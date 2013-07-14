@@ -15,6 +15,7 @@
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
+    using NIHEI.SC4Buddy.View.Login;
     using NIHEI.SC4Buddy.View.UserFolders;
 
     public partial class SettingsForm : Form
@@ -347,6 +348,11 @@
         {
             SessionController.Instance.Logout();
             UpdateLoginStatus();
+        }
+
+        private void RequestLoginButtonClick(object sender, EventArgs e)
+        {
+            new RequestLoginForm().ShowDialog(this);
         }
     }
 }

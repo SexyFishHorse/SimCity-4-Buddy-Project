@@ -578,6 +578,7 @@ namespace NIHEI.SC4Buddy.View.Application
             resources.ApplyResources(this.requestLoginButton, "requestLoginButton");
             this.requestLoginButton.Name = "requestLoginButton";
             this.requestLoginButton.UseVisualStyleBackColor = true;
+            this.requestLoginButton.Click += new System.EventHandler(this.RequestLoginButtonClick);
             // 
             // loginStatusLabel
             // 
