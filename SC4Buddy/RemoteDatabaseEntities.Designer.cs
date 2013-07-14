@@ -835,16 +835,14 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="salt">Initial value of the Salt property.</param>
-        /// <param name="rights">Initial value of the Rights property.</param>
         /// <param name="passphrase">Initial value of the Passphrase property.</param>
         /// <param name="activated">Initial value of the Activated property.</param>
         /// <param name="email">Initial value of the Email property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String salt, global::System.String rights, global::System.String passphrase, global::System.Boolean activated, global::System.String email)
+        public static User CreateUser(global::System.Int32 id, global::System.String salt, global::System.Byte[] passphrase, global::System.Boolean activated, global::System.String email)
         {
             User user = new User();
             user.Id = id;
             user.Salt = salt;
-            user.Rights = rights;
             user.Passphrase = passphrase;
             user.Activated = activated;
             user.Email = email;
@@ -926,7 +924,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
                 OnRightsChanged();
             }
         }
-        private global::System.String _Rights;
+        private global::System.String _Rights = "user";
         partial void OnRightsChanging(global::System.String value);
         partial void OnRightsChanged();
     
@@ -935,11 +933,11 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Passphrase
+        public global::System.Byte[] Passphrase
         {
             get
             {
-                return _Passphrase;
+                return StructuralObject.GetValidValue(_Passphrase);
             }
             set
             {
@@ -950,8 +948,8 @@ namespace NIHEI.SC4Buddy.Entities.Remote
                 OnPassphraseChanged();
             }
         }
-        private global::System.String _Passphrase;
-        partial void OnPassphraseChanging(global::System.String value);
+        private global::System.Byte[] _Passphrase;
+        partial void OnPassphraseChanging(global::System.Byte[] value);
         partial void OnPassphraseChanged();
     
         /// <summary>

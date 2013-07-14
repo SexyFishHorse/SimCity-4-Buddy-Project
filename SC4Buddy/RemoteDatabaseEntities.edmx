@@ -11,7 +11,7 @@
           <EntitySet Name="PluginDependency" EntityType="RemoteDatabaseEntities.Store.PluginDependency" store:Type="Tables" Schema="nihei_sc4buddy" />
           <EntitySet Name="PluginFile" EntityType="RemoteDatabaseEntities.Store.PluginFile" store:Type="Tables" Schema="nihei_sc4buddy" />
           <EntitySet Name="User" EntityType="RemoteDatabaseEntities.Store.User" store:Type="Tables" Schema="nihei_sc4buddy" />
-          <AssociationSet Name="Author_ibfk_1" Association="RemoteDatabaseEntities.Store.Author_ibfk_1">
+          <AssociationSet Name="Author_ibfk_2" Association="RemoteDatabaseEntities.Store.Author_ibfk_2">
             <End Role="User" EntitySet="User" />
             <End Role="Author" EntitySet="Author" />
           </AssociationSet>
@@ -74,12 +74,12 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Email" Type="varchar" Nullable="false" MaxLength="255" />
-          <Property Name="Passphrase" Type="text" Nullable="false" />
+          <Property Name="Passphrase" Type="blob" Nullable="false" />
           <Property Name="Salt" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="Rights" Type="enum" Nullable="false" />
           <Property Name="Activated" Type="bool" Nullable="false" />
         </EntityType>
-        <Association Name="Author_ibfk_1">
+        <Association Name="Author_ibfk_2">
           <End Role="User" Type="RemoteDatabaseEntities.Store.User" Multiplicity="0..1" />
           <End Role="Author" Type="RemoteDatabaseEntities.Store.Author" Multiplicity="*" />
           <ReferentialConstraint>
@@ -171,8 +171,8 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Salt" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Rights" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Passphrase" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Rights" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" DefaultValue="user" />
+          <Property Type="Binary" Name="Passphrase" Nullable="false" />
           <Property Type="Boolean" Name="Activated" Nullable="false" />
           <NavigationProperty Name="Authors" Relationship="Entities.Remote.Author_ibfk_1" FromRole="User" ToRole="Author" />
           <Property Type="String" Name="Email" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
