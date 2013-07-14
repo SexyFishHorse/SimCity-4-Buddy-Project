@@ -243,11 +243,13 @@ namespace NIHEI.SC4Buddy.View.Login
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(435, 241);
+            this.ControlBox = false;
             this.Controls.Add(this.requestButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "RequestLoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "RequestLoginForm";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
