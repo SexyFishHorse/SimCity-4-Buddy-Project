@@ -292,4 +292,22 @@ Should also notify the user that some files may have been installed so the user 
   <data name="AuthenticationError" xml:space="preserve">
     <value>Authentication error</value>
   </data>
+  <data name="UsernameHelpText" xml:space="preserve">
+    <value>Your username (what others see and search after) on the site you entered above.</value>
+  </data>
+  <data name="UsernameHelp" xml:space="preserve">
+    <value>Username help</value>
+  </data>
+  <data name="SiteUrlHelpText" xml:space="preserve">
+    <value>The URL to the website where you have uploaded your content. (Enter only 1 URL, you can add more sites when your user has been created)</value>
+  </data>
+  <data name="SiteUrlHelp" xml:space="preserve">
+    <value>Site URL help</value>
+  </data>
+  <data name="YouWillReceiveAnEmailWhenYourUserHasBeenValidatedAndActivated" xml:space="preserve">
+    <value>You will receive an e-mail when your user has been validated and activated.</value>
+  </data>
+  <data name="RequestSent" xml:space="preserve">
+    <value>Request sent</value>
+  </data>
 </root>

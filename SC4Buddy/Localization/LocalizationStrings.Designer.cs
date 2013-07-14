@@ -430,6 +430,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Request sent.
+        /// </summary>
+        internal static string RequestSent {
+            get {
+                return ResourceManager.GetString("RequestSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Run executable?.
         /// </summary>
         internal static string RunExecutable {
@@ -444,6 +453,24 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string SelectGameLocation {
             get {
                 return ResourceManager.GetString("SelectGameLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Site URL help.
+        /// </summary>
+        internal static string SiteUrlHelp {
+            get {
+                return ResourceManager.GetString("SiteUrlHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The URL to the website where you have uploaded your content. (Enter only 1 URL, you can add more sites when your user has been created).
+        /// </summary>
+        internal static string SiteUrlHelpText {
+            get {
+                return ResourceManager.GetString("SiteUrlHelpText", resourceCulture);
             }
         }
         
@@ -502,6 +529,24 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Username help.
+        /// </summary>
+        internal static string UsernameHelp {
+            get {
+                return ResourceManager.GetString("UsernameHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your username (what others see and search after) on the site you entered above..
+        /// </summary>
+        internal static string UsernameHelpText {
+            get {
+                return ResourceManager.GetString("UsernameHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Would you like to enter additional details for the installed plugins (like name, group, description, download link etc?)? You can always do this later if you so desire..
         /// </summary>
         internal static string WouldYouLikeToEnterAdditionalDetailsForTheInstalledPlugins {
@@ -525,6 +570,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string YouMustSettheGameLocationBeforeYouCanUseThisApplication {
             get {
                 return ResourceManager.GetString("YouMustSettheGameLocationBeforeYouCanUseThisApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You will receive an e-mail when your user has been validated and activated..
+        /// </summary>
+        internal static string YouWillReceiveAnEmailWhenYourUserHasBeenValidatedAndActivated {
+            get {
+                return ResourceManager.GetString("YouWillReceiveAnEmailWhenYourUserHasBeenValidatedAndActivated", resourceCulture);
             }
         }
     }
