@@ -309,6 +309,7 @@
             try
             {
                 SessionController.Instance.Login(usernameTextBox.Text, passwordTextBox.Text);
+                UpdateLoginStatus();
             }
             catch (InvalidCredentialException ex)
             {
