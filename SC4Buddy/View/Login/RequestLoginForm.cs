@@ -38,7 +38,7 @@
 
         private void RequestButtonClick(object sender, EventArgs e)
         {
-            var userController = new UserController(RemoteRegistryFactory.UserRegistry);
+            var userController = new UserController(RemoteRegistryFactory.UserRegistry, RemoteRegistryFactory.AuthorRegistry);
 
             userController.CreateUser(
                 emailTextBox.Text.Trim(), passwordTextBox.Text, siteUrlTextBox.Text.Trim(), usernameTextBox.Text.Trim());

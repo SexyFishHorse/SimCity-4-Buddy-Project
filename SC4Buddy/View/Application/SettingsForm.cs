@@ -224,10 +224,10 @@
                 logoutButton.Enabled = true;
                 loginButton.Enabled = false;
                 requestLoginButton.Enabled = false;
-                usernameTextBox.Text = SessionController.Instance.User.Username;
+                usernameTextBox.Text = SessionController.Instance.User.Email;
                 usernameTextBox.Enabled = false;
                 passwordTextBox.Enabled = false;
-                loginStatusLabel.Text = string.Format(LocalizationStrings.LoggedInAs, SessionController.Instance.User.Username);
+                loginStatusLabel.Text = string.Format(LocalizationStrings.LoggedInAs, SessionController.Instance.User.Email);
             }
             else
             {
