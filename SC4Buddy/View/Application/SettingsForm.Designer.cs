@@ -81,15 +81,19 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.enableRemoteDatabaseConnectionCheckbox = new System.Windows.Forms.CheckBox();
             this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.requestLoginButton = new System.Windows.Forms.Button();
+            this.loginStatusLabel = new System.Windows.Forms.Label();
+            this.logoutButton = new System.Windows.Forms.Button();
+            this.loginButton = new System.Windows.Forms.Button();
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.loginButton = new System.Windows.Forms.Button();
-            this.logoutButton = new System.Windows.Forms.Button();
-            this.loginStatusLabel = new System.Windows.Forms.Label();
-            this.requestLoginButton = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.usernameTextBox = new System.Windows.Forms.TextBox();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -101,8 +105,8 @@ namespace NIHEI.SC4Buddy.View.Application
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // closeButton
@@ -529,17 +533,12 @@ namespace NIHEI.SC4Buddy.View.Application
             this.fetchInformationFromRemoteCheckbox.Name = "fetchInformationFromRemoteCheckbox";
             this.fetchInformationFromRemoteCheckbox.UseVisualStyleBackColor = true;
             // 
-            // gameLocationDialog
-            // 
-            resources.ApplyResources(this.gameLocationDialog, "gameLocationDialog");
-            this.gameLocationDialog.ShowNewFolderButton = false;
-            // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.label11);
+            this.tabPage3.Controls.Add(this.passwordTextBox);
+            this.tabPage3.Controls.Add(this.usernameTextBox);
+            this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Controls.Add(this.requestLoginButton);
             this.tabPage3.Controls.Add(this.loginStatusLabel);
@@ -549,22 +548,10 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // loginButton
+            // label9
             // 
-            resources.ApplyResources(this.loginButton, "loginButton");
-            this.loginButton.Name = "loginButton";
-            this.loginButton.UseVisualStyleBackColor = true;
-            // 
-            // logoutButton
-            // 
-            resources.ApplyResources(this.logoutButton, "logoutButton");
-            this.logoutButton.Name = "logoutButton";
-            this.logoutButton.UseVisualStyleBackColor = true;
-            // 
-            // loginStatusLabel
-            // 
-            resources.ApplyResources(this.loginStatusLabel, "loginStatusLabel");
-            this.loginStatusLabel.Name = "loginStatusLabel";
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
             // 
             // requestLoginButton
             // 
@@ -572,10 +559,52 @@ namespace NIHEI.SC4Buddy.View.Application
             this.requestLoginButton.Name = "requestLoginButton";
             this.requestLoginButton.UseVisualStyleBackColor = true;
             // 
-            // label9
+            // loginStatusLabel
             // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
+            resources.ApplyResources(this.loginStatusLabel, "loginStatusLabel");
+            this.loginStatusLabel.Name = "loginStatusLabel";
+            // 
+            // logoutButton
+            // 
+            resources.ApplyResources(this.logoutButton, "logoutButton");
+            this.logoutButton.Name = "logoutButton";
+            this.logoutButton.UseVisualStyleBackColor = true;
+            // 
+            // loginButton
+            // 
+            resources.ApplyResources(this.loginButton, "loginButton");
+            this.loginButton.Name = "loginButton";
+            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.LoginButtonClick);
+            // 
+            // gameLocationDialog
+            // 
+            resources.ApplyResources(this.gameLocationDialog, "gameLocationDialog");
+            this.gameLocationDialog.ShowNewFolderButton = false;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
+            // usernameTextBox
+            // 
+            resources.ApplyResources(this.usernameTextBox, "usernameTextBox");
+            this.usernameTextBox.Name = "usernameTextBox";
+            // 
+            // passwordTextBox
+            // 
+            resources.ApplyResources(this.passwordTextBox, "passwordTextBox");
+            this.passwordTextBox.Name = "passwordTextBox";
+            // 
+            // label11
+            // 
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
             // 
             // SettingsForm
             // 
@@ -606,9 +635,9 @@ namespace NIHEI.SC4Buddy.View.Application
             this.groupBox2.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -673,5 +702,9 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.Button requestLoginButton;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox passwordTextBox;
+        private System.Windows.Forms.TextBox usernameTextBox;
+        private System.Windows.Forms.Label label10;
     }
 }

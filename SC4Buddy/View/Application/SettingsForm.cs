@@ -6,6 +6,7 @@
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Security.Authentication;
     using System.Windows.Forms;
 
     using Microsoft.Win32;
@@ -296,6 +297,26 @@
             if (result == DialogResult.Retry)
             {
                 e.Cancel = true;
+            }
+        }
+
+        private void LoginButtonClick(object sender, EventArgs e)
+        {
+            try
+            {
+                SessionController.Instance.Login(usernameTextBox.Text, passwordTextBox.Text);
+            }
+            catch (InvalidCredentialException ex)
+            {
+                MessageBox.Show(
+                    this,
+                    ex.Message,
+                    LocalizationStrings.InvalidCredentials,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
+
+                passwordTextBox.Text = null;
             }
         }
     }
