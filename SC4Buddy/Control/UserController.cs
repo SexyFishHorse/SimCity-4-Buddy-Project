@@ -89,5 +89,33 @@
 
             userRegistry.Update(user);
         }
+
+        private bool EmailSeemsValid(string email)
+        {
+            if (!email.Contains("@"))
+            {
+                return false;
+            }
+
+            var mailbox = email.Substring(0, email.IndexOf("@", StringComparison.Ordinal));
+            var domain = email.Substring(email.IndexOf("@", StringComparison.Ordinal) + 1);
+
+            if (mailbox.Length < 1)
+            {
+                return false;
+            }
+
+            if (domain.Length < 4)
+            {
+                return false;
+            }
+
+            if (!domain.Contains("."))
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
