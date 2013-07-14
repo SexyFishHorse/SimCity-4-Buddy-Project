@@ -24,6 +24,7 @@
         public void Add(User user)
         {
             entities.Users.AddObject(user);
+            entities.SaveChanges();
         }
     }
 }
