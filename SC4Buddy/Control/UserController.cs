@@ -116,21 +116,10 @@
         {
             if (array1.Length != array2.Length)
             {
-                Console.WriteLine("Arrays are not equally large " + array1.Length + " vs " + array2.Length);
                 return false;
             }
 
-            for (int i = 0; i < array1.Length; i++)
-            {
-                Console.WriteLine(array1[i] + " vs " + array2[i]);
-                if (array1[i] != array2[i])
-                {
-
-                    return false;
-                }
-            }
-
-            return true;
+            return !array1.Where((t, i) => t != array2[i]).Any();
         }
 
         private static byte[] GenerateSaltedHash(byte[] plainText, byte[] salt)
