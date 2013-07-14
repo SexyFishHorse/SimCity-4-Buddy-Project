@@ -48,13 +48,13 @@
             timer.Dispose();
         }
 
+        [DllImport("User32.dll")]
+        private static extern int SetForegroundWindow(IntPtr handle);
+
         private void SendSaveCommand(object state)
         {
             SetForegroundWindow((IntPtr)state);
             SendKeys.SendWait("^%(s)");
         }
-
-        [DllImport("User32.dll")]
-        private static extern int SetForegroundWindow(IntPtr handle);
     }
 }
