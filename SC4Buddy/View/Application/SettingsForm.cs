@@ -331,5 +331,11 @@
                 passwordTextBox.Text = null;
             }
         }
+
+        private void LogoutButtonClick(object sender, EventArgs e)
+        {
+            SessionController.Instance.Logout();
+            UpdateLoginStatus();
+        }
     }
 }
