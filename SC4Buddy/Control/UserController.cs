@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Security.Authentication;
     using System.Security.Cryptography;
+    using System.Text.RegularExpressions;
 
     using NIHEI.Common.TypeUtility;
     using NIHEI.SC4Buddy.DataAccess.Remote;
@@ -48,6 +49,25 @@
             }
 
             return possibleUser;
+        }
+
+        public void CreateUser(string email, string password, string site, string username)
+        {
+            var emailRegex = new Regex(@"/.+@.+\..+/i");
+            if (!emailRegex.IsMatch(email))
+            {
+                throw new ArgumentException("E-mail is not valid.");
+            }
+
+            var salt = StringUtility.GenerateRandomAlphaNumericString(256);
+
+            var passphrase = string.Concat(salt, password);
+
+            var algorithm = new SHA256Managed();
+
+            var hash = algorithm.ComputeHash(passphrase.ToByteArray()).ToStringValue();
+
+            var user = new User { Email = email, Salt = salt, Passphrase = hash };
         }
     }
 }
