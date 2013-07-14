@@ -34,5 +34,11 @@
 
             return authorRegistry.Authors.First(x => x.Name.Equals(authorName, StringComparison.OrdinalIgnoreCase));
         }
+
+        public void Add(Author author)
+        {
+            entities.Authors.AddObject(author);
+            entities.SaveChanges();
+        }
     }
 }
