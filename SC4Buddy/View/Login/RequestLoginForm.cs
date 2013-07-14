@@ -37,8 +37,8 @@
         {
             MessageBox.Show(
                 this,
-                "You will receive an e-mail when your user has been validated and activated.",
-                "Request sent",
+                LocalizationStrings.YouWillReceiveAnEmailWhenYourUserHasBeenValidatedAndActivated,
+                LocalizationStrings.RequestSent,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1);
