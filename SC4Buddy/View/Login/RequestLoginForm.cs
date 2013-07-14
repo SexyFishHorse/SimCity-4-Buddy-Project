@@ -32,5 +32,16 @@
                 MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1);
         }
+
+        private void RequestButtonClick(object sender, EventArgs e)
+        {
+            MessageBox.Show(
+                this,
+                "You will receive an e-mail when your user has been validated and activated.",
+                "Request sent",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
+        }
     }
 }

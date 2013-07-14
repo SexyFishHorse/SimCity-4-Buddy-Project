@@ -145,7 +145,7 @@ namespace NIHEI.SC4Buddy.View.Login
             // 
             this.usernamePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.usernamePictureBox.Cursor = System.Windows.Forms.Cursors.Help;
-            this.usernamePictureBox.Image = SilkIcons.HelpIcon;
+            this.usernamePictureBox.Image = global::NIHEI.SC4Buddy.SilkIcons.HelpIcon;
             this.usernamePictureBox.Location = new System.Drawing.Point(389, 46);
             this.usernamePictureBox.Name = "usernamePictureBox";
             this.usernamePictureBox.Size = new System.Drawing.Size(16, 16);
@@ -157,7 +157,7 @@ namespace NIHEI.SC4Buddy.View.Login
             // 
             this.sitePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.sitePictureBox.Cursor = System.Windows.Forms.Cursors.Help;
-            this.sitePictureBox.Image = SilkIcons.HelpIcon;
+            this.sitePictureBox.Image = global::NIHEI.SC4Buddy.SilkIcons.HelpIcon;
             this.sitePictureBox.Location = new System.Drawing.Point(389, 20);
             this.sitePictureBox.Name = "sitePictureBox";
             this.sitePictureBox.Size = new System.Drawing.Size(16, 16);
@@ -214,6 +214,7 @@ namespace NIHEI.SC4Buddy.View.Login
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Location = new System.Drawing.Point(348, 206);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
@@ -230,11 +231,14 @@ namespace NIHEI.SC4Buddy.View.Login
             this.requestButton.TabIndex = 9;
             this.requestButton.Text = "Request";
             this.requestButton.UseVisualStyleBackColor = true;
+            this.requestButton.Click += new System.EventHandler(this.RequestButtonClick);
             // 
             // RequestLoginForm
             // 
+            this.AcceptButton = this.requestButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(435, 241);
             this.Controls.Add(this.requestButton);
             this.Controls.Add(this.cancelButton);
