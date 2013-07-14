@@ -183,7 +183,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.autoSaveIntervalTrackBar.BackColor = System.Drawing.SystemColors.Window;
             this.autoSaveIntervalTrackBar.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::NIHEI.SC4Buddy.Properties.Settings.Default, "AutoSaveWaitTime", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             resources.ApplyResources(this.autoSaveIntervalTrackBar, "autoSaveIntervalTrackBar");
-            this.autoSaveIntervalTrackBar.Maximum = 120;
+            this.autoSaveIntervalTrackBar.Maximum = 60;
             this.autoSaveIntervalTrackBar.Minimum = 5;
             this.autoSaveIntervalTrackBar.Name = "autoSaveIntervalTrackBar";
             this.autoSaveIntervalTrackBar.Value = global::NIHEI.SC4Buddy.Properties.Settings.Default.AutoSaveWaitTime;
