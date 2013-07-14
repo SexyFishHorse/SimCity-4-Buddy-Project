@@ -165,6 +165,32 @@
             playButton.Enabled = false;
             playButton.Text = LocalizationStrings.StartingGame;
             playButton.ForeColor = Color.Gray;
+            playButton.Update();
+            var arguments = SetArguments();
+
+            var gameProcessStartInfo = new ProcessStartInfo
+                                          {
+                                              FileName =
+                                                  Settings.Default.GameLocation + @"\Apps\SimCity 4",
+                                              Arguments = string.Join(" ", arguments.ToArray())
+                                          };
+
+            var gameLauncher = new GameLauncher(gameProcessStartInfo, Settings.Default.AutoSaveWaitTime);
+            var gameLauncherThread = new Thread(gameLauncher.Start) { Name = "SC4Buddy GameLauncher" };
+
+            Console.WriteLine("before run.");
+            gameLauncherThread.Start();
+            Console.WriteLine("game launcher thread started");
+
+            Thread.Sleep(5000);
+
+            playButton.Enabled = true;
+            playButton.Text = localizationManager.GetString("playButton.Text");
+            playButton.ForeColor = Color.Black;
+        }
+
+        private List<string> SetArguments()
+        {
             var arguments = new List<string>();
             if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCpuCount))
             {
@@ -295,24 +321,7 @@
             {
                 arguments.Add(string.Format("-userDir:\"{0}\\\"", selectedUserFolder.Value.Path));
             }
-
-            var gameProcessStartInfo = new ProcessStartInfo
-                                          {
-                                              FileName =
-                                                  Settings.Default.GameLocation + @"\Apps\SimCity 4",
-                                              Arguments = string.Join(" ", arguments.ToArray())
-                                          };
-
-            var gameLauncher = new GameLauncher(gameProcessStartInfo, Settings.Default.AutoSaveWaitTime);
-            var gameLauncherThread = new Thread(gameLauncher.Start) { Name = "SC4Buddy GameLauncher" };
-
-            gameLauncherThread.Start();
-
-            gameLauncher.Start();
-
-            playButton.Enabled = true;
-            playButton.Text = localizationManager.GetString("playButton.Text");
-            playButton.ForeColor = Color.Black;
+            return arguments;
         }
 
         private void SettingsToolStripMenuItemClick(object sender, EventArgs e)
