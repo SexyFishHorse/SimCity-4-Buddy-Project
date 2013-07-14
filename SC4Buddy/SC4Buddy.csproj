@@ -124,6 +124,11 @@
       <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Remote\PluginMatcher.cs" />
+    <Compile Include="SilkIcons.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SilkIcons.resx</DependentUpon>
+    </Compile>
     <Compile Include="View\Developer\DeveloperDependenciesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,11 +208,18 @@
       <LastGenOutput>LocalizationStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="SilkIcons.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SilkIcons.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Developer\DeveloperDependenciesForm.resx">
       <DependentUpon>DeveloperDependenciesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Developer\DeveloperForm.resx">
       <DependentUpon>DeveloperForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Login\RequestLoginForm.resx">
+      <DependentUpon>RequestLoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Plugins\EnterPluginInformationForm.da.resx">
       <DependentUpon>EnterPluginInformationForm.cs</DependentUpon>
@@ -297,6 +309,7 @@
     <EmbeddedResource Include="View\Application\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Resources\help.png" />
     <Content Include="Wallpapers\1.jpg" />
     <EmbeddedResource Include="Wallpapers\10.jpg" />
     <EmbeddedResource Include="Wallpapers\2.jpg" />
