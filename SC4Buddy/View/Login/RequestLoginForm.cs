@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.View.Login
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
@@ -61,7 +62,7 @@
 
                 Close();
             }
-            catch (ArgumentException ex)
+            catch (ValidationException ex)
             {
                 MessageBox.Show(
                     this,
