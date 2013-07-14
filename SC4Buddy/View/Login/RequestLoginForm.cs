@@ -51,5 +51,10 @@
                 MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1);
         }
+
+        private void CancelButtonClick(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

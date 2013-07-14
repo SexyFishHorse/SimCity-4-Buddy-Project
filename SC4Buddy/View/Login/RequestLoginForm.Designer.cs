@@ -221,6 +221,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.cancelButton.TabIndex = 8;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButtonClick);
             // 
             // requestButton
             // 
