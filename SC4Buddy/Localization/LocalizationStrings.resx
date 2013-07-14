@@ -283,4 +283,10 @@ Should also notify the user that some files may have been installed so the user 
   <data name="InvalidCredentials" xml:space="preserve">
     <value>Invalid credentials.</value>
   </data>
+  <data name="DefaultUserFolderName" xml:space="preserve">
+    <value>Default user folder</value>
+  </data>
+  <data name="GameUserFolderName" xml:space="preserve">
+    <value>Game folder</value>
+  </data>
 </root>

@@ -133,6 +133,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default user folder.
+        /// </summary>
+        internal static string DefaultUserFolderName {
+            get {
+                return ResourceManager.GetString("DefaultUserFolderName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to run the {0} executable? Please note that the installer has to be installed in the plugin folder {1} in order to detect filechanges, otherwise you have to rescan the plugin folders manually..
         /// </summary>
         internal static string DoYouWantToRunTheNamExecutable {
@@ -201,6 +210,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string GameFolderNotSet {
             get {
                 return ResourceManager.GetString("GameFolderNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game folder.
+        /// </summary>
+        internal static string GameUserFolderName {
+            get {
+                return ResourceManager.GetString("GameUserFolderName", resourceCulture);
             }
         }
         
