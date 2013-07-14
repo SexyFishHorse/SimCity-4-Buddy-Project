@@ -90,6 +90,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Remote\User.cs" />
     <Compile Include="Entities\UserFolder.cs" />
     <Compile Include="Installer\InstallerEventArgs\InstalledPluginEventArgs.cs" />
     <Compile Include="Installer\InstallerEventArgs\InstallPluginEventArgs.cs" />
