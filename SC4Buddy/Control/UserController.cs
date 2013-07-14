@@ -29,6 +29,11 @@
                 throw new InvalidCredentialException("Invalid username or password.");
             }
 
+            if (!possibleUser.Activated)
+            {
+                throw new AuthenticationException("User is not activated yet.");
+            }
+
             var algorithm = new SHA256Managed();
 
             var passwordWithSalt = string.Concat(password, possibleUser.Salt);
