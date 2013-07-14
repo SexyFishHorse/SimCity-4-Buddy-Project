@@ -108,6 +108,7 @@
             }
 
             folder.Path = Settings.Default.GameLocation;
+            folder.Alias = LocalizationStrings.GameUserFolderName;
             userFolderRegistry.Update(folder);
         }
 
