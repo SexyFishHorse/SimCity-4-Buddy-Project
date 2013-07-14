@@ -316,4 +316,7 @@ Should also notify the user that some files may have been installed so the user 
   <data name="PasswordsDoesNotMatch" xml:space="preserve">
     <value>Passwords does not match.</value>
   </data>
+  <data name="EmailIsNotValid" xml:space="preserve">
+    <value>E-mail is not valid.</value>
+  </data>
 </root>

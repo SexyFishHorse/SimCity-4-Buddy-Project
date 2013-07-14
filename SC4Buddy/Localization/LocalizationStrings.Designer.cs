@@ -160,6 +160,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E-mail is not valid..
+        /// </summary>
+        internal static string EmailIsNotValid {
+            get {
+                return ResourceManager.GetString("EmailIsNotValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter additional plugin information.
         /// </summary>
         internal static string EnterAdditionalPluginInformation {
