@@ -223,6 +223,8 @@
                 loginButton.Enabled = false;
                 requestLoginButton.Enabled = false;
                 usernameTextBox.Text = SessionController.Instance.User.Username;
+                usernameTextBox.Enabled = false;
+                passwordTextBox.Enabled = false;
                 loginStatusLabel.Text = string.Format(LocalizationStrings.LoggedInAs, SessionController.Instance.User.Username);
             }
             else
@@ -230,6 +232,8 @@
                 logoutButton.Enabled = false;
                 loginButton.Enabled = true;
                 requestLoginButton.Enabled = true;
+                usernameTextBox.Enabled = true;
+                passwordTextBox.Enabled = true;
                 loginStatusLabel.Text = LocalizationStrings.NoUserIsLoggedIn;
             }
         }
