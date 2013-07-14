@@ -178,9 +178,7 @@
             var gameLauncher = new GameLauncher(gameProcessStartInfo, Settings.Default.AutoSaveWaitTime);
             var gameLauncherThread = new Thread(gameLauncher.Start) { Name = "SC4Buddy GameLauncher" };
 
-            Console.WriteLine("before run.");
             gameLauncherThread.Start();
-            Console.WriteLine("game launcher thread started");
 
             Thread.Sleep(5000);
 
@@ -321,6 +319,7 @@
             {
                 arguments.Add(string.Format("-userDir:\"{0}\\\"", selectedUserFolder.Value.Path));
             }
+
             return arguments;
         }
 
