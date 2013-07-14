@@ -73,11 +73,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="255" />
-          <Property Name="Passphrase" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Passphrase" Type="text" Nullable="false" />
           <Property Name="Salt" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="Rights" Type="enum" Nullable="false" />
           <Property Name="Activated" Type="bool" Nullable="false" />
+          <Property Name="EmailActivated" Type="bool" Nullable="false" />
         </EntityType>
         <Association Name="Author_ibfk_1">
           <End Role="User" Type="RemoteDatabaseEntities.Store.User" Multiplicity="0..1" />
@@ -170,12 +171,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Username" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Salt" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Rights" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Passphrase" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="Activated" Nullable="false" />
           <NavigationProperty Name="Authors" Relationship="Entities.Remote.Author_ibfk_1" FromRole="User" ToRole="Author" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="EmailActivated" Nullable="false" />
         </EntityType>
         <EntityType Name="Author">
           <Key>
@@ -263,11 +265,12 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="Entities.Remote.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="EmailActivated" ColumnName="EmailActivated" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Activated" ColumnName="Activated" />
                 <ScalarProperty Name="Passphrase" ColumnName="Passphrase" />
                 <ScalarProperty Name="Rights" ColumnName="Rights" />
                 <ScalarProperty Name="Salt" ColumnName="Salt" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

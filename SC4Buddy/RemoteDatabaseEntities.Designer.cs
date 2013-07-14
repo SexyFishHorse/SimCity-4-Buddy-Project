@@ -834,20 +834,22 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// Create a new User object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="username">Initial value of the Username property.</param>
         /// <param name="salt">Initial value of the Salt property.</param>
         /// <param name="rights">Initial value of the Rights property.</param>
         /// <param name="passphrase">Initial value of the Passphrase property.</param>
         /// <param name="activated">Initial value of the Activated property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String username, global::System.String salt, global::System.String rights, global::System.String passphrase, global::System.Boolean activated)
+        /// <param name="email">Initial value of the Email property.</param>
+        /// <param name="emailActivated">Initial value of the EmailActivated property.</param>
+        public static User CreateUser(global::System.Int32 id, global::System.String salt, global::System.String rights, global::System.String passphrase, global::System.Boolean activated, global::System.String email, global::System.Boolean emailActivated)
         {
             User user = new User();
             user.Id = id;
-            user.Username = username;
             user.Salt = salt;
             user.Rights = rights;
             user.Passphrase = passphrase;
             user.Activated = activated;
+            user.Email = email;
+            user.EmailActivated = emailActivated;
             return user;
         }
 
@@ -881,30 +883,6 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         private global::System.Int32 _Id;
         partial void OnIdChanging(global::System.Int32 value);
         partial void OnIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Username
-        {
-            get
-            {
-                return _Username;
-            }
-            set
-            {
-                OnUsernameChanging(value);
-                ReportPropertyChanging("Username");
-                _Username = StructuralObject.SetValidValue(value, false, "Username");
-                ReportPropertyChanged("Username");
-                OnUsernameChanged();
-            }
-        }
-        private global::System.String _Username;
-        partial void OnUsernameChanging(global::System.String value);
-        partial void OnUsernameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1001,6 +979,54 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         private global::System.Boolean _Activated;
         partial void OnActivatedChanging(global::System.Boolean value);
         partial void OnActivatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, false, "Email");
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean EmailActivated
+        {
+            get
+            {
+                return _EmailActivated;
+            }
+            set
+            {
+                OnEmailActivatedChanging(value);
+                ReportPropertyChanging("EmailActivated");
+                _EmailActivated = StructuralObject.SetValidValue(value, "EmailActivated");
+                ReportPropertyChanged("EmailActivated");
+                OnEmailActivatedChanged();
+            }
+        }
+        private global::System.Boolean _EmailActivated;
+        partial void OnEmailActivatedChanging(global::System.Boolean value);
+        partial void OnEmailActivatedChanged();
 
         #endregion
 
