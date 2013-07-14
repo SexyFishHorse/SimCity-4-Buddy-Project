@@ -50,11 +50,24 @@
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1);
+
+                ClearForm();
+
         }
 
         private void CancelButtonClick(object sender, EventArgs e)
         {
+            ClearForm();
             Close();
+        }
+
+        private void ClearForm()
+        {
+            emailTextBox.Text = string.Empty;
+            passwordTextBox.Text = string.Empty;
+            repeatPasswordTextBox.Text = string.Empty;
+            siteUrlTextBox.Text = string.Empty;
+            usernameTextBox.Text = string.Empty;
         }
     }
 }
