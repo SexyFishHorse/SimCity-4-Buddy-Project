@@ -367,6 +367,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Passwords does not match..
+        /// </summary>
+        internal static string PasswordsDoesNotMatch {
+            get {
+                return ResourceManager.GetString("PasswordsDoesNotMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You cannot use the same path for multiple plugin folders, the path cannot be blank, you cannot add the main plugin folder in the game folder, and the path must exist on your machine..
         /// </summary>
         internal static string PathError {

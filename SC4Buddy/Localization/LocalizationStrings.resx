@@ -313,4 +313,7 @@ Should also notify the user that some files may have been installed so the user 
   <data name="RegistrationError" xml:space="preserve">
     <value>Registration error</value>
   </data>
+  <data name="PasswordsDoesNotMatch" xml:space="preserve">
+    <value>Passwords does not match.</value>
+  </data>
 </root>
