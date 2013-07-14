@@ -40,19 +40,36 @@
         {
             var userController = new UserController(RemoteRegistryFactory.UserRegistry, RemoteRegistryFactory.AuthorRegistry);
 
-            userController.CreateUser(
-                emailTextBox.Text.Trim(), passwordTextBox.Text, siteUrlTextBox.Text.Trim(), usernameTextBox.Text.Trim());
+            try
+            {
+                userController.CreateUser(
+                    emailTextBox.Text.Trim(),
+                    passwordTextBox.Text,
+                    siteUrlTextBox.Text.Trim(),
+                    usernameTextBox.Text.Trim());
 
-            MessageBox.Show(
-                this,
-                LocalizationStrings.YouWillReceiveAnEmailWhenYourUserHasBeenValidatedAndActivated,
-                LocalizationStrings.RequestSent,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1);
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.YouWillReceiveAnEmailWhenYourUserHasBeenValidatedAndActivated,
+                    LocalizationStrings.RequestSent,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
 
                 ClearForm();
 
+                Close();
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(
+                    this,
+                    ex.Message,
+                    LocalizationStrings.RegistrationError,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
+            }
         }
 
         private void CancelButtonClick(object sender, EventArgs e)
