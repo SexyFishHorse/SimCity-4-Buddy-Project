@@ -580,7 +580,8 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// <param name="salt">Initial value of the Salt property.</param>
         /// <param name="rights">Initial value of the Rights property.</param>
         /// <param name="passphrase">Initial value of the Passphrase property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String username, global::System.String salt, global::System.String rights, global::System.String passphrase)
+        /// <param name="activated">Initial value of the Activated property.</param>
+        public static User CreateUser(global::System.Int32 id, global::System.String username, global::System.String salt, global::System.String rights, global::System.String passphrase, global::System.Boolean activated)
         {
             User user = new User();
             user.Id = id;
@@ -588,6 +589,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
             user.Salt = salt;
             user.Rights = rights;
             user.Passphrase = passphrase;
+            user.Activated = activated;
             return user;
         }
 
@@ -717,6 +719,30 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         private global::System.String _Passphrase;
         partial void OnPassphraseChanging(global::System.String value);
         partial void OnPassphraseChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean Activated
+        {
+            get
+            {
+                return _Activated;
+            }
+            set
+            {
+                OnActivatedChanging(value);
+                ReportPropertyChanging("Activated");
+                _Activated = StructuralObject.SetValidValue(value, "Activated");
+                ReportPropertyChanged("Activated");
+                OnActivatedChanged();
+            }
+        }
+        private global::System.Boolean _Activated;
+        partial void OnActivatedChanging(global::System.Boolean value);
+        partial void OnActivatedChanged();
 
         #endregion
 
