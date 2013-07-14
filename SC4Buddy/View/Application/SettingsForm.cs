@@ -210,13 +210,17 @@
                 backgroundImageListView.Items.Add(lvi);
             }
 
+            UpdateLoginStatus();
+        }
+
+        private void UpdateLoginStatus()
+        {
             if (SessionController.Instance.IsLoggedIn)
             {
                 logoutButton.Enabled = true;
                 loginButton.Enabled = false;
                 requestLoginButton.Enabled = false;
-                loginStatusLabel.Text = string.Format(
-                    LocalizationStrings.LoggedInAs, SessionController.Instance.User.Username);
+                loginStatusLabel.Text = string.Format(LocalizationStrings.LoggedInAs, SessionController.Instance.User.Username);
             }
             else
             {
