@@ -37,7 +37,7 @@ namespace NIHEI.SC4Buddy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
         public int AutoSaveWaitTime {
             get {
                 return ((int)(this["AutoSaveWaitTime"]));
