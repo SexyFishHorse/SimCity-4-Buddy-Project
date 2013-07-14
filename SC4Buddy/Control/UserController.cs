@@ -74,7 +74,7 @@
 
             userRegistry.Add(user);
 
-            var author = new Author() { Name = username, Site = site, User = user };
+            var author = new Author { Name = username, Site = site, User = user };
 
             authorRegistry.Add(author);
         }
