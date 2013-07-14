@@ -92,7 +92,7 @@
             button3.Enabled = !string.IsNullOrWhiteSpace(md5Textbox.Text);
         }
 
-        private void Button4Click(object sender, EventArgs e)
+        private void FilesButtonClick(object sender, EventArgs e)
         {
             if (openFileDialog2.ShowDialog(this) == DialogResult.OK)
             {
@@ -105,12 +105,12 @@
             }
         }
 
-        private void Button5Click(object sender, EventArgs e)
+        private void SaveButtonClick(object sender, EventArgs e)
         {
             var remotePlugin = new RemotePlugin
                                    {
                                        Name = nameTB.Text.Trim(),
-                                       Author = authorTB.Text.Trim(),
+                                       Author = GetAuthor(authorTB.Text.Trim()),
                                        Link = linkTB.Text.Trim(),
                                        Description = descTB.Text.Trim()
                                    };
@@ -153,12 +153,12 @@
             dependencies.Clear();
         }
 
-        private void Button6Click(object sender, EventArgs e)
+        private void ResetButtonClick(object sender, EventArgs e)
         {
             ClearRemotePluginForm();
         }
 
-        private void Button7Click(object sender, EventArgs e)
+        private void DependenciesButtonClick(object sender, EventArgs e)
         {
             var dialog = new DeveloperDependenciesForm();
             dialog.ShowDialog(this);
@@ -175,7 +175,7 @@
 
             e.Handled = true;
             e.SuppressKeyPress = true;
-            Button5Click(sender, EventArgs.Empty);
+            SaveButtonClick(sender, EventArgs.Empty);
         }
 
         private void CheckBox1CheckedChanged(object sender, EventArgs e)

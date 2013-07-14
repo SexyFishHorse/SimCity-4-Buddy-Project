@@ -36,12 +36,13 @@ namespace NIHEI.SC4Buddy.View.Developer
             this.button3 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.dependenciesButton = new System.Windows.Forms.Button();
+            this.resetButton = new System.Windows.Forms.Button();
             this.filesLB = new System.Windows.Forms.ListBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.filesButton = new System.Windows.Forms.Button();
             this.descTB = new System.Windows.Forms.TextBox();
             this.linkTB = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -51,7 +52,6 @@ namespace NIHEI.SC4Buddy.View.Developer
             this.nameTB = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -133,13 +133,26 @@ namespace NIHEI.SC4Buddy.View.Developer
             this.tabPage1.Text = "utils";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.DeveloperUploadToRemote;
+            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "DeveloperUploadToRemote", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox1.Location = new System.Drawing.Point(6, 64);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(163, 17);
+            this.checkBox1.TabIndex = 5;
+            this.checkBox1.Text = "Upload new plugins to server";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1CheckedChanged);
+            // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button7);
-            this.tabPage2.Controls.Add(this.button6);
+            this.tabPage2.Controls.Add(this.dependenciesButton);
+            this.tabPage2.Controls.Add(this.resetButton);
             this.tabPage2.Controls.Add(this.filesLB);
-            this.tabPage2.Controls.Add(this.button5);
-            this.tabPage2.Controls.Add(this.button4);
+            this.tabPage2.Controls.Add(this.saveButton);
+            this.tabPage2.Controls.Add(this.filesButton);
             this.tabPage2.Controls.Add(this.descTB);
             this.tabPage2.Controls.Add(this.linkTB);
             this.tabPage2.Controls.Add(this.label3);
@@ -155,27 +168,27 @@ namespace NIHEI.SC4Buddy.View.Developer
             this.tabPage2.Text = "add plugin to remote";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button7
+            // dependenciesButton
             // 
-            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button7.Location = new System.Drawing.Point(87, 316);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(89, 23);
-            this.button7.TabIndex = 13;
-            this.button7.Text = "dependencies";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.Button7Click);
+            this.dependenciesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dependenciesButton.Location = new System.Drawing.Point(87, 316);
+            this.dependenciesButton.Name = "dependenciesButton";
+            this.dependenciesButton.Size = new System.Drawing.Size(89, 23);
+            this.dependenciesButton.TabIndex = 13;
+            this.dependenciesButton.Text = "dependencies";
+            this.dependenciesButton.UseVisualStyleBackColor = true;
+            this.dependenciesButton.Click += new System.EventHandler(this.DependenciesButtonClick);
             // 
-            // button6
+            // resetButton
             // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.Location = new System.Drawing.Point(316, 316);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 12;
-            this.button6.Text = "reset";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.Button6Click);
+            this.resetButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.resetButton.Location = new System.Drawing.Point(316, 316);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(75, 23);
+            this.resetButton.TabIndex = 12;
+            this.resetButton.Text = "reset";
+            this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.ResetButtonClick);
             // 
             // filesLB
             // 
@@ -187,27 +200,27 @@ namespace NIHEI.SC4Buddy.View.Developer
             this.filesLB.Size = new System.Drawing.Size(466, 95);
             this.filesLB.TabIndex = 11;
             // 
-            // button5
+            // saveButton
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(397, 316);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "save";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.Button5Click);
+            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveButton.Location = new System.Drawing.Point(397, 316);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 8;
+            this.saveButton.Text = "save";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButtonClick);
             // 
-            // button4
+            // filesButton
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button4.Location = new System.Drawing.Point(6, 316);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "files";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.Button4Click);
+            this.filesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.filesButton.Location = new System.Drawing.Point(6, 316);
+            this.filesButton.Name = "filesButton";
+            this.filesButton.Size = new System.Drawing.Size(75, 23);
+            this.filesButton.TabIndex = 7;
+            this.filesButton.Text = "files";
+            this.filesButton.UseVisualStyleBackColor = true;
+            this.filesButton.Click += new System.EventHandler(this.FilesButtonClick);
             // 
             // descTB
             // 
@@ -280,19 +293,6 @@ namespace NIHEI.SC4Buddy.View.Developer
             this.openFileDialog2.FileName = "openFileDialog2";
             this.openFileDialog2.Multiselect = true;
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.DeveloperUploadToRemote;
-            this.checkBox1.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "DeveloperUploadToRemote", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox1.Location = new System.Drawing.Point(6, 64);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(163, 17);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "Upload new plugins to server";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox1CheckedChanged);
-            // 
             // DeveloperForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -320,8 +320,8 @@ namespace NIHEI.SC4Buddy.View.Developer
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button filesButton;
         private System.Windows.Forms.TextBox descTB;
         private System.Windows.Forms.TextBox linkTB;
         private System.Windows.Forms.Label label3;
@@ -331,8 +331,8 @@ namespace NIHEI.SC4Buddy.View.Developer
         private System.Windows.Forms.TextBox nameTB;
         private System.Windows.Forms.ListBox filesLB;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.Button dependenciesButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.CheckBox checkBox1;
     }
