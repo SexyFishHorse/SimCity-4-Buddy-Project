@@ -215,18 +215,21 @@
 
         private void UpdateLoginStatus()
         {
+            usernameTextBox.Text = string.Empty;
+            passwordTextBox.Text = string.Empty;
             if (SessionController.Instance.IsLoggedIn)
             {
                 logoutButton.Enabled = true;
                 loginButton.Enabled = false;
                 requestLoginButton.Enabled = false;
+                usernameTextBox.Text = SessionController.Instance.User.Username;
                 loginStatusLabel.Text = string.Format(LocalizationStrings.LoggedInAs, SessionController.Instance.User.Username);
             }
             else
             {
+                logoutButton.Enabled = false;
                 loginButton.Enabled = true;
                 requestLoginButton.Enabled = true;
-                logoutButton.Enabled = false;
                 loginStatusLabel.Text = LocalizationStrings.NoUserIsLoggedIn;
             }
         }
