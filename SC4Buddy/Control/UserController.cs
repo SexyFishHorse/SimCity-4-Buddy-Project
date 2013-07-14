@@ -12,17 +12,20 @@
 
     public class UserController
     {
-        private readonly UserRegistry registry;
+        private readonly UserRegistry userRegistry;
 
-        public UserController(UserRegistry registry)
+        private readonly AuthorRegistry authorRegistry;
+
+        public UserController(UserRegistry userRegistry, AuthorRegistry authorRegistry)
         {
-            this.registry = registry;
+            this.userRegistry = userRegistry;
+            this.authorRegistry = authorRegistry;
         }
 
         public User Login(string email, string password)
         {
             var possibleUser =
-                registry.Users.FirstOrDefault(
+                userRegistry.Users.FirstOrDefault(
                     x => x.Email.Equals(email, StringComparison.InvariantCultureIgnoreCase));
 
             if (possibleUser == null)
@@ -68,6 +71,12 @@
             var hash = algorithm.ComputeHash(passphrase.ToByteArray()).ToStringValue();
 
             var user = new User { Email = email, Salt = salt, Passphrase = hash };
+
+            userRegistry.Add(user);
+
+            var author = new Author() { Name = username, Site = site, User = user };
+
+            authorRegistry.Add(author);
         }
     }
 }
