@@ -45,5 +45,5 @@ TEST/*
 
 # Files #
 #########
-.suo
+*.suo
 *.user
