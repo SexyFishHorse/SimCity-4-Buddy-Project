@@ -123,12 +123,6 @@
       <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Remote\PluginMatcher.cs" />
-    <Compile Include="View\AuthorConsole\AuthorLoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\AuthorConsole\AuthorLoginForm.Designer.cs">
-      <DependentUpon>AuthorLoginForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\Developer\DeveloperDependenciesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +141,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="View\Elements\PluginListViewItem.cs" />
+    <Compile Include="View\Login\RequestLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Login\RequestLoginForm.Designer.cs">
+      <DependentUpon>RequestLoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Plugins\EnterPluginInformationForm.cs">
       <SubType>Form</SubType>
     </Compile>
