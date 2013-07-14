@@ -59,7 +59,7 @@
             var emailRegex = new Regex(@"/.+@.+\..+/i");
             if (!emailRegex.IsMatch(email))
             {
-                throw new ArgumentException("E-mail is not valid.");
+                throw new ValidationException(LocalizationStrings.EmailIsNotValid);
             }
 
             var salt = StringUtility.GenerateRandomAlphaNumericString(256);
