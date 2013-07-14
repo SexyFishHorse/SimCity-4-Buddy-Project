@@ -3,6 +3,7 @@
     using System;
     using System.Windows.Forms;
 
+    using NIHEI.SC4Buddy.Localization;
     public partial class RequestLoginForm : Form
     {
         public RequestLoginForm()
@@ -14,9 +15,8 @@
         {
             MessageBox.Show(
                 this,
-                "The URL to the website where you have uploaded your content."
-                + " (Enter only 1 URL, you can add more sites when your user has been created)",
-                "Site URL help",
+                LocalizationStrings.SiteUrlHelpText,
+                LocalizationStrings.SiteUrlHelp,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1);
@@ -26,8 +26,8 @@
         {
             MessageBox.Show(
                 this,
-                "Your username (what others see and search after) on the site you entered above.",
-                "Username help",
+                LocalizationStrings.UsernameHelpText,
+                LocalizationStrings.UsernameHelp,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information,
                 MessageBoxDefaultButton.Button1);
