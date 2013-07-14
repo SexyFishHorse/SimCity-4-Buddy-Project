@@ -63,9 +63,9 @@ namespace NIHEI.SC4Buddy {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Help {
+        internal static System.Drawing.Bitmap HelpIcon {
             get {
-                object obj = ResourceManager.GetObject("Help", resourceCulture);
+                object obj = ResourceManager.GetObject("HelpIcon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
