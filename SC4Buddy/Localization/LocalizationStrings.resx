@@ -280,4 +280,7 @@ Should also notify the user that some files may have been installed so the user 
   <data name="NoUserIsLoggedIn" xml:space="preserve">
     <value>No user is logged in.</value>
   </data>
+  <data name="InvalidCredentials" xml:space="preserve">
+    <value>Invalid credentials.</value>
+  </data>
 </root>

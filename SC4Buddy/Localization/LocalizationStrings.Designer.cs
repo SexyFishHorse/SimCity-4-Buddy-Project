@@ -232,6 +232,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid credentials..
+        /// </summary>
+        internal static string InvalidCredentials {
+            get {
+                return ResourceManager.GetString("InvalidCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The game location folder is invalid. You must select the root folder (i.e. &quot;C:\Program Files (x86)\Maxis\SimCity 4&quot;).
         /// </summary>
         internal static string InvalidGameLocationFolder {
