@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CA16821A-BC90-4653-A0F6-B35DF6CE8F70}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NIHEI.SC4Buddy</RootNamespace>
+    <AssemblyName>SC4Buddy</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>NIHEI.SC4Buddy.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="SharpCompress">
+      <HintPath>..\..\..\Packages\SharpCompress0.9\SharpCompress.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Control\GameLauncher.cs" />
+    <Compile Include="Control\UserFolders\FolderScanner.cs" />
+    <Compile Include="Control\Plugins\PluginController.cs" />
+    <Compile Include="Control\Plugins\PluginFileController.cs" />
+    <Compile Include="Control\SessionController.cs" />
+    <Compile Include="Control\UserController.cs" />
+    <Compile Include="DataAccess\RegistryFactory.cs" />
+    <Compile Include="DataAccess\Remote\RemotePluginFileRegistry.cs" />
+    <Compile Include="DataAccess\Remote\RemotePluginRegistry.cs" />
+    <Compile Include="DataAccess\Remote\RemoteRegistryFactory.cs" />
+    <Compile Include="DataAccess\Remote\UserRegistry.cs" />
+    <Compile Include="DatabaseEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\UserFolder.cs" />
+    <Compile Include="Installer\InstallerEventArgs\InstalledPluginEventArgs.cs" />
+    <Compile Include="Installer\InstallerEventArgs\InstallPluginEventArgs.cs" />
+    <Compile Include="Installer\InstallerEventArgs\InstallPluginFailureEventArgs.cs" />
+    <Compile Include="Installer\InstallerEventArgs\InstallProgressEventArgs.cs" />
+    <Compile Include="Installer\PluginInstaller.cs" />
+    <Compile Include="Installer\FileHandlers\BaseHandler.cs" />
+    <Compile Include="Installer\FileHandlers\DatHandler.cs" />
+    <Compile Include="Installer\FileHandlers\RarHandler.cs" />
+    <Compile Include="DataAccess\Plugins\PluginFileRegistry.cs" />
+    <Compile Include="DataAccess\PluginFolderRegistry.cs" />
+    <Compile Include="Control\UserFolders\UserFolderController.cs" />
+    <Compile Include="DataAccess\Plugins\PluginGroupRegistry.cs" />
+    <Compile Include="DataAccess\Plugins\PluginRegistry.cs" />
+    <Compile Include="Installer\FileHandlers\ZipHandler.cs" />
+    <Compile Include="Installer\UserFolderListener.cs" />
+    <Compile Include="Installer\PluginInstallerThread.cs" />
+    <Compile Include="Installer\InstallerEventArgs\ReadmeFilesEventArgs.cs" />
+    <Compile Include="Localization\LocalizationStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalizationStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SessionEventArgs.cs" />
+    <Compile Include="Model\ValidationResult.cs" />
+    <Compile Include="RemoteDatabaseEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Remote\PluginMatcher.cs" />
+    <Compile Include="View\AuthorConsole\AuthorLoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AuthorConsole\AuthorLoginForm.Designer.cs">
+      <DependentUpon>AuthorLoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Developer\DeveloperDependenciesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Developer\DeveloperDependenciesForm.Designer.cs">
+      <DependentUpon>DeveloperDependenciesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Developer\DeveloperForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Developer\DeveloperForm.Designer.cs">
+      <DependentUpon>DeveloperForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Elements\ListViewItemWithObjectValue.cs" />
+    <Compile Include="View\Elements\UserFolderListViewItem.cs" />
+    <Compile Include="View\Elements\UserFolderToolStripMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\Elements\PluginListViewItem.cs" />
+    <Compile Include="View\Plugins\EnterPluginInformationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Plugins\EnterPluginInformationForm.Designer.cs">
+      <DependentUpon>EnterPluginInformationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Plugins\FolderScannerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Plugins\FolderScannerForm.Designer.cs">
+      <DependentUpon>FolderScannerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Plugins\InstallPluginsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Plugins\InstallPluginsForm.Designer.cs">
+      <DependentUpon>InstallPluginsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserFolders\UserFolderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UserFolders\UserFolderForm.Designer.cs">
+      <DependentUpon>UserFolderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Plugins\ReadmeFilesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Plugins\ReadmeFilesForm.Designer.cs">
+      <DependentUpon>ReadmeFilesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Application\SC4Buddy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Application\SC4Buddy.Designer.cs">
+      <DependentUpon>SC4Buddy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\UserFolders\ManageUserFoldersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UserFolders\ManageUserFoldersForm.Designer.cs">
+      <DependentUpon>ManageUserFoldersForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Application\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Application\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Localization\LocalizationStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocalizationStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Developer\DeveloperDependenciesForm.resx">
+      <DependentUpon>DeveloperDependenciesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Developer\DeveloperForm.resx">
+      <DependentUpon>DeveloperForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Plugins\EnterPluginInformationForm.da.resx">
+      <DependentUpon>EnterPluginInformationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Plugins\EnterPluginInformationForm.resx">
+      <DependentUpon>EnterPluginInformationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Plugins\FolderScannerForm.resx">
+      <DependentUpon>FolderScannerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Plugins\InstallPluginsForm.resx">
+      <DependentUpon>InstallPluginsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserFolders\UserFolderForm.da.resx">
+      <DependentUpon>UserFolderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserFolders\UserFolderForm.resx">
+      <DependentUpon>UserFolderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Plugins\ReadmeFilesForm.resx">
+      <DependentUpon>ReadmeFilesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Application\SC4Buddy.da.resx">
+      <DependentUpon>SC4Buddy.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Application\SC4Buddy.resx">
+      <DependentUpon>SC4Buddy.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="View\UserFolders\ManageUserFoldersForm.da.resx">
+      <DependentUpon>ManageUserFoldersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UserFolders\ManageUserFoldersForm.resx">
+      <DependentUpon>ManageUserFoldersForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EntityDeploy Include="DatabaseEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DatabaseEntities.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>NIHEI.SC4Buddy.Entities</CustomToolNamespace>
+    </EntityDeploy>
+    <None Include="DatabaseEntities.edmx.diagram">
+      <DependentUpon>DatabaseEntities.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\DatabaseEntities.datasource" />
+    <None Include="Properties\DataSources\DatabaseEntities2.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="RemoteDatabaseEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RemoteDatabaseEntities.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>NIHEI.SC4Buddy.Entities.Remote</CustomToolNamespace>
+    </EntityDeploy>
+    <None Include="RemoteDatabaseEntities.edmx.diagram">
+      <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
+    </None>
+    <None Include="Wallpapers\13.jpg" />
+    <None Include="Wallpapers\12.jpg" />
+    <None Include="Wallpapers\11.jpg" />
+    <EmbeddedResource Include="View\Application\SettingsForm.da.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Application\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="Wallpapers\1.jpg" />
+    <EmbeddedResource Include="Wallpapers\10.jpg" />
+    <EmbeddedResource Include="Wallpapers\2.jpg" />
+    <EmbeddedResource Include="Wallpapers\3.jpg" />
+    <EmbeddedResource Include="Wallpapers\4.jpg" />
+    <EmbeddedResource Include="Wallpapers\5.jpg" />
+    <EmbeddedResource Include="Wallpapers\6.jpg" />
+    <EmbeddedResource Include="Wallpapers\7.jpg" />
+    <EmbeddedResource Include="Wallpapers\8.jpg" />
+    <EmbeddedResource Include="Wallpapers\9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Entities\Database.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.4.0">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 4.0 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\NiheiCommon\NiheiCommon.csproj">
+      <Project>{43F9AF3F-D57D-421D-BA98-87FD499CA314}</Project>
+      <Name>NiheiCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Remote\Control\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

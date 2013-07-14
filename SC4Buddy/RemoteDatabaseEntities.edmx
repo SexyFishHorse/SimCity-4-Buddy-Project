@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RemoteDatabaseEntities.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.1" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="RemoteDatabaseEntitiesStoreContainer">
+          <EntitySet Name="PluginDependency" EntityType="RemoteDatabaseEntities.Store.PluginDependency" store:Type="Tables" Schema="nihei_sc4buddy" />
+          <EntitySet Name="RemotePlugin" EntityType="RemoteDatabaseEntities.Store.RemotePlugin" store:Type="Tables" Schema="nihei_sc4buddy" />
+          <EntitySet Name="RemotePluginFile" EntityType="RemoteDatabaseEntities.Store.RemotePluginFile" store:Type="Tables" Schema="nihei_sc4buddy" />
+          <EntitySet Name="User" EntityType="RemoteDatabaseEntities.Store.User" store:Type="Tables" Schema="nihei_sc4buddy" />
+          <AssociationSet Name="PluginDependency_ibfk_3" Association="RemoteDatabaseEntities.Store.PluginDependency_ibfk_3">
+            <End Role="RemotePlugin" EntitySet="RemotePlugin" />
+            <End Role="PluginDependency" EntitySet="PluginDependency" />
+          </AssociationSet>
+          <AssociationSet Name="PluginDependency_ibfk_4" Association="RemoteDatabaseEntities.Store.PluginDependency_ibfk_4">
+            <End Role="RemotePlugin" EntitySet="RemotePlugin" />
+            <End Role="PluginDependency" EntitySet="PluginDependency" />
+          </AssociationSet>
+          <AssociationSet Name="RemotePluginFile_ibfk_2" Association="RemoteDatabaseEntities.Store.RemotePluginFile_ibfk_2">
+            <End Role="RemotePlugin" EntitySet="RemotePlugin" />
+            <End Role="RemotePluginFile" EntitySet="RemotePluginFile" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PluginDependency">
+          <Key>
+            <PropertyRef Name="PluginId" />
+            <PropertyRef Name="DependencyPluginId" />
+          </Key>
+          <Property Name="PluginId" Type="int" Nullable="false" />
+          <Property Name="DependencyPluginId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RemotePlugin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="Author" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="Link" Type="varchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="RemotePluginFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="Checksum" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="PluginId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Passphrase" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Salt" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Rights" Type="enum" Nullable="false" />
+        </EntityType>
+        <Association Name="PluginDependency_ibfk_3">
+          <End Role="RemotePlugin" Type="RemoteDatabaseEntities.Store.RemotePlugin" Multiplicity="1" />
+          <End Role="PluginDependency" Type="RemoteDatabaseEntities.Store.PluginDependency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RemotePlugin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PluginDependency">
+              <PropertyRef Name="PluginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PluginDependency_ibfk_4">
+          <End Role="RemotePlugin" Type="RemoteDatabaseEntities.Store.RemotePlugin" Multiplicity="1" />
+          <End Role="PluginDependency" Type="RemoteDatabaseEntities.Store.PluginDependency" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RemotePlugin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PluginDependency">
+              <PropertyRef Name="DependencyPluginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RemotePluginFile_ibfk_2">
+          <End Role="RemotePlugin" Type="RemoteDatabaseEntities.Store.RemotePlugin" Multiplicity="1" />
+          <End Role="RemotePluginFile" Type="RemoteDatabaseEntities.Store.RemotePluginFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RemotePlugin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RemotePluginFile">
+              <PropertyRef Name="PluginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Entities.Remote" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="RemoteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RemotePlugins" EntityType="Entities.Remote.RemotePlugin" />
+          <EntitySet Name="RemotePluginFiles" EntityType="Entities.Remote.RemotePluginFile" />
+          <AssociationSet Name="RemotePluginFile_ibfk_2" Association="Entities.Remote.RemotePluginFile_ibfk_2">
+            <End Role="RemotePlugin" EntitySet="RemotePlugins" />
+            <End Role="RemotePluginFile" EntitySet="RemotePluginFiles" />
+          </AssociationSet>
+          <AssociationSet Name="PluginDependency" Association="Entities.Remote.PluginDependency">
+            <End Role="RemotePlugin" EntitySet="RemotePlugins" />
+            <End Role="RemotePlugin1" EntitySet="RemotePlugins" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="Entities.Remote.User" />
+        </EntityContainer>
+        <EntityType Name="RemotePlugin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Author" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Link" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Files" Relationship="Entities.Remote.RemotePluginFile_ibfk_2" FromRole="RemotePlugin" ToRole="RemotePluginFile" />
+          <NavigationProperty Name="Dependencies" Relationship="Entities.Remote.PluginDependency" FromRole="RemotePlugin" ToRole="RemotePlugin1" />
+          <NavigationProperty Name="DependencyFor" Relationship="Entities.Remote.PluginDependency" FromRole="RemotePlugin1" ToRole="RemotePlugin" />
+        </EntityType>
+        <EntityType Name="RemotePluginFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Checksum" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="PluginId" Nullable="false" />
+          <NavigationProperty Name="Plugin" Relationship="Entities.Remote.RemotePluginFile_ibfk_2" FromRole="RemotePluginFile" ToRole="RemotePlugin" />
+        </EntityType>
+        <Association Name="RemotePluginFile_ibfk_2">
+          <End Type="Entities.Remote.RemotePlugin" Role="RemotePlugin" Multiplicity="1" />
+          <End Type="Entities.Remote.RemotePluginFile" Role="RemotePluginFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RemotePlugin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RemotePluginFile">
+              <PropertyRef Name="PluginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PluginDependency">
+          <End Type="Entities.Remote.RemotePlugin" Role="RemotePlugin" Multiplicity="*" />
+          <End Type="Entities.Remote.RemotePlugin" Role="RemotePlugin1" Multiplicity="*" />
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Salt" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Rights" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Passphrase" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="RemoteDatabaseEntities" />
+        <Alias Key="Target" Value="RemoteDatabaseEntities.Store" />
+        <EntityContainerMapping CdmEntityContainer="RemoteEntities" StorageEntityContainer="RemoteDatabaseEntitiesStoreContainer">
+          <EntitySetMapping Name="RemotePlugins">
+            <EntityTypeMapping TypeName="Entities.Remote.RemotePlugin">
+              <MappingFragment StoreEntitySet="RemotePlugin">
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RemotePluginFiles">
+            <EntityTypeMapping TypeName="Entities.Remote.RemotePluginFile">
+              <MappingFragment StoreEntitySet="RemotePluginFile">
+                <ScalarProperty Name="PluginId" ColumnName="PluginId" />
+                <ScalarProperty Name="Checksum" ColumnName="Checksum" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PluginDependency" TypeName="Entities.Remote.PluginDependency" StoreEntitySet="PluginDependency">
+            <EndProperty Name="RemotePlugin1">
+              <ScalarProperty Name="Id" ColumnName="DependencyPluginId" />
+            </EndProperty>
+            <EndProperty Name="RemotePlugin">
+              <ScalarProperty Name="Id" ColumnName="PluginId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Entities.Remote.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Passphrase" ColumnName="Passphrase" />
+                <ScalarProperty Name="Rights" ColumnName="Rights" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

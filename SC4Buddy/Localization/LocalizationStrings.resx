@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ConfirmUserFolderDeletion" xml:space="preserve">
+    <value>Confirm plugin folder deletion</value>
+  </data>
+  <data name="ConfirmUserFolderDeletionMessageBeforeFolderName" xml:space="preserve">
+    <value>Are you sure you want to remove the plugin folder</value>
+    <comment>NO trailing space, questionmarks or thelike. A space and the name of the plugin folder is added i.e. "Are you sure you want to remove the plugin folder "my plugin folder"?</comment>
+  </data>
+  <data name="UserFolderContentIsNotDeleted" xml:space="preserve">
+    <value>The folder or the content is not deleted from your computer</value>
+  </data>
+  <data name="AliasError" xml:space="preserve">
+    <value>You cannot use the same alias for multiple plugin folders and the alias cannot be blank.</value>
+  </data>
+  <data name="PathError" xml:space="preserve">
+    <value>You cannot use the same path for multiple plugin folders, the path cannot be blank, you cannot add the main plugin folder in the game folder, and the path must exist on your machine.</value>
+  </data>
+  <data name="InvalidGameLocationFolder" xml:space="preserve">
+    <value>The game location folder is invalid. You must select the root folder (i.e. "C:\Program Files (x86)\Maxis\SimCity 4")</value>
+  </data>
+  <data name="SelectGameLocation" xml:space="preserve">
+    <value>(Click browse to select the games folder)</value>
+    <comment>Enclose in paranthesis.</comment>
+  </data>
+  <data name="StartingGame" xml:space="preserve">
+    <value>Starting...</value>
+  </data>
+  <data name="ConfirmUninstall" xml:space="preserve">
+    <value>Confirm uninstall</value>
+  </data>
+  <data name="AreYouSureYouWantToUninstall" xml:space="preserve">
+    <value>Are you sure you want to uninstall {0}?</value>
+    <comment>{0} will be replaced with the name of the plugin</comment>
+  </data>
+  <data name="ConfirmInstallation" xml:space="preserve">
+    <value>Confirm installation</value>
+  </data>
+  <data name="AreYouSureYouWantToInstallTheSelectedPlugins" xml:space="preserve">
+    <value>Are you sure you want to install the selected {0} plugins?</value>
+    <comment>{0} will be replaced with the number of plugins (minimum value is 1)
+</comment>
+  </data>
+  <data name="WouldYouLikeToEnterInformationAboutThePlugin" xml:space="preserve">
+    <value>Would you like to enter information about the plugin?</value>
+  </data>
+  <data name="EnterPluginInformation" xml:space="preserve">
+    <value>Enter plugin information</value>
+  </data>
+  <data name="ThisFormContainsNumExecutableFiles" xml:space="preserve">
+    <value>This form contains {0} executable files.</value>
+    <comment>{0} will be replaced with the number of executable files</comment>
+  </data>
+  <data name="ExecutableFilesFound" xml:space="preserve">
+    <value>Executable files found</value>
+  </data>
+  <data name="DoYouWantToRunTheNamExecutable" xml:space="preserve">
+    <value>Do you want to run the {0} executable? Please note that the installer has to be installed in the plugin folder {1} in order to detect filechanges, otherwise you have to rescan the plugin folders manually.</value>
+    <comment>{0} will be replaced with the name of the file (i.e. "Install_BSC_Essentials.exe"), {1} will be replaced with the path of the plugin folder (i.e. "C:\users\myUser\Documents\SimCity 4\Plugins")</comment>
+  </data>
+  <data name="RunExecutable" xml:space="preserve">
+    <value>Run executable?</value>
+  </data>
+  <data name="ItSeemsLikeTheInstallationDidNotStart" xml:space="preserve">
+    <value>It seems like the installation did not start. If it did start then DO NOT CLOSE THIS DIALOG untill the installation is complete.</value>
+  </data>
+  <data name="PossibleErrorDetected" xml:space="preserve">
+    <value>Possible error detected.</value>
+  </data>
+  <data name="ThePluginDigNotContainAnyValidFilesToInstall" xml:space="preserve">
+    <value>The plugin did not contain any valid files to install. {0}</value>
+    <comment>{0} will be replaced by a paranthesis with a list of valid file extensions. i.e. "(*.dat, *.sc4model, *.sc4lot, *.sc4desc)"</comment>
+  </data>
+  <data name="FilesExtractedToTemporaryFolder" xml:space="preserve">
+    <value>Files extracted to temporary folder.</value>
+  </data>
+  <data name="FilesMovedToUserFolder" xml:space="preserve">
+    <value>Files moved to plugin folder.</value>
+  </data>
+  <data name="PluginInformationStored" xml:space="preserve">
+    <value>Plugin information stored</value>
+  </data>
+  <data name="PluginInstallFailed" xml:space="preserve">
+    <value>Plugin install failed.</value>
+  </data>
+  <data name="PluginInstalledSuccessfully" xml:space="preserve">
+    <value>Plugin installed successfully.</value>
+  </data>
+  <data name="InstallingPluginNam" xml:space="preserve">
+    <value>Installing plugin {0}</value>
+    <comment>{0} will be replaced with the name of the plugin</comment>
+  </data>
+  <data name="NumPluginsInstalledSuccessfully" xml:space="preserve">
+    <value>{0} plugins installed successfully.</value>
+    <comment>{0} will be replaced by the number of installed plugins (which installed without errors)</comment>
+  </data>
+  <data name="NumPluginsFailedInstallationPleaseReview" xml:space="preserve">
+    <value>{0} plugins failed installation. Please review these manually as some files may not have been removed correctly during recovery.</value>
+    <comment>{0} will be replaced by the number of plugins that experienced an error during install.
+
+Should also notify the user that some files may have been installed so the user should check this manually.</comment>
+  </data>
+  <data name="FailedPlugins" xml:space="preserve">
+    <value>Failed plugins:</value>
+  </data>
+  <data name="InstallationCompleted" xml:space="preserve">
+    <value>Installation completed.</value>
+  </data>
+  <data name="WouldYouLikeToEnterAdditionalDetailsForTheInstalledPlugins" xml:space="preserve">
+    <value>Would you like to enter additional details for the installed plugins (like name, group, description, download link etc?)? You can always do this later if you so desire.</value>
+  </data>
+  <data name="EnterAdditionalPluginInformation" xml:space="preserve">
+    <value>Enter additional plugin information</value>
+  </data>
+  <data name="YouMustSettheGameLocationBeforeYouCanUseThisApplication" xml:space="preserve">
+    <value>You must set the game location before you can use this application.</value>
+  </data>
+  <data name="GameFolderNotSet" xml:space="preserve">
+    <value>Game folder not set</value>
+  </data>
+  <data name="RemoveNonPluginFiles" xml:space="preserve">
+    <value>Remove non-plugin files</value>
+  </data>
+  <data name="ThisToolWillScanForAllNonPluginFilesAndRemoveThem" xml:space="preserve">
+    <value>This tool will scan for all non-plugin files and empty folders and remove them from the plugin directory. Are you sure you want to proceed? (Files are moved to the recycle bin)</value>
+  </data>
+  <data name="NumFilesAndNumFoldersWereRemoved" xml:space="preserve">
+    <value>{0} files and {1} folders were removed.</value>
+    <comment>{0} will be replaced by a number representing the number of files deleted
+{1} will be replaced by a number representing the number of folders deleted</comment>
+  </data>
+  <data name="NonPluginFilesDeleted" xml:space="preserve">
+    <value>Non-plugin files deleted</value>
+  </data>
+  <data name="NumMinutes" xml:space="preserve">
+    <value>{0} minutes</value>
+    <comment>{0} will be replaced by a number (minimum value is 5)</comment>
+  </data>
+  <data name="ThisWillRemoveNumFilesAndAtLeastNumFolders" xml:space="preserve">
+    <value>This will remove {0} files and at least {1} folders (more folders may be found after the files have been deleted). Are you sure you want to continue?</value>
+    <comment>{0} will be replaced with the number of files to be removed (minimum value is 0), {1} will be replaced with the number of folders to be removed (minimum value is 0)</comment>
+  </data>
+  <data name="ConfirmDeletionOfNonPluginFiles" xml:space="preserve">
+    <value>Confirm deletion of non plugin files</value>
+  </data>
+  <data name="NoNewDeletedOrUpdatedFilesDetected" xml:space="preserve">
+    <value>No new, deleted or updated files detected.</value>
+  </data>
+  <data name="NoFileChangesDetected" xml:space="preserve">
+    <value>No file changes detected</value>
+  </data>
+  <data name="PluginInformationUpdated" xml:space="preserve">
+    <value>Plugin information updated</value>
+  </data>
+  <data name="InformationForNumPluginsWereUpdated" xml:space="preserve">
+    <value>Information for {0} plugins were updated.</value>
+    <comment>{0} will be replaced by a number (minimum value 1)</comment>
+  </data>
+  <data name="LoggedInAs" xml:space="preserve">
+    <value>Logged in as {0}</value>
+    <comment>{0} will be replaced by the username of the logged in user</comment>
+  </data>
+  <data name="NoUserIsLoggedIn" xml:space="preserve">
+    <value>No user is logged in.</value>
+  </data>
+</root>
