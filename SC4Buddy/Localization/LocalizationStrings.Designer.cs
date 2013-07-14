@@ -421,6 +421,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Registration error.
+        /// </summary>
+        internal static string RegistrationError {
+            get {
+                return ResourceManager.GetString("RegistrationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove non-plugin files.
         /// </summary>
         internal static string RemoveNonPluginFiles {
