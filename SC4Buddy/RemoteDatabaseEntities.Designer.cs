@@ -839,8 +839,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// <param name="passphrase">Initial value of the Passphrase property.</param>
         /// <param name="activated">Initial value of the Activated property.</param>
         /// <param name="email">Initial value of the Email property.</param>
-        /// <param name="emailActivated">Initial value of the EmailActivated property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String salt, global::System.String rights, global::System.String passphrase, global::System.Boolean activated, global::System.String email, global::System.Boolean emailActivated)
+        public static User CreateUser(global::System.Int32 id, global::System.String salt, global::System.String rights, global::System.String passphrase, global::System.Boolean activated, global::System.String email)
         {
             User user = new User();
             user.Id = id;
@@ -849,7 +848,6 @@ namespace NIHEI.SC4Buddy.Entities.Remote
             user.Passphrase = passphrase;
             user.Activated = activated;
             user.Email = email;
-            user.EmailActivated = emailActivated;
             return user;
         }
 
@@ -1003,30 +1001,6 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         private global::System.String _Email;
         partial void OnEmailChanging(global::System.String value);
         partial void OnEmailChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean EmailActivated
-        {
-            get
-            {
-                return _EmailActivated;
-            }
-            set
-            {
-                OnEmailActivatedChanging(value);
-                ReportPropertyChanging("EmailActivated");
-                _EmailActivated = StructuralObject.SetValidValue(value, "EmailActivated");
-                ReportPropertyChanged("EmailActivated");
-                OnEmailActivatedChanged();
-            }
-        }
-        private global::System.Boolean _EmailActivated;
-        partial void OnEmailActivatedChanging(global::System.Boolean value);
-        partial void OnEmailActivatedChanged();
 
         #endregion
 

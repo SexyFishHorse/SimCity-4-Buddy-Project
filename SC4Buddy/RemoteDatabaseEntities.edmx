@@ -78,7 +78,6 @@
           <Property Name="Salt" Type="varchar" Nullable="false" MaxLength="255" />
           <Property Name="Rights" Type="enum" Nullable="false" />
           <Property Name="Activated" Type="bool" Nullable="false" />
-          <Property Name="EmailActivated" Type="bool" Nullable="false" />
         </EntityType>
         <Association Name="Author_ibfk_1">
           <End Role="User" Type="RemoteDatabaseEntities.Store.User" Multiplicity="0..1" />
@@ -177,7 +176,6 @@
           <Property Type="Boolean" Name="Activated" Nullable="false" />
           <NavigationProperty Name="Authors" Relationship="Entities.Remote.Author_ibfk_1" FromRole="User" ToRole="Author" />
           <Property Type="String" Name="Email" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="Boolean" Name="EmailActivated" Nullable="false" />
         </EntityType>
         <EntityType Name="Author">
           <Key>
@@ -265,7 +263,6 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="Entities.Remote.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="EmailActivated" ColumnName="EmailActivated" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Activated" ColumnName="Activated" />
                 <ScalarProperty Name="Passphrase" ColumnName="Passphrase" />
