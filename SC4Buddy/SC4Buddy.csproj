@@ -82,6 +82,7 @@
     <Compile Include="Control\SessionController.cs" />
     <Compile Include="Control\UserController.cs" />
     <Compile Include="DataAccess\RegistryFactory.cs" />
+    <Compile Include="DataAccess\Remote\AuthorRegistry.cs" />
     <Compile Include="DataAccess\Remote\RemotePluginFileRegistry.cs" />
     <Compile Include="DataAccess\Remote\RemotePluginRegistry.cs" />
     <Compile Include="DataAccess\Remote\RemoteRegistryFactory.cs" />

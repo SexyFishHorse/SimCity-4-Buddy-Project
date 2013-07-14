@@ -23,6 +23,8 @@
 
         private readonly RemotePluginRegistry remotePluginRegistry;
 
+        private readonly AuthorRegistry authorRegistry;
+
         private readonly List<RemotePlugin> dependencies;
 
         public DeveloperForm()
@@ -33,9 +35,11 @@
 
             userFolderRegistry = RegistryFactory.UserFolderRegistry;
 
-            selectedFiles = new List<string>();
-
             remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
+
+            authorRegistry = RemoteRegistryFactory.AuthorRegistry;
+
+            selectedFiles = new List<string>();
 
             dependencies = new List<RemotePlugin>();
         }
@@ -110,7 +114,7 @@
             var remotePlugin = new RemotePlugin
                                    {
                                        Name = nameTB.Text.Trim(),
-                                       Author = GetAuthor(authorTB.Text.Trim()),
+                                       Author = authorRegistry.GetAuthorByName(authorTB.Text.Trim()),
                                        Link = linkTB.Text.Trim(),
                                        Description = descTB.Text.Trim()
                                    };

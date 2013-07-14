@@ -60,7 +60,7 @@
             {
                 plugin.RemotePluginId = remotePlugin.Id;
                 plugin.Name = remotePlugin.Name;
-                plugin.Author = remotePlugin.Author;
+                plugin.Author = remotePlugin.Author.Name;
                 plugin.Link = remotePlugin.Link;
                 plugin.Description = remotePlugin.Description;
 

@@ -12,6 +12,8 @@
 
         private readonly UserRegistry userRegistry;
 
+        private readonly AuthorRegistry authorRegistry;
+
         private RemoteRegistryFactory()
         {
             var entities = new RemoteEntities();
@@ -21,6 +23,8 @@
             remotePluginFileRegistry = new RemotePluginFileRegistry(entities);
 
             userRegistry = new UserRegistry(entities);
+
+            authorRegistry = new AuthorRegistry(entities);
         }
 
         public static RemotePluginRegistry RemotePluginRegistry
@@ -44,6 +48,14 @@
             get
             {
                 return Instance.userRegistry;
+            }
+        }
+
+        public static AuthorRegistry AuthorRegistry
+        {
+            get
+            {
+                return Instance.authorRegistry;
             }
         }
     }

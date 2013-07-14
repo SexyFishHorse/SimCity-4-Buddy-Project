@@ -201,11 +201,13 @@
 
                             if (Settings.Default.DeveloperUploadToRemote)
                             {
+                                var authorRegistry = RemoteRegistryFactory.AuthorRegistry;
+
                                 var remotePlugin = new RemotePlugin
                                                        {
                                                            Name = enterPluginInformationForm.Plugin.Name,
                                                            Link = enterPluginInformationForm.Plugin.Link,
-                                                           Author = enterPluginInformationForm.Plugin.Author,
+                                                           Author = authorRegistry.GetAuthorByName(enterPluginInformationForm.Plugin.Author),
                                                            Description =
                                                                enterPluginInformationForm.Plugin.Description
                                                        };

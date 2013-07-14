@@ -35,7 +35,7 @@
             {
                 var results =
                     registry.RemotePlugins.Where(
-                        x => x.Name.ToUpper().Contains(txt.ToUpper()) || x.Author.ToUpper().Contains(txt.ToUpper()));
+                        x => x.Name.ToUpper().Contains(txt.ToUpper()) || x.Author.Name.ToUpper().Contains(txt.ToUpper()));
 
                 foreach (var result in from result in results
                                        let plugin = result

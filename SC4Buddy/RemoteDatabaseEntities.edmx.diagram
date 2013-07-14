@@ -4,12 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d5f9adb265e04483bdc1e2a175d96a3b" Name="Diagram1" >
-        <EntityTypeShape EntityType="Entities.Remote.RemotePlugin" Width="1.5" PointX="1.75" PointY="1.125" />
-        <EntityTypeShape EntityType="Entities.Remote.RemotePluginFile" Width="1.5" PointX="5" PointY="1.125" />
-        <AssociationConnector Association="Entities.Remote.RemotePluginFile_ibfk_2" />
-        <AssociationConnector Association="Entities.Remote.PluginDependency" />
-        <EntityTypeShape EntityType="Entities.Remote.User" Width="1.5" PointX="7.75" PointY="1.125" />
+      <Diagram DiagramId="d5f9adb265e04483bdc1e2a175d96a3b" Name="Diagram1" ZoomLevel="100" >
+        <EntityTypeShape EntityType="Entities.Remote.User" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="Entities.Remote.Author" Width="1.5" PointX="2.875" PointY="1.25" />
+        <EntityTypeShape EntityType="Entities.Remote.RemotePlugin" Width="1.5" PointX="5" PointY="1.625" />
+        <EntityTypeShape EntityType="Entities.Remote.RemotePluginFile" Width="1.5" PointX="7.125" PointY="2" />
+        <AssociationConnector Association="Entities.Remote.Author_ibfk_1" />
+        <AssociationConnector Association="Entities.Remote.Plugin_ibfk_1" />
+        <AssociationConnector Association="Entities.Remote.PluginFile_ibfk_2" />
+        <AssociationConnector Association="Entities.Remote.PluginDependency1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
