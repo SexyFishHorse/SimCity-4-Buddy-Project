@@ -26,5 +26,10 @@
             entities.Users.AddObject(user);
             entities.SaveChanges();
         }
+
+        public void Update(User user)
+        {
+            entities.SaveChanges();
+        }
     }
 }
