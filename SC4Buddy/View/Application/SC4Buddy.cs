@@ -28,11 +28,6 @@
 
         public Sc4Buddy()
         {
-            if (!EventLog.SourceExists("SimCity 4 Buddy"))
-            {
-                EventLog.CreateEventSource("SimCity 4 Buddy", "Application");
-            }
-
             InitializeComponent();
 
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(Sc4Buddy));

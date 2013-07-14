@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy
 {
     using System;
+    using System.Configuration;
     using System.Diagnostics;
     using System.Globalization;
     using System.IO;
@@ -16,12 +17,18 @@
 
     public static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+        private static readonly string LogSource = ConfigurationManager.AppSettings.Get("EventLogSource");
+
         [STAThread]
         public static void Main()
         {
+            if (!EventLog.SourceExists(LogSource))
+            {
+                EventLog.CreateEventSource(
+                    LogSource,
+                    ConfigurationManager.AppSettings.Get("EventLogName"));
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en");
