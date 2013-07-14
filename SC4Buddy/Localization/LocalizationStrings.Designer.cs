@@ -88,6 +88,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Authentication error.
+        /// </summary>
+        internal static string AuthenticationError {
+            get {
+                return ResourceManager.GetString("AuthenticationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm deletion of non plugin files.
         /// </summary>
         internal static string ConfirmDeletionOfNonPluginFiles {

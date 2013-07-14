@@ -289,4 +289,7 @@ Should also notify the user that some files may have been installed so the user 
   <data name="GameUserFolderName" xml:space="preserve">
     <value>Game folder</value>
   </data>
+  <data name="AuthenticationError" xml:space="preserve">
+    <value>Authentication error</value>
+  </data>
 </root>
