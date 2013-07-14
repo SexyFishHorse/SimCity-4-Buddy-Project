@@ -30,17 +30,17 @@ namespace NIHEI.SC4Buddy.View.Login
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.emailTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.repeatPasswordTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.emailTextBox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.usernamePictureBox = new System.Windows.Forms.PictureBox();
             this.sitePictureBox = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.siteUrlTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -57,18 +57,9 @@ namespace NIHEI.SC4Buddy.View.Login
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.Size = new System.Drawing.Size(75, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Username";
-            // 
-            // emailTextBox
-            // 
-            this.emailTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.emailTextBox.Location = new System.Drawing.Point(118, 19);
-            this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(287, 20);
-            this.emailTextBox.TabIndex = 1;
+            this.label1.Text = "E-mail address";
             // 
             // passwordTextBox
             // 
@@ -123,6 +114,15 @@ namespace NIHEI.SC4Buddy.View.Login
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Login information";
             // 
+            // emailTextBox
+            // 
+            this.emailTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.emailTextBox.Location = new System.Drawing.Point(118, 19);
+            this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.Size = new System.Drawing.Size(287, 20);
+            this.emailTextBox.TabIndex = 1;
+            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -130,7 +130,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.groupBox2.Controls.Add(this.usernamePictureBox);
             this.groupBox2.Controls.Add(this.sitePictureBox);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.usernameTextBox);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.siteUrlTextBox);
             this.groupBox2.Controls.Add(this.label4);
@@ -175,14 +175,14 @@ namespace NIHEI.SC4Buddy.View.Login
             this.label7.TabIndex = 5;
             this.label7.Text = "You can add users for other sites later";
             // 
-            // textBox1
+            // usernameTextBox
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.usernameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(118, 45);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(265, 20);
-            this.textBox1.TabIndex = 4;
+            this.usernameTextBox.Location = new System.Drawing.Point(118, 45);
+            this.usernameTextBox.Name = "usernameTextBox";
+            this.usernameTextBox.Size = new System.Drawing.Size(265, 20);
+            this.usernameTextBox.TabIndex = 4;
             // 
             // label6
             // 
@@ -259,7 +259,6 @@ namespace NIHEI.SC4Buddy.View.Login
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox emailTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox repeatPasswordTextBox;
@@ -269,11 +268,12 @@ namespace NIHEI.SC4Buddy.View.Login
         private System.Windows.Forms.TextBox siteUrlTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox usernameTextBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox sitePictureBox;
         private System.Windows.Forms.PictureBox usernamePictureBox;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button requestButton;
+        private System.Windows.Forms.TextBox emailTextBox;
     }
 }
