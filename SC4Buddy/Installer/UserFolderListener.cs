@@ -16,7 +16,7 @@
             DeletedFiles = new List<string>();
             RenamedFiles = new Dictionary<string, string>();
 
-            Watcher = new FileSystemWatcher(UserFolder.Path, "*")
+            Watcher = new FileSystemWatcher(UserFolder.PluginFolderPath, "*")
             {
                 IncludeSubdirectories = true,
                 EnableRaisingEvents = true,

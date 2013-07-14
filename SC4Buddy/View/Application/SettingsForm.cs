@@ -106,7 +106,7 @@
                 throw new InvalidOperationException("Main plugin folder has been deleted from the database.");
             }
 
-            folder.Path = Path.Combine(Settings.Default.GameLocation, "Plugins");
+            folder.Path = Settings.Default.GameLocation;
             userFolderRegistry.Update(folder);
         }
 
