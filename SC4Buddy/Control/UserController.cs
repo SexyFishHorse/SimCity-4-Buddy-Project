@@ -18,11 +18,11 @@
             this.registry = registry;
         }
 
-        public User Login(string username, string password)
+        public User Login(string email, string password)
         {
             var possibleUser =
                 registry.Users.FirstOrDefault(
-                    x => x.Username.Equals(username, StringComparison.InvariantCultureIgnoreCase));
+                    x => x.Email.Equals(email, StringComparison.InvariantCultureIgnoreCase));
 
             if (possibleUser == null)
             {
