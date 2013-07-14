@@ -35,6 +35,7 @@
 
             if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation))
             {
+                EventLog.WriteEntry(LogSource, "Game location not defined.");
                 Application.Run(new SettingsForm { StartPosition = FormStartPosition.CenterScreen });
                 SetDefaultUserFolder();
             }
@@ -55,6 +56,11 @@
             if (Directory.Exists(path) && !registry.UserFolders.Any(x => x.Path.Equals(path)))
             {
                 registry.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, Path = path });
+                EventLog.WriteEntry(LogSource, "Default user folder is set.");
+            }
+            else
+            {
+                EventLog.WriteEntry(LogSource, "Unable to locate default user folder.");
             }
         }
     }
