@@ -24,6 +24,36 @@
             this.authorRegistry = authorRegistry;
         }
 
+        private static bool CompareByteArrays(byte[] array1, byte[] array2)
+        {
+            if (array1.Length != array2.Length)
+            {
+                return false;
+            }
+
+            return !array1.Where((t, i) => t != array2[i]).Any();
+        }
+
+        private static byte[] GenerateSaltedHash(byte[] plainText, byte[] salt)
+        {
+            HashAlgorithm algorithm = new SHA256Managed();
+
+            var plainTextWithSaltBytes =
+              new byte[plainText.Length + salt.Length];
+
+            for (var i = 0; i < plainText.Length; i++)
+            {
+                plainTextWithSaltBytes[i] = plainText[i];
+            }
+
+            for (var i = 0; i < salt.Length; i++)
+            {
+                plainTextWithSaltBytes[plainText.Length + i] = salt[i];
+            }
+
+            return algorithm.ComputeHash(plainTextWithSaltBytes);
+        }
+
         public User Login(string email, string password)
         {
             var possibleUser =
@@ -110,36 +140,6 @@
             }
 
             return true;
-        }
-
-        private static bool CompareByteArrays(byte[] array1, byte[] array2)
-        {
-            if (array1.Length != array2.Length)
-            {
-                return false;
-            }
-
-            return !array1.Where((t, i) => t != array2[i]).Any();
-        }
-
-        private static byte[] GenerateSaltedHash(byte[] plainText, byte[] salt)
-        {
-            HashAlgorithm algorithm = new SHA256Managed();
-
-            var plainTextWithSaltBytes =
-              new byte[plainText.Length + salt.Length];
-
-            for (var i = 0; i < plainText.Length; i++)
-            {
-                plainTextWithSaltBytes[i] = plainText[i];
-            }
-
-            for (var i = 0; i < salt.Length; i++)
-            {
-                plainTextWithSaltBytes[plainText.Length + i] = salt[i];
-            }
-
-            return algorithm.ComputeHash(plainTextWithSaltBytes);
         }
     }
 }
