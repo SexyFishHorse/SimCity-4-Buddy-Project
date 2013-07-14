@@ -29,6 +29,8 @@
                     ConfigurationManager.AppSettings.Get("EventLogName"));
             }
 
+            EventLog.WriteEntry(LogSource, "SC4Buddy started.");
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en");
