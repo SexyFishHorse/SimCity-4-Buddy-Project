@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Control
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Security.Authentication;
     using System.Security.Cryptography;
@@ -9,6 +10,7 @@
     using NIHEI.Common.TypeUtility;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Localization;
 
     public class UserController
     {
@@ -54,8 +56,13 @@
             return possibleUser;
         }
 
-        public void CreateUser(string email, string password, string site, string username)
+        public void CreateUser(string email, string password, string repeatPassword, string site, string username)
         {
+            if (!password.Equals(repeatPassword, StringComparison.Ordinal))
+            {
+                throw new ValidationException(LocalizationStrings.PasswordsDoesNotMatch);
+            }
+
             var emailRegex = new Regex(@"/.+@.+\..+/i");
             if (!emailRegex.IsMatch(email))
             {

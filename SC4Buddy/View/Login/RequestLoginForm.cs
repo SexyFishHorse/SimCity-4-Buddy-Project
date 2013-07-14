@@ -45,6 +45,7 @@
                 userController.CreateUser(
                     emailTextBox.Text.Trim(),
                     passwordTextBox.Text,
+                    repeatPasswordTextBox.Text,
                     siteUrlTextBox.Text.Trim(),
                     usernameTextBox.Text.Trim());
 
