@@ -77,6 +77,10 @@
             var author = new Author { Name = username, Site = site, User = user };
 
             authorRegistry.Add(author);
+
+            user.Authors.Add(author);
+
+            userRegistry.Update(user);
         }
     }
 }
