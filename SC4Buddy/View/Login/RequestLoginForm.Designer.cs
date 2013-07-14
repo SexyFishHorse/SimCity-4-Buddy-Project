@@ -67,6 +67,7 @@ namespace NIHEI.SC4Buddy.View.Login
             | System.Windows.Forms.AnchorStyles.Right)));
             this.passwordTextBox.Location = new System.Drawing.Point(118, 45);
             this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.PasswordChar = '●';
             this.passwordTextBox.Size = new System.Drawing.Size(287, 20);
             this.passwordTextBox.TabIndex = 2;
             // 
@@ -85,6 +86,7 @@ namespace NIHEI.SC4Buddy.View.Login
             | System.Windows.Forms.AnchorStyles.Right)));
             this.repeatPasswordTextBox.Location = new System.Drawing.Point(118, 71);
             this.repeatPasswordTextBox.Name = "repeatPasswordTextBox";
+            this.repeatPasswordTextBox.PasswordChar = '●';
             this.repeatPasswordTextBox.Size = new System.Drawing.Size(287, 20);
             this.repeatPasswordTextBox.TabIndex = 4;
             // 
