@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Security.Authentication;
     using System.Security.Cryptography;
-    using System.Text.RegularExpressions;
+    using System.Text;
 
     using NIHEI.Common.TypeUtility;
     using NIHEI.SC4Buddy.DataAccess.Remote;
@@ -40,15 +40,10 @@
                 throw new AuthenticationException("User is not activated yet.");
             }
 
-            var algorithm = new SHA256Managed();
+            var saltedHash = GenerateSaltedHash(
+                Encoding.Default.GetBytes(password), Encoding.Default.GetBytes(possibleUser.Salt));
 
-            var passwordWithSalt = string.Concat(password, possibleUser.Salt);
-
-            var bytes = passwordWithSalt.ToByteArray();
-            var hash = algorithm.ComputeHash(bytes);
-            var hashedPassphrase = hash.ToStringValue();
-
-            if (!hashedPassphrase.Equals(possibleUser.Passphrase))
+            if (!CompareByteArrays(saltedHash, possibleUser.Passphrase))
             {
                 throw new InvalidCredentialException("Invalid username or password.");
             }
@@ -63,21 +58,20 @@
                 throw new ValidationException(LocalizationStrings.PasswordsDoesNotMatch);
             }
 
-            var emailRegex = new Regex(@"/.+@.+\..+/i");
-            if (!emailRegex.IsMatch(email))
+            if (!EmailSeemsValid(email))
             {
                 throw new ValidationException(LocalizationStrings.EmailIsNotValid);
             }
 
-            var salt = StringUtility.GenerateRandomAlphaNumericString(256);
+            var salt = StringUtility.GenerateRandomAlphaNumericString(50);
 
-            var passphrase = string.Concat(salt, password);
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
 
-            var algorithm = new SHA256Managed();
+            var saltBytes = Encoding.UTF8.GetBytes(salt);
 
-            var hash = algorithm.ComputeHash(passphrase.ToByteArray()).ToStringValue();
+            var saltedHashBytes = GenerateSaltedHash(passwordBytes, saltBytes);
 
-            var user = new User { Email = email, Salt = salt, Passphrase = hash };
+            var user = new User { Email = email, Salt = salt, Passphrase = saltedHashBytes };
 
             userRegistry.Add(user);
 
