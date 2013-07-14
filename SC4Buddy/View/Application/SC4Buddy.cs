@@ -14,6 +14,7 @@
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Developer;
     using NIHEI.SC4Buddy.View.Elements;
@@ -36,6 +37,19 @@
 
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(Sc4Buddy));
             controller = new UserFolderController(RegistryFactory.UserFolderRegistry);
+
+            SessionController.Instance.UserLoggedIn += OnUserLoggedIn;
+            SessionController.Instance.UserLoggedOut += OnUserLoggedOut;
+        }
+
+        private void OnUserLoggedOut(SessionController sender, SessionEventArgs eventargs)
+        {
+            developerToolStripMenuItem.Visible = false;
+        }
+
+        private void OnUserLoggedIn(SessionController sender, SessionEventArgs eventArgs)
+        {
+            developerToolStripMenuItem.Visible = eventArgs.User.IsDeveloper;
         }
 
         private void UserFolderComboBoxCheckSelectedValue(object sender, EventArgs e)
