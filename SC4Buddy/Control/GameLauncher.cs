@@ -3,26 +3,35 @@
     using System;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
-    using System.Threading;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Properties;
 
-    public class GameLauncher
+    using Timer = System.Threading.Timer;
+
+    public class GameLauncher : IDisposable
     {
         private readonly ProcessStartInfo gameProcessStartInfo;
 
         private readonly int autoSaveWaitTime;
 
+        private Process gameProcess;
+
+        private Timer timer;
+
         public GameLauncher(ProcessStartInfo gameProcessStartInfo, int autoSaveWaitTime)
         {
             this.gameProcessStartInfo = gameProcessStartInfo;
             this.autoSaveWaitTime = autoSaveWaitTime;
+            Running = true;
         }
+
+        protected bool Running { get; set; }
 
         public void Start()
         {
-            var gameProcess = Process.Start(gameProcessStartInfo);
+            gameProcess = Process.Start(gameProcessStartInfo);
+            gameProcess.Exited += (sender, args) => Dispose();
             var handle = gameProcess.Handle;
 
             if (!Settings.Default.EnableAutoSave)
@@ -30,17 +39,19 @@
                 return;
             }
 
-            while (true)
-            {
-                if (gameProcess.HasExited)
-                {
-                    break;
-                }
+            timer = new Timer(SendSaveCommand, handle, autoSaveWaitTime * 60000, autoSaveWaitTime * 60000);
+        }
 
-                SetForegroundWindow(handle);
-                SendKeys.SendWait("^%(s)");
-                Thread.Sleep(autoSaveWaitTime * 60000);
-            }
+        public void Dispose()
+        {
+            Running = false;
+            timer.Dispose();
+        }
+
+        private void SendSaveCommand(object state)
+        {
+            SetForegroundWindow((IntPtr)state);
+            SendKeys.SendWait("^%(s)");
         }
 
         [DllImport("User32.dll")]
