@@ -170,7 +170,7 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Salt" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Rights" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" DefaultValue="user" />
+          <Property Type="String" Name="Rights" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" DefaultValue="author" />
           <Property Type="Binary" Name="Passphrase" Nullable="false" />
           <NavigationProperty Name="Authors" Relationship="Entities.Remote.Author_ibfk_1" FromRole="User" ToRole="Author" />
           <Property Type="String" Name="Email" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />

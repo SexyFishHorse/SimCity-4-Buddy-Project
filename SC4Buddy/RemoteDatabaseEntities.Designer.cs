@@ -922,7 +922,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
                 OnRightsChanged();
             }
         }
-        private global::System.String _Rights = "user";
+        private global::System.String _Rights = "author";
         partial void OnRightsChanging(global::System.String value);
         partial void OnRightsChanged();
     
