@@ -181,6 +181,12 @@
                 cpuCountComboBox.Items.Add(i);
             }
 
+            cpuCountComboBox.SelectedIndex = 0;
+            displayModeComboBox.SelectedIndex = 1;
+            renderModeComboBox.SelectedIndex = 1;
+            colourDepthComboBox.SelectedIndex = 1;
+            cursorColourComboBox.SelectedIndex = 5;
+
             UpdateLanguageBox();
 
             var wallpapers = new List<Bitmap>

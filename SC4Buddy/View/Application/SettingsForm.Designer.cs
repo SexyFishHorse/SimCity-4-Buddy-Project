@@ -94,6 +94,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -107,6 +108,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage4.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // closeButton
@@ -239,6 +241,7 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox7);
             this.tabPage2.Controls.Add(this.groupBox4);
             this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.groupBox2);
@@ -250,12 +253,7 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Controls.Add(this.lowCpuPriorityCheckBox);
-            this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Controls.Add(this.languageComboBox);
             this.groupBox4.Controls.Add(this.pauseMinimizedCheckBox);
-            this.groupBox4.Controls.Add(this.disableIMECheckBox);
-            this.groupBox4.Controls.Add(this.writeLogCheckBox);
-            this.groupBox4.Controls.Add(this.ignoreMissingModelsCheckBox);
             this.groupBox4.Controls.Add(this.disableBackgroundLoaderCheckBox);
             this.groupBox4.Controls.Add(this.skipIntroCheckBox);
             this.groupBox4.Controls.Add(this.disableExceptionHandlingCheckBox);
@@ -608,6 +606,17 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // groupBox7
+            // 
+            resources.ApplyResources(this.groupBox7, "groupBox7");
+            this.groupBox7.Controls.Add(this.languageComboBox);
+            this.groupBox7.Controls.Add(this.label8);
+            this.groupBox7.Controls.Add(this.ignoreMissingModelsCheckBox);
+            this.groupBox7.Controls.Add(this.writeLogCheckBox);
+            this.groupBox7.Controls.Add(this.disableIMECheckBox);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.TabStop = false;
+            // 
             // SettingsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -640,6 +649,8 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -708,5 +719,6 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.TextBox usernameTextBox;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBox7;
     }
 }
