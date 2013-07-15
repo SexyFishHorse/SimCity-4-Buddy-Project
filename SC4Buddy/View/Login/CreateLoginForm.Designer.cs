@@ -29,6 +29,7 @@ namespace NIHEI.SC4Buddy.View.Login
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateLoginForm));
             this.label1 = new System.Windows.Forms.Label();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,6 +39,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.requestButton = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -137,7 +139,22 @@ namespace NIHEI.SC4Buddy.View.Login
             this.requestButton.UseVisualStyleBackColor = true;
             this.requestButton.Click += new System.EventHandler(this.RequestButtonClick);
             // 
-            // RequestLoginForm
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Location = new System.Drawing.Point(12, 115);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(411, 85);
+            this.textBox1.TabIndex = 10;
+            this.textBox1.Text = resources.GetString("textBox1.Text");
+            // 
+            // CreateLoginForm
             // 
             this.AcceptButton = this.requestButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -145,6 +162,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(435, 241);
             this.ControlBox = false;
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.requestButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.groupBox1);
@@ -154,6 +172,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -168,5 +187,6 @@ namespace NIHEI.SC4Buddy.View.Login
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button requestButton;
         private System.Windows.Forms.TextBox emailTextBox;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
