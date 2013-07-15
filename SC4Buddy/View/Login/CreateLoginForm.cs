@@ -8,9 +8,9 @@
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Localization;
 
-    public partial class RequestLoginForm : Form
+    public partial class CreateLoginForm : Form
     {
-        public RequestLoginForm()
+        public CreateLoginForm()
         {
             InitializeComponent();
         }

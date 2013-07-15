@@ -352,7 +352,7 @@
 
         private void RequestLoginButtonClick(object sender, EventArgs e)
         {
-            new RequestLoginForm().ShowDialog(this);
+            new CreateLoginForm().ShowDialog(this);
         }
     }
 }
