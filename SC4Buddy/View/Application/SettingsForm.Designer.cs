@@ -87,7 +87,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.requestLoginButton = new System.Windows.Forms.Button();
+            this.createLoginButton = new System.Windows.Forms.Button();
             this.loginStatusLabel = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.loginButton = new System.Windows.Forms.Button();
@@ -540,7 +540,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage3.Controls.Add(this.usernameTextBox);
             this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.requestLoginButton);
+            this.tabPage3.Controls.Add(this.createLoginButton);
             this.tabPage3.Controls.Add(this.loginStatusLabel);
             this.tabPage3.Controls.Add(this.logoutButton);
             this.tabPage3.Controls.Add(this.loginButton);
@@ -573,12 +573,12 @@ namespace NIHEI.SC4Buddy.View.Application
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
             // 
-            // requestLoginButton
+            // createLoginButton
             // 
-            resources.ApplyResources(this.requestLoginButton, "requestLoginButton");
-            this.requestLoginButton.Name = "requestLoginButton";
-            this.requestLoginButton.UseVisualStyleBackColor = true;
-            this.requestLoginButton.Click += new System.EventHandler(this.RequestLoginButtonClick);
+            resources.ApplyResources(this.createLoginButton, "createLoginButton");
+            this.createLoginButton.Name = "createLoginButton";
+            this.createLoginButton.UseVisualStyleBackColor = true;
+            this.createLoginButton.Click += new System.EventHandler(this.CreateLoginButtonClick);
             // 
             // loginStatusLabel
             // 
@@ -702,7 +702,7 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.Label loginStatusLabel;
         private System.Windows.Forms.Button logoutButton;
         private System.Windows.Forms.Button loginButton;
-        private System.Windows.Forms.Button requestLoginButton;
+        private System.Windows.Forms.Button createLoginButton;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox passwordTextBox;

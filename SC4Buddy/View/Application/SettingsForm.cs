@@ -223,7 +223,7 @@
             {
                 logoutButton.Enabled = true;
                 loginButton.Enabled = false;
-                requestLoginButton.Enabled = false;
+                createLoginButton.Enabled = false;
                 usernameTextBox.Text = SessionController.Instance.User.Email;
                 usernameTextBox.Enabled = false;
                 passwordTextBox.Enabled = false;
@@ -233,7 +233,7 @@
             {
                 logoutButton.Enabled = false;
                 loginButton.Enabled = true;
-                requestLoginButton.Enabled = true;
+                createLoginButton.Enabled = true;
                 usernameTextBox.Enabled = true;
                 passwordTextBox.Enabled = true;
                 loginStatusLabel.Text = LocalizationStrings.NoUserIsLoggedIn;
@@ -350,7 +350,7 @@
             UpdateLoginStatus();
         }
 
-        private void RequestLoginButtonClick(object sender, EventArgs e)
+        private void CreateLoginButtonClick(object sender, EventArgs e)
         {
             new CreateLoginForm().ShowDialog(this);
         }

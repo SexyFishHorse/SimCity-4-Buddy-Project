@@ -1669,31 +1669,31 @@ and for custom content creators.</value>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="requestLoginButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
+  <data name="createLoginButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
   </data>
-  <data name="requestLoginButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 228</value>
+  <data name="createLoginButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>337, 71</value>
   </data>
-  <data name="requestLoginButton.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 23</value>
+  <data name="createLoginButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
-  <data name="requestLoginButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="createLoginButton.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="requestLoginButton.Text" xml:space="preserve">
-    <value>Request login</value>
+  <data name="createLoginButton.Text" xml:space="preserve">
+    <value>Create login</value>
   </data>
-  <data name="&gt;&gt;requestLoginButton.Name" xml:space="preserve">
-    <value>requestLoginButton</value>
+  <data name="&gt;&gt;createLoginButton.Name" xml:space="preserve">
+    <value>createLoginButton</value>
   </data>
-  <data name="&gt;&gt;requestLoginButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;createLoginButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;requestLoginButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;createLoginButton.Parent" xml:space="preserve">
     <value>tabPage3</value>
   </data>
-  <data name="&gt;&gt;requestLoginButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;createLoginButton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="loginStatusLabel.AutoSize" type="System.Boolean, mscorlib">
