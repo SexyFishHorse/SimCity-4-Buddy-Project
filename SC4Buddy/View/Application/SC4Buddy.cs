@@ -39,12 +39,12 @@
 
         private void OnUserLoggedOut(SessionController sender, SessionEventArgs eventargs)
         {
-            developerToolStripMenuItem.Visible = false;
+            UpdateToolsVisibility();
         }
 
         private void OnUserLoggedIn(SessionController sender, SessionEventArgs eventArgs)
         {
-            developerToolStripMenuItem.Visible = eventArgs.User.IsDeveloper;
+            UpdateToolsVisibility();
         }
 
         private void UserFolderComboBoxCheckSelectedValue(object sender, EventArgs e)
@@ -116,8 +116,28 @@
 
         private void UpdateToolsVisibility()
         {
-            developerToolStripMenuItem.Visible = SessionController.Instance.IsLoggedIn
-                                                 && SessionController.Instance.User.Rights == "Developer";
+            developerToolStripMenuItem.Visible = false;
+            addPluginInformationToolStripMenuItem.Visible = false;
+            updatePluginInformationToolStripMenuItem.Visible = false;
+            myAuthorsToolStripMenuItem.Visible = false;
+
+            if (!SessionController.Instance.IsLoggedIn)
+            {
+                toolsToolStripMenuItem.Visible = false;
+                return;
+            }
+
+            if (SessionController.Instance.User.IsDeveloper)
+            {
+                developerToolStripMenuItem.Visible = true;
+            }
+
+            if (SessionController.Instance.User.IsAuthor || SessionController.Instance.User.IsDeveloper)
+            {
+                addPluginInformationToolStripMenuItem.Visible = true;
+                updatePluginInformationToolStripMenuItem.Visible = true;
+                myAuthorsToolStripMenuItem.Visible = true;
+            }
         }
 
         private void UpdateBackground()
