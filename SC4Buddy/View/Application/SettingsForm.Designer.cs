@@ -49,14 +49,15 @@ namespace NIHEI.SC4Buddy.View.Application
             this.gameLocationTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.languageComboBox = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.ignoreMissingModelsCheckBox = new System.Windows.Forms.CheckBox();
+            this.writeLogCheckBox = new System.Windows.Forms.CheckBox();
+            this.disableIMECheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lowCpuPriorityCheckBox = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.languageComboBox = new System.Windows.Forms.ComboBox();
             this.pauseMinimizedCheckBox = new System.Windows.Forms.CheckBox();
-            this.disableIMECheckBox = new System.Windows.Forms.CheckBox();
-            this.writeLogCheckBox = new System.Windows.Forms.CheckBox();
-            this.ignoreMissingModelsCheckBox = new System.Windows.Forms.CheckBox();
             this.disableBackgroundLoaderCheckBox = new System.Windows.Forms.CheckBox();
             this.skipIntroCheckBox = new System.Windows.Forms.CheckBox();
             this.disableExceptionHandlingCheckBox = new System.Windows.Forms.CheckBox();
@@ -94,7 +95,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -102,13 +102,13 @@ namespace NIHEI.SC4Buddy.View.Application
             ((System.ComponentModel.ISupportInitialize)(this.autoSaveIntervalTrackBar)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // closeButton
@@ -249,6 +249,55 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // groupBox7
+            // 
+            resources.ApplyResources(this.groupBox7, "groupBox7");
+            this.groupBox7.Controls.Add(this.languageComboBox);
+            this.groupBox7.Controls.Add(this.label8);
+            this.groupBox7.Controls.Add(this.ignoreMissingModelsCheckBox);
+            this.groupBox7.Controls.Add(this.writeLogCheckBox);
+            this.groupBox7.Controls.Add(this.disableIMECheckBox);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.TabStop = false;
+            // 
+            // languageComboBox
+            // 
+            resources.ApplyResources(this.languageComboBox, "languageComboBox");
+            this.languageComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherLanguage", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.languageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.languageComboBox.FormattingEnabled = true;
+            this.languageComboBox.Name = "languageComboBox";
+            this.languageComboBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherLanguage;
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // ignoreMissingModelsCheckBox
+            // 
+            resources.ApplyResources(this.ignoreMissingModelsCheckBox, "ignoreMissingModelsCheckBox");
+            this.ignoreMissingModelsCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherIgnoreMissingModels;
+            this.ignoreMissingModelsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherIgnoreMissingModels", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.ignoreMissingModelsCheckBox.Name = "ignoreMissingModelsCheckBox";
+            this.ignoreMissingModelsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // writeLogCheckBox
+            // 
+            resources.ApplyResources(this.writeLogCheckBox, "writeLogCheckBox");
+            this.writeLogCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherWriteLog;
+            this.writeLogCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherWriteLog", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.writeLogCheckBox.Name = "writeLogCheckBox";
+            this.writeLogCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // disableIMECheckBox
+            // 
+            resources.ApplyResources(this.disableIMECheckBox, "disableIMECheckBox");
+            this.disableIMECheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherDisableIME;
+            this.disableIMECheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherDisableIME", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.disableIMECheckBox.Name = "disableIMECheckBox";
+            this.disableIMECheckBox.UseVisualStyleBackColor = true;
+            // 
             // groupBox4
             // 
             resources.ApplyResources(this.groupBox4, "groupBox4");
@@ -270,20 +319,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.lowCpuPriorityCheckBox.Name = "lowCpuPriorityCheckBox";
             this.lowCpuPriorityCheckBox.UseVisualStyleBackColor = true;
             // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // languageComboBox
-            // 
-            resources.ApplyResources(this.languageComboBox, "languageComboBox");
-            this.languageComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherLanguage", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.languageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.languageComboBox.FormattingEnabled = true;
-            this.languageComboBox.Name = "languageComboBox";
-            this.languageComboBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherLanguage;
-            // 
             // pauseMinimizedCheckBox
             // 
             resources.ApplyResources(this.pauseMinimizedCheckBox, "pauseMinimizedCheckBox");
@@ -291,30 +326,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.pauseMinimizedCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherPauseMinimized", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.pauseMinimizedCheckBox.Name = "pauseMinimizedCheckBox";
             this.pauseMinimizedCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // disableIMECheckBox
-            // 
-            resources.ApplyResources(this.disableIMECheckBox, "disableIMECheckBox");
-            this.disableIMECheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherDisableIME;
-            this.disableIMECheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherDisableIME", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.disableIMECheckBox.Name = "disableIMECheckBox";
-            this.disableIMECheckBox.UseVisualStyleBackColor = true;
-            // 
-            // writeLogCheckBox
-            // 
-            resources.ApplyResources(this.writeLogCheckBox, "writeLogCheckBox");
-            this.writeLogCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherWriteLog;
-            this.writeLogCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherWriteLog", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.writeLogCheckBox.Name = "writeLogCheckBox";
-            this.writeLogCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // ignoreMissingModelsCheckBox
-            // 
-            resources.ApplyResources(this.ignoreMissingModelsCheckBox, "ignoreMissingModelsCheckBox");
-            this.ignoreMissingModelsCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherIgnoreMissingModels;
-            this.ignoreMissingModelsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherIgnoreMissingModels", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.ignoreMissingModelsCheckBox.Name = "ignoreMissingModelsCheckBox";
-            this.ignoreMissingModelsCheckBox.UseVisualStyleBackColor = true;
             // 
             // disableBackgroundLoaderCheckBox
             // 
@@ -606,17 +617,6 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // groupBox7
-            // 
-            resources.ApplyResources(this.groupBox7, "groupBox7");
-            this.groupBox7.Controls.Add(this.languageComboBox);
-            this.groupBox7.Controls.Add(this.label8);
-            this.groupBox7.Controls.Add(this.ignoreMissingModelsCheckBox);
-            this.groupBox7.Controls.Add(this.writeLogCheckBox);
-            this.groupBox7.Controls.Add(this.disableIMECheckBox);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.TabStop = false;
-            // 
             // SettingsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -638,6 +638,8 @@ namespace NIHEI.SC4Buddy.View.Application
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -649,8 +651,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
 
         }
