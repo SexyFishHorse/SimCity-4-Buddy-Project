@@ -16,12 +16,9 @@
     {
         private readonly UserRegistry userRegistry;
 
-        private readonly AuthorRegistry authorRegistry;
-
-        public UserController(UserRegistry userRegistry, AuthorRegistry authorRegistry)
+        public UserController(UserRegistry userRegistry)
         {
             this.userRegistry = userRegistry;
-            this.authorRegistry = authorRegistry;
         }
 
         public User Login(string email, string password)
@@ -51,7 +48,7 @@
             return possibleUser;
         }
 
-        public void CreateUser(string email, string password, string repeatPassword, string site, string username)
+        public void CreateUser(string email, string password, string repeatPassword)
         {
             if (!password.Equals(repeatPassword, StringComparison.Ordinal))
             {
@@ -74,14 +71,6 @@
             var user = new User { Email = email, Salt = salt, Passphrase = saltedHashBytes };
 
             userRegistry.Add(user);
-
-            var author = new Author { Name = username, Site = site, User = user };
-
-            authorRegistry.Add(author);
-
-            user.Authors.Add(author);
-
-            userRegistry.Update(user);
         }
 
         private static bool CompareByteArrays(byte[] array1, byte[] array2)

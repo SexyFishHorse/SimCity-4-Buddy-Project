@@ -15,40 +15,16 @@
             InitializeComponent();
         }
 
-        private void SitePictureBoxClick(object sender, EventArgs e)
-        {
-            MessageBox.Show(
-                this,
-                LocalizationStrings.SiteUrlHelpText,
-                LocalizationStrings.SiteUrlHelp,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1);
-        }
-
-        private void UsernamePictureBoxClick(object sender, EventArgs e)
-        {
-            MessageBox.Show(
-                this,
-                LocalizationStrings.UsernameHelpText,
-                LocalizationStrings.UsernameHelp,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1);
-        }
-
         private void RequestButtonClick(object sender, EventArgs e)
         {
-            var userController = new UserController(RemoteRegistryFactory.UserRegistry, RemoteRegistryFactory.AuthorRegistry);
+            var userController = new UserController(RemoteRegistryFactory.UserRegistry);
 
             try
             {
                 userController.CreateUser(
                     emailTextBox.Text.Trim(),
                     passwordTextBox.Text,
-                    repeatPasswordTextBox.Text,
-                    siteUrlTextBox.Text.Trim(),
-                    usernameTextBox.Text.Trim());
+                    repeatPasswordTextBox.Text);
 
                 MessageBox.Show(
                     this,
@@ -85,8 +61,6 @@
             emailTextBox.Text = string.Empty;
             passwordTextBox.Text = string.Empty;
             repeatPasswordTextBox.Text = string.Empty;
-            siteUrlTextBox.Text = string.Empty;
-            usernameTextBox.Text = string.Empty;
         }
     }
 }

@@ -12,7 +12,7 @@
 
         private SessionController()
         {
-            controller = new UserController(RemoteRegistryFactory.UserRegistry, RemoteRegistryFactory.AuthorRegistry);
+            controller = new UserController(RemoteRegistryFactory.UserRegistry);
         }
 
         public delegate void SessionEventHandler(SessionController sender, SessionEventArgs eventArgs);

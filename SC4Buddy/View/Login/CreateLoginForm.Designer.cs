@@ -36,20 +36,9 @@ namespace NIHEI.SC4Buddy.View.Login
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.emailTextBox = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.usernamePictureBox = new System.Windows.Forms.PictureBox();
-            this.sitePictureBox = new System.Windows.Forms.PictureBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.usernameTextBox = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.siteUrlTextBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.requestButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.usernamePictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sitePictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -125,94 +114,6 @@ namespace NIHEI.SC4Buddy.View.Login
             this.emailTextBox.Size = new System.Drawing.Size(287, 20);
             this.emailTextBox.TabIndex = 1;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.usernamePictureBox);
-            this.groupBox2.Controls.Add(this.sitePictureBox);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.usernameTextBox);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.siteUrlTextBox);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Location = new System.Drawing.Point(12, 115);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(411, 84);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Author information";
-            // 
-            // usernamePictureBox
-            // 
-            this.usernamePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.usernamePictureBox.Cursor = System.Windows.Forms.Cursors.Help;
-            this.usernamePictureBox.Image = global::NIHEI.SC4Buddy.SilkIcons.HelpIcon;
-            this.usernamePictureBox.Location = new System.Drawing.Point(389, 46);
-            this.usernamePictureBox.Name = "usernamePictureBox";
-            this.usernamePictureBox.Size = new System.Drawing.Size(16, 16);
-            this.usernamePictureBox.TabIndex = 7;
-            this.usernamePictureBox.TabStop = false;
-            this.usernamePictureBox.Click += new System.EventHandler(this.UsernamePictureBoxClick);
-            // 
-            // sitePictureBox
-            // 
-            this.sitePictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.sitePictureBox.Cursor = System.Windows.Forms.Cursors.Help;
-            this.sitePictureBox.Image = global::NIHEI.SC4Buddy.SilkIcons.HelpIcon;
-            this.sitePictureBox.Location = new System.Drawing.Point(389, 20);
-            this.sitePictureBox.Name = "sitePictureBox";
-            this.sitePictureBox.Size = new System.Drawing.Size(16, 16);
-            this.sitePictureBox.TabIndex = 6;
-            this.sitePictureBox.TabStop = false;
-            this.sitePictureBox.Click += new System.EventHandler(this.SitePictureBoxClick);
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 68);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(185, 13);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "You can add users for other sites later";
-            // 
-            // usernameTextBox
-            // 
-            this.usernameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.usernameTextBox.Location = new System.Drawing.Point(118, 45);
-            this.usernameTextBox.Name = "usernameTextBox";
-            this.usernameTextBox.Size = new System.Drawing.Size(265, 20);
-            this.usernameTextBox.TabIndex = 4;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 48);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 13);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Username";
-            // 
-            // siteUrlTextBox
-            // 
-            this.siteUrlTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.siteUrlTextBox.Location = new System.Drawing.Point(118, 19);
-            this.siteUrlTextBox.Name = "siteUrlTextBox";
-            this.siteUrlTextBox.Size = new System.Drawing.Size(265, 20);
-            this.siteUrlTextBox.TabIndex = 1;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 22);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(50, 13);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Site URL";
-            // 
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -246,17 +147,12 @@ namespace NIHEI.SC4Buddy.View.Login
             this.ControlBox = false;
             this.Controls.Add(this.requestButton);
             this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "RequestLoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "RequestLoginForm";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.usernamePictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sitePictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -269,14 +165,6 @@ namespace NIHEI.SC4Buddy.View.Login
         private System.Windows.Forms.TextBox repeatPasswordTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox siteUrlTextBox;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox usernameTextBox;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.PictureBox sitePictureBox;
-        private System.Windows.Forms.PictureBox usernamePictureBox;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button requestButton;
         private System.Windows.Forms.TextBox emailTextBox;

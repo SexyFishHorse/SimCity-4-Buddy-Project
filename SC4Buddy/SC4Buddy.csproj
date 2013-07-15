@@ -147,11 +147,11 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="View\Elements\PluginListViewItem.cs" />
-    <Compile Include="View\Login\RequestLoginForm.cs">
+    <Compile Include="View\Login\CreateLoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Login\RequestLoginForm.Designer.cs">
-      <DependentUpon>RequestLoginForm.cs</DependentUpon>
+    <Compile Include="View\Login\CreateLoginForm.Designer.cs">
+      <DependentUpon>CreateLoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Plugins\EnterPluginInformationForm.cs">
       <SubType>Form</SubType>
@@ -218,8 +218,8 @@
     <EmbeddedResource Include="View\Developer\DeveloperForm.resx">
       <DependentUpon>DeveloperForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Login\RequestLoginForm.resx">
-      <DependentUpon>RequestLoginForm.cs</DependentUpon>
+    <EmbeddedResource Include="View\Login\CreateLoginForm.resx">
+      <DependentUpon>CreateLoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Plugins\EnterPluginInformationForm.da.resx">
       <DependentUpon>EnterPluginInformationForm.cs</DependentUpon>
