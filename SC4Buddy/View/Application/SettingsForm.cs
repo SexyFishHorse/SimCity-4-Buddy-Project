@@ -332,16 +332,6 @@
 
                 passwordTextBox.Text = null;
             }
-            catch (AuthenticationException ex)
-            {
-                MessageBox.Show(
-                    this,
-                    ex.Message,
-                    LocalizationStrings.AuthenticationError,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation,
-                    MessageBoxDefaultButton.Button1);
-            }
         }
 
         private void LogoutButtonClick(object sender, EventArgs e)
