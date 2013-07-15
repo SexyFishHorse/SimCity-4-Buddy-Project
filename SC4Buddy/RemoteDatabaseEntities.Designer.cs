@@ -836,15 +836,13 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="salt">Initial value of the Salt property.</param>
         /// <param name="passphrase">Initial value of the Passphrase property.</param>
-        /// <param name="activated">Initial value of the Activated property.</param>
         /// <param name="email">Initial value of the Email property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String salt, global::System.Byte[] passphrase, global::System.Boolean activated, global::System.String email)
+        public static User CreateUser(global::System.Int32 id, global::System.String salt, global::System.Byte[] passphrase, global::System.String email)
         {
             User user = new User();
             user.Id = id;
             user.Salt = salt;
             user.Passphrase = passphrase;
-            user.Activated = activated;
             user.Email = email;
             return user;
         }
@@ -951,30 +949,6 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         private global::System.Byte[] _Passphrase;
         partial void OnPassphraseChanging(global::System.Byte[] value);
         partial void OnPassphraseChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Boolean Activated
-        {
-            get
-            {
-                return _Activated;
-            }
-            set
-            {
-                OnActivatedChanging(value);
-                ReportPropertyChanging("Activated");
-                _Activated = StructuralObject.SetValidValue(value, "Activated");
-                ReportPropertyChanged("Activated");
-                OnActivatedChanged();
-            }
-        }
-        private global::System.Boolean _Activated;
-        partial void OnActivatedChanging(global::System.Boolean value);
-        partial void OnActivatedChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

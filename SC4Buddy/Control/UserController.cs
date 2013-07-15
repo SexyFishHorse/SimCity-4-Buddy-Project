@@ -32,11 +32,6 @@
                 throw new InvalidCredentialException("Invalid username or password.");
             }
 
-            if (!possibleUser.Activated)
-            {
-                throw new AuthenticationException("User is not activated yet.");
-            }
-
             var saltedHash = GenerateSaltedHash(
                 Encoding.Default.GetBytes(password), Encoding.Default.GetBytes(possibleUser.Salt));
 
