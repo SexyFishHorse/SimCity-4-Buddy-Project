@@ -79,7 +79,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.repeatPasswordTextBox.Name = "repeatPasswordTextBox";
             this.repeatPasswordTextBox.PasswordChar = '●';
             this.repeatPasswordTextBox.Size = new System.Drawing.Size(281, 20);
-            this.repeatPasswordTextBox.TabIndex = 4;
+            this.repeatPasswordTextBox.TabIndex = 3;
             // 
             // label3
             // 
@@ -123,7 +123,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.cancelButton.Location = new System.Drawing.Point(342, 206);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 8;
+            this.cancelButton.TabIndex = 5;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButtonClick);
@@ -134,7 +134,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.createButton.Location = new System.Drawing.Point(261, 206);
             this.createButton.Name = "createButton";
             this.createButton.Size = new System.Drawing.Size(75, 23);
-            this.createButton.TabIndex = 9;
+            this.createButton.TabIndex = 4;
             this.createButton.Text = "Create";
             this.createButton.UseVisualStyleBackColor = true;
             this.createButton.Click += new System.EventHandler(this.RequestButtonClick);
