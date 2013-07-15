@@ -107,12 +107,17 @@
 
         private void Sc4BuddyLoad(object sender, EventArgs e)
         {
-            developerToolStripMenuItem.Visible = SessionController.Instance.IsLoggedIn
-                                                 && SessionController.Instance.User.Rights == "Developer";
+            UpdateToolsVisibility();
 
             RepopulateUserFolderRelatives();
 
             UpdateBackground();
+        }
+
+        private void UpdateToolsVisibility()
+        {
+            developerToolStripMenuItem.Visible = SessionController.Instance.IsLoggedIn
+                                                 && SessionController.Instance.User.Rights == "Developer";
         }
 
         private void UpdateBackground()
