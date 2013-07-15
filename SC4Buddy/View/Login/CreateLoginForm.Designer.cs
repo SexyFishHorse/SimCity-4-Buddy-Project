@@ -168,7 +168,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.Controls.Add(this.groupBox1);
             this.Name = "CreateLoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "RequestLoginForm";
+            this.Text = "Create user";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
