@@ -121,12 +121,6 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="developerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="developerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Developer</value>
-  </data>
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
@@ -149,10 +143,10 @@
     <value>Application</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 6</value>
+    <value>149, 6</value>
   </data>
   <data name="manageFoldersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="manageFoldersToolStripMenuItem.Text" xml:space="preserve">
     <value>Manage</value>
@@ -162,6 +156,33 @@
   </data>
   <data name="userFoldersToolStripMenuItem.Text" xml:space="preserve">
     <value>User folders</value>
+  </data>
+  <data name="developerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="developerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Developer</value>
+  </data>
+  <data name="addPluginInformationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="addPluginInformationToolStripMenuItem.Text" xml:space="preserve">
+    <value>Add plugin information</value>
+  </data>
+  <data name="updatePluginInformationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="updatePluginInformationToolStripMenuItem.Text" xml:space="preserve">
+    <value>Update plugin information</value>
+  </data>
+  <data name="myAuthorsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="myAuthorsToolStripMenuItem.Text" xml:space="preserve">
+    <value>My authors</value>
+  </data>
+  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
   </data>
   <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
     <value>Tools</value>
@@ -366,10 +387,34 @@
   <data name="&gt;&gt;manageFoldersToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolsToolStripMenuItem.Name" xml:space="preserve">
+    <value>toolsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;toolsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;developerToolStripMenuItem.Name" xml:space="preserve">
     <value>developerToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;developerToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addPluginInformationToolStripMenuItem.Name" xml:space="preserve">
+    <value>addPluginInformationToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;addPluginInformationToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;updatePluginInformationToolStripMenuItem.Name" xml:space="preserve">
+    <value>updatePluginInformationToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;updatePluginInformationToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;myAuthorsToolStripMenuItem.Name" xml:space="preserve">
+    <value>myAuthorsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;myAuthorsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
