@@ -38,7 +38,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
-            this.requestButton = new System.Windows.Forms.Button();
+            this.createButton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -59,7 +59,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.passwordTextBox.Location = new System.Drawing.Point(118, 45);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '●';
-            this.passwordTextBox.Size = new System.Drawing.Size(287, 20);
+            this.passwordTextBox.Size = new System.Drawing.Size(281, 20);
             this.passwordTextBox.TabIndex = 2;
             // 
             // label2
@@ -78,7 +78,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.repeatPasswordTextBox.Location = new System.Drawing.Point(118, 71);
             this.repeatPasswordTextBox.Name = "repeatPasswordTextBox";
             this.repeatPasswordTextBox.PasswordChar = '●';
-            this.repeatPasswordTextBox.Size = new System.Drawing.Size(287, 20);
+            this.repeatPasswordTextBox.Size = new System.Drawing.Size(281, 20);
             this.repeatPasswordTextBox.TabIndex = 4;
             // 
             // label3
@@ -102,7 +102,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(411, 97);
+            this.groupBox1.Size = new System.Drawing.Size(405, 97);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Login information";
@@ -113,14 +113,14 @@ namespace NIHEI.SC4Buddy.View.Login
             | System.Windows.Forms.AnchorStyles.Right)));
             this.emailTextBox.Location = new System.Drawing.Point(118, 19);
             this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(287, 20);
+            this.emailTextBox.Size = new System.Drawing.Size(281, 20);
             this.emailTextBox.TabIndex = 1;
             // 
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(348, 206);
+            this.cancelButton.Location = new System.Drawing.Point(342, 206);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 8;
@@ -128,16 +128,16 @@ namespace NIHEI.SC4Buddy.View.Login
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButtonClick);
             // 
-            // requestButton
+            // createButton
             // 
-            this.requestButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.requestButton.Location = new System.Drawing.Point(267, 206);
-            this.requestButton.Name = "requestButton";
-            this.requestButton.Size = new System.Drawing.Size(75, 23);
-            this.requestButton.TabIndex = 9;
-            this.requestButton.Text = "Request";
-            this.requestButton.UseVisualStyleBackColor = true;
-            this.requestButton.Click += new System.EventHandler(this.RequestButtonClick);
+            this.createButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.createButton.Location = new System.Drawing.Point(261, 206);
+            this.createButton.Name = "createButton";
+            this.createButton.Size = new System.Drawing.Size(75, 23);
+            this.createButton.TabIndex = 9;
+            this.createButton.Text = "Create";
+            this.createButton.UseVisualStyleBackColor = true;
+            this.createButton.Click += new System.EventHandler(this.RequestButtonClick);
             // 
             // textBox1
             // 
@@ -150,20 +150,20 @@ namespace NIHEI.SC4Buddy.View.Login
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(411, 85);
+            this.textBox1.Size = new System.Drawing.Size(405, 85);
             this.textBox1.TabIndex = 10;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // CreateLoginForm
             // 
-            this.AcceptButton = this.requestButton;
+            this.AcceptButton = this.createButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(435, 241);
+            this.ClientSize = new System.Drawing.Size(429, 241);
             this.ControlBox = false;
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.requestButton);
+            this.Controls.Add(this.createButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.groupBox1);
             this.Name = "CreateLoginForm";
@@ -185,7 +185,7 @@ namespace NIHEI.SC4Buddy.View.Login
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button cancelButton;
-        private System.Windows.Forms.Button requestButton;
+        private System.Windows.Forms.Button createButton;
         private System.Windows.Forms.TextBox emailTextBox;
         private System.Windows.Forms.TextBox textBox1;
     }
