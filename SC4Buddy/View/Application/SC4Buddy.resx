@@ -163,6 +163,9 @@
   <data name="userFoldersToolStripMenuItem.Text" xml:space="preserve">
     <value>User folders</value>
   </data>
+  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Tools</value>
+  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
