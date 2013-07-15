@@ -6,6 +6,7 @@
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Security;
     using System.Threading;
     using System.Windows.Forms;
 
@@ -22,11 +23,22 @@
         [STAThread]
         public static void Main()
         {
-            if (!EventLog.SourceExists(LogSource))
+            try
             {
-                EventLog.CreateEventSource(
-                    LogSource,
-                    ConfigurationManager.AppSettings.Get("EventLogName"));
+                if (!EventLog.SourceExists(LogSource))
+                {
+                    EventLog.CreateEventSource(LogSource, ConfigurationManager.AppSettings.Get("EventLogName"));
+                }
+            }
+            catch (SecurityException)
+            {
+                MessageBox.Show(
+                    LocalizationStrings.TheFirstTimeYouRunThisProgramYouMustRunItAsAnAdministrator,
+                    LocalizationStrings.AdditionalPermissionsRequired,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
             }
 
             EventLog.WriteEntry(LogSource, "SC4Buddy started.");

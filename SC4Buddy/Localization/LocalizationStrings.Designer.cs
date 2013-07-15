@@ -61,6 +61,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Additional permissions required..
+        /// </summary>
+        internal static string AdditionalPermissionsRequired {
+            get {
+                return ResourceManager.GetString("AdditionalPermissionsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You cannot use the same alias for multiple plugin folders and the alias cannot be blank..
         /// </summary>
         internal static string AliasError {
@@ -498,6 +507,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string StartingGame {
             get {
                 return ResourceManager.GetString("StartingGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The first time you run this program you must run it as an administrator (Right click on the shortcut and select &quot;Run as administrator&quot; and click &quot;Yes&quot; or &quot;OK&quot; in the following popup box). From there on you can start it without administrator rights..
+        /// </summary>
+        internal static string TheFirstTimeYouRunThisProgramYouMustRunItAsAnAdministrator {
+            get {
+                return ResourceManager.GetString("TheFirstTimeYouRunThisProgramYouMustRunItAsAnAdministrator", resourceCulture);
             }
         }
         

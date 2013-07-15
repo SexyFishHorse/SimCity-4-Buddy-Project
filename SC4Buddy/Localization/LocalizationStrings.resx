@@ -319,4 +319,10 @@ Should also notify the user that some files may have been installed so the user 
   <data name="EmailIsNotValid" xml:space="preserve">
     <value>E-mail is not valid.</value>
   </data>
+  <data name="AdditionalPermissionsRequired" xml:space="preserve">
+    <value>Additional permissions required.</value>
+  </data>
+  <data name="TheFirstTimeYouRunThisProgramYouMustRunItAsAnAdministrator" xml:space="preserve">
+    <value>The first time you run this program you must run it as an administrator (Right click on the shortcut and select "Run as administrator" and click "Yes" or "OK" in the following popup box). From there on you can start it without administrator rights.</value>
+  </data>
 </root>
