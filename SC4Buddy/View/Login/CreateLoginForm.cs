@@ -28,8 +28,8 @@
 
                 MessageBox.Show(
                     this,
-                    LocalizationStrings.YouWillReceiveAnEmailWhenYourUserHasBeenValidatedAndActivated,
-                    LocalizationStrings.RequestSent,
+                    LocalizationStrings.UserHasBeenCreatedYouCanNowLogIn,
+                    LocalizationStrings.UserCreated,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information,
                     MessageBoxDefaultButton.Button1);

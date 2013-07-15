@@ -304,11 +304,11 @@ Should also notify the user that some files may have been installed so the user 
   <data name="SiteUrlHelp" xml:space="preserve">
     <value>Site URL help</value>
   </data>
-  <data name="YouWillReceiveAnEmailWhenYourUserHasBeenValidatedAndActivated" xml:space="preserve">
-    <value>You will receive an e-mail when your user has been validated and activated.</value>
+  <data name="UserHasBeenCreatedYouCanNowLogIn" xml:space="preserve">
+    <value>User has been created. You can now log in.</value>
   </data>
-  <data name="RequestSent" xml:space="preserve">
-    <value>Request sent</value>
+  <data name="UserCreated" xml:space="preserve">
+    <value>User created</value>
   </data>
   <data name="RegistrationError" xml:space="preserve">
     <value>Registration error</value>

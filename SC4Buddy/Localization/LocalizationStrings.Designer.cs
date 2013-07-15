@@ -457,15 +457,6 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Request sent.
-        /// </summary>
-        internal static string RequestSent {
-            get {
-                return ResourceManager.GetString("RequestSent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Run executable?.
         /// </summary>
         internal static string RunExecutable {
@@ -547,11 +538,29 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User created.
+        /// </summary>
+        internal static string UserCreated {
+            get {
+                return ResourceManager.GetString("UserCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The folder or the content is not deleted from your computer.
         /// </summary>
         internal static string UserFolderContentIsNotDeleted {
             get {
                 return ResourceManager.GetString("UserFolderContentIsNotDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User has been created. You can now log in..
+        /// </summary>
+        internal static string UserHasBeenCreatedYouCanNowLogIn {
+            get {
+                return ResourceManager.GetString("UserHasBeenCreatedYouCanNowLogIn", resourceCulture);
             }
         }
         
@@ -597,15 +606,6 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string YouMustSettheGameLocationBeforeYouCanUseThisApplication {
             get {
                 return ResourceManager.GetString("YouMustSettheGameLocationBeforeYouCanUseThisApplication", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You will receive an e-mail when your user has been validated and activated..
-        /// </summary>
-        internal static string YouWillReceiveAnEmailWhenYourUserHasBeenValidatedAndActivated {
-            get {
-                return ResourceManager.GetString("YouWillReceiveAnEmailWhenYourUserHasBeenValidatedAndActivated", resourceCulture);
             }
         }
     }
