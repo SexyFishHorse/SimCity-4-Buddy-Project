@@ -60,7 +60,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label11 = new System.Windows.Forms.Label();
-            this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.createLoginButton = new System.Windows.Forms.Button();
@@ -84,6 +83,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.disableExceptionHandlingCheckBox = new System.Windows.Forms.CheckBox();
             this.cpuCountComboBox = new System.Windows.Forms.ComboBox();
             this.cursorColourComboBox = new System.Windows.Forms.ComboBox();
+            this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.colourDepthComboBox = new System.Windows.Forms.ComboBox();
             this.displayModeComboBox = new System.Windows.Forms.ComboBox();
             this.resolutionComboBox = new System.Windows.Forms.ComboBox();
@@ -333,11 +333,6 @@ namespace NIHEI.SC4Buddy.View.Application
             resources.ApplyResources(this.label11, "label11");
             this.label11.Name = "label11";
             // 
-            // passwordTextBox
-            // 
-            resources.ApplyResources(this.passwordTextBox, "passwordTextBox");
-            this.passwordTextBox.Name = "passwordTextBox";
-            // 
             // label10
             // 
             resources.ApplyResources(this.label10, "label10");
@@ -509,6 +504,11 @@ namespace NIHEI.SC4Buddy.View.Application
             resources.ApplyResources(this.cursorColourComboBox, "cursorColourComboBox");
             this.cursorColourComboBox.Name = "cursorColourComboBox";
             this.cursorColourComboBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherCursorColour;
+            // 
+            // passwordTextBox
+            // 
+            resources.ApplyResources(this.passwordTextBox, "passwordTextBox");
+            this.passwordTextBox.Name = "passwordTextBox";
             // 
             // colourDepthComboBox
             // 
