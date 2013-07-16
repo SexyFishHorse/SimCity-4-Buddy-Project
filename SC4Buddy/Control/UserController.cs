@@ -11,6 +11,7 @@
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Properties;
 
     public class UserController
     {
@@ -29,6 +30,7 @@
 
             if (possibleUser == null)
             {
+                Settings.Default.UserEmail = string.Empty;
                 throw new InvalidCredentialException("Invalid username or password.");
             }
 
@@ -39,6 +41,8 @@
             {
                 throw new InvalidCredentialException("Invalid username or password.");
             }
+
+
 
             return possibleUser;
         }
