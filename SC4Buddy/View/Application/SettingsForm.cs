@@ -223,15 +223,15 @@
 
         private void UpdateLoginStatus()
         {
-            usernameTextBox.Text = string.Empty;
+            emailTextBox.Text = string.Empty;
             passwordTextBox.Text = string.Empty;
             if (SessionController.Instance.IsLoggedIn)
             {
                 logoutButton.Enabled = true;
                 loginButton.Enabled = false;
                 createLoginButton.Enabled = false;
-                usernameTextBox.Text = SessionController.Instance.User.Email;
-                usernameTextBox.Enabled = false;
+                emailTextBox.Text = SessionController.Instance.User.Email;
+                emailTextBox.Enabled = false;
                 passwordTextBox.Enabled = false;
                 loginStatusLabel.Text = string.Format(LocalizationStrings.LoggedInAs, SessionController.Instance.User.Email);
             }
@@ -240,7 +240,7 @@
                 logoutButton.Enabled = false;
                 loginButton.Enabled = true;
                 createLoginButton.Enabled = true;
-                usernameTextBox.Enabled = true;
+                emailTextBox.Enabled = true;
                 passwordTextBox.Enabled = true;
                 loginStatusLabel.Text = LocalizationStrings.NoUserIsLoggedIn;
             }
@@ -323,7 +323,7 @@
         {
             try
             {
-                SessionController.Instance.Login(usernameTextBox.Text, passwordTextBox.Text);
+                SessionController.Instance.Login(emailTextBox.Text, passwordTextBox.Text);
                 UpdateLoginStatus();
             }
             catch (InvalidCredentialException ex)

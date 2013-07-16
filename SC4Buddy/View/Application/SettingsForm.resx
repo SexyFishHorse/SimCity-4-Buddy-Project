@@ -1563,6 +1563,9 @@
   <data name="label11.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label11.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label11.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 48</value>
   </data>
@@ -1614,44 +1617,47 @@
   <data name="&gt;&gt;passwordTextBox.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="usernameTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="emailTextBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="usernameTextBox.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="emailTextBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>67, 19</value>
   </data>
-  <data name="usernameTextBox.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="emailTextBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>345, 20</value>
   </data>
-  <data name="usernameTextBox.TabIndex" type="System.Int32, mscorlib">
+  <data name="emailTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;usernameTextBox.Name" xml:space="preserve">
-    <value>usernameTextBox</value>
+  <data name="&gt;&gt;emailTextBox.Name" xml:space="preserve">
+    <value>emailTextBox</value>
   </data>
-  <data name="&gt;&gt;usernameTextBox.Type" xml:space="preserve">
+  <data name="&gt;&gt;emailTextBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;usernameTextBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;emailTextBox.Parent" xml:space="preserve">
     <value>tabPage3</value>
   </data>
-  <data name="&gt;&gt;usernameTextBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;emailTextBox.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="label10.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 22</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 13</value>
+    <value>35, 13</value>
   </data>
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="label10.Text" xml:space="preserve">
-    <value>Username</value>
+    <value>E-mail</value>
   </data>
   <data name="&gt;&gt;label10.Name" xml:space="preserve">
     <value>label10</value>
@@ -1670,6 +1676,9 @@
   </data>
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 254</value>
@@ -1699,6 +1708,9 @@ and for custom content creators.</value>
   <data name="createLoginButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="createLoginButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="createLoginButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>337, 71</value>
   </data>
@@ -1726,6 +1738,9 @@ and for custom content creators.</value>
   <data name="loginStatusLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="loginStatusLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="loginStatusLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
@@ -1750,6 +1765,9 @@ and for custom content creators.</value>
   <data name="&gt;&gt;loginStatusLabel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="logoutButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="logoutButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>148, 71</value>
   </data>
@@ -1773,6 +1791,9 @@ and for custom content creators.</value>
   </data>
   <data name="&gt;&gt;logoutButton.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="loginButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="loginButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>67, 71</value>
@@ -1863,6 +1884,9 @@ and for custom content creators.</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>450, 369</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
