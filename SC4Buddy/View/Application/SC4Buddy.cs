@@ -18,6 +18,7 @@
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
+    using NIHEI.SC4Buddy.View.Author;
     using NIHEI.SC4Buddy.View.Developer;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.UserFolders;
@@ -405,6 +406,11 @@
         private void DeveloperToolStripMenuItemClick(object sender, EventArgs e)
         {
             new DeveloperForm().ShowDialog(this);
+        }
+
+        private void MyAuthorsToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            new MyAuthorsForm().ShowDialog(this);
         }
     }
 }
