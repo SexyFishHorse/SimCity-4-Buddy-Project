@@ -209,6 +209,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.addButton.TabIndex = 3;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.AddButtonClick);
             // 
             // MyAuthorsForm
             // 

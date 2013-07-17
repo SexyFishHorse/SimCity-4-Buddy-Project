@@ -244,5 +244,69 @@
 
             return siteUri.Uri.ToString();
         }
+
+        private void AddButtonClick(object sender, EventArgs e)
+        {
+            var username = usernameTextBox.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.YouCannotSpecifyAnEmptyUsername,
+                    LocalizationStrings.ValidationError,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }
+
+            try
+            {
+                var site = CleanupSiteUrl(siteComboBox.Text.Trim());
+
+                var author =
+                    registry.Authors.FirstOrDefault(
+                        x =>
+                        x.Name.Equals(username, StringComparison.OrdinalIgnoreCase)
+                        && x.Site.Replace("//www.", string.Empty)
+                            .Equals(site.Replace("//www.", string.Empty), StringComparison.OrdinalIgnoreCase));
+
+                if (author == null)
+                {
+                    author = new Author { Name = username, Site = site };
+                    registry.Add(author);
+                    UpdateAuthorListView();
+                    return;
+                }
+
+                if (author.UserId > 0)
+                {
+                    MessageBox.Show(
+                        this,
+                        LocalizationStrings.ThisAuthorIsAlreadyClaimedByAnotherUser,
+                        LocalizationStrings.ValidationError,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button1);
+                    return;
+                }
+
+                author.User = SessionController.Instance.User;
+                author.UserId = SessionController.Instance.User.Id;
+                registry.Update(author);
+                UpdateAuthorListView();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.TheSiteUrlIsInvalid,
+                    LocalizationStrings.ValidationError,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+            }
+        }
     }
 }
