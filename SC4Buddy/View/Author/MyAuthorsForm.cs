@@ -56,7 +56,9 @@
             autoCompleteSource.AddRange(sites);
 
             siteComboBox.AutoCompleteCustomSource = autoCompleteSource;
+            // ReSharper disable CoVariantArrayConversion
             siteComboBox.Items.AddRange(sites);
+            // ReSharper restore CoVariantArrayConversion
         }
 
         private void UsernameTextBoxTextChanged(object sender, EventArgs e)
