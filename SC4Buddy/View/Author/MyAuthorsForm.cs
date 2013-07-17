@@ -28,6 +28,10 @@
             usernameTextBox.Text = string.Empty;
             siteComboBox.SelectedIndex = -1;
             siteComboBox.Text = string.Empty;
+            addButton.Enabled = false;
+            removeButton.Enabled = false;
+            updateButton.Enabled = false;
+            authorsListView.SelectedItems.Clear();
         }
 
         private void MyAuthorsFormLoad(object sender, EventArgs e)
