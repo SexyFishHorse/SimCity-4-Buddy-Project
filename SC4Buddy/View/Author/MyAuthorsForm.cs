@@ -9,5 +9,10 @@
         {
             InitializeComponent();
         }
+
+        private void CloseButtonClick(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
