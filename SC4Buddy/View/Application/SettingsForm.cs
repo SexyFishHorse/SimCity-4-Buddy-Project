@@ -6,6 +6,7 @@
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Net.NetworkInformation;
     using System.Security.Authentication;
     using System.Windows.Forms;
 
@@ -349,6 +350,20 @@
         private void CreateLoginButtonClick(object sender, EventArgs e)
         {
             new CreateLoginForm().ShowDialog(this);
+        }
+
+        private void TabPage3Click(object sender, EventArgs e)
+        {
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.YouDoNotAppearToBeConnectedToTheInternet,
+                    LocalizationStrings.NoInternetDetectionDetected,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning,
+                    MessageBoxDefaultButton.Button1);
+            }
         }
     }
 }
