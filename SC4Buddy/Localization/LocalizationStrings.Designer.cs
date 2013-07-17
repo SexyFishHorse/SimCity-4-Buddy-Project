@@ -196,6 +196,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error occured during login..
+        /// </summary>
+        internal static string ErrorOccuredDuringLogin {
+            get {
+                return ResourceManager.GetString("ErrorOccuredDuringLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Executable files found.
         /// </summary>
         internal static string ExecutableFilesFound {
@@ -552,6 +561,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string ThisWillRemoveNumFilesAndAtLeastNumFolders {
             get {
                 return ResourceManager.GetString("ThisWillRemoveNumFilesAndAtLeastNumFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to log you into the system. .
+        /// </summary>
+        internal static string UnableToLogYouIntoTheSystem {
+            get {
+                return ResourceManager.GetString("UnableToLogYouIntoTheSystem", resourceCulture);
             }
         }
         

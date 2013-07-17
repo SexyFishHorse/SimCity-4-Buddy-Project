@@ -325,4 +325,10 @@ Should also notify the user that some files may have been installed so the user 
   <data name="TheFirstTimeYouRunThisProgramYouMustRunItAsAnAdministrator" xml:space="preserve">
     <value>The first time you run this program you must run it as an administrator (Right click on the shortcut and select "Run as administrator" and click "Yes" or "OK" in the following popup box). From there on you can start it without administrator rights.</value>
   </data>
+  <data name="UnableToLogYouIntoTheSystem" xml:space="preserve">
+    <value>Unable to log you into the system. </value>
+  </data>
+  <data name="ErrorOccuredDuringLogin" xml:space="preserve">
+    <value>Error occured during login.</value>
+  </data>
 </root>
