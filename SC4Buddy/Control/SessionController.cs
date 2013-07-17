@@ -56,6 +56,15 @@
             RaiseUserLoggedOutEvent();
         }
 
+        public void AttemptAutoLogin()
+        {
+            User = controller.AutoLogin();
+            if (User != null)
+            {
+                RaiseUserLoggedInEvent();
+            }
+        }
+
         protected virtual void RaiseUserLoggedInEvent()
         {
             UserLoggedIn(this, new SessionEventArgs(User));
