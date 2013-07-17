@@ -1,12 +1,14 @@
 ﻿namespace NIHEI.SC4Buddy.Entities.Remote
 {
+    using System;
+
     public partial class User
     {
         public bool IsDeveloper
         {
             get
             {
-                return Rights.Equals("Developer");
+                return Rights.Equals("Developer", StringComparison.OrdinalIgnoreCase);
             }
         }
 
@@ -14,7 +16,7 @@
         {
             get
             {
-                return Rights.Equals("Author");
+                return Rights.Equals("Author", StringComparison.OrdinalIgnoreCase);
             }
         }
     }
