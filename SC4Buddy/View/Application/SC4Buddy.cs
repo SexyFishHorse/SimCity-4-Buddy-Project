@@ -107,7 +107,7 @@
 
         private void Sc4BuddyLoad(object sender, EventArgs e)
         {
-            UpdateToolsVisibility();
+            SessionController.Instance.AttemptAutoLogin();
 
             RepopulateUserFolderRelatives();
 

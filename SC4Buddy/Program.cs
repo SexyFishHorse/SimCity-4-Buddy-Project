@@ -57,7 +57,6 @@
 
             if (!string.IsNullOrWhiteSpace(Settings.Default.GameLocation))
             {
-                SessionController.Instance.AttemptAutoLogin();
                 Application.Run(new Sc4Buddy());
             }
         }
