@@ -74,5 +74,23 @@
                 || siteComboBox.SelectedIndex >= 0
                 || !string.IsNullOrEmpty(siteComboBox.Text);
         }
+
+        private void AuthorsListViewSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (authorsListView.SelectedItems.Count < 1)
+            {
+                return;
+            }
+
+            var author = ((ListViewItemWithObjectValue<Entities.Remote.Author>)authorsListView.SelectedItems[0]).Value;
+
+            addButton.Enabled = false;
+
+            usernameTextBox.Text = author.Name;
+            siteComboBox.Text = author.Site;
+
+            updateButton.Enabled = true;
+            removeButton.Enabled = true;
+        }
     }
 }

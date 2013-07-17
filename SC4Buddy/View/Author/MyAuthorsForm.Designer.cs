@@ -74,6 +74,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.authorsListView.TabIndex = 0;
             this.authorsListView.UseCompatibleStateImageBehavior = false;
             this.authorsListView.View = System.Windows.Forms.View.Details;
+            this.authorsListView.SelectedIndexChanged += new System.EventHandler(this.AuthorsListViewSelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -108,7 +109,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(2, 32);
+            this.label2.Location = new System.Drawing.Point(3, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 3;
