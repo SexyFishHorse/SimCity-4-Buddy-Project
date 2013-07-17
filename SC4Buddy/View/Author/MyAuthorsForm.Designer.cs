@@ -175,6 +175,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // updateButton
             // 
             this.updateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.updateButton.Enabled = false;
             this.updateButton.Location = new System.Drawing.Point(165, 182);
             this.updateButton.Name = "updateButton";
             this.updateButton.Size = new System.Drawing.Size(75, 23);
@@ -185,6 +186,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // removeButton
             // 
             this.removeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.removeButton.Enabled = false;
             this.removeButton.Location = new System.Drawing.Point(84, 182);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(75, 23);
@@ -195,6 +197,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // addButton
             // 
             this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.addButton.Enabled = false;
             this.addButton.Location = new System.Drawing.Point(3, 182);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(75, 23);
