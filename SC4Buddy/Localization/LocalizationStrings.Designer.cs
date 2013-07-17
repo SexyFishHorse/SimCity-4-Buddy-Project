@@ -574,6 +574,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This author is already claimed by another user..
+        /// </summary>
+        internal static string ThisAuthorIsAlreadyClaimedByAnotherUser {
+            get {
+                return ResourceManager.GetString("ThisAuthorIsAlreadyClaimedByAnotherUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This form contains {0} executable files..
         /// </summary>
         internal static string ThisFormContainsNumExecutableFiles {

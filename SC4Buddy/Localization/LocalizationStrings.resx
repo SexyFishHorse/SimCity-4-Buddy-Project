@@ -358,4 +358,7 @@ Should also notify the user that some files may have been installed so the user 
   <data name="TheSiteUrlIsInvalid" xml:space="preserve">
     <value>The site URL is invalid. Enter it in the format "http://www.example.com".</value>
   </data>
+  <data name="ThisAuthorIsAlreadyClaimedByAnotherUser" xml:space="preserve">
+    <value>This author is already claimed by another user.</value>
+  </data>
 </root>
