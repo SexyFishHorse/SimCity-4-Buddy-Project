@@ -62,16 +62,26 @@
         private void UsernameTextBoxTextChanged(object sender, EventArgs e)
         {
             UpdateClearButtonStatus();
+            UpdateAddButtonStatus();
         }
 
         private void SiteComboBoxSelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateClearButtonStatus();
+            UpdateAddButtonStatus();
         }
 
         private void SiteComboBoxTextUpdate(object sender, EventArgs e)
         {
             UpdateClearButtonStatus();
+            UpdateAddButtonStatus();
+        }
+
+        private void UpdateAddButtonStatus()
+        {
+            addButton.Enabled = !string.IsNullOrWhiteSpace(usernameTextBox.Text)
+                                 && !string.IsNullOrWhiteSpace(siteComboBox.Text)
+                                && authorsListView.SelectedItems.Count == 0;
         }
 
         private void UpdateClearButtonStatus()
