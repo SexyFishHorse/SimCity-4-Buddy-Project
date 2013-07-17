@@ -127,6 +127,8 @@
                 return;
             }
 
+            toolsToolStripMenuItem.Visible = true;
+
             if (SessionController.Instance.User.IsDeveloper)
             {
                 developerToolStripMenuItem.Visible = true;
@@ -134,6 +136,7 @@
 
             if (SessionController.Instance.User.IsAuthor || SessionController.Instance.User.IsDeveloper)
             {
+                Console.WriteLine("Is author or developer");
                 addPluginInformationToolStripMenuItem.Visible = true;
                 updatePluginInformationToolStripMenuItem.Visible = true;
                 myAuthorsToolStripMenuItem.Visible = true;
