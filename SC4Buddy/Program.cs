@@ -10,6 +10,7 @@
     using System.Threading;
     using System.Windows.Forms;
 
+    using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
@@ -56,6 +57,7 @@
 
             if (!string.IsNullOrWhiteSpace(Settings.Default.GameLocation))
             {
+                SessionController.Instance.AttemptAutoLogin();
                 Application.Run(new Sc4Buddy());
             }
         }
