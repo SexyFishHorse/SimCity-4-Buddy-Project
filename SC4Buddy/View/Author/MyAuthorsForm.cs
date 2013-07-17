@@ -275,7 +275,13 @@
 
                 if (author == null)
                 {
-                    author = new Author { Name = username, Site = site };
+                    author = new Author
+                                 {
+                                     Name = username,
+                                     Site = site,
+                                     User = SessionController.Instance.User,
+                                     UserId = SessionController.Instance.User.Id
+                                 };
                     registry.Add(author);
                     UpdateAuthorListView();
                     return;
