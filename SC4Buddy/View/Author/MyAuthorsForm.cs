@@ -6,6 +6,7 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.DataAccess.Remote;
+    using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class MyAuthorsForm : Form
@@ -99,6 +100,44 @@
             removeButton.Enabled = true;
         }
 
+        private void RemoveButtonClick(object sender, EventArgs e)
+        {
+            if (authorsListView.SelectedItems.Count < 1)
+            {
+                return;
+            }
+
+            var author = ((ListViewItemWithObjectValue<Entities.Remote.Author>)authorsListView.SelectedItems[0]).Value;
+
+            var numPlugins = author.Plugins.Count;
+            string message;
+            if (numPlugins > 0)
+            {
+                message =
+                    string.Format(
+                        LocalizationStrings.ThisUserHasNumPluginsInTheCentralDatabase,
+                        numPlugins);
+            }
+            else
+            {
+                message = LocalizationStrings.ThisAuthorHasNoAssociatedPlugins;
+            }
+
+            if (MessageBox.Show(
+                this,
+                message,
+                LocalizationStrings.ConfirmDeletionOfAuthor,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2) == DialogResult.No)
+            {
+                return;
+            }
+
+            registry.Delete(author);
+
+            UpdateAuthorListView();
+        }
 
         private void UpdateAuthorListView()
         {
