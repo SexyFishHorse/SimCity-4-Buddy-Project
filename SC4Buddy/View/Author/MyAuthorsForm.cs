@@ -166,5 +166,18 @@
 
             authorsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
+
+        private string CleanupSiteUrl(string site)
+        {
+            var siteUri = new UriBuilder(site) { Path = string.Empty, Port = -1 };
+
+            if (!siteUri.Scheme.Equals("http", StringComparison.OrdinalIgnoreCase)
+                || !siteUri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase))
+            {
+                siteUri.Scheme = "http";
+            }
+
+            return siteUri.Uri.ToString();
+        }
     }
 }
