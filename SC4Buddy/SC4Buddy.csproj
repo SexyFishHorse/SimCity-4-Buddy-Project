@@ -129,6 +129,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SilkIcons.resx</DependentUpon>
     </Compile>
+    <Compile Include="View\Author\MyAuthorsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Author\MyAuthorsForm.Designer.cs">
+      <DependentUpon>MyAuthorsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Developer\DeveloperDependenciesForm.cs">
       <SubType>Form</SubType>
     </Compile>
