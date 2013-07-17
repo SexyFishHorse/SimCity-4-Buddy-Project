@@ -159,6 +159,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.clearButton.TabIndex = 3;
             this.clearButton.Text = "Clear";
             this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.ClearButtonClick);
             // 
             // label1
             // 

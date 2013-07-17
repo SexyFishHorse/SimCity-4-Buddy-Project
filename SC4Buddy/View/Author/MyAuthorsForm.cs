@@ -14,5 +14,11 @@
         {
             Close();
         }
+
+        private void ClearButtonClick(object sender, EventArgs e)
+        {
+            usernameTextBox.Text = string.Empty;
+            siteComboBox.SelectedIndex = -1;
+        }
     }
 }
