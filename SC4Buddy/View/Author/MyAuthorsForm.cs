@@ -54,6 +54,7 @@
             UpdateClearButtonStatus();
             UpdateAddButtonStatus();
             UpdateUpdateButtonStatus();
+            UpdateRemoveButtonStatus();
         }
 
         private void SiteComboBoxSelectedIndexChanged(object sender, EventArgs e)
@@ -61,6 +62,7 @@
             UpdateClearButtonStatus();
             UpdateAddButtonStatus();
             UpdateUpdateButtonStatus();
+            UpdateRemoveButtonStatus();
         }
 
         private void SiteComboBoxTextUpdate(object sender, EventArgs e)
@@ -68,6 +70,12 @@
             UpdateClearButtonStatus();
             UpdateAddButtonStatus();
             UpdateUpdateButtonStatus();
+            UpdateRemoveButtonStatus();
+        }
+
+        private void UpdateRemoveButtonStatus()
+        {
+            removeButton.Enabled = authorsListView.SelectedItems.Count > 0;
         }
 
         private void UpdateUpdateButtonStatus()
