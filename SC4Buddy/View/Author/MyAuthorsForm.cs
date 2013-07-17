@@ -6,6 +6,7 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.DataAccess.Remote;
+    using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Elements;
 
@@ -107,7 +108,7 @@
                 return;
             }
 
-            var author = ((ListViewItemWithObjectValue<Entities.Remote.Author>)authorsListView.SelectedItems[0]).Value;
+            var author = ((ListViewItemWithObjectValue<Author>)authorsListView.SelectedItems[0]).Value;
 
             addButton.Enabled = false;
 
@@ -125,7 +126,7 @@
                 return;
             }
 
-            var author = ((ListViewItemWithObjectValue<Entities.Remote.Author>)authorsListView.SelectedItems[0]).Value;
+            var author = ((ListViewItemWithObjectValue<Author>)authorsListView.SelectedItems[0]).Value;
 
             var numPlugins = author.Plugins.Count;
             string message;
@@ -165,7 +166,7 @@
             authorsListView.Items.Clear();
             foreach (var author in authors)
             {
-                var item = new ListViewItemWithObjectValue<Entities.Remote.Author>(author.Name, author);
+                var item = new ListViewItemWithObjectValue<Author>(author.Name, author);
                 item.SubItems.Add(author.Site);
                 authorsListView.Items.Add(item);
             }
@@ -211,7 +212,7 @@
                 var site = CleanupSiteUrl(siteComboBox.Text.Trim());
 
                 var author =
-                    ((ListViewItemWithObjectValue<Entities.Remote.Author>)authorsListView.SelectedItems[0]).Value;
+                    ((ListViewItemWithObjectValue<Author>)authorsListView.SelectedItems[0]).Value;
 
                 author.Name = usernameTextBox.Text.Trim();
                 author.Site = site;
