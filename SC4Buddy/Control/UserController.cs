@@ -6,6 +6,7 @@
     using System.Security.Authentication;
     using System.Security.Cryptography;
     using System.Text;
+    using System.Windows.Forms;
 
     using NIHEI.Common.TypeUtility;
     using NIHEI.SC4Buddy.DataAccess.Remote;
@@ -16,6 +17,8 @@
     public class UserController
     {
         private readonly UserRegistry userRegistry;
+
+        private readonly string passwordHashFilePath = Path.Combine(Application.UserAppDataPath, "hash.login");
 
         public UserController(UserRegistry userRegistry)
         {
