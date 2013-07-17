@@ -47,5 +47,28 @@
 
             authorsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
+
+        private void UsernameTextBoxTextChanged(object sender, EventArgs e)
+        {
+            UpdateClearButtonStatus();
+        }
+
+        private void SiteComboBoxSelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateClearButtonStatus();
+        }
+
+        private void SiteComboBoxTextUpdate(object sender, EventArgs e)
+        {
+            UpdateClearButtonStatus();
+        }
+
+        private void UpdateClearButtonStatus()
+        {
+            clearButton.Enabled =
+                !string.IsNullOrEmpty(usernameTextBox.Text)
+                || siteComboBox.SelectedIndex >= 0
+                || !string.IsNullOrEmpty(siteComboBox.Text);
+        }
     }
 }
