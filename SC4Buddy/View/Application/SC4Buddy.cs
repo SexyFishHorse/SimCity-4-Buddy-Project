@@ -6,6 +6,7 @@
     using System.Diagnostics;
     using System.Drawing;
     using System.Linq;
+    using System.Net.NetworkInformation;
     using System.Resources;
     using System.Threading;
     using System.Windows.Forms;
@@ -110,11 +111,35 @@
 
         private void Sc4BuddyLoad(object sender, EventArgs e)
         {
-            SessionController.Instance.AttemptAutoLogin();
+            if (NetworkInterface.GetIsNetworkAvailable())
+            {
+                AttemptAutoLogin();
+            }
 
             RepopulateUserFolderRelatives();
 
             UpdateBackground();
+        }
+
+        private void AttemptAutoLogin()
+        {
+            try
+            {
+                SessionController.Instance.AttemptAutoLogin();
+            }
+            catch (Exception ex)
+            {
+                eventLog.WriteEntry(ex.Message, EventLogEntryType.FailureAudit);
+                if (MessageBox.Show(
+                    this,
+                    LocalizationStrings.UnableToLogYouIntoTheSystem,
+                    LocalizationStrings.ErrorOccuredDuringLogin,
+                    MessageBoxButtons.RetryCancel,
+                    MessageBoxIcon.Error) == DialogResult.Retry)
+                {
+                    AttemptAutoLogin();
+                }
+            }
         }
 
         private void UpdateToolsVisibility()
