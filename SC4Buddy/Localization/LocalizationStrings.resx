@@ -337,4 +337,13 @@ Should also notify the user that some files may have been installed so the user 
   <data name="NoInternetDetectionDetected" xml:space="preserve">
     <value>No internet connection detected</value>
   </data>
+  <data name="ThisUserHasNumPluginsInTheCentralDatabase" xml:space="preserve">
+    <value>This author has {0} plugins in the central database. Deleting the author will NOT delete this information. Users will still be able to search for these plugins. Are you sure you want to delete this user?</value>
+  </data>
+  <data name="ThisAuthorHasNoAssociatedPlugins" xml:space="preserve">
+    <value>This author has no associated plugins. Are you sure you want to delete this user?</value>
+  </data>
+  <data name="ConfirmDeletionOfAuthor" xml:space="preserve">
+    <value>Confirm deletion of author</value>
+  </data>
 </root>

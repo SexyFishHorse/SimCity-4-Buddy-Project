@@ -106,6 +106,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm deletion of author.
+        /// </summary>
+        internal static string ConfirmDeletionOfAuthor {
+            get {
+                return ResourceManager.GetString("ConfirmDeletionOfAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm deletion of non plugin files.
         /// </summary>
         internal static string ConfirmDeletionOfNonPluginFiles {
@@ -547,6 +556,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This author has no associated plugins. Are you sure you want to delete this user?.
+        /// </summary>
+        internal static string ThisAuthorHasNoAssociatedPlugins {
+            get {
+                return ResourceManager.GetString("ThisAuthorHasNoAssociatedPlugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This form contains {0} executable files..
         /// </summary>
         internal static string ThisFormContainsNumExecutableFiles {
@@ -561,6 +579,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string ThisToolWillScanForAllNonPluginFilesAndRemoveThem {
             get {
                 return ResourceManager.GetString("ThisToolWillScanForAllNonPluginFilesAndRemoveThem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This author has {0} plugins in the central database. Deleting the author will NOT delete this information. Users will still be able to search for these plugins. Are you sure you want to delete this user?.
+        /// </summary>
+        internal static string ThisUserHasNumPluginsInTheCentralDatabase {
+            get {
+                return ResourceManager.GetString("ThisUserHasNumPluginsInTheCentralDatabase", resourceCulture);
             }
         }
         
