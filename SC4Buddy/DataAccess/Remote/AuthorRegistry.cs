@@ -46,5 +46,10 @@
             entities.Authors.DeleteObject(author);
             entities.SaveChanges();
         }
+
+        public void Update(Author author)
+        {
+            entities.SaveChanges();
+        }
     }
 }
