@@ -53,18 +53,28 @@
         {
             UpdateClearButtonStatus();
             UpdateAddButtonStatus();
+            UpdateUpdateButtonStatus();
         }
 
         private void SiteComboBoxSelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateClearButtonStatus();
             UpdateAddButtonStatus();
+            UpdateUpdateButtonStatus();
         }
 
         private void SiteComboBoxTextUpdate(object sender, EventArgs e)
         {
             UpdateClearButtonStatus();
             UpdateAddButtonStatus();
+            UpdateUpdateButtonStatus();
+        }
+
+        private void UpdateUpdateButtonStatus()
+        {
+            updateButton.Enabled = authorsListView.SelectedItems.Count > 0
+                                   && !string.IsNullOrWhiteSpace(usernameTextBox.Text)
+                                   && !string.IsNullOrWhiteSpace(siteComboBox.Text);
         }
 
         private void UpdateAddButtonStatus()
