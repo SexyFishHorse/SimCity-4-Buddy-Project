@@ -167,6 +167,63 @@
             authorsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
+        private void UpdateButtonClick(object sender, EventArgs e)
+        {
+            if (authorsListView.SelectedItems.Count < 1)
+            {
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(usernameTextBox.Text))
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.YouCannotSpecifyAnEmptyUsername,
+                    LocalizationStrings.ValidationError,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(siteComboBox.Text))
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.YouCannotSpecifyAnEmptySite,
+                    LocalizationStrings.ValidationError,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }
+
+            try
+            {
+                var site = CleanupSiteUrl(siteComboBox.Text.Trim());
+
+                var author =
+                    ((ListViewItemWithObjectValue<Entities.Remote.Author>)authorsListView.SelectedItems[0]).Value;
+
+                author.Name = usernameTextBox.Text.Trim();
+                author.Site = site;
+
+                registry.Update(author);
+
+                UpdateAuthorListView();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.TheSiteUrlIsInvalid,
+                    LocalizationStrings.ValidationError,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+            }
+        }
+
         private string CleanupSiteUrl(string site)
         {
             var siteUri = new UriBuilder(site) { Path = string.Empty, Port = -1 };
