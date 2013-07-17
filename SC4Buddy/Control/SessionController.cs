@@ -67,12 +67,18 @@
 
         protected virtual void RaiseUserLoggedInEvent()
         {
-            UserLoggedIn(this, new SessionEventArgs(User));
+            if (UserLoggedIn != null)
+            {
+                UserLoggedIn(this, new SessionEventArgs(User));
+            }
         }
 
         protected virtual void RaiseUserLoggedOutEvent()
         {
-            UserLoggedOut(this, new SessionEventArgs(User));
+            if (UserLoggedOut != null)
+            {
+                UserLoggedOut(this, new SessionEventArgs(User));
+            }
         }
     }
 }
