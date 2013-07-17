@@ -331,6 +331,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No internet connection detected.
+        /// </summary>
+        internal static string NoInternetDetectionDetected {
+            get {
+                return ResourceManager.GetString("NoInternetDetectionDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No new, deleted or updated files detected..
         /// </summary>
         internal static string NoNewDeletedOrUpdatedFilesDetected {
@@ -633,6 +642,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string WouldYouLikeToEnterInformationAboutThePlugin {
             get {
                 return ResourceManager.GetString("WouldYouLikeToEnterInformationAboutThePlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You do not appear to be connected to the internet. If this is not the case you can still try to login..
+        /// </summary>
+        internal static string YouDoNotAppearToBeConnectedToTheInternet {
+            get {
+                return ResourceManager.GetString("YouDoNotAppearToBeConnectedToTheInternet", resourceCulture);
             }
         }
         

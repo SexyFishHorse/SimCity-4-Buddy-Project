@@ -331,4 +331,10 @@ Should also notify the user that some files may have been installed so the user 
   <data name="ErrorOccuredDuringLogin" xml:space="preserve">
     <value>Error occured during login.</value>
   </data>
+  <data name="YouDoNotAppearToBeConnectedToTheInternet" xml:space="preserve">
+    <value>You do not appear to be connected to the internet. If this is not the case you can still try to login.</value>
+  </data>
+  <data name="NoInternetDetectionDetected" xml:space="preserve">
+    <value>No internet connection detected</value>
+  </data>
 </root>
