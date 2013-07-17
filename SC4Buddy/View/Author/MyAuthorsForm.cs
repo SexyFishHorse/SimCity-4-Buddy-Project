@@ -36,20 +36,7 @@
 
         private void MyAuthorsFormLoad(object sender, EventArgs e)
         {
-            var authors = registry.Authors.Where(x => x.UserId == SessionController.Instance.User.Id);
-
-            authorsListView.BeginUpdate();
-            authorsListView.Items.Clear();
-            foreach (var author in authors)
-            {
-                var item = new ListViewItemWithObjectValue<Entities.Remote.Author>(author.Name, author);
-                item.SubItems.Add(author.Site);
-                authorsListView.Items.Add(item);
-            }
-
-            authorsListView.EndUpdate();
-
-            authorsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            UpdateAuthorListView();
 
             var sites = registry.Authors.Select(x => x.Site).Distinct().ToArray();
             var autoCompleteSource = new AutoCompleteStringCollection();
@@ -110,6 +97,25 @@
 
             updateButton.Enabled = true;
             removeButton.Enabled = true;
+        }
+
+
+        private void UpdateAuthorListView()
+        {
+            var authors = registry.Authors.Where(x => x.UserId == SessionController.Instance.User.Id);
+
+            authorsListView.BeginUpdate();
+            authorsListView.Items.Clear();
+            foreach (var author in authors)
+            {
+                var item = new ListViewItemWithObjectValue<Entities.Remote.Author>(author.Name, author);
+                item.SubItems.Add(author.Site);
+                authorsListView.Items.Add(item);
+            }
+
+            authorsListView.EndUpdate();
+
+            authorsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
     }
 }
