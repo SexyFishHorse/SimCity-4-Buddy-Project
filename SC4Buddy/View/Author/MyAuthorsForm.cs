@@ -289,6 +289,7 @@
                                  };
                     registry.Add(author);
                     UpdateAuthorListView();
+                    ClearButtonClick(sender, e);
                     return;
                 }
 
@@ -308,6 +309,7 @@
                 author.UserId = SessionController.Instance.User.Id;
                 registry.Update(author);
                 UpdateAuthorListView();
+                ClearButtonClick(sender, e);
             }
             catch (FormatException)
             {
