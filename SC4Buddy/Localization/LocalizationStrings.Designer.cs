@@ -556,6 +556,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The site URL is invalid. Enter it in the format &quot;http://www.example.com&quot;..
+        /// </summary>
+        internal static string TheSiteUrlIsInvalid {
+            get {
+                return ResourceManager.GetString("TheSiteUrlIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This author has no associated plugins. Are you sure you want to delete this user?.
         /// </summary>
         internal static string ThisAuthorHasNoAssociatedPlugins {
@@ -655,6 +664,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Validation error.
+        /// </summary>
+        internal static string ValidationError {
+            get {
+                return ResourceManager.GetString("ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Would you like to enter additional details for the installed plugins (like name, group, description, download link etc?)? You can always do this later if you so desire..
         /// </summary>
         internal static string WouldYouLikeToEnterAdditionalDetailsForTheInstalledPlugins {
@@ -669,6 +687,24 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string WouldYouLikeToEnterInformationAboutThePlugin {
             get {
                 return ResourceManager.GetString("WouldYouLikeToEnterInformationAboutThePlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot specify an empty site..
+        /// </summary>
+        internal static string YouCannotSpecifyAnEmptySite {
+            get {
+                return ResourceManager.GetString("YouCannotSpecifyAnEmptySite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot specify an empty username..
+        /// </summary>
+        internal static string YouCannotSpecifyAnEmptyUsername {
+            get {
+                return ResourceManager.GetString("YouCannotSpecifyAnEmptyUsername", resourceCulture);
             }
         }
         

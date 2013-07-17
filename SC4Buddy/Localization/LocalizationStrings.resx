@@ -346,4 +346,16 @@ Should also notify the user that some files may have been installed so the user 
   <data name="ConfirmDeletionOfAuthor" xml:space="preserve">
     <value>Confirm deletion of author</value>
   </data>
+  <data name="ValidationError" xml:space="preserve">
+    <value>Validation error</value>
+  </data>
+  <data name="YouCannotSpecifyAnEmptySite" xml:space="preserve">
+    <value>You cannot specify an empty site.</value>
+  </data>
+  <data name="YouCannotSpecifyAnEmptyUsername" xml:space="preserve">
+    <value>You cannot specify an empty username.</value>
+  </data>
+  <data name="TheSiteUrlIsInvalid" xml:space="preserve">
+    <value>The site URL is invalid. Enter it in the format "http://www.example.com".</value>
+  </data>
 </root>
