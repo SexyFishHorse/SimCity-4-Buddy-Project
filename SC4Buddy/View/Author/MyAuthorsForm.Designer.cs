@@ -34,9 +34,11 @@ namespace NIHEI.SC4Buddy.View.Author
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // closeButton
@@ -59,7 +61,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.authorsListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.authorsListView.Location = new System.Drawing.Point(0, 0);
             this.authorsListView.Name = "authorsListView";
-            this.authorsListView.Size = new System.Drawing.Size(165, 208);
+            this.authorsListView.Size = new System.Drawing.Size(163, 173);
             this.authorsListView.TabIndex = 0;
             this.authorsListView.UseCompatibleStateImageBehavior = false;
             this.authorsListView.View = System.Windows.Forms.View.Details;
@@ -77,15 +79,26 @@ namespace NIHEI.SC4Buddy.View.Author
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(12, 12);
+            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.authorsListView);
-            this.splitContainer1.Size = new System.Drawing.Size(496, 208);
-            this.splitContainer1.SplitterDistance = 165;
+            this.splitContainer1.Size = new System.Drawing.Size(490, 173);
+            this.splitContainer1.SplitterDistance = 163;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.splitContainer1);
+            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(496, 208);
+            this.panel1.TabIndex = 2;
             // 
             // MyAuthorsForm
             // 
@@ -93,13 +106,14 @@ namespace NIHEI.SC4Buddy.View.Author
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeButton;
             this.ClientSize = new System.Drawing.Size(520, 261);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.closeButton);
-            this.Controls.Add(this.splitContainer1);
             this.Name = "MyAuthorsForm";
             this.Text = "MyAuthorsForm";
             this.splitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -111,6 +125,7 @@ namespace NIHEI.SC4Buddy.View.Author
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Panel panel1;
 
     }
 }

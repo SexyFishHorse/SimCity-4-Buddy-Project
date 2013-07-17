@@ -218,6 +218,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SilkIcons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Author\MyAuthorsForm.resx">
+      <DependentUpon>MyAuthorsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Developer\DeveloperDependenciesForm.resx">
       <DependentUpon>DeveloperDependenciesForm.cs</DependentUpon>
     </EmbeddedResource>
