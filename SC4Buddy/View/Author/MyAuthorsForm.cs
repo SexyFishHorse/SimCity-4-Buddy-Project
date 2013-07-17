@@ -153,7 +153,16 @@
                 return;
             }
 
-            registry.Delete(author);
+            if (numPlugins > 0)
+            {
+                author.UserId = 0;
+                author.User = null;
+                registry.Update(author);
+            }
+            else
+            {
+                registry.Delete(author);
+            }
 
             UpdateAuthorListView();
         }
