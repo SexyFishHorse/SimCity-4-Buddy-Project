@@ -235,6 +235,11 @@
 
         private string CleanupSiteUrl(string site)
         {
+            if (!site.Contains("."))
+            {
+                throw new FormatException("Site URL does not contain a dot.");
+            }
+
             var siteUri = new UriBuilder(site) { Path = string.Empty, Port = -1 };
 
             if (!siteUri.Scheme.Equals("http", StringComparison.OrdinalIgnoreCase)
