@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.IO;
     using System.Linq;
     using System.Security.Authentication;
     using System.Security.Cryptography;
@@ -25,29 +26,40 @@
             this.userRegistry = userRegistry;
         }
 
+        public User AutoLogin()
+        {
+            if (!File.Exists(passwordHashFilePath))
+            {
+                return null;
+            }
+
+            var email = Settings.Default.UserEmail;
+            var hash = File.ReadAllBytes(passwordHashFilePath);
+
+            try
+            {
+                return Login(email, hash);
+            }
+            catch (InvalidCredentialException)
+            {
+                return null;
+            }
+        }
+
         public User Login(string email, string password)
         {
-            var possibleUser =
-                userRegistry.Users.FirstOrDefault(
-                    x => x.Email.Equals(email, StringComparison.InvariantCultureIgnoreCase));
-
-            if (possibleUser == null)
+            Settings.Default.UserEmail = string.Empty;
+            if (File.Exists(passwordHashFilePath))
             {
-                Settings.Default.UserEmail = string.Empty;
-                throw new InvalidCredentialException("Invalid username or password.");
+                File.Delete(passwordHashFilePath);
             }
+
+            var possibleUser = GetPossibleUser(email);
 
             var saltedHash = GenerateSaltedHash(
                 Encoding.Default.GetBytes(password), Encoding.Default.GetBytes(possibleUser.Salt));
 
-            if (!CompareByteArrays(saltedHash, possibleUser.Passphrase))
-            {
-                throw new InvalidCredentialException("Invalid username or password.");
-            }
-
-
-
-            return possibleUser;
+            return CompareHashesAndUpdateSettings(saltedHash, possibleUser);
         }
 
         public void CreateUser(string email, string password, string repeatPassword)
@@ -103,6 +115,40 @@
             }
 
             return algorithm.ComputeHash(plainTextWithSaltBytes);
+        }
+
+        private User CompareHashesAndUpdateSettings(byte[] saltedHash, User possibleUser)
+        {
+            if (!CompareByteArrays(saltedHash, possibleUser.Passphrase))
+            {
+                throw new InvalidCredentialException("Invalid username or password.");
+            }
+
+            File.WriteAllBytes(passwordHashFilePath, saltedHash);
+            Settings.Default.Save();
+
+            return possibleUser;
+        }
+
+        private User GetPossibleUser(string email)
+        {
+            var possibleUser =
+                userRegistry.Users.FirstOrDefault(
+                    x => x.Email.Equals(email, StringComparison.InvariantCultureIgnoreCase));
+
+            if (possibleUser == null)
+            {
+                throw new InvalidCredentialException("Invalid username or password.");
+            }
+
+            return possibleUser;
+        }
+
+        private User Login(string email, byte[] passwordHash)
+        {
+            var possibleUser = GetPossibleUser(email);
+
+            return CompareHashesAndUpdateSettings(passwordHash, possibleUser);
         }
 
         private bool EmailSeemsValid(string email)
