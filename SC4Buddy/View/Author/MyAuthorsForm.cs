@@ -27,6 +27,7 @@
         {
             usernameTextBox.Text = string.Empty;
             siteComboBox.SelectedIndex = -1;
+            siteComboBox.Text = string.Empty;
         }
 
         private void MyAuthorsFormLoad(object sender, EventArgs e)
