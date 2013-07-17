@@ -119,6 +119,8 @@ namespace NIHEI.SC4Buddy.View.Author
             // 
             this.siteComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.siteComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.siteComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.siteComboBox.FormattingEnabled = true;
             this.siteComboBox.Location = new System.Drawing.Point(64, 29);
             this.siteComboBox.Name = "siteComboBox";

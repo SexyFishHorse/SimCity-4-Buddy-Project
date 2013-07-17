@@ -50,6 +50,13 @@
             authorsListView.EndUpdate();
 
             authorsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+            var sites = registry.Authors.Select(x => x.Site).Distinct().ToArray();
+            var autoCompleteSource = new AutoCompleteStringCollection();
+            autoCompleteSource.AddRange(sites);
+
+            siteComboBox.AutoCompleteCustomSource = autoCompleteSource;
+            siteComboBox.Items.AddRange(sites);
         }
 
         private void UsernameTextBoxTextChanged(object sender, EventArgs e)
