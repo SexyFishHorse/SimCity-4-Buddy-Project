@@ -139,7 +139,6 @@
 
             if (SessionController.Instance.User.IsAuthor || SessionController.Instance.User.IsDeveloper)
             {
-                Console.WriteLine("Is author or developer");
                 addPluginInformationToolStripMenuItem.Visible = true;
                 updatePluginInformationToolStripMenuItem.Visible = true;
                 myAuthorsToolStripMenuItem.Visible = true;
