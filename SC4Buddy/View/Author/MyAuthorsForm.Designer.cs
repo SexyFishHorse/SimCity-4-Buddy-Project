@@ -206,7 +206,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.closeButton);
             this.Name = "MyAuthorsForm";
-            this.Text = "MyAuthorsForm";
+            this.Text = "My authors";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
