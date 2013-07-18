@@ -28,9 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // AddPluginInformationForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "AddPluginInformationForm";
+            this.ClientSize = new System.Drawing.Size(661, 389);
+            this.Name = "AddPluginInformationForm";
+            this.Text = "Add plugin information to the central database";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
