@@ -14,5 +14,20 @@
         {
             Close();
         }
+
+
+        private void ReloadSiteAndAuthorComboBoxItems(IEnumerable<Author> authors)
+        {
+            siteAndAuthorComboBox.BeginUpdate();
+            siteAndAuthorComboBox.Items.Clear();
+            foreach (var author in authors)
+            {
+                siteAndAuthorComboBox.Items.Add(
+                    new ListViewItemWithObjectValue<Entities.Remote.Author>(
+                        string.Format("{1} ({0})", author.Name, author.Site), author));
+            }
+
+            siteAndAuthorComboBox.EndUpdate();
+        }
     }
 }
