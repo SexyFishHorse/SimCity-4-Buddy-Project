@@ -133,6 +133,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // saveButton
             // 
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveButton.Enabled = false;
             this.saveButton.Location = new System.Drawing.Point(407, 316);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
