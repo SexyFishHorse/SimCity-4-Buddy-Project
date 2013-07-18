@@ -180,6 +180,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.Name = "AddPluginInformationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add plugin information to the central database";
+            this.Load += new System.EventHandler(this.AddPluginInformationFormLoad);
             this.ResumeLayout(false);
             this.PerformLayout();
 
