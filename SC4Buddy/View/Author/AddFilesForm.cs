@@ -35,5 +35,10 @@
             filesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
         }
+
+        private void CancelButtonClick(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
