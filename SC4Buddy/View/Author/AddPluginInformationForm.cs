@@ -59,5 +59,15 @@
 
             siteAndAuthorComboBox.EndUpdate();
         }
+
+        private void FilesButtonClick(object sender, EventArgs e)
+        {
+            var dialog = new AddFilesForm();
+
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                
+            }
+        }
     }
 }
