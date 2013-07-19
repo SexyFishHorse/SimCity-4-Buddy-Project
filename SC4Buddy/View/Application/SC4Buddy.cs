@@ -412,5 +412,10 @@
         {
             new MyAuthorsForm().ShowDialog(this);
         }
+
+        private void AddPluginInformationToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            new AddPluginInformationForm().ShowDialog(this);
+        }
     }
 }
