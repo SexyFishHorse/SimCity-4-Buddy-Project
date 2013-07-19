@@ -112,7 +112,9 @@ namespace NIHEI.SC4Buddy.View.Author
             // selectFileDialog
             // 
             this.selectFileDialog.Multiselect = true;
-            this.selectFileDialog.Title = "Select the files that this plugin contains";
+            this.selectFileDialog.Title = "Select the files that this plugin contains. You can select individual files or a " +
+    "zip file containing all the files (It does not work with archives with installer" +
+    "s though)";
             // 
             // AddFilesForm
             // 

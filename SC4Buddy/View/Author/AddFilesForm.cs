@@ -32,19 +32,7 @@
 
             foreach (var filename in filenames)
             {
-                if (Directory.Exists(filename))
-                {
-                    var entities = Directory.EnumerateFiles(filename);
-
-                    foreach (var entity in entities)
-                    {
-                        AddFileToList(entity);
-                    }
-                }
-                else
-                {
-                    AddFileToList(filename);
-                }
+                AddFileToList(filename);
             }
 
             UpdateListViewAndOkButton();
