@@ -84,5 +84,19 @@
         {
             removeButton.Enabled = filesListView.SelectedItems.Count > 0;
         }
+
+        private void RemoveButtonClick(object sender, EventArgs e)
+        {
+            var selectedItems = filesListView.SelectedItems;
+
+            foreach (var selectedItem in selectedItems)
+            {
+                files.Remove(((ListViewItemWithObjectValue<RemotePluginFile>)selectedItem).Value);
+            }
+
+            UpdateListView();
+
+            removeButton.Enabled = false;
+        }
     }
 }
