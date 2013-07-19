@@ -20,6 +20,37 @@
             files = new List<RemotePluginFile>();
         }
 
+        private void AddButtonClick(object sender, EventArgs e)
+        {
+            if (selectFileDialog.ShowDialog(this) == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            var filenames = selectFileDialog.FileNames;
+
+            foreach (var filename in filenames)
+            {
+                Console.WriteLine(filename);
+                if (Directory.Exists(filename))
+                {
+                    Console.WriteLine("\tdirectory");
+                    var entities = Directory.EnumerateFiles(filename);
+
+                    foreach (var entity in entities)
+                    {
+                        AddFileToList(entity);
+                    }
+                }
+                else
+                {
+                    AddFileToList(filename);
+                }
+            }
+
+            UpdateListView();
+        }
+
         private void UpdateListView()
         {
             filesListView.BeginUpdate();
