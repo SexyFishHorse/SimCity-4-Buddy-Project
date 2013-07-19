@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Windows.Forms;
 
-    using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.View.Elements;
 
     public partial class AddPluginInformationForm : Form
     {
@@ -53,7 +53,7 @@
             foreach (var author in authors)
             {
                 siteAndAuthorComboBox.Items.Add(
-                    new ListViewItemWithObjectValue<Entities.Remote.Author>(
+                    new ComboBoxItem<Author>(
                         string.Format("{1} ({0})", author.Name, author.Site), author));
             }
 
