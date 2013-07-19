@@ -32,7 +32,9 @@
 
             foreach (var filename in filenames)
             {
-                AddFileToList(filename);
+                var fileInfo = new FileInfo(filename);
+                AddFileToList(fileInfo);
+                
             }
 
             UpdateListViewAndOkButton();
@@ -55,13 +57,12 @@
             okButton.Enabled = files.Any();
         }
 
-        private void AddFileToList(string filename)
+        private void AddFileToList(FileInfo fileInfo)
         {
-            var fileinfo = new FileInfo(filename);
             var file = new RemotePluginFile
                            {
-                               Name = fileinfo.Name,
-                               Checksum = Md5ChecksumUtility.CalculateChecksum(fileinfo.FullName).ToHex()
+                               Name = fileInfo.Name,
+                               Checksum = Md5ChecksumUtility.CalculateChecksum(fileInfo.FullName).ToHex()
                            };
             files.Add(file);
         }
