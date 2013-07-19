@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Windows.Forms;
 
     using NIHEI.Common.IO;
@@ -46,10 +47,10 @@
                 }
             }
 
-            UpdateListView();
+            UpdateListViewAndOkButton();
         }
 
-        private void UpdateListView()
+        private void UpdateListViewAndOkButton()
         {
             filesListView.BeginUpdate();
             filesListView.Items.Clear();
@@ -62,6 +63,8 @@
 
             filesListView.EndUpdate();
             filesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+            okButton.Enabled = files.Any();
         }
 
         private void AddFileToList(string filename)
@@ -94,7 +97,7 @@
                 files.Remove(((ListViewItemWithObjectValue<RemotePluginFile>)selectedItem).Value);
             }
 
-            UpdateListView();
+            UpdateListViewAndOkButton();
 
             removeButton.Enabled = false;
         }

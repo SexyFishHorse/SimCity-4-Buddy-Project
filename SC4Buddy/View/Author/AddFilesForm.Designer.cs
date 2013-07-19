@@ -53,6 +53,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.okButton.Enabled = false;
             this.okButton.Location = new System.Drawing.Point(261, 262);
             this.okButton.Name = "okButton";
@@ -115,8 +116,10 @@ namespace NIHEI.SC4Buddy.View.Author
             // 
             // AddFilesForm
             // 
+            this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(429, 297);
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.addButton);
