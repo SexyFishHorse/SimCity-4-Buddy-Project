@@ -9,6 +9,7 @@
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Localization;
 
     public partial class AddPluginInformationForm : Form
     {
@@ -28,7 +29,19 @@
 
         private void AddPluginInformationFormLoad(object sender, EventArgs e)
         {
-            var authors = authorRegistry.Authors.Where(x => x.UserId == SessionController.Instance.User.Id);
+            var authors = authorRegistry.Authors.Where(x => x.UserId == SessionController.Instance.User.Id).ToList();
+
+            if (!authors.Any())
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.YouNeedToAddAtLeastOneAuthorInOrderToAddPluginInformationToTheCentralDatabase,
+                    LocalizationStrings.NoAuthorsDefined,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                Close();
+            }
 
             ReloadSiteAndAuthorComboBoxItems(authors);
         }

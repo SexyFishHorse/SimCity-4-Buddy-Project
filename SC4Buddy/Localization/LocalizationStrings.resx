@@ -361,4 +361,10 @@ Should also notify the user that some files may have been installed so the user 
   <data name="ThisAuthorIsAlreadyClaimedByAnotherUser" xml:space="preserve">
     <value>This author is already claimed by another user.</value>
   </data>
+  <data name="NoAuthorsDefined" xml:space="preserve">
+    <value>No authors defined.</value>
+  </data>
+  <data name="YouNeedToAddAtLeastOneAuthorInOrderToAddPluginInformationToTheCentralDatabase" xml:space="preserve">
+    <value>You need to add at least one author in order to add plugin information to the central database.</value>
+  </data>
 </root>

@@ -331,6 +331,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No authors defined..
+        /// </summary>
+        internal static string NoAuthorsDefined {
+            get {
+                return ResourceManager.GetString("NoAuthorsDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No file changes detected.
         /// </summary>
         internal static string NoFileChangesDetected {
@@ -732,6 +741,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string YouMustSettheGameLocationBeforeYouCanUseThisApplication {
             get {
                 return ResourceManager.GetString("YouMustSettheGameLocationBeforeYouCanUseThisApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to add at least one author in order to add plugin information to the central database..
+        /// </summary>
+        internal static string YouNeedToAddAtLeastOneAuthorInOrderToAddPluginInformationToTheCentralDatabase {
+            get {
+                return ResourceManager.GetString("YouNeedToAddAtLeastOneAuthorInOrderToAddPluginInformationToTheCentralDatabase", resourceCulture);
             }
         }
     }
