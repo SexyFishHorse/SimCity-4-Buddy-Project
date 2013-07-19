@@ -19,6 +19,21 @@
 
             files = new List<RemotePluginFile>();
         }
+
+        private void UpdateListView()
+        {
+            filesListView.BeginUpdate();
+            filesListView.Items.Clear();
+            foreach (var file in files)
+            {
+                var item = new ListViewItemWithObjectValue<RemotePluginFile>(file.Name, file);
+                item.SubItems.Add(file.Checksum);
+                filesListView.Items.Add(item);
+            }
+
+            filesListView.EndUpdate();
+            filesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+        }
         }
     }
 }
