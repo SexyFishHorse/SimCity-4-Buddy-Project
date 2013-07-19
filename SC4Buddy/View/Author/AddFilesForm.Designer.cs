@@ -124,6 +124,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.cancelButton);
             this.Name = "AddFilesForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add files to plugin";
             this.ResumeLayout(false);
 
