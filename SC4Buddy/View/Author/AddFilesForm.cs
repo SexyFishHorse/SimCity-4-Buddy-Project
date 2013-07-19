@@ -40,6 +40,12 @@
             UpdateListViewAndOkButton();
         }
 
+        private bool IsArchive(FileInfo fileInfo)
+        {
+            var supportedArchiveTypes = new[] { ".rar", ".zip" };
+            return supportedArchiveTypes.Any(type => fileInfo.Extension.Equals(type, StringComparison.OrdinalIgnoreCase));
+        }
+
         private void UpdateListViewAndOkButton()
         {
             filesListView.BeginUpdate();
