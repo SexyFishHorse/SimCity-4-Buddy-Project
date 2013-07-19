@@ -34,6 +34,18 @@
             filesListView.EndUpdate();
             filesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
+
+        private void AddFileToList(string filename)
+        {
+            var fileinfo = new FileInfo(filename);
+            var file = new RemotePluginFile
+                           {
+                               Name = fileinfo.Name,
+                               Checksum = Md5ChecksumUtility.CalculateChecksum(fileinfo.FullName).ToHex()
+                           };
+            files.Add(file);
+
+            Console.WriteLine("\tadded");
         }
 
         private void CancelButtonClick(object sender, EventArgs e)
