@@ -83,5 +83,10 @@
         {
             Close();
         }
+
+        private void FilesListViewSelectedIndexChanged(object sender, EventArgs e)
+        {
+            removeButton.Enabled = filesListView.SelectedItems.Count > 0;
+        }
     }
 }

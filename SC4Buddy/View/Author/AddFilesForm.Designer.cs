@@ -75,6 +75,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.filesListView.TabIndex = 2;
             this.filesListView.UseCompatibleStateImageBehavior = false;
             this.filesListView.View = System.Windows.Forms.View.Details;
+            this.filesListView.SelectedIndexChanged += new System.EventHandler(this.FilesListViewSelectedIndexChanged);
             // 
             // columnHeader1
             // 
