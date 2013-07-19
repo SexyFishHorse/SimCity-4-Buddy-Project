@@ -31,10 +31,8 @@
 
             foreach (var filename in filenames)
             {
-                Console.WriteLine(filename);
                 if (Directory.Exists(filename))
                 {
-                    Console.WriteLine("\tdirectory");
                     var entities = Directory.EnumerateFiles(filename);
 
                     foreach (var entity in entities)
@@ -75,8 +73,6 @@
                                Checksum = Md5ChecksumUtility.CalculateChecksum(fileinfo.FullName).ToHex()
                            };
             files.Add(file);
-
-            Console.WriteLine("\tadded");
         }
 
         private void CancelButtonClick(object sender, EventArgs e)
