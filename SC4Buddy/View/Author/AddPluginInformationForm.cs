@@ -66,7 +66,17 @@
 
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
-                
+
+            }
+        }
+
+        private void SelectInstalledPluginButtonClick(object sender, EventArgs e)
+        {
+            var dialog = new SelectInstalledPluginForm();
+
+            if (dialog.ShowDialog(this) == DialogResult.Cancel)
+            {
+                return;
             }
         }
     }

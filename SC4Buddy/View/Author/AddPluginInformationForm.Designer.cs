@@ -172,6 +172,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.selectInstalledPluginButton.TabIndex = 12;
             this.selectInstalledPluginButton.Text = "Select installed plugin";
             this.selectInstalledPluginButton.UseVisualStyleBackColor = true;
+            this.selectInstalledPluginButton.Click += new System.EventHandler(this.SelectInstalledPluginButtonClick);
             // 
             // AddPluginInformationForm
             // 
