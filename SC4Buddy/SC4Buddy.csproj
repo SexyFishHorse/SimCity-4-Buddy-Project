@@ -147,6 +147,12 @@
     <Compile Include="View\Author\MyAuthorsForm.Designer.cs">
       <DependentUpon>MyAuthorsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Author\SelectInstalledPluginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Author\SelectInstalledPluginForm.Designer.cs">
+      <DependentUpon>SelectInstalledPluginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Developer\DeveloperDependenciesForm.cs">
       <SubType>Form</SubType>
     </Compile>
