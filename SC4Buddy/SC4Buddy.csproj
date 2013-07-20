@@ -245,6 +245,9 @@
     <EmbeddedResource Include="View\Author\MyAuthorsForm.resx">
       <DependentUpon>MyAuthorsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Author\SelectInstalledPluginForm.resx">
+      <DependentUpon>SelectInstalledPluginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Developer\DeveloperDependenciesForm.resx">
       <DependentUpon>DeveloperDependenciesForm.cs</DependentUpon>
     </EmbeddedResource>
