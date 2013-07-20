@@ -120,5 +120,15 @@
                 siteAndAuthorComboBox.SelectedItem = comboBoxItem;
             }
         }
+
+        private void DependenciesButtonClick(object sender, EventArgs e)
+        {
+            var dialog = new DependenciesForm();
+
+            if (dialog.ShowDialog(this) == DialogResult.Cancel)
+            {
+                
+            }
+        }
     }
 }

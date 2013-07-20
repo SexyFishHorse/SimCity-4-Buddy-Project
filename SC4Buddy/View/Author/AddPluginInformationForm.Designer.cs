@@ -162,6 +162,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.dependenciesButton.TabIndex = 11;
             this.dependenciesButton.Text = "Dependencies";
             this.dependenciesButton.UseVisualStyleBackColor = true;
+            this.dependenciesButton.Click += new System.EventHandler(this.DependenciesButtonClick);
             // 
             // selectInstalledPluginButton
             // 
