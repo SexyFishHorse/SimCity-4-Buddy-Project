@@ -89,6 +89,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.includeInformationCheckBox.TabIndex = 4;
             this.includeInformationCheckBox.Text = "Include entered information";
             this.includeInformationCheckBox.UseVisualStyleBackColor = true;
+            this.includeInformationCheckBox.CheckedChanged += new System.EventHandler(this.IncludeInformationCheckBoxCheckedChanged);
             // 
             // okButton
             // 

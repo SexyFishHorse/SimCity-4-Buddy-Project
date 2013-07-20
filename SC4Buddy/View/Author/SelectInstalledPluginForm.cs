@@ -26,6 +26,8 @@
 
         public Plugin SelectedPlugin { get; set; }
 
+        public bool IncludeInformation { get; set; }
+
         private void SelectInstalledPluginFormLoad(object sender, EventArgs e)
         {
             var userFolders = userFolderRegistry.UserFolders.Where(x => x.Plugin.Any());
@@ -72,6 +74,11 @@
             {
                 okButton.Enabled = false;
             }
+        }
+
+        private void IncludeInformationCheckBoxCheckedChanged(object sender, EventArgs e)
+        {
+            IncludeInformation = includeInformationCheckBox.Checked;
         }
     }
 }
