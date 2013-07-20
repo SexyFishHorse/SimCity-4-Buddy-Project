@@ -2,11 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.DataAccess.Remote;
+    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Elements;
@@ -79,6 +81,43 @@
             if (dialog.ShowDialog(this) == DialogResult.Cancel)
             {
                 return;
+            }
+
+            var plugin = dialog.SelectedPlugin;
+            files = ConvertPluginFilesToRemotePluginFiles(plugin.Files.ToList());
+
+            if (dialog.IncludeInformation)
+            {
+                nameTextBox.Text = plugin.Name.Trim();
+                linkTextBox.Text = plugin.Link.Trim();
+                descriptionTextBox.Text = plugin.Description.Trim();
+                SelectAuthorInList(plugin.Author, plugin.Link);
+            }
+        }
+
+        private IList<RemotePluginFile> ConvertPluginFilesToRemotePluginFiles(IList<PluginFile> pluginFiles)
+        {
+            var output = new List<RemotePluginFile>(pluginFiles.Count());
+            output.AddRange(
+                pluginFiles.Select(pluginFile => new RemotePluginFile { Name = new FileInfo(pluginFile.Path).Name, Checksum = pluginFile.Checksum }));
+
+            return output;
+        }
+
+        private void SelectAuthorInList(string author, string link)
+        {
+            var authors = siteAndAuthorComboBox.Items;
+
+            foreach (var comboBoxItem in
+                authors.Cast<ComboBoxItem<Author>>()
+                       .Where(
+                           comboBoxItem =>
+                           link.Replace("//www.", "//")
+                               .ToUpper()
+                               .Contains(comboBoxItem.Value.Site.Replace("//www.", "//").ToUpper())
+                           && comboBoxItem.Value.Name.ToUpper().Equals(author.ToUpper())))
+            {
+                siteAndAuthorComboBox.SelectedItem = comboBoxItem;
             }
         }
     }
