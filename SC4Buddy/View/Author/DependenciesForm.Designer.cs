@@ -274,6 +274,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.cancelButton);
             this.Name = "DependenciesForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add dependencies";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
