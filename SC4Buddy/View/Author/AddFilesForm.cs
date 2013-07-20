@@ -16,11 +16,13 @@
     {
         private readonly IList<RemotePluginFile> files;
 
-        public AddFilesForm()
+        public AddFilesForm(IList<RemotePluginFile> remotePluginFiles)
         {
             InitializeComponent();
 
-            files = new List<RemotePluginFile>();
+            files = remotePluginFiles;
+
+            UpdateListViewAndOkButton();
         }
 
         public IList<RemotePluginFile> Files

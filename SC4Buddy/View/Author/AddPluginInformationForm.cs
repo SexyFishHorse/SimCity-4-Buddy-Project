@@ -73,7 +73,7 @@
 
         private void FilesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new AddFilesForm();
+            var dialog = new AddFilesForm(files);
 
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
