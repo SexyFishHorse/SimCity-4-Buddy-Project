@@ -30,9 +30,8 @@
 
             var filenames = selectFileDialog.FileNames;
 
-            foreach (var filename in filenames)
+            foreach (var fileInfo in filenames.Select(filename => new FileInfo(filename)))
             {
-                var fileInfo = new FileInfo(filename);
                 if (IsArchive(fileInfo))
                 {
                     AddArchiveToList(fileInfo);
@@ -41,7 +40,6 @@
                 {
                     AddFileToList(fileInfo);
                 }
-
             }
 
             UpdateListViewAndOkButton();
