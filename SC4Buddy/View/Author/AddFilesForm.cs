@@ -153,6 +153,11 @@
                 return;
             }
 
+            if (fileInfo.Name.ToUpper().Equals("THUMBS.DB") || fileInfo.Name.ToUpper().Equals("DESKTOP.INI"))
+            {
+                return;
+            }
+
             var file = new RemotePluginFile
                            {
                                Name = fileInfo.Name,
