@@ -47,6 +47,11 @@
             searchResultListView.Items.Clear();
             foreach (var remotePlugin in plugins)
             {
+                if (Dependencies.Where(x => x.Id != 0).Any(dependency => dependency.Id == remotePlugin.Id))
+                {
+                    continue;
+                }
+
                 var item = new ListViewItemWithObjectValue<RemotePlugin>(remotePlugin.Name, remotePlugin);
                 item.SubItems.Add(remotePlugin.Author.Name);
                 item.SubItems.Add(remotePlugin.Link);
