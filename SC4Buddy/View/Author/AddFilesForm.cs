@@ -33,11 +33,23 @@
             foreach (var filename in filenames)
             {
                 var fileInfo = new FileInfo(filename);
-                AddFileToList(fileInfo);
-                
+                if (IsArchive(fileInfo))
+                {
+                    AddArchiveToList(fileInfo);
+                }
+                else
+                {
+                    AddFileToList(fileInfo);
+                }
+
             }
 
             UpdateListViewAndOkButton();
+        }
+
+        private void AddArchiveToList(FileInfo fileInfo)
+        {
+            throw new NotImplementedException();
         }
 
         private bool IsArchive(FileInfo fileInfo)

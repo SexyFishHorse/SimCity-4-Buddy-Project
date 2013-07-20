@@ -547,6 +547,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The file {0} is not recognized as a supported archive. Extract the files and add them manually..
+        /// </summary>
+        internal static string TheFileNamIsNotRecognizedAsASupportedArchive {
+            get {
+                return ResourceManager.GetString("TheFileNamIsNotRecognizedAsASupportedArchive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The first time you run this program you must run it as an administrator (Right click on the shortcut and select &quot;Run as administrator&quot; and click &quot;Yes&quot; or &quot;OK&quot; in the following popup box). From there on you can start it without administrator rights..
         /// </summary>
         internal static string TheFirstTimeYouRunThisProgramYouMustRunItAsAnAdministrator {
@@ -637,6 +646,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unsupported file type.
+        /// </summary>
+        internal static string UnsupportedFileType {
+            get {
+                return ResourceManager.GetString("UnsupportedFileType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User created.
         /// </summary>
         internal static string UserCreated {
@@ -709,6 +727,17 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+<<<<<<< Updated upstream
+=======
+        ///   Looks up a localized string similar to You cannot add archives with executable installers in them. You have to add the files individually..
+        /// </summary>
+        internal static string YouCannotAddArchivesWithExecutableInstallersInThem {
+            get {
+                return ResourceManager.GetString("YouCannotAddArchivesWithExecutableInstallersInThem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You cannot specify an empty site..
         /// </summary>
         internal static string YouCannotSpecifyAnEmptySite {
@@ -727,6 +756,7 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+>>>>>>> Stashed changes
         ///   Looks up a localized string similar to You do not appear to be connected to the internet. If this is not the case you can still try to login..
         /// </summary>
         internal static string YouDoNotAppearToBeConnectedToTheInternet {
