@@ -102,6 +102,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.okButton.TabIndex = 5;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.OkButtonClick);
             // 
             // cancelButton
             // 
@@ -113,6 +114,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.cancelButton.TabIndex = 6;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButtonClick);
             // 
             // SelectInstalledPluginForm
             // 

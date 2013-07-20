@@ -64,21 +64,24 @@
         {
             var plugin = ((ComboBoxItem<Plugin>)pluginComboBox.SelectedItem).Value;
 
-            if (plugin != null)
-            {
-                okButton.Enabled = true;
-
-                SelectedPlugin = plugin;
-            }
-            else
-            {
-                okButton.Enabled = false;
-            }
+            okButton.Enabled = plugin != null;
         }
 
         private void IncludeInformationCheckBoxCheckedChanged(object sender, EventArgs e)
         {
             IncludeInformation = includeInformationCheckBox.Checked;
+        }
+
+        private void CancelButtonClick(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void OkButtonClick(object sender, EventArgs e)
+        {
+            var plugin = ((ComboBoxItem<Plugin>)pluginComboBox.SelectedItem).Value;
+
+            SelectedPlugin = plugin;
         }
     }
 }
