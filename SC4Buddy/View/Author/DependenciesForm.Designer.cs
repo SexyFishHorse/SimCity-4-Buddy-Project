@@ -206,6 +206,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.addUnknownAsDependencyButton.TabIndex = 4;
             this.addUnknownAsDependencyButton.Text = "Add as dependency";
             this.addUnknownAsDependencyButton.UseVisualStyleBackColor = true;
+            this.addUnknownAsDependencyButton.Click += new System.EventHandler(this.AddUnknownAsDependencyButtonClick);
             // 
             // linkTextBox
             // 

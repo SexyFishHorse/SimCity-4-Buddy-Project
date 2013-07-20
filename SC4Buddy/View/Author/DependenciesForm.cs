@@ -8,6 +8,7 @@
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Localization;
 
     public partial class DependenciesForm : Form
     {
@@ -155,6 +156,42 @@
         private void ValidateUnknownPlugin()
         {
             addUnknownAsDependencyButton.Enabled = nameTextBox.Text.Trim().Length > 0 && linkTextBox.Text.Trim().Length > 0;
+        }
+
+        private void AddUnknownAsDependencyButtonClick(object sender, EventArgs e)
+        {
+            try
+            {
+                var remotePlugin = new RemotePlugin
+                                       {
+                                           Name = nameTextBox.Text.Trim(),
+                                           Link = ValidateSiteUrl(linkTextBox.Text.Trim())
+                                       };
+
+                Dependencies.Add(remotePlugin);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.TheSiteUrlIsInvalid,
+                    LocalizationStrings.ValidationError,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+            }
+
+            UpdateDependenciesList();
+        }
+
+        private string ValidateSiteUrl(string url)
+        {
+            if (!url.ToUpper().StartsWith("HTTP"))
+            {
+                throw new FormatException("URL is neither http or https protocol");
+            }
+
+            return url;
         }
     }
 }
