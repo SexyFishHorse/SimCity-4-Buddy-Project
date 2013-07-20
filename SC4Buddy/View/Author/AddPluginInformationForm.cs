@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
@@ -24,6 +25,8 @@
         public AddPluginInformationForm()
         {
             authorRegistry = RemoteRegistryFactory.AuthorRegistry;
+
+            dependencies = new Collection<RemotePlugin>();
 
             InitializeComponent();
         }
@@ -125,7 +128,7 @@
 
         private void DependenciesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new DependenciesForm();
+            var dialog = new DependenciesForm(dependencies);
 
             if (dialog.ShowDialog(this) == DialogResult.Cancel)
             {

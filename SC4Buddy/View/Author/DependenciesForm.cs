@@ -14,13 +14,15 @@
     {
         private readonly RemotePluginRegistry remotePluginRegistry;
 
-        public DependenciesForm()
+        public DependenciesForm(ICollection<RemotePlugin> dependencies)
         {
-            Dependencies = new List<RemotePlugin>();
+            Dependencies = dependencies;
 
             remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
 
             InitializeComponent();
+
+            UpdateDependenciesList();
         }
 
         public ICollection<RemotePlugin> Dependencies { get; set; }
