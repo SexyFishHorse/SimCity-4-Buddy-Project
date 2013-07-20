@@ -33,6 +33,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.okButton = new System.Windows.Forms.Button();
             this.dependenciesListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.addAsDependencyButton = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@ namespace NIHEI.SC4Buddy.View.Author
             this.label2 = new System.Windows.Forms.Label();
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.removeButton = new System.Windows.Forms.Button();
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -91,14 +91,18 @@ namespace NIHEI.SC4Buddy.View.Author
             this.dependenciesListView.TabIndex = 2;
             this.dependenciesListView.UseCompatibleStateImageBehavior = false;
             this.dependenciesListView.View = System.Windows.Forms.View.Details;
+            this.dependenciesListView.SelectedIndexChanged += new System.EventHandler(this.DependenciesListViewSelectedIndexChanged);
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Plugin name";
             // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Author";
+            // 
             // columnHeader2
             // 
-            this.columnHeader2.DisplayIndex = 1;
             this.columnHeader2.Text = "Link";
             // 
             // groupBox1
@@ -249,10 +253,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.removeButton.TabIndex = 5;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Author";
+            this.removeButton.Click += new System.EventHandler(this.RemoveButtonClick);
             // 
             // DependenciesForm
             // 

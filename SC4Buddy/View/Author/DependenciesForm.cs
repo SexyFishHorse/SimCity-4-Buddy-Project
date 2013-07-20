@@ -102,5 +102,44 @@
             dependenciesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             dependenciesListView.EndUpdate();
         }
+
+        private void DependenciesListViewSelectedIndexChanged(object sender, EventArgs e)
+        {
+            removeButton.Enabled = dependenciesListView.Items.Count > 0;
+        }
+
+        private void RemoveButtonClick(object sender, EventArgs e)
+        {
+            var items = dependenciesListView.SelectedItems;
+            var addItems = new List<ListViewItemWithObjectValue<RemotePlugin>>(items.Count);
+
+            foreach (ListViewItemWithObjectValue<RemotePlugin> item in items)
+            {
+                Dependencies.Remove(item.Value);
+                addItems.Add(item);
+            }
+
+            UpdateDependenciesList();
+
+            removeButton.Enabled = false;
+
+            var text = searchBox.Text.Trim().ToUpper().Replace("//WWW.", "//");
+
+            if (text.Length < 3)
+            {
+                searchResultListView.Items.Clear();
+                return;
+            }
+
+            foreach (
+                var item in
+                    addItems.Where(
+                        item =>
+                        item.Value.Name.ToUpper().Contains(text) || item.Value.Author.Name.ToUpper().Contains(text)
+                        || item.Value.Link.ToUpper().Contains(text)))
+            {
+                searchResultListView.Items.Add(item);
+            }
+        }
     }
 }
