@@ -57,6 +57,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.userFolderComboBox.Name = "userFolderComboBox";
             this.userFolderComboBox.Size = new System.Drawing.Size(339, 21);
             this.userFolderComboBox.TabIndex = 1;
+            this.userFolderComboBox.SelectedIndexChanged += new System.EventHandler(this.UserFolderComboBoxSelectedIndexChanged);
             // 
             // pluginComboBox
             // 
