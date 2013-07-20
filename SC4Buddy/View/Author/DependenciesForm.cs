@@ -23,7 +23,7 @@
             InitializeComponent();
         }
 
-        protected ICollection<RemotePlugin> Dependencies { get; set; }
+        public ICollection<RemotePlugin> Dependencies { get; set; }
 
         private void SearchBoxTextChanged(object sender, EventArgs e)
         {
