@@ -215,6 +215,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.linkTextBox.Name = "linkTextBox";
             this.linkTextBox.Size = new System.Drawing.Size(537, 20);
             this.linkTextBox.TabIndex = 3;
+            this.linkTextBox.TextChanged += new System.EventHandler(this.LinkTextBoxTextChanged);
             // 
             // label3
             // 
@@ -242,6 +243,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(537, 20);
             this.nameTextBox.TabIndex = 0;
+            this.nameTextBox.TextChanged += new System.EventHandler(this.NameTextBoxTextChanged);
             // 
             // removeButton
             // 

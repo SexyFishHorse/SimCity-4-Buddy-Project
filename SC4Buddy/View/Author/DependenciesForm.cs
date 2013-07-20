@@ -141,5 +141,20 @@
                 searchResultListView.Items.Add(item);
             }
         }
+
+        private void NameTextBoxTextChanged(object sender, EventArgs e)
+        {
+            ValidateUnknownPlugin();
+        }
+
+        private void LinkTextBoxTextChanged(object sender, EventArgs e)
+        {
+            ValidateUnknownPlugin();
+        }
+
+        private void ValidateUnknownPlugin()
+        {
+            addUnknownAsDependencyButton.Enabled = nameTextBox.Text.Trim().Length > 0 && linkTextBox.Text.Trim().Length > 0;
+        }
     }
 }
