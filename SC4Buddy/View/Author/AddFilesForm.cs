@@ -23,6 +23,14 @@
             files = new List<RemotePluginFile>();
         }
 
+        public IList<RemotePluginFile> Files
+        {
+            get
+            {
+                return files;
+            }
+        }
+
         private void AddButtonClick(object sender, EventArgs e)
         {
             if (selectFileDialog.ShowDialog(this) == DialogResult.Cancel)
