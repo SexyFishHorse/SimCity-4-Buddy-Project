@@ -61,6 +61,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(408, 20);
             this.nameTextBox.TabIndex = 1;
+            this.nameTextBox.TextChanged += new System.EventHandler(this.NameTextBoxTextChanged);
             // 
             // label2
             // 
@@ -81,6 +82,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.siteAndAuthorComboBox.Name = "siteAndAuthorComboBox";
             this.siteAndAuthorComboBox.Size = new System.Drawing.Size(408, 21);
             this.siteAndAuthorComboBox.TabIndex = 3;
+            this.siteAndAuthorComboBox.SelectedIndexChanged += new System.EventHandler(this.SiteAndAuthorComboBoxSelectedIndexChanged);
             // 
             // label3
             // 
@@ -99,6 +101,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.linkTextBox.Name = "linkTextBox";
             this.linkTextBox.Size = new System.Drawing.Size(408, 20);
             this.linkTextBox.TabIndex = 5;
+            this.linkTextBox.TextChanged += new System.EventHandler(this.LinkTextBoxTextChanged);
             // 
             // label4
             // 

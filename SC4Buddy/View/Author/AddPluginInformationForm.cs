@@ -26,6 +26,8 @@
         {
             authorRegistry = RemoteRegistryFactory.AuthorRegistry;
 
+            files = new List<RemotePluginFile>();
+
             dependencies = new Collection<RemotePlugin>();
 
             InitializeComponent();
@@ -77,6 +79,8 @@
             {
                 files = dialog.Files;
             }
+
+            UpdateSaveButtonStatus();
         }
 
         private void SelectInstalledPluginButtonClick(object sender, EventArgs e)
@@ -134,6 +138,43 @@
             {
                 dependencies = dialog.Dependencies;
             }
+        }
+
+        private void UpdateSaveButtonStatus()
+        {
+            var enabled = files.Any();
+
+            if (nameTextBox.Text.Length < 1)
+            {
+                enabled = false;
+            }
+
+            if (linkTextBox.Text.Length < 1)
+            {
+                enabled = false;
+            }
+
+            if (siteAndAuthorComboBox.SelectedItem == null)
+            {
+                enabled = false;
+            }
+
+            saveButton.Enabled = enabled;
+        }
+
+        private void NameTextBoxTextChanged(object sender, EventArgs e)
+        {
+            UpdateSaveButtonStatus();
+        }
+
+        private void LinkTextBoxTextChanged(object sender, EventArgs e)
+        {
+            UpdateSaveButtonStatus();
+        }
+
+        private void SiteAndAuthorComboBoxSelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateSaveButtonStatus();
         }
     }
 }
