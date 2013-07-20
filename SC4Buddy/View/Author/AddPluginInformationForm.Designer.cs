@@ -41,6 +41,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.saveButton = new System.Windows.Forms.Button();
             this.filesButton = new System.Windows.Forms.Button();
             this.dependenciesButton = new System.Windows.Forms.Button();
+            this.selectInstalledPluginButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -162,11 +163,22 @@ namespace NIHEI.SC4Buddy.View.Author
             this.dependenciesButton.Text = "Dependencies";
             this.dependenciesButton.UseVisualStyleBackColor = true;
             // 
+            // selectInstalledPluginButton
+            // 
+            this.selectInstalledPluginButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.selectInstalledPluginButton.Location = new System.Drawing.Point(189, 316);
+            this.selectInstalledPluginButton.Name = "selectInstalledPluginButton";
+            this.selectInstalledPluginButton.Size = new System.Drawing.Size(123, 23);
+            this.selectInstalledPluginButton.TabIndex = 12;
+            this.selectInstalledPluginButton.Text = "Select installed plugin";
+            this.selectInstalledPluginButton.UseVisualStyleBackColor = true;
+            // 
             // AddPluginInformationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(575, 351);
+            this.Controls.Add(this.selectInstalledPluginButton);
             this.Controls.Add(this.dependenciesButton);
             this.Controls.Add(this.filesButton);
             this.Controls.Add(this.saveButton);
@@ -202,5 +214,6 @@ namespace NIHEI.SC4Buddy.View.Author
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button filesButton;
         private System.Windows.Forms.Button dependenciesButton;
+        private System.Windows.Forms.Button selectInstalledPluginButton;
     }
 }
