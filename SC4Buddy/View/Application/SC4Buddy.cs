@@ -116,6 +116,8 @@
                 AttemptAutoLogin();
             }
 
+            UpdateToolsVisibility();
+
             RepopulateUserFolderRelatives();
 
             UpdateBackground();
