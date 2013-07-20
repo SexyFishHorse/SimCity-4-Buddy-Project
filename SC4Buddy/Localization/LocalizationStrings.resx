@@ -373,4 +373,13 @@ Should also notify the user that some files may have been installed so the user 
   <data name="YouCannotAddExecutableFilesToTheListOfPluginFiles" xml:space="preserve">
     <value>You cannot add executable files (.exe) to the list of plugin files.</value>
   </data>
+  <data name="UnsupportedFiletype" xml:space="preserve">
+    <value>Unsupported filetype</value>
+  </data>
+  <data name="TheFiletypeXIsNotRecognizedAsAValidArchiveFiletype" xml:space="preserve">
+    <value>The filetype {0} is not recognized as a valid archive filetype.</value>
+  </data>
+  <data name="ThisArchiveContainsNumExecutableFiles" xml:space="preserve">
+    <value>This archive contains {0} executable file(s) that cannot be added to the plugin information list.</value>
+  </data>
 </root>

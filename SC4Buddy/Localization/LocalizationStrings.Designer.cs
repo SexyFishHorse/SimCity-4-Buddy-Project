@@ -556,6 +556,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The filetype {0} is not recognized as a valid archive filetype..
+        /// </summary>
+        internal static string TheFiletypeXIsNotRecognizedAsAValidArchiveFiletype {
+            get {
+                return ResourceManager.GetString("TheFiletypeXIsNotRecognizedAsAValidArchiveFiletype", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The first time you run this program you must run it as an administrator (Right click on the shortcut and select &quot;Run as administrator&quot; and click &quot;Yes&quot; or &quot;OK&quot; in the following popup box). From there on you can start it without administrator rights..
         /// </summary>
         internal static string TheFirstTimeYouRunThisProgramYouMustRunItAsAnAdministrator {
@@ -579,6 +588,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string TheSiteUrlIsInvalid {
             get {
                 return ResourceManager.GetString("TheSiteUrlIsInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This archive contains {0} executable file(s) that cannot be added to the plugin information list..
+        /// </summary>
+        internal static string ThisArchiveContainsNumExecutableFiles {
+            get {
+                return ResourceManager.GetString("ThisArchiveContainsNumExecutableFiles", resourceCulture);
             }
         }
         
@@ -642,6 +660,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string UnableToLogYouIntoTheSystem {
             get {
                 return ResourceManager.GetString("UnableToLogYouIntoTheSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsupported filetype.
+        /// </summary>
+        internal static string UnsupportedFiletype {
+            get {
+                return ResourceManager.GetString("UnsupportedFiletype", resourceCulture);
             }
         }
         

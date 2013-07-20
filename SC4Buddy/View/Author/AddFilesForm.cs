@@ -9,6 +9,7 @@
     using NIHEI.Common.IO;
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Installer.FileHandlers;
     using NIHEI.SC4Buddy.Localization;
 
     public partial class AddFilesForm : Form
@@ -48,7 +49,61 @@
 
         private void AddArchiveToList(FileInfo fileInfo)
         {
-            throw new NotImplementedException();
+            BaseHandler handler;
+            switch (fileInfo.Extension.ToUpper())
+            {
+                case ".ZIP":
+                    handler = new ZipHandler();
+                    break;
+                case ".RAR":
+                    handler = new RarHandler();
+                    break;
+                default:
+                    MessageBox.Show(
+                    this,
+                    string.Format(LocalizationStrings.TheFiletypeXIsNotRecognizedAsAValidArchiveFiletype, fileInfo.Extension),
+                    LocalizationStrings.UnsupportedFiletype,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                    return;
+            }
+
+            var randomFileName = Path.GetRandomFileName();
+            randomFileName = randomFileName.Substring(0, randomFileName.Length - 4) + DateTime.UtcNow.Ticks;
+            var tempPath = Path.Combine(Path.GetTempPath(), "SC4Buddy", randomFileName);
+
+            handler.FileInfo = fileInfo;
+            handler.TempFolder = tempPath;
+
+            handler.ExtractFilesToTemp();
+
+            var tempFiles = Directory.EnumerateFiles(tempPath, "*", SearchOption.AllDirectories);
+
+            var numExecutables = 0;
+            foreach (var newFileInfo in tempFiles.Select(file => new FileInfo(file)))
+            {
+                if (newFileInfo.Extension.ToUpper().Equals(".EXE"))
+                {
+                    numExecutables++;
+                    continue;
+                }
+
+                AddFileToList(newFileInfo);
+            }
+
+            if (numExecutables > 0)
+            {
+                MessageBox.Show(
+                    this,
+                    string.Format(LocalizationStrings.ThisArchiveContainsNumExecutableFiles, numExecutables),
+                    LocalizationStrings.UnsupportedFiletype,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning,
+                    MessageBoxDefaultButton.Button1);
+            }
+
+            FileUtility.DeleteFolder(new DirectoryInfo(tempPath));
         }
 
         private bool IsArchive(FileInfo fileInfo)
