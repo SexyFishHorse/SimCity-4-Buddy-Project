@@ -19,6 +19,8 @@
 
         private IList<RemotePluginFile> files;
 
+        private ICollection<RemotePlugin> dependencies;
+
         public AddPluginInformationForm()
         {
             authorRegistry = RemoteRegistryFactory.AuthorRegistry;
@@ -127,7 +129,7 @@
 
             if (dialog.ShowDialog(this) == DialogResult.Cancel)
             {
-                
+                dependencies = dialog.Dependencies;
             }
         }
     }
