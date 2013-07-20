@@ -193,5 +193,15 @@
 
             return url;
         }
+
+        private void OkButtonClick(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void CancelButtonClick(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
