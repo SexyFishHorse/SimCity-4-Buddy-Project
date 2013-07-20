@@ -82,6 +82,8 @@
             var plugin = ((ComboBoxItem<Plugin>)pluginComboBox.SelectedItem).Value;
 
             SelectedPlugin = plugin;
+
+            Close();
         }
     }
 }
