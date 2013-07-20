@@ -367,4 +367,10 @@ Should also notify the user that some files may have been installed so the user 
   <data name="YouNeedToAddAtLeastOneAuthorInOrderToAddPluginInformationToTheCentralDatabase" xml:space="preserve">
     <value>You need to add at least one author in order to add plugin information to the central database.</value>
   </data>
+  <data name="InvalidFileTypeDetected" xml:space="preserve">
+    <value>Invalid file type detected.</value>
+  </data>
+  <data name="YouCannotAddExecutableFilesToTheListOfPluginFiles" xml:space="preserve">
+    <value>You cannot add executable files (.exe) to the list of plugin files.</value>
+  </data>
 </root>

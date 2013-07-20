@@ -9,6 +9,7 @@
     using NIHEI.Common.IO;
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Localization;
 
     public partial class AddFilesForm : Form
     {
@@ -75,6 +76,18 @@
 
         private void AddFileToList(FileInfo fileInfo)
         {
+            if (fileInfo.Extension.ToUpper().Equals(".EXE"))
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.YouCannotAddExecutableFilesToTheListOfPluginFiles,
+                    LocalizationStrings.InvalidFileTypeDetected,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }
+
             var file = new RemotePluginFile
                            {
                                Name = fileInfo.Name,
