@@ -35,20 +35,21 @@ namespace NIHEI.SC4Buddy.View.Author
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.searchBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.addAsDependencyButton = new System.Windows.Forms.Button();
             this.searchResultListView = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.addAsDependencyButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.searchBox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.linkTextBox = new System.Windows.Forms.TextBox();
             this.addUnknownAsDependencyButton = new System.Windows.Forms.Button();
+            this.linkTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
             this.removeButton = new System.Windows.Forms.Button();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -82,6 +83,7 @@ namespace NIHEI.SC4Buddy.View.Author
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dependenciesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
+            this.columnHeader6,
             this.columnHeader2});
             this.dependenciesListView.Location = new System.Drawing.Point(12, 355);
             this.dependenciesListView.Name = "dependenciesListView";
@@ -96,6 +98,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // 
             // columnHeader2
             // 
+            this.columnHeader2.DisplayIndex = 1;
             this.columnHeader2.Text = "Link";
             // 
             // groupBox1
@@ -113,24 +116,17 @@ namespace NIHEI.SC4Buddy.View.Author
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add a plugin known to the central database";
             // 
-            // searchBox
+            // addAsDependencyButton
             // 
-            this.searchBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchBox.Location = new System.Drawing.Point(176, 19);
-            this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(408, 20);
-            this.searchBox.TabIndex = 0;
-            this.searchBox.TextChanged += new System.EventHandler(this.SearchBoxTextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Link, author name or plugin name";
+            this.addAsDependencyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.addAsDependencyButton.Enabled = false;
+            this.addAsDependencyButton.Location = new System.Drawing.Point(6, 202);
+            this.addAsDependencyButton.Name = "addAsDependencyButton";
+            this.addAsDependencyButton.Size = new System.Drawing.Size(121, 23);
+            this.addAsDependencyButton.TabIndex = 3;
+            this.addAsDependencyButton.Text = "Add as dependency";
+            this.addAsDependencyButton.UseVisualStyleBackColor = true;
+            this.addAsDependencyButton.Click += new System.EventHandler(this.AddAsDependencyButtonClick);
             // 
             // searchResultListView
             // 
@@ -147,6 +143,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.searchResultListView.TabIndex = 2;
             this.searchResultListView.UseCompatibleStateImageBehavior = false;
             this.searchResultListView.View = System.Windows.Forms.View.Details;
+            this.searchResultListView.SelectedIndexChanged += new System.EventHandler(this.SearchResultListViewSelectedIndexChanged);
             // 
             // columnHeader3
             // 
@@ -160,16 +157,24 @@ namespace NIHEI.SC4Buddy.View.Author
             // 
             this.columnHeader5.Text = "Link";
             // 
-            // addAsDependencyButton
+            // label1
             // 
-            this.addAsDependencyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.addAsDependencyButton.Enabled = false;
-            this.addAsDependencyButton.Location = new System.Drawing.Point(6, 202);
-            this.addAsDependencyButton.Name = "addAsDependencyButton";
-            this.addAsDependencyButton.Size = new System.Drawing.Size(121, 23);
-            this.addAsDependencyButton.TabIndex = 3;
-            this.addAsDependencyButton.Text = "Add as dependency";
-            this.addAsDependencyButton.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(164, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Link, author name or plugin name";
+            // 
+            // searchBox
+            // 
+            this.searchBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchBox.Location = new System.Drawing.Point(176, 19);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(408, 20);
+            this.searchBox.TabIndex = 0;
+            this.searchBox.TextChanged += new System.EventHandler(this.SearchBoxTextChanged);
             // 
             // groupBox2
             // 
@@ -187,42 +192,6 @@ namespace NIHEI.SC4Buddy.View.Author
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Add an unknown plugin";
             // 
-            // nameTextBox
-            // 
-            this.nameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.nameTextBox.Location = new System.Drawing.Point(47, 19);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(537, 20);
-            this.nameTextBox.TabIndex = 0;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Name";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 48);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(27, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Link";
-            // 
-            // linkTextBox
-            // 
-            this.linkTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkTextBox.Location = new System.Drawing.Point(47, 45);
-            this.linkTextBox.Name = "linkTextBox";
-            this.linkTextBox.Size = new System.Drawing.Size(537, 20);
-            this.linkTextBox.TabIndex = 3;
-            // 
             // addUnknownAsDependencyButton
             // 
             this.addUnknownAsDependencyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -234,6 +203,42 @@ namespace NIHEI.SC4Buddy.View.Author
             this.addUnknownAsDependencyButton.Text = "Add as dependency";
             this.addUnknownAsDependencyButton.UseVisualStyleBackColor = true;
             // 
+            // linkTextBox
+            // 
+            this.linkTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkTextBox.Location = new System.Drawing.Point(47, 45);
+            this.linkTextBox.Name = "linkTextBox";
+            this.linkTextBox.Size = new System.Drawing.Size(537, 20);
+            this.linkTextBox.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 48);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(27, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Link";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Name";
+            // 
+            // nameTextBox
+            // 
+            this.nameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nameTextBox.Location = new System.Drawing.Point(47, 19);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(537, 20);
+            this.nameTextBox.TabIndex = 0;
+            // 
             // removeButton
             // 
             this.removeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -244,6 +249,10 @@ namespace NIHEI.SC4Buddy.View.Author
             this.removeButton.TabIndex = 5;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Author";
             // 
             // DependenciesForm
             // 
@@ -290,5 +299,6 @@ namespace NIHEI.SC4Buddy.View.Author
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.Button removeButton;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.View.Author
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -14,10 +15,14 @@
 
         public DependenciesForm()
         {
+            Dependencies = new List<RemotePlugin>();
+
             remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
 
             InitializeComponent();
         }
+
+        protected ICollection<RemotePlugin> Dependencies { get; set; }
 
         private void SearchBoxTextChanged(object sender, EventArgs e)
         {
@@ -47,6 +52,55 @@
 
             searchResultListView.EndUpdate();
             searchResultListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+        }
+
+        private void SearchResultListViewSelectedIndexChanged(object sender, EventArgs e)
+        {
+            var items = searchResultListView.SelectedItems;
+
+            addAsDependencyButton.Enabled = items.Count > 0;
+        }
+
+        private void AddAsDependencyButtonClick(object sender, EventArgs e)
+        {
+            var items = searchResultListView.SelectedItems;
+            var removingItems = new List<ListViewItemWithObjectValue<RemotePlugin>>();
+
+            foreach (ListViewItemWithObjectValue<RemotePlugin> item in items)
+            {
+                if (Dependencies.Any(x => x.Id == item.Value.Id))
+                {
+                    return;
+                }
+
+                Dependencies.Add(item.Value);
+                removingItems.Add(item);
+            }
+
+            foreach (var item in removingItems)
+            {
+                searchResultListView.Items.Remove(item);
+            }
+
+            UpdateDependenciesList();
+            addAsDependencyButton.Enabled = false;
+        }
+
+        private void UpdateDependenciesList()
+        {
+            dependenciesListView.BeginUpdate();
+            dependenciesListView.Items.Clear();
+
+            foreach (var dependency in Dependencies)
+            {
+                var item = new ListViewItemWithObjectValue<RemotePlugin>(dependency.Name, dependency);
+                item.SubItems.Add(dependency.Author.Name);
+                item.SubItems.Add(dependency.Link);
+                dependenciesListView.Items.Add(item);
+            }
+
+            dependenciesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            dependenciesListView.EndUpdate();
         }
     }
 }
