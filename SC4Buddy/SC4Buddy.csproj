@@ -248,6 +248,9 @@
     <EmbeddedResource Include="View\Author\AddPluginInformationForm.resx">
       <DependentUpon>AddPluginInformationForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Author\DependenciesForm.resx">
+      <DependentUpon>DependenciesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Author\MyAuthorsForm.resx">
       <DependentUpon>MyAuthorsForm.cs</DependentUpon>
     </EmbeddedResource>
