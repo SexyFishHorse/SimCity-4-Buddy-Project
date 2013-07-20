@@ -15,6 +15,8 @@
     {
         private readonly AuthorRegistry authorRegistry;
 
+        private IList<RemotePluginFile> files;
+
         public AddPluginInformationForm()
         {
             authorRegistry = RemoteRegistryFactory.AuthorRegistry;
@@ -66,7 +68,7 @@
 
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
-
+                files = dialog.Files;
             }
         }
 
