@@ -69,6 +69,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.pluginComboBox.Name = "pluginComboBox";
             this.pluginComboBox.Size = new System.Drawing.Size(339, 21);
             this.pluginComboBox.TabIndex = 2;
+            this.pluginComboBox.SelectedIndexChanged += new System.EventHandler(this.PluginComboBoxSelectedIndexChanged);
             // 
             // label2
             // 
@@ -93,6 +94,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.okButton.Enabled = false;
             this.okButton.Location = new System.Drawing.Point(259, 66);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);

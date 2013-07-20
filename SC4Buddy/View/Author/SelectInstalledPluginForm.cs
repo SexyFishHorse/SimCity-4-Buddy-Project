@@ -24,6 +24,8 @@
             InitializeComponent();
         }
 
+        public Plugin SelectedPlugin { get; set; }
+
         private void SelectInstalledPluginFormLoad(object sender, EventArgs e)
         {
             var userFolders = userFolderRegistry.UserFolders.Where(x => x.Plugin.Any());
@@ -53,6 +55,22 @@
             else
             {
                 pluginComboBox.Enabled = false;
+            }
+        }
+
+        private void PluginComboBoxSelectedIndexChanged(object sender, EventArgs e)
+        {
+            var plugin = ((ComboBoxItem<Plugin>)pluginComboBox.SelectedItem).Value;
+
+            if (plugin != null)
+            {
+                okButton.Enabled = true;
+
+                SelectedPlugin = plugin;
+            }
+            else
+            {
+                okButton.Enabled = false;
             }
         }
     }
