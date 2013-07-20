@@ -25,6 +25,7 @@
 
             if (text.Length < 3)
             {
+                searchResultListView.Items.Clear();
                 return;
             }
 
@@ -41,6 +42,7 @@
                 var item = new ListViewItemWithObjectValue<RemotePlugin>(remotePlugin.Name, remotePlugin);
                 item.SubItems.Add(remotePlugin.Author.Name);
                 item.SubItems.Add(remotePlugin.Link);
+                searchResultListView.Items.Add(item);
             }
 
             searchResultListView.EndUpdate();
