@@ -132,6 +132,7 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             this.updatePluginInformationToolStripMenuItem.Name = "updatePluginInformationToolStripMenuItem";
             resources.ApplyResources(this.updatePluginInformationToolStripMenuItem, "updatePluginInformationToolStripMenuItem");
+            this.updatePluginInformationToolStripMenuItem.Click += new System.EventHandler(this.UpdatePluginInformationToolStripMenuItemClick);
             // 
             // myAuthorsToolStripMenuItem
             // 

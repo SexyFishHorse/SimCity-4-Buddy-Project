@@ -417,5 +417,10 @@
         {
             new AddPluginInformationForm().ShowDialog(this);
         }
+
+        private void UpdatePluginInformationToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            new UpdatePluginInformationForm().ShowDialog(this);
+        }
     }
 }
