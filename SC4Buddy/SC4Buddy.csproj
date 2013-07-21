@@ -129,11 +129,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SilkIcons.resx</DependentUpon>
     </Compile>
-    <Compile Include="View\Author\AddFilesForm.cs">
+    <Compile Include="View\Author\FilesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Author\AddFilesForm.Designer.cs">
-      <DependentUpon>AddFilesForm.cs</DependentUpon>
+    <Compile Include="View\Author\FilesForm.Designer.cs">
+      <DependentUpon>FilesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Author\AddPluginInformationForm.cs">
       <SubType>Form</SubType>
@@ -248,8 +248,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>SilkIcons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Author\AddFilesForm.resx">
-      <DependentUpon>AddFilesForm.cs</DependentUpon>
+    <EmbeddedResource Include="View\Author\FilesForm.resx">
+      <DependentUpon>FilesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Author\AddPluginInformationForm.resx">
       <DependentUpon>AddPluginInformationForm.cs</DependentUpon>

@@ -12,11 +12,11 @@
     using NIHEI.SC4Buddy.Installer.FileHandlers;
     using NIHEI.SC4Buddy.Localization;
 
-    public partial class AddFilesForm : Form
+    public partial class FilesForm : Form
     {
         private readonly IList<RemotePluginFile> files;
 
-        public AddFilesForm(IList<RemotePluginFile> remotePluginFiles)
+        public FilesForm(IList<RemotePluginFile> remotePluginFiles)
         {
             InitializeComponent();
 
