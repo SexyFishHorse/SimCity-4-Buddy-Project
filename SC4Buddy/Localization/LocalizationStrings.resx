@@ -382,4 +382,16 @@ Should also notify the user that some files may have been installed so the user 
   <data name="ThisArchiveContainsNumExecutableFiles" xml:space="preserve">
     <value>This archive contains {0} executable file(s) that cannot be added to the plugin information list.</value>
   </data>
+  <data name="TheLinkToTheDownloadInfoPageAndTheSiteOfTheAuthorDoesNotMatch" xml:space="preserve">
+    <value>The link to the download info page and the site of the author does not match. (i.e. You cannot add a sc4devotion download link for a simtropolis author)</value>
+  </data>
+  <data name="LinkAndAuthorSiteDoesNotMatch" xml:space="preserve">
+    <value>Link and author site does not match.</value>
+  </data>
+  <data name="ThePluginHasBeenAddedToTheCentralDatabase" xml:space="preserve">
+    <value>The plugin has been added to the central database.</value>
+  </data>
+  <data name="PluginHasBeenAdded" xml:space="preserve">
+    <value>Plugin has been added</value>
+  </data>
 </root>

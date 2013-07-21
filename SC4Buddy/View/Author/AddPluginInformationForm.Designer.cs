@@ -144,6 +144,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.saveButton.TabIndex = 9;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButtonClick);
             // 
             // filesButton
             // 

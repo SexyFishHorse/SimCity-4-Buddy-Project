@@ -331,6 +331,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Link and author site does not match..
+        /// </summary>
+        internal static string LinkAndAuthorSiteDoesNotMatch {
+            get {
+                return ResourceManager.GetString("LinkAndAuthorSiteDoesNotMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Logged in as {0}.
         /// </summary>
         internal static string LoggedInAs {
@@ -444,6 +453,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string PathError {
             get {
                 return ResourceManager.GetString("PathError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plugin has been added.
+        /// </summary>
+        internal static string PluginHasBeenAdded {
+            get {
+                return ResourceManager.GetString("PluginHasBeenAdded", resourceCulture);
             }
         }
         
@@ -574,11 +592,29 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The link to the download info page and the site of the author does not match. (i.e. You cannot add a sc4devotion download link for a simtropolis author).
+        /// </summary>
+        internal static string TheLinkToTheDownloadInfoPageAndTheSiteOfTheAuthorDoesNotMatch {
+            get {
+                return ResourceManager.GetString("TheLinkToTheDownloadInfoPageAndTheSiteOfTheAuthorDoesNotMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The plugin did not contain any valid files to install. {0}.
         /// </summary>
         internal static string ThePluginDigNotContainAnyValidFilesToInstall {
             get {
                 return ResourceManager.GetString("ThePluginDigNotContainAnyValidFilesToInstall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The plugin has been added to the central database..
+        /// </summary>
+        internal static string ThePluginHasBeenAddedToTheCentralDatabase {
+            get {
+                return ResourceManager.GetString("ThePluginHasBeenAddedToTheCentralDatabase", resourceCulture);
             }
         }
         

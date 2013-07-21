@@ -18,6 +18,8 @@
     {
         private readonly AuthorRegistry authorRegistry;
 
+        private readonly RemotePluginRegistry remotePluginRegistry;
+
         private IList<RemotePluginFile> files;
 
         private ICollection<RemotePlugin> dependencies;
@@ -25,6 +27,8 @@
         public AddPluginInformationForm()
         {
             authorRegistry = RemoteRegistryFactory.AuthorRegistry;
+
+            remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
 
             files = new List<RemotePluginFile>();
 
@@ -175,6 +179,72 @@
         private void SiteAndAuthorComboBoxSelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateSaveButtonStatus();
+        }
+
+        private void SaveButtonClick(object sender, EventArgs e)
+        {
+            var link = linkTextBox.Text.Trim();
+            var author = ((ComboBoxItem<Author>)siteAndAuthorComboBox.SelectedItem).Value;
+            if (!ValidateLinkAndAuthor(link, author))
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.TheLinkToTheDownloadInfoPageAndTheSiteOfTheAuthorDoesNotMatch,
+                    LocalizationStrings.LinkAndAuthorSiteDoesNotMatch,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }
+
+            var name = nameTextBox.Text.Trim();
+            var description = descriptionTextBox.Text.Trim();
+
+            var remotePlugin = new RemotePlugin { Name = name, Link = link, Author = author, Description = description };
+            foreach (var file in files)
+            {
+                remotePlugin.Files.Add(file);
+            }
+
+            foreach (var dependency in dependencies)
+            {
+                remotePlugin.Dependencies.Add(dependency);
+                if (dependency.Id == 0)
+                {
+                    remotePluginRegistry.Add(dependency);
+                }
+            }
+
+            remotePluginRegistry.Add(remotePlugin);
+
+            MessageBox.Show(
+                this,
+                LocalizationStrings.ThePluginHasBeenAddedToTheCentralDatabase,
+                LocalizationStrings.PluginHasBeenAdded,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Asterisk,
+                MessageBoxDefaultButton.Button1);
+
+            ClearForm();
+        }
+
+        private void ClearForm()
+        {
+            nameTextBox.Text = string.Empty;
+            linkTextBox.Text = string.Empty;
+            descriptionTextBox.Text = string.Empty;
+            siteAndAuthorComboBox.SelectedItem = null;
+            files = new List<RemotePluginFile>();
+            dependencies = new Collection<RemotePlugin>();
+            saveButton.Enabled = false;
+        }
+
+        private bool ValidateLinkAndAuthor(string link, Author author)
+        {
+            link = link.ToUpper().Replace("//WWW.", "//");
+            var site = author.Site.ToUpper().Replace("//WWW.", "//");
+
+            return link.Contains(site);
         }
     }
 }
