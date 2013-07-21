@@ -102,7 +102,7 @@
             foreach (var dependency in Dependencies)
             {
                 var item = new ListViewItemWithObjectValue<RemotePlugin>(dependency.Name, dependency);
-                item.SubItems.Add(dependency.Author.Name);
+                item.SubItems.Add(item.Value.Author != null ? dependency.Author.Name : LocalizationStrings.Unknown);
                 item.SubItems.Add(dependency.Link);
                 dependenciesListView.Items.Add(item);
             }

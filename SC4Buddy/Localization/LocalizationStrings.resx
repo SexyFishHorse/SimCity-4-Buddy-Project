@@ -394,4 +394,8 @@ Should also notify the user that some files may have been installed so the user 
   <data name="PluginHasBeenAdded" xml:space="preserve">
     <value>Plugin has been added</value>
   </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unknown</value>
+    <comment>displayed text for unknown plugin authors</comment>
+  </data>
 </root>
