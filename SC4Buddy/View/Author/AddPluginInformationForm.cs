@@ -206,15 +206,6 @@
                 remotePlugin.Files.Add(file);
             }
 
-            foreach (var dependency in dependencies)
-            {
-                remotePlugin.Dependencies.Add(dependency);
-                if (dependency.Id == 0)
-                {
-                    remotePluginRegistry.Add(dependency);
-                }
-            }
-
             remotePluginRegistry.Add(remotePlugin);
 
             MessageBox.Show(
