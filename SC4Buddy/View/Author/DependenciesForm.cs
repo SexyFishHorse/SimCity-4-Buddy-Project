@@ -176,6 +176,8 @@
                                        };
 
                 Dependencies.Add(remotePlugin);
+
+                ClearAddUnknownPluginFields();
             }
             catch (FormatException)
             {
@@ -189,6 +191,13 @@
             }
 
             UpdateDependenciesList();
+        }
+
+        private void ClearAddUnknownPluginFields()
+        {
+            nameTextBox.Text = string.Empty;
+            linkTextBox.Text = string.Empty;
+            addUnknownAsDependencyButton.Enabled = false;
         }
 
         private string ValidateSiteUrl(string url)
