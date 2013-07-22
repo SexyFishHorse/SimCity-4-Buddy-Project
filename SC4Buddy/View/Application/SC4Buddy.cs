@@ -97,6 +97,12 @@
                     UserFolderComboBox.Items.Add(new ComboBoxItem<UserFolder>(userFolder.Alias, userFolder));
                 }
 
+                if (userFolder.Alias.Equals("?"))
+                {
+                    userFolder.Alias = LocalizationStrings.GameUserFolderName;
+                    controller.Update(userFolder);
+                }
+
                 userFoldersToolStripMenuItem.DropDownItems.Insert(insertIndex, new UserFolderToolStripMenuItem(userFolder, UserFolderMenuItemClick));
                 insertIndex++;
             }
