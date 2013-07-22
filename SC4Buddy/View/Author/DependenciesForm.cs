@@ -53,7 +53,7 @@
                 }
 
                 var item = new ListViewItemWithObjectValue<RemotePlugin>(remotePlugin.Name, remotePlugin);
-                item.SubItems.Add(remotePlugin.Author.Name);
+                item.SubItems.Add(remotePlugin.AuthorId != 0 ? remotePlugin.Author.Name : LocalizationStrings.Unknown);
                 item.SubItems.Add(remotePlugin.Link);
                 searchResultListView.Items.Add(item);
             }
