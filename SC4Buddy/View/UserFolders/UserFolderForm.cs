@@ -39,8 +39,13 @@
             {
                 if (userFolder.Id == 1)
                 {
-                    userFolder.Path = Path.Combine(Settings.Default.GameLocation, "Plugins");
-                    RegistryFactory.UserFolderRegistry.Update(userFolder);
+                    if (userFolder.Alias.Equals("?"))
+                    {
+                        userFolder.Alias = LocalizationStrings.GameUserFolderName;
+                    }
+
+                    userFolder.Path = Settings.Default.GameLocation;
+                    controller.Update(userFolder);
                 }
                 else
                 {
