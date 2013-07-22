@@ -1,5 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
+    using System;
+
     using NIHEI.SC4Buddy.DataAccess.Plugins;
     using NIHEI.SC4Buddy.Entities;
 
@@ -24,6 +26,7 @@
             pluginRegistry = new PluginRegistry(databaseEntities);
         }
 
+        [Obsolete("Use entity controllers directly")]
         public static PluginFileRegistry PluginFileRegistry
         {
             get
@@ -32,6 +35,7 @@
             }
         }
 
+        [Obsolete("Use entity controllers directly")]
         public static UserFolderRegistry UserFolderRegistry
         {
             get
@@ -40,6 +44,7 @@
             }
         }
 
+        [Obsolete("Use entity controllers directly")]
         public static PluginGroupRegistry PluginGroupRegistry
         {
             get
@@ -48,6 +53,7 @@
             }
         }
 
+        [Obsolete("Use entity controllers directly")]
         public static PluginRegistry PluginRegistry
         {
             get

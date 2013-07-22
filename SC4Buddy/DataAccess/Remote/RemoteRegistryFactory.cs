@@ -1,5 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess.Remote
 {
+    using System;
+
     using NIHEI.SC4Buddy.Entities.Remote;
 
     public class RemoteRegistryFactory
@@ -27,6 +29,7 @@
             authorRegistry = new AuthorRegistry(entities);
         }
 
+        [Obsolete("Use entity controllers directly")]
         public static RemotePluginRegistry RemotePluginRegistry
         {
             get
@@ -35,6 +38,7 @@
             }
         }
 
+        [Obsolete("Use entity controllers directly")]
         public static RemotePluginFileRegistry RemotePluginFileRegistry
         {
             get
@@ -43,6 +47,7 @@
             }
         }
 
+        [Obsolete("Use entity controllers directly")]
         public static UserRegistry UserRegistry
         {
             get
@@ -51,6 +56,7 @@
             }
         }
 
+        [Obsolete("Use entity controllers directly")]
         public static AuthorRegistry AuthorRegistry
         {
             get
