@@ -42,7 +42,7 @@
 
         private IEnumerable<string> GetFiles()
         {
-            return Directory.EnumerateFiles(Path.Combine(UserFolder.PluginFolderPath), "*", SearchOption.AllDirectories)
+            return Directory.EnumerateFiles(UserFolder.PluginFolderPath, "*", SearchOption.AllDirectories)
                              .Where(BaseHandler.IsPluginFile);
         }
     }
