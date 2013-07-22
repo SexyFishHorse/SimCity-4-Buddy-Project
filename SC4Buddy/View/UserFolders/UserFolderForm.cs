@@ -35,6 +35,10 @@
 
         public UserFolderForm(UserFolder userFolder)
         {
+            groupRegistry = RegistryFactory.PluginGroupRegistry;
+            pluginRegistry = RegistryFactory.PluginRegistry;
+            controller = new UserFolderController(RegistryFactory.UserFolderRegistry);
+
             if (!Directory.Exists(userFolder.Path))
             {
                 if (userFolder.Id == 1)
@@ -55,10 +59,6 @@
 
             this.userFolder = userFolder;
             InitializeComponent();
-
-            groupRegistry = RegistryFactory.PluginGroupRegistry;
-            pluginRegistry = RegistryFactory.PluginRegistry;
-            controller = new UserFolderController(RegistryFactory.UserFolderRegistry);
         }
 
         private static bool IsBackgroundImage(string entity, UserFolder userFolder)
