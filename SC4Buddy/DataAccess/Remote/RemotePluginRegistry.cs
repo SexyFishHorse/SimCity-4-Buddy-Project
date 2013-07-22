@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess.Remote
 {
     using System.Collections.Generic;
+    using System.Data.Objects;
 
     using NIHEI.SC4Buddy.Entities.Remote;
 
@@ -13,7 +14,7 @@
             this.entities = entities;
         }
 
-        public IEnumerable<RemotePlugin> RemotePlugins
+        public ObjectSet<RemotePlugin> RemotePlugins
         {
             get
             {
