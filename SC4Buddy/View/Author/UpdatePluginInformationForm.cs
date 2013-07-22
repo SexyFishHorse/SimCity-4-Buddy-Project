@@ -6,12 +6,18 @@
     using System.Windows.Forms;
 
     using NIHEI.Common.UI.Elements;
+    using NIHEI.SC4Buddy.Control;
+    using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
 
     public partial class UpdatePluginInformationForm : Form
     {
+        private readonly RemotePluginRegistry remotePluginRegistry;
+
         public UpdatePluginInformationForm()
         {
+            remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
+
             InitializeComponent();
         }
 
@@ -36,19 +42,18 @@
 
             if (text.Length < 3)
             {
+                searchResultsListView.Items.Clear();
                 return;
             }
 
-            using (var remoteEntities = new RemoteEntities())
-            {
-                var plugins =
-                    remoteEntities.RemotePlugins.Where(
-                        x =>
-                        x.Name.ToUpper().Contains(text) || x.Link.ToUpper().Replace("//WWW.", "//").Contains(text)
-                        || x.Author.Name.ToUpper().Contains(text));
+            var plugins =
+                remotePluginRegistry.RemotePlugins.Include("Author").Where(
+                    x =>
+                    x.Author != null && x.Author.User != null && x.Author.UserId == SessionController.Instance.User.Id
+                    && (x.Name.ToUpper().Contains(text) || x.Author.Name.ToUpper().Contains(text)
+                        || x.Link.ToUpper().Replace("//WWW.", "//").Contains(text)));
 
-                UpdateSearchResultListView(plugins);
-            }
+            UpdateSearchResultListView(plugins);
         }
     }
 }
