@@ -249,8 +249,8 @@
 
         private bool RemoveNonPluginFiles(out int numFiles, out int numFolders)
         {
-            var files = Directory.EnumerateFiles(userFolder.Path, "*", SearchOption.AllDirectories);
-            var folders = Directory.EnumerateDirectories(userFolder.Path, "*", SearchOption.AllDirectories).ToList();
+            var files = Directory.EnumerateFiles(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories);
+            var folders = Directory.EnumerateDirectories(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories).ToList();
 
             var filesToDelete =
                 files.Where(x => !BaseHandler.IsPluginFile(x) && !IsBackgroundImage(x, userFolder) && !IsDamnFile(x))
