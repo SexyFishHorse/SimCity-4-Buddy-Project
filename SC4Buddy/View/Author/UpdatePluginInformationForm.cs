@@ -6,17 +6,12 @@
     using System.Windows.Forms;
 
     using NIHEI.Common.UI.Elements;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
 
     public partial class UpdatePluginInformationForm : Form
     {
-        private readonly RemotePluginRegistry remotePluginRegistry;
-
         public UpdatePluginInformationForm()
         {
-            remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
-
             InitializeComponent();
         }
 
@@ -44,13 +39,16 @@
                 return;
             }
 
-            var plugins =
-                remotePluginRegistry.RemotePlugins.Where(
-                    x =>
-                    x.Name.ToUpper().Contains(text) || x.Link.ToUpper().Replace("//WWW.", "//").Contains(text)
-                    || x.Author.Name.ToUpper().Contains(text));
+            using (var remoteEntities = new RemoteEntities())
+            {
+                var plugins =
+                    remoteEntities.RemotePlugins.Where(
+                        x =>
+                        x.Name.ToUpper().Contains(text) || x.Link.ToUpper().Replace("//WWW.", "//").Contains(text)
+                        || x.Author.Name.ToUpper().Contains(text));
 
-            UpdateSearchResultListView(plugins);
+                UpdateSearchResultListView(plugins);
+            }
         }
     }
 }
