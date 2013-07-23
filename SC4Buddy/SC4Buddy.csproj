@@ -11,20 +11,27 @@
     <AssemblyName>SC4Buddy</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <PublishUrl>ftp://web17.gigahost.dk/www/static.nihei.dk/downloads/sc4buddy/</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <InstallUrl>http://static.nihei.dk/downloads/sc4buddy/</InstallUrl>
+    <SupportUrl>http://community.simtropolis.com/topic/58814-the-simcity-4-buddy-project/</SupportUrl>
+    <ProductName>SimCity 4 Buddy</ProductName>
+    <PublisherName>NIHEI Systems</PublisherName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -49,6 +56,18 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>NIHEI.SC4Buddy.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>78CE61E3097A66B3CA078435277EBEFC02523562</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>SC4Buddy_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -354,6 +373,7 @@
     <None Include="RemoteDatabaseEntities.edmx.diagram">
       <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
     </None>
+    <None Include="SC4Buddy_TemporaryKey.pfx" />
     <None Include="Wallpapers\13.jpg" />
     <None Include="Wallpapers\12.jpg" />
     <None Include="Wallpapers\11.jpg" />

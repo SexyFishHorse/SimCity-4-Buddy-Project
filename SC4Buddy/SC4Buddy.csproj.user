@@ -2,13 +2,13 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectView>ProjectFiles</ProjectView>
-    <PublishUrlHistory />
-    <InstallUrlHistory />
+    <PublishUrlHistory>ftp://web17.gigahost.dk/www/static.nihei.dk/downloads/sc4buddy/|ftp://web17.gigahost.dk/static.nihei.dk/downloads/sc4buddy/|D:\users\asbjorn\SkyDrive\Code\Releases\SC4Buddy\|D:\SkyDrive\Code\Releases\SC4Buddy\|D:\SkyDrive\Code\Releases\APBGraphicsUpdater\SC4Buddy\</PublishUrlHistory>
+    <InstallUrlHistory>http://static.nihei.dk/downloads/sc4buddy/</InstallUrlHistory>
     <SupportUrlHistory />
     <UpdateUrlHistory />
     <BootstrapperUrlHistory />
     <ErrorReportUrlHistory />
     <FallbackCulture>en-US</FallbackCulture>
-    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+    <VerifyUploadedFiles>true</VerifyUploadedFiles>
   </PropertyGroup>
 </Project>
