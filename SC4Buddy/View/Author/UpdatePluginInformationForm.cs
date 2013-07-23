@@ -134,5 +134,15 @@
                 files = dialog.Files;
             }
         }
+
+        private void DependenciesButtonClick(object sender, EventArgs e)
+        {
+            var dialog = new DependenciesForm(dependencies);
+
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                dependencies = dialog.Dependencies.ToList();
+            }
+        }
     }
 }
