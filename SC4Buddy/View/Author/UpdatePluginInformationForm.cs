@@ -16,11 +16,17 @@
 
         private readonly AuthorRegistry authorRegistry;
 
+        private IList<RemotePlugin> dependencies;
+
+        private IList<RemotePluginFile> files;
+
         public UpdatePluginInformationForm()
         {
             remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
-
             authorRegistry = RemoteRegistryFactory.AuthorRegistry;
+
+            dependencies = new List<RemotePlugin>();
+            files = new List<RemotePluginFile>();
 
             InitializeComponent();
         }
@@ -71,7 +77,52 @@
             {
                 siteAndAuthorComboBox.Items.Add(new ComboBoxItem<Author>(string.Format("{0} ({1})", author.Site, author.Name), author));
             }
+
             siteAndAuthorComboBox.EndUpdate();
+        }
+
+        private void SearchResultsListViewSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (searchResultsListView.SelectedItems.Count < 1)
+            {
+                return;
+            }
+
+            var item = ((ListViewItemWithObjectValue<RemotePlugin>)searchResultsListView.SelectedItems[0]).Value;
+
+            nameTextBox.Enabled = true;
+            nameTextBox.Text = item.Name;
+            linkTextBox.Enabled = true;
+            linkTextBox.Text = item.Link;
+            descriptionTextBox.Enabled = true;
+            descriptionTextBox.Text = item.Description;
+            SelectAuthorInList(item.Author.Name, item.Author.Site);
+            siteAndAuthorComboBox.Enabled = true;
+
+            dependencies = item.Dependencies.ToList();
+            dependenciesButton.Enabled = true;
+            files = item.Files.ToList();
+            filesButton.Enabled = true;
+
+            saveButton.Enabled = true;
+            deleteButton.Enabled = true;
+        }
+
+        private void SelectAuthorInList(string author, string link)
+        {
+            var authors = siteAndAuthorComboBox.Items;
+
+            foreach (var comboBoxItem in
+                authors.Cast<ComboBoxItem<Author>>()
+                       .Where(
+                           comboBoxItem =>
+                           link.Replace("//www.", "//")
+                               .ToUpper()
+                               .Contains(comboBoxItem.Value.Site.Replace("//www.", "//").ToUpper())
+                           && comboBoxItem.Value.Name.ToUpper().Equals(author.ToUpper())))
+            {
+                siteAndAuthorComboBox.SelectedItem = comboBoxItem;
+            }
         }
     }
 }

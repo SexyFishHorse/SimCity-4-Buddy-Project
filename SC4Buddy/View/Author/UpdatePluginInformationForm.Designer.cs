@@ -71,11 +71,13 @@ namespace NIHEI.SC4Buddy.View.Author
             this.columnHeader3,
             this.columnHeader2});
             this.searchResultsListView.Location = new System.Drawing.Point(6, 45);
+            this.searchResultsListView.MultiSelect = false;
             this.searchResultsListView.Name = "searchResultsListView";
             this.searchResultsListView.Size = new System.Drawing.Size(489, 148);
             this.searchResultsListView.TabIndex = 1;
             this.searchResultsListView.UseCompatibleStateImageBehavior = false;
             this.searchResultsListView.View = System.Windows.Forms.View.Details;
+            this.searchResultsListView.SelectedIndexChanged += new System.EventHandler(this.SearchResultsListViewSelectedIndexChanged);
             // 
             // columnHeader1
             // 
