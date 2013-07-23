@@ -5,18 +5,22 @@
     using System.Linq;
     using System.Windows.Forms;
 
-    using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.View.Elements;
 
     public partial class UpdatePluginInformationForm : Form
     {
         private readonly RemotePluginRegistry remotePluginRegistry;
 
+        private readonly AuthorRegistry authorRegistry;
+
         public UpdatePluginInformationForm()
         {
             remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
+
+            authorRegistry = RemoteRegistryFactory.AuthorRegistry;
 
             InitializeComponent();
         }
@@ -54,6 +58,18 @@
                         || x.Link.ToUpper().Replace("//WWW.", "//").Contains(text)));
 
             UpdateSearchResultListView(plugins);
+        }
+
+        private void UpdatePluginInformationFormLoad(object sender, EventArgs e)
+        {
+            var authors = authorRegistry.Authors.Where(x => x.UserId == SessionController.Instance.User.Id);
+
+            siteAndAuthorComboBox.BeginUpdate();
+            foreach (var author in authors)
+            {
+                siteAndAuthorComboBox.Items.Add(new ComboBoxItem<Author>(string.Format("{0} ({1})", author.Site, author.Name), author));
+            }
+            siteAndAuthorComboBox.EndUpdate();
         }
     }
 }

@@ -253,6 +253,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.Controls.Add(this.cancelButton);
             this.Name = "UpdatePluginInformationForm";
             this.Text = "Update plugin information in the central database";
+            this.Load += new System.EventHandler(this.UpdatePluginInformationFormLoad);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
