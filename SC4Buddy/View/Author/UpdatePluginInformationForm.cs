@@ -35,8 +35,10 @@
                 var item = new ListViewItemWithObjectValue<RemotePlugin>(plugin.Name, plugin);
                 item.SubItems.Add(plugin.Author.Name);
                 item.SubItems.Add(plugin.Link);
+                searchResultsListView.Items.Add(item);
             }
 
+            searchResultsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             searchResultsListView.EndUpdate();
         }
 
@@ -55,7 +57,7 @@
                     x =>
                     x.Author != null && x.Author.User != null && x.Author.UserId == SessionController.Instance.User.Id
                     && (x.Name.ToUpper().Contains(text) || x.Author.Name.ToUpper().Contains(text)
-                        || x.Link.ToUpper().Replace("//WWW.", "//").Contains(text)));
+                        || x.Link.ToUpper().Replace("//WWW.", "//").Contains(text))).ToList();
 
             UpdateSearchResultListView(plugins);
         }
