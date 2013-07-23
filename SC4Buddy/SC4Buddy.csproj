@@ -28,9 +28,11 @@
     <PublisherName>NIHEI Systems</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -374,9 +376,9 @@
       <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
     </None>
     <None Include="SC4Buddy_TemporaryKey.pfx" />
-    <None Include="Wallpapers\13.jpg" />
-    <None Include="Wallpapers\12.jpg" />
-    <None Include="Wallpapers\11.jpg" />
+    <Content Include="Wallpapers\13.jpg" />
+    <Content Include="Wallpapers\12.jpg" />
+    <Content Include="Wallpapers\11.jpg" />
     <EmbeddedResource Include="View\Application\SettingsForm.da.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -385,15 +387,15 @@
     </EmbeddedResource>
     <None Include="Resources\help.png" />
     <Content Include="Wallpapers\1.jpg" />
-    <EmbeddedResource Include="Wallpapers\10.jpg" />
-    <EmbeddedResource Include="Wallpapers\2.jpg" />
-    <EmbeddedResource Include="Wallpapers\3.jpg" />
-    <EmbeddedResource Include="Wallpapers\4.jpg" />
-    <EmbeddedResource Include="Wallpapers\5.jpg" />
-    <EmbeddedResource Include="Wallpapers\6.jpg" />
-    <EmbeddedResource Include="Wallpapers\7.jpg" />
-    <EmbeddedResource Include="Wallpapers\8.jpg" />
-    <EmbeddedResource Include="Wallpapers\9.jpg" />
+    <Content Include="Wallpapers\10.jpg" />
+    <Content Include="Wallpapers\2.jpg" />
+    <Content Include="Wallpapers\3.jpg" />
+    <Content Include="Wallpapers\4.jpg" />
+    <Content Include="Wallpapers\5.jpg" />
+    <Content Include="Wallpapers\6.jpg" />
+    <Content Include="Wallpapers\7.jpg" />
+    <Content Include="Wallpapers\8.jpg" />
+    <Content Include="Wallpapers\9.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Entities\Database.sdf">
