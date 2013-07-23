@@ -1,6 +1,5 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess.Remote
 {
-    using System.Collections.Generic;
     using System.Data.Objects;
 
     using NIHEI.SC4Buddy.Entities.Remote;
@@ -30,6 +29,12 @@
 
         public void Update(RemotePlugin dependency)
         {
+            entities.SaveChanges();
+        }
+
+        public void Delete(RemotePlugin item)
+        {
+            entities.RemotePlugins.DeleteObject(item);
             entities.SaveChanges();
         }
     }

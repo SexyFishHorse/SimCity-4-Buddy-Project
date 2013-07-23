@@ -8,6 +8,7 @@
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class UpdatePluginInformationForm : Form
@@ -143,6 +144,45 @@
             {
                 dependencies = dialog.Dependencies.ToList();
             }
+        }
+
+        private void DeleteButtonClick(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(
+                this,
+                LocalizationStrings.AreYouSureYouWantToDeleteThisPluginFromTheServer,
+                LocalizationStrings.ConfirmDeletionOfPlugin,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2) == DialogResult.No)
+            {
+                return;
+            }
+
+            var listViewItem = searchResultsListView.SelectedItems[0];
+            var item = ((ListViewItemWithObjectValue<RemotePlugin>)listViewItem).Value;
+
+            searchResultsListView.Items.Remove(listViewItem);
+
+            remotePluginRegistry.Delete(item);
+
+            ClearForm();
+        }
+
+        private void ClearForm()
+        {
+            nameTextBox.Text = string.Empty;
+            nameTextBox.Enabled = false;
+            linkTextBox.Text = string.Empty;
+            linkTextBox.Enabled = false;
+            siteAndAuthorComboBox.SelectedIndex = -1;
+            siteAndAuthorComboBox.Enabled = false;
+            descriptionTextBox.Text = string.Empty;
+            descriptionTextBox.Enabled = false;
+            filesButton.Enabled = false;
+            dependenciesButton.Enabled = false;
+            saveButton.Enabled = false;
+            deleteButton.Enabled = false;
         }
     }
 }

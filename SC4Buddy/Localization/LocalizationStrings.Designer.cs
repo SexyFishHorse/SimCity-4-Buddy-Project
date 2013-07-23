@@ -79,6 +79,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this plugin from the server? This will NOT remove the plugins from the users plugin folders..
+        /// </summary>
+        internal static string AreYouSureYouWantToDeleteThisPluginFromTheServer {
+            get {
+                return ResourceManager.GetString("AreYouSureYouWantToDeleteThisPluginFromTheServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to install the selected {0} plugins?.
         /// </summary>
         internal static string AreYouSureYouWantToInstallTheSelectedPlugins {
@@ -120,6 +129,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string ConfirmDeletionOfNonPluginFiles {
             get {
                 return ResourceManager.GetString("ConfirmDeletionOfNonPluginFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm deletion of plugin.
+        /// </summary>
+        internal static string ConfirmDeletionOfPlugin {
+            get {
+                return ResourceManager.GetString("ConfirmDeletionOfPlugin", resourceCulture);
             }
         }
         

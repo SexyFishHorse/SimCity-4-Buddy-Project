@@ -398,4 +398,10 @@ Should also notify the user that some files may have been installed so the user 
     <value>Unknown</value>
     <comment>displayed text for unknown plugin authors</comment>
   </data>
+  <data name="ConfirmDeletionOfPlugin" xml:space="preserve">
+    <value>Confirm deletion of plugin</value>
+  </data>
+  <data name="AreYouSureYouWantToDeleteThisPluginFromTheServer" xml:space="preserve">
+    <value>Are you sure you want to delete this plugin from the server? This will NOT remove the plugins from the users plugin folders.</value>
+  </data>
 </root>
