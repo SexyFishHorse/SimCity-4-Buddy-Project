@@ -637,6 +637,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The plugin has been updated in the central database..
+        /// </summary>
+        internal static string ThePluginHasBeenUpdatedInTheCentralDatabase {
+            get {
+                return ResourceManager.GetString("ThePluginHasBeenUpdatedInTheCentralDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The site URL is invalid. Enter it in the format &quot;http://www.example.com&quot;..
         /// </summary>
         internal static string TheSiteUrlIsInvalid {

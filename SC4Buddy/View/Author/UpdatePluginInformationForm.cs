@@ -184,5 +184,73 @@
             saveButton.Enabled = false;
             deleteButton.Enabled = false;
         }
+
+        private void SaveButtonClick(object sender, EventArgs e)
+        {
+            var listViewItem = searchResultsListView.SelectedItems[0];
+            var remotePlugin = ((ListViewItemWithObjectValue<RemotePlugin>)listViewItem).Value;
+
+            var link = linkTextBox.Text.Trim();
+            var author = ((ComboBoxItem<Author>)siteAndAuthorComboBox.SelectedItem).Value;
+
+            if (!ValidateLinkAndAuthor(link, author))
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.TheLinkToTheDownloadInfoPageAndTheSiteOfTheAuthorDoesNotMatch,
+                    LocalizationStrings.LinkAndAuthorSiteDoesNotMatch,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }
+
+            var name = nameTextBox.Text.Trim();
+            var description = descriptionTextBox.Text.Trim();
+
+            searchResultsListView.Items.Remove(listViewItem);
+
+            remotePlugin.Name = name;
+            remotePlugin.Description = description;
+            remotePlugin.Author = author;
+            remotePlugin.Link = link;
+
+            remotePlugin.Files.Clear();
+            foreach (var file in files)
+            {
+                remotePlugin.Files.Add(file);
+            }
+
+            remotePlugin.Dependencies.Clear();
+            foreach (var dependency in dependencies)
+            {
+                remotePlugin.Dependencies.Add(dependency);
+            }
+
+            remotePluginRegistry.Update(remotePlugin);
+
+            var item = new ListViewItemWithObjectValue<RemotePlugin>(remotePlugin.Name, remotePlugin);
+            item.SubItems.Add(remotePlugin.Author.Name);
+            item.SubItems.Add(remotePlugin.Link);
+            searchResultsListView.Items.Add(item);
+
+            MessageBox.Show(
+                this,
+                LocalizationStrings.ThePluginHasBeenUpdatedInTheCentralDatabase,
+                LocalizationStrings.PluginInformationUpdated,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
+
+            ClearForm();
+        }
+
+        private bool ValidateLinkAndAuthor(string link, Author author)
+        {
+            link = link.ToUpper().Replace("//WWW.", "//");
+            var site = author.Site.ToUpper().Replace("//WWW.", "//");
+
+            return link.Contains(site);
+        }
     }
 }

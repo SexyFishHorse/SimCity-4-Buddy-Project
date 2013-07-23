@@ -404,4 +404,7 @@ Should also notify the user that some files may have been installed so the user 
   <data name="AreYouSureYouWantToDeleteThisPluginFromTheServer" xml:space="preserve">
     <value>Are you sure you want to delete this plugin from the server? This will NOT remove the plugins from the users plugin folders.</value>
   </data>
+  <data name="ThePluginHasBeenUpdatedInTheCentralDatabase" xml:space="preserve">
+    <value>The plugin has been updated in the central database.</value>
+  </data>
 </root>
