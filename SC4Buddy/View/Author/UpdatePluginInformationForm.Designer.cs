@@ -103,6 +103,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // filesButton
             // 
             this.filesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.filesButton.Enabled = false;
             this.filesButton.Location = new System.Drawing.Point(12, 464);
             this.filesButton.Name = "filesButton";
             this.filesButton.Size = new System.Drawing.Size(75, 23);
@@ -113,6 +114,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // dependenciesButton
             // 
             this.dependenciesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dependenciesButton.Enabled = false;
             this.dependenciesButton.Location = new System.Drawing.Point(93, 464);
             this.dependenciesButton.Name = "dependenciesButton";
             this.dependenciesButton.Size = new System.Drawing.Size(93, 23);
@@ -123,6 +125,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // deleteButton
             // 
             this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.deleteButton.Enabled = false;
             this.deleteButton.Location = new System.Drawing.Point(276, 464);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(75, 23);
@@ -147,6 +150,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // 
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.saveButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.saveButton.Enabled = false;
             this.saveButton.Location = new System.Drawing.Point(357, 464);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
@@ -158,6 +162,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // 
             this.nameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.nameTextBox.Enabled = false;
             this.nameTextBox.Location = new System.Drawing.Point(97, 217);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(416, 20);
@@ -186,6 +191,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.siteAndAuthorComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.siteAndAuthorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.siteAndAuthorComboBox.Enabled = false;
             this.siteAndAuthorComboBox.FormattingEnabled = true;
             this.siteAndAuthorComboBox.Location = new System.Drawing.Point(97, 243);
             this.siteAndAuthorComboBox.Name = "siteAndAuthorComboBox";
@@ -196,6 +202,7 @@ namespace NIHEI.SC4Buddy.View.Author
             // 
             this.linkTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkTextBox.Enabled = false;
             this.linkTextBox.Location = new System.Drawing.Point(97, 270);
             this.linkTextBox.Name = "linkTextBox";
             this.linkTextBox.Size = new System.Drawing.Size(416, 20);
@@ -224,6 +231,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.descriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.descriptionTextBox.Enabled = false;
             this.descriptionTextBox.Location = new System.Drawing.Point(12, 315);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
