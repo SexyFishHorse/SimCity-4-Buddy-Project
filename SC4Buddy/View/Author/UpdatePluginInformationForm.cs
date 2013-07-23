@@ -124,5 +124,15 @@
                 siteAndAuthorComboBox.SelectedItem = comboBoxItem;
             }
         }
+
+        private void FilesButtonClick(object sender, EventArgs e)
+        {
+            var dialog = new FilesForm(files);
+
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                files = dialog.Files;
+            }
+        }
     }
 }

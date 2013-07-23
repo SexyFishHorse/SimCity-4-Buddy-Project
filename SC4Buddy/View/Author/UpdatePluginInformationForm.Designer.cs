@@ -112,6 +112,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.filesButton.TabIndex = 3;
             this.filesButton.Text = "Files";
             this.filesButton.UseVisualStyleBackColor = true;
+            this.filesButton.Click += new System.EventHandler(this.FilesButtonClick);
             // 
             // dependenciesButton
             // 
