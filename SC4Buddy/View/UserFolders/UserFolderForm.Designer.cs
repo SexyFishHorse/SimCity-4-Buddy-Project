@@ -206,8 +206,8 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // 
             // installMultifilePluginToolStripMenuItem
             // 
-            this.installMultifilePluginToolStripMenuItem.Name = "installMultifilePluginToolStripMenuItem";
             resources.ApplyResources(this.installMultifilePluginToolStripMenuItem, "installMultifilePluginToolStripMenuItem");
+            this.installMultifilePluginToolStripMenuItem.Name = "installMultifilePluginToolStripMenuItem";
             this.installMultifilePluginToolStripMenuItem.Click += new System.EventHandler(this.InstallMultifilePluginToolStripMenuItemClick);
             // 
             // scanForNewPluginsToolStripMenuItem
