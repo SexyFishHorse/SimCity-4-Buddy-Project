@@ -11,22 +11,20 @@
     <AssemblyName>SC4Buddy</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftp://web17.gigahost.dk/www/static.nihei.dk/downloads/sc4buddy/</PublishUrl>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\asbjorn\SkyDrive\Code\Releases\SC4Buddy\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Web</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://static.nihei.dk/downloads/sc4buddy/</InstallUrl>
     <SupportUrl>http://community.simtropolis.com/topic/58814-the-simcity-4-buddy-project/</SupportUrl>
     <ProductName>SimCity 4 Buddy</ProductName>
     <PublisherName>NIHEI Systems</PublisherName>
-    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
