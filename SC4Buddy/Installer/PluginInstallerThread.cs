@@ -64,50 +64,50 @@
                 var fileInfo = new FileInfo(file);
                 RaiseInstallPluginEvent(fileInfo);
 
-                ////try
-                ////{
-                var installedFiles = new List<PluginFile>();
-
-                var randomFileName = Path.GetRandomFileName();
-                randomFileName = randomFileName.Substring(0, randomFileName.Length - 4) + DateTime.UtcNow.Ticks;
-
-                installer.ExtractToTempFolder(fileInfo, Path.Combine(Path.GetTempPath(), "SC4Buddy", randomFileName));
-
-                RaiseInstallProgressEvent(fileInfo, 25, LocalizationStrings.FilesExtractedToTemporaryFolder);
-
-                HandleReadmeFiles(fileInfo, installer);
-
-                installedFiles.AddRange(HandleExecutableFiles(installer, UserFolder));
-
-                installedFiles.AddRange(HandlePluginFiles(installer));
-
-                if (!installedFiles.Any())
+                try
                 {
-                    var validExtensions = string.Format("({0})", string.Join(", ", BaseHandler.PluginFileExtensions));
-                    var errorMessage =
-                        string.Format(
-                            LocalizationStrings.ThePluginDigNotContainAnyValidFilesToInstall,
-                            validExtensions);
-                    RaisePluginInstallFailedEvent(fileInfo, errorMessage);
-                    continue;
+                    var installedFiles = new List<PluginFile>();
+
+                    var randomFileName = Path.GetRandomFileName();
+                    randomFileName = randomFileName.Substring(0, randomFileName.Length - 4) + DateTime.UtcNow.Ticks;
+
+                    installer.ExtractToTempFolder(fileInfo, Path.Combine(Path.GetTempPath(), "SC4Buddy", randomFileName));
+
+                    RaiseInstallProgressEvent(fileInfo, 25, LocalizationStrings.FilesExtractedToTemporaryFolder);
+
+                    HandleReadmeFiles(fileInfo, installer);
+
+                    installedFiles.AddRange(HandleExecutableFiles(installer, UserFolder));
+
+                    installedFiles.AddRange(HandlePluginFiles(installer));
+
+                    if (!installedFiles.Any())
+                    {
+                        var validExtensions = string.Format("({0})", string.Join(", ", BaseHandler.PluginFileExtensions));
+                        var errorMessage =
+                            string.Format(
+                                LocalizationStrings.ThePluginDigNotContainAnyValidFilesToInstall,
+                                validExtensions);
+                        RaisePluginInstallFailedEvent(fileInfo, errorMessage);
+                        continue;
+                    }
+
+                    RaiseInstallProgressEvent(fileInfo, 75, LocalizationStrings.FilesMovedToUserFolder);
+
+                    var plugin = new Plugin { Name = new FileInfo(file).Name, UserFolder = UserFolder };
+
+                    SavePluginInformation(plugin, installedFiles);
+
+                    RaisePluginInstalledEvent(fileInfo, plugin);
                 }
+                catch (Exception ex)
+                {
+                    var errorMessage = string.Format(
+                        "Unexpected exception during plugin install: [{0}] {1}",
+                        new object[] { ex.GetType().Name, ex.Message });
 
-                RaiseInstallProgressEvent(fileInfo, 75, LocalizationStrings.FilesMovedToUserFolder);
-
-                var plugin = new Plugin { Name = new FileInfo(file).Name, UserFolder = UserFolder };
-
-                SavePluginInformation(plugin, installedFiles);
-
-                RaisePluginInstalledEvent(fileInfo, plugin);
-                ////}
-                ////catch (Exception ex)
-                ////{
-                ////    var errorMessage = string.Format(
-                ////        "Unexpected exception during plugin install: [{0}] {1}",
-                ////        new object[] { ex.GetType().Name, ex.Message });
-
-                ////    RaisePluginInstallFailedEvent(fileInfo, errorMessage);
-                ////}
+                    RaisePluginInstallFailedEvent(fileInfo, errorMessage);
+                }
             }
 
             RaiseAllPluginsInstalledEvent();
