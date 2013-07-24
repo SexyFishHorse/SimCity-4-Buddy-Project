@@ -107,7 +107,6 @@
                 ////        new object[] { ex.GetType().Name, ex.Message });
 
                 ////    RaisePluginInstallFailedEvent(fileInfo, errorMessage);
-                ////    ////EventLog.WriteEntry(Resources.EventLogSource, errorMessage, EventLogEntryType.Error);
                 ////}
             }
 

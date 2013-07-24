@@ -18,38 +18,15 @@
 
     public static class Program
     {
-        private static readonly string LogSource = ConfigurationManager.AppSettings.Get("EventLogSource");
-
         [STAThread]
         public static void Main()
         {
-            try
-            {
-                if (!EventLog.SourceExists(LogSource))
-                {
-                    EventLog.CreateEventSource(LogSource, ConfigurationManager.AppSettings.Get("EventLogName"));
-                }
-            }
-            catch (SecurityException)
-            {
-                MessageBox.Show(
-                    LocalizationStrings.TheFirstTimeYouRunThisProgramYouMustRunItAsAnAdministrator,
-                    LocalizationStrings.AdditionalPermissionsRequired,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error,
-                    MessageBoxDefaultButton.Button1);
-                return;
-            }
-
-            EventLog.WriteEntry(LogSource, "SC4Buddy started.");
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en");
 
             if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation))
             {
-                EventLog.WriteEntry(LogSource, "Game location not defined.");
                 Application.Run(new SettingsForm { StartPosition = FormStartPosition.CenterScreen });
                 SetDefaultUserFolder();
             }
@@ -70,11 +47,6 @@
             if (Directory.Exists(path) && !registry.UserFolders.Any(x => x.Path.Equals(path)))
             {
                 registry.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, Path = path });
-                EventLog.WriteEntry(LogSource, "Default user folder is set.");
-            }
-            else
-            {
-                EventLog.WriteEntry(LogSource, "Unable to locate default user folder.");
             }
         }
     }

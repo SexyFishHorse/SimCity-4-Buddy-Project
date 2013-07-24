@@ -29,8 +29,6 @@
 
         private readonly UserFolderController controller;
 
-        private EventLog eventLog = new EventLog(ConfigurationManager.AppSettings["EventLogName"]);
-
         public Sc4Buddy()
         {
             InitializeComponent();
@@ -138,7 +136,6 @@
             }
             catch (Exception ex)
             {
-                eventLog.WriteEntry(ex.Message, EventLogEntryType.FailureAudit);
                 if (MessageBox.Show(
                     this,
                     LocalizationStrings.UnableToLogYouIntoTheSystem,
