@@ -422,5 +422,15 @@
         {
             new UpdatePluginInformationForm().ShowDialog(this);
         }
+
+        private void SupportToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            Process.Start("http://community.simtropolis.com/topic/58814-the-simcity-4-buddy-project/");
+        }
+
+        private void AboutToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            new AboutBox().ShowDialog(this);
+        }
     }
 }

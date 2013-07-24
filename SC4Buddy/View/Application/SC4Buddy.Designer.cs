@@ -43,6 +43,9 @@ namespace NIHEI.SC4Buddy.View.Application
             this.addPluginInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updatePluginInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.myAuthorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.UserFolderComboBox = new System.Windows.Forms.ComboBox();
@@ -57,7 +60,8 @@ namespace NIHEI.SC4Buddy.View.Application
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.programToolStripMenuItem,
             this.userFoldersToolStripMenuItem,
-            this.toolsToolStripMenuItem});
+            this.toolsToolStripMenuItem,
+            this.helpToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
@@ -140,6 +144,26 @@ namespace NIHEI.SC4Buddy.View.Application
             resources.ApplyResources(this.myAuthorsToolStripMenuItem, "myAuthorsToolStripMenuItem");
             this.myAuthorsToolStripMenuItem.Click += new System.EventHandler(this.MyAuthorsToolStripMenuItemClick);
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.supportToolStripMenuItem,
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
+            // 
+            // supportToolStripMenuItem
+            // 
+            this.supportToolStripMenuItem.Name = "supportToolStripMenuItem";
+            resources.ApplyResources(this.supportToolStripMenuItem, "supportToolStripMenuItem");
+            this.supportToolStripMenuItem.Click += new System.EventHandler(this.SupportToolStripMenuItemClick);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItemClick);
+            // 
             // backgroundPanel
             // 
             resources.ApplyResources(this.backgroundPanel, "backgroundPanel");
@@ -210,6 +234,9 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.ToolStripMenuItem addPluginInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updatePluginInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem myAuthorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem supportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 
