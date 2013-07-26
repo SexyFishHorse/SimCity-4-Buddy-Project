@@ -433,5 +433,10 @@
         {
             new AboutBox().ShowDialog(this);
         }
+
+        private void BugsAndFeedbackToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/NIHEI-Systems/sc4buddy/issues");
+        }
     }
 }

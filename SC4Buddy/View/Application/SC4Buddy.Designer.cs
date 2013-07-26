@@ -50,6 +50,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.panel2 = new System.Windows.Forms.Panel();
             this.UserFolderComboBox = new System.Windows.Forms.ComboBox();
             this.playButton = new System.Windows.Forms.Button();
+            this.bugsAndFeedbackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.backgroundPanel.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -148,6 +149,7 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.supportToolStripMenuItem,
+            this.bugsAndFeedbackToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
@@ -196,6 +198,12 @@ namespace NIHEI.SC4Buddy.View.Application
             this.playButton.UseVisualStyleBackColor = true;
             this.playButton.Click += new System.EventHandler(this.PlayButtonClick);
             // 
+            // bugsAndFeedbackToolStripMenuItem
+            // 
+            this.bugsAndFeedbackToolStripMenuItem.Name = "bugsAndFeedbackToolStripMenuItem";
+            resources.ApplyResources(this.bugsAndFeedbackToolStripMenuItem, "bugsAndFeedbackToolStripMenuItem");
+            this.bugsAndFeedbackToolStripMenuItem.Click += new System.EventHandler(this.BugsAndFeedbackToolStripMenuItemClick);
+            // 
             // Sc4Buddy
             // 
             resources.ApplyResources(this, "$this");
@@ -237,6 +245,7 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem supportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bugsAndFeedbackToolStripMenuItem;
     }
 }
 
