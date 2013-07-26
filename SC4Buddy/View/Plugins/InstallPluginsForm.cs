@@ -225,12 +225,6 @@
                                 }
 
                                 RemoteRegistryFactory.RemotePluginRegistry.Add(remotePlugin);
-                                foreach (var file in remotePlugin.Files)
-                                {
-                                    RemoteRegistryFactory.RemotePluginFileRegistry.Add(file);
-                                }
-
-                                RemoteRegistryFactory.RemotePluginRegistry.Update(remotePlugin);
                             }
                         }
                     }));
