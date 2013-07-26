@@ -151,7 +151,20 @@
             {
                 installedFile.Plugin = plugin;
                 plugin.Files.Add(installedFile);
-                pluginFileRegistry.Add(installedFile);
+
+                var existingPlugin =
+                    pluginFileRegistry.Files.FirstOrDefault(
+                        x => x.Path.Equals(installedFile.Path, StringComparison.OrdinalIgnoreCase));
+                if (existingPlugin != null)
+                {
+                    existingPlugin.Plugin = installedFile.Plugin;
+                    existingPlugin.PluginId = installedFile.Id;
+                    pluginFileRegistry.Update(existingPlugin);
+                }
+                else
+                {
+                    pluginFileRegistry.Add(installedFile);
+                }
             }
 
             pluginRegistry.Update(plugin);
