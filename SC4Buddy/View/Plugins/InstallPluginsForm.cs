@@ -9,9 +9,7 @@
 
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.DataAccess.Plugins;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities;
-    using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Installer;
     using NIHEI.SC4Buddy.Installer.InstallerEventArgs;
     using NIHEI.SC4Buddy.Localization;
