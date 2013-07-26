@@ -32,7 +32,6 @@
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
-                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("en");
 
                 if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation))
                 {
