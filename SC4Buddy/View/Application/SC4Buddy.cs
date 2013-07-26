@@ -2,14 +2,16 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Configuration;
     using System.Diagnostics;
     using System.Drawing;
     using System.Linq;
     using System.Net.NetworkInformation;
+    using System.Reflection;
     using System.Resources;
     using System.Threading;
     using System.Windows.Forms;
+
+    using log4net;
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.UserFolders;
@@ -25,6 +27,8 @@
 
     public partial class Sc4Buddy : Form
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly ResourceManager localizationManager;
 
         private readonly UserFolderController controller;
