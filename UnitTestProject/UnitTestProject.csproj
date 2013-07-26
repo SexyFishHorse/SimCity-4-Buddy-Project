@@ -37,15 +37,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Moq">
-      <HintPath>..\..\..\Packages\Moq4.0.10827\NET40\Moq.dll</HintPath>
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Should">
-      <HintPath>..\..\..\Packages\Should1.1.12\Should.dll</HintPath>
+      <HintPath>..\packages\Should.1.1.20\lib\Should.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="xunit">
-      <HintPath>..\..\..\Packages\xUnit1.9.1\xunit.dll</HintPath>
+      <HintPath>..\packages\xunit.1.9.1\lib\net20\xunit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>
@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <Choose>
