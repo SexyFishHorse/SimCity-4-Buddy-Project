@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SC4Buddy", "SC4Buddy\SC4Bud
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{A2D89F0D-4519-441F-8F6D-5BB32490664B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiheiCommon", "..\NiheiCommon\NiheiCommon.csproj", "{43F9AF3F-D57D-421D-BA98-87FD499CA314}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiheiCommon", "NiheiCommon\NiheiCommon.csproj", "{43F9AF3F-D57D-421D-BA98-87FD499CA314}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
