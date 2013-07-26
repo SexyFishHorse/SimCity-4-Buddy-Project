@@ -198,34 +198,6 @@
                             {
                                 pluginRegistry.Update(enterPluginInformationForm.Plugin);
                             }
-
-                            if (Settings.Default.DeveloperUploadToRemote)
-                            {
-                                var authorRegistry = RemoteRegistryFactory.AuthorRegistry;
-
-                                var remotePlugin = new RemotePlugin
-                                                       {
-                                                           Name = enterPluginInformationForm.Plugin.Name,
-                                                           Link = enterPluginInformationForm.Plugin.Link,
-                                                           Author = authorRegistry.GetAuthorByName(enterPluginInformationForm.Plugin.Author),
-                                                           Description =
-                                                               enterPluginInformationForm.Plugin.Description
-                                                       };
-
-                                foreach (var file in plugin.Files)
-                                {
-                                    var remoteFile = new RemotePluginFile
-                                                         {
-                                                             Checksum = file.Checksum,
-                                                             Name = new FileInfo(file.Path).Name,
-                                                             Plugin = remotePlugin,
-                                                             PluginId = remotePlugin.Id
-                                                         };
-                                    remotePlugin.Files.Add(remoteFile);
-                                }
-
-                                RemoteRegistryFactory.RemotePluginRegistry.Add(remotePlugin);
-                            }
                         }
                     }));
             }
