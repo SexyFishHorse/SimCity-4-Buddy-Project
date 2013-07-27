@@ -9,9 +9,7 @@
 
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.DataAccess.Plugins;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities;
-    using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Installer;
     using NIHEI.SC4Buddy.Installer.InstallerEventArgs;
     using NIHEI.SC4Buddy.Localization;
@@ -197,40 +195,6 @@
                             if (result == DialogResult.OK)
                             {
                                 pluginRegistry.Update(enterPluginInformationForm.Plugin);
-                            }
-
-                            if (Settings.Default.DeveloperUploadToRemote)
-                            {
-                                var authorRegistry = RemoteRegistryFactory.AuthorRegistry;
-
-                                var remotePlugin = new RemotePlugin
-                                                       {
-                                                           Name = enterPluginInformationForm.Plugin.Name,
-                                                           Link = enterPluginInformationForm.Plugin.Link,
-                                                           Author = authorRegistry.GetAuthorByName(enterPluginInformationForm.Plugin.Author),
-                                                           Description =
-                                                               enterPluginInformationForm.Plugin.Description
-                                                       };
-
-                                foreach (var file in plugin.Files)
-                                {
-                                    var remoteFile = new RemotePluginFile
-                                                         {
-                                                             Checksum = file.Checksum,
-                                                             Name = new FileInfo(file.Path).Name,
-                                                             Plugin = remotePlugin,
-                                                             PluginId = remotePlugin.Id
-                                                         };
-                                    remotePlugin.Files.Add(remoteFile);
-                                }
-
-                                RemoteRegistryFactory.RemotePluginRegistry.Add(remotePlugin);
-                                foreach (var file in remotePlugin.Files)
-                                {
-                                    RemoteRegistryFactory.RemotePluginFileRegistry.Add(file);
-                                }
-
-                                RemoteRegistryFactory.RemotePluginRegistry.Update(remotePlugin);
                             }
                         }
                     }));

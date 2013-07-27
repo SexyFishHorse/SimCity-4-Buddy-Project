@@ -5,8 +5,10 @@
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
 
     using NIHEI.Common.IO;
+    using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.DataAccess.Plugins;
     using NIHEI.SC4Buddy.Entities;
@@ -15,16 +17,21 @@
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Plugins;
 
+    using log4net;
+
     public class PluginInstallerThread
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly PluginFileRegistry pluginFileRegistry;
 
-        private readonly PluginRegistry pluginRegistry;
+        private readonly PluginController pluginController;
 
         public PluginInstallerThread()
         {
             pluginFileRegistry = RegistryFactory.PluginFileRegistry;
-            pluginRegistry = RegistryFactory.PluginRegistry;
+
+            pluginController = new PluginController(RegistryFactory.PluginRegistry);
         }
 
         public delegate void InstallPluginEventHandler(PluginInstallerThread sender, InstallPluginEventArgs args);
@@ -63,6 +70,7 @@
             {
                 var fileInfo = new FileInfo(file);
                 RaiseInstallPluginEvent(fileInfo);
+                Log.Info("Installing plugin " + fileInfo.Name);
 
                 try
                 {
@@ -99,12 +107,16 @@
                     SavePluginInformation(plugin, installedFiles);
 
                     RaisePluginInstalledEvent(fileInfo, plugin);
+
+                    Log.Info("Installation successfull.");
                 }
                 catch (Exception ex)
                 {
                     var errorMessage = string.Format(
                         "Unexpected exception during plugin install: [{0}] {1}",
                         new object[] { ex.GetType().Name, ex.Message });
+
+                    Log.Error("Installation failed", ex);
 
                     RaisePluginInstallFailedEvent(fileInfo, errorMessage);
                 }
@@ -145,16 +157,23 @@
 
         private void SavePluginInformation(Plugin plugin, IEnumerable<PluginFile> installedFiles)
         {
-            pluginRegistry.Add(plugin);
-
             foreach (var installedFile in installedFiles)
             {
                 installedFile.Plugin = plugin;
                 plugin.Files.Add(installedFile);
-                pluginFileRegistry.Add(installedFile);
+
+                var existingPlugin =
+                    pluginFileRegistry.Files.FirstOrDefault(
+                        x => x.Path.Equals(installedFile.Path, StringComparison.OrdinalIgnoreCase));
+                if (existingPlugin != null)
+                {
+                    pluginFileRegistry.Delete(existingPlugin);
+                }
             }
 
-            pluginRegistry.Update(plugin);
+            pluginController.RemoveEmptyPlugins();
+
+            pluginController.Update(plugin);
         }
 
         private IEnumerable<PluginFile> HandlePluginFiles(PluginInstaller installer)
