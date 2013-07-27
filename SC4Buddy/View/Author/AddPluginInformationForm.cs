@@ -232,10 +232,10 @@
 
         private bool ValidateLinkAndAuthor(string link, Author author)
         {
-            link = link.ToUpper().Replace("//WWW.", "//");
-            var site = author.Site.ToUpper().Replace("//WWW.", "//");
+            var siteUri = new UriBuilder(author.Site);
+            var linkUri = new UriBuilder(link);
 
-            return link.Contains(site);
+            return linkUri.Host.EndsWith(siteUri.Host, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
