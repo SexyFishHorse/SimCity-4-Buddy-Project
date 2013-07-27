@@ -5,6 +5,7 @@
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
@@ -16,8 +17,12 @@
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Plugins;
 
+    using log4net;
+
     public class PluginInstallerThread
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly PluginFileRegistry pluginFileRegistry;
 
         private readonly PluginController pluginController;
@@ -65,6 +70,7 @@
             {
                 var fileInfo = new FileInfo(file);
                 RaiseInstallPluginEvent(fileInfo);
+                Log.Info("Installing plugin " + fileInfo.Name);
 
                 try
                 {
@@ -101,12 +107,16 @@
                     SavePluginInformation(plugin, installedFiles);
 
                     RaisePluginInstalledEvent(fileInfo, plugin);
+
+                    Log.Info("Installation successfull.");
                 }
                 catch (Exception ex)
                 {
                     var errorMessage = string.Format(
                         "Unexpected exception during plugin install: [{0}] {1}",
                         new object[] { ex.GetType().Name, ex.Message });
+
+                    Log.Error("Installation failed", ex);
 
                     RaisePluginInstallFailedEvent(fileInfo, errorMessage);
                 }
