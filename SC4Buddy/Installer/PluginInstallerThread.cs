@@ -7,6 +7,7 @@
     using System.Linq;
 
     using NIHEI.Common.IO;
+    using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.DataAccess.Plugins;
     using NIHEI.SC4Buddy.Entities;
@@ -19,12 +20,13 @@
     {
         private readonly PluginFileRegistry pluginFileRegistry;
 
-        private readonly PluginRegistry pluginRegistry;
+        private readonly PluginController pluginController;
 
         public PluginInstallerThread()
         {
             pluginFileRegistry = RegistryFactory.PluginFileRegistry;
-            pluginRegistry = RegistryFactory.PluginRegistry;
+
+            pluginController = new PluginController(RegistryFactory.PluginRegistry);
         }
 
         public delegate void InstallPluginEventHandler(PluginInstallerThread sender, InstallPluginEventArgs args);
@@ -145,8 +147,6 @@
 
         private void SavePluginInformation(Plugin plugin, IEnumerable<PluginFile> installedFiles)
         {
-            pluginRegistry.Add(plugin);
-
             foreach (var installedFile in installedFiles)
             {
                 installedFile.Plugin = plugin;
@@ -157,17 +157,13 @@
                         x => x.Path.Equals(installedFile.Path, StringComparison.OrdinalIgnoreCase));
                 if (existingPlugin != null)
                 {
-                    existingPlugin.Plugin = installedFile.Plugin;
-                    existingPlugin.PluginId = installedFile.Id;
-                    pluginFileRegistry.Update(existingPlugin);
-                }
-                else
-                {
-                    pluginFileRegistry.Add(installedFile);
+                    pluginFileRegistry.Delete(existingPlugin);
                 }
             }
 
-            pluginRegistry.Update(plugin);
+            pluginController.RemoveEmptyPlugins();
+
+            pluginController.Update(plugin);
         }
 
         private IEnumerable<PluginFile> HandlePluginFiles(PluginInstaller installer)
