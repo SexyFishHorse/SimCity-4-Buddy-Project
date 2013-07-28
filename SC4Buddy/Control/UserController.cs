@@ -48,12 +48,6 @@
 
         public User Login(string email, string password)
         {
-            Settings.Default.UserEmail = string.Empty;
-            if (File.Exists(passwordHashFilePath))
-            {
-                File.Delete(passwordHashFilePath);
-            }
-
             var possibleUser = GetPossibleUser(email);
 
             var saltedHash = GenerateSaltedHash(
@@ -64,12 +58,6 @@
 
         private User Login(string email, byte[] password)
         {
-            Settings.Default.UserEmail = string.Empty;
-            if (File.Exists(passwordHashFilePath))
-            {
-                File.Delete(passwordHashFilePath);
-            }
-
             var possibleUser = GetPossibleUser(email);
 
             return CompareHashesAndUpdateSettings(password, possibleUser);
@@ -124,6 +112,12 @@
         {
             if (!saltedHash.SequenceEqual(possibleUser.Passphrase))
             {
+                Settings.Default.UserEmail = string.Empty;
+                if (File.Exists(passwordHashFilePath))
+                {
+                    File.Delete(passwordHashFilePath);
+                }
+
                 throw new InvalidCredentialException("Invalid username or password.");
             }
 
