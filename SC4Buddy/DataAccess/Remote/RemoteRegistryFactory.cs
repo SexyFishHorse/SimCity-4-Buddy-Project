@@ -1,5 +1,10 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess.Remote
 {
+    using System;
+    using System.Configuration;
+    using System.Data.Common;
+    using System.Data.EntityClient;
+
     using NIHEI.SC4Buddy.Entities.Remote;
 
     public class RemoteRegistryFactory
@@ -16,7 +21,18 @@
 
         private RemoteRegistryFactory()
         {
-            var entities = new RemoteEntities();
+            var originalConnectionString = ConfigurationManager.ConnectionStrings["RemoteEntities"].ConnectionString;
+
+            Console.WriteLine(originalConnectionString);
+            var entityBuilder = new EntityConnectionStringBuilder(originalConnectionString);
+            var providerConnectionString = entityBuilder.ProviderConnectionString;
+            providerConnectionString += ";password=_VslefXPl5Tg8pBcSYzI";
+
+            entityBuilder.ProviderConnectionString = providerConnectionString;
+
+            Console.WriteLine(entityBuilder.ConnectionString);
+
+            var entities = new RemoteEntities(entityBuilder.ConnectionString);
 
             remotePluginRegistry = new RemotePluginRegistry(entities);
 

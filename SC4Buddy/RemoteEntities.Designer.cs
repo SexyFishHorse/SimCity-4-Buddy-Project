@@ -19,10 +19,10 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("Entities.Remote", "Author_ibfk_1", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIHEI.SC4Buddy.Entities.Remote.User), "Author", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.Author), true)]
-[assembly: EdmRelationshipAttribute("Entities.Remote", "Plugin_ibfk_1", "Author", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIHEI.SC4Buddy.Entities.Remote.Author), "Plugin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePlugin), true)]
-[assembly: EdmRelationshipAttribute("Entities.Remote", "PluginFile_ibfk_3", "Plugin", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePlugin), "RemotePluginFile", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePluginFile), true)]
-[assembly: EdmRelationshipAttribute("Entities.Remote", "PluginDependency", "Plugin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePlugin), "Plugin1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePlugin))]
+[assembly: EdmRelationshipAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_Author_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIHEI.SC4Buddy.Entities.Remote.User), "Author", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.Author), true)]
+[assembly: EdmRelationshipAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_Plugin_Author", "Author", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIHEI.SC4Buddy.Entities.Remote.Author), "Plugin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePlugin), true)]
+[assembly: EdmRelationshipAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_PluginFile_Plugin", "Plugin", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePlugin), "PluginFile", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePluginFile), true)]
+[assembly: EdmRelationshipAttribute("NIHEI.SC4Buddy.Entities.Remote", "PluginDependency", "Plugin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePlugin), "Plugin1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePlugin))]
 
 #endregion
 
@@ -77,22 +77,6 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<User> Users
-        {
-            get
-            {
-                if ((_Users == null))
-                {
-                    _Users = base.CreateObjectSet<User>("Users");
-                }
-                return _Users;
-            }
-        }
-        private ObjectSet<User> _Users;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Author> Authors
         {
             get
@@ -105,6 +89,22 @@ namespace NIHEI.SC4Buddy.Entities.Remote
             }
         }
         private ObjectSet<Author> _Authors;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<RemotePlugin> RemotePlugins
+        {
+            get
+            {
+                if ((_RemotePlugins == null))
+                {
+                    _RemotePlugins = base.CreateObjectSet<RemotePlugin>("RemotePlugins");
+                }
+                return _RemotePlugins;
+            }
+        }
+        private ObjectSet<RemotePlugin> _RemotePlugins;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -125,30 +125,22 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<RemotePlugin> RemotePlugins
+        public ObjectSet<User> Users
         {
             get
             {
-                if ((_RemotePlugins == null))
+                if ((_Users == null))
                 {
-                    _RemotePlugins = base.CreateObjectSet<RemotePlugin>("RemotePlugins");
+                    _Users = base.CreateObjectSet<User>("Users");
                 }
-                return _RemotePlugins;
+                return _Users;
             }
         }
-        private ObjectSet<RemotePlugin> _RemotePlugins;
+        private ObjectSet<User> _Users;
 
         #endregion
 
         #region AddTo Methods
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToUsers(User user)
-        {
-            base.AddObject("Users", user);
-        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Authors EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -156,6 +148,14 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         public void AddToAuthors(Author author)
         {
             base.AddObject("Authors", author);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the RemotePlugins EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToRemotePlugins(RemotePlugin remotePlugin)
+        {
+            base.AddObject("RemotePlugins", remotePlugin);
         }
     
         /// <summary>
@@ -167,11 +167,11 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the RemotePlugins EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Users EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToRemotePlugins(RemotePlugin remotePlugin)
+        public void AddToUsers(User user)
         {
-            base.AddObject("RemotePlugins", remotePlugin);
+            base.AddObject("Users", user);
         }
 
         #endregion
@@ -185,7 +185,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Entities.Remote", Name="Author")]
+    [EdmEntityTypeAttribute(NamespaceName="NIHEI.SC4Buddy.Entities.Remote", Name="Author")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class Author : EntityObject
@@ -195,15 +195,15 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// <summary>
         /// Create a new Author object.
         /// </summary>
-        /// <param name="id">Initial value of the id property.</param>
-        /// <param name="site">Initial value of the Site property.</param>
+        /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static Author CreateAuthor(global::System.Int32 id, global::System.String site, global::System.String name)
+        /// <param name="site">Initial value of the Site property.</param>
+        public static Author CreateAuthor(global::System.Int32 id, global::System.String name, global::System.String site)
         {
             Author author = new Author();
-            author.id = id;
-            author.Site = site;
+            author.Id = id;
             author.Name = name;
+            author.Site = site;
             return author;
         }
 
@@ -216,27 +216,27 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 id
+        public global::System.Int32 Id
         {
             get
             {
-                return _id;
+                return _Id;
             }
             set
             {
-                if (_id != value)
+                if (_Id != value)
                 {
-                    OnidChanging(value);
-                    ReportPropertyChanging("id");
-                    _id = StructuralObject.SetValidValue(value, "id");
-                    ReportPropertyChanged("id");
-                    OnidChanged();
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
                 }
             }
         }
-        private global::System.Int32 _id;
-        partial void OnidChanging(global::System.Int32 value);
-        partial void OnidChanged();
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -267,30 +267,6 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Site
-        {
-            get
-            {
-                return _Site;
-            }
-            set
-            {
-                OnSiteChanging(value);
-                ReportPropertyChanging("Site");
-                _Site = StructuralObject.SetValidValue(value, false, "Site");
-                ReportPropertyChanged("Site");
-                OnSiteChanged();
-            }
-        }
-        private global::System.String _Site;
-        partial void OnSiteChanging(global::System.String value);
-        partial void OnSiteChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.String Name
         {
             get
@@ -309,6 +285,30 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Site
+        {
+            get
+            {
+                return _Site;
+            }
+            set
+            {
+                OnSiteChanging(value);
+                ReportPropertyChanging("Site");
+                _Site = StructuralObject.SetValidValue(value, false, "Site");
+                ReportPropertyChanged("Site");
+                OnSiteChanged();
+            }
+        }
+        private global::System.String _Site;
+        partial void OnSiteChanging(global::System.String value);
+        partial void OnSiteChanged();
 
         #endregion
 
@@ -320,16 +320,16 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Entities.Remote", "Author_ibfk_1", "User")]
+        [EdmRelationshipNavigationPropertyAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_Author_User", "User")]
         public User User
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Entities.Remote.Author_ibfk_1", "User").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("NIHEI.SC4Buddy.Entities.Remote.FK_Author_User", "User").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Entities.Remote.Author_ibfk_1", "User").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("NIHEI.SC4Buddy.Entities.Remote.FK_Author_User", "User").Value = value;
             }
         }
         /// <summary>
@@ -341,13 +341,13 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("Entities.Remote.Author_ibfk_1", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("NIHEI.SC4Buddy.Entities.Remote.FK_Author_User", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("Entities.Remote.Author_ibfk_1", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("NIHEI.SC4Buddy.Entities.Remote.FK_Author_User", "User", value);
                 }
             }
         }
@@ -358,18 +358,18 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Entities.Remote", "Plugin_ibfk_1", "Plugin")]
+        [EdmRelationshipNavigationPropertyAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_Plugin_Author", "Plugin")]
         public EntityCollection<RemotePlugin> Plugins
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RemotePlugin>("Entities.Remote.Plugin_ibfk_1", "Plugin");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RemotePlugin>("NIHEI.SC4Buddy.Entities.Remote.FK_Plugin_Author", "Plugin");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RemotePlugin>("Entities.Remote.Plugin_ibfk_1", "Plugin", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RemotePlugin>("NIHEI.SC4Buddy.Entities.Remote.FK_Plugin_Author", "Plugin", value);
                 }
             }
         }
@@ -381,7 +381,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Entities.Remote", Name="RemotePlugin")]
+    [EdmEntityTypeAttribute(NamespaceName="NIHEI.SC4Buddy.Entities.Remote", Name="RemotePlugin")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class RemotePlugin : EntityObject
@@ -393,13 +393,13 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="link">Initial value of the Link property.</param>
-        public static RemotePlugin CreateRemotePlugin(global::System.Int32 id, global::System.String name, global::System.String link)
+        /// <param name="authorId">Initial value of the AuthorId property.</param>
+        public static RemotePlugin CreateRemotePlugin(global::System.Int32 id, global::System.String name, global::System.Int32 authorId)
         {
             RemotePlugin remotePlugin = new RemotePlugin();
             remotePlugin.Id = id;
             remotePlugin.Name = name;
-            remotePlugin.Link = link;
+            remotePlugin.AuthorId = authorId;
             return remotePlugin;
         }
 
@@ -461,9 +461,9 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> AuthorId
+        public global::System.Int32 AuthorId
         {
             get
             {
@@ -478,8 +478,8 @@ namespace NIHEI.SC4Buddy.Entities.Remote
                 OnAuthorIdChanged();
             }
         }
-        private Nullable<global::System.Int32> _AuthorId;
-        partial void OnAuthorIdChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _AuthorId;
+        partial void OnAuthorIdChanging(global::System.Int32 value);
         partial void OnAuthorIdChanged();
     
         /// <summary>
@@ -509,7 +509,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Link
         {
@@ -521,7 +521,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
             {
                 OnLinkChanging(value);
                 ReportPropertyChanging("Link");
-                _Link = StructuralObject.SetValidValue(value, false, "Link");
+                _Link = StructuralObject.SetValidValue(value, true, "Link");
                 ReportPropertyChanged("Link");
                 OnLinkChanged();
             }
@@ -540,16 +540,16 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Entities.Remote", "Plugin_ibfk_1", "Author")]
+        [EdmRelationshipNavigationPropertyAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_Plugin_Author", "Author")]
         public Author Author
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Author>("Entities.Remote.Plugin_ibfk_1", "Author").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Author>("NIHEI.SC4Buddy.Entities.Remote.FK_Plugin_Author", "Author").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Author>("Entities.Remote.Plugin_ibfk_1", "Author").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Author>("NIHEI.SC4Buddy.Entities.Remote.FK_Plugin_Author", "Author").Value = value;
             }
         }
         /// <summary>
@@ -561,13 +561,13 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Author>("Entities.Remote.Plugin_ibfk_1", "Author");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Author>("NIHEI.SC4Buddy.Entities.Remote.FK_Plugin_Author", "Author");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Author>("Entities.Remote.Plugin_ibfk_1", "Author", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Author>("NIHEI.SC4Buddy.Entities.Remote.FK_Plugin_Author", "Author", value);
                 }
             }
         }
@@ -578,18 +578,18 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Entities.Remote", "PluginFile_ibfk_3", "RemotePluginFile")]
+        [EdmRelationshipNavigationPropertyAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_PluginFile_Plugin", "PluginFile")]
         public EntityCollection<RemotePluginFile> Files
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RemotePluginFile>("Entities.Remote.PluginFile_ibfk_3", "RemotePluginFile");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RemotePluginFile>("NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin", "PluginFile");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RemotePluginFile>("Entities.Remote.PluginFile_ibfk_3", "RemotePluginFile", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RemotePluginFile>("NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin", "PluginFile", value);
                 }
             }
         }
@@ -600,18 +600,18 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Entities.Remote", "PluginDependency", "Plugin1")]
+        [EdmRelationshipNavigationPropertyAttribute("NIHEI.SC4Buddy.Entities.Remote", "PluginDependency", "Plugin1")]
         public EntityCollection<RemotePlugin> Dependencies
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RemotePlugin>("Entities.Remote.PluginDependency", "Plugin1");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RemotePlugin>("NIHEI.SC4Buddy.Entities.Remote.PluginDependency", "Plugin1");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RemotePlugin>("Entities.Remote.PluginDependency", "Plugin1", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RemotePlugin>("NIHEI.SC4Buddy.Entities.Remote.PluginDependency", "Plugin1", value);
                 }
             }
         }
@@ -622,18 +622,18 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Entities.Remote", "PluginDependency", "Plugin")]
+        [EdmRelationshipNavigationPropertyAttribute("NIHEI.SC4Buddy.Entities.Remote", "PluginDependency", "Plugin")]
         public EntityCollection<RemotePlugin> DependencyFor
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RemotePlugin>("Entities.Remote.PluginDependency", "Plugin");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RemotePlugin>("NIHEI.SC4Buddy.Entities.Remote.PluginDependency", "Plugin");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RemotePlugin>("Entities.Remote.PluginDependency", "Plugin", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RemotePlugin>("NIHEI.SC4Buddy.Entities.Remote.PluginDependency", "Plugin", value);
                 }
             }
         }
@@ -645,7 +645,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Entities.Remote", Name="RemotePluginFile")]
+    [EdmEntityTypeAttribute(NamespaceName="NIHEI.SC4Buddy.Entities.Remote", Name="RemotePluginFile")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class RemotePluginFile : EntityObject
@@ -782,16 +782,16 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Entities.Remote", "PluginFile_ibfk_3", "Plugin")]
+        [EdmRelationshipNavigationPropertyAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_PluginFile_Plugin", "Plugin")]
         public RemotePlugin Plugin
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RemotePlugin>("Entities.Remote.PluginFile_ibfk_3", "Plugin").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RemotePlugin>("NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin", "Plugin").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RemotePlugin>("Entities.Remote.PluginFile_ibfk_3", "Plugin").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RemotePlugin>("NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin", "Plugin").Value = value;
             }
         }
         /// <summary>
@@ -803,13 +803,13 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RemotePlugin>("Entities.Remote.PluginFile_ibfk_3", "Plugin");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RemotePlugin>("NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin", "Plugin");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RemotePlugin>("Entities.Remote.PluginFile_ibfk_3", "Plugin", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RemotePlugin>("NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin", "Plugin", value);
                 }
             }
         }
@@ -821,7 +821,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="Entities.Remote", Name="User")]
+    [EdmEntityTypeAttribute(NamespaceName="NIHEI.SC4Buddy.Entities.Remote", Name="User")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class User : EntityObject
@@ -832,16 +832,16 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// Create a new User object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="email">Initial value of the Email property.</param>
         /// <param name="salt">Initial value of the Salt property.</param>
         /// <param name="passphrase">Initial value of the Passphrase property.</param>
-        /// <param name="email">Initial value of the Email property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String salt, global::System.Byte[] passphrase, global::System.String email)
+        public static User CreateUser(global::System.Int32 id, global::System.String email, global::System.String salt, global::System.Byte[] passphrase)
         {
             User user = new User();
             user.Id = id;
+            user.Email = email;
             user.Salt = salt;
             user.Passphrase = passphrase;
-            user.Email = email;
             return user;
         }
 
@@ -875,6 +875,30 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         private global::System.Int32 _Id;
         partial void OnIdChanging(global::System.Int32 value);
         partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Email
+        {
+            get
+            {
+                return _Email;
+            }
+            set
+            {
+                OnEmailChanging(value);
+                ReportPropertyChanging("Email");
+                _Email = StructuralObject.SetValidValue(value, false, "Email");
+                ReportPropertyChanged("Email");
+                OnEmailChanged();
+            }
+        }
+        private global::System.String _Email;
+        partial void OnEmailChanging(global::System.String value);
+        partial void OnEmailChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -920,7 +944,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
                 OnRightsChanged();
             }
         }
-        private global::System.String _Rights = "author";
+        private global::System.String _Rights = "Author";
         partial void OnRightsChanging(global::System.String value);
         partial void OnRightsChanged();
     
@@ -947,30 +971,6 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         private global::System.Byte[] _Passphrase;
         partial void OnPassphraseChanging(global::System.Byte[] value);
         partial void OnPassphraseChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Email
-        {
-            get
-            {
-                return _Email;
-            }
-            set
-            {
-                OnEmailChanging(value);
-                ReportPropertyChanging("Email");
-                _Email = StructuralObject.SetValidValue(value, false, "Email");
-                ReportPropertyChanged("Email");
-                OnEmailChanged();
-            }
-        }
-        private global::System.String _Email;
-        partial void OnEmailChanging(global::System.String value);
-        partial void OnEmailChanged();
 
         #endregion
 
@@ -982,18 +982,18 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("Entities.Remote", "Author_ibfk_1", "Author")]
+        [EdmRelationshipNavigationPropertyAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_Author_User", "Author")]
         public EntityCollection<Author> Authors
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Author>("Entities.Remote.Author_ibfk_1", "Author");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Author>("NIHEI.SC4Buddy.Entities.Remote.FK_Author_User", "Author");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Author>("Entities.Remote.Author_ibfk_1", "Author", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Author>("NIHEI.SC4Buddy.Entities.Remote.FK_Author_User", "Author", value);
                 }
             }
         }

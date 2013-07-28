@@ -62,6 +62,19 @@
             return CompareHashesAndUpdateSettings(saltedHash, possibleUser);
         }
 
+        private User Login(string email, byte[] password)
+        {
+            Settings.Default.UserEmail = string.Empty;
+            if (File.Exists(passwordHashFilePath))
+            {
+                File.Delete(passwordHashFilePath);
+            }
+
+            var possibleUser = GetPossibleUser(email);
+
+            return CompareHashesAndUpdateSettings(password, possibleUser);
+        }
+
         public void CreateUser(string email, string password, string repeatPassword)
         {
             if (!password.Equals(repeatPassword, StringComparison.Ordinal))
@@ -74,7 +87,7 @@
                 throw new ValidationException(LocalizationStrings.EmailIsNotValid);
             }
 
-            var salt = StringUtility.GenerateRandomAlphaNumericString(50);
+            var salt = StringUtility.GenerateRandomAlphaNumericString(25);
 
             var passwordBytes = Encoding.UTF8.GetBytes(password);
 
@@ -85,16 +98,6 @@
             var user = new User { Email = email, Salt = salt, Passphrase = saltedHashBytes };
 
             userRegistry.Add(user);
-        }
-
-        private static bool CompareByteArrays(byte[] array1, byte[] array2)
-        {
-            if (array1.Length != array2.Length)
-            {
-                return false;
-            }
-
-            return !array1.Where((t, i) => t != array2[i]).Any();
         }
 
         private static byte[] GenerateSaltedHash(byte[] plainText, byte[] salt)
@@ -119,7 +122,7 @@
 
         private User CompareHashesAndUpdateSettings(byte[] saltedHash, User possibleUser)
         {
-            if (!CompareByteArrays(saltedHash, possibleUser.Passphrase))
+            if (!saltedHash.SequenceEqual(possibleUser.Passphrase))
             {
                 throw new InvalidCredentialException("Invalid username or password.");
             }
@@ -142,13 +145,6 @@
             }
 
             return possibleUser;
-        }
-
-        private User Login(string email, byte[] passwordHash)
-        {
-            var possibleUser = GetPossibleUser(email);
-
-            return CompareHashesAndUpdateSettings(passwordHash, possibleUser);
         }
 
         private bool EmailSeemsValid(string email)
