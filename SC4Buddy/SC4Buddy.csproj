@@ -88,12 +88,9 @@
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="SharpCompress">
-      <HintPath>..\packages\sharpcompress.0.9\lib\net40\SharpCompress.dll</HintPath>
+      <HintPath>..\packages\sharpcompress.0.10\lib\net40\SharpCompress.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -134,6 +131,7 @@
     </Compile>
     <Compile Include="Entities\Remote\User.cs" />
     <Compile Include="Entities\UserFolder.cs" />
+    <Compile Include="Installer\FileHandlers\RarMultipartHandler.cs" />
     <Compile Include="Installer\InstallerEventArgs\InstalledPluginEventArgs.cs" />
     <Compile Include="Installer\InstallerEventArgs\InstallPluginEventArgs.cs" />
     <Compile Include="Installer\InstallerEventArgs\InstallPluginFailureEventArgs.cs" />
