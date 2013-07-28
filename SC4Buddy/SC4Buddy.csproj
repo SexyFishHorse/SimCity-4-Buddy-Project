@@ -79,14 +79,6 @@
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="MySql.Data, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MySql.Data.6.7.4\lib\net40\MySql.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="MySql.Data.Entity, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MySQL.Data.Entities.6.7.4.1\lib\net45\MySql.Data.Entity.dll</HintPath>
-    </Reference>
     <Reference Include="SharpCompress">
       <HintPath>..\packages\sharpcompress.0.9\lib\net40\SharpCompress.dll</HintPath>
     </Reference>
@@ -107,6 +99,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Author.cs">
+      <DependentUpon>RemoteEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Control\GameLauncher.cs" />
     <Compile Include="Control\UserFolders\FolderScanner.cs" />
     <Compile Include="Control\Plugins\PluginController.cs" />
@@ -150,16 +145,35 @@
     </Compile>
     <Compile Include="Model\SessionEventArgs.cs" />
     <Compile Include="Model\ValidationResult.cs" />
-    <Compile Include="RemoteDatabaseEntities.Designer.cs">
+    <Compile Include="RemoteEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
+      <DependentUpon>RemoteEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RemoteEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemoteEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RemoteEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemoteEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="RemotePlugin.cs">
+      <DependentUpon>RemoteEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RemotePluginFile.cs">
+      <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Remote\PluginMatcher.cs" />
     <Compile Include="SilkIcons.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SilkIcons.resx</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="View\Application\AboutBox.cs">
       <SubType>Form</SubType>
@@ -373,6 +387,8 @@
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DatabaseEntities.datasource" />
     <None Include="Properties\DataSources\DatabaseEntities2.datasource" />
+    <None Include="Properties\DataSources\NIHEI.SC4Buddy.Entities.DatabaseEntities1.datasource" />
+    <None Include="Properties\DataSources\NIHEI.SC4Buddy.Entities.Remote.RemoteEntities1.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -387,15 +403,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="RemoteDatabaseEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RemoteDatabaseEntities.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>NIHEI.SC4Buddy.Entities.Remote</CustomToolNamespace>
-    </EntityDeploy>
-    <None Include="RemoteDatabaseEntities.edmx.diagram">
-      <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
-    </None>
-    <None Include="SC4Buddy_TemporaryKey.pfx" />
     <Content Include="Wallpapers\13.jpg" />
     <Content Include="Wallpapers\12.jpg" />
     <Content Include="Wallpapers\11.jpg" />
@@ -405,6 +412,24 @@
     <EmbeddedResource Include="View\Application\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EntityDeploy Include="RemoteEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RemoteEntities.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>NIHEI.SC4Buddy.Entities.Remote</CustomToolNamespace>
+    </EntityDeploy>
+    <None Include="RemoteEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RemoteEntities.edmx</DependentUpon>
+      <LastGenOutput>RemoteEntities.Context.cs</LastGenOutput>
+    </None>
+    <None Include="RemoteEntities.edmx.diagram">
+      <DependentUpon>RemoteEntities.edmx</DependentUpon>
+    </None>
+    <None Include="RemoteEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RemoteEntities.edmx</DependentUpon>
+      <LastGenOutput>RemoteEntities.cs</LastGenOutput>
+    </None>
     <None Include="Resources\help.png" />
     <Content Include="Wallpapers\1.jpg" />
     <Content Include="Wallpapers\10.jpg" />
