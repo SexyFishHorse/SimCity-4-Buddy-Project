@@ -41,7 +41,7 @@
 
             var path = gameLocationDialog.SelectedPath;
 
-            if (!ValidateGameLocationPath(path))
+            if (ValidateGameLocationPath(path))
             {
                 gameLocationTextBox.Text = path;
             }
