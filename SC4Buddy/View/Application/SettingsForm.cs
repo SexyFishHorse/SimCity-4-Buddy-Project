@@ -297,8 +297,6 @@
 
         private void SettingsFormFormClosing(object sender, FormClosingEventArgs e)
         {
-            Console.WriteLine(e.CloseReason);
-
             Settings.Default.Reload();
 
             if (ValidateGameLocationPath(gameLocationTextBox.Text))
