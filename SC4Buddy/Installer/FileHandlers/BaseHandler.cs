@@ -91,7 +91,7 @@
         {
             if (Directory.Exists(TempFolder))
             {
-                Directory.Delete(TempFolder, true);
+                FileUtility.DeleteFolder(TempFolder);
             }
 
             Directory.CreateDirectory(TempFolder);
