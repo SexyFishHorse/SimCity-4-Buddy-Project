@@ -46,6 +46,12 @@
                     }
                     else
                     {
+                        var directories = Path.GetDirectoryName(tempPath);
+                        if (!string.IsNullOrWhiteSpace(directories))
+                        {
+                            Directory.CreateDirectory(directories);
+                        }
+
                         entry.WriteToFile(tempPath);
                         tempEntries.Add(new FileInfo(tempPath));
                     }
