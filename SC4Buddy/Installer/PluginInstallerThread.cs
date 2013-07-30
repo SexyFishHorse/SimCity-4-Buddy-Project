@@ -173,7 +173,14 @@
 
             pluginController.RemoveEmptyPlugins();
 
-            pluginController.Update(plugin);
+            if (plugin.Id > 0)
+            {
+                pluginController.Update(plugin);
+            }
+            else
+            {
+                pluginController.Add(plugin);
+            }
         }
 
         private IEnumerable<PluginFile> HandlePluginFiles(PluginInstaller installer)
