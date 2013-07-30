@@ -72,6 +72,11 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
   <ItemGroup>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -407,6 +412,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\icon.ico" />
+    <Content Include="Resources\logo.png" />
     <Content Include="Wallpapers\13.jpg" />
     <Content Include="Wallpapers\12.jpg" />
     <Content Include="Wallpapers\11.jpg" />
