@@ -29,6 +29,7 @@ namespace NIHEI.SC4Buddy.View.Author
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DependenciesForm));
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.dependenciesListView = new System.Windows.Forms.ListView();
@@ -273,6 +274,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.Controls.Add(this.dependenciesListView);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.cancelButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DependenciesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add dependencies";

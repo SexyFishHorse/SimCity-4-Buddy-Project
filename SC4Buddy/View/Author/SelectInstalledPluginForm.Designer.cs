@@ -29,6 +29,7 @@ namespace NIHEI.SC4Buddy.View.Author
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectInstalledPluginForm));
             this.label1 = new System.Windows.Forms.Label();
             this.userFolderComboBox = new System.Windows.Forms.ComboBox();
             this.pluginComboBox = new System.Windows.Forms.ComboBox();
@@ -130,6 +131,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.Controls.Add(this.pluginComboBox);
             this.Controls.Add(this.userFolderComboBox);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SelectInstalledPluginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select installed plugin";

@@ -46,15 +46,19 @@ namespace NIHEI.SC4Buddy.View.Application
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bugsAndFeedbackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundPanel = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.UserFolderComboBox = new System.Windows.Forms.ComboBox();
             this.playButton = new System.Windows.Forms.Button();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.backgroundPanel.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -168,6 +172,11 @@ namespace NIHEI.SC4Buddy.View.Application
             resources.ApplyResources(this.bugsAndFeedbackToolStripMenuItem, "bugsAndFeedbackToolStripMenuItem");
             this.bugsAndFeedbackToolStripMenuItem.Click += new System.EventHandler(this.BugsAndFeedbackToolStripMenuItemClick);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
@@ -178,6 +187,8 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             resources.ApplyResources(this.backgroundPanel, "backgroundPanel");
             this.backgroundPanel.BackgroundImage = global::NIHEI.SC4Buddy.Properties.Resources.Wallpaper11;
+            this.backgroundPanel.Controls.Add(this.pictureBox2);
+            this.backgroundPanel.Controls.Add(this.pictureBox1);
             this.backgroundPanel.Controls.Add(this.panel2);
             this.backgroundPanel.Name = "backgroundPanel";
             // 
@@ -206,10 +217,19 @@ namespace NIHEI.SC4Buddy.View.Application
             this.playButton.UseVisualStyleBackColor = true;
             this.playButton.Click += new System.EventHandler(this.PlayButtonClick);
             // 
-            // toolStripSeparator3
+            // pictureBox1
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.pictureBox1, "pictureBox1");
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.TabStop = false;
             // 
             // Sc4Buddy
             // 
@@ -225,6 +245,8 @@ namespace NIHEI.SC4Buddy.View.Application
             this.menuStrip1.PerformLayout();
             this.backgroundPanel.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,6 +276,8 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bugsAndFeedbackToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
