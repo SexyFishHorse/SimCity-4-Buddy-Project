@@ -166,6 +166,7 @@ namespace NIHEI.SC4Buddy.View.Login
             this.Controls.Add(this.createButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CreateLoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Create user";

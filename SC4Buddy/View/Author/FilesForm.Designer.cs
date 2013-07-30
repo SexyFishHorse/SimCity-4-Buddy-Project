@@ -29,6 +29,7 @@ namespace NIHEI.SC4Buddy.View.Author
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilesForm));
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.filesListView = new System.Windows.Forms.ListView();
@@ -129,6 +130,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.Controls.Add(this.filesListView);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.cancelButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FilesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Plugin files";
