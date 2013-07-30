@@ -1,10 +1,12 @@
 ﻿namespace NIHEI.SC4Buddy.Installer.FileHandlers
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
 
     using SharpCompress.Archive;
     using SharpCompress.Archive.Rar;
+    using SharpCompress.Common;
 
     public class ArchiveHandler : BaseHandler
     {
@@ -31,7 +33,7 @@
 
                     if (rarArchive.IsMultipartVolume() && !rarArchive.IsFirstVolume())
                     {
-                        return tempEntries;
+                        throw new MultiVolumeExtractionException("You can only select part 1 in a multiRar plugin.");
                     }
                 }
 
