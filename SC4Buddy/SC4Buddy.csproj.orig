@@ -30,7 +30,11 @@
     <PublisherName>NIHEI Systems</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
+<<<<<<< HEAD
+    <ApplicationRevision>10</ApplicationRevision>
+=======
     <ApplicationRevision>12</ApplicationRevision>
+>>>>>>> published version 0.0.0.11
     <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
