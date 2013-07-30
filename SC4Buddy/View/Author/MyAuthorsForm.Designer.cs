@@ -29,6 +29,7 @@ namespace NIHEI.SC4Buddy.View.Author
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyAuthorsForm));
             this.closeButton = new System.Windows.Forms.Button();
             this.authorsListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -219,6 +220,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.ClientSize = new System.Drawing.Size(520, 261);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.closeButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MyAuthorsForm";
             this.Text = "My authors";
             this.Load += new System.EventHandler(this.MyAuthorsFormLoad);

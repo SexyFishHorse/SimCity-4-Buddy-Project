@@ -29,6 +29,7 @@ namespace NIHEI.SC4Buddy.View.Author
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdatePluginInformationForm));
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.searchResultsListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -265,6 +266,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.Controls.Add(this.dependenciesButton);
             this.Controls.Add(this.filesButton);
             this.Controls.Add(this.cancelButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UpdatePluginInformationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Update plugin information in the central database";
