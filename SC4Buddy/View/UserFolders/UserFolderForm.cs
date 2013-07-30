@@ -216,11 +216,6 @@
             RepopulateInstalledPluginsListView();
         }
 
-        private void InstallMultifilePluginToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void ScanForNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
             new FolderScannerForm(userFolder).ShowDialog(this);

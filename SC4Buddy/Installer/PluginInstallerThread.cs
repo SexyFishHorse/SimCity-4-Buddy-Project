@@ -17,6 +17,8 @@
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Plugins;
 
+    using SharpCompress.Common;
+
     using log4net;
 
     public class PluginInstallerThread
@@ -44,6 +46,9 @@
 
         public delegate void ReadmeFilesFoundEventHandler(PluginInstallerThread sender, ReadmeFilesEventArgs args);
 
+        public delegate void NotPartOneOfMultipartDetectedEventHandler(
+            PluginInstallerThread sender, InstallPluginEventArgs args);
+
         public event InstallPluginEventHandler InstallingPlugin;
 
         public event InstalledPluginEventHandler PluginInstalled;
@@ -55,6 +60,8 @@
         public event EventHandler AllPluginsInstalled;
 
         public event ReadmeFilesFoundEventHandler ReadmeFilesFound;
+
+        public event NotPartOneOfMultipartDetectedEventHandler NotPartOneOfMultipartDetected;
 
         public string[] FilesToInstall { get; set; }
 
@@ -79,7 +86,16 @@
                     var randomFileName = Path.GetRandomFileName();
                     randomFileName = randomFileName.Substring(0, randomFileName.Length - 4) + DateTime.UtcNow.Ticks;
 
-                    installer.ExtractToTempFolder(fileInfo, Path.Combine(Path.GetTempPath(), "SC4Buddy", randomFileName));
+                    try
+                    {
+                        installer.ExtractToTempFolder(
+                            fileInfo, Path.Combine(Path.GetTempPath(), "SC4Buddy", randomFileName));
+                    }
+                    catch (MultiVolumeExtractionException)
+                    {
+                        RaiseNotPartOneOfMultipartDetectedEvent(fileInfo);
+                        continue;
+                    }
 
                     RaiseInstallProgressEvent(fileInfo, 25, LocalizationStrings.FilesExtractedToTemporaryFolder);
 
@@ -123,6 +139,11 @@
             }
 
             RaiseAllPluginsInstalledEvent();
+        }
+
+        protected virtual void RaiseNotPartOneOfMultipartDetectedEvent(FileInfo fileInfo)
+        {
+            NotPartOneOfMultipartDetected.Invoke(this, new InstallPluginEventArgs(fileInfo));
         }
 
         protected virtual void RaiseInstallProgressEvent(FileInfo fileInfo, int progress, string message)

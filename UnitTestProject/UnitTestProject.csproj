@@ -64,6 +64,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Installer\FileHandlers\BaseHandlerTest.cs" />
+    <Compile Include="Installer\FileHandlers\InstallHandlerTest.cs" />
     <Compile Include="Installer\FileHandlers\RarHandlerTest.cs" />
     <Compile Include="Installer\FileHandlers\DatHandlerTest.cs" />
     <Compile Include="Installer\FileHandlers\ExtracterTestBase.cs" />

@@ -49,7 +49,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.pluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.installToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.installMultifilePluginToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scanForNewPluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scanForNonpluginFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -193,7 +192,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // 
             this.pluginsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.installToolStripMenuItem,
-            this.installMultifilePluginToolStripMenuItem,
             this.scanForNewPluginsToolStripMenuItem});
             this.pluginsToolStripMenuItem.Name = "pluginsToolStripMenuItem";
             resources.ApplyResources(this.pluginsToolStripMenuItem, "pluginsToolStripMenuItem");
@@ -203,12 +201,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.installToolStripMenuItem.Name = "installToolStripMenuItem";
             resources.ApplyResources(this.installToolStripMenuItem, "installToolStripMenuItem");
             this.installToolStripMenuItem.Click += new System.EventHandler(this.InstallToolStripMenuItemClick);
-            // 
-            // installMultifilePluginToolStripMenuItem
-            // 
-            resources.ApplyResources(this.installMultifilePluginToolStripMenuItem, "installMultifilePluginToolStripMenuItem");
-            this.installMultifilePluginToolStripMenuItem.Name = "installMultifilePluginToolStripMenuItem";
-            this.installMultifilePluginToolStripMenuItem.Click += new System.EventHandler(this.InstallMultifilePluginToolStripMenuItemClick);
             // 
             // scanForNewPluginsToolStripMenuItem
             // 
@@ -282,7 +274,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem pluginsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem installToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem installMultifilePluginToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scanForNewPluginsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scanForNonpluginFilesToolStripMenuItem;

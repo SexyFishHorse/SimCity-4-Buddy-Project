@@ -35,11 +35,6 @@
                     throw new FileNotFoundException("FileInfo does not point to an existing file.");
                 }
 
-                if (!value.Extension.Equals(RequiredExtension, StringComparison.OrdinalIgnoreCase))
-                {
-                    throw new ArgumentException(string.Format(@"FileInfo must point to a {0} file.", RequiredExtension), "value");
-                }
-
                 fileInfo = value;
             }
         }
@@ -96,7 +91,7 @@
         {
             if (Directory.Exists(TempFolder))
             {
-                Directory.Delete(TempFolder, true);
+                FileUtility.DeleteFolder(TempFolder);
             }
 
             Directory.CreateDirectory(TempFolder);

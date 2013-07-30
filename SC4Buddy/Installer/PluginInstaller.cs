@@ -33,10 +33,10 @@
                     FileHandler = new DatHandler();
                     break;
                 case ".ZIP":
-                    FileHandler = new ZipHandler();
+                    FileHandler = new ArchiveHandler();
                     break;
                 case ".RAR":
-                    FileHandler = new RarHandler();
+                    FileHandler = new ArchiveHandler();
                     break;
                 default:
                     throw new ArgumentException(@"FileInfo must point to either a dat, rar or zip file.", "fileInfo");
