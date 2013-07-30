@@ -6,7 +6,7 @@
     using SharpCompress.Archive;
     using SharpCompress.Archive.Rar;
 
-    public class InstallHandler : BaseHandler
+    public class ArchiveHandler : BaseHandler
     {
         public override string RequiredExtension
         {

@@ -23,7 +23,7 @@
         [Fact]
         public void ExtractFilesToTempTest1()
         {
-            var instance = new InstallHandler { FileInfo = new FileInfo(archivePath), TempFolder = tempFolder };
+            var instance = new ArchiveHandler { FileInfo = new FileInfo(archivePath), TempFolder = tempFolder };
 
             var infos = instance.ExtractFilesToTemp().ToList();
 
