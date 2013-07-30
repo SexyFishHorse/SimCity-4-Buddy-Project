@@ -55,10 +55,17 @@
             pluginInstallerThread.InstallProgressChanged += OnInstallProgressChanged;
             pluginInstallerThread.AllPluginsInstalled += OnAllPluginsInstalled;
             pluginInstallerThread.ReadmeFilesFound += OnReadmeFilesFound;
+            pluginInstallerThread.NotPartOneOfMultipartDetected += OnNotPartOneOfMultipartDetected;
 
             var installerThread = new Thread(pluginInstallerThread.Install);
             installerThread.SetApartmentState(ApartmentState.STA);
             installerThread.Start();
+        }
+
+        private void OnNotPartOneOfMultipartDetected(PluginInstallerThread sender, InstallPluginEventArgs args)
+        {
+            WriteLine(string.Format(LocalizationStrings.FileXSkipped, args.FileInfo.Name));
+            WriteLine(LocalizationStrings.YouCanOnlySelectPart1OfAMultipartPlugin);
         }
 
         public bool AskToRunExecutable(UserFolder userFolder, FileInfo executable)

@@ -34,7 +34,7 @@
         [Fact(DisplayName = "set_FileInfo, FileInfo for non-zip file, ArgumentException")]
         public void FileInfoSetterTest()
         {
-            var instance = new ZipHandler();
+            var instance = new ArchiveHandler();
             var exception =
                 Assert.Throws<ArgumentException>(
                     () => instance.FileInfo = new FileInfo(Path.Combine(PathToTestMaterial, "rar/archive.rar")));
@@ -46,7 +46,7 @@
         [Fact(DisplayName = "ExtractFilesToTemp(), No FileInfo, Throws InvalidOperationException")]
         public void ExtractFilesToTempTest1()
         {
-            var instance = new ZipHandler();
+            var instance = new ArchiveHandler();
 
             var exception = Assert.Throws<InvalidOperationException>(() => instance.ExtractFilesToTemp());
             exception.Message.ShouldEqual("FileInfo is not set.");
@@ -55,7 +55,7 @@
         [Fact(DisplayName = "ExtractFilesToTemp(), Valid zipfile, Files moved to temp folder")]
         public void ExtractFilesToTempTest2()
         {
-            var instance = new ZipHandler
+            var instance = new ArchiveHandler
                                {
                                    FileInfo =
                                        new FileInfo(archivePath),
@@ -85,7 +85,7 @@
                             + "Throw InvalidOperationException")]
         public void MoveFilesToUserFolder1()
         {
-            var instance = new ZipHandler();
+            var instance = new ArchiveHandler();
 
             var exception = Assert.Throws<ArgumentNullException>(() => instance.MoveToPluginFolder(null));
             exception.ParamName.ShouldEqual("userFolder");
@@ -96,7 +96,7 @@
                             + "Throw InvalidOperationException")]
         public void MoveFilesToUserFolderTest2()
         {
-            var instance = new ZipHandler();
+            var instance = new ArchiveHandler();
             var userFolder = new UserFolder
                                    {
                                        Alias = "Main plugin folder",
@@ -112,7 +112,7 @@
             + "Throw ArgumentException")]
         public void MoveFilesToUserFolderTest3()
         {
-            var instance = new ZipHandler { FileInfo = new FileInfo(archivePath), TempFolder = tempFolder };
+            var instance = new ArchiveHandler { FileInfo = new FileInfo(archivePath), TempFolder = tempFolder };
 
             Assert.DoesNotThrow(() => instance.ExtractFilesToTemp());
 
@@ -137,7 +137,7 @@
                 throw new InvalidOperationException("output folder not created. (" + folderCreated.FullName + ")");
             }
 
-            var instance = new ZipHandler { FileInfo = new FileInfo(archivePath), TempFolder = tempFolder };
+            var instance = new ArchiveHandler { FileInfo = new FileInfo(archivePath), TempFolder = tempFolder };
             var userFolder = new UserFolder { Alias = "Main plugin folder", Path = outputFolder };
 
             Assert.DoesNotThrow(() => instance.ExtractFilesToTemp());

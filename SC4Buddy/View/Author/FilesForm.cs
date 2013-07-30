@@ -63,10 +63,10 @@
             switch (fileInfo.Extension.ToUpper())
             {
                 case ".ZIP":
-                    handler = new ZipHandler();
+                    handler = new ArchiveHandler();
                     break;
                 case ".RAR":
-                    handler = new RarHandler();
+                    handler = new ArchiveHandler();
                     break;
                 default:
                     MessageBox.Show(

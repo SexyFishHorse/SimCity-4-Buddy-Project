@@ -268,6 +268,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File {0} skipped..
+        /// </summary>
+        internal static string FileXSkipped {
+            get {
+                return ResourceManager.GetString("FileXSkipped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Game folder not set.
         /// </summary>
         internal static string GameFolderNotSet {
@@ -840,6 +849,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string YouCannotSpecifyAnEmptyUsername {
             get {
                 return ResourceManager.GetString("YouCannotSpecifyAnEmptyUsername", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can only select part 1 of a multipart plugin (plugin spread over more files like plugin.part1.rar, plugin.part2.rar). If you have already selected part 1 the program will automatically find the other parts and install them..
+        /// </summary>
+        internal static string YouCanOnlySelectPart1OfAMultipartPlugin {
+            get {
+                return ResourceManager.GetString("YouCanOnlySelectPart1OfAMultipartPlugin", resourceCulture);
             }
         }
         

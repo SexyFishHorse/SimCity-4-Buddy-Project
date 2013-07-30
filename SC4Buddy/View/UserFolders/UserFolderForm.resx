@@ -553,22 +553,13 @@
     <value>204, 17</value>
   </metadata>
   <data name="installToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="installToolStripMenuItem.Text" xml:space="preserve">
     <value>Install</value>
   </data>
-  <data name="installMultifilePluginToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="installMultifilePluginToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
-  </data>
-  <data name="installMultifilePluginToolStripMenuItem.Text" xml:space="preserve">
-    <value>Install multi-file plugin</value>
-  </data>
   <data name="scanForNewPluginsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 22</value>
+    <value>184, 22</value>
   </data>
   <data name="scanForNewPluginsToolStripMenuItem.Text" xml:space="preserve">
     <value>Scan for new plugins</value>
@@ -2324,12 +2315,6 @@
     <value>installToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;installToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;installMultifilePluginToolStripMenuItem.Name" xml:space="preserve">
-    <value>installMultifilePluginToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;installMultifilePluginToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;scanForNewPluginsToolStripMenuItem.Name" xml:space="preserve">

@@ -47,6 +47,21 @@
         /// If set to true the deleted files and folders will be sent to 
         /// the recycle bin in stead of being permanently deleted.
         /// </param>
+        public static void DeleteFolder(string path, bool sendToRecycleBin = false)
+        {
+            DeleteFolder(new DirectoryInfo(path), sendToRecycleBin);
+        }
+
+        /// <summary>
+        /// Deletes a directory and all of its content.
+        /// </summary>
+        /// <param name="path">
+        /// The directory to delete.
+        /// </param>
+        /// <param name="sendToRecycleBin">
+        /// If set to true the deleted files and folders will be sent to 
+        /// the recycle bin in stead of being permanently deleted.
+        /// </param>
         public static void DeleteFolder(DirectoryInfo path, bool sendToRecycleBin = false)
         {
             var files = path.EnumerateFiles("*", SearchOption.AllDirectories);
