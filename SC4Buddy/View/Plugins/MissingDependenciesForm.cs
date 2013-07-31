@@ -16,6 +16,8 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private RemotePlugin selectedItem;
 
+        private IList<RemotePlugin> visitedDependencies;
+
         public MissingDependenciesForm()
         {
             InitializeComponent();
@@ -53,6 +55,11 @@ namespace NIHEI.SC4Buddy.View.Plugins
         private void GoToDownloadButtonClick(object sender, EventArgs e)
         {
             Process.Start(selectedItem.Link);
+            if (!visitedDependencies.Contains(selectedItem))
+            {
+                visitedDependencies.Add(selectedItem);
+            }
+            UpdateListView();
         }
     }
 }
