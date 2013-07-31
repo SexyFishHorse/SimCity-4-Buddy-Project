@@ -41,8 +41,8 @@ namespace NIHEI.SC4Buddy.View.Plugins
             // 
             // dependencyListView
             // 
-            this.dependencyListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dependencyListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dependencyListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
@@ -88,6 +88,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.goToDownloadButton.TabIndex = 2;
             this.goToDownloadButton.Text = "Go to download";
             this.goToDownloadButton.UseVisualStyleBackColor = true;
+            this.goToDownloadButton.Click += new System.EventHandler(this.GoToDownloadButtonClick);
             // 
             // closeButton
             // 

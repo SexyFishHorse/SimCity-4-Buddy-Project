@@ -3,6 +3,8 @@ using System.Windows.Forms;
 
 namespace NIHEI.SC4Buddy.View.Plugins
 {
+    using System.Diagnostics;
+
     using NIHEI.Common.UI.Elements;
 
     public partial class MissingDependenciesForm : Form
@@ -30,6 +32,11 @@ namespace NIHEI.SC4Buddy.View.Plugins
             {
                 goToDownloadButton.Enabled = false;
             }
+        }
+
+        private void GoToDownloadButtonClick(object sender, EventArgs e)
+        {
+            Process.Start(link);
         }
     }
 }
