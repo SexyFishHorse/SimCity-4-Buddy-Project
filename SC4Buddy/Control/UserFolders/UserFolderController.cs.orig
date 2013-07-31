@@ -157,6 +157,7 @@
             return plugins.Count(matcher.MatchAndUpdate);
         }
 
+<<<<<<< HEAD
         public void GetEstimatedFilesAndFoldersToBeRemoved(UserFolder userFolder, out int numFiles, out int numFolders)
         {
             var files = Directory.EnumerateFiles(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories);
@@ -219,11 +220,11 @@
             }
 
             return numFolders;
-        }
-
+=======
         public int NumberOfRecognizedPlugins()
         {
             return pluginController.Plugins.Count(x => x.RemotePluginId > 0);
+>>>>>>> made method to check the number of recognized plugins in the user controller
         }
     }
 }
