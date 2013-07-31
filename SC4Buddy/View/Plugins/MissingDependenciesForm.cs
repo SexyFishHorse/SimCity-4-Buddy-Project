@@ -34,6 +34,22 @@ namespace NIHEI.SC4Buddy.View.Plugins
             }
         }
 
+        private void UpdateListView()
+        {
+            dependencyListView.BeginUpdate();
+            dependencyListView.Items.Clear();
+            foreach (var remotePlugin in missingDependencies)
+            {
+                var item = new ListViewItemWithObjectValue<RemotePlugin>(remotePlugin.Name, remotePlugin);
+                item.SubItems.Add(remotePlugin.AuthorId > 0 ? remotePlugin.Author.Name : LocalizationStrings.Unknown);
+                item.SubItems.Add(remotePlugin.Link);
+                item.SubItems.Add(visitedDependencies.Contains(remotePlugin) ? LocalizationStrings.Visited : string.Empty);
+                dependencyListView.Items.Add(item);
+            }
+            dependencyListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            dependencyListView.EndUpdate();
+        }
+
         private void DependencyListViewSelectedIndexChanged(object sender, EventArgs e)
         {
             if (dependencyListView.SelectedItems.Count > 0)
