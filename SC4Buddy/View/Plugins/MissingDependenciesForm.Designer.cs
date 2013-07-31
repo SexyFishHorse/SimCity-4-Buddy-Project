@@ -34,6 +34,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.goToDownloadButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
@@ -47,7 +48,8 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.dependencyListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader3,
+            this.columnHeader4});
             this.dependencyListView.Location = new System.Drawing.Point(12, 25);
             this.dependencyListView.MultiSelect = false;
             this.dependencyListView.Name = "dependencyListView";
@@ -59,15 +61,23 @@ namespace NIHEI.SC4Buddy.View.Plugins
             // 
             // columnHeader1
             // 
+            this.columnHeader1.DisplayIndex = 1;
             this.columnHeader1.Text = "Name";
             // 
             // columnHeader2
             // 
+            this.columnHeader2.DisplayIndex = 2;
             this.columnHeader2.Text = "Author";
             // 
             // columnHeader3
             // 
+            this.columnHeader3.DisplayIndex = 3;
             this.columnHeader3.Text = "Link";
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.DisplayIndex = 0;
+            this.columnHeader4.Text = "Visited";
             // 
             // label1
             // 
@@ -128,5 +138,6 @@ namespace NIHEI.SC4Buddy.View.Plugins
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button goToDownloadButton;
         private System.Windows.Forms.Button closeButton;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }
