@@ -284,7 +284,10 @@
             }
 
             var checker = new DependencyChecker();
-            checker.CheckDependencies(userFolder);
+            var missingDependencies = checker.CheckDependencies(userFolder);
+
+            var dialog = new MissingDependenciesForm { MissingDependencies = missingDependencies };
+            dialog.ShowDialog(this);
         }
     }
 }
