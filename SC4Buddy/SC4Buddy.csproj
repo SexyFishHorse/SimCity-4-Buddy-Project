@@ -490,9 +490,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Remote\Control\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\NiheiCommon\NiheiCommon.csproj">
       <Project>{43f9af3f-d57d-421d-ba98-87fd499ca314}</Project>
