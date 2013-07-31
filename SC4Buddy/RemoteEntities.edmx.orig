@@ -91,8 +91,13 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Plugin_Author">
+<<<<<<< HEAD
+          <End Role="Author" Type="Entities.Store.Author" Multiplicity="0..1" />
+          <End Role="Plugin" Type="Entities.Store.Plugin" Multiplicity="*" />
+=======
           <End Role="Author" Type="NIHEI.SC4Buddy.Entities.Remote.Store.Author" Multiplicity="0..1" />
           <End Role="Plugin" Type="NIHEI.SC4Buddy.Entities.Remote.Store.Plugin" Multiplicity="*" />
+>>>>>>> regenerated remoteentities entity model
           <ReferentialConstraint>
             <Principal Role="Author">
               <PropertyRef Name="Id" />
@@ -179,11 +184,19 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
+<<<<<<< HEAD
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="AuthorId" />
           <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Link" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+=======
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="AuthorId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Link" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+>>>>>>> regenerated remoteentities entity model
           <NavigationProperty Name="Author" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_Plugin_Author" FromRole="Plugin" ToRole="Author" />
           <NavigationProperty Name="Files" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin" FromRole="Plugin" ToRole="PluginFile" />
           <NavigationProperty Name="Dependencies" Relationship="NIHEI.SC4Buddy.Entities.Remote.PluginDependency" FromRole="Plugin" ToRole="Plugin1" />
@@ -203,11 +216,19 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
+<<<<<<< HEAD
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Email" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Salt" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Rights" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" DefaultValue="Author" />
           <Property Type="Binary" Name="Passphrase" Nullable="false" MaxLength="Max" FixedLength="false" />
+=======
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="Salt" Type="String" Nullable="false" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="Rights" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" DefaultValue="Author" />
+          <Property Name="Passphrase" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+>>>>>>> regenerated remoteentities entity model
           <NavigationProperty Name="Authors" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_Author_User" FromRole="User" ToRole="Author" />
         </EntityType>
         <Association Name="FK_Author_User">
@@ -223,8 +244,13 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Plugin_Author">
+<<<<<<< HEAD
           <End Type="NIHEI.SC4Buddy.Entities.Remote.Author" Role="Author" Multiplicity="0..1" />
           <End Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Role="Plugin" Multiplicity="*" />
+=======
+          <End Role="Author" Type="NIHEI.SC4Buddy.Entities.Remote.Author" Multiplicity="0..1" />
+          <End Role="Plugin" Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Multiplicity="*" />
+>>>>>>> regenerated remoteentities entity model
           <ReferentialConstraint>
             <Principal Role="Author">
               <PropertyRef Name="Id" />
@@ -299,7 +325,12 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="PluginDependency" TypeName="NIHEI.SC4Buddy.Entities.Remote.PluginDependency" StoreEntitySet="PluginDependency">
+<<<<<<< HEAD
+            <EndProperty Name="Plugin1">
               <ScalarProperty Name="Id" ColumnName="DependencyPluginId" />
+            </EndProperty>
+=======
+>>>>>>> regenerated remoteentities entity model
             <EndProperty Name="Plugin">
               <ScalarProperty Name="Id" ColumnName="PluginId" />
             </EndProperty>
