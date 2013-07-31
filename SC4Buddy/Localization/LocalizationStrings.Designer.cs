@@ -394,6 +394,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No dependencies missing.
+        /// </summary>
+        internal static string NoDependenciesMissing {
+            get {
+                return ResourceManager.GetString("NoDependenciesMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No file changes detected.
         /// </summary>
         internal static string NoFileChangesDetected {
@@ -480,6 +489,16 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string NumMinutes {
             get {
                 return ResourceManager.GetString("NumMinutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} plugins checked for missing dependencies and none were missing.
+        ///Note that plugins not known to the central server was not checked..
+        /// </summary>
+        internal static string NumPluginsCheckedForMissingPluginsAndNoneWereMissing {
+            get {
+                return ResourceManager.GetString("NumPluginsCheckedForMissingPluginsAndNoneWereMissing", resourceCulture);
             }
         }
         

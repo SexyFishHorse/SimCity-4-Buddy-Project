@@ -442,4 +442,11 @@ Should also notify the user that some files may have been installed so the user 
     <value>Uncaught exception: "{0}".
 Would you like to open the log?</value>
   </data>
+  <data name="NoDependenciesMissing" xml:space="preserve">
+    <value>No dependencies missing</value>
+  </data>
+  <data name="NumPluginsCheckedForMissingPluginsAndNoneWereMissing" xml:space="preserve">
+    <value>{0} plugins checked for missing dependencies and none were missing.
+Note that plugins not known to the central server was not checked.</value>
+  </data>
 </root>

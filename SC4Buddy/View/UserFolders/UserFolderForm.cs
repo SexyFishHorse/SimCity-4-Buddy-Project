@@ -286,8 +286,21 @@
             var checker = new DependencyChecker();
             var missingDependencies = checker.CheckDependencies(userFolder);
 
-            var dialog = new MissingDependenciesForm { MissingDependencies = missingDependencies };
-            dialog.ShowDialog(this);
+            if (missingDependencies.Any())
+            {
+                var dialog = new MissingDependenciesForm { MissingDependencies = missingDependencies };
+                dialog.ShowDialog(this);
+            }
+            else
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
+                    LocalizationStrings.NoDependenciesMissing,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
+            }
         }
     }
 }
