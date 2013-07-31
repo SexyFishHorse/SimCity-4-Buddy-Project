@@ -213,6 +213,7 @@ namespace NIHEI.SC4Buddy.View.Application
             // scanButton
             // 
             resources.ApplyResources(this.scanButton, "scanButton");
+            this.scanButton.CausesValidation = false;
             this.scanButton.Name = "scanButton";
             this.toolTip1.SetToolTip(this.scanButton, resources.GetString("scanButton.ToolTip"));
             this.scanButton.UseVisualStyleBackColor = true;
