@@ -35,18 +35,35 @@
 
             var remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
 
-            var remotePluginsWithDependencies = new List<RemotePlugin>(knownPlugins.Count());
-            remotePluginsWithDependencies.AddRange(
-                knownPlugins.Select(
-                    knownPlugin =>
-                    remotePluginRegistry.RemotePlugins.FirstOrDefault(
-                        x => x.Id == knownPlugin.RemotePluginId && x.Dependencies.Any())));
+            var remotePluginsWithDependencies = new List<RemotePlugin>();
 
-            var missingDependencies =
-                (remotePluginsWithDependencies.SelectMany(
-                    remotePlugin => remotePlugin.Dependencies, (remotePlugin, dependency) => new { remotePlugin, dependency })
-                                              .Where(@t => knownPlugins.All(x => x.RemotePluginId != @t.dependency.Id))
-                                              .Select(@t => @t.dependency)).ToList();
+            foreach (var knownPlugin in knownPlugins)
+            {
+                foreach (var remotePlugin in remotePluginRegistry.RemotePlugins.Include("Author"))
+                {
+                    if (remotePlugin.Id == knownPlugin.RemotePluginId)
+                    {
+                        if (remotePlugin.Dependencies.Any())
+                        {
+                            remotePluginsWithDependencies.Add(remotePlugin);
+                        }
+                    }
+                }
+            }
+
+            var missingDependencies = new List<RemotePlugin>();
+
+            foreach (var remotePlugin in remotePluginsWithDependencies)
+            {
+                foreach (var dependency in remotePlugin.Dependencies)
+                {
+                    if (!knownPlugins.Any(x => x.RemotePluginId == dependency.Id))
+                    {
+                        missingDependencies.Add(dependency);
+                    }
+                }
+            }
+
             return missingDependencies;
         }
     }

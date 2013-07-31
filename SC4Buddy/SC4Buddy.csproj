@@ -280,7 +280,7 @@
     <Compile Include="View\Plugins\MissingDependenciesForm.Designer.cs">
       <DependentUpon>MissingDependenciesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserFolders\DependencyChecker.cs" />
+    <Compile Include="Remote\DependencyChecker.cs" />
     <Compile Include="View\UserFolders\UserFolderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -502,9 +502,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Remote\Control\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\NiheiCommon\NiheiCommon.csproj">
       <Project>{43f9af3f-d57d-421d-ba98-87fd499ca314}</Project>
