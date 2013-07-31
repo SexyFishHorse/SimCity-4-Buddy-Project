@@ -19,7 +19,7 @@
     {
         private readonly UserRegistry userRegistry;
 
-        private readonly string passwordHashFilePath = Path.Combine(Application.UserAppDataPath, "hash.login");
+        private readonly string passwordHashFilePath = Path.Combine(Application.LocalUserAppDataPath, "hash.login");
 
         public UserController(UserRegistry userRegistry)
         {
