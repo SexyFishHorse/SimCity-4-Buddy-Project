@@ -449,4 +449,10 @@ Would you like to open the log?</value>
     <value>{0} plugins checked for missing dependencies and none were missing.
 Note that plugins not known to the central server was not checked.</value>
   </data>
+  <data name="WouldYouLikeToScanForMissingDependencies" xml:space="preserve">
+    <value>Would you like to scan for missing dependencies?</value>
+  </data>
+  <data name="DependencyCheck" xml:space="preserve">
+    <value>Dependency check</value>
+  </data>
 </root>

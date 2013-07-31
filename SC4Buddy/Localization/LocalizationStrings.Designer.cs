@@ -187,6 +187,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dependency check.
+        /// </summary>
+        internal static string DependencyCheck {
+            get {
+                return ResourceManager.GetString("DependencyCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to run the {0} executable? Please note that the installer has to be installed in the plugin folder {1} in order to detect filechanges, otherwise you have to rescan the plugin folders manually..
         /// </summary>
         internal static string DoYouWantToRunTheNamExecutable {
@@ -923,6 +932,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string WouldYouLikeToEnterInformationAboutThePlugin {
             get {
                 return ResourceManager.GetString("WouldYouLikeToEnterInformationAboutThePlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to scan for missing dependencies?.
+        /// </summary>
+        internal static string WouldYouLikeToScanForMissingDependencies {
+            get {
+                return ResourceManager.GetString("WouldYouLikeToScanForMissingDependencies", resourceCulture);
             }
         }
         

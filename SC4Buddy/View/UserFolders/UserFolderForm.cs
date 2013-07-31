@@ -193,6 +193,19 @@
             new InstallPluginsForm(files, userFolder).ShowDialog(this);
 
             RepopulateInstalledPluginsListView();
+
+            var scanForDependencies = MessageBox.Show(
+                this,
+                LocalizationStrings.WouldYouLikeToScanForMissingDependencies,
+                LocalizationStrings.DependencyCheck,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
+
+            if (scanForDependencies == DialogResult.Yes)
+            {
+                CheckForMissingDependenciesToolStripMenuItemClick(sender, e);
+            }
         }
 
         private void ScanForNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
