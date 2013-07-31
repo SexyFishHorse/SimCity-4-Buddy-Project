@@ -280,7 +280,11 @@
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation,
                     MessageBoxDefaultButton.Button1);
+                return;
             }
+
+            var checker = new DependencyChecker();
+            checker.CheckDependencies(userFolder);
         }
     }
 }
