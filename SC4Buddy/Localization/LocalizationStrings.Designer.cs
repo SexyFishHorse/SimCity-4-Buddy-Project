@@ -286,6 +286,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Game not found.
+        /// </summary>
+        internal static string GameNotFound {
+            get {
+                return ResourceManager.GetString("GameNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Game folder.
         /// </summary>
         internal static string GameUserFolderName {
@@ -723,6 +732,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string ThisWillRemoveNumFilesAndAtLeastNumFolders {
             get {
                 return ResourceManager.GetString("ThisWillRemoveNumFilesAndAtLeastNumFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to locate the game. Use the browse option instead..
+        /// </summary>
+        internal static string UnableToLocateTheGameUseTheBrowseOptionInstead {
+            get {
+                return ResourceManager.GetString("UnableToLocateTheGameUseTheBrowseOptionInstead", resourceCulture);
             }
         }
         
