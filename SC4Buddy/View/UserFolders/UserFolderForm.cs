@@ -264,5 +264,23 @@
         {
             updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Default.FetchInfoFromRemote;
         }
+
+        private void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            controller.UpdateInfoForAllPluginsFromServer();
+
+            var numRecognizedPlugins = controller.NumberOfRecognizedPlugins();
+
+            if (numRecognizedPlugins < 1)
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked,
+                    LocalizationStrings.NoRecognizablePluginsFound,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
+            }
+        }
     }
 }

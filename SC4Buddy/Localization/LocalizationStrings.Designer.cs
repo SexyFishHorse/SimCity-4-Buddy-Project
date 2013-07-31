@@ -412,6 +412,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None of your plugins are recognized on the central server and can therefore not be checked..
+        /// </summary>
+        internal static string NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked {
+            get {
+                return ResourceManager.GetString("NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No new, deleted or updated files detected..
         /// </summary>
         internal static string NoNewDeletedOrUpdatedFilesDetected {
@@ -435,6 +444,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string NonPluginFilesDeleted {
             get {
                 return ResourceManager.GetString("NonPluginFilesDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No recognizable plugins found.
+        /// </summary>
+        internal static string NoRecognizablePluginsFound {
+            get {
+                return ResourceManager.GetString("NoRecognizablePluginsFound", resourceCulture);
             }
         }
         

@@ -420,16 +420,20 @@ Should also notify the user that some files may have been installed so the user 
   <data name="UnableToLocateTheGameUseTheBrowseOptionInstead" xml:space="preserve">
     <value>Unable to locate the game. Use the browse option instead.</value>
   </data>
+<<<<<<< HEAD
   <data name="ThereAreNoNonPluginFilesOrEmptyFoldersToRemove" xml:space="preserve">
     <value>There are no non-plugin files or empty folders to remove.</value>
   </data>
-  <data name="NoRecognizablePluginsFound" xml:space="preserve">
-    <value>No recognizable plugins found</value>
-  </data>
   <data name="NoNonPluginFilesDetected" xml:space="preserve">
     <value>No non-plugin files detected</value>
+  </data>
+</root>
+=======
+  <data name="NoRecognizablePluginsFound" xml:space="preserve">
+    <value>No recognizable plugins found</value>
   </data>
   <data name="NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked" xml:space="preserve">
     <value>None of your plugins are recognized on the central server and can therefore not be checked.</value>
   </data>
 </root>
+>>>>>>> added menu item for dependencies check and initialized it with update information from central server.
