@@ -121,44 +121,76 @@
 
         private void ScanButtonClick(object sender, EventArgs e)
         {
-            const string RegistryKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
+            var regKeys = new[]
+                              {
+                                  @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+                                  @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+                              };
 
-            using (var key = Registry.LocalMachine.OpenSubKey(RegistryKey))
+            var match = false;
+
+            foreach (var regKey in regKeys)
             {
-                if (key == null)
+                using (var key = Registry.LocalMachine.OpenSubKey(regKey))
                 {
-                    return;
-                }
-
-                foreach (var subKeyName in key.GetSubKeyNames())
-                {
-                    using (var subKey = key.OpenSubKey(subKeyName))
+                    if (key == null)
                     {
-                        if (subKey == null)
+                        continue;
+                    }
+
+                    foreach (var subKeyName in key.GetSubKeyNames())
+                    {
+                        using (var subKey = key.OpenSubKey(subKeyName))
                         {
-                            continue;
+                            if (subKey == null)
+                            {
+                                continue;
+                            }
+
+                            if (string.IsNullOrWhiteSpace((string)subKey.GetValue("DisplayName")))
+                            {
+                                continue;
+                            }
+
+                            var name = (string)subKey.GetValue("DisplayName");
+                            var path = (string)subKey.GetValue("InstallLocation");
+
+                            if (!name.StartsWith("SimCity 4"))
+                            {
+                                continue;
+                            }
+
+                            if (!ValidateGameLocationPath(path, false))
+                            {
+                                continue;
+                            }
+
+                            gameLocationTextBox.Text = path;
+                            match = true;
+                            break;
                         }
-
-                        if (string.IsNullOrWhiteSpace((string)subKey.GetValue("DisplayName")))
-                        {
-                            continue;
-                        }
-
-                        var name = (string)subKey.GetValue("DisplayName");
-                        var path = (string)subKey.GetValue("InstallLocation");
-
-                        if (!name.StartsWith("SimCity 4"))
-                        {
-                            continue;
-                        }
-
-                        gameLocationTextBox.Text = path;
+                    }
+                    if (match)
+                    {
                         break;
                     }
                 }
             }
 
-            UpdateLanguageBox();
+            if (!match)
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.UnableToLocateTheGameUseTheBrowseOptionInstead,
+                    LocalizationStrings.GameNotFound,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
+            }
+            else
+            {
+                UpdateLanguageBox();
+            }
         }
 
         private void SettingsFormLoad(object sender, EventArgs e)

@@ -414,4 +414,10 @@ Should also notify the user that some files may have been installed so the user 
     <value>File {0} skipped.</value>
     <comment>{0} will be replaced by the filename of the plugin (i.e. largeStadium.rar)</comment>
   </data>
+  <data name="GameNotFound" xml:space="preserve">
+    <value>Game not found</value>
+  </data>
+  <data name="UnableToLocateTheGameUseTheBrowseOptionInstead" xml:space="preserve">
+    <value>Unable to locate the game. Use the browse option instead.</value>
+  </data>
 </root>
