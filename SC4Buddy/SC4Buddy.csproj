@@ -274,6 +274,12 @@
     <Compile Include="View\Plugins\InstallPluginsForm.Designer.cs">
       <DependentUpon>InstallPluginsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Plugins\MissingDependenciesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Plugins\MissingDependenciesForm.Designer.cs">
+      <DependentUpon>MissingDependenciesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\UserFolders\DependencyChecker.cs" />
     <Compile Include="View\UserFolders\UserFolderForm.cs">
       <SubType>Form</SubType>
@@ -357,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Plugins\InstallPluginsForm.resx">
       <DependentUpon>InstallPluginsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Plugins\MissingDependenciesForm.resx">
+      <DependentUpon>MissingDependenciesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\UserFolders\UserFolderForm.da.resx">
       <DependentUpon>UserFolderForm.cs</DependentUpon>
