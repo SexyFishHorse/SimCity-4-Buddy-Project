@@ -432,4 +432,14 @@ Should also notify the user that some files may have been installed so the user 
   <data name="NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked" xml:space="preserve">
     <value>None of your plugins are recognized on the central server and can therefore not be checked.</value>
   </data>
+  <data name="Visited" xml:space="preserve">
+    <value>Visited</value>
+  </data>
+  <data name="UncaughtException" xml:space="preserve">
+    <value>Uncaught exception</value>
+  </data>
+  <data name="UncaughtExceptionWouldYouLikeToOpenTheLog" xml:space="preserve">
+    <value>Uncaught exception: "{0}".
+Would you like to open the log?</value>
+  </data>
 </root>

@@ -790,6 +790,25 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Uncaught exception.
+        /// </summary>
+        internal static string UncaughtException {
+            get {
+                return ResourceManager.GetString("UncaughtException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uncaught exception: &quot;{0}&quot;.
+        ///Would you like to open the log?.
+        /// </summary>
+        internal static string UncaughtExceptionWouldYouLikeToOpenTheLog {
+            get {
+                return ResourceManager.GetString("UncaughtExceptionWouldYouLikeToOpenTheLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown.
         /// </summary>
         internal static string Unknown {
@@ -858,6 +877,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string ValidationError {
             get {
                 return ResourceManager.GetString("ValidationError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visited.
+        /// </summary>
+        internal static string Visited {
+            get {
+                return ResourceManager.GetString("Visited", resourceCulture);
             }
         }
         
