@@ -13,7 +13,8 @@ namespace NIHEI.SC4Buddy.View.Plugins
     public partial class MissingDependenciesForm : Form
     {
         private IEnumerable<RemotePlugin> missingDependencies;
-        private string link;
+
+        private RemotePlugin selectedItem;
 
         public MissingDependenciesForm()
         {
@@ -36,10 +37,10 @@ namespace NIHEI.SC4Buddy.View.Plugins
             if (dependencyListView.SelectedItems.Count > 0)
             {
                 var item =
-                    ((ListViewItemWithObjectValue<Entities.Remote.RemotePlugin>)dependencyListView.SelectedItems[0])
+                    ((ListViewItemWithObjectValue<RemotePlugin>)dependencyListView.SelectedItems[0])
                         .Value;
 
-                link = item.Link;
+                selectedItem = item;
 
                 goToDownloadButton.Enabled = true;
             }
@@ -51,7 +52,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private void GoToDownloadButtonClick(object sender, EventArgs e)
         {
-            Process.Start(link);
+            Process.Start(selectedItem.Link);
         }
     }
 }
