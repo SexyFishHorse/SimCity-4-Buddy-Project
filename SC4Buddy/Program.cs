@@ -25,27 +25,31 @@
             XmlConfigurator.Configure();
 
             Log.Info("Application starting");
+#if (!DEBUG)
             try
             {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
+#endif
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
 
-                if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation))
-                {
-                    Application.Run(new SettingsForm { StartPosition = FormStartPosition.CenterScreen });
-                    SetDefaultUserFolder();
-                }
+            if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation))
+            {
+                Application.Run(new SettingsForm { StartPosition = FormStartPosition.CenterScreen });
+                SetDefaultUserFolder();
+            }
 
-                if (!string.IsNullOrWhiteSpace(Settings.Default.GameLocation))
-                {
-                    Application.Run(new Sc4Buddy());
-                }
+            if (!string.IsNullOrWhiteSpace(Settings.Default.GameLocation))
+            {
+                Application.Run(new Sc4Buddy());
+            }
+#if (!DEBUG)
             }
             catch (Exception ex)
             {
                 Log.Error("Uncaught error", ex);
             }
+#endif
         }
 
         private static void SetDefaultUserFolder()
