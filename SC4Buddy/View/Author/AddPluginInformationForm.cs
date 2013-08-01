@@ -106,6 +106,10 @@
                 descriptionTextBox.Text = plugin.Description.Trim();
                 SelectAuthorInList(plugin.Author, plugin.Link);
             }
+            else if (nameTextBox.Text.Trim().Length < 1)
+            {
+                nameTextBox.Text = plugin.Name.Trim();
+            }
         }
 
         private IList<RemotePluginFile> ConvertPluginFilesToRemotePluginFiles(IList<PluginFile> pluginFiles)
