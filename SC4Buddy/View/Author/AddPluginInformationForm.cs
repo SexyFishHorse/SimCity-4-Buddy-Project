@@ -102,9 +102,12 @@
             if (dialog.IncludeInformation)
             {
                 nameTextBox.Text = plugin.Name.Trim();
-                linkTextBox.Text = plugin.Link.Trim();
-                descriptionTextBox.Text = plugin.Description.Trim();
-                SelectAuthorInList(plugin.Author, plugin.Link);
+                linkTextBox.Text = plugin.Link;
+                descriptionTextBox.Text = plugin.Description;
+                if (plugin.Author != null && !string.IsNullOrWhiteSpace(plugin.Link))
+                {
+                    SelectAuthorInList(plugin.Author, plugin.Link);
+                }
             }
             else if (nameTextBox.Text.Trim().Length < 1)
             {
