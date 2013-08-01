@@ -20,7 +20,7 @@ using System.Xml.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_Author_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIHEI.SC4Buddy.Entities.Remote.User), "Author", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.Author), true)]
-[assembly: EdmRelationshipAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_Plugin_Author", "Author", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIHEI.SC4Buddy.Entities.Remote.Author), "Plugin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePlugin), true)]
+[assembly: EdmRelationshipAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_Plugin_Author", "Author", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIHEI.SC4Buddy.Entities.Remote.Author), "Plugin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePlugin), true)]
 [assembly: EdmRelationshipAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_PluginFile_Plugin", "Plugin", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePlugin), "PluginFile", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePluginFile), true)]
 [assembly: EdmRelationshipAttribute("NIHEI.SC4Buddy.Entities.Remote", "PluginDependency", "Plugin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePlugin), "Plugin1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Remote.RemotePlugin))]
 
@@ -393,13 +393,13 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="authorId">Initial value of the AuthorId property.</param>
-        public static RemotePlugin CreateRemotePlugin(global::System.Int32 id, global::System.String name, global::System.Int32 authorId)
+        /// <param name="link">Initial value of the Link property.</param>
+        public static RemotePlugin CreateRemotePlugin(global::System.Int32 id, global::System.String name, global::System.String link)
         {
             RemotePlugin remotePlugin = new RemotePlugin();
             remotePlugin.Id = id;
             remotePlugin.Name = name;
-            remotePlugin.AuthorId = authorId;
+            remotePlugin.Link = link;
             return remotePlugin;
         }
 
@@ -461,9 +461,9 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 AuthorId
+        public Nullable<global::System.Int32> AuthorId
         {
             get
             {
@@ -478,8 +478,8 @@ namespace NIHEI.SC4Buddy.Entities.Remote
                 OnAuthorIdChanged();
             }
         }
-        private global::System.Int32 _AuthorId;
-        partial void OnAuthorIdChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _AuthorId;
+        partial void OnAuthorIdChanging(Nullable<global::System.Int32> value);
         partial void OnAuthorIdChanged();
     
         /// <summary>
@@ -509,7 +509,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String Link
         {
@@ -521,7 +521,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
             {
                 OnLinkChanging(value);
                 ReportPropertyChanging("Link");
-                _Link = StructuralObject.SetValidValue(value, true, "Link");
+                _Link = StructuralObject.SetValidValue(value, false, "Link");
                 ReportPropertyChanged("Link");
                 OnLinkChanged();
             }
