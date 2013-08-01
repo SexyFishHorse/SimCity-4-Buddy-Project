@@ -47,17 +47,17 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
-          <Property Name="AuthorId" Type="int" Nullable="false" />
+          <Property Name="AuthorId" Type="int" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="Link" Type="nvarchar(max)" />
+          <Property Name="Link" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="PluginDependency">
           <Key>
             <PropertyRef Name="PluginId" />
-            <PropertyRef Name="DependencPluginId" />
+            <PropertyRef Name="DependencyPluginId" />
           </Key>
           <Property Name="PluginId" Type="int" Nullable="false" />
-          <Property Name="DependencPluginId" Type="int" Nullable="false" />
+          <Property Name="DependencyPluginId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="PluginFile">
           <Key>
@@ -91,7 +91,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Plugin_Author">
-          <End Role="Author" Type="Entities.Store.Author" Multiplicity="1" />
+          <End Role="Author" Type="Entities.Store.Author" Multiplicity="0..1" />
           <End Role="Plugin" Type="Entities.Store.Plugin" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Author">
@@ -122,7 +122,7 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="PluginDependency">
-              <PropertyRef Name="DependencPluginId" />
+              <PropertyRef Name="DependencyPluginId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -181,9 +181,9 @@
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="AuthorId" Nullable="false" />
+          <Property Type="Int32" Name="AuthorId" />
           <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Link" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="Link" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Author" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_Plugin_Author" FromRole="Plugin" ToRole="Author" />
           <NavigationProperty Name="Files" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin" FromRole="Plugin" ToRole="PluginFile" />
           <NavigationProperty Name="Dependencies" Relationship="NIHEI.SC4Buddy.Entities.Remote.PluginDependency" FromRole="Plugin" ToRole="Plugin1" />
@@ -207,8 +207,8 @@
           <Property Type="String" Name="Email" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Salt" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Rights" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" DefaultValue="Author" />
-          <NavigationProperty Name="Authors" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_Author_User" FromRole="User" ToRole="Author" />
           <Property Type="Binary" Name="Passphrase" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Authors" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_Author_User" FromRole="User" ToRole="Author" />
         </EntityType>
         <Association Name="FK_Author_User">
           <End Type="NIHEI.SC4Buddy.Entities.Remote.User" Role="User" Multiplicity="0..1" />
@@ -223,7 +223,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Plugin_Author">
-          <End Type="NIHEI.SC4Buddy.Entities.Remote.Author" Role="Author" Multiplicity="1" />
+          <End Type="NIHEI.SC4Buddy.Entities.Remote.Author" Role="Author" Multiplicity="0..1" />
           <End Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Role="Plugin" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Author">
@@ -300,7 +300,7 @@
           </EntitySetMapping>
           <AssociationSetMapping Name="PluginDependency" TypeName="NIHEI.SC4Buddy.Entities.Remote.PluginDependency" StoreEntitySet="PluginDependency">
             <EndProperty Name="Plugin1">
-              <ScalarProperty Name="Id" ColumnName="DependencPluginId" />
+              <ScalarProperty Name="Id" ColumnName="DependencyPluginId" />
             </EndProperty>
             <EndProperty Name="Plugin">
               <ScalarProperty Name="Id" ColumnName="PluginId" />

@@ -23,7 +23,7 @@ namespace NIHEI.SC4Buddy
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public int AuthorId { get; set; }
+        public Nullable<int> AuthorId { get; set; }
         public string Description { get; set; }
         public string Link { get; set; }
     
