@@ -44,6 +44,8 @@
         {
             if (userFolderComboBox.SelectedItem != null)
             {
+                pluginComboBox.BeginUpdate();
+                pluginComboBox.Items.Clear();
                 pluginComboBox.Enabled = true;
 
                 var userFolder = ((ComboBoxItem<UserFolder>)userFolderComboBox.SelectedItem).Value;
@@ -53,6 +55,8 @@
                 {
                     pluginComboBox.Items.Add(new ComboBoxItem<Plugin>(plugin.Name, plugin));
                 }
+
+                pluginComboBox.EndUpdate();
             }
             else
             {
