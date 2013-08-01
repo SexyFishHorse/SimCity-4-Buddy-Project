@@ -28,10 +28,10 @@
     <SupportUrl>http://community.simtropolis.com/topic/58814-the-simcity-4-buddy-project/</SupportUrl>
     <ProductName>SimCity 4 Buddy</ProductName>
     <PublisherName>NIHEI Systems</PublisherName>
-    <MinimumRequiredVersion>0.0.0.12</MinimumRequiredVersion>
+    <MinimumRequiredVersion>0.0.0.13</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
