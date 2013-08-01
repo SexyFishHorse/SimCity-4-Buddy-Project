@@ -80,7 +80,7 @@
             Plugin.Link = linkTextBox.Text.Trim();
             Plugin.Group = GetOrCreateGroup();
 
-            if (oldGroup != null)
+            if (oldGroup != null && !oldGroup.Equals(Plugin.Group))
             {
                 oldGroup.Plugins.Remove(plugin);
                 pluginGroupRegistry.Update(oldGroup);
