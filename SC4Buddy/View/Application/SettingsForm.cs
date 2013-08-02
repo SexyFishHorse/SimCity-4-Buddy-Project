@@ -21,7 +21,7 @@
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly SettingsController settingsController;
+        private readonly ISettingsController settingsController;
 
         public SettingsForm()
         {

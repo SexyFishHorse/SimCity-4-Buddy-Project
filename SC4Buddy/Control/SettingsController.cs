@@ -15,7 +15,7 @@
 
     using log4net;
 
-    public class SettingsController
+    public class SettingsController : ISettingsController
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
