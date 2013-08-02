@@ -1,31 +1,31 @@
 ﻿namespace NIHEI.SC4Buddy.View.Application
 {
     using System;
-    using System.Collections.Generic;
     using System.Drawing;
     using System.Globalization;
-    using System.IO;
     using System.Linq;
     using System.Net.NetworkInformation;
+    using System.Reflection;
     using System.Security.Authentication;
     using System.Windows.Forms;
-
-    using Microsoft.Win32;
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Login;
-    using NIHEI.SC4Buddy.View.UserFolders;
+
+    using log4net;
 
     public partial class SettingsForm : Form
     {
-        private readonly UserFolderRegistry userFolderRegistry;
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        private readonly ISettingsController settingsController;
 
         public SettingsForm()
         {
-            userFolderRegistry = RegistryFactory.UserFolderRegistry;
+            settingsController = new SettingsController(RegistryFactory.UserFolderRegistry);
 
             InitializeComponent();
         }
@@ -41,8 +41,9 @@
 
             var path = gameLocationDialog.SelectedPath;
 
-            if (ValidateGameLocationPath(path))
+            if (settingsController.ValidateGameLocationPath(path))
             {
+                Log.Info(string.Format("Browsed to valid game location: {0}", path));
                 gameLocationTextBox.Text = path;
             }
 
@@ -68,9 +69,15 @@
 
         private void OkButtonClick(object sender, EventArgs e)
         {
-            if (!ValidateGameLocationPath(gameLocationTextBox.Text))
+            if (!settingsController.ValidateGameLocationPath(gameLocationTextBox.Text))
             {
-                return;
+                Log.Info("OK pressed, no valid game folder set.");
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.InvalidGameLocationFolder,
+                    LocalizationStrings.GameNotFound,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
 
             if (backgroundImageListView.SelectedIndices.Count > 0)
@@ -80,105 +87,25 @@
 
             Settings.Default.Save();
 
-            UpdateMainFolder();
+            settingsController.UpdateMainFolder();
 
             Close();
         }
 
-        private bool ValidateGameLocationPath(string path, bool showErrors = true)
-        {
-            if (File.Exists(Path.Combine(path, @"Apps\SimCity 4.exe")))
-            {
-                return true;
-            }
-
-            if (showErrors)
-            {
-                errorProvider.SetIconPadding(gameLocationTextBox, ManageUserFoldersForm.ErrorIconPadding);
-                errorProvider.SetError(gameLocationTextBox, LocalizationStrings.InvalidGameLocationFolder);
-            }
-
-            return false;
-        }
-
-        private void UpdateMainFolder()
-        {
-            var folder = userFolderRegistry.UserFolders.FirstOrDefault(x => x.Id == 1);
-            if (folder == null)
-            {
-                throw new InvalidOperationException("Main plugin folder has been deleted from the database.");
-            }
-
-            folder.Path = Settings.Default.GameLocation;
-            folder.Alias = LocalizationStrings.GameUserFolderName;
-            userFolderRegistry.Update(folder);
-        }
-
         private void CloseButtonClick(object sender, EventArgs e)
         {
+            Log.Info("Closing settings form");
             Close();
         }
 
         private void ScanButtonClick(object sender, EventArgs e)
         {
-            var regKeys = new[]
-                              {
-                                  @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
-                                  @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
-                              };
+            var gameLocation = settingsController.SearchForGameLocation();
 
-            var match = false;
-
-            foreach (var regKey in regKeys)
+            if (!string.IsNullOrWhiteSpace(gameLocation))
             {
-                using (var key = Registry.LocalMachine.OpenSubKey(regKey))
-                {
-                    if (key == null)
-                    {
-                        continue;
-                    }
+                Log.Info("Could not find game location using the scanner");
 
-                    foreach (var subKeyName in key.GetSubKeyNames())
-                    {
-                        using (var subKey = key.OpenSubKey(subKeyName))
-                        {
-                            if (subKey == null)
-                            {
-                                continue;
-                            }
-
-                            if (string.IsNullOrWhiteSpace((string)subKey.GetValue("DisplayName")))
-                            {
-                                continue;
-                            }
-
-                            var name = (string)subKey.GetValue("DisplayName");
-                            var path = (string)subKey.GetValue("InstallLocation");
-
-                            if (!name.StartsWith("SimCity 4"))
-                            {
-                                continue;
-                            }
-
-                            if (!ValidateGameLocationPath(path, false))
-                            {
-                                continue;
-                            }
-
-                            gameLocationTextBox.Text = path;
-                            match = true;
-                            break;
-                        }
-                    }
-                    if (match)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            if (!match)
-            {
                 MessageBox.Show(
                     this,
                     LocalizationStrings.UnableToLocateTheGameUseTheBrowseOptionInstead,
@@ -189,6 +116,9 @@
             }
             else
             {
+                Log.Info("Game found using scanner");
+
+                gameLocationTextBox.Text = gameLocation;
                 UpdateLanguageBox();
             }
         }
@@ -209,12 +139,16 @@
             autoSaveIntervalTrackBar.Enabled = Settings.Default.EnableAutoSave;
             UpdateAutoSaveLabel(Settings.Default.AutoSaveWaitTime);
 
+            cpuCountComboBox.BeginUpdate();
+            cpuCountComboBox.Items.Clear();
             for (var i = 1; i <= Environment.ProcessorCount; i++)
             {
                 cpuCountComboBox.Items.Add(i);
             }
 
             cpuCountComboBox.SelectedIndex = 0;
+            cpuCountComboBox.EndUpdate();
+
             displayModeComboBox.SelectedIndex = 1;
             renderModeComboBox.SelectedIndex = 1;
             colourDepthComboBox.SelectedIndex = 1;
@@ -222,44 +156,41 @@
 
             UpdateLanguageBox();
 
-            var wallpapers = new List<Bitmap>
-                                 {
-                                     Resources.Wallpaper1,
-                                     Resources.Wallpaper2,
-                                     Resources.Wallpaper3,
-                                     Resources.Wallpaper4,
-                                     Resources.Wallpaper5,
-                                     Resources.Wallpaper6,
-                                     Resources.Wallpaper7,
-                                     Resources.Wallpaper8,
-                                     Resources.Wallpaper9,
-                                     Resources.Wallpaper10,
-                                     Resources.Wallpaper11,
-                                     Resources.Wallpaper12,
-                                     Resources.Wallpaper13
-                                 };
+            UpdateBackgroundsListView();
 
-            var ilist = new ImageList { ImageSize = new Size(65, 65) };
-            backgroundImageListView.LargeImageList = ilist;
+            UpdateLoginStatus();
+        }
+
+        private void UpdateBackgroundsListView()
+        {
+            var wallpapers = settingsController.GetWallpapers();
+
+            backgroundImageListView.BeginUpdate();
+            var imageList = new ImageList { ImageSize = new Size(65, 65) };
+            backgroundImageListView.LargeImageList = imageList;
 
             for (var index = 0; index < wallpapers.Count; index++)
             {
                 var wallpaper = wallpapers[index];
-                var lvi = new ListViewItem((index + 1).ToString(CultureInfo.InvariantCulture));
-                ilist.Images.Add(wallpaper);
-                lvi.ImageIndex = index;
-                backgroundImageListView.Items.Add(lvi);
+                var item = new ListViewItem((index + 1).ToString(CultureInfo.InvariantCulture));
+                imageList.Images.Add(wallpaper);
+                item.ImageIndex = index;
+
+                backgroundImageListView.Items.Add(item);
             }
 
-            UpdateLoginStatus();
+            backgroundImageListView.EndUpdate();
         }
 
         private void UpdateLoginStatus()
         {
             emailTextBox.Text = string.Empty;
             passwordTextBox.Text = string.Empty;
+
             if (SessionController.Instance.IsLoggedIn)
             {
+                Log.Info("User is logged in");
+
                 logoutButton.Enabled = true;
                 loginButton.Enabled = false;
                 createLoginButton.Enabled = false;
@@ -270,6 +201,8 @@
             }
             else
             {
+                Log.Info("User is not logged in");
+
                 logoutButton.Enabled = false;
                 loginButton.Enabled = true;
                 createLoginButton.Enabled = true;
@@ -281,23 +214,17 @@
 
         private void UpdateLanguageBox()
         {
-            if (!ValidateGameLocationPath(Settings.Default.GameLocation, false))
+            if (!settingsController.ValidateGameLocationPath(Settings.Default.GameLocation))
             {
                 return;
             }
 
-            var dirs = Directory.EnumerateDirectories(
-                Settings.Default.GameLocation, "*", SearchOption.TopDirectoryOnly);
-            var languages =
-                dirs.Select(
-                    dir => new { dir, files = Directory.EnumerateFiles(dir, "*", SearchOption.TopDirectoryOnly) })
-                    .Where(
-                        @t =>
-                        @t.files.Any(file => file.EndsWith("SimCityLocale.dat", StringComparison.OrdinalIgnoreCase)))
-                    .Select(@t => new DirectoryInfo(@t.dir).Name)
-                    .ToList();
+            var languages = settingsController.GetInstalledLanguages();
 
+            languageComboBox.BeginUpdate();
+            languageComboBox.Items.Clear();
             languageComboBox.Items.AddRange(languages.Cast<object>().ToArray());
+            languageComboBox.EndUpdate();
         }
 
         private void DisableAudioCheckBoxCheckedChanged(object sender, EventArgs e)
@@ -331,8 +258,15 @@
         {
             Settings.Default.Reload();
 
-            if (ValidateGameLocationPath(gameLocationTextBox.Text))
+            if (!settingsController.ValidateGameLocationPath(Settings.Default.GameLocation))
             {
+                Log.Info("Invalid game location on form closing");
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.InvalidGameLocationFolder,
+                    LocalizationStrings.GameNotFound,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return;
             }
 
@@ -344,21 +278,27 @@
                 MessageBoxIcon.Exclamation,
                 MessageBoxDefaultButton.Button1);
 
-            if (result == DialogResult.Retry)
+            if (result != DialogResult.Retry)
             {
-                e.Cancel = true;
+                return;
             }
+
+            Log.Info("Abort form close");
+            e.Cancel = true;
         }
 
         private void LoginButtonClick(object sender, EventArgs e)
         {
             try
             {
+                Log.Info("Logging in");
                 SessionController.Instance.Login(emailTextBox.Text, passwordTextBox.Text);
                 UpdateLoginStatus();
             }
             catch (InvalidCredentialException ex)
             {
+                Log.Error("error on login", ex);
+
                 MessageBox.Show(
                     this,
                     ex.Message,
@@ -384,16 +324,19 @@
 
         private void TabPage3Click(object sender, EventArgs e)
         {
-            if (!NetworkInterface.GetIsNetworkAvailable())
+            if (NetworkInterface.GetIsNetworkAvailable())
             {
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.YouDoNotAppearToBeConnectedToTheInternet,
-                    LocalizationStrings.NoInternetDetectionDetected,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning,
-                    MessageBoxDefaultButton.Button1);
+                return;
             }
+
+            Log.Info("No internet connection detected");
+            MessageBox.Show(
+                this,
+                LocalizationStrings.YouDoNotAppearToBeConnectedToTheInternet,
+                LocalizationStrings.NoInternetDetectionDetected,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button1);
         }
     }
 }
