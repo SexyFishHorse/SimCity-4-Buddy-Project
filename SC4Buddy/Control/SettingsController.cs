@@ -88,7 +88,7 @@
                             var name = (string)subKey.GetValue("DisplayName");
                             var path = (string)subKey.GetValue("InstallLocation");
 
-                            if (!name.StartsWith("SimCity 4") || !ValidateGameLocationPath(path))
+                            if (!name.StartsWith("SimCity 4") || string.IsNullOrWhiteSpace(path) || !ValidateGameLocationPath(path))
                             {
                                 continue;
                             }
