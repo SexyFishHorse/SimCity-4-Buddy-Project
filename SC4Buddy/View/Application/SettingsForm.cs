@@ -20,15 +20,11 @@
 
     public partial class SettingsForm : Form
     {
-        private readonly UserFolderRegistry userFolderRegistry;
-
         private readonly SettingsController settingsController;
 
         public SettingsForm()
         {
-            userFolderRegistry = RegistryFactory.UserFolderRegistry;
-
-            settingsController = new SettingsController();
+            settingsController = new SettingsController(RegistryFactory.UserFolderRegistry);
 
             InitializeComponent();
         }
@@ -88,22 +84,9 @@
 
             Settings.Default.Save();
 
-            UpdateMainFolder();
+            settingsController.UpdateMainFolder();
 
             Close();
-        }
-
-        private void UpdateMainFolder()
-        {
-            var folder = userFolderRegistry.UserFolders.FirstOrDefault(x => x.Id == 1);
-            if (folder == null)
-            {
-                throw new InvalidOperationException("Main plugin folder has been deleted from the database.");
-            }
-
-            folder.Path = Settings.Default.GameLocation;
-            folder.Alias = LocalizationStrings.GameUserFolderName;
-            userFolderRegistry.Update(folder);
         }
 
         private void CloseButtonClick(object sender, EventArgs e)
