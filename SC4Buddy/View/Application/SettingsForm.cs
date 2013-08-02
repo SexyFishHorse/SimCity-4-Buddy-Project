@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Drawing;
     using System.Globalization;
-    using System.IO;
     using System.Linq;
     using System.Net.NetworkInformation;
     using System.Security.Authentication;
@@ -206,18 +205,12 @@
                 return;
             }
 
-            var dirs = Directory.EnumerateDirectories(
-                Settings.Default.GameLocation, "*", SearchOption.TopDirectoryOnly);
-            var languages =
-                dirs.Select(
-                    dir => new { dir, files = Directory.EnumerateFiles(dir, "*", SearchOption.TopDirectoryOnly) })
-                    .Where(
-                        @t =>
-                        @t.files.Any(file => file.EndsWith("SimCityLocale.dat", StringComparison.OrdinalIgnoreCase)))
-                    .Select(@t => new DirectoryInfo(@t.dir).Name)
-                    .ToList();
+            var languages = settingsController.GetInstalledLanguages();
 
+            languageComboBox.BeginUpdate();
+            languageComboBox.Items.Clear();
             languageComboBox.Items.AddRange(languages.Cast<object>().ToArray());
+            languageComboBox.EndUpdate();
         }
 
         private void DisableAudioCheckBoxCheckedChanged(object sender, EventArgs e)

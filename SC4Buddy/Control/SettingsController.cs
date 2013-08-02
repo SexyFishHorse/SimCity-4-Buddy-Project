@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Control
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
 
@@ -96,5 +97,20 @@
 
             return gamePath;
         }
+
+        public List<string> GetInstalledLanguages()
+        {
+            var dirs = Directory.EnumerateDirectories(Settings.Default.GameLocation, "*", SearchOption.TopDirectoryOnly);
+
+            var languages =
+                dirs.Select(dir => new { dir, files = Directory.EnumerateFiles(dir, "*", SearchOption.TopDirectoryOnly) })
+                    .Where(@t => @t.files.Any(file => file.EndsWith("SimCityLocale.dat", StringComparison.OrdinalIgnoreCase)))
+                    .Select(@t => new DirectoryInfo(@t.dir).Name)
+                    .ToList();
+
+            return languages;
+        }
+
+
     }
 }
