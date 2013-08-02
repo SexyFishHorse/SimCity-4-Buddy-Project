@@ -5,6 +5,7 @@
     using System.Globalization;
     using System.Linq;
     using System.Net.NetworkInformation;
+    using System.Reflection;
     using System.Security.Authentication;
     using System.Windows.Forms;
 
@@ -14,8 +15,12 @@
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Login;
 
+    using log4net;
+
     public partial class SettingsForm : Form
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly SettingsController settingsController;
 
         public SettingsForm()
@@ -38,6 +43,7 @@
 
             if (settingsController.ValidateGameLocationPath(path))
             {
+                Log.Info(string.Format("Browsed to valid game location: {0}", path));
                 gameLocationTextBox.Text = path;
             }
 
@@ -65,6 +71,7 @@
         {
             if (!settingsController.ValidateGameLocationPath(gameLocationTextBox.Text))
             {
+                Log.Info("OK pressed, no valid game folder set.");
                 MessageBox.Show(
                     this,
                     LocalizationStrings.InvalidGameLocationFolder,
@@ -87,6 +94,7 @@
 
         private void CloseButtonClick(object sender, EventArgs e)
         {
+            Log.Info("Closing settings form");
             Close();
         }
 
@@ -96,6 +104,8 @@
 
             if (!string.IsNullOrWhiteSpace(gameLocation))
             {
+                Log.Info("Could not find game location using the scanner");
+
                 MessageBox.Show(
                     this,
                     LocalizationStrings.UnableToLocateTheGameUseTheBrowseOptionInstead,
@@ -106,6 +116,8 @@
             }
             else
             {
+                Log.Info("Game found using scanner");
+
                 gameLocationTextBox.Text = gameLocation;
                 UpdateLanguageBox();
             }
@@ -144,6 +156,13 @@
 
             UpdateLanguageBox();
 
+            UpdateBackgroundsListView();
+
+            UpdateLoginStatus();
+        }
+
+        private void UpdateBackgroundsListView()
+        {
             var wallpapers = settingsController.GetWallpapers();
 
             backgroundImageListView.BeginUpdate();
@@ -161,8 +180,6 @@
             }
 
             backgroundImageListView.EndUpdate();
-
-            UpdateLoginStatus();
         }
 
         private void UpdateLoginStatus()
@@ -172,6 +189,8 @@
 
             if (SessionController.Instance.IsLoggedIn)
             {
+                Log.Info("User is logged in");
+
                 logoutButton.Enabled = true;
                 loginButton.Enabled = false;
                 createLoginButton.Enabled = false;
@@ -182,6 +201,8 @@
             }
             else
             {
+                Log.Info("User is not logged in");
+
                 logoutButton.Enabled = false;
                 loginButton.Enabled = true;
                 createLoginButton.Enabled = true;
@@ -237,8 +258,9 @@
         {
             Settings.Default.Reload();
 
-            if (settingsController.ValidateGameLocationPath(gameLocationTextBox.Text))
+            if (!settingsController.ValidateGameLocationPath(Settings.Default.GameLocation))
             {
+                Log.Info("Invalid game location on form closing");
                 MessageBox.Show(
                     this,
                     LocalizationStrings.InvalidGameLocationFolder,
@@ -256,21 +278,27 @@
                 MessageBoxIcon.Exclamation,
                 MessageBoxDefaultButton.Button1);
 
-            if (result == DialogResult.Retry)
+            if (result != DialogResult.Retry)
             {
-                e.Cancel = true;
+                return;
             }
+
+            Log.Info("Abort form close");
+            e.Cancel = true;
         }
 
         private void LoginButtonClick(object sender, EventArgs e)
         {
             try
             {
+                Log.Info("Logging in");
                 SessionController.Instance.Login(emailTextBox.Text, passwordTextBox.Text);
                 UpdateLoginStatus();
             }
             catch (InvalidCredentialException ex)
             {
+                Log.Error("error on login", ex);
+
                 MessageBox.Show(
                     this,
                     ex.Message,
@@ -296,16 +324,19 @@
 
         private void TabPage3Click(object sender, EventArgs e)
         {
-            if (!NetworkInterface.GetIsNetworkAvailable())
+            if (NetworkInterface.GetIsNetworkAvailable())
             {
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.YouDoNotAppearToBeConnectedToTheInternet,
-                    LocalizationStrings.NoInternetDetectionDetected,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning,
-                    MessageBoxDefaultButton.Button1);
+                return;
             }
+
+            Log.Info("No internet connection detected");
+            MessageBox.Show(
+                this,
+                LocalizationStrings.YouDoNotAppearToBeConnectedToTheInternet,
+                LocalizationStrings.NoInternetDetectionDetected,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button1);
         }
     }
 }
