@@ -123,6 +123,7 @@ namespace NIHEI.SC4Buddy.View.Author
             this.descriptionTextBox.Name = "descriptionTextBox";
             this.descriptionTextBox.Size = new System.Drawing.Size(551, 200);
             this.descriptionTextBox.TabIndex = 7;
+            this.descriptionTextBox.TextChanged += new System.EventHandler(this.DescriptionTextBoxTextChanged);
             // 
             // cancelButton
             // 

@@ -170,6 +170,11 @@
                 enabled = false;
             }
 
+            if (descriptionTextBox.Text.Length < 1)
+            {
+                enabled = false;
+            }
+
             saveButton.Enabled = enabled;
         }
 
@@ -248,6 +253,11 @@
             var linkUri = new UriBuilder(link);
 
             return linkUri.Host.EndsWith(siteUri.Host, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private void DescriptionTextBoxTextChanged(object sender, EventArgs e)
+        {
+            UpdateSaveButtonStatus();
         }
     }
 }
