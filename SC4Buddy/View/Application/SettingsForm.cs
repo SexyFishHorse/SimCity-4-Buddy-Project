@@ -17,15 +17,18 @@
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Login;
-    using NIHEI.SC4Buddy.View.UserFolders;
 
     public partial class SettingsForm : Form
     {
         private readonly UserFolderRegistry userFolderRegistry;
 
+        private readonly SettingsController settingsController;
+
         public SettingsForm()
         {
             userFolderRegistry = RegistryFactory.UserFolderRegistry;
+
+            settingsController = new SettingsController();
 
             InitializeComponent();
         }
@@ -41,7 +44,7 @@
 
             var path = gameLocationDialog.SelectedPath;
 
-            if (ValidateGameLocationPath(path))
+            if (settingsController.ValidateGameLocationPath(path))
             {
                 gameLocationTextBox.Text = path;
             }
@@ -68,9 +71,14 @@
 
         private void OkButtonClick(object sender, EventArgs e)
         {
-            if (!ValidateGameLocationPath(gameLocationTextBox.Text))
+            if (!settingsController.ValidateGameLocationPath(gameLocationTextBox.Text))
             {
-                return;
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.InvalidGameLocationFolder,
+                    LocalizationStrings.GameNotFound,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
 
             if (backgroundImageListView.SelectedIndices.Count > 0)
@@ -83,22 +91,6 @@
             UpdateMainFolder();
 
             Close();
-        }
-
-        private bool ValidateGameLocationPath(string path, bool showErrors = true)
-        {
-            if (File.Exists(Path.Combine(path, @"Apps\SimCity 4.exe")))
-            {
-                return true;
-            }
-
-            if (showErrors)
-            {
-                errorProvider.SetIconPadding(gameLocationTextBox, ManageUserFoldersForm.ErrorIconPadding);
-                errorProvider.SetError(gameLocationTextBox, LocalizationStrings.InvalidGameLocationFolder);
-            }
-
-            return false;
         }
 
         private void UpdateMainFolder()
@@ -160,7 +152,7 @@
                                 continue;
                             }
 
-                            if (!ValidateGameLocationPath(path, false))
+                            if (!settingsController.ValidateGameLocationPath(path))
                             {
                                 continue;
                             }
@@ -281,7 +273,7 @@
 
         private void UpdateLanguageBox()
         {
-            if (!ValidateGameLocationPath(Settings.Default.GameLocation, false))
+            if (!settingsController.ValidateGameLocationPath(Settings.Default.GameLocation))
             {
                 return;
             }
@@ -331,8 +323,14 @@
         {
             Settings.Default.Reload();
 
-            if (ValidateGameLocationPath(gameLocationTextBox.Text))
+            if (settingsController.ValidateGameLocationPath(gameLocationTextBox.Text))
             {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.InvalidGameLocationFolder,
+                    LocalizationStrings.GameNotFound,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 return;
             }
 
