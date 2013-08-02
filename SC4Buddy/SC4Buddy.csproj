@@ -117,6 +117,7 @@
       <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Control\GameLauncher.cs" />
+    <Compile Include="Control\SettingsController.cs" />
     <Compile Include="Control\UserFolders\FolderScanner.cs" />
     <Compile Include="Control\Plugins\PluginController.cs" />
     <Compile Include="Control\Plugins\PluginFileController.cs" />
