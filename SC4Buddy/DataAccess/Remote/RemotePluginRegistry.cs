@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess.Remote
 {
     using System.Data.Objects;
+    using System.Linq;
 
     using NIHEI.SC4Buddy.Entities.Remote;
 
@@ -34,6 +35,13 @@
 
         public void Delete(RemotePlugin item)
         {
+            var files = item.Files.ToList();
+
+            foreach (var file in files)
+            {
+                entities.RemotePluginFiles.DeleteObject(file);
+            }
+
             entities.RemotePlugins.DeleteObject(item);
             entities.SaveChanges();
         }
