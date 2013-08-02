@@ -5,6 +5,7 @@
     using System.Drawing;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
 
     using Microsoft.Win32;
 
@@ -12,8 +13,12 @@
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
 
+    using log4net;
+
     public class SettingsController
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly string[] regKeys = new[]
                               {
                                   @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
@@ -29,8 +34,10 @@
 
         public bool ValidateGameLocationPath(string path)
         {
+            Log.Error(string.Format("Validating game path: {0}", path));
             if (string.IsNullOrWhiteSpace(path))
             {
+                Log.Error("Game location is empty");
                 throw new ArgumentException(@"Path cannot be null or empty", "path");
             }
 
@@ -39,6 +46,8 @@
 
         public void UpdateMainFolder()
         {
+            Log.Info("Updating main folder");
+
             var folder = userFolderRegistry.UserFolders.FirstOrDefault(x => x.Id == 1);
             if (folder == null)
             {
@@ -52,12 +61,14 @@
 
         public string SearchForGameLocation()
         {
+            Log.Info("Searching for game location");
             var match = false;
 
             var gamePath = string.Empty;
 
             foreach (var regKey in regKeys)
             {
+                Log.Info(string.Format("Checking key: {0}", regKey));
                 using (var key = Registry.LocalMachine.OpenSubKey(regKey))
                 {
                     if (key == null)
@@ -82,6 +93,8 @@
                                 continue;
                             }
 
+                            Log.Info(string.Format("Found a match. Name: {0}, Path: {1}", name, path));
+
                             match = true;
                             gamePath = path;
 
@@ -104,8 +117,11 @@
             var dirs = Directory.EnumerateDirectories(Settings.Default.GameLocation, "*", SearchOption.TopDirectoryOnly);
 
             var languages =
-                dirs.Select(dir => new { dir, files = Directory.EnumerateFiles(dir, "*", SearchOption.TopDirectoryOnly) })
-                    .Where(@t => @t.files.Any(file => file.EndsWith("SimCityLocale.dat", StringComparison.OrdinalIgnoreCase)))
+                dirs.Select(
+                    dir => new { dir, files = Directory.EnumerateFiles(dir, "*", SearchOption.TopDirectoryOnly) })
+                    .Where(
+                        @t =>
+                        @t.files.Any(file => file.EndsWith("SimCityLocale.dat", StringComparison.OrdinalIgnoreCase)))
                     .Select(@t => new DirectoryInfo(@t.dir).Name)
                     .ToList();
 
