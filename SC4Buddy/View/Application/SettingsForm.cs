@@ -10,8 +10,6 @@
     using System.Security.Authentication;
     using System.Windows.Forms;
 
-    using Microsoft.Win32;
-
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
@@ -96,63 +94,9 @@
 
         private void ScanButtonClick(object sender, EventArgs e)
         {
-            var regKeys = new[]
-                              {
-                                  @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
-                                  @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
-                              };
+            var gameLocation = settingsController.SearchForGameLocation();
 
-            var match = false;
-
-            foreach (var regKey in regKeys)
-            {
-                using (var key = Registry.LocalMachine.OpenSubKey(regKey))
-                {
-                    if (key == null)
-                    {
-                        continue;
-                    }
-
-                    foreach (var subKeyName in key.GetSubKeyNames())
-                    {
-                        using (var subKey = key.OpenSubKey(subKeyName))
-                        {
-                            if (subKey == null)
-                            {
-                                continue;
-                            }
-
-                            if (string.IsNullOrWhiteSpace((string)subKey.GetValue("DisplayName")))
-                            {
-                                continue;
-                            }
-
-                            var name = (string)subKey.GetValue("DisplayName");
-                            var path = (string)subKey.GetValue("InstallLocation");
-
-                            if (!name.StartsWith("SimCity 4"))
-                            {
-                                continue;
-                            }
-
-                            if (!settingsController.ValidateGameLocationPath(path))
-                            {
-                                continue;
-                            }
-
-                            gameLocationTextBox.Text = path;
-                            match = true;
-                            break;
-                        }
-                    }
-                    if (match)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            if (!match)
+            if (!string.IsNullOrWhiteSpace(gameLocation))
             {
                 MessageBox.Show(
                     this,
@@ -164,6 +108,7 @@
             }
             else
             {
+                gameLocationTextBox.Text = gameLocation;
                 UpdateLanguageBox();
             }
         }
