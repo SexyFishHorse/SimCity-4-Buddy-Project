@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.IO;
     using System.Linq;
 
@@ -111,6 +112,24 @@
             return languages;
         }
 
-
+        public List<Bitmap> GetWallpapers()
+        {
+            return new List<Bitmap>
+                       {
+                           Resources.Wallpaper1,
+                           Resources.Wallpaper2,
+                           Resources.Wallpaper3,
+                           Resources.Wallpaper4,
+                           Resources.Wallpaper5,
+                           Resources.Wallpaper6,
+                           Resources.Wallpaper7,
+                           Resources.Wallpaper8,
+                           Resources.Wallpaper9,
+                           Resources.Wallpaper10,
+                           Resources.Wallpaper11,
+                           Resources.Wallpaper12,
+                           Resources.Wallpaper13
+                       };
+        }
     }
 }

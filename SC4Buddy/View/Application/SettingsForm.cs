@@ -1,7 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.View.Application
 {
     using System;
-    using System.Collections.Generic;
     using System.Drawing;
     using System.Globalization;
     using System.Linq;
@@ -128,12 +127,16 @@
             autoSaveIntervalTrackBar.Enabled = Settings.Default.EnableAutoSave;
             UpdateAutoSaveLabel(Settings.Default.AutoSaveWaitTime);
 
+            cpuCountComboBox.BeginUpdate();
+            cpuCountComboBox.Items.Clear();
             for (var i = 1; i <= Environment.ProcessorCount; i++)
             {
                 cpuCountComboBox.Items.Add(i);
             }
 
             cpuCountComboBox.SelectedIndex = 0;
+            cpuCountComboBox.EndUpdate();
+
             displayModeComboBox.SelectedIndex = 1;
             renderModeComboBox.SelectedIndex = 1;
             colourDepthComboBox.SelectedIndex = 1;
@@ -141,34 +144,23 @@
 
             UpdateLanguageBox();
 
-            var wallpapers = new List<Bitmap>
-                                 {
-                                     Resources.Wallpaper1,
-                                     Resources.Wallpaper2,
-                                     Resources.Wallpaper3,
-                                     Resources.Wallpaper4,
-                                     Resources.Wallpaper5,
-                                     Resources.Wallpaper6,
-                                     Resources.Wallpaper7,
-                                     Resources.Wallpaper8,
-                                     Resources.Wallpaper9,
-                                     Resources.Wallpaper10,
-                                     Resources.Wallpaper11,
-                                     Resources.Wallpaper12,
-                                     Resources.Wallpaper13
-                                 };
+            var wallpapers = settingsController.GetWallpapers();
 
-            var ilist = new ImageList { ImageSize = new Size(65, 65) };
-            backgroundImageListView.LargeImageList = ilist;
+            backgroundImageListView.BeginUpdate();
+            var imageList = new ImageList { ImageSize = new Size(65, 65) };
+            backgroundImageListView.LargeImageList = imageList;
 
             for (var index = 0; index < wallpapers.Count; index++)
             {
                 var wallpaper = wallpapers[index];
-                var lvi = new ListViewItem((index + 1).ToString(CultureInfo.InvariantCulture));
-                ilist.Images.Add(wallpaper);
-                lvi.ImageIndex = index;
-                backgroundImageListView.Items.Add(lvi);
+                var item = new ListViewItem((index + 1).ToString(CultureInfo.InvariantCulture));
+                imageList.Images.Add(wallpaper);
+                item.ImageIndex = index;
+
+                backgroundImageListView.Items.Add(item);
             }
+
+            backgroundImageListView.EndUpdate();
 
             UpdateLoginStatus();
         }
@@ -177,6 +169,7 @@
         {
             emailTextBox.Text = string.Empty;
             passwordTextBox.Text = string.Empty;
+
             if (SessionController.Instance.IsLoggedIn)
             {
                 logoutButton.Enabled = true;
