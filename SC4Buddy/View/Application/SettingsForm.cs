@@ -78,6 +78,7 @@
                     LocalizationStrings.GameNotFound,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                return;
             }
 
             if (backgroundImageListView.SelectedIndices.Count > 0)
