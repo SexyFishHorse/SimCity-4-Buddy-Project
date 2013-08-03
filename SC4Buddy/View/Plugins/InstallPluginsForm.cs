@@ -66,6 +66,7 @@
         {
             WriteLine(string.Format(LocalizationStrings.FileXSkipped, args.FileInfo.Name));
             WriteLine(LocalizationStrings.YouCanOnlySelectPart1OfAMultipartPlugin);
+            IncrementInstalledPlugins();
         }
 
         public bool AskToRunExecutable(UserFolder userFolder, FileInfo executable)
