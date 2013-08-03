@@ -35,7 +35,7 @@
 
         public void Delete(RemotePlugin item)
         {
-            var files = item.Files.ToList();
+            var files = item.PluginFiles.ToList();
 
             foreach (var file in files)
             {

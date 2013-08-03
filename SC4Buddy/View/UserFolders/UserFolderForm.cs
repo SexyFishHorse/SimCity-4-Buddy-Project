@@ -13,6 +13,7 @@
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
+    using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.Plugins;
 
@@ -193,6 +194,19 @@
             new InstallPluginsForm(files, userFolder).ShowDialog(this);
 
             RepopulateInstalledPluginsListView();
+
+            var scanForDependencies = MessageBox.Show(
+                this,
+                LocalizationStrings.WouldYouLikeToScanForMissingDependencies,
+                LocalizationStrings.DependencyCheck,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
+
+            if (scanForDependencies == DialogResult.Yes)
+            {
+                CheckForMissingDependenciesToolStripMenuItemClick(sender, e);
+            }
         }
 
         private void ScanForNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
@@ -263,6 +277,44 @@
         private void UserFolderFormActivated(object sender, EventArgs e)
         {
             updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Default.FetchInfoFromRemote;
+        }
+
+        private void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            controller.UpdateInfoForAllPluginsFromServer();
+
+            var numRecognizedPlugins = controller.NumberOfRecognizedPlugins(userFolder);
+
+            if (numRecognizedPlugins < 1)
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked,
+                    LocalizationStrings.NoRecognizablePluginsFound,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button1);
+                return;
+            }
+
+            var checker = new DependencyChecker();
+            var missingDependencies = checker.CheckDependencies(userFolder);
+
+            if (missingDependencies.Any())
+            {
+                var dialog = new MissingDependenciesForm { MissingDependencies = missingDependencies };
+                dialog.ShowDialog(this);
+            }
+            else
+            {
+                MessageBox.Show(
+                    this,
+                    string.Format(LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing, numRecognizedPlugins),
+                    LocalizationStrings.NoDependenciesMissing,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
+            }
         }
     }
 }

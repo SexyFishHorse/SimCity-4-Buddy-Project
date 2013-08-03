@@ -139,7 +139,7 @@
                                          PluginId = remotePlugin.Id,
                                          Plugin = remotePlugin
                                      };
-                remotePlugin.Files.Add(remoteFile);
+                remotePlugin.PluginFiles.Add(remoteFile);
                 RemoteRegistryFactory.RemotePluginFileRegistry.Add(remoteFile);
             }
 
