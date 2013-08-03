@@ -197,7 +197,7 @@
         {
             var link = linkTextBox.Text.Trim();
             var author = ((ComboBoxItem<Author>)siteAndAuthorComboBox.SelectedItem).Value;
-            if (!ValidateLinkAndAuthor(link, author))
+            if (!RemotePluginController.ValidateLinkAndAuthor(link, author))
             {
                 MessageBox.Show(
                     this,
@@ -245,14 +245,6 @@
             files = new List<RemotePluginFile>();
             dependencies = new Collection<RemotePlugin>();
             saveButton.Enabled = false;
-        }
-
-        private bool ValidateLinkAndAuthor(string link, Author author)
-        {
-            var siteUri = new UriBuilder(author.Site);
-            var linkUri = new UriBuilder(link);
-
-            return linkUri.Host.EndsWith(siteUri.Host, StringComparison.OrdinalIgnoreCase);
         }
 
         private void DescriptionTextBoxTextChanged(object sender, EventArgs e)

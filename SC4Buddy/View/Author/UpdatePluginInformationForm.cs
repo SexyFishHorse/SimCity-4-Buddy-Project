@@ -193,7 +193,7 @@
             var link = linkTextBox.Text.Trim();
             var author = ((ComboBoxItem<Author>)siteAndAuthorComboBox.SelectedItem).Value;
 
-            if (!ValidateLinkAndAuthor(link, author))
+            if (!RemotePluginController.ValidateLinkAndAuthor(link, author))
             {
                 MessageBox.Show(
                     this,
@@ -243,14 +243,6 @@
                 MessageBoxDefaultButton.Button1);
 
             ClearForm();
-        }
-
-        private bool ValidateLinkAndAuthor(string link, Author author)
-        {
-            link = link.ToUpper().Replace("//WWW.", "//");
-            var site = author.Site.ToUpper().Replace("//WWW.", "//");
-
-            return link.Contains(site);
         }
     }
 }
