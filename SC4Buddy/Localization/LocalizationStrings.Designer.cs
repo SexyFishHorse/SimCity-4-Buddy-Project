@@ -241,6 +241,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error opening readme file.
+        /// </summary>
+        internal static string ErrorOpeningReadmeFile {
+            get {
+                return ResourceManager.GetString("ErrorOpeningReadmeFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Executable files found.
         /// </summary>
         internal static string ExecutableFilesFound {
@@ -814,6 +823,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string UnableToLogYouIntoTheSystem {
             get {
                 return ResourceManager.GetString("UnableToLogYouIntoTheSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to open this readme file. You can access it in the plugins folder after installation. The following error was returned &quot;{0}&quot;.
+        /// </summary>
+        internal static string UnableToOpenThisReadmeFile {
+            get {
+                return ResourceManager.GetString("UnableToOpenThisReadmeFile", resourceCulture);
             }
         }
         

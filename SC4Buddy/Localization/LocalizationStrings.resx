@@ -455,4 +455,10 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="DependencyCheck" xml:space="preserve">
     <value>Dependency check</value>
   </data>
+  <data name="UnableToOpenThisReadmeFile" xml:space="preserve">
+    <value>Unable to open this readme file. You can access it in the plugins folder after installation. The following error was returned "{0}"</value>
+  </data>
+  <data name="ErrorOpeningReadmeFile" xml:space="preserve">
+    <value>Error opening readme file</value>
+  </data>
 </root>
