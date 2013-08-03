@@ -7,19 +7,14 @@
     using System.Linq;
     using System.Windows.Forms;
 
-    using Microsoft.VisualBasic.FileIO;
-
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.DataAccess.Plugins;
     using NIHEI.SC4Buddy.Entities;
-    using NIHEI.SC4Buddy.Installer.FileHandlers;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.Plugins;
-
-    using SearchOption = System.IO.SearchOption;
 
     public partial class UserFolderForm : Form
     {
@@ -59,22 +54,6 @@
 
             this.userFolder = userFolder;
             InitializeComponent();
-        }
-
-        private static bool IsBackgroundImage(string entity, UserFolder userFolder)
-        {
-            if (userFolder.Id != 1)
-            {
-                return false;
-            }
-
-            var validFilenames = new[]
-                                     {
-                                         "Background3D0.png", "Background3D1.png", "Background3D2.png",
-                                         "Background3D3.png", "Background3D4.png"
-                                     };
-
-            return validFilenames.Any(entity.EndsWith);
         }
 
         private void UserFolderFormLoad(object sender, EventArgs e)
@@ -226,33 +205,20 @@
         {
             int numFiles;
             int numFolders;
-            if (!RemoveNonPluginFiles(out numFiles, out numFolders))
+
+            controller.GetEstimatedFilesAndFoldersToBeRemoved(userFolder, out numFiles, out numFolders);
+
+            if (numFiles < 1 && numFolders < 1)
             {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.ThereAreNoNonPluginFilesOrEmptyFoldersToRemove,
+                    LocalizationStrings.NoNonPluginFilesDetected,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
                 return;
             }
-
-            var message = string.Format(LocalizationStrings.NumFilesAndNumFoldersWereRemoved, numFiles, numFolders);
-
-            MessageBox.Show(
-                this,
-                message,
-                LocalizationStrings.NonPluginFilesDeleted,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1);
-        }
-
-        private bool RemoveNonPluginFiles(out int numFiles, out int numFolders)
-        {
-            var files = Directory.EnumerateFiles(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories);
-            var folders = Directory.EnumerateDirectories(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories).ToList();
-
-            var filesToDelete =
-                files.Where(x => !BaseHandler.IsPluginFile(x) && !IsBackgroundImage(x, userFolder) && !IsDamnFile(x))
-                     .ToList();
-
-            numFiles = filesToDelete.Count();
-            numFolders = folders.Count(x => !new DirectoryInfo(x).EnumerateFiles("*", SearchOption.AllDirectories).Any());
 
             var confirmation = MessageBox.Show(
                 this,
@@ -264,33 +230,20 @@
 
             if (confirmation == DialogResult.No)
             {
-                return false;
+                return;
             }
 
-            foreach (var file in filesToDelete)
-            {
-                FileSystem.DeleteFile(file, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-            }
+            numFolders = controller.RemoveNonPluginFiles(userFolder);
 
-            var foldersToDelete =
-                folders.Where(x => !new DirectoryInfo(x).EnumerateFiles("*", SearchOption.AllDirectories).Any()).ToList();
-            numFolders = foldersToDelete.Count();
+            var message = string.Format(LocalizationStrings.NumFilesAndNumFoldersWereRemoved, numFiles, numFolders);
 
-            foreach (var folder in foldersToDelete.Where(Directory.Exists))
-            {
-                FileSystem.DeleteDirectory(folder, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
-            }
-
-            return true;
-        }
-
-        private bool IsDamnFile(string path)
-        {
-            var relativePath = path.Replace(userFolder.Path, string.Empty);
-
-            return relativePath.StartsWith(@"\DAMN", StringComparison.OrdinalIgnoreCase)
-                   && (relativePath.EndsWith("placeholder", StringComparison.OrdinalIgnoreCase)
-                       || relativePath.EndsWith("DAMN-Indexer.cmd"));
+            MessageBox.Show(
+                this,
+                message,
+                LocalizationStrings.NonPluginFilesDeleted,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
         }
 
         private void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)

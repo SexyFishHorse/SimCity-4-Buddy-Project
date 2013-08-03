@@ -420,4 +420,10 @@ Should also notify the user that some files may have been installed so the user 
   <data name="UnableToLocateTheGameUseTheBrowseOptionInstead" xml:space="preserve">
     <value>Unable to locate the game. Use the browse option instead.</value>
   </data>
+  <data name="ThereAreNoNonPluginFilesOrEmptyFoldersToRemove" xml:space="preserve">
+    <value>There are no non-plugin files or empty folders to remove.</value>
+  </data>
+  <data name="NoNonPluginFilesDetected" xml:space="preserve">
+    <value>No non-plugin files detected</value>
+  </data>
 </root>

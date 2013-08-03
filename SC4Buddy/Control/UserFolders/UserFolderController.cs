@@ -10,8 +10,11 @@
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Installer.FileHandlers;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
+
+    using SearchOption = System.IO.SearchOption;
 
     public class UserFolderController
     {
@@ -152,6 +155,70 @@
             var matcher = new PluginMatcher();
 
             return plugins.Count(matcher.MatchAndUpdate);
+        }
+
+        public void GetEstimatedFilesAndFoldersToBeRemoved(UserFolder userFolder, out int numFiles, out int numFolders)
+        {
+            var files = Directory.EnumerateFiles(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories);
+            var folders = Directory.EnumerateDirectories(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories).ToList();
+
+            var filesToDelete =
+                files.Where(x => !BaseHandler.IsPluginFile(x) && !IsBackgroundImage(x, userFolder) && !IsDamnFile(userFolder, x))
+                     .ToList();
+
+            numFiles = filesToDelete.Count();
+            numFolders = folders.Count(x => !new DirectoryInfo(x).EnumerateFiles("*", SearchOption.AllDirectories).Any());
+        }
+
+        private bool IsDamnFile(UserFolder userFolder, string path)
+        {
+            var relativePath = path.Replace(userFolder.PluginFolderPath, string.Empty);
+
+            return relativePath.StartsWith(@"\DAMN", StringComparison.OrdinalIgnoreCase)
+                   && (relativePath.EndsWith("placeholder", StringComparison.OrdinalIgnoreCase)
+                       || relativePath.EndsWith("DAMN-Indexer.cmd"));
+        }
+
+        private static bool IsBackgroundImage(string entity, UserFolder userFolder)
+        {
+            if (userFolder.Id != 1)
+            {
+                return false;
+            }
+
+            var validFilenames = new[]
+                                     {
+                                         "Background3D0.png", "Background3D1.png", "Background3D2.png",
+                                         "Background3D3.png", "Background3D4.png"
+                                     };
+
+            return validFilenames.Any(entity.EndsWith);
+        }
+
+        public int RemoveNonPluginFiles(UserFolder userFolder)
+        {
+            var files = Directory.EnumerateFiles(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories);
+            var folders = Directory.EnumerateDirectories(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories).ToList();
+
+            var filesToDelete =
+                files.Where(x => !BaseHandler.IsPluginFile(x) && !IsBackgroundImage(x, userFolder) && !IsDamnFile(userFolder, x))
+                     .ToList();
+
+            foreach (var file in filesToDelete)
+            {
+                FileSystem.DeleteFile(file, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+            }
+
+            var foldersToDelete =
+                folders.Where(x => !new DirectoryInfo(x).EnumerateFiles("*", SearchOption.AllDirectories).Any()).ToList();
+            var numFolders = foldersToDelete.Count();
+
+            foreach (var folder in foldersToDelete.Where(Directory.Exists))
+            {
+                FileSystem.DeleteDirectory(folder, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+            }
+
+            return numFolders;
         }
     }
 }
