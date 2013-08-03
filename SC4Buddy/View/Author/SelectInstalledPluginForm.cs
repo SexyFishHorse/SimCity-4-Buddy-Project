@@ -30,14 +30,18 @@
 
         private void SelectInstalledPluginFormLoad(object sender, EventArgs e)
         {
-            var userFolders = userFolderRegistry.UserFolders.Where(x => x.Plugins.Any());
+            var userFolders = userFolderRegistry.UserFolders.Where(x => x.Plugins.Any()).ToList();
 
+            userFolderComboBox.Enabled = userFolders.Any();
+
+            userFolderComboBox.BeginUpdate();
             foreach (var userFolder in userFolders)
             {
                 userFolderComboBox.Items.Add(new ComboBoxItem<UserFolder>(userFolder.Alias, userFolder));
             }
 
             pluginComboBox.Enabled = false;
+            userFolderComboBox.EndUpdate();
         }
 
         private void UserFolderComboBoxSelectedIndexChanged(object sender, EventArgs e)
