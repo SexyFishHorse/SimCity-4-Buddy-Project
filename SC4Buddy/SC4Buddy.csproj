@@ -274,6 +274,13 @@
     <Compile Include="View\Plugins\InstallPluginsForm.Designer.cs">
       <DependentUpon>InstallPluginsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Plugins\MissingDependenciesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Plugins\MissingDependenciesForm.Designer.cs">
+      <DependentUpon>MissingDependenciesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Remote\DependencyChecker.cs" />
     <Compile Include="View\UserFolders\UserFolderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,6 +363,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Plugins\InstallPluginsForm.resx">
       <DependentUpon>InstallPluginsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Plugins\MissingDependenciesForm.resx">
+      <DependentUpon>MissingDependenciesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\UserFolders\UserFolderForm.da.resx">
       <DependentUpon>UserFolderForm.cs</DependentUpon>
@@ -492,9 +502,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Remote\Control\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\NiheiCommon\NiheiCommon.csproj">
       <Project>{43f9af3f-d57d-421d-ba98-87fd499ca314}</Project>

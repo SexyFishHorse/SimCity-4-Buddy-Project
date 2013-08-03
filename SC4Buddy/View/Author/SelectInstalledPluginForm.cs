@@ -30,7 +30,7 @@
 
         private void SelectInstalledPluginFormLoad(object sender, EventArgs e)
         {
-            var userFolders = userFolderRegistry.UserFolders.Where(x => x.Plugin.Any());
+            var userFolders = userFolderRegistry.UserFolders.Where(x => x.Plugins.Any());
 
             foreach (var userFolder in userFolders)
             {

@@ -16,7 +16,7 @@ namespace NIHEI.SC4Buddy
     {
         public RemotePlugin()
         {
-            this.Files = new HashSet<RemotePluginFile>();
+            this.PluginFiles = new HashSet<RemotePluginFile>();
             this.Dependencies = new HashSet<RemotePlugin>();
             this.DependencyFor = new HashSet<RemotePlugin>();
         }
@@ -28,7 +28,7 @@ namespace NIHEI.SC4Buddy
         public string Link { get; set; }
     
         public virtual Author Author { get; set; }
-        public virtual ICollection<RemotePluginFile> Files { get; set; }
+        public virtual ICollection<RemotePluginFile> PluginFiles { get; set; }
         public virtual ICollection<RemotePlugin> Dependencies { get; set; }
         public virtual ICollection<RemotePlugin> DependencyFor { get; set; }
     }

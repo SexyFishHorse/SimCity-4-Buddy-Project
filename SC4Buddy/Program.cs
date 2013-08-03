@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy
 {
     using System;
+    using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Reflection;
@@ -58,6 +59,23 @@
             catch (Exception ex)
             {
                 Log.Error("Uncaught error", ex);
+
+                var showLog = MessageBox.Show(
+                    string.Format(LocalizationStrings.UncaughtExceptionWouldYouLikeToOpenTheLog, ex.Message),
+                    LocalizationStrings.UncaughtException,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
+
+                if (showLog == DialogResult.No)
+                {
+                    return;
+                }
+
+                var path = Application.LocalUserAppDataPath.Substring(
+                    0, Application.LocalUserAppDataPath.LastIndexOf(@"\", StringComparison.Ordinal));
+
+                Process.Start("explorer.exe", path);
             }
 #endif
         }

@@ -102,7 +102,7 @@
 
             dependencies = item.Dependencies.ToList();
             dependenciesButton.Enabled = true;
-            files = item.Files.ToList();
+            files = item.PluginFiles.ToList();
             filesButton.Enabled = true;
 
             saveButton.Enabled = true;
@@ -215,10 +215,10 @@
             remotePlugin.Author = author;
             remotePlugin.Link = link;
 
-            remotePlugin.Files.Clear();
+            remotePlugin.PluginFiles.Clear();
             foreach (var file in files)
             {
-                remotePlugin.Files.Add(file);
+                remotePlugin.PluginFiles.Add(file);
             }
 
             remotePlugin.Dependencies.Clear();

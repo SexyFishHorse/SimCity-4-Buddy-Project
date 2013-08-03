@@ -187,6 +187,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dependency check.
+        /// </summary>
+        internal static string DependencyCheck {
+            get {
+                return ResourceManager.GetString("DependencyCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to run the {0} executable? Please note that the installer has to be installed in the plugin folder {1} in order to detect filechanges, otherwise you have to rescan the plugin folders manually..
         /// </summary>
         internal static string DoYouWantToRunTheNamExecutable {
@@ -394,6 +403,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No dependencies missing.
+        /// </summary>
+        internal static string NoDependenciesMissing {
+            get {
+                return ResourceManager.GetString("NoDependenciesMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No file changes detected.
         /// </summary>
         internal static string NoFileChangesDetected {
@@ -408,6 +426,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string NoInternetDetectionDetected {
             get {
                 return ResourceManager.GetString("NoInternetDetectionDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None of your plugins are recognized on the central server and can therefore not be checked..
+        /// </summary>
+        internal static string NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked {
+            get {
+                return ResourceManager.GetString("NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked", resourceCulture);
             }
         }
         
@@ -439,6 +466,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No recognizable plugins found.
+        /// </summary>
+        internal static string NoRecognizablePluginsFound {
+            get {
+                return ResourceManager.GetString("NoRecognizablePluginsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No user is logged in..
         /// </summary>
         internal static string NoUserIsLoggedIn {
@@ -462,6 +498,16 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string NumMinutes {
             get {
                 return ResourceManager.GetString("NumMinutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} plugins checked for missing dependencies and none were missing.
+        ///Note that plugins not known to the central server was not checked..
+        /// </summary>
+        internal static string NumPluginsCheckedForMissingPluginsAndNoneWereMissing {
+            get {
+                return ResourceManager.GetString("NumPluginsCheckedForMissingPluginsAndNoneWereMissing", resourceCulture);
             }
         }
         
@@ -772,6 +818,25 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Uncaught exception.
+        /// </summary>
+        internal static string UncaughtException {
+            get {
+                return ResourceManager.GetString("UncaughtException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uncaught exception: &quot;{0}&quot;.
+        ///Would you like to open the log?.
+        /// </summary>
+        internal static string UncaughtExceptionWouldYouLikeToOpenTheLog {
+            get {
+                return ResourceManager.GetString("UncaughtExceptionWouldYouLikeToOpenTheLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknown.
         /// </summary>
         internal static string Unknown {
@@ -844,6 +909,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Visited.
+        /// </summary>
+        internal static string Visited {
+            get {
+                return ResourceManager.GetString("Visited", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Would you like to enter additional details for the installed plugins (like name, group, description, download link etc?)? You can always do this later if you so desire..
         /// </summary>
         internal static string WouldYouLikeToEnterAdditionalDetailsForTheInstalledPlugins {
@@ -858,6 +932,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string WouldYouLikeToEnterInformationAboutThePlugin {
             get {
                 return ResourceManager.GetString("WouldYouLikeToEnterInformationAboutThePlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to scan for missing dependencies?.
+        /// </summary>
+        internal static string WouldYouLikeToScanForMissingDependencies {
+            get {
+                return ResourceManager.GetString("WouldYouLikeToScanForMissingDependencies", resourceCulture);
             }
         }
         

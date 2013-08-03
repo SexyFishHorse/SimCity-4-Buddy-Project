@@ -189,7 +189,7 @@
           <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Path" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Alias" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Plugin" Relationship="NIHEI.SC4Buddy.Entities.FK_UserFolder_Plugin" FromRole="UserFolder" ToRole="Plugin" />
+          <NavigationProperty Name="Plugins" Relationship="NIHEI.SC4Buddy.Entities.FK_UserFolder_Plugin" FromRole="UserFolder" ToRole="Plugin" />
         </EntityType>
         <Association Name="FK_UserFolder_Plugin">
           <End Type="NIHEI.SC4Buddy.Entities.UserFolder" Role="UserFolder" Multiplicity="1">

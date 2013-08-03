@@ -53,6 +53,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scanForNonpluginFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateInfoForAllPluginsFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkForMissingDependenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -212,7 +213,8 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.scanForNonpluginFilesToolStripMenuItem,
-            this.updateInfoForAllPluginsFromServerToolStripMenuItem});
+            this.updateInfoForAllPluginsFromServerToolStripMenuItem,
+            this.checkForMissingDependenciesToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
             // 
@@ -227,6 +229,12 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.updateInfoForAllPluginsFromServerToolStripMenuItem.Name = "updateInfoForAllPluginsFromServerToolStripMenuItem";
             resources.ApplyResources(this.updateInfoForAllPluginsFromServerToolStripMenuItem, "updateInfoForAllPluginsFromServerToolStripMenuItem");
             this.updateInfoForAllPluginsFromServerToolStripMenuItem.Click += new System.EventHandler(this.UpdateInfoForAllPluginsFromServerToolStripMenuItemClick);
+            // 
+            // checkForMissingDependenciesToolStripMenuItem
+            // 
+            this.checkForMissingDependenciesToolStripMenuItem.Name = "checkForMissingDependenciesToolStripMenuItem";
+            resources.ApplyResources(this.checkForMissingDependenciesToolStripMenuItem, "checkForMissingDependenciesToolStripMenuItem");
+            this.checkForMissingDependenciesToolStripMenuItem.Click += new System.EventHandler(this.CheckForMissingDependenciesToolStripMenuItemClick);
             // 
             // UserFolderForm
             // 
@@ -279,5 +287,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
         private System.Windows.Forms.ToolStripMenuItem scanForNonpluginFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateInfoForAllPluginsFromServerToolStripMenuItem;
         private System.Windows.Forms.Label isRemoteInfoLabel;
+        private System.Windows.Forms.ToolStripMenuItem checkForMissingDependenciesToolStripMenuItem;
     }
 }

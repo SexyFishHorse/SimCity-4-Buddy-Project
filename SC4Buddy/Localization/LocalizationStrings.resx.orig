@@ -420,39 +420,20 @@ Should also notify the user that some files may have been installed so the user 
   <data name="UnableToLocateTheGameUseTheBrowseOptionInstead" xml:space="preserve">
     <value>Unable to locate the game. Use the browse option instead.</value>
   </data>
+<<<<<<< HEAD
   <data name="ThereAreNoNonPluginFilesOrEmptyFoldersToRemove" xml:space="preserve">
     <value>There are no non-plugin files or empty folders to remove.</value>
-  </data>
-  <data name="NoRecognizablePluginsFound" xml:space="preserve">
-    <value>No recognizable plugins found</value>
   </data>
   <data name="NoNonPluginFilesDetected" xml:space="preserve">
     <value>No non-plugin files detected</value>
   </data>
+</root>
+=======
+  <data name="NoRecognizablePluginsFound" xml:space="preserve">
+    <value>No recognizable plugins found</value>
+  </data>
   <data name="NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked" xml:space="preserve">
     <value>None of your plugins are recognized on the central server and can therefore not be checked.</value>
   </data>
-  <data name="Visited" xml:space="preserve">
-    <value>Visited</value>
-  </data>
-  <data name="UncaughtException" xml:space="preserve">
-    <value>Uncaught exception</value>
-  </data>
-  <data name="UncaughtExceptionWouldYouLikeToOpenTheLog" xml:space="preserve">
-    <value>Uncaught exception: "{0}".
-Would you like to open the log?</value>
-  </data>
-  <data name="NoDependenciesMissing" xml:space="preserve">
-    <value>No dependencies missing</value>
-  </data>
-  <data name="NumPluginsCheckedForMissingPluginsAndNoneWereMissing" xml:space="preserve">
-    <value>{0} plugins checked for missing dependencies and none were missing.
-Note that plugins not known to the central server was not checked.</value>
-  </data>
-  <data name="WouldYouLikeToScanForMissingDependencies" xml:space="preserve">
-    <value>Would you like to scan for missing dependencies?</value>
-  </data>
-  <data name="DependencyCheck" xml:space="preserve">
-    <value>Dependency check</value>
-  </data>
 </root>
+>>>>>>> added menu item for dependencies check and initialized it with update information from central server.

@@ -910,7 +910,7 @@ namespace NIHEI.SC4Buddy.Entities
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("NIHEI.SC4Buddy.Entities", "FK_UserFolder_Plugin", "Plugin")]
-        public EntityCollection<Plugin> Plugin
+        public EntityCollection<Plugin> Plugins
         {
             get
             {
