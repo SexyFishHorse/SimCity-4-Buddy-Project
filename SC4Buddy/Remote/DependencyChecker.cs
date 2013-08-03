@@ -31,7 +31,8 @@
 
         private static List<RemotePlugin> GetMissingDependenciesForFolder(UserFolder userFolder)
         {
-            var knownPlugins = userFolder.Plugins.Where(x => x.RemotePluginId > 0 && x.UserFolder.Equals(userFolder)).ToList();
+            var knownPlugins =
+                userFolder.Plugins.Where(x => x.RemotePluginId > 0 && x.UserFolder.Equals(userFolder)).ToList();
 
             var remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
 
