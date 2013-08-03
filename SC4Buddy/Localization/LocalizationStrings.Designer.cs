@@ -800,7 +800,7 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This will remove {0} files and at least {1} folders (more folders may be found after the files have been deleted). Are you sure you want to continue?.
+        ///   Looks up a localized string similar to This will remove {0} files and at least {1} folders (more folders may be found after the files have been deleted). Deleted files and folders are moved to the recycle bin. Are you sure you want to continue?.
         /// </summary>
         internal static string ThisWillRemoveNumFilesAndAtLeastNumFolders {
             get {
