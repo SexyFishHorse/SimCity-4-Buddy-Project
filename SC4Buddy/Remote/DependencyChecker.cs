@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.View.UserFolders
+﻿namespace NIHEI.SC4Buddy.Remote
 {
     using System.Collections.Generic;
     using System.Linq;
