@@ -283,7 +283,7 @@
         {
             controller.UpdateInfoForAllPluginsFromServer();
 
-            var numRecognizedPlugins = controller.NumberOfRecognizedPlugins();
+            var numRecognizedPlugins = controller.NumberOfRecognizedPlugins(userFolder);
 
             if (numRecognizedPlugins < 1)
             {
