@@ -16,7 +16,6 @@ namespace NIHEI.SC4Buddy
     {
         public User()
         {
-            this.Rights = "Author";
             this.Authors = new HashSet<Author>();
         }
     

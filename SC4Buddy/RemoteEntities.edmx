@@ -127,7 +127,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PluginFile_Plugin">
-          <End Role="Plugin" Type="NIHEI.SC4Buddy.Entities.Remote.Store.Plugin" Multiplicity="1" />
+          <End Role="Plugin" Type="NIHEI.SC4Buddy.Entities.Remote.Store.Plugin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="PluginFile" Type="NIHEI.SC4Buddy.Entities.Remote.Store.PluginFile" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Plugin">
@@ -168,10 +170,10 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
-          <Property Name="Site" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Site" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_Author_User" FromRole="Author" ToRole="User" />
           <NavigationProperty Name="Plugins" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_Plugin_Author" FromRole="Author" ToRole="Plugin" />
         </EntityType>
@@ -185,7 +187,7 @@
           <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Link" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Author" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_Plugin_Author" FromRole="Plugin" ToRole="Author" />
-          <NavigationProperty Name="Files" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin" FromRole="Plugin" ToRole="PluginFile" />
+          <NavigationProperty Name="PluginFiles" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin" FromRole="Plugin" ToRole="PluginFile" />
           <NavigationProperty Name="Dependencies" Relationship="NIHEI.SC4Buddy.Entities.Remote.PluginDependency" FromRole="Plugin" ToRole="Plugin1" />
           <NavigationProperty Name="DependencyFor" Relationship="NIHEI.SC4Buddy.Entities.Remote.PluginDependency" FromRole="Plugin1" ToRole="Plugin" />
         </EntityType>
@@ -193,10 +195,10 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
-          <Property Name="Checksum" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
-          <Property Name="PluginId" Type="Int32" Nullable="false" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Checksum" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PluginId" Nullable="false" />
           <NavigationProperty Name="Plugin" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin" FromRole="PluginFile" ToRole="Plugin" />
         </EntityType>
         <EntityType Name="User">
@@ -206,13 +208,13 @@
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Email" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="Salt" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="Rights" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" DefaultValue="Author" />
+          <Property Type="String" Name="Rights" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Type="Binary" Name="Passphrase" Nullable="false" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Authors" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_Author_User" FromRole="User" ToRole="Author" />
         </EntityType>
         <Association Name="FK_Author_User">
-          <End Role="User" Type="NIHEI.SC4Buddy.Entities.Remote.User" Multiplicity="0..1" />
-          <End Role="Author" Type="NIHEI.SC4Buddy.Entities.Remote.Author" Multiplicity="*" />
+          <End Type="NIHEI.SC4Buddy.Entities.Remote.User" Role="User" Multiplicity="0..1" />
+          <End Type="NIHEI.SC4Buddy.Entities.Remote.Author" Role="Author" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -235,8 +237,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_PluginFile_Plugin">
-          <End Role="Plugin" Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Multiplicity="1" />
-          <End Role="PluginFile" Type="NIHEI.SC4Buddy.Entities.Remote.RemotePluginFile" Multiplicity="*" />
+          <End Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Role="Plugin" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="NIHEI.SC4Buddy.Entities.Remote.RemotePluginFile" Role="PluginFile" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Plugin">
               <PropertyRef Name="Id" />
@@ -247,10 +251,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="PluginDependency">
-          <End Role="Plugin" Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Multiplicity="*" />
-          <End Role="Plugin1" Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Multiplicity="*" />
+          <End Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Role="Plugin" Multiplicity="*" />
+          <End Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Role="Plugin1" Multiplicity="*" />
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -259,52 +263,51 @@
           <EntitySetMapping Name="Authors">
             <EntityTypeMapping TypeName="NIHEI.SC4Buddy.Entities.Remote.Author">
               <MappingFragment StoreEntitySet="Author">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Site" ColumnName="Site" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RemotePlugins">
             <EntityTypeMapping TypeName="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin">
               <MappingFragment StoreEntitySet="Plugin">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RemotePluginFiles">
             <EntityTypeMapping TypeName="NIHEI.SC4Buddy.Entities.Remote.RemotePluginFile">
               <MappingFragment StoreEntitySet="PluginFile">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Checksum" ColumnName="Checksum" />
                 <ScalarProperty Name="PluginId" ColumnName="PluginId" />
+                <ScalarProperty Name="Checksum" ColumnName="Checksum" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="NIHEI.SC4Buddy.Entities.Remote.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Salt" ColumnName="Salt" />
-                <ScalarProperty Name="Rights" ColumnName="Rights" />
                 <ScalarProperty Name="Passphrase" ColumnName="Passphrase" />
+                <ScalarProperty Name="Rights" ColumnName="Rights" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <AssociationSetMapping Name="PluginDependency" TypeName="NIHEI.SC4Buddy.Entities.Remote.PluginDependency" StoreEntitySet="PluginDependency">
-              <ScalarProperty Name="Id" ColumnName="DependencyPluginId" />
-            <EndProperty Name="Plugin">
-              <ScalarProperty Name="Id" ColumnName="PluginId" />
-            </EndProperty>
             <EndProperty Name="Plugin1">
               <ScalarProperty Name="Id" ColumnName="DependencyPluginId" />
+            </EndProperty>
+            <EndProperty Name="Plugin">
+              <ScalarProperty Name="Id" ColumnName="PluginId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

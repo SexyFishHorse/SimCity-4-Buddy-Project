@@ -215,7 +215,7 @@
             var remotePlugin = new RemotePlugin { Name = name, Link = link, Author = author, Description = description };
             foreach (var file in files)
             {
-                remotePlugin.Files.Add(file);
+                remotePlugin.PluginFiles.Add(file);
             }
 
             foreach (var dependency in dependencies)

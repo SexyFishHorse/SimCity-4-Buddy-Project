@@ -579,7 +579,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_PluginFile_Plugin", "PluginFile")]
-        public EntityCollection<RemotePluginFile> Files
+        public EntityCollection<RemotePluginFile> PluginFiles
         {
             get
             {
@@ -834,13 +834,15 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="email">Initial value of the Email property.</param>
         /// <param name="salt">Initial value of the Salt property.</param>
+        /// <param name="rights">Initial value of the Rights property.</param>
         /// <param name="passphrase">Initial value of the Passphrase property.</param>
-        public static User CreateUser(global::System.Int32 id, global::System.String email, global::System.String salt, global::System.Byte[] passphrase)
+        public static User CreateUser(global::System.Int32 id, global::System.String email, global::System.String salt, global::System.String rights, global::System.Byte[] passphrase)
         {
             User user = new User();
             user.Id = id;
             user.Email = email;
             user.Salt = salt;
+            user.Rights = rights;
             user.Passphrase = passphrase;
             return user;
         }
@@ -944,7 +946,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
                 OnRightsChanged();
             }
         }
-        private global::System.String _Rights = "Author";
+        private global::System.String _Rights;
         partial void OnRightsChanging(global::System.String value);
         partial void OnRightsChanged();
     
