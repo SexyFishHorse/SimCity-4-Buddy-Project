@@ -69,6 +69,7 @@
             var plugin = ((ComboBoxItem<Plugin>)pluginComboBox.SelectedItem).Value;
 
             okButton.Enabled = plugin != null;
+            includeInformationCheckBox.Checked = plugin != null;
         }
 
         private void IncludeInformationCheckBoxCheckedChanged(object sender, EventArgs e)
