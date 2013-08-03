@@ -84,6 +84,9 @@ namespace NIHEI.SC4Buddy.View.Author
             // includeInformationCheckBox
             // 
             this.includeInformationCheckBox.AutoSize = true;
+            this.includeInformationCheckBox.Checked = true;
+            this.includeInformationCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.includeInformationCheckBox.Enabled = false;
             this.includeInformationCheckBox.Location = new System.Drawing.Point(12, 70);
             this.includeInformationCheckBox.Name = "includeInformationCheckBox";
             this.includeInformationCheckBox.Size = new System.Drawing.Size(154, 17);
