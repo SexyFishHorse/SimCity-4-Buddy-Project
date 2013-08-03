@@ -5,6 +5,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
 
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Entities.Remote;
@@ -32,13 +33,20 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
                 UpdateListView();
             }
+            get
+            {
+                return missingDependencies;
+            }
         }
 
         private void UpdateListView()
         {
+            var dependencies = ClearDuplicatesFromDependencies(MissingDependencies);
+
             dependencyListView.BeginUpdate();
             dependencyListView.Items.Clear();
-            foreach (var remotePlugin in missingDependencies)
+
+            foreach (var remotePlugin in dependencies)
             {
                 var item = new ListViewItemWithObjectValue<RemotePlugin>(remotePlugin.Name, remotePlugin);
                 item.SubItems.Add(remotePlugin.AuthorId > 0 ? remotePlugin.Author.Name : LocalizationStrings.Unknown);
@@ -48,6 +56,11 @@ namespace NIHEI.SC4Buddy.View.Plugins
             }
             dependencyListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             dependencyListView.EndUpdate();
+        }
+
+        private IEnumerable<RemotePlugin> ClearDuplicatesFromDependencies(IEnumerable<RemotePlugin> remotePlugins)
+        {
+            return remotePlugins.Distinct(new RemotePluginComparer());
         }
 
         private void DependencyListViewSelectedIndexChanged(object sender, EventArgs e)
