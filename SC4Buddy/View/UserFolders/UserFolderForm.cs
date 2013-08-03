@@ -308,7 +308,7 @@
             {
                 MessageBox.Show(
                     this,
-                    LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
+                    string.Format(LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing, numRecognizedPlugins),
                     LocalizationStrings.NoDependenciesMissing,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information,
