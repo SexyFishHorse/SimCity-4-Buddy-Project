@@ -6,6 +6,8 @@
     using System.Reflection;
     using System.Windows.Forms;
 
+    using NIHEI.SC4Buddy.Control;
+
     using log4net;
     using log4net.Config;
 
@@ -33,14 +35,22 @@
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
 
-            if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation))
+            if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation) || !Directory.Exists(Settings.Default.GameLocation))
             {
-                Application.Run(new SettingsForm { StartPosition = FormStartPosition.CenterScreen });
+                var settingsForm = new SettingsForm { StartPosition = FormStartPosition.CenterScreen };
+
+                Application.Run(settingsForm);
                 SetDefaultUserFolder();
             }
 
-            if (!string.IsNullOrWhiteSpace(Settings.Default.GameLocation))
+            if (RegistryFactory.UserFolderRegistry.UserFolders.Any(x => x.Id == 1 && x.Path.Equals("?")))
             {
+                SetDefaultUserFolder();
+            }
+
+            if (Directory.Exists(Settings.Default.GameLocation))
+            {
+                new SettingsController(RegistryFactory.UserFolderRegistry).UpdateMainFolder();
                 Application.Run(new Sc4Buddy());
             }
 #if (!DEBUG)
