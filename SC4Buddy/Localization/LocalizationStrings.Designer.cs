@@ -421,6 +421,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No non-plugin files detected.
+        /// </summary>
+        internal static string NoNonPluginFilesDetected {
+            get {
+                return ResourceManager.GetString("NoNonPluginFilesDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Non-plugin files deleted.
         /// </summary>
         internal static string NonPluginFilesDeleted {
@@ -660,6 +669,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string ThePluginHasBeenUpdatedInTheCentralDatabase {
             get {
                 return ResourceManager.GetString("ThePluginHasBeenUpdatedInTheCentralDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no non-plugin files or empty folders to remove..
+        /// </summary>
+        internal static string ThereAreNoNonPluginFilesOrEmptyFoldersToRemove {
+            get {
+                return ResourceManager.GetString("ThereAreNoNonPluginFilesOrEmptyFoldersToRemove", resourceCulture);
             }
         }
         
