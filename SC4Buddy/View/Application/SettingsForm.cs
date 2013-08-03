@@ -102,7 +102,7 @@
         {
             var gameLocation = settingsController.SearchForGameLocation();
 
-            if (!string.IsNullOrWhiteSpace(gameLocation))
+            if (string.IsNullOrWhiteSpace(gameLocation))
             {
                 Log.Info("Could not find game location using the scanner");
 
