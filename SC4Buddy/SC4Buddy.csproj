@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Control\GameLauncher.cs" />
     <Compile Include="Control\ISettingsController.cs" />
+    <Compile Include="Control\RemotePluginController.cs" />
     <Compile Include="Control\SettingsController.cs" />
     <Compile Include="Control\UserFolders\FolderScanner.cs" />
     <Compile Include="Control\Plugins\PluginController.cs" />
