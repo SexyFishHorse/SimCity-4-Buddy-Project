@@ -38,7 +38,7 @@
             if (string.IsNullOrWhiteSpace(path))
             {
                 Log.Error("Game location is empty");
-                throw new ArgumentException(@"Path cannot be null or empty", "path");
+                return false;
             }
 
             return File.Exists(Path.Combine(path, @"Apps\SimCity 4.exe"));

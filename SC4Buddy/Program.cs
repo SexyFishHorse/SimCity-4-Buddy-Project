@@ -35,7 +35,7 @@
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
-
+            
             if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation) || !Directory.Exists(Settings.Default.GameLocation))
             {
                 var settingsForm = new SettingsForm { StartPosition = FormStartPosition.CenterScreen };
