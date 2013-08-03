@@ -261,17 +261,7 @@
 
             if (!settingsController.ValidateGameLocationPath(Settings.Default.GameLocation))
             {
-                Log.Info("Invalid game location on form closing");
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.InvalidGameLocationFolder,
-                    LocalizationStrings.GameNotFound,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return;
-            }
-
-            var result = MessageBox.Show(
+                var result = MessageBox.Show(
                 this,
                 LocalizationStrings.YouMustSettheGameLocationBeforeYouCanUseThisApplication,
                 LocalizationStrings.GameFolderNotSet,
@@ -279,13 +269,14 @@
                 MessageBoxIcon.Exclamation,
                 MessageBoxDefaultButton.Button1);
 
-            if (result != DialogResult.Retry)
-            {
-                return;
-            }
+                if (result != DialogResult.Retry)
+                {
+                    return;
+                }
 
-            Log.Info("Abort form close");
-            e.Cancel = true;
+                Log.Info("Abort form close");
+                e.Cancel = true;
+            }
         }
 
         private void LoginButtonClick(object sender, EventArgs e)
