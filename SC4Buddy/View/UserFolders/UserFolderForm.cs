@@ -231,6 +231,25 @@
         {
             new FolderScannerForm(userFolder).ShowDialog(this);
             RepopulateInstalledPluginsListView();
+
+            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.EnableRemoteDatabaseConnection
+                || !Settings.Default.AllowDependencyCheck)
+            {
+                return;
+            }
+
+            var scanForDependencies = MessageBox.Show(
+                this,
+                LocalizationStrings.WouldYouLikeToScanForMissingDependencies,
+                LocalizationStrings.DependencyCheck,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
+
+            if (scanForDependencies == DialogResult.Yes)
+            {
+                CheckForMissingDependenciesToolStripMenuItemClick(sender, e);
+            }
         }
 
         private void ScanForNonpluginFilesToolStripMenuItemClick(object sender, EventArgs e)
