@@ -80,12 +80,21 @@
         private static IEnumerable<FileInfo> GetReadmeFiles(IEnumerable<FileSystemInfo> tempFiles)
         {
             var readmeExtensions = new[] { ".html", ".htm", ".mht", ".pdf", ".txt", ".rtf", ".doc", ".docx", "odt" };
-            return
-                tempFiles.Where(x => x is FileInfo)
-                         .SelectMany(file => readmeExtensions, (file, readmeExtension) => new { file, readmeExtension })
-                         .Where(@t => @t.file.Extension.Equals(@t.readmeExtension, StringComparison.OrdinalIgnoreCase))
-                         .Select(@t => @t.file as FileInfo)
-                         .ToList();
+            var nonReadmeFilenames = new[] { "CLEANITOL", "REMOVELIST" };
+
+            var readmeFiles = new List<FileInfo>();
+            foreach (
+                FileInfo file in
+                    tempFiles.Cast<FileInfo>()
+                             .Where(file => !nonReadmeFilenames.Any(x => file.Name.ToUpper().Contains(x))))
+            {
+                readmeFiles.AddRange(
+                    readmeExtensions.Where(
+                        readmeExtension => file.Extension.Equals(readmeExtension, StringComparison.OrdinalIgnoreCase))
+                                    .Select(readmeExtension => file));
+            }
+
+            return readmeFiles;
         }
     }
 }
