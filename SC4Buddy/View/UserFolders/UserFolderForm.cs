@@ -196,7 +196,7 @@
                 LocalizationStrings.ConfirmInstallation,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
-                MessageBoxDefaultButton.Button2);
+                MessageBoxDefaultButton.Button1);
 
             if (confirmResult == DialogResult.No)
             {
