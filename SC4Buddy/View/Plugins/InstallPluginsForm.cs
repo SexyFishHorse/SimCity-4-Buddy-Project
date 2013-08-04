@@ -88,19 +88,6 @@
                         MessageBoxIcon.Stop)));
         }
 
-        public void ShowNumberOfExecutablesDialog(PluginInstaller installer)
-        {
-            Invoke(
-                new Action(
-                    () =>
-                    MessageBox.Show(
-                        this,
-                        string.Format(LocalizationStrings.ThisFormContainsNumExecutableFiles, installer.Executables.Count()),
-                        LocalizationStrings.ExecutableFilesFound,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information)));
-        }
-
         protected void IncrementInstalledPlugins()
         {
             SetOverallProgresBar(OverallProgressBar.Value + 1);
