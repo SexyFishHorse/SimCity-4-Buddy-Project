@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Net.NetworkInformation;
     using System.Threading;
     using System.Windows.Forms;
 
@@ -175,7 +176,7 @@
             {
                 Invoke(new Action(() =>
                     {
-                        if (Settings.Default.EnableRemoteDatabaseConnection && Settings.Default.FetchInfoFromRemote)
+                        if (NetworkInterface.GetIsNetworkAvailable() && Settings.Default.EnableRemoteDatabaseConnection && Settings.Default.FetchInfoFromRemote)
                         {
                             var matcher = new PluginMatcher();
                             var matched = tempPluginInfo.Where(matcher.MatchAndUpdate).ToList();
