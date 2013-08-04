@@ -5,6 +5,7 @@
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Net.NetworkInformation;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control.UserFolders;
@@ -60,6 +61,17 @@
         private void UserFolderFormLoad(object sender, EventArgs e)
         {
             RepopulateInstalledPluginsListView();
+
+            if (!Settings.Default.EnableRemoteDatabaseConnection || !NetworkInterface.GetIsNetworkAvailable())
+            {
+                updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = false;
+                checkForMissingDependenciesToolStripMenuItem.Visible = false;
+            }
+            else
+            {
+                updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Default.FetchInfoFromRemote;
+                checkForMissingDependenciesToolStripMenuItem.Visible = Settings.Default.AllowDependencyCheck;
+            }
         }
 
         private void RepopulateInstalledPluginsListView()
