@@ -1473,6 +1473,36 @@
   <data name="&gt;&gt;tabPage2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="allowCheckMissingDependenciesCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="allowCheckMissingDependenciesCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="allowCheckMissingDependenciesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 52</value>
+  </data>
+  <data name="allowCheckMissingDependenciesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>265, 17</value>
+  </data>
+  <data name="allowCheckMissingDependenciesCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="allowCheckMissingDependenciesCheckBox.Text" xml:space="preserve">
+    <value>Check for missing dependencies for known plugins</value>
+  </data>
+  <data name="&gt;&gt;allowCheckMissingDependenciesCheckBox.Name" xml:space="preserve">
+    <value>allowCheckMissingDependenciesCheckBox</value>
+  </data>
+  <data name="&gt;&gt;allowCheckMissingDependenciesCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;allowCheckMissingDependenciesCheckBox.Parent" xml:space="preserve">
+    <value>tabPage4</value>
+  </data>
+  <data name="&gt;&gt;allowCheckMissingDependenciesCheckBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="enableRemoteDatabaseConnectionCheckbox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1501,7 +1531,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;enableRemoteDatabaseConnectionCheckbox.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="fetchInformationFromRemoteCheckbox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1531,7 +1561,7 @@
     <value>tabPage4</value>
   </data>
   <data name="&gt;&gt;fetchInformationFromRemoteCheckbox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="tabPage4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -3550,6 +3580,9 @@ and for custom content creators.</value>
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAA
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
