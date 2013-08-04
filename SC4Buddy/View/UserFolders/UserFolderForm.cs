@@ -207,6 +207,12 @@
 
             RepopulateInstalledPluginsListView();
 
+            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.EnableRemoteDatabaseConnection
+                || !Settings.Default.AllowDependencyCheck)
+            {
+                return;
+            }
+
             var scanForDependencies = MessageBox.Show(
                 this,
                 LocalizationStrings.WouldYouLikeToScanForMissingDependencies,
