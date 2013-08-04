@@ -46,7 +46,7 @@
             FileHandler.FileInfo = fileInfo;
 
             var tempFiles = FileHandler.ExtractFilesToTemp().ToList();
-            ReadmeFiles = GetReadmeFiles(tempFiles);
+            ReadmeFiles = GetReadmeFiles(tempFiles.Where(x => x is FileInfo).Cast<FileInfo>());
             Executables = GetExecutables(tempFiles);
             PluginFiles = GetPluginFiles(tempFiles);
         }
@@ -77,7 +77,7 @@
                          .ToList();
         }
 
-        private static IEnumerable<FileInfo> GetReadmeFiles(IEnumerable<FileSystemInfo> tempFiles)
+        private static IEnumerable<FileInfo> GetReadmeFiles(IEnumerable<FileInfo> tempFiles)
         {
             var readmeExtensions = new[] { ".html", ".htm", ".mht", ".pdf", ".txt", ".rtf", ".doc", ".docx", "odt" };
             var nonReadmeFilenames = new[] { "CLEANITOL", "REMOVELIST" };
