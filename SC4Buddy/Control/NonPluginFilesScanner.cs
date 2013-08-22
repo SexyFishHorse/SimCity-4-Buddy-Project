@@ -14,6 +14,36 @@
 
     public class NonPluginFilesScanner
     {
+        public bool HasFilesAndFoldersToRemove(UserFolder userFolder, out int numFiles, out int numFolders)
+        {
+            var filesToDelete = GetFilesToDelete(userFolder);
+            numFiles = filesToDelete.Count();
+
+            var foldersToDelete = GetFoldersToDelete(userFolder);
+            numFolders = foldersToDelete.Count();
+
+            return numFiles > 0 || numFolders > 0;
+        }
+
+        public int RemoveNonPluginFiles(UserFolder userFolder)
+        {
+            var filesToDelete = GetFilesToDelete(userFolder);
+
+            foreach (var file in filesToDelete)
+            {
+                FileSystem.DeleteFile(file, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+            }
+
+            var foldersToDelete = GetFoldersToDelete(userFolder);
+
+            foreach (var folder in foldersToDelete.Where(Directory.Exists))
+            {
+                FileSystem.DeleteDirectory(folder, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+            }
+
+            return foldersToDelete.Count();
+        }
+
         private static IList<string> GetFoldersToDelete(UserFolder userFolder)
         {
             var folders = Directory.EnumerateDirectories(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories).ToList();
