@@ -55,7 +55,7 @@
 
         private void UserFolderComboBoxCheckSelectedValue(object sender, EventArgs e)
         {
-            var selectUserFolderText = localizationManager.GetString("UserFolderComboBox.Text");
+            var selectUserFolderText = localizationManager.GetString("userFolderComboBox.Text");
             if (userFolderComboBox.SelectedItem == null
                 || userFolderComboBox.Text.Equals(selectUserFolderText))
             {
