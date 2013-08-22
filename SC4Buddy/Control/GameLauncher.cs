@@ -45,6 +45,8 @@
                 return;
             }
 
+            Log.Info(string.Format("Autosave is enabled. Attempting to save the game every {0} minutes.", autoSaveWaitTime));
+
             timer = new Timer(SendSaveCommand, handle, autoSaveWaitTime * MillisecondsPrMinute, autoSaveWaitTime * MillisecondsPrMinute);
         }
 
@@ -58,6 +60,7 @@
 
         private void SendSaveCommand(object state)
         {
+            Log.Info("Sending save signal to the game.");
             SetForegroundWindow((IntPtr)state);
             SendKeys.SendWait("^%(s)");
         }
