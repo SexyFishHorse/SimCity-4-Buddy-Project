@@ -11,6 +11,8 @@
 
     public class GameLauncher : IDisposable
     {
+        private const int MillisecondsPrMinute = 60000;
+
         private readonly ProcessStartInfo gameProcessStartInfo;
 
         private readonly int autoSaveWaitTime;
@@ -39,7 +41,7 @@
                 return;
             }
 
-            timer = new Timer(SendSaveCommand, handle, autoSaveWaitTime * 60000, autoSaveWaitTime * 60000);
+            timer = new Timer(SendSaveCommand, handle, autoSaveWaitTime * MillisecondsPrMinute, autoSaveWaitTime * MillisecondsPrMinute);
         }
 
         public void Dispose()
