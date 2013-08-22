@@ -1,6 +1,8 @@
 ﻿namespace NIHEI.SC4Buddy.Control
 {
+    using System;
     using System.Text;
+    using System.Text.RegularExpressions;
 
     public class GameArgumentsController
     {
@@ -49,9 +51,15 @@
             return string.Format("-customResolution:{0}", (enabled ? "enabled" : "disabled"));
         }
 
-        public string GetStringForResolution(string width, string height, bool depth32)
+        public string GetStringForResolution(string widthTimesHeight, bool depth32)
         {
-            return string.Format("-r{0}x{1}x{2}", width, height, (depth32 ? "32" : "16"));
+            var regEx = new Regex(@"\d+x\d+");
+            if (!regEx.IsMatch(widthTimesHeight))
+            {
+                throw new ArgumentException(@"Must be in the format \d+x\d+", widthTimesHeight);
+            }
+
+            return string.Format("-r{0}x{1}", widthTimesHeight, (depth32 ? "32" : "16"));
         }
 
         public string GetStringForWindowMode(bool enabled)
