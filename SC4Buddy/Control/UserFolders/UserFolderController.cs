@@ -170,7 +170,7 @@
             numFolders = folders.Count(x => !new DirectoryInfo(x).EnumerateFiles("*", SearchOption.AllDirectories).Any());
         }
 
-        private bool IsDamnFile(UserFolder userFolder, string path)
+        public static bool IsDamnFile(UserFolder userFolder, string path)
         {
             var relativePath = path.Replace(userFolder.PluginFolderPath, string.Empty);
 
@@ -179,7 +179,7 @@
                        || relativePath.EndsWith("DAMN-Indexer.cmd"));
         }
 
-        private static bool IsBackgroundImage(string entity, UserFolder userFolder)
+        public static bool IsBackgroundImage(string entity, UserFolder userFolder)
         {
             if (userFolder.Id != 1)
             {
