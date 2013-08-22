@@ -49,7 +49,7 @@
                 gameLocationTextBox.Text = path;
             }
 
-            UpdateLanguageBox();
+            UpdateLanguageComboBox();
         }
 
         private void GameLocationTextBoxTextChanged(object sender, EventArgs e)
@@ -64,7 +64,7 @@
                 ? Color.Gray
                 : Color.Black;
 
-            UpdateLanguageBox();
+            UpdateLanguageComboBox();
         }
 
         private void OkButtonClick(object sender, EventArgs e)
@@ -133,7 +133,7 @@
                 Log.Info("Game found using scanner");
 
                 gameLocationTextBox.Text = gameLocation;
-                UpdateLanguageBox();
+                UpdateLanguageComboBox();
             }
         }
 
@@ -191,6 +191,7 @@
             cpuPriorityComboBox.Items.Add(new ComboBoxItem<GameArgumentsHelper.CpuPriority>(LocalizationStrings.High, GameArgumentsHelper.CpuPriority.High));
             cpuPriorityComboBox.EndUpdate();
 
+            UpdateLanguageComboBox();
             cursorColourComboBox.BeginUpdate();
             cursorColourComboBox.Items.Clear();
             cursorColourComboBox.Items.Add(LocalizationStrings.Ignore);
@@ -214,7 +215,6 @@
                     LocalizationStrings.FullColors, GameArgumentsHelper.CursorColorDepth.FullColors));
             cursorColourComboBox.EndUpdate();
 
-            UpdateLanguageBox();
             UpdateBackgroundsListView();
             UpdateLoginStatus();
         }
@@ -270,7 +270,7 @@
             }
         }
 
-        private void UpdateLanguageBox()
+        private void UpdateLanguageComboBox()
         {
             if (!settingsController.ValidateGameLocationPath(Settings.Default.GameLocation))
             {
