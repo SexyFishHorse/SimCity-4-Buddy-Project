@@ -15,6 +15,7 @@
     using NIHEI.SC4Buddy.Installer.FileHandlers;
     using NIHEI.SC4Buddy.Installer.InstallerEventArgs;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Plugins;
 
     using SharpCompress.Common;
@@ -232,13 +233,11 @@
         {
             var installedFiles = new List<PluginFile>();
 
-            foreach (var executable in installer.Executables)
+            foreach (
+                var executable in
+                    installer.Executables.Where(
+                        x => Settings.Default.InstallerAutoRunExecutables || Form.AskToRunExecutable(userFolder, x)))
             {
-                if (!Form.AskToRunExecutable(userFolder, executable))
-                {
-                    continue;
-                }
-
                 using (var folderListener = new UserFolderListener(userFolder))
                 {
                     folderListener.Start();
