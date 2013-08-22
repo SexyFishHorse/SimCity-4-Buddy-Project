@@ -1,9 +1,15 @@
 ﻿namespace NIHEI.SC4Buddy.Control
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Reflection;
     using System.Text;
     using System.Text.RegularExpressions;
 
+    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Properties;
 
     using log4net;
 
@@ -190,6 +196,93 @@
         protected string GetStringForUserDir(UserFolder selectedUserFolder)
         {
             return string.Format("-userDir:\"{0}\\\"", selectedUserFolder.Path);
+        }
+
+        private IEnumerable<string> GetAudioArguments()
+        {
+            var output = new Collection<string>
+                             {
+                                 GetStringForAudio(!Settings.Default.LauncherDisableAudio),
+                                 GetStringForMusic(!Settings.Default.LauncherDisableMusic),
+                                 GetStringForSounds(!Settings.Default.LauncherDisableSound)
+                             };
+
+            return output;
+        }
+
+        private IEnumerable<string> GetVideoArguments()
+        {
+            var output = new Collection<string>
+                             {
+                                 GetStringForCustomResolution(
+                                     Settings.Default.LauncherCustomResolution)
+                             };
+
+            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherResolution))
+            {
+                output.Add(
+                    GetStringForResolution(
+                        Settings.Default.LauncherResolution, Settings.Default.Launcher32BitColourDepth));
+            }
+
+            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCursorColour))
+            {
+                CursorColorDepth cursorColorDepth;
+                if (Enum.TryParse(
+                    Settings.Default.LauncherCursorColour, true, out cursorColorDepth))
+                {
+                    output.Add(GetStringForCustomCursors(cursorColorDepth));
+                    output.Add(GetStringForCursors(cursorColorDepth));
+                }
+            }
+
+            return output;
+        }
+
+        private IEnumerable<string> GetPerformanceArguments()
+        {
+            var output = new Collection<string>();
+            int cpuCount;
+            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCpuCount) && int.TryParse(Settings.Default.LauncherCpuCount, out cpuCount))
+            {
+                output.Add(GetStringForNumberOfCpus(cpuCount));
+            }
+
+            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCpuPriority))
+            {
+                CpuPriority priority;
+                if (Enum.TryParse(Settings.Default.LauncherCpuPriority, true, out priority))
+                {
+                    output.Add(GetStringForCpuPriority(priority));
+                }
+                else
+                {
+                    Log.Warn(
+                        string.Format(
+                            "Unknown CPU priority: \"{0}\", skipping argument.", Settings.Default.LauncherCpuPriority));
+                }
+            }
+
+            output.Add(GetStringForIntroSequence(!Settings.Default.LauncherSkipIntro));
+            output.Add(GetStringForPauseWhenMinimized(Settings.Default.LauncherPauseMinimized));
+            output.Add(GetStringForExceptionHandling(!Settings.Default.LauncherDisableExceptionHandling));
+            output.Add(GetStringForBackgroundLoading(!Settings.Default.LauncherDisableBackgroundLoader));
+
+            return output;
+        }
+
+        public IEnumerable<string> GetOtherArguments()
+        {
+            var output = new Collection<string>
+                             {
+                                 GetStringForLanguage(Settings.Default.LauncherLanguage),
+                                 GetStringForIgnoreMissingModels(
+                                     Settings.Default.LauncherIgnoreMissingModels),
+                                 GetStringForImeEnabled(!Settings.Default.LauncherDisableIME),
+                                 GetStringForWriteLog(Settings.Default.LauncherWriteLog)
+                             };
+
+            return output;
         }
     }
 }
