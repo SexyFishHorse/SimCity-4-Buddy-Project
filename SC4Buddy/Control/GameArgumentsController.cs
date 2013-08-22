@@ -186,5 +186,10 @@
         {
             return string.Format("-l:{0}", language);
         }
+
+        protected string GetStringForUserDir(UserFolder selectedUserFolder)
+        {
+            return string.Format("-userDir:\"{0}\\\"", selectedUserFolder.Path);
+        }
     }
 }
