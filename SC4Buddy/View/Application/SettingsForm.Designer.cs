@@ -49,6 +49,8 @@ namespace NIHEI.SC4Buddy.View.Application
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cpuPriorityComboBox = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -67,11 +69,10 @@ namespace NIHEI.SC4Buddy.View.Application
             this.loginStatusLabel = new System.Windows.Forms.Label();
             this.logoutButton = new System.Windows.Forms.Button();
             this.loginButton = new System.Windows.Forms.Button();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.AskForAdditionalInfoAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
             this.autoSaveIntervalTrackBar = new System.Windows.Forms.TrackBar();
             this.enableAutoSaveButton = new System.Windows.Forms.CheckBox();
             this.gameLocationTextBox = new System.Windows.Forms.TextBox();
@@ -79,14 +80,12 @@ namespace NIHEI.SC4Buddy.View.Application
             this.ignoreMissingModelsCheckBox = new System.Windows.Forms.CheckBox();
             this.writeLogCheckBox = new System.Windows.Forms.CheckBox();
             this.disableIMECheckBox = new System.Windows.Forms.CheckBox();
-            this.lowCpuPriorityCheckBox = new System.Windows.Forms.CheckBox();
             this.pauseMinimizedCheckBox = new System.Windows.Forms.CheckBox();
             this.disableBackgroundLoaderCheckBox = new System.Windows.Forms.CheckBox();
             this.skipIntroCheckBox = new System.Windows.Forms.CheckBox();
             this.disableExceptionHandlingCheckBox = new System.Windows.Forms.CheckBox();
             this.cpuCountComboBox = new System.Windows.Forms.ComboBox();
             this.cursorColourComboBox = new System.Windows.Forms.ComboBox();
-            this.AutoRunInstallerExecutablesCheckBox = new System.Windows.Forms.CheckBox();
             this.colourDepthComboBox = new System.Windows.Forms.ComboBox();
             this.displayModeComboBox = new System.Windows.Forms.ComboBox();
             this.resolutionComboBox = new System.Windows.Forms.ComboBox();
@@ -100,6 +99,8 @@ namespace NIHEI.SC4Buddy.View.Application
             this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
             this.emailTextBox = new System.Windows.Forms.TextBox();
             this.RemoveNonPluginFilesAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
+            this.AutoRunInstallerExecutablesCheckBox = new System.Windows.Forms.CheckBox();
+            this.AskForAdditionalInfoAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -112,8 +113,8 @@ namespace NIHEI.SC4Buddy.View.Application
             this.groupBox2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoSaveIntervalTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -247,7 +248,8 @@ namespace NIHEI.SC4Buddy.View.Application
             // groupBox4
             // 
             resources.ApplyResources(this.groupBox4, "groupBox4");
-            this.groupBox4.Controls.Add(this.lowCpuPriorityCheckBox);
+            this.groupBox4.Controls.Add(this.cpuPriorityComboBox);
+            this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Controls.Add(this.pauseMinimizedCheckBox);
             this.groupBox4.Controls.Add(this.disableBackgroundLoaderCheckBox);
             this.groupBox4.Controls.Add(this.skipIntroCheckBox);
@@ -256,6 +258,18 @@ namespace NIHEI.SC4Buddy.View.Application
             this.groupBox4.Controls.Add(this.cpuCountComboBox);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
+            // 
+            // cpuPriorityComboBox
+            // 
+            resources.ApplyResources(this.cpuPriorityComboBox, "cpuPriorityComboBox");
+            this.cpuPriorityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cpuPriorityComboBox.FormattingEnabled = true;
+            this.cpuPriorityComboBox.Name = "cpuPriorityComboBox";
+            // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
             // 
             // label6
             // 
@@ -384,15 +398,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.loginButton.UseVisualStyleBackColor = true;
             this.loginButton.Click += new System.EventHandler(this.LoginButtonClick);
             // 
-            // gameLocationDialog
-            // 
-            resources.ApplyResources(this.gameLocationDialog, "gameLocationDialog");
-            this.gameLocationDialog.ShowNewFolderButton = false;
-            // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.RemoveNonPluginFilesAfterInstallCheckBox);
@@ -402,13 +407,14 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // AskForAdditionalInfoAfterInstallCheckBox
+            // gameLocationDialog
             // 
-            resources.ApplyResources(this.AskForAdditionalInfoAfterInstallCheckBox, "AskForAdditionalInfoAfterInstallCheckBox");
-            this.AskForAdditionalInfoAfterInstallCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.InstallerAskForAdditionalInfo;
-            this.AskForAdditionalInfoAfterInstallCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "InstallerAskForAdditionalInfo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.AskForAdditionalInfoAfterInstallCheckBox.Name = "AskForAdditionalInfoAfterInstallCheckBox";
-            this.AskForAdditionalInfoAfterInstallCheckBox.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.gameLocationDialog, "gameLocationDialog");
+            this.gameLocationDialog.ShowNewFolderButton = false;
+            // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
             // 
             // autoSaveIntervalTrackBar
             // 
@@ -472,14 +478,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.disableIMECheckBox.Name = "disableIMECheckBox";
             this.disableIMECheckBox.UseVisualStyleBackColor = true;
             // 
-            // lowCpuPriorityCheckBox
-            // 
-            resources.ApplyResources(this.lowCpuPriorityCheckBox, "lowCpuPriorityCheckBox");
-            this.lowCpuPriorityCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherLowCpuPriority;
-            this.lowCpuPriorityCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherLowCpuPriority", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.lowCpuPriorityCheckBox.Name = "lowCpuPriorityCheckBox";
-            this.lowCpuPriorityCheckBox.UseVisualStyleBackColor = true;
-            // 
             // pauseMinimizedCheckBox
             // 
             resources.ApplyResources(this.pauseMinimizedCheckBox, "pauseMinimizedCheckBox");
@@ -526,24 +524,9 @@ namespace NIHEI.SC4Buddy.View.Application
             this.cursorColourComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherCursorColour", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cursorColourComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cursorColourComboBox.FormattingEnabled = true;
-            this.cursorColourComboBox.Items.AddRange(new object[] {
-            resources.GetString("cursorColourComboBox.Items"),
-            resources.GetString("cursorColourComboBox.Items1"),
-            resources.GetString("cursorColourComboBox.Items2"),
-            resources.GetString("cursorColourComboBox.Items3"),
-            resources.GetString("cursorColourComboBox.Items4"),
-            resources.GetString("cursorColourComboBox.Items5")});
             resources.ApplyResources(this.cursorColourComboBox, "cursorColourComboBox");
             this.cursorColourComboBox.Name = "cursorColourComboBox";
             this.cursorColourComboBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherCursorColour;
-            // 
-            // AutoRunInstallerExecutablesCheckBox
-            // 
-            resources.ApplyResources(this.AutoRunInstallerExecutablesCheckBox, "AutoRunInstallerExecutablesCheckBox");
-            this.AutoRunInstallerExecutablesCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.InstallerAutoRunExecutables;
-            this.AutoRunInstallerExecutablesCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "InstallerAutoRunExecutables", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.AutoRunInstallerExecutablesCheckBox.Name = "AutoRunInstallerExecutablesCheckBox";
-            this.AutoRunInstallerExecutablesCheckBox.UseVisualStyleBackColor = true;
             // 
             // colourDepthComboBox
             // 
@@ -672,6 +655,23 @@ namespace NIHEI.SC4Buddy.View.Application
             this.RemoveNonPluginFilesAfterInstallCheckBox.Name = "RemoveNonPluginFilesAfterInstallCheckBox";
             this.RemoveNonPluginFilesAfterInstallCheckBox.UseVisualStyleBackColor = true;
             // 
+            // AutoRunInstallerExecutablesCheckBox
+            // 
+            resources.ApplyResources(this.AutoRunInstallerExecutablesCheckBox, "AutoRunInstallerExecutablesCheckBox");
+            this.AutoRunInstallerExecutablesCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.InstallerAutoRunExecutables;
+            this.AutoRunInstallerExecutablesCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "InstallerAutoRunExecutables", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.AutoRunInstallerExecutablesCheckBox.Name = "AutoRunInstallerExecutablesCheckBox";
+            this.AutoRunInstallerExecutablesCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // AskForAdditionalInfoAfterInstallCheckBox
+            // 
+            resources.ApplyResources(this.AskForAdditionalInfoAfterInstallCheckBox, "AskForAdditionalInfoAfterInstallCheckBox");
+            this.AskForAdditionalInfoAfterInstallCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.InstallerAskForAdditionalInfo;
+            this.AskForAdditionalInfoAfterInstallCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AskForAdditionalInfoAfterInstallCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "InstallerAskForAdditionalInfo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.AskForAdditionalInfoAfterInstallCheckBox.Name = "AskForAdditionalInfoAfterInstallCheckBox";
+            this.AskForAdditionalInfoAfterInstallCheckBox.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -704,9 +704,9 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage4.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.autoSaveIntervalTrackBar)).EndInit();
             this.ResumeLayout(false);
 
@@ -753,7 +753,6 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox disableIMECheckBox;
         private System.Windows.Forms.CheckBox pauseMinimizedCheckBox;
-        private System.Windows.Forms.CheckBox lowCpuPriorityCheckBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox languageComboBox;
         private System.Windows.Forms.GroupBox groupBox5;
@@ -782,5 +781,7 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.CheckBox RemoveNonPluginFilesAfterInstallCheckBox;
         private System.Windows.Forms.CheckBox AutoRunInstallerExecutablesCheckBox;
         private System.Windows.Forms.CheckBox AskForAdditionalInfoAfterInstallCheckBox;
+        private System.Windows.Forms.ComboBox cpuPriorityComboBox;
+        private System.Windows.Forms.Label label12;
     }
 }

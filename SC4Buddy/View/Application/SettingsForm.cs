@@ -13,6 +13,7 @@
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
+    using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.Login;
 
     using log4net;
@@ -149,6 +150,14 @@
 
             cpuCountComboBox.SelectedIndex = 0;
             cpuCountComboBox.EndUpdate();
+
+            cpuPriorityComboBox.BeginUpdate();
+            cpuPriorityComboBox.Items.Clear();
+            cpuPriorityComboBox.Items.Add(LocalizationStrings.Ignore);
+            cpuPriorityComboBox.Items.Add(new ComboBoxItem<GameArgumentsController.CpuPriority>(LocalizationStrings.Low, GameArgumentsController.CpuPriority.Low));
+            cpuPriorityComboBox.Items.Add(new ComboBoxItem<GameArgumentsController.CpuPriority>(LocalizationStrings.Medium, GameArgumentsController.CpuPriority.Medium));
+            cpuPriorityComboBox.Items.Add(new ComboBoxItem<GameArgumentsController.CpuPriority>(LocalizationStrings.High, GameArgumentsController.CpuPriority.High));
+            cpuPriorityComboBox.EndUpdate();
 
             displayModeComboBox.SelectedIndex = 1;
             renderModeComboBox.SelectedIndex = 1;

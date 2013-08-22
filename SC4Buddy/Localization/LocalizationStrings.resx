@@ -470,4 +470,16 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="DoYouWantToScanForAndRemoveNonPluginFiles" xml:space="preserve">
     <value>Do you want to scan for and remove non-plugin files?</value>
   </data>
+  <data name="Ignore" xml:space="preserve">
+    <value>(ignore)</value>
+  </data>
+  <data name="Low" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>High</value>
+  </data>
 </root>

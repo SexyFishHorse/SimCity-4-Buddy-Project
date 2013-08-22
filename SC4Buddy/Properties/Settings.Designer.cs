@@ -277,13 +277,13 @@ namespace NIHEI.SC4Buddy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherLowCpuPriority {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LauncherCpuPriority {
             get {
-                return ((bool)(this["LauncherLowCpuPriority"]));
+                return ((string)(this["LauncherCpuPriority"]));
             }
             set {
-                this["LauncherLowCpuPriority"] = value;
+                this["LauncherCpuPriority"] = value;
             }
         }
         

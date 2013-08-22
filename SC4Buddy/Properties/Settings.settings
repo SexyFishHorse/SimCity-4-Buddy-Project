@@ -65,8 +65,8 @@
     <Setting Name="Wallpaper" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="LauncherLowCpuPriority" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="LauncherCpuPriority" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="LauncherLanguage" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
