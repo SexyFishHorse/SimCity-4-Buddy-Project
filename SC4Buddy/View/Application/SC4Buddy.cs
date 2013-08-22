@@ -243,7 +243,12 @@
             playButton.ForeColor = Color.Gray;
             playButton.Update();
 
-            var selectedUserFolder = ((ComboBoxItem<UserFolder>)userFolderComboBox.SelectedItem).Value;
+            UserFolder selectedUserFolder = null;
+            if (userFolderComboBox.SelectedItem != null)
+            {
+                selectedUserFolder = ((ComboBoxItem<UserFolder>)userFolderComboBox.SelectedItem).Value;
+            }
+
             var arguments = new GameArgumentsHelper().GetArgumentString(selectedUserFolder);
 
             var gameProcessStartInfo = new ProcessStartInfo
