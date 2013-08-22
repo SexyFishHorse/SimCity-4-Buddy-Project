@@ -178,7 +178,7 @@
 
         private void SavePluginInformation(Plugin plugin, IEnumerable<PluginFile> installedFiles)
         {
-            foreach (var installedFile in installedFiles)
+            foreach (var installedFile in installedFiles.Distinct(new PluginFileComparer()))
             {
                 installedFile.Plugin = plugin;
                 plugin.Files.Add(installedFile);

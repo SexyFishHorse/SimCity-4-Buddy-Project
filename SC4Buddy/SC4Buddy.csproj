@@ -143,6 +143,7 @@
     <Compile Include="Installer\InstallerEventArgs\InstallPluginEventArgs.cs" />
     <Compile Include="Installer\InstallerEventArgs\InstallPluginFailureEventArgs.cs" />
     <Compile Include="Installer\InstallerEventArgs\InstallProgressEventArgs.cs" />
+    <Compile Include="Installer\PluginFileComparer.cs" />
     <Compile Include="Installer\PluginInstaller.cs" />
     <Compile Include="Installer\FileHandlers\BaseHandler.cs" />
     <Compile Include="Installer\FileHandlers\DatHandler.cs" />
