@@ -75,9 +75,9 @@
             IncrementInstalledPlugins();
         }
 
-        public bool AskToRunExecutable(UserFolder userFolder, FileInfo executable)
+        public bool AskToRunExecutable(FileInfo executable)
         {
-            return (bool)Invoke(new Func<bool>(() => ShowAskToRunExecutable(userFolder, executable)));
+            return (bool)Invoke(new Func<bool>(() => ShowAskToRunExecutable(executable)));
         }
 
         public void ShowInstallationDidNotStartDialog()
@@ -128,7 +128,7 @@
             Write("\n" + message);
         }
 
-        private bool ShowAskToRunExecutable(UserFolder userFolder, FileInfo executable)
+        private bool ShowAskToRunExecutable(FileInfo executable)
         {
             var messageString = string.Format(
                 LocalizationStrings.DoYouWantToRunTheNamExecutable,

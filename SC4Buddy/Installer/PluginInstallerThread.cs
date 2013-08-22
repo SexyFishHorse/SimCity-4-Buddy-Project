@@ -236,7 +236,7 @@
             foreach (
                 var executable in
                     installer.Executables.Where(
-                        x => Settings.Default.InstallerAutoRunExecutables || Form.AskToRunExecutable(userFolder, x)))
+                        x => Settings.Default.InstallerAutoRunExecutables || Form.AskToRunExecutable(x)))
             {
                 using (var folderListener = new UserFolderListener(userFolder))
                 {
