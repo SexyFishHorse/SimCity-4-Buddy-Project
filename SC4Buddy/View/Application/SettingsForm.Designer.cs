@@ -372,11 +372,9 @@ namespace NIHEI.SC4Buddy.View.Application
             // cpuCountComboBox
             // 
             resources.ApplyResources(this.cpuCountComboBox, "cpuCountComboBox");
-            this.cpuCountComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherCpuCount", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.cpuCountComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cpuCountComboBox.FormattingEnabled = true;
             this.cpuCountComboBox.Name = "cpuCountComboBox";
-            this.cpuCountComboBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherCpuCount;
             // 
             // groupBox3
             // 

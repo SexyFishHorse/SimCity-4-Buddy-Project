@@ -142,7 +142,7 @@
 
         protected string GetStringForNumberOfCpus(int numCpus)
         {
-            return string.Format("-cpuCount:{0}", numCpus);
+            return numCpus > 0 ? string.Format("-cpuCount:{0}", numCpus) : string.Empty;
         }
 
         protected string GetStringForCpuPriority(CpuPriority priority)
@@ -273,10 +273,10 @@
         private IEnumerable<string> GetPerformanceArguments()
         {
             var output = new Collection<string>();
-            int cpuCount;
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCpuCount) && int.TryParse(Settings.Default.LauncherCpuCount, out cpuCount))
+
+            if (Settings.Default.LauncherCpuCount > 0)
             {
-                output.Add(GetStringForNumberOfCpus(cpuCount));
+                output.Add(GetStringForNumberOfCpus(Settings.Default.LauncherCpuCount));
             }
 
             if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCpuPriority))
