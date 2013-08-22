@@ -389,6 +389,11 @@
             languageComboBox.Items.Clear();
             languageComboBox.Items.Add(LocalizationStrings.Ignore);
             languageComboBox.Items.AddRange(languages.Cast<object>().ToArray());
+
+            languageComboBox.SelectedItem = string.IsNullOrWhiteSpace(Settings.Default.LauncherLanguage)
+                                                ? LocalizationStrings.Ignore
+                                                : Settings.Default.LauncherLanguage;
+
             languageComboBox.EndUpdate();
         }
 
