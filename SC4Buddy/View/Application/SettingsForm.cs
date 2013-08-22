@@ -200,25 +200,25 @@
             switch (selectedCursor)
             {
                 case GameArgumentsHelper.CursorColorDepth.Disabled:
-                    cpuCountComboBox.SelectedIndex = 1;
+                    cursorColourComboBox.SelectedIndex = 1;
                     break;
                 case GameArgumentsHelper.CursorColorDepth.SystemCursors:
-                    cpuCountComboBox.SelectedIndex = 2;
+                    cursorColourComboBox.SelectedIndex = 2;
                     break;
                 case GameArgumentsHelper.CursorColorDepth.BlackAndWhite:
-                    cpuCountComboBox.SelectedIndex = 3;
+                    cursorColourComboBox.SelectedIndex = 3;
                     break;
                 case GameArgumentsHelper.CursorColorDepth.Colors16:
-                    cpuCountComboBox.SelectedIndex = 4;
+                    cursorColourComboBox.SelectedIndex = 4;
                     break;
                 case GameArgumentsHelper.CursorColorDepth.Colors256:
-                    cpuCountComboBox.SelectedIndex = 5;
+                    cursorColourComboBox.SelectedIndex = 5;
                     break;
                 case GameArgumentsHelper.CursorColorDepth.FullColors:
-                    cpuCountComboBox.SelectedIndex = 6;
+                    cursorColourComboBox.SelectedIndex = 6;
                     break;
                 default:
-                    cpuCountComboBox.SelectedIndex = 0;
+                    cursorColourComboBox.SelectedIndex = 0;
                     break;
             }
 
