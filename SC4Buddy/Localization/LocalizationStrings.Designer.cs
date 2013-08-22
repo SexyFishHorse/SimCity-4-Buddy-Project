@@ -214,6 +214,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to scan for and remove non-plugin files?.
+        /// </summary>
+        internal static string DoYouWantToScanForAndRemoveNonPluginFiles {
+            get {
+                return ResourceManager.GetString("DoYouWantToScanForAndRemoveNonPluginFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E-mail is not valid..
         /// </summary>
         internal static string EmailIsNotValid {

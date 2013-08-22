@@ -58,15 +58,7 @@
 
         private static IEnumerable<FileSystemInfo> GetPluginFiles(IEnumerable<FileSystemInfo> tempFiles)
         {
-            var pluginExtensions = new[] { ".dat", ".SC4Lot", ".SC4Desc", ".SC4Model" };
-            return
-                tempFiles.SelectMany(info => pluginExtensions, (info, extension) => new { info, extension })
-                         .Where(
-                             @t =>
-                             @t.info is DirectoryInfo
-                             || @t.info.Extension.Equals(@t.extension, StringComparison.OrdinalIgnoreCase))
-                         .Select(@t => @t.info)
-                         .ToList();
+            return tempFiles.Where(entry => entry is DirectoryInfo || BaseHandler.IsPluginFile(entry.FullName)).ToList();
         }
 
         private static IEnumerable<FileInfo> GetExecutables(IEnumerable<FileSystemInfo> tempFiles)
@@ -79,14 +71,13 @@
 
         private static IEnumerable<FileInfo> GetReadmeFiles(IEnumerable<FileInfo> tempFiles)
         {
-            var readmeExtensions = new[] { ".html", ".htm", ".mht", ".pdf", ".txt", ".rtf", ".doc", ".docx", "odt" };
+            var readmeExtensions = new[] { ".html", ".htm", ".mht", ".pdf", ".txt", ".rtf", ".doc", ".docx", ".odt" };
             var nonReadmeFilenames = new[] { "CLEANITOL", "REMOVELIST" };
 
             var readmeFiles = new List<FileInfo>();
             foreach (
-                FileInfo file in
-                    tempFiles.Cast<FileInfo>()
-                             .Where(file => !nonReadmeFilenames.Any(x => file.Name.ToUpper().Contains(x))))
+                var file in
+                    tempFiles.Where(file => !nonReadmeFilenames.Any(x => file.Name.ToUpper().Contains(x))))
             {
                 readmeFiles.AddRange(
                     readmeExtensions.Where(

@@ -38,14 +38,18 @@
             registry.Delete(plugin);
         }
 
-        public void RemoveEmptyPlugins()
+        public int RemoveEmptyPlugins()
         {
-            var emptyPlugins = registry.Plugins.Where(x => !x.Files.Any());
+            var emptyPlugins = registry.Plugins.Where(x => !x.Files.Any()).ToList();
+
+            var counter = emptyPlugins.Count();
 
             foreach (var emptyPlugin in emptyPlugins)
             {
                 Delete(emptyPlugin);
             }
+
+            return counter;
         }
     }
 }

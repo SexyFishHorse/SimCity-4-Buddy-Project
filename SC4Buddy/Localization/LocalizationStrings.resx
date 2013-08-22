@@ -467,4 +467,7 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="CannotMatchPluginsAgainstDatabaseAsNoConnectionsAreAvailable" xml:space="preserve">
     <value>Cannot match plugins against database as no connections are available</value>
   </data>
+  <data name="DoYouWantToScanForAndRemoveNonPluginFiles" xml:space="preserve">
+    <value>Do you want to scan for and remove non-plugin files?</value>
+  </data>
 </root>
