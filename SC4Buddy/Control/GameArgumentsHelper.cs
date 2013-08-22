@@ -13,7 +13,7 @@
 
     using log4net;
 
-    public class GameArgumentsController
+    public class GameArgumentsHelper
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 

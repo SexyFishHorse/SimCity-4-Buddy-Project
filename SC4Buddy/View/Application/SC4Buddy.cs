@@ -241,7 +241,7 @@
             playButton.Text = LocalizationStrings.StartingGame;
             playButton.ForeColor = Color.Gray;
             playButton.Update();
-            var arguments = new GameArgumentsController().GetArgumentString((userFolderComboBox.SelectedItem as ComboBoxItem<UserFolder>).Value);
+            var arguments = new GameArgumentsHelper().GetArgumentString((userFolderComboBox.SelectedItem as ComboBoxItem<UserFolder>).Value);
 
             var gameProcessStartInfo = new ProcessStartInfo
                                           {
