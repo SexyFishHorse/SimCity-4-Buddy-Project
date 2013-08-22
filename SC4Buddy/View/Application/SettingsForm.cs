@@ -27,9 +27,9 @@
 
         public SettingsForm()
         {
-            settingsController = new SettingsController(RegistryFactory.UserFolderRegistry);
-
             InitializeComponent();
+
+            settingsController = new SettingsController(RegistryFactory.UserFolderRegistry);
         }
 
         private void BrowseButtonClick(object sender, EventArgs e)
