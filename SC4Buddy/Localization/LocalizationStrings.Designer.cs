@@ -115,6 +115,24 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 16 bits.
+        /// </summary>
+        internal static string Bits16 {
+            get {
+                return ResourceManager.GetString("Bits16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 32 bits.
+        /// </summary>
+        internal static string Bits32 {
+            get {
+                return ResourceManager.GetString("Bits32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Black and White.
         /// </summary>
         internal static string BlackAndWhite {

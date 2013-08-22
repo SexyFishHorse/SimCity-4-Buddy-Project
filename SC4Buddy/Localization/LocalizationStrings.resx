@@ -509,4 +509,10 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="Software" xml:space="preserve">
     <value>Software</value>
   </data>
+  <data name="Bits16" xml:space="preserve">
+    <value>16 bits</value>
+  </data>
+  <data name="Bits32" xml:space="preserve">
+    <value>32 bits</value>
+  </data>
 </root>

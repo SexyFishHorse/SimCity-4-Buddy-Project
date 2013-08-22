@@ -149,6 +149,15 @@
             renderModeComboBox.Items.Add(new ComboBoxItem<GameArgumentsHelper.RenderMode>(LocalizationStrings.Software, GameArgumentsHelper.RenderMode.Software));
             renderModeComboBox.EndUpdate();
 
+            colourDepthComboBox.BeginUpdate();
+            colourDepthComboBox.Items.Clear();
+            colourDepthComboBox.Items.Add(LocalizationStrings.Ignore);
+            colourDepthComboBox.Items.Add(new ComboBoxItem<GameArgumentsHelper.ColorDepth )(
+                LocalizationStrings.Bits16, GameArgumentsHelper.ColorDepth.Bits16);
+            colourDepthComboBox.Items.Add(new ComboBoxItem<GameArgumentsHelper.ColorDepth )(
+                LocalizationStrings.Bits32, GameArgumentsHelper.ColorDepth.Bits32);
+            colourDepthComboBox.EndUpdate();
+
             cpuCountComboBox.BeginUpdate();
             cpuCountComboBox.Items.Clear();
             cpuCountComboBox.Items.Add(LocalizationStrings.Ignore);
