@@ -72,6 +72,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.OutputTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             resources.ApplyResources(this.OutputTextBox, "OutputTextBox");
             this.OutputTextBox.Name = "OutputTextBox";
+            this.OutputTextBox.ReadOnly = true;
             // 
             // panel1
             // 

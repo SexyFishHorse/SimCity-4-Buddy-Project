@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Control\GameLauncher.cs" />
     <Compile Include="Control\ISettingsController.cs" />
+    <Compile Include="Control\NonPluginFilesScanner.cs" />
     <Compile Include="Control\RemotePluginController.cs" />
     <Compile Include="Control\SettingsController.cs" />
     <Compile Include="Control\UserFolders\FolderScanner.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Installer\InstallerEventArgs\InstallPluginEventArgs.cs" />
     <Compile Include="Installer\InstallerEventArgs\InstallPluginFailureEventArgs.cs" />
     <Compile Include="Installer\InstallerEventArgs\InstallProgressEventArgs.cs" />
+    <Compile Include="Installer\PluginFileComparer.cs" />
     <Compile Include="Installer\PluginInstaller.cs" />
     <Compile Include="Installer\FileHandlers\BaseHandler.cs" />
     <Compile Include="Installer\FileHandlers\DatHandler.cs" />
@@ -251,6 +253,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="View\Elements\PluginListViewItem.cs" />
+    <Compile Include="View\Helpers\NonPluginFilesScannerUiHelper.cs" />
     <Compile Include="View\Login\CreateLoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
