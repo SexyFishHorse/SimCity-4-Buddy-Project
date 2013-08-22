@@ -8,6 +8,7 @@
     using System.Net.NetworkInformation;
     using System.Windows.Forms;
 
+    using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.DataAccess.Plugins;
@@ -257,7 +258,8 @@
             int numFiles;
             int numFolders;
 
-            controller.GetEstimatedFilesAndFoldersToBeRemoved(userFolder, out numFiles, out numFolders);
+            var scanner = new NonPluginFilesScanner();
+            scanner.HasFilesAndFoldersToRemove(userFolder, out numFiles, out numFolders);
 
             if (numFiles < 1 && numFolders < 1)
             {
@@ -284,7 +286,7 @@
                 return;
             }
 
-            numFolders = controller.RemoveNonPluginFiles(userFolder);
+            numFolders = scanner.RemoveNonPluginFiles(userFolder);
 
             var message = string.Format(LocalizationStrings.NumFilesAndNumFoldersWereRemoved, numFiles, numFolders);
 
