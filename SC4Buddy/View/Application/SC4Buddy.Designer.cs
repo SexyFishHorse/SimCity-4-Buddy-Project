@@ -49,16 +49,16 @@ namespace NIHEI.SC4Buddy.View.Application
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundPanel = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.UserFolderComboBox = new System.Windows.Forms.ComboBox();
-            this.playButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.userFolderComboBox = new System.Windows.Forms.ComboBox();
+            this.playButton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.backgroundPanel.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -192,30 +192,12 @@ namespace NIHEI.SC4Buddy.View.Application
             this.backgroundPanel.Controls.Add(this.panel2);
             this.backgroundPanel.Name = "backgroundPanel";
             // 
-            // panel2
+            // pictureBox2
             // 
-            this.panel2.BackColor = System.Drawing.Color.Transparent;
-            this.panel2.Controls.Add(this.UserFolderComboBox);
-            this.panel2.Controls.Add(this.playButton);
-            resources.ApplyResources(this.panel2, "panel2");
-            this.panel2.Name = "panel2";
-            // 
-            // UserFolderComboBox
-            // 
-            resources.ApplyResources(this.UserFolderComboBox, "UserFolderComboBox");
-            this.UserFolderComboBox.ForeColor = System.Drawing.Color.Gray;
-            this.UserFolderComboBox.FormattingEnabled = true;
-            this.UserFolderComboBox.Name = "UserFolderComboBox";
-            this.UserFolderComboBox.DropDown += new System.EventHandler(this.UserFolderComboBoxDropDown);
-            this.UserFolderComboBox.SelectedIndexChanged += new System.EventHandler(this.UserFolderComboBoxCheckSelectedValue);
-            this.UserFolderComboBox.TextChanged += new System.EventHandler(this.UserFolderComboBoxCheckSelectedValue);
-            // 
-            // playButton
-            // 
-            resources.ApplyResources(this.playButton, "playButton");
-            this.playButton.Name = "playButton";
-            this.playButton.UseVisualStyleBackColor = true;
-            this.playButton.Click += new System.EventHandler(this.PlayButtonClick);
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(this.pictureBox2, "pictureBox2");
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -224,12 +206,30 @@ namespace NIHEI.SC4Buddy.View.Application
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.TabStop = false;
             // 
-            // pictureBox2
+            // panel2
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.pictureBox2, "pictureBox2");
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.TabStop = false;
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
+            this.panel2.Controls.Add(this.userFolderComboBox);
+            this.panel2.Controls.Add(this.playButton);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // userFolderComboBox
+            // 
+            resources.ApplyResources(this.userFolderComboBox, "userFolderComboBox");
+            this.userFolderComboBox.ForeColor = System.Drawing.Color.Gray;
+            this.userFolderComboBox.FormattingEnabled = true;
+            this.userFolderComboBox.Name = "userFolderComboBox";
+            this.userFolderComboBox.DropDown += new System.EventHandler(this.UserFolderComboBoxDropDown);
+            this.userFolderComboBox.SelectedIndexChanged += new System.EventHandler(this.UserFolderComboBoxCheckSelectedValue);
+            this.userFolderComboBox.TextChanged += new System.EventHandler(this.UserFolderComboBoxCheckSelectedValue);
+            // 
+            // playButton
+            // 
+            resources.ApplyResources(this.playButton, "playButton");
+            this.playButton.Name = "playButton";
+            this.playButton.UseVisualStyleBackColor = true;
+            this.playButton.Click += new System.EventHandler(this.PlayButtonClick);
             // 
             // Sc4Buddy
             // 
@@ -244,9 +244,9 @@ namespace NIHEI.SC4Buddy.View.Application
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.backgroundPanel.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,7 +258,7 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.Panel backgroundPanel;
         private System.Windows.Forms.ToolStripMenuItem programToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.ComboBox UserFolderComboBox;
+        private System.Windows.Forms.ComboBox userFolderComboBox;
         private System.Windows.Forms.Button playButton;
         private System.Windows.Forms.ToolStripMenuItem userFoldersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageFoldersToolStripMenuItem;
