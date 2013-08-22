@@ -3,18 +3,28 @@
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Localization;
-    using NIHEI.SC4Buddy.View.UserFolders;
 
     public static class NonPluginFilesScannerUiHelper
     {
+        public static bool ShowDoYouWantToScanForNonPluginFiles(Form parentForm)
+        {
+            return MessageBox.Show(
+                parentForm,
+                LocalizationStrings.DoYouWantToScanForAndRemoveNonPluginFiles,
+                LocalizationStrings.RemoveNonPluginFiles,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Asterisk,
+                MessageBoxDefaultButton.Button1) == DialogResult.Yes;
+        }
+
         public static void ShowThereAreNoEntitiesToRemoveDialog(Form parentForm)
         {
             MessageBox.Show(
-                    parentForm,
-                    LocalizationStrings.ThereAreNoNonPluginFilesOrEmptyFoldersToRemove,
-                    LocalizationStrings.NoNonPluginFilesDetected,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                parentForm,
+                LocalizationStrings.ThereAreNoNonPluginFilesOrEmptyFoldersToRemove,
+                LocalizationStrings.NoNonPluginFilesDetected,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
 
         public static bool ShowConfirmDialog(Form parentForm, int numFiles, int numFolders)

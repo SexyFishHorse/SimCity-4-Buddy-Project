@@ -8,6 +8,7 @@
     using System.Threading;
     using System.Windows.Forms;
 
+    using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.DataAccess.Plugins;
     using NIHEI.SC4Buddy.Entities;
@@ -16,9 +17,12 @@
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
+    using NIHEI.SC4Buddy.View.Helpers;
 
     public partial class InstallPluginsForm : Form
     {
+        private readonly UserFolder userFolder;
+
         private readonly IList<string> installedPlugins;
 
         private readonly IList<string> failedPlugins;
@@ -31,6 +35,7 @@
 
         public InstallPluginsForm(string[] files, UserFolder userFolder)
         {
+            this.userFolder = userFolder;
             InitializeComponent();
 
             installedPlugins = new List<string>();
@@ -179,18 +184,39 @@
                             return;
                         }
 
-                        if (!Settings.Default.InstallerAskForAdditionalInfo || ShowWouldYouLikeToEnterAdditionalDetailsDialog() == DialogResult.No)
+                        if (Settings.Default.InstallerAskForAdditionalInfo
+                            && ShowWouldYouLikeToEnterAdditionalDetailsDialog() != DialogResult.No)
                         {
-                            return;
+                            foreach (var plugin in tempPluginInfo)
+                            {
+                                enterPluginInformationForm.Plugin = plugin;
+                                var result = ShowEnterPluginInformationForm();
+                                if (result == DialogResult.OK)
+                                {
+                                    pluginRegistry.Update(enterPluginInformationForm.Plugin);
+                                }
+                            }
                         }
 
-                        foreach (var plugin in tempPluginInfo)
+                        if (Settings.Default.InstallerAskToRemoveNonPluginFiles)
                         {
-                            enterPluginInformationForm.Plugin = plugin;
-                            var result = ShowEnterPluginInformationForm();
-                            if (result == DialogResult.OK)
+                            if (NonPluginFilesScannerUiHelper.ShowDoYouWantToScanForNonPluginFiles(this))
                             {
-                                pluginRegistry.Update(enterPluginInformationForm.Plugin);
+                                int numFiles;
+                                int numFolders;
+
+                                var scanner = new NonPluginFilesScanner();
+                                if (!scanner.HasFilesAndFoldersToRemove(userFolder, out numFiles, out numFolders))
+                                {
+                                    NonPluginFilesScannerUiHelper.ShowThereAreNoEntitiesToRemoveDialog(this);
+                                }
+
+                                if (NonPluginFilesScannerUiHelper.ShowConfirmDialog(this, numFiles, numFolders))
+                                {
+                                    numFolders = scanner.RemoveNonPluginFiles(userFolder);
+
+                                    NonPluginFilesScannerUiHelper.ShowConfirmDialog(this, numFiles, numFolders);
+                                }
                             }
                         }
                     }));
