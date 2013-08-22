@@ -470,4 +470,52 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="DoYouWantToScanForAndRemoveNonPluginFiles" xml:space="preserve">
     <value>Do you want to scan for and remove non-plugin files?</value>
   </data>
+  <data name="Ignore" xml:space="preserve">
+    <value>(ignore)</value>
+  </data>
+  <data name="Low" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="High" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="SystemCursors" xml:space="preserve">
+    <value>System Cursors</value>
+  </data>
+  <data name="BlackAndWhite" xml:space="preserve">
+    <value>Black and White</value>
+  </data>
+  <data name="Colors16" xml:space="preserve">
+    <value>16 colours</value>
+  </data>
+  <data name="Colors256" xml:space="preserve">
+    <value>256 colours</value>
+  </data>
+  <data name="FullColors" xml:space="preserve">
+    <value>Full colours</value>
+  </data>
+  <data name="DirectX" xml:space="preserve">
+    <value>DirectX</value>
+  </data>
+  <data name="OpenGL" xml:space="preserve">
+    <value>OpenGL</value>
+  </data>
+  <data name="Software" xml:space="preserve">
+    <value>Software</value>
+  </data>
+  <data name="Bits16" xml:space="preserve">
+    <value>16 bits</value>
+  </data>
+  <data name="Bits32" xml:space="preserve">
+    <value>32 bits</value>
+  </data>
+  <data name="ResolutionMustBeInTheFormatNumberXNumber" xml:space="preserve">
+    <value>Resolution must be in the format NUMBERxNUMBER. I.e. "1024x768".</value>
+  </data>
 </root>

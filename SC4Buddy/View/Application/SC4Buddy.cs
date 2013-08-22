@@ -1,9 +1,9 @@
 ﻿namespace NIHEI.SC4Buddy.View.Application
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
+    using System.IO;
     using System.Linq;
     using System.Net.NetworkInformation;
     using System.Reflection;
@@ -56,22 +56,22 @@
 
         private void UserFolderComboBoxCheckSelectedValue(object sender, EventArgs e)
         {
-            var selectUserFolderText = localizationManager.GetString("UserFolderComboBox.Text");
-            if (UserFolderComboBox.SelectedItem == null
-                || UserFolderComboBox.Text.Equals(selectUserFolderText))
+            var selectUserFolderText = localizationManager.GetString("userFolderComboBox.Text");
+            if (userFolderComboBox.SelectedItem == null
+                || userFolderComboBox.Text.Equals(selectUserFolderText))
             {
-                UserFolderComboBox.Text = selectUserFolderText;
-                UserFolderComboBox.ForeColor = Color.Gray;
+                userFolderComboBox.Text = selectUserFolderText;
+                userFolderComboBox.ForeColor = Color.Gray;
             }
             else
             {
-                UserFolderComboBox.ForeColor = Color.Black;
+                userFolderComboBox.ForeColor = Color.Black;
             }
         }
 
         private void UserFolderComboBoxDropDown(object sender, EventArgs e)
         {
-            UserFolderComboBox.ForeColor = Color.Black;
+            userFolderComboBox.ForeColor = Color.Black;
         }
 
         private void ManageFoldersToolStripMenuItemClick(object sender, EventArgs e)
@@ -83,8 +83,8 @@
 
         private void RepopulateUserFolderRelatives()
         {
-            UserFolderComboBox.BeginUpdate();
-            UserFolderComboBox.Items.Clear();
+            userFolderComboBox.BeginUpdate();
+            userFolderComboBox.Items.Clear();
 
             var remove = userFoldersToolStripMenuItem.DropDownItems.OfType<UserFolderToolStripMenuItem>().ToList();
             foreach (var item in remove)
@@ -97,7 +97,7 @@
             {
                 if (userFolder.Id != 1)
                 {
-                    UserFolderComboBox.Items.Add(new ComboBoxItem<UserFolder>(userFolder.Alias, userFolder));
+                    userFolderComboBox.Items.Add(new ComboBoxItem<UserFolder>(userFolder.Alias, userFolder));
                 }
 
                 if (userFolder.Alias.Equals("?"))
@@ -110,7 +110,7 @@
                 insertIndex++;
             }
 
-            UserFolderComboBox.EndUpdate();
+            userFolderComboBox.EndUpdate();
         }
 
         private void ExitToolStripMenuItemClick(object sender, EventArgs e)
@@ -140,6 +140,8 @@
             }
             catch (Exception ex)
             {
+                Log.Error("Error during auto-login", ex);
+
                 if (MessageBox.Show(
                     this,
                     LocalizationStrings.UnableToLogYouIntoTheSystem,
@@ -240,17 +242,27 @@
             playButton.Text = LocalizationStrings.StartingGame;
             playButton.ForeColor = Color.Gray;
             playButton.Update();
-            var arguments = SetArguments();
+
+            UserFolder selectedUserFolder = null;
+            if (userFolderComboBox.SelectedItem != null)
+            {
+                selectedUserFolder = ((ComboBoxItem<UserFolder>)userFolderComboBox.SelectedItem).Value;
+            }
+
+            var arguments = new GameArgumentsHelper().GetArgumentString(selectedUserFolder);
 
             var gameProcessStartInfo = new ProcessStartInfo
-                                          {
-                                              FileName =
-                                                  Settings.Default.GameLocation + @"\Apps\SimCity 4",
-                                              Arguments = string.Join(" ", arguments.ToArray())
-                                          };
+                                           {
+                                               FileName =
+                                                   Path.Combine(
+                                                       Settings.Default.GameLocation,
+                                                       "Apps",
+                                                       "SimCity 4.exe"),
+                                               Arguments = arguments
+                                           };
 
             var gameLauncher = new GameLauncher(gameProcessStartInfo, Settings.Default.AutoSaveWaitTime);
-            var gameLauncherThread = new Thread(gameLauncher.Start) { Name = "SC4Buddy GameLauncher" };
+            var gameLauncherThread = new Thread(gameLauncher.Start) { Name = "SC4Buddy AutoSaver" };
 
             gameLauncherThread.Start();
 
@@ -259,142 +271,6 @@
             playButton.Enabled = true;
             playButton.Text = localizationManager.GetString("playButton.Text");
             playButton.ForeColor = Color.Black;
-        }
-
-        private List<string> SetArguments()
-        {
-            var arguments = new List<string>();
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCpuCount))
-            {
-                arguments.Add(string.Format("-cpucount:{0}", Settings.Default.LauncherCpuCount));
-            }
-
-            if (Settings.Default.LauncherLowCpuPriority)
-            {
-                arguments.Add("-cpupriority:low");
-            }
-
-            if (Settings.Default.LauncherDisableAudio)
-            {
-                arguments.Add("-audio:off");
-            }
-
-            if (Settings.Default.LauncherDisableMusic)
-            {
-                arguments.Add("-music:off");
-            }
-
-            if (Settings.Default.LauncherDisableSound)
-            {
-                arguments.Add("-sound:off");
-            }
-
-            if (Settings.Default.LauncherDisableIME)
-            {
-                arguments.Add("-ime:disabled");
-            }
-
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCursorColour))
-            {
-                if (Settings.Default.LauncherCursorColour.Equals("system cursors", StringComparison.OrdinalIgnoreCase))
-                {
-                    arguments.Add("-customcursors:disabled");
-                }
-                else
-                {
-                    switch (Settings.Default.LauncherCursorColour)
-                    {
-                        case "Disabled":
-                            arguments.Add("-cursors:disabled");
-                            break;
-                        case "Black and white":
-                            arguments.Add("-cursors:bw");
-                            break;
-                        case "16 colours":
-                            arguments.Add("-cursors:color16");
-                            break;
-                        case "256 colours":
-                            arguments.Add("-cursors:colour256");
-                            break;
-                        case "Full colours":
-                            arguments.Add("-cursors:fullcolor");
-                            break;
-                    }
-                }
-            }
-
-            if (Settings.Default.LauncherCustomResolution)
-            {
-                arguments.Add("-customresolution:enabled");
-            }
-
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherGameMode))
-            {
-                switch (Settings.Default.LauncherGameMode)
-                {
-                    case "Window":
-                        arguments.Add("-w");
-                        break;
-                    case "Fullscreen":
-                        arguments.Add("-f");
-                        break;
-                }
-            }
-
-            if (Settings.Default.LauncherIgnoreMissingModels)
-            {
-                arguments.Add("-ignoremissingmodelsdatabugs:on");
-            }
-
-            if (Settings.Default.LauncherPauseMinimized)
-            {
-                arguments.Add("-gp");
-            }
-
-            if (Settings.Default.LauncherDisableExceptionHandling)
-            {
-                arguments.Add("-exceptionhandling:off");
-            }
-
-            if (Settings.Default.LauncherDisableBackgroundLoader)
-            {
-                arguments.Add("-backgroundloader:off");
-            }
-
-            if (Settings.Default.LauncherSkipIntro)
-            {
-                arguments.Add("-intro:off");
-            }
-
-            if (Settings.Default.LauncherWriteLog)
-            {
-                arguments.Add("-writeLog:on");
-            }
-
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherLanguage))
-            {
-                arguments.Add("-l:" + Settings.Default.LauncherLanguage);
-            }
-
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherResolution))
-            {
-                var res = string.Format("-r{0}", Settings.Default.LauncherResolution);
-                if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherColourDepth))
-                {
-                    res += string.Format("x{0}", Settings.Default.LauncherColourDepth.Substring(0, 2));
-                }
-
-                arguments.Add(res);
-            }
-
-            var selectedUserFolder = UserFolderComboBox.SelectedItem as ComboBoxItem<UserFolder>;
-
-            if (selectedUserFolder != null)
-            {
-                arguments.Add(string.Format("-userDir:\"{0}\\\"", selectedUserFolder.Value.Path));
-            }
-
-            return arguments;
         }
 
         private void SettingsToolStripMenuItemClick(object sender, EventArgs e)
@@ -437,6 +313,16 @@
         private void BugsAndFeedbackToolStripMenuItemClick(object sender, EventArgs e)
         {
             Process.Start("https://github.com/NIHEI-Systems/sc4buddy/issues");
+        }
+
+        private void OpenLogFileToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            var path = Application.LocalUserAppDataPath.Substring(
+                    0, Application.LocalUserAppDataPath.LastIndexOf(@"\", StringComparison.Ordinal));
+
+            var file = string.Format("log-{0}.txt", DateTime.Now.ToString("yyyy-MM-dd"));
+
+            Process.Start(Path.Combine(path, file));
         }
     }
 }

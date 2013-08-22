@@ -2,15 +2,22 @@
 {
     using System;
     using System.Diagnostics;
+    using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Properties;
 
+    using log4net;
+
     using Timer = System.Threading.Timer;
 
     public class GameLauncher : IDisposable
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        private const int MillisecondsPrMinute = 60000;
+
         private readonly ProcessStartInfo gameProcessStartInfo;
 
         private readonly int autoSaveWaitTime;
@@ -23,13 +30,12 @@
         {
             this.gameProcessStartInfo = gameProcessStartInfo;
             this.autoSaveWaitTime = autoSaveWaitTime;
-            Running = true;
         }
-
-        protected bool Running { get; set; }
 
         public void Start()
         {
+            Log.Info(
+                "Starting game with the following arguments: " + gameProcessStartInfo.Arguments);
             gameProcess = Process.Start(gameProcessStartInfo);
             gameProcess.Exited += (sender, args) => Dispose();
             var handle = gameProcess.Handle;
@@ -39,12 +45,13 @@
                 return;
             }
 
-            timer = new Timer(SendSaveCommand, handle, autoSaveWaitTime * 60000, autoSaveWaitTime * 60000);
+            Log.Info(string.Format("Autosave is enabled. Attempting to save the game every {0} minutes.", autoSaveWaitTime));
+
+            timer = new Timer(SendSaveCommand, handle, autoSaveWaitTime * MillisecondsPrMinute, autoSaveWaitTime * MillisecondsPrMinute);
         }
 
         public void Dispose()
         {
-            Running = false;
             timer.Dispose();
         }
 
@@ -53,6 +60,7 @@
 
         private void SendSaveCommand(object state)
         {
+            Log.Info("Sending save signal to the game.");
             SetForegroundWindow((IntPtr)state);
             SendKeys.SendWait("^%(s)");
         }

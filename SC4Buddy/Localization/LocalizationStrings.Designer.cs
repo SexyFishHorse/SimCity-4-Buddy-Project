@@ -115,11 +115,56 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 16 bits.
+        /// </summary>
+        internal static string Bits16 {
+            get {
+                return ResourceManager.GetString("Bits16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 32 bits.
+        /// </summary>
+        internal static string Bits32 {
+            get {
+                return ResourceManager.GetString("Bits32", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Black and White.
+        /// </summary>
+        internal static string BlackAndWhite {
+            get {
+                return ResourceManager.GetString("BlackAndWhite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot match plugins against database as no connections are available.
         /// </summary>
         internal static string CannotMatchPluginsAgainstDatabaseAsNoConnectionsAreAvailable {
             get {
                 return ResourceManager.GetString("CannotMatchPluginsAgainstDatabaseAsNoConnectionsAreAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 16 colours.
+        /// </summary>
+        internal static string Colors16 {
+            get {
+                return ResourceManager.GetString("Colors16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 256 colours.
+        /// </summary>
+        internal static string Colors256 {
+            get {
+                return ResourceManager.GetString("Colors256", resourceCulture);
             }
         }
         
@@ -201,6 +246,24 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string DependencyCheck {
             get {
                 return ResourceManager.GetString("DependencyCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DirectX.
+        /// </summary>
+        internal static string DirectX {
+            get {
+                return ResourceManager.GetString("DirectX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabled.
+        /// </summary>
+        internal static string Disabled {
+            get {
+                return ResourceManager.GetString("Disabled", resourceCulture);
             }
         }
         
@@ -313,6 +376,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Full colours.
+        /// </summary>
+        internal static string FullColors {
+            get {
+                return ResourceManager.GetString("FullColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Game folder not set.
         /// </summary>
         internal static string GameFolderNotSet {
@@ -336,6 +408,24 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string GameUserFolderName {
             get {
                 return ResourceManager.GetString("GameUserFolderName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to High.
+        /// </summary>
+        internal static string High {
+            get {
+                return ResourceManager.GetString("High", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (ignore).
+        /// </summary>
+        internal static string Ignore {
+            get {
+                return ResourceManager.GetString("Ignore", resourceCulture);
             }
         }
         
@@ -417,6 +507,24 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string LoggedInAs {
             get {
                 return ResourceManager.GetString("LoggedInAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Low.
+        /// </summary>
+        internal static string Low {
+            get {
+                return ResourceManager.GetString("Low", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medium.
+        /// </summary>
+        internal static string Medium {
+            get {
+                return ResourceManager.GetString("Medium", resourceCulture);
             }
         }
         
@@ -557,6 +665,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OpenGL.
+        /// </summary>
+        internal static string OpenGL {
+            get {
+                return ResourceManager.GetString("OpenGL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Passwords does not match..
         /// </summary>
         internal static string PasswordsDoesNotMatch {
@@ -647,6 +764,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resolution must be in the format NUMBERxNUMBER. I.e. &quot;1024x768&quot;..
+        /// </summary>
+        internal static string ResolutionMustBeInTheFormatNumberXNumber {
+            get {
+                return ResourceManager.GetString("ResolutionMustBeInTheFormatNumberXNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Run executable?.
         /// </summary>
         internal static string RunExecutable {
@@ -683,11 +809,29 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Software.
+        /// </summary>
+        internal static string Software {
+            get {
+                return ResourceManager.GetString("Software", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Starting....
         /// </summary>
         internal static string StartingGame {
             get {
                 return ResourceManager.GetString("StartingGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Cursors.
+        /// </summary>
+        internal static string SystemCursors {
+            get {
+                return ResourceManager.GetString("SystemCursors", resourceCulture);
             }
         }
         

@@ -116,6 +116,7 @@
     <Compile Include="Author.cs">
       <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Control\GameArgumentsHelper.cs" />
     <Compile Include="Control\GameLauncher.cs" />
     <Compile Include="Control\ISettingsController.cs" />
     <Compile Include="Control\NonPluginFilesScanner.cs" />
@@ -185,11 +186,6 @@
       <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Remote\PluginMatcher.cs" />
-    <Compile Include="SilkIcons.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SilkIcons.resx</DependentUpon>
-    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
@@ -322,10 +318,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LocalizationStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SilkIcons.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>SilkIcons.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Application\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
@@ -465,7 +457,6 @@
       <DependentUpon>RemoteEntities.edmx</DependentUpon>
       <LastGenOutput>RemoteEntities.cs</LastGenOutput>
     </None>
-    <None Include="Resources\help.png" />
     <Content Include="Wallpapers\1.jpg" />
     <Content Include="Wallpapers\10.jpg" />
     <Content Include="Wallpapers\2.jpg" />
