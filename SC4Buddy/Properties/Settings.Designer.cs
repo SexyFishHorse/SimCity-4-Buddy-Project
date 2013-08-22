@@ -133,10 +133,10 @@ namespace NIHEI.SC4Buddy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LauncherCpuCount {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LauncherCpuCount {
             get {
-                return ((string)(this["LauncherCpuCount"]));
+                return ((int)(this["LauncherCpuCount"]));
             }
             set {
                 this["LauncherCpuCount"] = value;
