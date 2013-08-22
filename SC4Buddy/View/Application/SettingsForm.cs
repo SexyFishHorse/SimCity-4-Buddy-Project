@@ -330,5 +330,19 @@
                 MessageBoxIcon.Warning,
                 MessageBoxDefaultButton.Button1);
         }
+
+        private void EnableRemoteDatabaseConnectionCheckboxCheckedChanged(object sender, EventArgs e)
+        {
+            if (enableRemoteDatabaseConnectionCheckbox.Checked)
+            {
+                fetchInformationFromRemoteCheckbox.Enabled = true;
+                allowCheckMissingDependenciesCheckBox.Enabled = true;
+            }
+            else
+            {
+                fetchInformationFromRemoteCheckbox.Enabled = false;
+                allowCheckMissingDependenciesCheckBox.Enabled = false;
+            }
+        }
     }
 }

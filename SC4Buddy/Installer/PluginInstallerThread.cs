@@ -230,8 +230,6 @@
 
         private IEnumerable<PluginFile> RunExecutables(PluginInstaller installer, UserFolder userFolder)
         {
-            Form.ShowNumberOfExecutablesDialog(installer);
-
             var installedFiles = new List<PluginFile>();
 
             foreach (var executable in installer.Executables)

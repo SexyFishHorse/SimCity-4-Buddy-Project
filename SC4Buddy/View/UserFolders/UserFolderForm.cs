@@ -5,6 +5,7 @@
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Net.NetworkInformation;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control.UserFolders;
@@ -60,6 +61,17 @@
         private void UserFolderFormLoad(object sender, EventArgs e)
         {
             RepopulateInstalledPluginsListView();
+
+            if (!Settings.Default.EnableRemoteDatabaseConnection || !NetworkInterface.GetIsNetworkAvailable())
+            {
+                updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = false;
+                checkForMissingDependenciesToolStripMenuItem.Visible = false;
+            }
+            else
+            {
+                updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Default.FetchInfoFromRemote;
+                checkForMissingDependenciesToolStripMenuItem.Visible = Settings.Default.AllowDependencyCheck;
+            }
         }
 
         private void RepopulateInstalledPluginsListView()
@@ -184,7 +196,7 @@
                 LocalizationStrings.ConfirmInstallation,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question,
-                MessageBoxDefaultButton.Button2);
+                MessageBoxDefaultButton.Button1);
 
             if (confirmResult == DialogResult.No)
             {
@@ -194,6 +206,12 @@
             new InstallPluginsForm(files, userFolder).ShowDialog(this);
 
             RepopulateInstalledPluginsListView();
+
+            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.EnableRemoteDatabaseConnection
+                || !Settings.Default.AllowDependencyCheck)
+            {
+                return;
+            }
 
             var scanForDependencies = MessageBox.Show(
                 this,
@@ -213,6 +231,25 @@
         {
             new FolderScannerForm(userFolder).ShowDialog(this);
             RepopulateInstalledPluginsListView();
+
+            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.EnableRemoteDatabaseConnection
+                || !Settings.Default.AllowDependencyCheck)
+            {
+                return;
+            }
+
+            var scanForDependencies = MessageBox.Show(
+                this,
+                LocalizationStrings.WouldYouLikeToScanForMissingDependencies,
+                LocalizationStrings.DependencyCheck,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
+
+            if (scanForDependencies == DialogResult.Yes)
+            {
+                CheckForMissingDependenciesToolStripMenuItemClick(sender, e);
+            }
         }
 
         private void ScanForNonpluginFilesToolStripMenuItemClick(object sender, EventArgs e)
