@@ -482,4 +482,22 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="High" xml:space="preserve">
     <value>High</value>
   </data>
+  <data name="Disabled" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+  <data name="SystemCursors" xml:space="preserve">
+    <value>System Cursors</value>
+  </data>
+  <data name="BlackAndWhite" xml:space="preserve">
+    <value>Black and White</value>
+  </data>
+  <data name="Colors16" xml:space="preserve">
+    <value>16 colours</value>
+  </data>
+  <data name="Colors256" xml:space="preserve">
+    <value>256 colours</value>
+  </data>
+  <data name="FullColors" xml:space="preserve">
+    <value>Full colours</value>
+  </data>
 </root>

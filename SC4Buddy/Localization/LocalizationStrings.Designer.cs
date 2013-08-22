@@ -115,11 +115,38 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Black and White.
+        /// </summary>
+        internal static string BlackAndWhite {
+            get {
+                return ResourceManager.GetString("BlackAndWhite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot match plugins against database as no connections are available.
         /// </summary>
         internal static string CannotMatchPluginsAgainstDatabaseAsNoConnectionsAreAvailable {
             get {
                 return ResourceManager.GetString("CannotMatchPluginsAgainstDatabaseAsNoConnectionsAreAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 16 colours.
+        /// </summary>
+        internal static string Colors16 {
+            get {
+                return ResourceManager.GetString("Colors16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 256 colours.
+        /// </summary>
+        internal static string Colors256 {
+            get {
+                return ResourceManager.GetString("Colors256", resourceCulture);
             }
         }
         
@@ -201,6 +228,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string DependencyCheck {
             get {
                 return ResourceManager.GetString("DependencyCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disabled.
+        /// </summary>
+        internal static string Disabled {
+            get {
+                return ResourceManager.GetString("Disabled", resourceCulture);
             }
         }
         
@@ -309,6 +345,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string FileXSkipped {
             get {
                 return ResourceManager.GetString("FileXSkipped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full colours.
+        /// </summary>
+        internal static string FullColors {
+            get {
+                return ResourceManager.GetString("FullColors", resourceCulture);
             }
         }
         
@@ -724,6 +769,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string StartingGame {
             get {
                 return ResourceManager.GetString("StartingGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Cursors.
+        /// </summary>
+        internal static string SystemCursors {
+            get {
+                return ResourceManager.GetString("SystemCursors", resourceCulture);
             }
         }
         

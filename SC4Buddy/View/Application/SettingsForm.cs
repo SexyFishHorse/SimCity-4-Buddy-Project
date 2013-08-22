@@ -162,6 +162,29 @@
             cpuPriorityComboBox.Items.Add(new ComboBoxItem<GameArgumentsController.CpuPriority>(LocalizationStrings.High, GameArgumentsController.CpuPriority.High));
             cpuPriorityComboBox.EndUpdate();
 
+            cursorColourComboBox.BeginUpdate();
+            cpuCountComboBox.Items.Clear();
+            cpuCountComboBox.Items.Add(LocalizationStrings.Ignore);
+            cpuCountComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsController.CursorColorDepth>(
+                    LocalizationStrings.Disabled, GameArgumentsController.CursorColorDepth.Disabled));
+            cpuCountComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsController.CursorColorDepth>(
+                    LocalizationStrings.SystemCursors, GameArgumentsController.CursorColorDepth.SystemCursors));
+            cpuCountComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsController.CursorColorDepth>(
+                    LocalizationStrings.BlackAndWhite, GameArgumentsController.CursorColorDepth.BlackAndWhite));
+            cpuCountComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsController.CursorColorDepth>(
+                    LocalizationStrings.Colors16, GameArgumentsController.CursorColorDepth.Colors16));
+            cpuCountComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsController.CursorColorDepth>(
+                    LocalizationStrings.Colors256, GameArgumentsController.CursorColorDepth.Colors256));
+            cpuCountComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsController.CursorColorDepth>(
+                    LocalizationStrings.FullColors, GameArgumentsController.CursorColorDepth.FullColors));
+            cpuCountComboBox.EndUpdate();
+
             displayModeComboBox.SelectedIndex = 1;
             renderModeComboBox.SelectedIndex = 1;
             colourDepthComboBox.SelectedIndex = 1;
