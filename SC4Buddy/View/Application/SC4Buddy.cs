@@ -140,6 +140,8 @@
             }
             catch (Exception ex)
             {
+                Log.Error("Error during auto-login", ex);
+
                 if (MessageBox.Show(
                     this,
                     LocalizationStrings.UnableToLogYouIntoTheSystem,
