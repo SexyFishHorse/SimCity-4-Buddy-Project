@@ -23,17 +23,14 @@
     <Setting Name="LauncherRenderMode" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="LauncherGameMode" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="LauncherResolution" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="LauncherColourDepth" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="Launcher32BitColourDepth" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="LauncherCpuCount" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="LauncherCpuCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="LauncherDisableExceptionHandling" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -65,8 +62,8 @@
     <Setting Name="Wallpaper" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="LauncherLowCpuPriority" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="LauncherCpuPriority" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="LauncherLanguage" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -94,6 +91,9 @@
     </Setting>
     <Setting Name="InstallerAskForAdditionalInfo" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LauncherWindowMode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

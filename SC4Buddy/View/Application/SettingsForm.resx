@@ -126,7 +126,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="closeButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>416, 334</value>
+    <value>416, 338</value>
   </data>
   <data name="closeButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="okButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>335, 334</value>
+    <value>335, 338</value>
   </data>
   <data name="okButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -193,7 +193,7 @@
     <value>6, 19</value>
   </data>
   <data name="backgroundImageListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 93</value>
+    <value>447, 100</value>
   </data>
   <data name="backgroundImageListView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -214,7 +214,7 @@
     <value>6, 159</value>
   </data>
   <data name="groupBox6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 118</value>
+    <value>459, 125</value>
   </data>
   <data name="groupBox6.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -233,6 +233,9 @@
   </data>
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="groupBox5.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
   <data name="shortAutosaveIntervalsLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -277,7 +280,7 @@
     <value>NoControl</value>
   </data>
   <data name="autoSaveIntervalLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 77</value>
+    <value>59, 77</value>
   </data>
   <data name="autoSaveIntervalLabel.Size" type="System.Drawing.Size, System.Drawing">
     <value>394, 13</value>
@@ -303,6 +306,9 @@
   <data name="&gt;&gt;autoSaveIntervalLabel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="autoSaveIntervalTrackBar.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="autoSaveIntervalTrackBar.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -310,7 +316,7 @@
     <value>6, 42</value>
   </data>
   <data name="autoSaveIntervalTrackBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 45</value>
+    <value>447, 45</value>
   </data>
   <data name="autoSaveIntervalTrackBar.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -361,7 +367,7 @@
     <value>6, 60</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 93</value>
+    <value>459, 93</value>
   </data>
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -394,7 +400,7 @@
     <value>NoControl</value>
   </data>
   <data name="scanButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>377, 19</value>
+    <value>430, 19</value>
   </data>
   <data name="scanButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 23</value>
@@ -430,7 +436,7 @@
     <value>NoControl</value>
   </data>
   <data name="browseButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 19</value>
+    <value>349, 19</value>
   </data>
   <data name="browseButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -460,7 +466,7 @@
     <value>87, 21</value>
   </data>
   <data name="gameLocationTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 20</value>
+    <value>256, 20</value>
   </data>
   <data name="gameLocationTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -511,7 +517,7 @@
     <value>6, 6</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>406, 48</value>
+    <value>459, 48</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -538,7 +544,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 290</value>
+    <value>471, 294</value>
   </data>
   <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -706,7 +712,7 @@
     <value>4</value>
   </data>
   <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>212, 173</value>
+    <value>212, 177</value>
   </data>
   <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
     <value>251, 111</value>
@@ -732,35 +738,59 @@
   <data name="groupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="lowCpuPriorityCheckBox.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="cpuPriorityComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
   </data>
-  <data name="lowCpuPriorityCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="cpuPriorityComboBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 46</value>
   </data>
-  <data name="lowCpuPriorityCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 46</value>
+  <data name="cpuPriorityComboBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>157, 21</value>
   </data>
-  <data name="lowCpuPriorityCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 17</value>
+  <data name="cpuPriorityComboBox.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
-  <data name="lowCpuPriorityCheckBox.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="&gt;&gt;cpuPriorityComboBox.Name" xml:space="preserve">
+    <value>cpuPriorityComboBox</value>
   </data>
-  <data name="lowCpuPriorityCheckBox.Text" xml:space="preserve">
-    <value>Low CPU priority</value>
+  <data name="&gt;&gt;cpuPriorityComboBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lowCpuPriorityCheckBox.Name" xml:space="preserve">
-    <value>lowCpuPriorityCheckBox</value>
-  </data>
-  <data name="&gt;&gt;lowCpuPriorityCheckBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lowCpuPriorityCheckBox.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cpuPriorityComboBox.Parent" xml:space="preserve">
     <value>groupBox4</value>
   </data>
-  <data name="&gt;&gt;lowCpuPriorityCheckBox.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cpuPriorityComboBox.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="label12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label12.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="label12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 49</value>
+  </data>
+  <data name="label12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="label12.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="label12.Text" xml:space="preserve">
+    <value>CPU Priority</value>
+  </data>
+  <data name="&gt;&gt;label12.Name" xml:space="preserve">
+    <value>label12</value>
+  </data>
+  <data name="&gt;&gt;label12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label12.Parent" xml:space="preserve">
+    <value>groupBox4</value>
+  </data>
+  <data name="&gt;&gt;label12.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="pauseMinimizedCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -769,7 +799,7 @@
     <value>NoControl</value>
   </data>
   <data name="pauseMinimizedCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 92</value>
+    <value>6, 96</value>
   </data>
   <data name="pauseMinimizedCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 17</value>
@@ -790,7 +820,7 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;pauseMinimizedCheckBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="disableBackgroundLoaderCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -799,7 +829,7 @@
     <value>NoControl</value>
   </data>
   <data name="disableBackgroundLoaderCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 138</value>
+    <value>6, 142</value>
   </data>
   <data name="disableBackgroundLoaderCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>153, 17</value>
@@ -820,7 +850,7 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;disableBackgroundLoaderCheckBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="skipIntroCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -829,7 +859,7 @@
     <value>NoControl</value>
   </data>
   <data name="skipIntroCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 69</value>
+    <value>6, 73</value>
   </data>
   <data name="skipIntroCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 17</value>
@@ -850,7 +880,7 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;skipIntroCheckBox.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="disableExceptionHandlingCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -859,7 +889,7 @@
     <value>NoControl</value>
   </data>
   <data name="disableExceptionHandlingCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 115</value>
+    <value>6, 119</value>
   </data>
   <data name="disableExceptionHandlingCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>153, 17</value>
@@ -880,7 +910,7 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;disableExceptionHandlingCheckBox.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="label6.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -910,7 +940,7 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="cpuCountComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -934,13 +964,13 @@
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;cpuCountComboBox.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>212, 6</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>251, 161</value>
+    <value>251, 165</value>
   </data>
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -963,6 +993,36 @@
   <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left</value>
   </data>
+  <data name="windowModeCheckBox.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="windowModeCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="windowModeCheckBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 42</value>
+  </data>
+  <data name="windowModeCheckBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 17</value>
+  </data>
+  <data name="windowModeCheckBox.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="windowModeCheckBox.Text" xml:space="preserve">
+    <value>Window mode</value>
+  </data>
+  <data name="&gt;&gt;windowModeCheckBox.Name" xml:space="preserve">
+    <value>windowModeCheckBox</value>
+  </data>
+  <data name="&gt;&gt;windowModeCheckBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;windowModeCheckBox.Parent" xml:space="preserve">
+    <value>groupBox3</value>
+  </data>
+  <data name="&gt;&gt;windowModeCheckBox.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -970,7 +1030,7 @@
     <value>NoControl</value>
   </data>
   <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 153</value>
+    <value>6, 149</value>
   </data>
   <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
@@ -991,28 +1051,10 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;label7.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="cursorColourComboBox.Items" xml:space="preserve">
-    <value>Disabled</value>
-  </data>
-  <data name="cursorColourComboBox.Items1" xml:space="preserve">
-    <value>System cursors</value>
-  </data>
-  <data name="cursorColourComboBox.Items2" xml:space="preserve">
-    <value>Black and white</value>
-  </data>
-  <data name="cursorColourComboBox.Items3" xml:space="preserve">
-    <value>16 colours</value>
-  </data>
-  <data name="cursorColourComboBox.Items4" xml:space="preserve">
-    <value>256 colours</value>
-  </data>
-  <data name="cursorColourComboBox.Items5" xml:space="preserve">
-    <value>Full colours</value>
+    <value>1</value>
   </data>
   <data name="cursorColourComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 150</value>
+    <value>83, 146</value>
   </data>
   <data name="cursorColourComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 21</value>
@@ -1030,19 +1072,13 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;cursorColourComboBox.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="colourDepthComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="colourDepthComboBox.Items" xml:space="preserve">
-    <value>16 bit</value>
-  </data>
-  <data name="colourDepthComboBox.Items1" xml:space="preserve">
-    <value>32 bit</value>
-  </data>
   <data name="colourDepthComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 123</value>
+    <value>83, 119</value>
   </data>
   <data name="colourDepthComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 21</value>
@@ -1060,7 +1096,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;colourDepthComboBox.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="label5.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1069,7 +1105,7 @@
     <value>NoControl</value>
   </data>
   <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 126</value>
+    <value>6, 122</value>
   </data>
   <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 13</value>
@@ -1090,67 +1126,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 45</value>
-  </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
-  </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="label4.Text" xml:space="preserve">
-    <value>Mode</value>
-  </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
-  </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="displayModeComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="displayModeComboBox.Items" xml:space="preserve">
-    <value>Window</value>
-  </data>
-  <data name="displayModeComboBox.Items1" xml:space="preserve">
-    <value>Fullscreen</value>
-  </data>
-  <data name="displayModeComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 42</value>
-  </data>
-  <data name="displayModeComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>111, 21</value>
-  </data>
-  <data name="displayModeComboBox.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;displayModeComboBox.Name" xml:space="preserve">
-    <value>displayModeComboBox</value>
-  </data>
-  <data name="&gt;&gt;displayModeComboBox.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;displayModeComboBox.Parent" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;displayModeComboBox.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="resolutionComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -1165,7 +1141,7 @@
     <value>1020x1024</value>
   </data>
   <data name="resolutionComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 96</value>
+    <value>83, 92</value>
   </data>
   <data name="resolutionComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 21</value>
@@ -1183,7 +1159,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;resolutionComboBox.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1192,7 +1168,7 @@
     <value>NoControl</value>
   </data>
   <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 99</value>
+    <value>6, 95</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
@@ -1213,22 +1189,13 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="renderModeComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="renderModeComboBox.Items" xml:space="preserve">
-    <value>Software</value>
-  </data>
-  <data name="renderModeComboBox.Items1" xml:space="preserve">
-    <value>DirectX</value>
-  </data>
-  <data name="renderModeComboBox.Items2" xml:space="preserve">
-    <value>OpenGL</value>
-  </data>
   <data name="renderModeComboBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 69</value>
+    <value>83, 65</value>
   </data>
   <data name="renderModeComboBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 21</value>
@@ -1246,7 +1213,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;renderModeComboBox.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1255,7 +1222,7 @@
     <value>NoControl</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 72</value>
+    <value>6, 68</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 13</value>
@@ -1276,7 +1243,7 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="customResolutionCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1306,13 +1273,13 @@
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;customResolutionCheckBox.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 100</value>
   </data>
   <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 184</value>
+    <value>200, 188</value>
   </data>
   <data name="groupBox3.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1453,7 +1420,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 290</value>
+    <value>471, 294</value>
   </data>
   <data name="tabPage2.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1570,7 +1537,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 290</value>
+    <value>471, 294</value>
   </data>
   <data name="tabPage4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1856,7 +1823,7 @@ and for custom content creators.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 290</value>
+    <value>471, 294</value>
   </data>
   <data name="tabPage3.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1973,7 +1940,7 @@ and for custom content creators.</value>
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tabPage5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>471, 290</value>
+    <value>471, 294</value>
   </data>
   <data name="tabPage5.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1997,7 +1964,7 @@ and for custom content creators.</value>
     <value>12, 12</value>
   </data>
   <data name="tabControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>479, 316</value>
+    <value>479, 320</value>
   </data>
   <data name="tabControl1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2020,9 +1987,6 @@ and for custom content creators.</value>
   <data name="gameLocationDialog.Description" xml:space="preserve">
     <value>Select the SimCity 4 game folder. (I.e. C:\Program Files (x86)\Maxis\SimCity 4)</value>
   </data>
-  <metadata name="errorProvider.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>181, 17</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -2030,7 +1994,7 @@ and for custom content creators.</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>503, 369</value>
+    <value>503, 373</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3709,12 +3673,6 @@ and for custom content creators.</value>
   </data>
   <data name="&gt;&gt;gameLocationDialog.Type" xml:space="preserve">
     <value>System.Windows.Forms.FolderBrowserDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;errorProvider.Name" xml:space="preserve">
-    <value>errorProvider</value>
-  </data>
-  <data name="&gt;&gt;errorProvider.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ErrorProvider, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolTip1.Name" xml:space="preserve">
     <value>toolTip1</value>

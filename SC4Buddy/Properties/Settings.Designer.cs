@@ -110,18 +110,6 @@ namespace NIHEI.SC4Buddy.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LauncherGameMode {
-            get {
-                return ((string)(this["LauncherGameMode"]));
-            }
-            set {
-                this["LauncherGameMode"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string LauncherResolution {
             get {
                 return ((string)(this["LauncherResolution"]));
@@ -133,22 +121,22 @@ namespace NIHEI.SC4Buddy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LauncherColourDepth {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Launcher32BitColourDepth {
             get {
-                return ((string)(this["LauncherColourDepth"]));
+                return ((bool)(this["Launcher32BitColourDepth"]));
             }
             set {
-                this["LauncherColourDepth"] = value;
+                this["Launcher32BitColourDepth"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LauncherCpuCount {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LauncherCpuCount {
             get {
-                return ((string)(this["LauncherCpuCount"]));
+                return ((int)(this["LauncherCpuCount"]));
             }
             set {
                 this["LauncherCpuCount"] = value;
@@ -277,13 +265,13 @@ namespace NIHEI.SC4Buddy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherLowCpuPriority {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LauncherCpuPriority {
             get {
-                return ((bool)(this["LauncherLowCpuPriority"]));
+                return ((string)(this["LauncherCpuPriority"]));
             }
             set {
-                this["LauncherLowCpuPriority"] = value;
+                this["LauncherCpuPriority"] = value;
             }
         }
         
@@ -392,6 +380,18 @@ namespace NIHEI.SC4Buddy.Properties {
             }
             set {
                 this["InstallerAskForAdditionalInfo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LauncherWindowMode {
+            get {
+                return ((bool)(this["LauncherWindowMode"]));
+            }
+            set {
+                this["LauncherWindowMode"] = value;
             }
         }
     }
