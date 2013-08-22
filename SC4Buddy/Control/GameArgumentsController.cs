@@ -198,6 +198,26 @@
             return string.Format("-userDir:\"{0}\\\"", selectedUserFolder.Path);
         }
 
+        public string GetArgumentString(UserFolder selectedUserFolder)
+        {
+            var arguments = new List<string>();
+
+            arguments.AddRange(GetAudioArguments());
+
+            arguments.AddRange(GetVideoArguments());
+
+            arguments.AddRange(GetPerformanceArguments());
+
+            arguments.AddRange(GetOtherArguments());
+
+            if (selectedUserFolder != null)
+            {
+                arguments.Add(GetStringForUserDir(selectedUserFolder));
+            }
+
+            return string.Join(" ", arguments.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray());
+        }
+
         private IEnumerable<string> GetAudioArguments()
         {
             var output = new Collection<string>
