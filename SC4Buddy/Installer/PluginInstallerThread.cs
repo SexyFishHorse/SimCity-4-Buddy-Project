@@ -192,9 +192,9 @@
                 }
             }
 
-            pluginController.RemoveEmptyPlugins();
+            var numDeleted = pluginController.RemoveEmptyPlugins();
 
-            if (plugin.Id > 0)
+            if (plugin.Id > 0 || numDeleted > 0)
             {
                 pluginController.Update(plugin);
             }
