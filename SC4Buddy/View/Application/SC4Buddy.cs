@@ -257,7 +257,7 @@
                                            };
 
             var gameLauncher = new GameLauncher(gameProcessStartInfo, Settings.Default.AutoSaveWaitTime);
-            var gameLauncherThread = new Thread(gameLauncher.Start) { Name = "SC4Buddy GameLauncher" };
+            var gameLauncherThread = new Thread(gameLauncher.Start) { Name = "SC4Buddy AutoSaver" };
 
             gameLauncherThread.Start();
 
