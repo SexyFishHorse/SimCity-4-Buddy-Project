@@ -54,6 +54,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.panel2 = new System.Windows.Forms.Panel();
             this.userFolderComboBox = new System.Windows.Forms.ComboBox();
             this.playButton = new System.Windows.Forms.Button();
+            this.openLogFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.backgroundPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -155,6 +156,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.supportToolStripMenuItem,
             this.bugsAndFeedbackToolStripMenuItem,
+            this.openLogFileToolStripMenuItem,
             this.toolStripSeparator3,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
@@ -231,6 +233,12 @@ namespace NIHEI.SC4Buddy.View.Application
             this.playButton.UseVisualStyleBackColor = true;
             this.playButton.Click += new System.EventHandler(this.PlayButtonClick);
             // 
+            // openLogFileToolStripMenuItem
+            // 
+            this.openLogFileToolStripMenuItem.Name = "openLogFileToolStripMenuItem";
+            resources.ApplyResources(this.openLogFileToolStripMenuItem, "openLogFileToolStripMenuItem");
+            this.openLogFileToolStripMenuItem.Click += new System.EventHandler(this.OpenLogFileToolStripMenuItemClick);
+            // 
             // Sc4Buddy
             // 
             resources.ApplyResources(this, "$this");
@@ -278,6 +286,7 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem openLogFileToolStripMenuItem;
     }
 }
 

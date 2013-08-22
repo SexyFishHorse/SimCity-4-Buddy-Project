@@ -314,5 +314,15 @@
         {
             Process.Start("https://github.com/NIHEI-Systems/sc4buddy/issues");
         }
+
+        private void OpenLogFileToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            var path = Application.LocalUserAppDataPath.Substring(
+                    0, Application.LocalUserAppDataPath.LastIndexOf(@"\", StringComparison.Ordinal));
+
+            var file = string.Format("log-{0}.txt", DateTime.Now.ToString("yyyy-MM-dd"));
+
+            Process.Start(Path.Combine(path, file));
+        }
     }
 }
