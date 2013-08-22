@@ -185,7 +185,6 @@
                     LocalizationStrings.FullColors, GameArgumentsController.CursorColorDepth.FullColors));
             cpuCountComboBox.EndUpdate();
 
-            displayModeComboBox.SelectedIndex = 1;
             renderModeComboBox.SelectedIndex = 1;
             colourDepthComboBox.SelectedIndex = 1;
             cursorColourComboBox.SelectedIndex = 5;

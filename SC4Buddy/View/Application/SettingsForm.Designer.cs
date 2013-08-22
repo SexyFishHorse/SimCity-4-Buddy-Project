@@ -55,7 +55,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -85,9 +84,9 @@ namespace NIHEI.SC4Buddy.View.Application
             this.skipIntroCheckBox = new System.Windows.Forms.CheckBox();
             this.disableExceptionHandlingCheckBox = new System.Windows.Forms.CheckBox();
             this.cpuCountComboBox = new System.Windows.Forms.ComboBox();
+            this.windowModeCheckBox = new System.Windows.Forms.CheckBox();
             this.cursorColourComboBox = new System.Windows.Forms.ComboBox();
             this.colourDepthComboBox = new System.Windows.Forms.ComboBox();
-            this.displayModeComboBox = new System.Windows.Forms.ComboBox();
             this.resolutionComboBox = new System.Windows.Forms.ComboBox();
             this.renderModeComboBox = new System.Windows.Forms.ComboBox();
             this.customResolutionCheckBox = new System.Windows.Forms.CheckBox();
@@ -279,12 +278,11 @@ namespace NIHEI.SC4Buddy.View.Application
             // groupBox3
             // 
             resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Controls.Add(this.windowModeCheckBox);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.cursorColourComboBox);
             this.groupBox3.Controls.Add(this.colourDepthComboBox);
             this.groupBox3.Controls.Add(this.label5);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.displayModeComboBox);
             this.groupBox3.Controls.Add(this.resolutionComboBox);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.renderModeComboBox);
@@ -302,11 +300,6 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
             // 
             // label3
             // 
@@ -519,6 +512,14 @@ namespace NIHEI.SC4Buddy.View.Application
             this.cpuCountComboBox.Name = "cpuCountComboBox";
             this.cpuCountComboBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherCpuCount;
             // 
+            // windowModeCheckBox
+            // 
+            resources.ApplyResources(this.windowModeCheckBox, "windowModeCheckBox");
+            this.windowModeCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherWindowMode;
+            this.windowModeCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherWindowMode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.windowModeCheckBox.Name = "windowModeCheckBox";
+            this.windowModeCheckBox.UseVisualStyleBackColor = true;
+            // 
             // cursorColourComboBox
             // 
             this.cursorColourComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherCursorColour", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -539,18 +540,6 @@ namespace NIHEI.SC4Buddy.View.Application
             resources.GetString("colourDepthComboBox.Items1")});
             this.colourDepthComboBox.Name = "colourDepthComboBox";
             this.colourDepthComboBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherColourDepth;
-            // 
-            // displayModeComboBox
-            // 
-            resources.ApplyResources(this.displayModeComboBox, "displayModeComboBox");
-            this.displayModeComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherGameMode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.displayModeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.displayModeComboBox.FormattingEnabled = true;
-            this.displayModeComboBox.Items.AddRange(new object[] {
-            resources.GetString("displayModeComboBox.Items"),
-            resources.GetString("displayModeComboBox.Items1")});
-            this.displayModeComboBox.Name = "displayModeComboBox";
-            this.displayModeComboBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherGameMode;
             // 
             // resolutionComboBox
             // 
@@ -738,8 +727,6 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox colourDepthComboBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox displayModeComboBox;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label6;
@@ -783,5 +770,6 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.CheckBox AskForAdditionalInfoAfterInstallCheckBox;
         private System.Windows.Forms.ComboBox cpuPriorityComboBox;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox windowModeCheckBox;
     }
 }

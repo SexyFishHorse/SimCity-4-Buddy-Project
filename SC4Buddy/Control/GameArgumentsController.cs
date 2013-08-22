@@ -54,7 +54,7 @@
             return string.Format("-r{0}x{1}x{2}", width, height, (depth32 ? "32" : "16"));
         }
 
-        public string GetStringForDisplayMode(bool enabled)
+        public string GetStringForWindowMode(bool enabled)
         {
             return enabled ? "-w" : "-f";
         }

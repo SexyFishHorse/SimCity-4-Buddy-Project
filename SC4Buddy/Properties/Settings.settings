@@ -23,9 +23,6 @@
     <Setting Name="LauncherRenderMode" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="LauncherGameMode" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="LauncherResolution" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
@@ -94,6 +91,9 @@
     </Setting>
     <Setting Name="InstallerAskForAdditionalInfo" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LauncherWindowMode" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>
