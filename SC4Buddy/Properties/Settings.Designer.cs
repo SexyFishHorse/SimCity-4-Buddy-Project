@@ -121,13 +121,13 @@ namespace NIHEI.SC4Buddy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LauncherColourDepth {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Launcher32BitColourDepth {
             get {
-                return ((string)(this["LauncherColourDepth"]));
+                return ((bool)(this["Launcher32BitColourDepth"]));
             }
             set {
-                this["LauncherColourDepth"] = value;
+                this["Launcher32BitColourDepth"] = value;
             }
         }
         
