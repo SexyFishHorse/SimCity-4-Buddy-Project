@@ -17,6 +17,7 @@
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Elements;
+    using NIHEI.SC4Buddy.View.Helpers;
     using NIHEI.SC4Buddy.View.Plugins;
 
     public partial class UserFolderForm : Form
@@ -263,40 +264,18 @@
 
             if (numFiles < 1 && numFolders < 1)
             {
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.ThereAreNoNonPluginFilesOrEmptyFoldersToRemove,
-                    LocalizationStrings.NoNonPluginFilesDetected,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-
+                NonPluginFilesScannerUiHelper.ShowThereAreNoEntitiesToRemoveDialog(this);
                 return;
             }
 
-            var confirmation = MessageBox.Show(
-                this,
-                string.Format(LocalizationStrings.ThisWillRemoveNumFilesAndAtLeastNumFolders, numFiles, numFolders),
-                LocalizationStrings.ConfirmDeletionOfNonPluginFiles,
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question,
-                MessageBoxDefaultButton.Button2);
-
-            if (confirmation == DialogResult.No)
+            if (!NonPluginFilesScannerUiHelper.ShowConfirmDialog(this, numFiles, numFolders))
             {
                 return;
             }
 
             numFolders = scanner.RemoveNonPluginFiles(userFolder);
 
-            var message = string.Format(LocalizationStrings.NumFilesAndNumFoldersWereRemoved, numFiles, numFolders);
-
-            MessageBox.Show(
-                this,
-                message,
-                LocalizationStrings.NonPluginFilesDeleted,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1);
+            NonPluginFilesScannerUiHelper.ShowRemovalSummary(this, numFiles, numFolders);
         }
 
         private void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
