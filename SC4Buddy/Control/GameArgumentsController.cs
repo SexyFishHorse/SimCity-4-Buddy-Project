@@ -36,27 +36,27 @@
             Low = 1, Medium = 2, High = 3
         }
 
-        public string GetStringForAudio(bool enabled)
+        protected string GetStringForAudio(bool enabled)
         {
             return string.Format("-audio:{0}", (enabled ? "on" : "off"));
         }
 
-        public string GetStringForMusic(bool enabled)
+        protected string GetStringForMusic(bool enabled)
         {
             return string.Format("-music:{0}", (enabled ? "on" : "off"));
         }
 
-        public string GetStringForSounds(bool enabled)
+        protected string GetStringForSounds(bool enabled)
         {
             return string.Format("-sounds:{0}", (enabled ? "on" : "off"));
         }
 
-        public string GetStringForCustomResolution(bool enabled)
+        protected string GetStringForCustomResolution(bool enabled)
         {
             return string.Format("-customResolution:{0}", (enabled ? "enabled" : "disabled"));
         }
 
-        public string GetStringForResolution(string widthTimesHeight, bool depth32)
+        protected string GetStringForResolution(string widthTimesHeight, bool depth32)
         {
             var regEx = new Regex(@"\d+x\d+");
             if (!regEx.IsMatch(widthTimesHeight))
@@ -67,12 +67,12 @@
             return string.Format("-r{0}x{1}", widthTimesHeight, (depth32 ? "32" : "16"));
         }
 
-        public string GetStringForWindowMode(bool enabled)
+        protected string GetStringForWindowMode(bool enabled)
         {
             return enabled ? "-w" : "-f";
         }
 
-        public string GetStringForRenderMode(RenderMode renderMode)
+        protected string GetStringForRenderMode(RenderMode renderMode)
         {
             var builder = new StringBuilder("-d:");
             switch (renderMode)
@@ -91,12 +91,12 @@
             return builder.ToString();
         }
 
-        public string GetStringForCustomCursors(CursorColorDepth cursorColorDepth)
+        protected string GetStringForCustomCursors(CursorColorDepth cursorColorDepth)
         {
             return "-customCursors:" + (cursorColorDepth == CursorColorDepth.SystemCursors ? "enabled" : "disabled");
         }
 
-        public string GetStringForCursors(CursorColorDepth cursorColorDepth)
+        protected string GetStringForCursors(CursorColorDepth cursorColorDepth)
         {
             var builder = new StringBuilder("-cursors:");
             switch (cursorColorDepth)
@@ -123,12 +123,12 @@
             return builder.ToString();
         }
 
-        public string GetStringForNumberOfCpus(int numCpus)
+        protected string GetStringForNumberOfCpus(int numCpus)
         {
             return string.Format("-cpuCount:{0}", numCpus);
         }
 
-        public string GetStringForCpuPriority(CpuPriority priority)
+        protected string GetStringForCpuPriority(CpuPriority priority)
         {
             var builder = new StringBuilder("-cpuPriority:");
             switch (priority)
@@ -147,42 +147,42 @@
             return builder.ToString();
         }
 
-        public string GetStringForIntroSequence(bool enabled)
+        protected string GetStringForIntroSequence(bool enabled)
         {
             return string.Format("-intro:{0}", (enabled ? "on" : "off"));
         }
 
-        public string GetStringForPauseWhenMinimized(bool enabled)
+        protected string GetStringForPauseWhenMinimized(bool enabled)
         {
             return enabled ? "-gp" : string.Empty;
         }
 
-        public string GetStringForExceptionHandling(bool enabled)
+        protected string GetStringForExceptionHandling(bool enabled)
         {
             return string.Format("-exceptionHandling:{0}", (enabled ? "on" : "off"));
         }
 
-        public string GetStringForBackgroundLoading(bool enabled)
+        protected string GetStringForBackgroundLoading(bool enabled)
         {
             return string.Format("-backgroundLoader:{0}", (enabled ? "on" : "off"));
         }
 
-        public string GetStringForIgnoreMissingModels(bool enabled)
+        protected string GetStringForIgnoreMissingModels(bool enabled)
         {
             return string.Format("-ignoreMissingModelDataBugs:{0}", (enabled ? "on" : "off"));
         }
 
-        public string GetStringForImeEnabled(bool enabled)
+        protected string GetStringForImeEnabled(bool enabled)
         {
             return string.Format("-ime:{0}", (enabled ? "enabled" : "disabled"));
         }
 
-        public string GetStringForWriteLog(bool enabled)
+        protected string GetStringForWriteLog(bool enabled)
         {
             return string.Format("-writeLog:" + (enabled ? "enabled" : "disabled"));
         }
 
-        public string GetStringForLanguage(string language)
+        protected string GetStringForLanguage(string language)
         {
             return string.Format("-l:{0}", language);
         }
