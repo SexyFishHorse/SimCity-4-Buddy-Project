@@ -58,15 +58,17 @@
 
         private static IEnumerable<FileSystemInfo> GetPluginFiles(IEnumerable<FileSystemInfo> tempFiles)
         {
-            var pluginExtensions = new[] { ".dat", ".SC4Lot", ".SC4Desc", ".SC4Model" };
-            return
-                tempFiles.SelectMany(info => pluginExtensions, (info, extension) => new { info, extension })
-                         .Where(
-                             @t =>
-                             @t.info is DirectoryInfo
-                             || @t.info.Extension.Equals(@t.extension, StringComparison.OrdinalIgnoreCase))
-                         .Select(@t => @t.info)
-                         .ToList();
+            //var pluginExtensions = new[] { ".dat", ".SC4Lot", ".SC4Desc", ".SC4Model" };
+            //return
+            //    tempFiles.SelectMany(info => pluginExtensions, (info, extension) => new { info, extension })
+            //             .Where(
+            //                 @t =>
+            //                 @t.info is DirectoryInfo
+            //                 || @t.info.Extension.Equals(@t.extension, StringComparison.OrdinalIgnoreCase))
+            //             .Select(@t => @t.info)
+            //             .ToList();
+
+            return tempFiles.ToList();
         }
 
         private static IEnumerable<FileInfo> GetExecutables(IEnumerable<FileSystemInfo> tempFiles)
