@@ -28,33 +28,30 @@
             XmlConfigurator.Configure();
 
             Log.Info("Application starting");
-#if (!DEBUG)
             try
             {
-#endif
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
-            
-            if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation) || !Directory.Exists(Settings.Default.GameLocation))
-            {
-                var settingsForm = new SettingsForm { StartPosition = FormStartPosition.CenterScreen };
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
 
-                Application.Run(settingsForm);
-                SetDefaultUserFolder();
-            }
+                if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation) || !Directory.Exists(Settings.Default.GameLocation))
+                {
+                    var settingsForm = new SettingsForm { StartPosition = FormStartPosition.CenterScreen };
 
-            if (RegistryFactory.UserFolderRegistry.UserFolders.Any(x => x.Id == 1 && x.Path.Equals("?")))
-            {
-                SetDefaultUserFolder();
-            }
+                    Application.Run(settingsForm);
+                    SetDefaultUserFolder();
+                }
 
-            if (Directory.Exists(Settings.Default.GameLocation))
-            {
-                new SettingsController(RegistryFactory.UserFolderRegistry).UpdateMainFolder();
-                Application.Run(new Sc4Buddy());
-            }
-#if (!DEBUG)
+                if (RegistryFactory.UserFolderRegistry.UserFolders.Any(x => x.Id == 1 && x.Path.Equals("?")))
+                {
+                    SetDefaultUserFolder();
+                }
+
+                if (Directory.Exists(Settings.Default.GameLocation))
+                {
+                    new SettingsController(RegistryFactory.UserFolderRegistry).UpdateMainFolder();
+                    Application.Run(new Sc4Buddy());
+                }
             }
             catch (Exception ex)
             {
@@ -77,7 +74,6 @@
 
                 Process.Start("explorer.exe", path);
             }
-#endif
         }
 
         private static void SetDefaultUserFolder()
