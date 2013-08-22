@@ -358,5 +358,41 @@ namespace NIHEI.SC4Buddy.Properties {
                 this["AllowDependencyCheck"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool InstallerAskToRemoveNonPluginFiles {
+            get {
+                return ((bool)(this["InstallerAskToRemoveNonPluginFiles"]));
+            }
+            set {
+                this["InstallerAskToRemoveNonPluginFiles"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool InstallerAutoRunExecutables {
+            get {
+                return ((bool)(this["InstallerAutoRunExecutables"]));
+            }
+            set {
+                this["InstallerAutoRunExecutables"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool InstallerAskForAdditionalInfo {
+            get {
+                return ((bool)(this["InstallerAskForAdditionalInfo"]));
+            }
+            set {
+                this["InstallerAskForAdditionalInfo"] = value;
+            }
+        }
     }
 }
