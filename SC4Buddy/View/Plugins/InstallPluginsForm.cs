@@ -179,7 +179,7 @@
                             return;
                         }
 
-                        if (ShowWouldYouLikeToEnterAdditionalDetailsDialog() == DialogResult.No)
+                        if (!Settings.Default.InstallerAskForAdditionalInfo || ShowWouldYouLikeToEnterAdditionalDetailsDialog() == DialogResult.No)
                         {
                             return;
                         }
