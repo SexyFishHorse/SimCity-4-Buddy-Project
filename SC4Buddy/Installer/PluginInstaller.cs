@@ -84,9 +84,8 @@
 
             var readmeFiles = new List<FileInfo>();
             foreach (
-                FileInfo file in
-                    tempFiles.Cast<FileInfo>()
-                             .Where(file => !nonReadmeFilenames.Any(x => file.Name.ToUpper().Contains(x))))
+                var file in
+                    tempFiles.Where(file => !nonReadmeFilenames.Any(x => file.Name.ToUpper().Contains(x))))
             {
                 readmeFiles.AddRange(
                     readmeExtensions.Where(
