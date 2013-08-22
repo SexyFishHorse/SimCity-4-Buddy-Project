@@ -43,13 +43,9 @@
 
         public static bool IsPluginFile(string entry)
         {
-            var match = false;
-            foreach (var extension in PluginFileExtensions.Where(extension => new FileInfo(entry).Extension.Equals(extension, StringComparison.OrdinalIgnoreCase)))
-            {
-                match = true;
-            }
-
-            return match;
+            return
+                PluginFileExtensions.Any(
+                    extension => new FileInfo(entry).Extension.Equals(extension, StringComparison.OrdinalIgnoreCase));
         }
 
         public IEnumerable<PluginFile> MoveToPluginFolder(UserFolder userFolder)
