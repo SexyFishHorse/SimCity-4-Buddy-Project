@@ -53,8 +53,6 @@
 
         private void GameLocationTextBoxTextChanged(object sender, EventArgs e)
         {
-            errorProvider.Clear();
-
             if (gameLocationTextBox.Text.Length < 1)
             {
                 gameLocationTextBox.Text = LocalizationStrings.SelectGameLocation;

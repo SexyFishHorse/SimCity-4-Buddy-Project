@@ -98,7 +98,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.AutoRunInstallerExecutablesCheckBox = new System.Windows.Forms.CheckBox();
             this.AskForAdditionalInfoAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -114,7 +113,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage4.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoSaveIntervalTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // closeButton
@@ -646,10 +645,6 @@ namespace NIHEI.SC4Buddy.View.Application
             resources.ApplyResources(this.gameLocationDialog, "gameLocationDialog");
             this.gameLocationDialog.ShowNewFolderButton = false;
             // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
             // SettingsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -685,7 +680,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage3.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.autoSaveIntervalTrackBar)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -701,7 +696,6 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.TextBox gameLocationTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.FolderBrowserDialog gameLocationDialog;
-        private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Button scanButton;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox2;
