@@ -10,7 +10,7 @@
 
     public abstract class BaseHandler
     {
-        public static readonly string[] PluginFileExtensions = new[] { ".dat", ".SC4Lot", ".SC4Desc", ".SC4Model" };
+        public static readonly string[] PluginFileExtensions = new[] { ".dat", ".SC4Lot", ".SC4Desc", ".SC4Model", ".sav", ".dll" };
 
         private FileInfo fileInfo;
 
