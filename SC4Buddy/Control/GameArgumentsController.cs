@@ -4,8 +4,13 @@
     using System.Text;
     using System.Text.RegularExpressions;
 
+
+    using log4net;
+
     public class GameArgumentsController
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public enum RenderMode
         {
             OpenGl = 1, DirectX = 2, Software = 3
