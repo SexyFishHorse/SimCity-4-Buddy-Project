@@ -17,9 +17,20 @@
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        public enum ColorDepth
+        {
+            Bits16 = 1,
+
+            Bits32 = 2
+        }
+
         public enum RenderMode
         {
-            OpenGl = 1, DirectX = 2, Software = 3
+            OpenGl = 1,
+
+            DirectX = 2,
+
+            Software = 3
         }
 
         public enum CursorColorDepth
