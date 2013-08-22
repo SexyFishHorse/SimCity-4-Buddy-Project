@@ -232,6 +232,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DirectX.
+        /// </summary>
+        internal static string DirectX {
+            get {
+                return ResourceManager.GetString("DirectX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Disabled.
         /// </summary>
         internal static string Disabled {
@@ -638,6 +647,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OpenGL.
+        /// </summary>
+        internal static string OpenGL {
+            get {
+                return ResourceManager.GetString("OpenGL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Passwords does not match..
         /// </summary>
         internal static string PasswordsDoesNotMatch {
@@ -760,6 +778,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string SiteUrlHelpText {
             get {
                 return ResourceManager.GetString("SiteUrlHelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Software.
+        /// </summary>
+        internal static string Software {
+            get {
+                return ResourceManager.GetString("Software", resourceCulture);
             }
         }
         

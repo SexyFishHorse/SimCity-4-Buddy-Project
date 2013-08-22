@@ -141,6 +141,14 @@
             autoSaveIntervalTrackBar.Enabled = Settings.Default.EnableAutoSave;
             UpdateAutoSaveLabel(Settings.Default.AutoSaveWaitTime);
 
+            renderModeComboBox.BeginUpdate();
+            renderModeComboBox.Items.Clear();
+            renderModeComboBox.Items.Add(LocalizationStrings.Ignore);
+            renderModeComboBox.Items.Add(new ComboBoxItem<GameArgumentsController.RenderMode>(LocalizationStrings.DirectX, GameArgumentsController.RenderMode.DirectX));
+            renderModeComboBox.Items.Add(new ComboBoxItem<GameArgumentsController.RenderMode>(LocalizationStrings.OpenGL, GameArgumentsController.RenderMode.OpenGl));
+            renderModeComboBox.Items.Add(new ComboBoxItem<GameArgumentsController.RenderMode>(LocalizationStrings.Software, GameArgumentsController.RenderMode.Software));
+            renderModeComboBox.EndUpdate();
+
             cpuCountComboBox.BeginUpdate();
             cpuCountComboBox.Items.Clear();
             cpuCountComboBox.Items.Add(LocalizationStrings.Ignore);
@@ -163,36 +171,30 @@
             cpuPriorityComboBox.EndUpdate();
 
             cursorColourComboBox.BeginUpdate();
-            cpuCountComboBox.Items.Clear();
-            cpuCountComboBox.Items.Add(LocalizationStrings.Ignore);
-            cpuCountComboBox.Items.Add(
+            cursorColourComboBox.Items.Clear();
+            cursorColourComboBox.Items.Add(LocalizationStrings.Ignore);
+            cursorColourComboBox.Items.Add(
                 new ComboBoxItem<GameArgumentsController.CursorColorDepth>(
                     LocalizationStrings.Disabled, GameArgumentsController.CursorColorDepth.Disabled));
-            cpuCountComboBox.Items.Add(
+            cursorColourComboBox.Items.Add(
                 new ComboBoxItem<GameArgumentsController.CursorColorDepth>(
                     LocalizationStrings.SystemCursors, GameArgumentsController.CursorColorDepth.SystemCursors));
-            cpuCountComboBox.Items.Add(
+            cursorColourComboBox.Items.Add(
                 new ComboBoxItem<GameArgumentsController.CursorColorDepth>(
                     LocalizationStrings.BlackAndWhite, GameArgumentsController.CursorColorDepth.BlackAndWhite));
-            cpuCountComboBox.Items.Add(
+            cursorColourComboBox.Items.Add(
                 new ComboBoxItem<GameArgumentsController.CursorColorDepth>(
                     LocalizationStrings.Colors16, GameArgumentsController.CursorColorDepth.Colors16));
-            cpuCountComboBox.Items.Add(
+            cursorColourComboBox.Items.Add(
                 new ComboBoxItem<GameArgumentsController.CursorColorDepth>(
                     LocalizationStrings.Colors256, GameArgumentsController.CursorColorDepth.Colors256));
-            cpuCountComboBox.Items.Add(
+            cursorColourComboBox.Items.Add(
                 new ComboBoxItem<GameArgumentsController.CursorColorDepth>(
                     LocalizationStrings.FullColors, GameArgumentsController.CursorColorDepth.FullColors));
-            cpuCountComboBox.EndUpdate();
-
-            renderModeComboBox.SelectedIndex = 1;
-            colourDepthComboBox.SelectedIndex = 1;
-            cursorColourComboBox.SelectedIndex = 5;
+            cursorColourComboBox.EndUpdate();
 
             UpdateLanguageBox();
-
             UpdateBackgroundsListView();
-
             UpdateLoginStatus();
         }
 
@@ -258,6 +260,7 @@
 
             languageComboBox.BeginUpdate();
             languageComboBox.Items.Clear();
+            languageComboBox.Items.Add(LocalizationStrings.Ignore);
             languageComboBox.Items.AddRange(languages.Cast<object>().ToArray());
             languageComboBox.EndUpdate();
         }

@@ -500,4 +500,13 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="FullColors" xml:space="preserve">
     <value>Full colours</value>
   </data>
+  <data name="DirectX" xml:space="preserve">
+    <value>DirectX</value>
+  </data>
+  <data name="OpenGL" xml:space="preserve">
+    <value>OpenGL</value>
+  </data>
+  <data name="Software" xml:space="preserve">
+    <value>Software</value>
+  </data>
 </root>

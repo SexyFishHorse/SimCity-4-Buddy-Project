@@ -1194,15 +1194,6 @@
   <data name="renderModeComboBox.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="renderModeComboBox.Items" xml:space="preserve">
-    <value>Software</value>
-  </data>
-  <data name="renderModeComboBox.Items1" xml:space="preserve">
-    <value>DirectX</value>
-  </data>
-  <data name="renderModeComboBox.Items2" xml:space="preserve">
-    <value>OpenGL</value>
-  </data>
   <data name="renderModeComboBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>83, 65</value>
   </data>
