@@ -6,17 +6,27 @@
     {
         public enum RenderMode
         {
-            OpenGl, DirectX, Software
+            OpenGl = 1, DirectX = 2, Software = 3
         }
 
         public enum CursorColorDepth
         {
-            Disabled, BlackAndWhite, Colors16, Colors256, FullColors
+            Disabled = 1,
+
+            BlackAndWhite = 2,
+
+            Colors16 = 3,
+
+            Colors256 = 4,
+
+            FullColors = 5,
+
+            SystemCursors = 6
         }
 
         public enum CpuPriority
         {
-            Low, Medium, High
+            Low = 1, Medium = 2, High = 3
         }
 
         public string GetStringForAudio(bool enabled)
