@@ -78,6 +78,11 @@
             return builder.ToString();
         }
 
+        public string GetStringForCustomCursors(CursorColorDepth cursorColorDepth)
+        {
+            return "-customCursors:" + (cursorColorDepth == CursorColorDepth.SystemCursors ? "enabled" : "disabled");
+        }
+
         public string GetStringForCursors(CursorColorDepth cursorColorDepth)
         {
             var builder = new StringBuilder("-cursors:");
