@@ -143,12 +143,15 @@
 
             cpuCountComboBox.BeginUpdate();
             cpuCountComboBox.Items.Clear();
+            cpuCountComboBox.Items.Add(LocalizationStrings.Ignore);
             for (var i = 1; i <= Environment.ProcessorCount; i++)
             {
                 cpuCountComboBox.Items.Add(i);
             }
 
-            cpuCountComboBox.SelectedIndex = 0;
+            int selectedIndex;
+            int.TryParse(Settings.Default.LauncherCpuCount, out selectedIndex);
+            cpuCountComboBox.SelectedIndex = selectedIndex;
             cpuCountComboBox.EndUpdate();
 
             cpuPriorityComboBox.BeginUpdate();
