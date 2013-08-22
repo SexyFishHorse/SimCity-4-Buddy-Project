@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics;
     using System.Drawing;
+    using System.IO;
     using System.Linq;
     using System.Net.NetworkInformation;
     using System.Reflection;
@@ -246,11 +247,14 @@
             var arguments = new GameArgumentsHelper().GetArgumentString(selectedUserFolder);
 
             var gameProcessStartInfo = new ProcessStartInfo
-                                          {
-                                              FileName =
-                                                  Settings.Default.GameLocation + @"\Apps\SimCity 4",
-                                              Arguments = arguments
-                                          };
+                                           {
+                                               FileName =
+                                                   Path.Combine(
+                                                       Settings.Default.GameLocation,
+                                                       "Apps",
+                                                       "SimCity 4.exe"),
+                                               Arguments = arguments
+                                           };
 
             var gameLauncher = new GameLauncher(gameProcessStartInfo, Settings.Default.AutoSaveWaitTime);
             var gameLauncherThread = new Thread(gameLauncher.Start) { Name = "SC4Buddy GameLauncher" };
