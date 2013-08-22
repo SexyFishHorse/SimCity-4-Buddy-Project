@@ -461,4 +461,10 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="ErrorOpeningReadmeFile" xml:space="preserve">
     <value>Error opening readme file</value>
   </data>
+  <data name="YouAreOffline" xml:space="preserve">
+    <value>You are offline</value>
+  </data>
+  <data name="CannotMatchPluginsAgainstDatabaseAsNoConnectionsAreAvailable" xml:space="preserve">
+    <value>Cannot match plugins against database as no connections are available</value>
+  </data>
 </root>

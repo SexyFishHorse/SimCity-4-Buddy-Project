@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Net.NetworkInformation;
     using System.Threading;
     using System.Windows.Forms;
 
@@ -87,19 +88,6 @@
                         MessageBoxIcon.Stop)));
         }
 
-        public void ShowNumberOfExecutablesDialog(PluginInstaller installer)
-        {
-            Invoke(
-                new Action(
-                    () =>
-                    MessageBox.Show(
-                        this,
-                        string.Format(LocalizationStrings.ThisFormContainsNumExecutableFiles, installer.Executables.Count()),
-                        LocalizationStrings.ExecutableFilesFound,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information)));
-        }
-
         protected void IncrementInstalledPlugins()
         {
             SetOverallProgresBar(OverallProgressBar.Value + 1);
@@ -175,7 +163,7 @@
             {
                 Invoke(new Action(() =>
                     {
-                        if (Settings.Default.EnableRemoteDatabaseConnection && Settings.Default.FetchInfoFromRemote)
+                        if (NetworkInterface.GetIsNetworkAvailable() && Settings.Default.EnableRemoteDatabaseConnection && Settings.Default.FetchInfoFromRemote)
                         {
                             var matcher = new PluginMatcher();
                             var matched = tempPluginInfo.Where(matcher.MatchAndUpdate).ToList();

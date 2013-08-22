@@ -115,6 +115,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot match plugins against database as no connections are available.
+        /// </summary>
+        internal static string CannotMatchPluginsAgainstDatabaseAsNoConnectionsAreAvailable {
+            get {
+                return ResourceManager.GetString("CannotMatchPluginsAgainstDatabaseAsNoConnectionsAreAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm deletion of author.
         /// </summary>
         internal static string ConfirmDeletionOfAuthor {
@@ -959,6 +968,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string WouldYouLikeToScanForMissingDependencies {
             get {
                 return ResourceManager.GetString("WouldYouLikeToScanForMissingDependencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are offline.
+        /// </summary>
+        internal static string YouAreOffline {
+            get {
+                return ResourceManager.GetString("YouAreOffline", resourceCulture);
             }
         }
         
