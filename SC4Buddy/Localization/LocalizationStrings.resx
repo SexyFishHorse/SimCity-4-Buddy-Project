@@ -515,4 +515,7 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="Bits32" xml:space="preserve">
     <value>32 bits</value>
   </data>
+  <data name="ResolutionMustBeInTheFormatNumberXNumber" xml:space="preserve">
+    <value>Resolution must be in the format NUMBERxNUMBER. I.e. "1024x768".</value>
+  </data>
 </root>

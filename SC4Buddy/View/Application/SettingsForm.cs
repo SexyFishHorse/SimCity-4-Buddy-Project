@@ -7,6 +7,7 @@
     using System.Net.NetworkInformation;
     using System.Reflection;
     using System.Security.Authentication;
+    using System.Text.RegularExpressions;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
@@ -77,6 +78,19 @@
                     LocalizationStrings.GameNotFound,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!ValidateResolution())
+            {
+                Log.Info(string.Format("Invalid resolution: \"{0}\"", resolutionComboBox.Text.Trim()));
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.ResolutionMustBeInTheFormatNumberXNumber,
+                    LocalizationStrings.ValidationError,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1);
                 return;
             }
 
@@ -387,6 +401,15 @@
                 fetchInformationFromRemoteCheckbox.Enabled = false;
                 allowCheckMissingDependenciesCheckBox.Enabled = false;
             }
+        }
+
+        private bool ValidateResolution()
+        {
+            var regEx = new Regex(@"\d+x\d+");
+            var text = resolutionComboBox.Text.Trim();
+
+            return (regEx.IsMatch(text) || string.IsNullOrWhiteSpace(text)
+                    || text.Equals(LocalizationStrings.Ignore, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

@@ -764,6 +764,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Resolution must be in the format NUMBERxNUMBER. I.e. &quot;1024x768&quot;..
+        /// </summary>
+        internal static string ResolutionMustBeInTheFormatNumberXNumber {
+            get {
+                return ResourceManager.GetString("ResolutionMustBeInTheFormatNumberXNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Run executable?.
         /// </summary>
         internal static string RunExecutable {
