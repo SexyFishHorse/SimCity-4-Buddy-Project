@@ -81,7 +81,7 @@
 
         private static IEnumerable<FileInfo> GetReadmeFiles(IEnumerable<FileInfo> tempFiles)
         {
-            var readmeExtensions = new[] { ".html", ".htm", ".mht", ".pdf", ".txt", ".rtf", ".doc", ".docx", "odt" };
+            var readmeExtensions = new[] { ".html", ".htm", ".mht", ".pdf", ".txt", ".rtf", ".doc", ".docx", ".odt" };
             var nonReadmeFilenames = new[] { "CLEANITOL", "REMOVELIST" };
 
             var readmeFiles = new List<FileInfo>();
