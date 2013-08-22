@@ -153,45 +153,25 @@
             autoSaveIntervalTrackBar.Enabled = Settings.Default.EnableAutoSave;
             UpdateAutoSaveLabel(Settings.Default.AutoSaveWaitTime);
 
-            renderModeComboBox.BeginUpdate();
-            renderModeComboBox.Items.Clear();
-            renderModeComboBox.Items.Add(LocalizationStrings.Ignore);
-            renderModeComboBox.Items.Add(new ComboBoxItem<GameArgumentsHelper.RenderMode>(LocalizationStrings.DirectX, GameArgumentsHelper.RenderMode.DirectX));
-            renderModeComboBox.Items.Add(new ComboBoxItem<GameArgumentsHelper.RenderMode>(LocalizationStrings.OpenGL, GameArgumentsHelper.RenderMode.OpenGl));
-            renderModeComboBox.Items.Add(new ComboBoxItem<GameArgumentsHelper.RenderMode>(LocalizationStrings.Software, GameArgumentsHelper.RenderMode.Software));
-            renderModeComboBox.EndUpdate();
+            UpdateRenderModeComboBox();
 
-            colourDepthComboBox.BeginUpdate();
-            colourDepthComboBox.Items.Clear();
-            colourDepthComboBox.Items.Add(LocalizationStrings.Ignore);
-            colourDepthComboBox.Items.Add(new ComboBoxItem<GameArgumentsHelper.ColorDepth )(
-                LocalizationStrings.Bits16, GameArgumentsHelper.ColorDepth.Bits16);
-            colourDepthComboBox.Items.Add(new ComboBoxItem<GameArgumentsHelper.ColorDepth )(
-                LocalizationStrings.Bits32, GameArgumentsHelper.ColorDepth.Bits32);
-            colourDepthComboBox.EndUpdate();
+            UpdateColourDepthComboBox();
 
-            cpuCountComboBox.BeginUpdate();
-            cpuCountComboBox.Items.Clear();
-            cpuCountComboBox.Items.Add(LocalizationStrings.Ignore);
-            for (var i = 1; i <= Environment.ProcessorCount; i++)
-            {
-                cpuCountComboBox.Items.Add(i);
-            }
+            UpdateCpuCountComboBox();
 
-            int selectedIndex;
-            int.TryParse(Settings.Default.LauncherCpuCount, out selectedIndex);
-            cpuCountComboBox.SelectedIndex = selectedIndex;
-            cpuCountComboBox.EndUpdate();
+            UpdateCpuPriorityComboBox();
 
-            cpuPriorityComboBox.BeginUpdate();
-            cpuPriorityComboBox.Items.Clear();
-            cpuPriorityComboBox.Items.Add(LocalizationStrings.Ignore);
-            cpuPriorityComboBox.Items.Add(new ComboBoxItem<GameArgumentsHelper.CpuPriority>(LocalizationStrings.Low, GameArgumentsHelper.CpuPriority.Low));
-            cpuPriorityComboBox.Items.Add(new ComboBoxItem<GameArgumentsHelper.CpuPriority>(LocalizationStrings.Medium, GameArgumentsHelper.CpuPriority.Medium));
-            cpuPriorityComboBox.Items.Add(new ComboBoxItem<GameArgumentsHelper.CpuPriority>(LocalizationStrings.High, GameArgumentsHelper.CpuPriority.High));
-            cpuPriorityComboBox.EndUpdate();
+            UpdateCursorColourComboBox();
 
             UpdateLanguageComboBox();
+
+            UpdateBackgroundsListView();
+
+            UpdateLoginStatus();
+        }
+
+        private void UpdateCursorColourComboBox()
+        {
             cursorColourComboBox.BeginUpdate();
             cursorColourComboBox.Items.Clear();
             cursorColourComboBox.Items.Add(LocalizationStrings.Ignore);
@@ -213,10 +193,136 @@
             cursorColourComboBox.Items.Add(
                 new ComboBoxItem<GameArgumentsHelper.CursorColorDepth>(
                     LocalizationStrings.FullColors, GameArgumentsHelper.CursorColorDepth.FullColors));
-            cursorColourComboBox.EndUpdate();
 
-            UpdateBackgroundsListView();
-            UpdateLoginStatus();
+            GameArgumentsHelper.CursorColorDepth selectedCursor;
+            Enum.TryParse(Settings.Default.LauncherCursorColour, true, out selectedCursor);
+
+            switch (selectedCursor)
+            {
+                case GameArgumentsHelper.CursorColorDepth.Disabled:
+                    cpuCountComboBox.SelectedIndex = 1;
+                    break;
+                case GameArgumentsHelper.CursorColorDepth.SystemCursors:
+                    cpuCountComboBox.SelectedIndex = 2;
+                    break;
+                case GameArgumentsHelper.CursorColorDepth.BlackAndWhite:
+                    cpuCountComboBox.SelectedIndex = 3;
+                    break;
+                case GameArgumentsHelper.CursorColorDepth.Colors16:
+                    cpuCountComboBox.SelectedIndex = 4;
+                    break;
+                case GameArgumentsHelper.CursorColorDepth.Colors256:
+                    cpuCountComboBox.SelectedIndex = 5;
+                    break;
+                case GameArgumentsHelper.CursorColorDepth.FullColors:
+                    cpuCountComboBox.SelectedIndex = 6;
+                    break;
+                default:
+                    cpuCountComboBox.SelectedIndex = 0;
+                    break;
+            }
+
+            cursorColourComboBox.EndUpdate();
+        }
+
+        private void UpdateCpuPriorityComboBox()
+        {
+            cpuPriorityComboBox.BeginUpdate();
+            cpuPriorityComboBox.Items.Clear();
+            cpuPriorityComboBox.Items.Add(LocalizationStrings.Ignore);
+            cpuPriorityComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.CpuPriority>(LocalizationStrings.Low, GameArgumentsHelper.CpuPriority.Low));
+            cpuPriorityComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.CpuPriority>(
+                    LocalizationStrings.Medium, GameArgumentsHelper.CpuPriority.Medium));
+            cpuPriorityComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.CpuPriority>(
+                    LocalizationStrings.High, GameArgumentsHelper.CpuPriority.High));
+
+            GameArgumentsHelper.CpuPriority selectedPriority;
+            Enum.TryParse(Settings.Default.LauncherCpuPriority, true, out selectedPriority);
+            switch (selectedPriority)
+            {
+                case GameArgumentsHelper.CpuPriority.Low:
+                    cpuPriorityComboBox.SelectedIndex = 1;
+                    break;
+                case GameArgumentsHelper.CpuPriority.Medium:
+                    cpuPriorityComboBox.SelectedIndex = 2;
+                    break;
+                case GameArgumentsHelper.CpuPriority.High:
+                    cpuPriorityComboBox.SelectedIndex = 3;
+                    break;
+                default:
+                    cpuPriorityComboBox.SelectedIndex = 0;
+                    break;
+            }
+
+            cpuPriorityComboBox.EndUpdate();
+        }
+
+        private void UpdateCpuCountComboBox()
+        {
+            cpuCountComboBox.BeginUpdate();
+            cpuCountComboBox.Items.Clear();
+            cpuCountComboBox.Items.Add(LocalizationStrings.Ignore);
+            for (var i = 1; i <= Environment.ProcessorCount; i++)
+            {
+                cpuCountComboBox.Items.Add(i);
+            }
+
+            cpuCountComboBox.SelectedIndex = Settings.Default.LauncherCpuCount;
+            cpuCountComboBox.EndUpdate();
+        }
+
+        private void UpdateColourDepthComboBox()
+        {
+            colourDepthComboBox.BeginUpdate();
+            colourDepthComboBox.Items.Clear();
+            colourDepthComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.ColorDepth>(
+                    LocalizationStrings.Bits16, GameArgumentsHelper.ColorDepth.Bits16));
+            colourDepthComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.ColorDepth>(
+                    LocalizationStrings.Bits32, GameArgumentsHelper.ColorDepth.Bits32));
+
+            colourDepthComboBox.SelectedIndex = Settings.Default.Launcher32BitColourDepth ? 1 : 0;
+            colourDepthComboBox.EndUpdate();
+        }
+
+        private void UpdateRenderModeComboBox()
+        {
+            renderModeComboBox.BeginUpdate();
+            renderModeComboBox.Items.Clear();
+            renderModeComboBox.Items.Add(LocalizationStrings.Ignore);
+            renderModeComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.RenderMode>(
+                    LocalizationStrings.DirectX, GameArgumentsHelper.RenderMode.DirectX));
+            renderModeComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.RenderMode>(
+                    LocalizationStrings.OpenGL, GameArgumentsHelper.RenderMode.OpenGl));
+            renderModeComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.RenderMode>(
+                    LocalizationStrings.Software, GameArgumentsHelper.RenderMode.Software));
+
+            GameArgumentsHelper.RenderMode selectedRenderMode;
+            Enum.TryParse(Settings.Default.LauncherRenderMode, true, out selectedRenderMode);
+            switch (selectedRenderMode)
+            {
+                case GameArgumentsHelper.RenderMode.DirectX:
+                    renderModeComboBox.SelectedIndex = 1;
+                    break;
+                case GameArgumentsHelper.RenderMode.OpenGl:
+                    renderModeComboBox.SelectedIndex = 2;
+                    break;
+                case GameArgumentsHelper.RenderMode.Software:
+                    renderModeComboBox.SelectedIndex = 3;
+                    break;
+                default:
+                    renderModeComboBox.SelectedIndex = 0;
+                    break;
+            }
+
+            renderModeComboBox.EndUpdate();
         }
 
         private void UpdateBackgroundsListView()
