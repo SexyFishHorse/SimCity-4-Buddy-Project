@@ -103,6 +103,8 @@
                 case CursorColorDepth.FullColors:
                     builder.Append("fullcolor");
                     break;
+                default:
+                    return string.Empty;
             }
 
             return builder.ToString();
