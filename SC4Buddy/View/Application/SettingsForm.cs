@@ -99,6 +99,41 @@
                 Settings.Default.Wallpaper = backgroundImageListView.SelectedIndices[0] + 1;
             }
 
+            if (renderModeComboBox.SelectedIndex > 0)
+            {
+                var renderMode = ((ComboBoxItem<GameArgumentsHelper.RenderMode>)renderModeComboBox.SelectedItem).Value;
+                Settings.Default.LauncherRenderMode = renderMode.ToString();
+            }
+            else
+            {
+                Settings.Default.LauncherRenderMode = string.Empty;
+            }
+
+            var regex = new Regex(@"\d+x\d+");
+            var resolution = resolutionComboBox.Text.Trim();
+            Settings.Default.LauncherResolution = regex.IsMatch(resolution) ? resolution : string.Empty;
+
+            Settings.Default.Launcher32BitColourDepth =
+                ((ComboBoxItem<GameArgumentsHelper.ColorDepth>)colourDepthComboBox.SelectedItem).Value
+                == GameArgumentsHelper.ColorDepth.Bits32;
+
+            Settings.Default.LauncherCursorColour = cursorColourComboBox.SelectedIndex > 0
+                                                        ? ((ComboBoxItem<GameArgumentsHelper.CursorColorDepth>)
+                                                           cursorColourComboBox.SelectedItem).Value.ToString()
+                                                        : string.Empty;
+
+            int numCpus;
+            int.TryParse(
+                cpuCountComboBox.Text.Trim(), out numCpus);
+            Settings.Default.LauncherCpuCount = numCpus;
+
+            Settings.Default.LauncherCpuPriority = cpuPriorityComboBox.SelectedIndex > 0
+                                                       ? ((ComboBoxItem<GameArgumentsHelper.CpuPriority>)
+                                                          cpuPriorityComboBox.SelectedItem).Value.ToString()
+                                                       : string.Empty;
+
+
+
             Settings.Default.Save();
 
             settingsController.UpdateMainFolder();
