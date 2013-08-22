@@ -25,10 +25,7 @@
         {
             this.gameProcessStartInfo = gameProcessStartInfo;
             this.autoSaveWaitTime = autoSaveWaitTime;
-            Running = true;
         }
-
-        protected bool Running { get; set; }
 
         public void Start()
         {
@@ -46,7 +43,6 @@
 
         public void Dispose()
         {
-            Running = false;
             timer.Dispose();
         }
 
