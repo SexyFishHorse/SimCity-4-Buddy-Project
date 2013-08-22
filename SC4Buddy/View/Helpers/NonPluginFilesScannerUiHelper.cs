@@ -17,7 +17,7 @@
                     MessageBoxIcon.Information);
         }
 
-        public static bool ShowConfirmDialog(UserFolderForm parentForm, int numFiles, int numFolders)
+        public static bool ShowConfirmDialog(Form parentForm, int numFiles, int numFolders)
         {
             return MessageBox.Show(
                 parentForm,
@@ -28,7 +28,7 @@
                 MessageBoxDefaultButton.Button2) == DialogResult.Yes;
         }
 
-        public static void ShowRemovalSummary(UserFolderForm parentForm, int numFiles, int numFolders)
+        public static void ShowRemovalSummary(Form parentForm, int numFiles, int numFolders)
         {
             var message = string.Format(LocalizationStrings.NumFilesAndNumFoldersWereRemoved, numFiles, numFolders);
 
