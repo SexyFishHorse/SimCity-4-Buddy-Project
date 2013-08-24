@@ -94,6 +94,7 @@
             this.Name = "MoveOrCopyForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Move or copy plugin";
+            this.Load += new System.EventHandler(this.MoveOrCopyFormLoad);
             this.ResumeLayout(false);
 
         }
