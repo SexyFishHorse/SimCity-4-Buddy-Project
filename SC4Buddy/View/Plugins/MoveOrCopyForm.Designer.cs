@@ -28,11 +28,80 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MoveOrCopyForm));
+            this.userFolderListView = new System.Windows.Forms.ListView();
+            this.moveButton = new System.Windows.Forms.Button();
+            this.copyButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // userFolderListView
+            // 
+            this.userFolderListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.userFolderListView.Location = new System.Drawing.Point(12, 12);
+            this.userFolderListView.Name = "userFolderListView";
+            this.userFolderListView.Size = new System.Drawing.Size(260, 208);
+            this.userFolderListView.TabIndex = 1;
+            this.userFolderListView.UseCompatibleStateImageBehavior = false;
+            this.userFolderListView.View = System.Windows.Forms.View.List;
+            // 
+            // moveButton
+            // 
+            this.moveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.moveButton.Location = new System.Drawing.Point(12, 226);
+            this.moveButton.Name = "moveButton";
+            this.moveButton.Size = new System.Drawing.Size(75, 23);
+            this.moveButton.TabIndex = 2;
+            this.moveButton.Text = "Move";
+            this.moveButton.UseVisualStyleBackColor = true;
+            // 
+            // copyButton
+            // 
+            this.copyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.copyButton.Location = new System.Drawing.Point(93, 226);
+            this.copyButton.Name = "copyButton";
+            this.copyButton.Size = new System.Drawing.Size(75, 23);
+            this.copyButton.TabIndex = 3;
+            this.copyButton.Text = "Copy";
+            this.copyButton.UseVisualStyleBackColor = true;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelButton.Location = new System.Drawing.Point(197, 226);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 4;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            // 
+            // MoveOrCopyForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "MoveOrCopyForm";
+            this.CancelButton = this.cancelButton;
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ControlBox = false;
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.copyButton);
+            this.Controls.Add(this.moveButton);
+            this.Controls.Add(this.userFolderListView);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "MoveOrCopyForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Move or copy plugin";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.ListView userFolderListView;
+        private System.Windows.Forms.Button moveButton;
+        private System.Windows.Forms.Button copyButton;
+        private System.Windows.Forms.Button cancelButton;
     }
 }
