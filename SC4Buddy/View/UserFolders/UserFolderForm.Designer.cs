@@ -54,6 +54,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.scanForNonpluginFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateInfoForAllPluginsFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForMissingDependenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveOrCopyButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -96,6 +97,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.moveOrCopyButton);
             this.groupBox1.Controls.Add(this.isRemoteInfoLabel);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.updateInfoButton);
@@ -236,6 +238,12 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             resources.ApplyResources(this.checkForMissingDependenciesToolStripMenuItem, "checkForMissingDependenciesToolStripMenuItem");
             this.checkForMissingDependenciesToolStripMenuItem.Click += new System.EventHandler(this.CheckForMissingDependenciesToolStripMenuItemClick);
             // 
+            // moveOrCopyButton
+            // 
+            resources.ApplyResources(this.moveOrCopyButton, "moveOrCopyButton");
+            this.moveOrCopyButton.Name = "moveOrCopyButton";
+            this.moveOrCopyButton.UseVisualStyleBackColor = true;
+            // 
             // UserFolderForm
             // 
             resources.ApplyResources(this, "$this");
@@ -288,5 +296,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
         private System.Windows.Forms.ToolStripMenuItem updateInfoForAllPluginsFromServerToolStripMenuItem;
         private System.Windows.Forms.Label isRemoteInfoLabel;
         private System.Windows.Forms.ToolStripMenuItem checkForMissingDependenciesToolStripMenuItem;
+        private System.Windows.Forms.Button moveOrCopyButton;
     }
 }
