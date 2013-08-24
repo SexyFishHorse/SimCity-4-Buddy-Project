@@ -279,6 +279,12 @@
       <DependentUpon>MissingDependenciesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Remote\DependencyChecker.cs" />
+    <Compile Include="View\Plugins\MoveOrCopyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Plugins\MoveOrCopyForm.Designer.cs">
+      <DependentUpon>MoveOrCopyForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Plugins\RemotePluginComparer.cs" />
     <Compile Include="View\UserFolders\UserFolderForm.cs">
       <SubType>Form</SubType>
