@@ -12,5 +12,10 @@ namespace NIHEI.SC4Buddy.View.Plugins
         }
 
         public Plugin Plugin { get; set; }
+
+        private void CancelButtonClick(object sender, System.EventArgs e)
+        {
+            Close();
+        }
     }
 }
