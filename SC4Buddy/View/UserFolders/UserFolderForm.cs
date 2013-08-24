@@ -341,5 +341,12 @@
                     MessageBoxDefaultButton.Button1);
             }
         }
+
+        private void MoveOrCopyButtonClick(object sender, EventArgs e)
+        {
+            var dialog = new MoveOrCopyForm();
+            dialog.Plugin = selectedPlugin;
+            dialog.ShowDialog(this);
+        }
     }
 }
