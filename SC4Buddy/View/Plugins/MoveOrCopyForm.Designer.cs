@@ -41,15 +41,18 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.userFolderListView.Location = new System.Drawing.Point(12, 12);
+            this.userFolderListView.MultiSelect = false;
             this.userFolderListView.Name = "userFolderListView";
             this.userFolderListView.Size = new System.Drawing.Size(260, 208);
             this.userFolderListView.TabIndex = 1;
             this.userFolderListView.UseCompatibleStateImageBehavior = false;
             this.userFolderListView.View = System.Windows.Forms.View.List;
+            this.userFolderListView.SelectedIndexChanged += new System.EventHandler(this.UserFolderListViewSelectedIndexChanged);
             // 
             // moveButton
             // 
             this.moveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.moveButton.Enabled = false;
             this.moveButton.Location = new System.Drawing.Point(12, 226);
             this.moveButton.Name = "moveButton";
             this.moveButton.Size = new System.Drawing.Size(75, 23);
@@ -60,6 +63,7 @@
             // copyButton
             // 
             this.copyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.copyButton.Enabled = false;
             this.copyButton.Location = new System.Drawing.Point(93, 226);
             this.copyButton.Name = "copyButton";
             this.copyButton.Size = new System.Drawing.Size(75, 23);

@@ -8,6 +8,8 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
     public partial class MoveOrCopyForm : Form
     {
+        private UserFolder selectedUserFolder;
+
         public MoveOrCopyForm()
         {
             InitializeComponent();
@@ -33,6 +35,22 @@ namespace NIHEI.SC4Buddy.View.Plugins
             }
 
             userFolderListView.EndUpdate();
+        }
+
+        private void UserFolderListViewSelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (userFolderListView.SelectedItems.Count > 0)
+            {
+                selectedUserFolder = ((ListViewItemWithObjectValue<UserFolder>)userFolderListView.SelectedItems[0]).Value;
+
+                moveButton.Enabled = true;
+                copyButton.Enabled = true;
+            }
+            else
+            {
+                moveButton.Enabled = false;
+                copyButton.Enabled = false;
+            }
         }
     }
 }
