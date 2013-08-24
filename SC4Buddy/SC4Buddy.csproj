@@ -365,6 +365,9 @@
     <EmbeddedResource Include="View\Plugins\MissingDependenciesForm.resx">
       <DependentUpon>MissingDependenciesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Plugins\MoveOrCopyForm.resx">
+      <DependentUpon>MoveOrCopyForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\UserFolders\UserFolderForm.resx">
       <DependentUpon>UserFolderForm.cs</DependentUpon>
     </EmbeddedResource>
