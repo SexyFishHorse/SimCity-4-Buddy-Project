@@ -349,9 +349,6 @@
     <EmbeddedResource Include="View\Login\CreateLoginForm.resx">
       <DependentUpon>CreateLoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Plugins\EnterPluginInformationForm.da.resx">
-      <DependentUpon>EnterPluginInformationForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\Plugins\EnterPluginInformationForm.resx">
       <DependentUpon>EnterPluginInformationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -364,18 +361,11 @@
     <EmbeddedResource Include="View\Plugins\MissingDependenciesForm.resx">
       <DependentUpon>MissingDependenciesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\UserFolders\UserFolderForm.da.resx">
-      <DependentUpon>UserFolderForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\UserFolders\UserFolderForm.resx">
       <DependentUpon>UserFolderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Plugins\ReadmeFilesForm.resx">
       <DependentUpon>ReadmeFilesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Application\SC4Buddy.da.resx">
-      <DependentUpon>SC4Buddy.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Application\SC4Buddy.resx">
       <DependentUpon>SC4Buddy.cs</DependentUpon>
@@ -391,9 +381,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View\UserFolders\ManageUserFoldersForm.da.resx">
-      <DependentUpon>ManageUserFoldersForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\UserFolders\ManageUserFoldersForm.resx">
       <DependentUpon>ManageUserFoldersForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -433,9 +420,6 @@
     <Content Include="Wallpapers\13.jpg" />
     <Content Include="Wallpapers\12.jpg" />
     <Content Include="Wallpapers\11.jpg" />
-    <EmbeddedResource Include="View\Application\SettingsForm.da.resx">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\Application\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
