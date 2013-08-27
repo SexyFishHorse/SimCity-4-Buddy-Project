@@ -348,5 +348,25 @@
             dialog.Plugin = selectedPlugin;
             dialog.ShowDialog(this);
         }
+
+        private void DialogOnErrorDuringCopyOrMove(object sender, EventArgs eventArgs)
+        {
+            MessageBox.Show(
+                this,
+                "Error during copy or move operation. Some of the files may or may not have been copied or moved.",
+                "Error during copy or move.",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+        }
+
+        private void DialogOnPluginCopied(object sender, EventArgs eventArgs)
+        {
+            MessageBox.Show(
+                this,
+                "Plugin has been successfully copied.",
+                "Plugin has been copied.",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Asterisk);
+        }
     }
 }
