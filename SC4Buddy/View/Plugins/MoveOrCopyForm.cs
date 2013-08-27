@@ -9,10 +9,14 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
     public partial class MoveOrCopyForm : Form
     {
+
+        private readonly UserFolder currentUserFolder;
+
         private UserFolder selectedUserFolder;
 
-        public MoveOrCopyForm()
+        public MoveOrCopyForm(UserFolder currentUserFolder)
         {
+            this.currentUserFolder = currentUserFolder;
             InitializeComponent();
         }
 
