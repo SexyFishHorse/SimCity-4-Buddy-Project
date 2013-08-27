@@ -313,6 +313,24 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during copying or moving plugin.
+        /// </summary>
+        internal static string ErrorDuringCopyingOrMovingPlugin {
+            get {
+                return ResourceManager.GetString("ErrorDuringCopyingOrMovingPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error during copy or move operation. Some of the files may or may not have been copied or moved..
+        /// </summary>
+        internal static string ErrorDuringCopyOrMoveOperation {
+            get {
+                return ResourceManager.GetString("ErrorDuringCopyOrMoveOperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured during login..
         /// </summary>
         internal static string ErrorOccuredDuringLogin {
@@ -692,6 +710,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Plugin copied.
+        /// </summary>
+        internal static string PluginCopied {
+            get {
+                return ResourceManager.GetString("PluginCopied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Plugin has been added.
         /// </summary>
         internal static string PluginHasBeenAdded {
@@ -701,6 +728,13 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Plugin has been successfully copied..
+        /// </summary>
+        internal static string PluginHasBeenSuccessfullyCopied {
+            get {
+                return ResourceManager.GetString("PluginHasBeenSuccessfullyCopied", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Plugin has been successfully moved..
@@ -755,6 +789,8 @@ namespace NIHEI.SC4Buddy.Localization {
                 return ResourceManager.GetString("PluginMoved", resourceCulture);
             }
         }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Possible error detected..
         /// </summary>
         internal static string PossibleErrorDetected {

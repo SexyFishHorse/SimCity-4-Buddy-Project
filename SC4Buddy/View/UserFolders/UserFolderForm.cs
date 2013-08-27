@@ -362,12 +362,13 @@
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
+
         private void DialogOnErrorDuringCopyOrMove(object sender, EventArgs eventArgs)
         {
             MessageBox.Show(
                 this,
-                "Error during copy or move operation. Some of the files may or may not have been copied or moved.",
-                "Error during copy or move.",
+                LocalizationStrings.ErrorDuringCopyOrMoveOperation,
+                LocalizationStrings.ErrorDuringCopyingOrMovingPlugin,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
         }
@@ -376,10 +377,10 @@
         {
             MessageBox.Show(
                 this,
-                "Plugin has been successfully copied.",
-                "Plugin has been copied.",
+                LocalizationStrings.PluginHasBeenSuccessfullyCopied,
+                LocalizationStrings.PluginCopied,
                 MessageBoxButtons.OK,
-                MessageBoxIcon.Asterisk);
+                MessageBoxIcon.Information);
         }
     }
 }
