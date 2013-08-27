@@ -346,12 +346,22 @@
         {
             var dialog = new MoveOrCopyForm(userFolder) { Plugin = selectedPlugin };
             dialog.PluginCopied += DialogOnPluginCopied;
+            dialog.PluginMoved += DialogOnPluginMoved;
             dialog.ErrorDuringCopyOrMove += DialogOnErrorDuringCopyOrMove;
             dialog.ShowDialog(this);
 
             RepopulateInstalledPluginsListView();
         }
 
+        private void DialogOnPluginMoved(object sender, EventArgs eventArgs)
+        {
+            MessageBox.Show(
+                this,
+                LocalizationStrings.PluginHasBeenSuccessfullyMoved,
+                LocalizationStrings.PluginMoved,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
         private void DialogOnErrorDuringCopyOrMove(object sender, EventArgs eventArgs)
         {
             MessageBox.Show(

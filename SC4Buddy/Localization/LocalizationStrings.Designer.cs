@@ -701,6 +701,17 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plugin has been successfully moved..
+        /// </summary>
+        internal static string PluginHasBeenSuccessfullyMoved {
+            get {
+                return ResourceManager.GetString("PluginHasBeenSuccessfullyMoved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Plugin information stored.
         /// </summary>
         internal static string PluginInformationStored {
@@ -737,6 +748,13 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Plugin moved.
+        /// </summary>
+        internal static string PluginMoved {
+            get {
+                return ResourceManager.GetString("PluginMoved", resourceCulture);
+            }
+        }
         ///   Looks up a localized string similar to Possible error detected..
         /// </summary>
         internal static string PossibleErrorDetected {
