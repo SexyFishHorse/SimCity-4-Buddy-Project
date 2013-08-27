@@ -5,12 +5,13 @@
     using System.IO;
     using System.Linq;
 
+    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
 
     public class PluginCopier
     {
-        public void CopyPlugin(Plugin plugin, UserFolder targetUserFolder)
+        public void CopyPlugin(Plugin plugin, UserFolder targetUserFolder, bool moveInsteadOfCopy = false)
         {
             var newPlugin = new Plugin
                             {
@@ -31,6 +32,14 @@
             }
 
             RegistryFactory.PluginRegistry.Add(newPlugin);
+
+            if (!moveInsteadOfCopy)
+            {
+                return;
+            }
+
+            var controller = new UserFolderController(RegistryFactory.UserFolderRegistry);
+            controller.UninstallPlugin(plugin);
         }
 
         private PluginFile CopyFile(PluginFile pluginFile, UserFolder targetUserFolder)
