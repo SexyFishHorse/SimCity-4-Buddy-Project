@@ -344,9 +344,12 @@
 
         private void MoveOrCopyButtonClick(object sender, EventArgs e)
         {
-            var dialog = new MoveOrCopyForm();
-            dialog.Plugin = selectedPlugin;
+            var dialog = new MoveOrCopyForm(userFolder) { Plugin = selectedPlugin };
+            dialog.PluginCopied += DialogOnPluginCopied;
+            dialog.ErrorDuringCopyOrMove += DialogOnErrorDuringCopyOrMove;
             dialog.ShowDialog(this);
+
+            RepopulateInstalledPluginsListView();
         }
 
         private void DialogOnErrorDuringCopyOrMove(object sender, EventArgs eventArgs)
