@@ -60,6 +60,7 @@
             this.moveButton.TabIndex = 2;
             this.moveButton.Text = "Move";
             this.moveButton.UseVisualStyleBackColor = true;
+            this.moveButton.Click += new System.EventHandler(this.MoveButtonClick);
             // 
             // copyButton
             // 
