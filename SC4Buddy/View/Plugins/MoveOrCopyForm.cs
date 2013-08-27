@@ -2,6 +2,7 @@
 
 namespace NIHEI.SC4Buddy.View.Plugins
 {
+    using System;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.View.Elements;
@@ -17,12 +18,12 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         public Plugin Plugin { get; set; }
 
-        private void CancelButtonClick(object sender, System.EventArgs e)
+        private void CancelButtonClick(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void MoveOrCopyFormLoad(object sender, System.EventArgs e)
+        private void MoveOrCopyFormLoad(object sender, EventArgs e)
         {
             userFolderListView.BeginUpdate();
             userFolderListView.Items.Clear();
@@ -37,7 +38,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             userFolderListView.EndUpdate();
         }
 
-        private void UserFolderListViewSelectedIndexChanged(object sender, System.EventArgs e)
+        private void UserFolderListViewSelectedIndexChanged(object sender, EventArgs e)
         {
             if (userFolderListView.SelectedItems.Count > 0)
             {
