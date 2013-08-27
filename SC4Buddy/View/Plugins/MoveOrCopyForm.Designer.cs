@@ -33,6 +33,7 @@
             this.moveButton = new System.Windows.Forms.Button();
             this.copyButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // userFolderListView
@@ -43,7 +44,7 @@
             this.userFolderListView.Location = new System.Drawing.Point(12, 12);
             this.userFolderListView.MultiSelect = false;
             this.userFolderListView.Name = "userFolderListView";
-            this.userFolderListView.Size = new System.Drawing.Size(260, 208);
+            this.userFolderListView.Size = new System.Drawing.Size(260, 195);
             this.userFolderListView.TabIndex = 1;
             this.userFolderListView.UseCompatibleStateImageBehavior = false;
             this.userFolderListView.View = System.Windows.Forms.View.List;
@@ -70,6 +71,7 @@
             this.copyButton.TabIndex = 3;
             this.copyButton.Text = "Copy";
             this.copyButton.UseVisualStyleBackColor = true;
+            this.copyButton.Click += new System.EventHandler(this.CopyButtonClick);
             // 
             // cancelButton
             // 
@@ -83,6 +85,16 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButtonClick);
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 210);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(192, 13);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Note that this will overwrite existing files";
+            // 
             // MoveOrCopyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -90,6 +102,7 @@
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.ControlBox = false;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.copyButton);
             this.Controls.Add(this.moveButton);
@@ -100,6 +113,7 @@
             this.Text = "Move or copy plugin";
             this.Load += new System.EventHandler(this.MoveOrCopyFormLoad);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -109,5 +123,6 @@
         private System.Windows.Forms.Button moveButton;
         private System.Windows.Forms.Button copyButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Label label1;
     }
 }
