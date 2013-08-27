@@ -7,8 +7,32 @@
 
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
+
     public class PluginCopier
     {
+        public void CopyPlugin(Plugin plugin, UserFolder targetUserFolder)
+        {
+            var newPlugin = new Plugin
+                            {
+                                Name = plugin.Name,
+                                Link = plugin.Link,
+                                Description = plugin.Description,
+                                Author = plugin.Author,
+                                UserFolder = targetUserFolder
+                            };
+
+            var files = new List<PluginFile>(plugin.Files.Count);
+
+            files.AddRange(plugin.Files.Select(pluginFile => CopyFile(pluginFile, targetUserFolder)));
+
+            foreach (var pluginFile in files)
+            {
+                newPlugin.Files.Add(pluginFile);
+            }
+
+            RegistryFactory.PluginRegistry.Add(newPlugin);
+        }
+
         private PluginFile CopyFile(PluginFile pluginFile, UserFolder targetUserFolder)
         {
             var currentPath = pluginFile.Path;
