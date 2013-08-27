@@ -3,6 +3,7 @@
 namespace NIHEI.SC4Buddy.View.Plugins
 {
     using System;
+    using System.Linq;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.View.Elements;
@@ -67,7 +68,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
             var userFolders = RegistryFactory.UserFolderRegistry.UserFolders;
 
-            foreach (var userFolder in userFolders)
+            foreach (var userFolder in userFolders.Where(userFolder => !userFolder.Equals(currentUserFolder)))
             {
                 userFolderListView.Items.Add(new ListViewItemWithObjectValue<UserFolder>(userFolder.Alias, userFolder));
             }
