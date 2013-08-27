@@ -14,6 +14,12 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private UserFolder selectedUserFolder;
 
+        public event EventHandler PluginCopied;
+
+        public event EventHandler PluginMoved;
+
+        public event EventHandler ErrorDuringCopyOrMove;
+
         public MoveOrCopyForm(UserFolder currentUserFolder)
         {
             this.currentUserFolder = currentUserFolder;
@@ -21,6 +27,33 @@ namespace NIHEI.SC4Buddy.View.Plugins
         }
 
         public Plugin Plugin { get; set; }
+
+        protected virtual void OnPluginCopied()
+        {
+            var handler = PluginCopied;
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
+
+        protected virtual void OnPluginMoved()
+        {
+            var handler = PluginMoved;
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
+
+        protected virtual void OnErrorDuringCopyOrMove()
+        {
+            var handler = ErrorDuringCopyOrMove;
+            if (handler != null)
+            {
+                handler(this, EventArgs.Empty);
+            }
+        }
 
         private void CancelButtonClick(object sender, EventArgs e)
         {
