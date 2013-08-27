@@ -4,12 +4,18 @@ namespace NIHEI.SC4Buddy.View.Plugins
 {
     using System;
     using System.Linq;
+    using System.Reflection;
+
+    using log4net;
+
+    using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class MoveOrCopyForm : Form
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly UserFolder currentUserFolder;
 
