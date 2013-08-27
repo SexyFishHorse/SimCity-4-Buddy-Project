@@ -97,5 +97,28 @@ namespace NIHEI.SC4Buddy.View.Plugins
                 copyButton.Enabled = false;
             }
         }
+
+        private void CopyButtonClick(object sender, EventArgs e)
+        {
+            var copier = new PluginCopier();
+            try
+            {
+                copier.CopyPlugin(Plugin, selectedUserFolder);
+                OnPluginCopied();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(
+                    string.Format(
+                        "Error during copy plugin {0} (id: {1}) to folder {2}",
+                        Plugin.Name,
+                        Plugin.Id,
+                        selectedUserFolder.PluginFolderPath),
+                    ex);
+                OnErrorDuringCopyOrMove();
+            }
+
+            Close();
+        }
     }
 }
