@@ -36,7 +36,7 @@
         {
             groupRegistry = RegistryFactory.PluginGroupRegistry;
             pluginRegistry = RegistryFactory.PluginRegistry;
-            controller = new UserFolderController(RegistryFactory.UserFolderRegistry);
+            controller = new UserFolderController(EntityFactory.Instance.Entities);
 
             if (!Directory.Exists(userFolder.Path))
             {

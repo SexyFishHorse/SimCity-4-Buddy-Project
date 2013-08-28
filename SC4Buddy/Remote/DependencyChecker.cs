@@ -18,7 +18,7 @@
 
             var missingDependencies = GetMissingDependencies(knownPluginsWithDependencies, knownPlugins);
 
-            var controller = new UserFolderController(RegistryFactory.UserFolderRegistry);
+            var controller = new UserFolderController(EntityFactory.Instance.Entities);
 
             if (!controller.IsMainFolder(userFolder))
             {

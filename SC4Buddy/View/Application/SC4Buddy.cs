@@ -38,7 +38,7 @@
             InitializeComponent();
 
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(Sc4Buddy));
-            controller = new UserFolderController(RegistryFactory.UserFolderRegistry);
+            controller = new UserFolderController(EntityFactory.Instance.Entities);
 
             SessionController.Instance.UserLoggedIn += OnUserLoggedIn;
             SessionController.Instance.UserLoggedOut += OnUserLoggedOut;

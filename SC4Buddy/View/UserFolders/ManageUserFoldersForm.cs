@@ -24,7 +24,7 @@
         {
             InitializeComponent();
 
-            controller = new UserFolderController(RegistryFactory.UserFolderRegistry);
+            controller = new UserFolderController(EntityFactory.Instance.Entities);
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(ManageUserFoldersForm));
         }
 
