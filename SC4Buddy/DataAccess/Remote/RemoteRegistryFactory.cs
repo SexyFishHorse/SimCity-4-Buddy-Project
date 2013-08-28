@@ -9,8 +9,6 @@
     {
         private static readonly RemoteRegistryFactory Instance = new RemoteRegistryFactory();
 
-        private readonly RemotePluginRegistry remotePluginRegistry;
-
         private readonly UserRegistry userRegistry;
 
         private RemoteRegistryFactory()
@@ -25,17 +23,7 @@
 
             var entities = new RemoteDatabaseEntities(entityBuilder.ConnectionString);
 
-            remotePluginRegistry = new RemotePluginRegistry(entities);
-
             userRegistry = new UserRegistry(entities);
-        }
-
-        public static RemotePluginRegistry RemotePluginRegistry
-        {
-            get
-            {
-                return Instance.remotePluginRegistry;
-            }
         }
 
         public static UserRegistry UserRegistry
