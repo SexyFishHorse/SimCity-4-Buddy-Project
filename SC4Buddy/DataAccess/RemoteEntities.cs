@@ -4,17 +4,48 @@
 
     public class RemoteEntities : IRemoteEntitites
     {
-        public IQueryable<Author> Authors { get; private set; }
+        private readonly RemoteDatabaseEntities entities;
 
-        public IQueryable<RemotePlugin> Plugins { get; private set; }
+        public RemoteEntities(RemoteDatabaseEntities entities)
+        {
+            this.entities = entities;
+        }
 
-        public IQueryable<RemotePluginFile> PluginFiles { get; private set; }
+        public IQueryable<Author> Authors
+        {
+            get
+            {
+                return entities.Authors;
+            }
+        }
 
-        public IQueryable<User> Users { get; private set; }
+        public IQueryable<RemotePlugin> Plugins
+        {
+            get
+            {
+                return entities.RemotePlugins;
+            }
+        }
+
+        public IQueryable<RemotePluginFile> PluginFiles
+        {
+            get
+            {
+                return entities.RemotePluginFiles;
+            }
+        }
+
+        public IQueryable<User> Users
+        {
+            get
+            {
+                return entities.Users;
+            }
+        }
 
         public void SaveChanges()
         {
-            throw new System.NotImplementedException();
+            entities.SaveChanges();
         }
     }
 }
