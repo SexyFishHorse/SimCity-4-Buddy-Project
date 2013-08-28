@@ -42,19 +42,22 @@
             failedPlugins = new List<string>();
             tempPluginInfo = new List<Plugin>();
 
-            enterPluginInformationForm = new EnterPluginInformationForm();
+            enterPluginInformationForm =
+                new EnterPluginInformationForm(new PluginGroupController(EntityFactory.Instance.Entities));
 
             this.pluginController = pluginController;
 
             OverallProgressBar.Maximum = files.Length;
             CurrentProgressBar.Maximum = 100;
 
-            var pluginInstallerThread = new PluginInstallerThread(pluginController, new PluginFileController(EntityFactory.Instance.Entities))
-                                            {
-                                                Form = this,
-                                                FilesToInstall = files,
-                                                UserFolder = userFolder
-                                            };
+            var pluginInstallerThread = new PluginInstallerThread(
+                pluginController,
+                new PluginFileController(EntityFactory.Instance.Entities))
+                                        {
+                                            Form = this,
+                                            FilesToInstall = files,
+                                            UserFolder = userFolder
+                                        };
             pluginInstallerThread.InstallingPlugin += OnInstallingPlugin;
             pluginInstallerThread.PluginInstalled += OnPluginInstalled;
             pluginInstallerThread.PluginInstallFailed += OnPluginInstallFailed;
@@ -168,7 +171,8 @@
             {
                 Invoke(new Action(() =>
                     {
-                        if (NetworkInterface.GetIsNetworkAvailable() && Settings.Default.EnableRemoteDatabaseConnection && Settings.Default.FetchInfoFromRemote)
+                        if (NetworkInterface.GetIsNetworkAvailable() && Settings.Default.EnableRemoteDatabaseConnection
+                            && Settings.Default.FetchInfoFromRemote)
                         {
                             var matcher = new PluginMatcher(pluginController);
                             var matched = tempPluginInfo.Where(matcher.MatchAndUpdate).ToList();

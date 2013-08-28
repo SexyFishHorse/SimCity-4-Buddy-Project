@@ -177,7 +177,7 @@
 
         private void UpdateInfoButtonClick(object sender, EventArgs e)
         {
-            var infoDialog = new EnterPluginInformationForm { Plugin = selectedPlugin };
+            var infoDialog = new EnterPluginInformationForm(pluginGroupController) { Plugin = selectedPlugin };
             if (infoDialog.ShowDialog(this) == DialogResult.OK)
             {
                 pluginController.Update(infoDialog.Plugin);
