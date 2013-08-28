@@ -123,6 +123,7 @@
     <Compile Include="Control\Plugins\PluginGroupController.cs" />
     <Compile Include="Control\RemotePluginController.cs" />
     <Compile Include="Control\Remote\AuthorController.cs" />
+    <Compile Include="Control\Remote\RemotePluginFileController.cs" />
     <Compile Include="Control\SettingsController.cs" />
     <Compile Include="Control\UserFolders\FolderScanner.cs" />
     <Compile Include="Control\Plugins\PluginController.cs" />
