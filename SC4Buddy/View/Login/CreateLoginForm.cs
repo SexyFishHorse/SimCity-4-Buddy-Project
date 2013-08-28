@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Windows.Forms;
 
-    using NIHEI.SC4Buddy.Control;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Localization;
 

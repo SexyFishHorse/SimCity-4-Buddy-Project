@@ -1,5 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.Control
 {
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Model;

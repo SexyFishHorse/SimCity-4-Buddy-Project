@@ -129,7 +129,7 @@
     <Compile Include="Control\Plugins\PluginController.cs" />
     <Compile Include="Control\Plugins\PluginFileController.cs" />
     <Compile Include="Control\SessionController.cs" />
-    <Compile Include="Control\UserController.cs" />
+    <Compile Include="Control\Remote\UserController.cs" />
     <Compile Include="DataAccess\Entities.cs" />
     <Compile Include="DataAccess\EntityFactory.cs" />
     <Compile Include="DataAccess\IEntities.cs" />
