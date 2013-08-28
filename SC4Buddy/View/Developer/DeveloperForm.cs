@@ -172,7 +172,7 @@
 
         private void DependenciesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new DeveloperDependenciesForm();
+            var dialog = new DeveloperDependenciesForm(remotePluginController);
             dialog.ShowDialog(this);
 
             dependencies.AddRange(dialog.Dependencies);
