@@ -297,7 +297,7 @@
 
         private void MyAuthorsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new MyAuthorsForm().ShowDialog(this);
+            new MyAuthorsForm(new AuthorController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
         }
 
         private void AddPluginInformationToolStripMenuItemClick(object sender, EventArgs e)
