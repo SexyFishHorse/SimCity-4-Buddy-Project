@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
     using System.Linq;
+    using SC4Buddy.Entities.Remote;
 
     public class RemoteEntities : IRemoteEntitites
     {
