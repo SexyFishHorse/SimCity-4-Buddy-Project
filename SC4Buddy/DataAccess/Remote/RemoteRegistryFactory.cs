@@ -11,8 +11,6 @@
 
         private readonly RemotePluginRegistry remotePluginRegistry;
 
-        private readonly RemotePluginFileRegistry remotePluginFileRegistry;
-
         private readonly UserRegistry userRegistry;
 
         private RemoteRegistryFactory()
@@ -29,8 +27,6 @@
 
             remotePluginRegistry = new RemotePluginRegistry(entities);
 
-            remotePluginFileRegistry = new RemotePluginFileRegistry(entities);
-
             userRegistry = new UserRegistry(entities);
         }
 
@@ -39,14 +35,6 @@
             get
             {
                 return Instance.remotePluginRegistry;
-            }
-        }
-
-        public static RemotePluginFileRegistry RemotePluginFileRegistry
-        {
-            get
-            {
-                return Instance.remotePluginFileRegistry;
             }
         }
 

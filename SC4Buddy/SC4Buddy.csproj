@@ -135,7 +135,6 @@
     <Compile Include="DataAccess\IEntities.cs" />
     <Compile Include="DataAccess\IRemoteEntities.cs" />
     <Compile Include="DataAccess\RemoteEntities.cs" />
-    <Compile Include="DataAccess\Remote\RemotePluginFileRegistry.cs" />
     <Compile Include="DataAccess\Remote\RemotePluginRegistry.cs" />
     <Compile Include="DataAccess\Remote\RemoteRegistryFactory.cs" />
     <Compile Include="DataAccess\Remote\UserRegistry.cs" />
