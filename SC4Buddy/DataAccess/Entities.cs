@@ -6,17 +6,48 @@
 
     public class Entities : IEntities
     {
-        public IQueryable<Plugin> Plugins { get; private set; }
+        private readonly DatabaseEntities entities;
 
-        public IQueryable<PluginFile> Files { get; private set; }
+        public Entities(DatabaseEntities entities)
+        {
+            this.entities = entities;
+        }
 
-        public IQueryable<UserFolder> UserFolders { get; private set; }
+        public IQueryable<Plugin> Plugins
+        {
+            get
+            {
+                return entities.Plugins;
+            }
+        }
 
-        public IQueryable<PluginGroup> Groups { get; private set; }
+        public IQueryable<PluginFile> Files
+        {
+            get
+            {
+                return entities.PluginFiles;
+            }
+        }
+
+        public IQueryable<UserFolder> UserFolders
+        {
+            get
+            {
+                return entities.UserFolders;
+            }
+        }
+
+        public IQueryable<PluginGroup> Groups
+        {
+            get
+            {
+                return entities.PluginGroups;
+            }
+        }
 
         public void SaveChanges()
         {
-            throw new System.NotImplementedException();
+            entities.SaveChanges();
         }
     }
 }
