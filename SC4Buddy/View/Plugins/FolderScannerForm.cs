@@ -7,8 +7,6 @@
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.DataAccess.Plugins;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Elements;
@@ -21,15 +19,19 @@
 
         private readonly PluginController pluginController;
 
-        private readonly PluginGroupRegistry pluginGroupRegistry;
+        private readonly PluginGroupController pluginGroupController;
 
-        public FolderScannerForm(PluginController pluginController, PluginFileController pluginFileController, UserFolder userFolder)
+        public FolderScannerForm(
+            PluginController pluginController,
+            PluginGroupController pluginGroupController,
+            PluginFileController pluginFileController,
+            UserFolder userFolder)
         {
             this.pluginFileController = pluginFileController;
 
             this.pluginController = pluginController;
 
-            pluginGroupRegistry = RegistryFactory.PluginGroupRegistry;
+            this.pluginGroupController = pluginGroupController;
 
             UserFolder = userFolder;
 
@@ -250,7 +252,7 @@
             if (group != null)
             {
                 group.Plugins.Add(plugin);
-                pluginGroupRegistry.Update(group);
+                pluginGroupController.SaveChanges();
             }
 
             foreach (var pluginFile in
@@ -333,13 +335,13 @@
             }
 
             var group =
-                pluginGroupRegistry.PluginGroups.FirstOrDefault(
+                pluginGroupController.Groups.FirstOrDefault(
                     x => x.Name.Equals(selectedText, StringComparison.OrdinalIgnoreCase));
 
             if (group == null)
             {
                 group = new PluginGroup { Name = selectedText.Trim() };
-                pluginGroupRegistry.Add(group);
+                pluginGroupController.Add(group);
             }
 
             return group;
@@ -349,7 +351,7 @@
         {
             groupComboBox.BeginUpdate();
 
-            foreach (var pluginGroup in pluginGroupRegistry.PluginGroups)
+            foreach (var pluginGroup in pluginGroupController.Groups)
             {
                 groupComboBox.Items.Add(new ComboBoxItem<PluginGroup>(pluginGroup.Name, pluginGroup));
             }
