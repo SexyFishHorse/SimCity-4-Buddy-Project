@@ -16,7 +16,7 @@
             this.entities = entities;
         }
 
-        public IObjectSet<RemotePlugin> RemotePlugins
+        public IObjectSet<RemotePlugin> Plugins
         {
             get
             {

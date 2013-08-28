@@ -10,6 +10,7 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
@@ -323,7 +324,8 @@
                 return;
             }
 
-            var checker = new DependencyChecker();
+            var checker = new DependencyChecker(
+                userFolderController, new RemotePluginController(EntityFactory.Instance.RemoteEntities));
             var missingDependencies = checker.CheckDependencies(userFolder);
 
             if (missingDependencies.Any())
