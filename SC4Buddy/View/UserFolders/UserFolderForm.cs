@@ -9,6 +9,7 @@
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
+    using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.DataAccess.Plugins;
@@ -26,17 +27,17 @@
 
         private readonly PluginGroupRegistry groupRegistry;
 
-        private readonly PluginRegistry pluginRegistry;
+        private readonly PluginController pluginController;
 
-        private readonly UserFolderController controller;
+        private readonly UserFolderController userFolderController;
 
         private Plugin selectedPlugin;
 
-        public UserFolderForm(UserFolder userFolder)
+        public UserFolderForm(PluginController pluginController, UserFolderController userFolderController, UserFolder userFolder)
         {
             groupRegistry = RegistryFactory.PluginGroupRegistry;
-            pluginRegistry = RegistryFactory.PluginRegistry;
-            controller = new UserFolderController(EntityFactory.Instance.Entities);
+            this.pluginController = pluginController;
+            this.userFolderController = userFolderController;
 
             if (!Directory.Exists(userFolder.Path))
             {
@@ -48,7 +49,7 @@
                     }
 
                     userFolder.Path = Settings.Default.GameLocation;
-                    controller.Update(userFolder);
+                    userFolderController.Update(userFolder);
                 }
                 else
                 {
@@ -89,7 +90,7 @@
 
             foreach (
                 var listViewItem in
-                    pluginRegistry.Plugins
+                    pluginController.Plugins
                     .Where(x => x.UserFolderId == userFolder.Id)
                     .Select(
                         plugin =>
@@ -145,7 +146,7 @@
                 return;
             }
 
-            controller.UninstallPlugin(selectedPlugin);
+            userFolderController.UninstallPlugin(selectedPlugin);
             ClearPluginInformation();
             RepopulateInstalledPluginsListView();
         }
@@ -176,7 +177,7 @@
             var infoDialog = new EnterPluginInformationForm { Plugin = selectedPlugin };
             if (infoDialog.ShowDialog(this) == DialogResult.OK)
             {
-                pluginRegistry.Update(infoDialog.Plugin);
+                pluginController.Update(infoDialog.Plugin);
             }
 
             RepopulateInstalledPluginsListView();
@@ -280,7 +281,7 @@
 
         private void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
         {
-            var numUpdated = controller.UpdateInfoForAllPluginsFromServer();
+            var numUpdated = userFolderController.UpdateInfoForAllPluginsFromServer();
             RepopulateInstalledPluginsListView();
 
             MessageBox.Show(
@@ -299,9 +300,9 @@
 
         private void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            controller.UpdateInfoForAllPluginsFromServer();
+            userFolderController.UpdateInfoForAllPluginsFromServer();
 
-            var numRecognizedPlugins = controller.NumberOfRecognizedPlugins(userFolder);
+            var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolder);
 
             if (numRecognizedPlugins < 1)
             {

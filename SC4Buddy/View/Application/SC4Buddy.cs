@@ -234,7 +234,10 @@
 
         private void UserFolderMenuItemClick(object sender, EventArgs e)
         {
-            new UserFolderForm(((UserFolderToolStripMenuItem)sender).UserFolder).ShowDialog(this);
+            new UserFolderForm(
+                new PluginController(EntityFactory.Instance.Entities),
+                new UserFolderController(EntityFactory.Instance.Entities),
+                ((UserFolderToolStripMenuItem)sender).UserFolder).ShowDialog(this);
         }
 
         private void PlayButtonClick(object sender, EventArgs e)
