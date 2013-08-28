@@ -236,6 +236,7 @@
         {
             new UserFolderForm(
                 new PluginController(EntityFactory.Instance.Entities),
+                new PluginGroupController(EntityFactory.Instance.Entities),
                 new UserFolderController(EntityFactory.Instance.Entities),
                 ((UserFolderToolStripMenuItem)sender).UserFolder).ShowDialog(this);
         }

@@ -12,7 +12,6 @@
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.DataAccess.Plugins;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
@@ -25,7 +24,7 @@
     {
         private readonly UserFolder userFolder;
 
-        private readonly PluginGroupRegistry groupRegistry;
+        private readonly PluginGroupController pluginGroupController;
 
         private readonly PluginController pluginController;
 
@@ -33,9 +32,13 @@
 
         private Plugin selectedPlugin;
 
-        public UserFolderForm(PluginController pluginController, UserFolderController userFolderController, UserFolder userFolder)
+        public UserFolderForm(
+            PluginController pluginController,
+            PluginGroupController pluginGroupController,
+            UserFolderController userFolderController,
+            UserFolder userFolder)
         {
-            groupRegistry = RegistryFactory.PluginGroupRegistry;
+            this.pluginGroupController = pluginGroupController;
             this.pluginController = pluginController;
             this.userFolderController = userFolderController;
 
@@ -83,7 +86,7 @@
             installedPluginsListView.Items.Clear();
             installedPluginsListView.Groups.Clear();
 
-            foreach (var pluginGroup in groupRegistry.PluginGroups.Where(x => x.Plugins.Any()))
+            foreach (var pluginGroup in pluginGroupController.Groups.Where(x => x.Plugins.Any()))
             {
                 installedPluginsListView.Groups.Add(pluginGroup.Id.ToString(CultureInfo.InvariantCulture), pluginGroup.Name);
             }
