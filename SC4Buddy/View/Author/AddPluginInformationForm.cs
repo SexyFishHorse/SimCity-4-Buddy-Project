@@ -9,6 +9,7 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.DataAccess.Remote;
@@ -19,7 +20,7 @@
 
     public partial class AddPluginInformationForm : Form
     {
-        private readonly AuthorRegistry authorRegistry;
+        private readonly AuthorController authorController;
 
         private readonly RemotePluginRegistry remotePluginRegistry;
 
@@ -27,9 +28,9 @@
 
         private ICollection<RemotePlugin> dependencies;
 
-        public AddPluginInformationForm()
+        public AddPluginInformationForm(AuthorController authorController)
         {
-            authorRegistry = RemoteRegistryFactory.AuthorRegistry;
+            this.authorController = authorController;
 
             remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
 
@@ -47,7 +48,7 @@
 
         private void AddPluginInformationFormLoad(object sender, EventArgs e)
         {
-            var authors = authorRegistry.Authors.Where(x => x.UserId == SessionController.Instance.User.Id).ToList();
+            var authors = authorController.Authors.Where(x => x.UserId == SessionController.Instance.User.Id).ToList();
 
             if (!authors.Any())
             {

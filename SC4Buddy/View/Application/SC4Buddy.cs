@@ -302,7 +302,7 @@
 
         private void AddPluginInformationToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new AddPluginInformationForm().ShowDialog(this);
+            new AddPluginInformationForm(new AuthorController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
         }
 
         private void UpdatePluginInformationToolStripMenuItemClick(object sender, EventArgs e)
