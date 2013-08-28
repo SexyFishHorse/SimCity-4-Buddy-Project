@@ -127,6 +127,7 @@
     <Compile Include="Control\Plugins\PluginFileController.cs" />
     <Compile Include="Control\SessionController.cs" />
     <Compile Include="Control\UserController.cs" />
+    <Compile Include="DataAccess\EntityFactory.cs" />
     <Compile Include="DataAccess\RegistryFactory.cs" />
     <Compile Include="DataAccess\Remote\AuthorRegistry.cs" />
     <Compile Include="DataAccess\Remote\RemotePluginFileRegistry.cs" />
