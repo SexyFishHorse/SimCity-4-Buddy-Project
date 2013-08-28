@@ -83,18 +83,18 @@
 
         private static void SetDefaultUserFolder()
         {
-            var registry = RegistryFactory.UserFolderRegistry;
+            var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
 
             var path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimCity 4");
 
-            if (!Directory.Exists(path) || registry.UserFolders.Any(x => x.Path.Equals(path)))
+            if (!Directory.Exists(path) || userFolderController.UserFolders.Any(x => x.Path.Equals(path)))
             {
                 return;
             }
 
             Log.Info(string.Format("Setting default user folder to {0}", path));
-            registry.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, Path = path });
+            userFolderController.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, Path = path });
         }
     }
 }
