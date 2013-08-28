@@ -20,6 +20,9 @@
 
         private EntityFactory()
         {
+            RemoteEntities = CreateRemoteEntities();
+
+            Entities = new Entities(new DatabaseEntities());
         }
 
         public Entities Entities { get; private set; }
