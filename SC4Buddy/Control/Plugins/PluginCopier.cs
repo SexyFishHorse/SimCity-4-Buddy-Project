@@ -45,7 +45,7 @@
         private PluginFile CopyFile(PluginFile pluginFile, UserFolder targetUserFolder)
         {
             var currentPath = pluginFile.Path;
-            var relativeFilePath = currentPath.Remove(0, pluginFile.Plugin.UserFolder.PluginFolderPath.Length + 2);
+            var relativeFilePath = currentPath.Remove(0, pluginFile.Plugin.UserFolder.PluginFolderPath.Length + 1);
             var newFilePath = Path.Combine(targetUserFolder.PluginFolderPath, relativeFilePath);
             var newDirectoryPath = targetUserFolder.PluginFolderPath;
             if (relativeFilePath.Contains("\\"))
