@@ -140,7 +140,7 @@
 
         private void DependenciesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new DependenciesForm(dependencies);
+            var dialog = new DependenciesForm(dependencies, remotePluginController);
 
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
