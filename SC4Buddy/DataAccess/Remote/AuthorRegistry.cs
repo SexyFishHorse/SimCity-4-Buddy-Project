@@ -8,9 +8,9 @@
 
     public class AuthorRegistry
     {
-        private readonly RemoteEntities entities;
+        private readonly RemoteDatabaseEntities entities;
 
-        public AuthorRegistry(RemoteEntities entities)
+        public AuthorRegistry(RemoteDatabaseEntities entities)
         {
             this.entities = entities;
         }

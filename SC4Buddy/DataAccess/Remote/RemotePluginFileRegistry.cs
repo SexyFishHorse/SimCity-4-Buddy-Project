@@ -6,9 +6,9 @@
 
     public class RemotePluginFileRegistry
     {
-        private readonly RemoteEntities entities;
+        private readonly RemoteDatabaseEntities entities;
 
-        public RemotePluginFileRegistry(RemoteEntities entities)
+        public RemotePluginFileRegistry(RemoteDatabaseEntities entities)
         {
             this.entities = entities;
         }

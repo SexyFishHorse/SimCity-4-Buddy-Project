@@ -177,10 +177,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="RemoteEntities.Designer.cs">
+    <Compile Include="RemoteDatabaseEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RemoteEntities.edmx</DependentUpon>
+      <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="RemotePlugin.cs">
       <DependentUpon>RemoteEntities.tt</DependentUpon>
@@ -426,22 +426,22 @@
     <EmbeddedResource Include="View\Application\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="RemoteEntities.edmx">
+    <EntityDeploy Include="RemoteDatabaseEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RemoteEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>RemoteDatabaseEntities.Designer.cs</LastGenOutput>
       <CustomToolNamespace>NIHEI.SC4Buddy.Entities.Remote</CustomToolNamespace>
     </EntityDeploy>
     <None Include="RemoteEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RemoteEntities.edmx</DependentUpon>
+      <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
       <LastGenOutput>RemoteEntities.Context.cs</LastGenOutput>
     </None>
-    <None Include="RemoteEntities.edmx.diagram">
-      <DependentUpon>RemoteEntities.edmx</DependentUpon>
+    <None Include="RemoteDatabaseEntities.edmx.diagram">
+      <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
     </None>
     <None Include="RemoteEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RemoteEntities.edmx</DependentUpon>
+      <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
       <LastGenOutput>RemoteEntities.cs</LastGenOutput>
     </None>
     <Content Include="Wallpapers\1.jpg" />

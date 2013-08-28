@@ -6,9 +6,9 @@
 
     public class UserRegistry
     {
-        private readonly RemoteEntities entities;
+        private readonly RemoteDatabaseEntities entities;
 
-        public UserRegistry(RemoteEntities entities)
+        public UserRegistry(RemoteDatabaseEntities entities)
         {
             this.entities = entities;
         }

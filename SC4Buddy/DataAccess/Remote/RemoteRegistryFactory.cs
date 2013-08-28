@@ -27,7 +27,7 @@
 
             entityBuilder.ProviderConnectionString = providerConnectionString;
 
-            var entities = new RemoteEntities(entityBuilder.ConnectionString);
+            var entities = new RemoteDatabaseEntities(entityBuilder.ConnectionString);
 
             remotePluginRegistry = new RemotePluginRegistry(entities);
 
