@@ -32,5 +32,11 @@
         {
             entities.SaveChanges();
         }
+
+        public void Add(PluginGroup pluginGroup)
+        {
+            entities.Groups.AddObject(pluginGroup);
+            SaveChanges();
+        }
     }
 }
