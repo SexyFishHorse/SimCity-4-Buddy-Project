@@ -232,7 +232,7 @@
 
         private void ScanForNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new FolderScannerForm(pluginController, userFolder).ShowDialog(this);
+            new FolderScannerForm(pluginController, new PluginFileController(EntityFactory.Instance.Entities), userFolder).ShowDialog(this);
             RepopulateInstalledPluginsListView();
 
             if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.EnableRemoteDatabaseConnection

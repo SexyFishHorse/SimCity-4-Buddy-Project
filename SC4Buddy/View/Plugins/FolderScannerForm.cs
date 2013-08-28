@@ -17,15 +17,15 @@
     {
         public const int ErrorIconPadding = -18;
 
-        private readonly PluginFileRegistry pluginFileRegistry;
+        private readonly PluginFileController pluginFileController;
 
         private readonly PluginController pluginController;
 
         private readonly PluginGroupRegistry pluginGroupRegistry;
 
-        public FolderScannerForm(PluginController pluginController, UserFolder userFolder)
+        public FolderScannerForm(PluginController pluginController, PluginFileController pluginFileController, UserFolder userFolder)
         {
-            pluginFileRegistry = RegistryFactory.PluginFileRegistry;
+            this.pluginFileController = pluginFileController;
 
             this.pluginController = pluginController;
 
@@ -191,7 +191,7 @@
         {
             scanningProgressLabel.Visible = true;
             Update();
-            var folderScanner = new FolderScanner(pluginFileRegistry, UserFolder);
+            var folderScanner = new FolderScanner(pluginFileController, UserFolder);
 
             if (!folderScanner.Run())
             {
@@ -253,7 +253,6 @@
                 pluginGroupRegistry.Update(group);
             }
 
-            pluginFileRegistry.BeginUpdate();
             foreach (var pluginFile in
                 pluginFilesListView.Items.Cast<ListViewItem>()
                                    .Select(item => item.Text)
@@ -266,11 +265,10 @@
                                                Plugin = plugin
                                            }))
             {
-                pluginFileRegistry.Add(pluginFile);
                 plugin.Files.Add(pluginFile);
             }
 
-            pluginFileRegistry.EndUpdate();
+            pluginFileController.SaveChanges();
 
             ClearInfoAndSelectedFilesForms();
 
