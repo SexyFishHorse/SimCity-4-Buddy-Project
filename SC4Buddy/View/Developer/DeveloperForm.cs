@@ -7,17 +7,18 @@
     using System.Windows.Forms;
 
     using NIHEI.Common.IO;
+    using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.DataAccess.Plugins;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Properties;
 
     public partial class DeveloperForm : Form
     {
-        private readonly PluginRegistry pluginRegistry;
+        private readonly PluginController pluginRegistry;
 
-        private readonly UserFolderRegistry userFolderRegistry;
+        private readonly UserFolderController userFolderRegistry;
 
         private readonly ICollection<string> selectedFiles;
 
@@ -27,13 +28,13 @@
 
         private readonly List<RemotePlugin> dependencies;
 
-        public DeveloperForm()
+        public DeveloperForm(PluginController pluginController, UserFolderController userFolderController)
         {
             InitializeComponent();
 
-            pluginRegistry = RegistryFactory.PluginRegistry;
+            pluginRegistry = pluginController;
 
-            userFolderRegistry = RegistryFactory.UserFolderRegistry;
+            userFolderRegistry = userFolderController;
 
             remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
 

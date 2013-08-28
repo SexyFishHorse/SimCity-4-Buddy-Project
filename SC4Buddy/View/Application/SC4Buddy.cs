@@ -14,6 +14,7 @@
     using log4net;
 
     using NIHEI.SC4Buddy.Control;
+    using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
@@ -31,14 +32,14 @@
 
         private readonly ResourceManager localizationManager;
 
-        private readonly UserFolderController controller;
+        private readonly UserFolderController userFolderController;
 
         public Sc4Buddy()
         {
             InitializeComponent();
 
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(Sc4Buddy));
-            controller = new UserFolderController(EntityFactory.Instance.Entities);
+            userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
 
             SessionController.Instance.UserLoggedIn += OnUserLoggedIn;
             SessionController.Instance.UserLoggedOut += OnUserLoggedOut;
@@ -93,7 +94,7 @@
             }
 
             var insertIndex = 0;
-            foreach (var userFolder in controller.UserFolders)
+            foreach (var userFolder in userFolderController.UserFolders)
             {
                 if (userFolder.Id != 1)
                 {
@@ -103,7 +104,7 @@
                 if (userFolder.Alias.Equals("?"))
                 {
                     userFolder.Alias = LocalizationStrings.GameUserFolderName;
-                    controller.Update(userFolder);
+                    userFolderController.Update(userFolder);
                 }
 
                 userFoldersToolStripMenuItem.DropDownItems.Insert(insertIndex, new UserFolderToolStripMenuItem(userFolder, UserFolderMenuItemClick));
@@ -282,7 +283,7 @@
 
         private void DeveloperToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new DeveloperForm().ShowDialog(this);
+            new DeveloperForm(new PluginController(EntityFactory.Instance.Entities), userFolderController).ShowDialog(this);
         }
 
         private void MyAuthorsToolStripMenuItemClick(object sender, EventArgs e)
