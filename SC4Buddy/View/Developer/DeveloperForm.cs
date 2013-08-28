@@ -9,16 +9,17 @@
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Properties;
 
     public partial class DeveloperForm : Form
     {
-        private readonly PluginController pluginRegistry;
+        private readonly PluginController pluginController;
 
-        private readonly UserFolderController userFolderRegistry;
+        private readonly PluginGroupController pluginGroupController;
+
+        private readonly UserFolderController userFolderController;
 
         private readonly ICollection<string> selectedFiles;
 
@@ -28,46 +29,43 @@
 
         private readonly List<RemotePlugin> dependencies;
 
-        public DeveloperForm(PluginController pluginController, UserFolderController userFolderController)
+        public DeveloperForm(PluginController pluginController, PluginGroupController pluginGroupController, UserFolderController userFolderController)
         {
             InitializeComponent();
 
-            pluginRegistry = pluginController;
-
-            userFolderRegistry = userFolderController;
+            this.pluginController = pluginController;
+            this.pluginGroupController = pluginGroupController;
+            this.userFolderController = userFolderController;
 
             remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
-
             authorRegistry = RemoteRegistryFactory.AuthorRegistry;
 
             selectedFiles = new List<string>();
-
             dependencies = new List<RemotePlugin>();
         }
 
         private void Button1Click(object sender, EventArgs e)
         {
-            foreach (var plugin in pluginRegistry.Plugins)
+            foreach (var plugin in pluginController.Plugins)
             {
-                pluginRegistry.Delete(plugin);
+                pluginController.Delete(plugin);
             }
 
-            var pluginGroupRegistry = RegistryFactory.PluginGroupRegistry;
-            foreach (var pluginGroup in pluginGroupRegistry.PluginGroups)
+            foreach (var pluginGroup in pluginGroupController.Groups)
             {
-                pluginGroupRegistry.Delete(pluginGroup);
+                pluginGroupController.Delete(pluginGroup);
             }
 
-            foreach (var folder in userFolderRegistry.UserFolders.Where(x => x.Id != 1))
+            foreach (var folder in userFolderController.UserFolders.Where(x => x.Id != 1))
             {
-                userFolderRegistry.Delete(folder);
+                userFolderController.Delete(folder);
             }
 
-            var mainFolder = userFolderRegistry.UserFolders.First(x => x.Id == 1);
+            var mainFolder = userFolderController.UserFolders.First(x => x.Id == 1);
             {
                 mainFolder.Alias = "Main plugin folder";
                 mainFolder.Path = " ";
-                userFolderRegistry.Update(mainFolder);
+                userFolderController.Update(mainFolder);
             }
 
             MessageBox.Show(this, @"Database reset.");

@@ -286,7 +286,10 @@
 
         private void DeveloperToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new DeveloperForm(new PluginController(EntityFactory.Instance.Entities), userFolderController).ShowDialog(this);
+            new DeveloperForm(
+                new PluginController(EntityFactory.Instance.Entities),
+                new PluginGroupController(EntityFactory.Instance.Entities),
+                userFolderController).ShowDialog(this);
         }
 
         private void MyAuthorsToolStripMenuItemClick(object sender, EventArgs e)
