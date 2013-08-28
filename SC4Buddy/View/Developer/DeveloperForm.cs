@@ -10,7 +10,6 @@
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Properties;
 
@@ -24,7 +23,7 @@
 
         private readonly ICollection<string> selectedFiles;
 
-        private readonly RemotePluginRegistry remotePluginRegistry;
+        private readonly RemotePluginController remotePluginController;
 
         private readonly RemotePluginFileController remotePluginFileController;
 
@@ -37,6 +36,7 @@
             PluginGroupController pluginGroupController,
             UserFolderController userFolderController,
             AuthorController authorController,
+            RemotePluginController remotePluginController,
             RemotePluginFileController remotePluginFileController)
         {
             InitializeComponent();
@@ -45,9 +45,9 @@
             this.pluginGroupController = pluginGroupController;
             this.userFolderController = userFolderController;
 
-            remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
-            this.remotePluginFileController = remotePluginFileController;
             this.authorController = authorController;
+            this.remotePluginController = remotePluginController;
+            this.remotePluginFileController = remotePluginFileController;
 
             selectedFiles = new List<string>();
             dependencies = new List<RemotePlugin>();
@@ -131,10 +131,10 @@
             {
                 remotePlugin.Dependencies.Add(dependency);
                 dependency.DependencyFor.Add(remotePlugin);
-                remotePluginRegistry.Update(dependency);
+                remotePluginController.SaveChanges();
             }
 
-            remotePluginRegistry.Add(remotePlugin);
+            remotePluginController.Add(remotePlugin);
 
             foreach (var file in selectedFiles)
             {

@@ -293,6 +293,7 @@
                 new PluginGroupController(EntityFactory.Instance.Entities),
                 userFolderController,
                 new AuthorController(EntityFactory.Instance.RemoteEntities),
+                new RemotePluginController(EntityFactory.Instance.RemoteEntities),
                 new RemotePluginFileController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
         }
 
