@@ -12,7 +12,6 @@
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Localization;
@@ -22,17 +21,17 @@
     {
         private readonly AuthorController authorController;
 
-        private readonly RemotePluginRegistry remotePluginRegistry;
+        private readonly RemotePluginController remotePluginController;
 
         private IList<RemotePluginFile> files;
 
         private ICollection<RemotePlugin> dependencies;
 
-        public AddPluginInformationForm(AuthorController authorController)
+        public AddPluginInformationForm(
+            AuthorController authorController, RemotePluginController remotePluginController)
         {
             this.authorController = authorController;
-
-            remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
+            this.remotePluginController = remotePluginController;
 
             files = new List<RemotePluginFile>();
 
@@ -229,7 +228,7 @@
                 remotePlugin.Dependencies.Add(dependency);
             }
 
-            remotePluginRegistry.Add(remotePlugin);
+            remotePluginController.Add(remotePlugin);
 
             MessageBox.Show(
                 this,
