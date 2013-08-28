@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
-    using System.Linq;
+    using System.Data.Objects;
+
     using SC4Buddy.Entities.Remote;
 
     public class RemoteEntities : IRemoteEntitites
@@ -12,7 +13,7 @@
             this.entities = entities;
         }
 
-        public IQueryable<Author> Authors
+        public IObjectSet<Author> Authors
         {
             get
             {
@@ -20,7 +21,7 @@
             }
         }
 
-        public IQueryable<RemotePlugin> Plugins
+        public IObjectSet<RemotePlugin> Plugins
         {
             get
             {
@@ -28,7 +29,7 @@
             }
         }
 
-        public IQueryable<RemotePluginFile> PluginFiles
+        public IObjectSet<RemotePluginFile> PluginFiles
         {
             get
             {
@@ -36,7 +37,7 @@
             }
         }
 
-        public IQueryable<User> Users
+        public IObjectSet<User> Users
         {
             get
             {

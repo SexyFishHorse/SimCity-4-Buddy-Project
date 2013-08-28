@@ -1,18 +1,18 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
-    using System.Linq;
+    using System.Data.Objects;
 
     using NIHEI.SC4Buddy.Entities;
 
     public interface IEntities
     {
-        IQueryable<Plugin> Plugins { get; }
+        IObjectSet<Plugin> Plugins { get; }
 
-        IQueryable<PluginFile> Files { get; }
+        IObjectSet<PluginFile> Files { get; }
 
-        IQueryable<UserFolder> UserFolders { get; }
+        IObjectSet<UserFolder> UserFolders { get; }
 
-        IQueryable<PluginGroup> Groups { get; }
+        IObjectSet<PluginGroup> Groups { get; }
 
         void SaveChanges();
     }

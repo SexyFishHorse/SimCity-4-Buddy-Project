@@ -1,17 +1,18 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
-    using System.Linq;
+    using System.Data.Objects;
+
     using SC4Buddy.Entities.Remote;
 
     public interface IRemoteEntitites
     {
-        IQueryable<Author> Authors { get; }
+        IObjectSet<Author> Authors { get; }
 
-        IQueryable<RemotePlugin> Plugins { get; }
+        IObjectSet<RemotePlugin> Plugins { get; }
 
-        IQueryable<RemotePluginFile> PluginFiles { get; }
+        IObjectSet<RemotePluginFile> PluginFiles { get; }
 
-        IQueryable<User> Users { get; }
+        IObjectSet<User> Users { get; }
 
         void SaveChanges();
     }

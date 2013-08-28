@@ -1,6 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
-    using System.Linq;
+    using System.Data.Objects;
 
     using NIHEI.SC4Buddy.Entities;
 
@@ -13,7 +13,7 @@
             this.entities = entities;
         }
 
-        public IQueryable<Plugin> Plugins
+        public IObjectSet<Plugin> Plugins
         {
             get
             {
@@ -21,7 +21,7 @@
             }
         }
 
-        public IQueryable<PluginFile> Files
+        public IObjectSet<PluginFile> Files
         {
             get
             {
@@ -29,7 +29,7 @@
             }
         }
 
-        public IQueryable<UserFolder> UserFolders
+        public IObjectSet<UserFolder> UserFolders
         {
             get
             {
@@ -37,7 +37,7 @@
             }
         }
 
-        public IQueryable<PluginGroup> Groups
+        public IObjectSet<PluginGroup> Groups
         {
             get
             {
