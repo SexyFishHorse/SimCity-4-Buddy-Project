@@ -26,7 +26,7 @@
             this.registry = registry;
 
             pluginFileController = new PluginFileController(RegistryFactory.PluginFileRegistry);
-            pluginController = new PluginController(RegistryFactory.PluginRegistry);
+            pluginController = new PluginController(EntityFactory.Instance.Entities);
         }
 
         public IEnumerable<UserFolder> UserFolders

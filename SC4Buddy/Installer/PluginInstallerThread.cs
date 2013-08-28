@@ -34,7 +34,7 @@
         {
             pluginFileRegistry = RegistryFactory.PluginFileRegistry;
 
-            pluginController = new PluginController(RegistryFactory.PluginRegistry);
+            pluginController = new PluginController(EntityFactory.Instance.Entities);
         }
 
         public delegate void InstallPluginEventHandler(PluginInstallerThread sender, InstallPluginEventArgs args);
