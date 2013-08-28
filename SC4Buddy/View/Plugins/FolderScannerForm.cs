@@ -207,7 +207,7 @@
             Update();
             var folderScanner = new FolderScanner(pluginFileRegistry, UserFolder);
 
-            if (!folderScanner.Run())
+            if (!folderScanner.ScanFolder())
             {
                 MessageBox.Show(
                     this,

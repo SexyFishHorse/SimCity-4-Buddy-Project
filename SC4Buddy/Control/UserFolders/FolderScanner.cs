@@ -23,7 +23,7 @@
 
         public IEnumerable<string> NewFiles { get; private set; }
 
-        public bool Run()
+        public bool ScanFolder()
         {
             var entries = GetFiles();
 
