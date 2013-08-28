@@ -9,8 +9,7 @@
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
-    using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.DataAccess.Plugins;
+    using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Installer;
     using NIHEI.SC4Buddy.Installer.InstallerEventArgs;
@@ -29,11 +28,11 @@
 
         private readonly IList<Plugin> tempPluginInfo;
 
-        private readonly PluginRegistry pluginRegistry;
+        private readonly PluginController pluginController;
 
         private readonly EnterPluginInformationForm enterPluginInformationForm;
 
-        public InstallPluginsForm(string[] files, UserFolder userFolder)
+        public InstallPluginsForm(PluginController pluginController, string[] files, UserFolder userFolder)
         {
             this.userFolder = userFolder;
             InitializeComponent();
@@ -44,7 +43,7 @@
 
             enterPluginInformationForm = new EnterPluginInformationForm();
 
-            pluginRegistry = RegistryFactory.PluginRegistry;
+            this.pluginController = pluginController;
 
             OverallProgressBar.Maximum = files.Length;
             CurrentProgressBar.Maximum = 100;
@@ -193,7 +192,7 @@
                                 var result = ShowEnterPluginInformationForm();
                                 if (result == DialogResult.OK)
                                 {
-                                    pluginRegistry.Update(enterPluginInformationForm.Plugin);
+                                    pluginController.Update(enterPluginInformationForm.Plugin);
                                 }
                             }
                         }

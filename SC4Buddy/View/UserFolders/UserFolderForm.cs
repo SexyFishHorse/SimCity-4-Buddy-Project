@@ -206,7 +206,7 @@
                 return;
             }
 
-            new InstallPluginsForm(files, userFolder).ShowDialog(this);
+            new InstallPluginsForm(pluginController, files, userFolder).ShowDialog(this);
 
             RepopulateInstalledPluginsListView();
 
