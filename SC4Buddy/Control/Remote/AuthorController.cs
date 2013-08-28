@@ -9,9 +9,9 @@
 
     public class AuthorController
     {
-        private readonly IRemoteEntitites entities;
+        private readonly IRemoteEntities entities;
 
-        public AuthorController(IRemoteEntitites entities)
+        public AuthorController(IRemoteEntities entities)
         {
             this.entities = entities;
         }

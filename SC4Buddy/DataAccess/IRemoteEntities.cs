@@ -4,7 +4,7 @@
 
     using SC4Buddy.Entities.Remote;
 
-    public interface IRemoteEntitites
+    public interface IRemoteEntities
     {
         IObjectSet<Author> Authors { get; }
 

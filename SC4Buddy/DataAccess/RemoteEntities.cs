@@ -4,7 +4,7 @@
 
     using SC4Buddy.Entities.Remote;
 
-    public class RemoteEntities : IRemoteEntitites
+    public class RemoteEntities : IRemoteEntities
     {
         private readonly RemoteDatabaseEntities entities;
 
