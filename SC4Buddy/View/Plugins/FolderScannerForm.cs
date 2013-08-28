@@ -1,6 +1,8 @@
 ﻿namespace NIHEI.SC4Buddy.View.Plugins
 {
     using System;
+    using System.Collections;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -71,52 +73,65 @@
         {
             var items = newFilesListView.SelectedItems;
 
-            if (items.Count > 0)
+            if (items.Count <= 0)
             {
-                pluginFilesListView.BeginUpdate();
-                newFilesListView.BeginUpdate();
-
-                foreach (ListViewItem item in items)
-                {
-                    newFilesListView.Items.Remove(item);
-                    pluginFilesListView.Items.Add(item);
-                }
-
-                ResizeColumns();
-
-                newFilesListView.EndUpdate();
-                pluginFilesListView.EndUpdate();
-
-                removeAllButton.Enabled = true;
-
-                NewFilesListViewSelectedIndexChanged(sender, e);
+                return;
             }
+
+            if (pluginFilesListView.Items.Count == 0 && nameTextBox.Text.Length < 1)
+            {
+                var path = items[0].Text;
+                var fileInfo = new FileInfo(path);
+
+                nameTextBox.Text = fileInfo.Name;
+            }
+
+            MoveItemsToPluginFilesListView(items);
+
+            removeAllButton.Enabled = true;
+
+            NewFilesListViewSelectedIndexChanged(sender, e);
         }
 
         private void AddAllButtonClick(object sender, EventArgs e)
         {
             var items = newFilesListView.Items;
 
-            if (items.Count > 0)
+            if (items.Count <= 0)
             {
-                pluginFilesListView.BeginUpdate();
-                newFilesListView.BeginUpdate();
-
-                foreach (ListViewItem item in items)
-                {
-                    newFilesListView.Items.Remove(item);
-                    pluginFilesListView.Items.Add(item);
-                }
-
-                ResizeColumns();
-
-                newFilesListView.EndUpdate();
-                pluginFilesListView.EndUpdate();
-
-                removeAllButton.Enabled = true;
-                addButton.Enabled = false;
-                addAllButton.Enabled = false;
+                return;
             }
+
+            if (pluginFilesListView.Items.Count == 0 && nameTextBox.Text.Length < 1)
+            {
+                var path = items[0].Text;
+                var fileInfo = new FileInfo(path);
+
+                nameTextBox.Text = fileInfo.Name;
+            }
+
+            MoveItemsToPluginFilesListView(items);
+
+            removeAllButton.Enabled = true;
+            addButton.Enabled = false;
+            addAllButton.Enabled = false;
+        }
+
+        private void MoveItemsToPluginFilesListView(IEnumerable items)
+        {
+            pluginFilesListView.BeginUpdate();
+            newFilesListView.BeginUpdate();
+
+            foreach (ListViewItem item in items)
+            {
+                newFilesListView.Items.Remove(item);
+                pluginFilesListView.Items.Add(item);
+            }
+
+            ResizeColumns();
+
+            newFilesListView.EndUpdate();
+            pluginFilesListView.EndUpdate();
         }
 
         private void RemoveButtonClick(object sender, EventArgs e)
