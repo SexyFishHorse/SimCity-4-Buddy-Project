@@ -25,7 +25,7 @@
         {
             this.registry = registry;
 
-            pluginFileController = new PluginFileController(RegistryFactory.PluginFileRegistry);
+            pluginFileController = new PluginFileController(EntityFactory.Instance.Entities);
             pluginController = new PluginController(EntityFactory.Instance.Entities);
         }
 
