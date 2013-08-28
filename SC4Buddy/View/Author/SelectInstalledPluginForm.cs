@@ -4,22 +4,22 @@
     using System.Linq;
     using System.Windows.Forms;
 
-    using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.DataAccess.Plugins;
+    using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class SelectInstalledPluginForm : Form
     {
-        private readonly UserFolderRegistry userFolderRegistry;
+        private readonly UserFolderController userFolderController;
 
-        private readonly PluginRegistry pluginRegistry;
+        private readonly PluginController pluginController;
 
-        public SelectInstalledPluginForm()
+        public SelectInstalledPluginForm(UserFolderController userFolderController, PluginController pluginController)
         {
-            userFolderRegistry = RegistryFactory.UserFolderRegistry;
+            this.userFolderController = userFolderController;
 
-            pluginRegistry = RegistryFactory.PluginRegistry;
+            this.pluginController = pluginController;
 
             InitializeComponent();
         }
@@ -30,7 +30,7 @@
 
         private void SelectInstalledPluginFormLoad(object sender, EventArgs e)
         {
-            var userFolders = userFolderRegistry.UserFolders.Where(x => x.Plugins.Any()).ToList();
+            var userFolders = userFolderController.UserFolders.Where(x => x.Plugins.Any()).ToList();
 
             userFolderComboBox.Enabled = userFolders.Any();
 
@@ -53,7 +53,7 @@
                 pluginComboBox.Enabled = true;
 
                 var userFolder = ((ComboBoxItem<UserFolder>)userFolderComboBox.SelectedItem).Value;
-                var plugins = pluginRegistry.Plugins.Where(x => x.UserFolderId == userFolder.Id);
+                var plugins = pluginController.Plugins.Where(x => x.UserFolderId == userFolder.Id);
 
                 foreach (var plugin in plugins)
                 {

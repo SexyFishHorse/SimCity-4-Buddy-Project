@@ -8,6 +8,9 @@
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
+    using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.UserFolders;
+    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Entities.Remote;
@@ -89,7 +92,9 @@
 
         private void SelectInstalledPluginButtonClick(object sender, EventArgs e)
         {
-            var dialog = new SelectInstalledPluginForm();
+            var dialog = new SelectInstalledPluginForm(
+                new UserFolderController(EntityFactory.Instance.Entities),
+                new PluginController(EntityFactory.Instance.Entities));
 
             if (dialog.ShowDialog(this) == DialogResult.Cancel)
             {
