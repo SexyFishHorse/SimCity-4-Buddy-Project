@@ -149,7 +149,7 @@
         {
             var plugins = pluginController.Plugins;
 
-            var matcher = new PluginMatcher();
+            var matcher = new PluginMatcher(pluginController);
 
             return plugins.Count(matcher.MatchAndUpdate);
         }

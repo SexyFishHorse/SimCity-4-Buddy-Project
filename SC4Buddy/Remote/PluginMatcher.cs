@@ -5,8 +5,7 @@
     using System.IO;
     using System.Linq;
 
-    using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.DataAccess.Plugins;
+    using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Entities.Remote;
@@ -15,13 +14,13 @@
     {
         private readonly RemotePluginFileRegistry remotePluginFileRegistry;
 
-        private readonly PluginRegistry pluginRegistry;
+        private readonly PluginController pluginController;
 
-        public PluginMatcher()
+        public PluginMatcher(PluginController pluginController)
         {
             remotePluginFileRegistry = RemoteRegistryFactory.RemotePluginFileRegistry;
 
-            pluginRegistry = RegistryFactory.PluginRegistry;
+            this.pluginController = pluginController;
         }
 
         public IEnumerable<RemotePlugin> GetPossibleRemotePlugins(IList<PluginFile> files)
@@ -64,7 +63,7 @@
                 plugin.Link = remotePlugin.Link;
                 plugin.Description = remotePlugin.Description;
 
-                pluginRegistry.Update(plugin);
+                pluginController.Update(plugin);
 
                 return true;
             }

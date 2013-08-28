@@ -169,7 +169,7 @@
                     {
                         if (NetworkInterface.GetIsNetworkAvailable() && Settings.Default.EnableRemoteDatabaseConnection && Settings.Default.FetchInfoFromRemote)
                         {
-                            var matcher = new PluginMatcher();
+                            var matcher = new PluginMatcher(pluginController);
                             var matched = tempPluginInfo.Where(matcher.MatchAndUpdate).ToList();
 
                             foreach (var match in matched)
