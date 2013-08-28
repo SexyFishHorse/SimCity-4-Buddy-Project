@@ -11,14 +11,11 @@
 
         private readonly PluginGroupRegistry pluginGroupRegistry;
 
-        private readonly PluginRegistry pluginRegistry;
-
         private RegistryFactory()
         {
             var databaseEntities = new DatabaseEntities();
             pluginFileRegistry = new PluginFileRegistry(databaseEntities);
             pluginGroupRegistry = new PluginGroupRegistry(databaseEntities);
-            pluginRegistry = new PluginRegistry(databaseEntities);
         }
 
         public static PluginFileRegistry PluginFileRegistry
@@ -34,14 +31,6 @@
             get
             {
                 return Instance.pluginGroupRegistry;
-            }
-        }
-
-        public static PluginRegistry PluginRegistry
-        {
-            get
-            {
-                return Instance.pluginRegistry;
             }
         }
     }

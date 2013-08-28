@@ -157,7 +157,6 @@
     <Compile Include="DataAccess\Plugins\PluginFileRegistry.cs" />
     <Compile Include="Control\UserFolders\UserFolderController.cs" />
     <Compile Include="DataAccess\Plugins\PluginGroupRegistry.cs" />
-    <Compile Include="DataAccess\Plugins\PluginRegistry.cs" />
     <Compile Include="Installer\UserFolderListener.cs" />
     <Compile Include="Installer\PluginInstallerThread.cs" />
     <Compile Include="Installer\InstallerEventArgs\ReadmeFilesEventArgs.cs" />
