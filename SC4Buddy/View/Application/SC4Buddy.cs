@@ -292,7 +292,8 @@
                 new PluginController(EntityFactory.Instance.Entities),
                 new PluginGroupController(EntityFactory.Instance.Entities),
                 userFolderController,
-                new AuthorController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
+                new AuthorController(EntityFactory.Instance.RemoteEntities),
+                new RemotePluginFileController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
         }
 
         private void MyAuthorsToolStripMenuItemClick(object sender, EventArgs e)

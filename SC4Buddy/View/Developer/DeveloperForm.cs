@@ -26,11 +26,18 @@
 
         private readonly RemotePluginRegistry remotePluginRegistry;
 
+        private readonly RemotePluginFileController remotePluginFileController;
+
         private readonly AuthorController authorController;
 
         private readonly List<RemotePlugin> dependencies;
 
-        public DeveloperForm(PluginController pluginController, PluginGroupController pluginGroupController, UserFolderController userFolderController, AuthorController authorController)
+        public DeveloperForm(
+            PluginController pluginController,
+            PluginGroupController pluginGroupController,
+            UserFolderController userFolderController,
+            AuthorController authorController,
+            RemotePluginFileController remotePluginFileController)
         {
             InitializeComponent();
 
@@ -39,6 +46,7 @@
             this.userFolderController = userFolderController;
 
             remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
+            this.remotePluginFileController = remotePluginFileController;
             this.authorController = authorController;
 
             selectedFiles = new List<string>();
@@ -140,7 +148,7 @@
                                          Plugin = remotePlugin
                                      };
                 remotePlugin.PluginFiles.Add(remoteFile);
-                RemoteRegistryFactory.RemotePluginFileRegistry.Add(remoteFile);
+                remotePluginFileController.Add(remoteFile);
             }
 
             ClearRemotePluginForm();
