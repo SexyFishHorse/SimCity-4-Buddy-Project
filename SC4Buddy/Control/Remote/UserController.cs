@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Control.Remote
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.IO;
     using System.Linq;
@@ -10,20 +11,39 @@
     using System.Windows.Forms;
 
     using NIHEI.Common.TypeUtility;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
+    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
 
     public class UserController
     {
-        private readonly UserRegistry userRegistry;
+        private readonly RemoteEntities entities;
 
         private readonly string passwordHashFilePath = Path.Combine(Application.LocalUserAppDataPath, "hash.login");
 
-        public UserController(UserRegistry userRegistry)
+        public UserController(RemoteEntities entities)
         {
-            this.userRegistry = userRegistry;
+            this.entities = entities;
+        }
+
+        public IEnumerable<User> Users
+        {
+            get
+            {
+                return entities.Users;
+            }
+        }
+
+        public void Add(User user)
+        {
+            entities.Users.AddObject(user);
+            entities.SaveChanges();
+        }
+
+        public void Update(User user)
+        {
+            entities.SaveChanges();
         }
 
         public User AutoLogin()
@@ -85,7 +105,7 @@
 
             var user = new User { Email = email, Salt = salt, Passphrase = saltedHashBytes };
 
-            userRegistry.Add(user);
+            Add(user);
         }
 
         private static byte[] GenerateSaltedHash(byte[] plainText, byte[] salt)
@@ -130,7 +150,7 @@
         private User GetPossibleUser(string email)
         {
             var possibleUser =
-                userRegistry.Users.FirstOrDefault(
+                Users.FirstOrDefault(
                     x => x.Email.Equals(email, StringComparison.InvariantCultureIgnoreCase));
 
             if (possibleUser == null)
