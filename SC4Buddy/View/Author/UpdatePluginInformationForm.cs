@@ -6,6 +6,7 @@
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Localization;
@@ -15,16 +16,16 @@
     {
         private readonly RemotePluginRegistry remotePluginRegistry;
 
-        private readonly AuthorRegistry authorRegistry;
+        private readonly AuthorController authorController;
 
         private IList<RemotePlugin> dependencies;
 
         private IList<RemotePluginFile> files;
 
-        public UpdatePluginInformationForm()
+        public UpdatePluginInformationForm(AuthorController authorController)
         {
             remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
-            authorRegistry = RemoteRegistryFactory.AuthorRegistry;
+            this.authorController = authorController;
 
             dependencies = new List<RemotePlugin>();
             files = new List<RemotePluginFile>();
@@ -71,7 +72,7 @@
 
         private void UpdatePluginInformationFormLoad(object sender, EventArgs e)
         {
-            var authors = authorRegistry.Authors.Where(x => x.UserId == SessionController.Instance.User.Id);
+            var authors = authorController.Authors.Where(x => x.UserId == SessionController.Instance.User.Id);
 
             siteAndAuthorComboBox.BeginUpdate();
             foreach (var author in authors)
