@@ -5,6 +5,7 @@
     using System.Windows.Forms;
 
     using NIHEI.Common.IO;
+    using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.DataAccess.Plugins;
@@ -18,15 +19,15 @@
 
         private readonly PluginFileRegistry pluginFileRegistry;
 
-        private readonly PluginRegistry pluginRegistry;
+        private readonly PluginController pluginController;
 
         private readonly PluginGroupRegistry pluginGroupRegistry;
 
-        public FolderScannerForm(UserFolder userFolder)
+        public FolderScannerForm(PluginController pluginController, UserFolder userFolder)
         {
             pluginFileRegistry = RegistryFactory.PluginFileRegistry;
 
-            pluginRegistry = RegistryFactory.PluginRegistry;
+            this.pluginController = pluginController;
 
             pluginGroupRegistry = RegistryFactory.PluginGroupRegistry;
 
@@ -243,7 +244,7 @@
                                  UserFolder = UserFolder
                              };
 
-            pluginRegistry.Add(plugin);
+            pluginController.Add(plugin);
 
             var group = plugin.Group;
             if (group != null)
