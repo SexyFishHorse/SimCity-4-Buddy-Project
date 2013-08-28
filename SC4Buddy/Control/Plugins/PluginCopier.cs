@@ -11,6 +11,13 @@
 
     public class PluginCopier
     {
+        private readonly PluginController controller;
+
+        public PluginCopier(PluginController controller)
+        {
+            this.controller = controller;
+        }
+
         public void CopyPlugin(Plugin plugin, UserFolder targetUserFolder, bool moveInsteadOfCopy = false)
         {
             var newPlugin = new Plugin
@@ -31,15 +38,15 @@
                 newPlugin.Files.Add(pluginFile);
             }
 
-            RegistryFactory.PluginRegistry.Add(newPlugin);
+            controller.Add(plugin);
 
             if (!moveInsteadOfCopy)
             {
                 return;
             }
 
-            var controller = new UserFolderController(RegistryFactory.UserFolderRegistry);
-            controller.UninstallPlugin(plugin);
+            var userFolderController = new UserFolderController(RegistryFactory.UserFolderRegistry);
+            userFolderController.UninstallPlugin(plugin);
         }
 
         private PluginFile CopyFile(PluginFile pluginFile, UserFolder targetUserFolder)

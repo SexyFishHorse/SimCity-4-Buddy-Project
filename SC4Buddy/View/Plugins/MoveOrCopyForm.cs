@@ -100,7 +100,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private void CopyButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier();
+            var copier = new PluginCopier(new PluginController(RegistryFactory.PluginRegistry));
             try
             {
                 copier.CopyPlugin(Plugin, selectedUserFolder);
@@ -123,7 +123,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private void MoveButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier();
+            var copier = new PluginCopier(new PluginController(RegistryFactory.PluginRegistry));
             try
             {
                 copier.CopyPlugin(Plugin, selectedUserFolder, true);
