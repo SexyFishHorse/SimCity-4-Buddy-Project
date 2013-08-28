@@ -311,7 +311,9 @@
 
         private void UpdatePluginInformationToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new UpdatePluginInformationForm(new AuthorController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
+            new UpdatePluginInformationForm(
+                new AuthorController(EntityFactory.Instance.RemoteEntities),
+                new RemotePluginController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
         }
 
         private void SupportToolStripMenuItemClick(object sender, EventArgs e)
