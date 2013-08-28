@@ -155,7 +155,6 @@
     <Compile Include="Installer\FileHandlers\BaseHandler.cs" />
     <Compile Include="Installer\FileHandlers\DatHandler.cs" />
     <Compile Include="DataAccess\Plugins\PluginFileRegistry.cs" />
-    <Compile Include="DataAccess\PluginFolderRegistry.cs" />
     <Compile Include="Control\UserFolders\UserFolderController.cs" />
     <Compile Include="DataAccess\Plugins\PluginGroupRegistry.cs" />
     <Compile Include="DataAccess\Plugins\PluginRegistry.cs" />

@@ -9,8 +9,6 @@
 
         private readonly PluginFileRegistry pluginFileRegistry;
 
-        private readonly UserFolderRegistry userFolderRegistry;
-
         private readonly PluginGroupRegistry pluginGroupRegistry;
 
         private readonly PluginRegistry pluginRegistry;
@@ -19,7 +17,6 @@
         {
             var databaseEntities = new DatabaseEntities();
             pluginFileRegistry = new PluginFileRegistry(databaseEntities);
-            userFolderRegistry = new UserFolderRegistry(databaseEntities);
             pluginGroupRegistry = new PluginGroupRegistry(databaseEntities);
             pluginRegistry = new PluginRegistry(databaseEntities);
         }
@@ -29,14 +26,6 @@
             get
             {
                 return Instance.pluginFileRegistry;
-            }
-        }
-
-        public static UserFolderRegistry UserFolderRegistry
-        {
-            get
-            {
-                return Instance.userFolderRegistry;
             }
         }
 
