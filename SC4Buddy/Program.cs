@@ -8,6 +8,8 @@
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
+    using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
 
     using log4net;
     using log4net.Config;
@@ -31,19 +33,18 @@
             Log.Info("Application starting");
             try
             {
+                var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
 
                 if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation) || !Directory.Exists(Settings.Default.GameLocation))
                 {
-                    var settingsForm = new SettingsForm { StartPosition = FormStartPosition.CenterScreen };
+                    var settingsForm = new SettingsForm(userFolderController) { StartPosition = FormStartPosition.CenterScreen };
 
                     Application.Run(settingsForm);
                     SetDefaultUserFolder();
                 }
-
-                var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
 
                 if (userFolderController.UserFolders.Any(x => x.Id == 1 && x.Path.Equals("?")))
                 {
@@ -53,7 +54,14 @@
                 if (Directory.Exists(Settings.Default.GameLocation))
                 {
                     new SettingsController(userFolderController).UpdateMainFolder();
-                    Application.Run(new Sc4Buddy());
+                    Application.Run(
+                        new Sc4Buddy(
+                            userFolderController,
+                            new PluginController(EntityFactory.Instance.Entities),
+                            new PluginGroupController(EntityFactory.Instance.Entities),
+                            new RemotePluginController(EntityFactory.Instance.RemoteEntities),
+                            new RemotePluginFileController(EntityFactory.Instance.RemoteEntities),
+                            new AuthorController(EntityFactory.Instance.RemoteEntities)));
                 }
             }
             catch (Exception ex)

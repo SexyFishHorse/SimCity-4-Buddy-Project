@@ -12,7 +12,6 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Elements;
@@ -26,11 +25,11 @@
 
         private readonly ISettingsController settingsController;
 
-        public SettingsForm()
+        public SettingsForm(UserFolderController userFolderController)
         {
             InitializeComponent();
 
-            settingsController = new SettingsController(new UserFolderController(EntityFactory.Instance.Entities));
+            settingsController = new SettingsController(userFolderController);
         }
 
         private void BrowseButtonClick(object sender, EventArgs e)

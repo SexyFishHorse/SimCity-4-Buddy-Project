@@ -17,7 +17,6 @@
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
@@ -35,12 +34,34 @@
 
         private readonly UserFolderController userFolderController;
 
-        public Sc4Buddy()
+        private readonly PluginController pluginController;
+
+        private readonly PluginGroupController pluginGroupController;
+
+        private readonly RemotePluginController remotePluginController;
+
+        private readonly RemotePluginFileController remotePluginFileController;
+
+        private readonly AuthorController authorController;
+
+        public Sc4Buddy(
+            UserFolderController userFolderController,
+            PluginController pluginController,
+            PluginGroupController pluginGroupController,
+            RemotePluginController remotePluginController,
+            RemotePluginFileController remotePluginFileController,
+            AuthorController authorController)
         {
+            this.userFolderController = userFolderController;
+            this.remotePluginController = remotePluginController;
+            this.authorController = authorController;
+            this.remotePluginFileController = remotePluginFileController;
+            this.pluginGroupController = pluginGroupController;
+            this.pluginController = pluginController;
+
             InitializeComponent();
 
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(Sc4Buddy));
-            userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
 
             SessionController.Instance.UserLoggedIn += OnUserLoggedIn;
             SessionController.Instance.UserLoggedOut += OnUserLoggedOut;
@@ -236,9 +257,9 @@
         private void UserFolderMenuItemClick(object sender, EventArgs e)
         {
             new UserFolderForm(
-                new PluginController(EntityFactory.Instance.Entities),
-                new PluginGroupController(EntityFactory.Instance.Entities),
-                new UserFolderController(EntityFactory.Instance.Entities),
+                pluginController,
+                pluginGroupController,
+                userFolderController,
                 ((UserFolderToolStripMenuItem)sender).UserFolder).ShowDialog(this);
         }
 
@@ -281,7 +302,7 @@
 
         private void SettingsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new SettingsForm().ShowDialog(this);
+            new SettingsForm(userFolderController).ShowDialog(this);
 
             UpdateBackground();
         }
@@ -289,31 +310,31 @@
         private void DeveloperToolStripMenuItemClick(object sender, EventArgs e)
         {
             new DeveloperForm(
-                new PluginController(EntityFactory.Instance.Entities),
-                new PluginGroupController(EntityFactory.Instance.Entities),
+                pluginController,
+                pluginGroupController,
                 userFolderController,
-                new AuthorController(EntityFactory.Instance.RemoteEntities),
-                new RemotePluginController(EntityFactory.Instance.RemoteEntities),
-                new RemotePluginFileController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
+                authorController,
+                remotePluginController,
+                remotePluginFileController).ShowDialog(this);
         }
 
         private void MyAuthorsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new MyAuthorsForm(new AuthorController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
+            new MyAuthorsForm(authorController).ShowDialog(this);
         }
 
         private void AddPluginInformationToolStripMenuItemClick(object sender, EventArgs e)
         {
             new AddPluginInformationForm(
-                new AuthorController(EntityFactory.Instance.RemoteEntities),
-                new RemotePluginController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
+                authorController,
+                remotePluginController).ShowDialog(this);
         }
 
         private void UpdatePluginInformationToolStripMenuItemClick(object sender, EventArgs e)
         {
             new UpdatePluginInformationForm(
-                new AuthorController(EntityFactory.Instance.RemoteEntities),
-                new RemotePluginController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
+                authorController,
+                remotePluginController).ShowDialog(this);
         }
 
         private void SupportToolStripMenuItemClick(object sender, EventArgs e)
