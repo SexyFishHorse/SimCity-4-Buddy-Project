@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NIHEI.SC4Buddy.DataAccess
+﻿namespace NIHEI.SC4Buddy.DataAccess
 {
-    interface IEntities
+    using System.Linq;
+
+    using NIHEI.SC4Buddy.Entities;
+
+    public interface IEntities
     {
+        IQueryable<Plugin> Plugins { get; }
+
+        IQueryable<PluginFile> Files { get; }
+
+        IQueryable<UserFolder> UserFolders { get; }
+
+        IQueryable<PluginGroup> Groups { get; }
+
+        void SaveChanges();
     }
 }
