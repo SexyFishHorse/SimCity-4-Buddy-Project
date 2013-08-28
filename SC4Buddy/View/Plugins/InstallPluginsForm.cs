@@ -10,6 +10,7 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Installer;
@@ -174,7 +175,8 @@
                         if (NetworkInterface.GetIsNetworkAvailable() && Settings.Default.EnableRemoteDatabaseConnection
                             && Settings.Default.FetchInfoFromRemote)
                         {
-                            var matcher = new PluginMatcher(pluginController);
+                            var matcher = new PluginMatcher(
+                                pluginController, new RemotePluginFileController(EntityFactory.Instance.RemoteEntities));
                             var matched = tempPluginInfo.Where(matcher.MatchAndUpdate).ToList();
 
                             foreach (var match in matched)

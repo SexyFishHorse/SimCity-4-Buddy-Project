@@ -8,6 +8,7 @@
     using Microsoft.VisualBasic.FileIO;
 
     using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Properties;
@@ -149,7 +150,8 @@
         {
             var plugins = pluginController.Plugins;
 
-            var matcher = new PluginMatcher(pluginController);
+            var matcher = new PluginMatcher(
+                pluginController, new RemotePluginFileController(EntityFactory.Instance.RemoteEntities));
 
             return plugins.Count(matcher.MatchAndUpdate);
         }

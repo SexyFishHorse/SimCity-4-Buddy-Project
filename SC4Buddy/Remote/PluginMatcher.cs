@@ -6,20 +6,19 @@
     using System.Linq;
 
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Entities.Remote;
 
     public class PluginMatcher
     {
-        private readonly RemotePluginFileRegistry remotePluginFileRegistry;
+        private readonly RemotePluginFileController remotePluginFileController;
 
         private readonly PluginController pluginController;
 
-        public PluginMatcher(PluginController pluginController)
+        public PluginMatcher(PluginController pluginController, RemotePluginFileController remotePluginFileController)
         {
-            remotePluginFileRegistry = RemoteRegistryFactory.RemotePluginFileRegistry;
-
+            this.remotePluginFileController = remotePluginFileController;
             this.pluginController = pluginController;
         }
 
@@ -31,7 +30,7 @@
             {
                 var fileInfo = new FileInfo(file.Path);
                 fileMatches.AddRange(
-                    remotePluginFileRegistry.Files.Where(
+                    remotePluginFileController.Files.Where(
                         x =>
                         x.Name.Equals(fileInfo.Name, StringComparison.OrdinalIgnoreCase) && x.Checksum.Equals(file.Checksum)));
             }
