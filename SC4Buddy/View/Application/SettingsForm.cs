@@ -11,6 +11,7 @@
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
+    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
@@ -29,7 +30,7 @@
         {
             InitializeComponent();
 
-            settingsController = new SettingsController(RegistryFactory.UserFolderRegistry);
+            settingsController = new SettingsController(new UserFolderController(EntityFactory.Instance.Entities));
         }
 
         private void BrowseButtonClick(object sender, EventArgs e)

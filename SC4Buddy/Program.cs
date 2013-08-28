@@ -12,6 +12,7 @@
     using log4net;
     using log4net.Config;
 
+    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
@@ -42,14 +43,16 @@
                     SetDefaultUserFolder();
                 }
 
-                if (RegistryFactory.UserFolderRegistry.UserFolders.Any(x => x.Id == 1 && x.Path.Equals("?")))
+                var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
+
+                if (userFolderController.UserFolders.Any(x => x.Id == 1 && x.Path.Equals("?")))
                 {
                     SetDefaultUserFolder();
                 }
 
                 if (Directory.Exists(Settings.Default.GameLocation))
                 {
-                    new SettingsController(RegistryFactory.UserFolderRegistry).UpdateMainFolder();
+                    new SettingsController(userFolderController).UpdateMainFolder();
                     Application.Run(new Sc4Buddy());
                 }
             }

@@ -9,7 +9,7 @@
 
     using Microsoft.Win32;
 
-    using NIHEI.SC4Buddy.DataAccess;
+    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
 
@@ -19,17 +19,16 @@
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly string[] regKeys = new[]
-                              {
-                                  @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
-                                  @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
-                              };
+        private readonly string[] regKeys = {
+                                                @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+                                                @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+                                            };
 
-        private readonly IUserFolderRegistry userFolderRegistry;
+        private readonly UserFolderController userFolderController;
 
-        public SettingsController(IUserFolderRegistry userFolderRegistry)
+        public SettingsController(UserFolderController userFolderController)
         {
-            this.userFolderRegistry = userFolderRegistry;
+            this.userFolderController = userFolderController;
         }
 
         public bool ValidateGameLocationPath(string path)
@@ -48,7 +47,7 @@
         {
             Log.Info("Updating main folder");
 
-            var folder = userFolderRegistry.UserFolders.FirstOrDefault(x => x.Id == 1);
+            var folder = userFolderController.UserFolders.FirstOrDefault(x => x.Id == 1);
             if (folder == null)
             {
                 throw new InvalidOperationException("Main plugin folder has been deleted from the database.");
@@ -56,7 +55,7 @@
 
             folder.Path = Settings.Default.GameLocation;
             folder.Alias = LocalizationStrings.GameUserFolderName;
-            userFolderRegistry.Update(folder);
+            userFolderController.Update(folder);
         }
 
         public string SearchForGameLocation()
