@@ -8,6 +8,7 @@
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
@@ -25,11 +26,11 @@
 
         private readonly RemotePluginRegistry remotePluginRegistry;
 
-        private readonly AuthorRegistry authorRegistry;
+        private readonly AuthorController authorController;
 
         private readonly List<RemotePlugin> dependencies;
 
-        public DeveloperForm(PluginController pluginController, PluginGroupController pluginGroupController, UserFolderController userFolderController)
+        public DeveloperForm(PluginController pluginController, PluginGroupController pluginGroupController, UserFolderController userFolderController, AuthorController authorController)
         {
             InitializeComponent();
 
@@ -38,7 +39,7 @@
             this.userFolderController = userFolderController;
 
             remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
-            authorRegistry = RemoteRegistryFactory.AuthorRegistry;
+            this.authorController = authorController;
 
             selectedFiles = new List<string>();
             dependencies = new List<RemotePlugin>();
@@ -113,7 +114,7 @@
             var remotePlugin = new RemotePlugin
                                    {
                                        Name = nameTB.Text.Trim(),
-                                       Author = authorRegistry.GetAuthorByName(authorTB.Text.Trim()),
+                                       Author = authorController.GetAuthorByName(authorTB.Text.Trim()),
                                        Link = linkTB.Text.Trim(),
                                        Description = descTB.Text.Trim()
                                    };

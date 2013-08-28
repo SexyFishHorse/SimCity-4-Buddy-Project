@@ -15,6 +15,7 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
@@ -290,7 +291,8 @@
             new DeveloperForm(
                 new PluginController(EntityFactory.Instance.Entities),
                 new PluginGroupController(EntityFactory.Instance.Entities),
-                userFolderController).ShowDialog(this);
+                userFolderController,
+                new AuthorController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
         }
 
         private void MyAuthorsToolStripMenuItemClick(object sender, EventArgs e)
