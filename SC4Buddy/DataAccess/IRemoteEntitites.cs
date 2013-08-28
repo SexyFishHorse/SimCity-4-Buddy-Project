@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NIHEI.SC4Buddy.DataAccess
+﻿namespace NIHEI.SC4Buddy.DataAccess
 {
-    interface IRemoteEntitites
+    using System.Linq;
+
+    public interface IRemoteEntitites
     {
+        IQueryable<Author> Authors { get; }
+
+        IQueryable<RemotePlugin> Plugins { get; }
+
+        IQueryable<RemotePluginFile> PluginFiles { get; }
+
+        IQueryable<User> Users { get; }
+
+        void SaveChanges();
     }
 }
