@@ -9,8 +9,6 @@
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.DataAccess.Plugins;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Installer.FileHandlers;
     using NIHEI.SC4Buddy.Installer.InstallerEventArgs;
@@ -26,15 +24,14 @@
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly PluginFileRegistry pluginFileRegistry;
+        private readonly PluginFileController pluginFileController;
 
         private readonly PluginController pluginController;
 
-        public PluginInstallerThread()
+        public PluginInstallerThread(PluginController pluginController, PluginFileController pluginFileController)
         {
-            pluginFileRegistry = RegistryFactory.PluginFileRegistry;
-
-            pluginController = new PluginController(EntityFactory.Instance.Entities);
+            this.pluginFileController = pluginFileController;
+            this.pluginController = pluginController;
         }
 
         public delegate void InstallPluginEventHandler(PluginInstallerThread sender, InstallPluginEventArgs args);
@@ -185,11 +182,11 @@
                 plugin.Files.Add(installedFile);
 
                 var existingPlugin =
-                    pluginFileRegistry.Files.FirstOrDefault(
+                    pluginFileController.Files.FirstOrDefault(
                         x => x.Path.Equals(installedFile.Path, StringComparison.OrdinalIgnoreCase));
                 if (existingPlugin != null)
                 {
-                    pluginFileRegistry.Delete(existingPlugin);
+                    pluginFileController.Delete(existingPlugin);
                 }
             }
 
@@ -263,13 +260,13 @@
         private IEnumerable<PluginFile> HandleListenerFileChanges(UserFolderListener folderListener)
         {
             var installedFiles = new List<PluginFile>();
-            pluginFileRegistry.DeleteFilesByPath(folderListener.DeletedFiles);
+            pluginFileController.DeleteFilesByPath(folderListener.DeletedFiles);
 
             installedFiles.AddRange(
                 folderListener.CreatedFiles.Where(File.Exists).Select(
                     file => new PluginFile { Path = file, Checksum = Md5ChecksumUtility.CalculateChecksum(file).ToHex() }));
 
-            pluginFileRegistry.DeleteFilesByPath(folderListener.ChangedFiles);
+            pluginFileController.DeleteFilesByPath(folderListener.ChangedFiles);
 
             installedFiles.AddRange(
                 folderListener.ChangedFiles.Where(File.Exists).Select(
@@ -283,7 +280,7 @@
                 newPaths.Add(file.Value);
             }
 
-            pluginFileRegistry.DeleteFilesByPath(oldPaths);
+            pluginFileController.DeleteFilesByPath(oldPaths);
 
             installedFiles.AddRange(
                 newPaths.Where(File.Exists).Select(

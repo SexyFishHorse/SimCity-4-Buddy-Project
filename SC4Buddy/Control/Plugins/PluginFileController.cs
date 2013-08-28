@@ -1,6 +1,9 @@
 ﻿namespace NIHEI.SC4Buddy.Control.Plugins
 {
+    using System;
+    using System.Collections.Generic;
     using System.Data.Objects;
+    using System.Linq;
 
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
@@ -25,11 +28,30 @@
         public void Delete(PluginFile file)
         {
             entities.Files.DeleteObject(file);
+            SaveChanges();
         }
 
         public void SaveChanges()
         {
             entities.SaveChanges();
+        }
+
+        public PluginFile GetFileByPath(string path)
+        {
+            return Files.FirstOrDefault(x => x.Path.Equals(path, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public void DeleteFilesByPath(ICollection<string> deletedFiles)
+        {
+            foreach (
+                var pluginFile in deletedFiles
+                .Select(GetFileByPath)
+                .Where(pluginFile => pluginFile != null))
+            {
+                Delete(pluginFile);
+            }
+
+            SaveChanges();
         }
     }
 }

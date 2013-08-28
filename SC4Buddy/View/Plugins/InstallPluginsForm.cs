@@ -10,6 +10,7 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Installer;
     using NIHEI.SC4Buddy.Installer.InstallerEventArgs;
@@ -48,7 +49,7 @@
             OverallProgressBar.Maximum = files.Length;
             CurrentProgressBar.Maximum = 100;
 
-            var pluginInstallerThread = new PluginInstallerThread
+            var pluginInstallerThread = new PluginInstallerThread(pluginController, new PluginFileController(EntityFactory.Instance.Entities))
                                             {
                                                 Form = this,
                                                 FilesToInstall = files,
