@@ -226,7 +226,8 @@
 
             foreach (var file in newFiles)
             {
-                newFilesListView.Items.Add(file);
+                var filename = file.Remove(0, UserFolder.PluginFolderPath.Length + 1);
+                newFilesListView.Items.Add(filename);
             }
 
             ResizeColumns();
@@ -275,8 +276,8 @@
                                        path =>
                                        new PluginFile
                                            {
-                                               Path = path,
-                                               Checksum = Md5ChecksumUtility.CalculateChecksum(path).ToHex(),
+                                               Path = Path.Combine(UserFolder.PluginFolderPath, path),
+                                               Checksum = Md5ChecksumUtility.CalculateChecksum(Path.Combine(UserFolder.PluginFolderPath, path)).ToHex(),
                                                Plugin = plugin
                                            }))
             {
