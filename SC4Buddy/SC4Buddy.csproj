@@ -132,7 +132,6 @@
     <Compile Include="DataAccess\EntityFactory.cs" />
     <Compile Include="DataAccess\IEntities.cs" />
     <Compile Include="DataAccess\IRemoteEntitites.cs" />
-    <Compile Include="DataAccess\RegistryFactory.cs" />
     <Compile Include="DataAccess\RemoteEntities.cs" />
     <Compile Include="DataAccess\Remote\AuthorRegistry.cs" />
     <Compile Include="DataAccess\Remote\RemotePluginFileRegistry.cs" />
@@ -156,7 +155,6 @@
     <Compile Include="Installer\FileHandlers\BaseHandler.cs" />
     <Compile Include="Installer\FileHandlers\DatHandler.cs" />
     <Compile Include="Control\UserFolders\UserFolderController.cs" />
-    <Compile Include="DataAccess\Plugins\PluginGroupRegistry.cs" />
     <Compile Include="Installer\UserFolderListener.cs" />
     <Compile Include="Installer\PluginInstallerThread.cs" />
     <Compile Include="Installer\InstallerEventArgs\ReadmeFilesEventArgs.cs" />
