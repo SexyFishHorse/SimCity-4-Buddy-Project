@@ -2,29 +2,31 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class UpdatePluginInformationForm : Form
     {
-        private readonly RemotePluginRegistry remotePluginRegistry;
+        private readonly RemotePluginController remotePluginController;
 
-        private readonly AuthorRegistry authorRegistry;
+        private readonly AuthorController authorController;
 
         private IList<RemotePlugin> dependencies;
 
         private IList<RemotePluginFile> files;
 
-        public UpdatePluginInformationForm()
+        public UpdatePluginInformationForm(
+            AuthorController authorController, RemotePluginController remotePluginController)
         {
-            remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
-            authorRegistry = RemoteRegistryFactory.AuthorRegistry;
+            this.authorController = authorController;
+            this.remotePluginController = remotePluginController;
 
             dependencies = new List<RemotePlugin>();
             files = new List<RemotePluginFile>();
@@ -60,7 +62,7 @@
             }
 
             var plugins =
-                remotePluginRegistry.RemotePlugins.Include("Author").Where(
+                remotePluginController.Plugins.Include("Author").Where(
                     x =>
                     x.Author != null && x.Author.User != null && x.Author.UserId == SessionController.Instance.User.Id
                     && (x.Name.ToUpper().Contains(text) || x.Author.Name.ToUpper().Contains(text)
@@ -71,7 +73,7 @@
 
         private void UpdatePluginInformationFormLoad(object sender, EventArgs e)
         {
-            var authors = authorRegistry.Authors.Where(x => x.UserId == SessionController.Instance.User.Id);
+            var authors = authorController.Authors.Where(x => x.UserId == SessionController.Instance.User.Id);
 
             siteAndAuthorComboBox.BeginUpdate();
             foreach (var author in authors)
@@ -138,7 +140,7 @@
 
         private void DependenciesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new DependenciesForm(dependencies);
+            var dialog = new DependenciesForm(dependencies, remotePluginController);
 
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
@@ -164,7 +166,7 @@
 
             searchResultsListView.Items.Remove(listViewItem);
 
-            remotePluginRegistry.Delete(item);
+            remotePluginController.Delete(item);
 
             ClearForm();
         }
@@ -227,7 +229,7 @@
                 remotePlugin.Dependencies.Add(dependency);
             }
 
-            remotePluginRegistry.Update(remotePlugin);
+            remotePluginController.SaveChanges();
 
             var item = new ListViewItemWithObjectValue<RemotePlugin>(remotePlugin.Name, remotePlugin);
             item.SubItems.Add(remotePlugin.Author.Name);

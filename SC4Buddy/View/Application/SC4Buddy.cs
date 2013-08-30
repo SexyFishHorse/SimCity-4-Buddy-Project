@@ -14,8 +14,9 @@
     using log4net;
 
     using NIHEI.SC4Buddy.Control;
+    using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
@@ -31,14 +32,36 @@
 
         private readonly ResourceManager localizationManager;
 
-        private readonly UserFolderController controller;
+        private readonly UserFolderController userFolderController;
 
-        public Sc4Buddy()
+        private readonly PluginController pluginController;
+
+        private readonly PluginGroupController pluginGroupController;
+
+        private readonly RemotePluginController remotePluginController;
+
+        private readonly RemotePluginFileController remotePluginFileController;
+
+        private readonly AuthorController authorController;
+
+        public Sc4Buddy(
+            UserFolderController userFolderController,
+            PluginController pluginController,
+            PluginGroupController pluginGroupController,
+            RemotePluginController remotePluginController,
+            RemotePluginFileController remotePluginFileController,
+            AuthorController authorController)
         {
+            this.userFolderController = userFolderController;
+            this.remotePluginController = remotePluginController;
+            this.authorController = authorController;
+            this.remotePluginFileController = remotePluginFileController;
+            this.pluginGroupController = pluginGroupController;
+            this.pluginController = pluginController;
+
             InitializeComponent();
 
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(Sc4Buddy));
-            controller = new UserFolderController(RegistryFactory.UserFolderRegistry);
 
             SessionController.Instance.UserLoggedIn += OnUserLoggedIn;
             SessionController.Instance.UserLoggedOut += OnUserLoggedOut;
@@ -93,7 +116,7 @@
             }
 
             var insertIndex = 0;
-            foreach (var userFolder in controller.UserFolders)
+            foreach (var userFolder in userFolderController.UserFolders)
             {
                 if (userFolder.Id != 1)
                 {
@@ -103,7 +126,7 @@
                 if (userFolder.Alias.Equals("?"))
                 {
                     userFolder.Alias = LocalizationStrings.GameUserFolderName;
-                    controller.Update(userFolder);
+                    userFolderController.Update(userFolder);
                 }
 
                 userFoldersToolStripMenuItem.DropDownItems.Insert(insertIndex, new UserFolderToolStripMenuItem(userFolder, UserFolderMenuItemClick));
@@ -233,7 +256,11 @@
 
         private void UserFolderMenuItemClick(object sender, EventArgs e)
         {
-            new UserFolderForm(((UserFolderToolStripMenuItem)sender).UserFolder).ShowDialog(this);
+            new UserFolderForm(
+                pluginController,
+                pluginGroupController,
+                userFolderController,
+                ((UserFolderToolStripMenuItem)sender).UserFolder).ShowDialog(this);
         }
 
         private void PlayButtonClick(object sender, EventArgs e)
@@ -275,29 +302,39 @@
 
         private void SettingsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new SettingsForm().ShowDialog(this);
+            new SettingsForm(userFolderController).ShowDialog(this);
 
             UpdateBackground();
         }
 
         private void DeveloperToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new DeveloperForm().ShowDialog(this);
+            new DeveloperForm(
+                pluginController,
+                pluginGroupController,
+                userFolderController,
+                authorController,
+                remotePluginController,
+                remotePluginFileController).ShowDialog(this);
         }
 
         private void MyAuthorsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new MyAuthorsForm().ShowDialog(this);
+            new MyAuthorsForm(authorController).ShowDialog(this);
         }
 
         private void AddPluginInformationToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new AddPluginInformationForm().ShowDialog(this);
+            new AddPluginInformationForm(
+                authorController,
+                remotePluginController).ShowDialog(this);
         }
 
         private void UpdatePluginInformationToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new UpdatePluginInformationForm().ShowDialog(this);
+            new UpdatePluginInformationForm(
+                authorController,
+                remotePluginController).ShowDialog(this);
         }
 
         private void SupportToolStripMenuItemClick(object sender, EventArgs e)

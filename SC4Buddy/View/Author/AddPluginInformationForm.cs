@@ -8,7 +8,10 @@
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
+    using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
+    using NIHEI.SC4Buddy.Control.UserFolders;
+    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Localization;
@@ -16,19 +19,19 @@
 
     public partial class AddPluginInformationForm : Form
     {
-        private readonly AuthorRegistry authorRegistry;
+        private readonly AuthorController authorController;
 
-        private readonly RemotePluginRegistry remotePluginRegistry;
+        private readonly RemotePluginController remotePluginController;
 
         private IList<RemotePluginFile> files;
 
         private ICollection<RemotePlugin> dependencies;
 
-        public AddPluginInformationForm()
+        public AddPluginInformationForm(
+            AuthorController authorController, RemotePluginController remotePluginController)
         {
-            authorRegistry = RemoteRegistryFactory.AuthorRegistry;
-
-            remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
+            this.authorController = authorController;
+            this.remotePluginController = remotePluginController;
 
             files = new List<RemotePluginFile>();
 
@@ -44,7 +47,7 @@
 
         private void AddPluginInformationFormLoad(object sender, EventArgs e)
         {
-            var authors = authorRegistry.Authors.Where(x => x.UserId == SessionController.Instance.User.Id).ToList();
+            var authors = authorController.Authors.Where(x => x.UserId == SessionController.Instance.User.Id).ToList();
 
             if (!authors.Any())
             {
@@ -89,7 +92,9 @@
 
         private void SelectInstalledPluginButtonClick(object sender, EventArgs e)
         {
-            var dialog = new SelectInstalledPluginForm();
+            var dialog = new SelectInstalledPluginForm(
+                new UserFolderController(EntityFactory.Instance.Entities),
+                new PluginController(EntityFactory.Instance.Entities));
 
             if (dialog.ShowDialog(this) == DialogResult.Cancel)
             {
@@ -143,7 +148,7 @@
 
         private void DependenciesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new DependenciesForm(dependencies);
+            var dialog = new DependenciesForm(dependencies, remotePluginController);
 
             if (dialog.ShowDialog(this) == DialogResult.Cancel)
             {
@@ -223,7 +228,7 @@
                 remotePlugin.Dependencies.Add(dependency);
             }
 
-            remotePluginRegistry.Add(remotePlugin);
+            remotePluginController.Add(remotePlugin);
 
             MessageBox.Show(
                 this,

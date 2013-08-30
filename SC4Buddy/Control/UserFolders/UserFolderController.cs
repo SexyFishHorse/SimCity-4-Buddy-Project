@@ -8,6 +8,7 @@
     using Microsoft.VisualBasic.FileIO;
 
     using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Properties;
@@ -15,25 +16,25 @@
 
     public class UserFolderController
     {
-        private readonly IUserFolderRegistry registry;
+        private readonly IEntities entities;
 
         private readonly PluginFileController pluginFileController;
 
         private readonly PluginController pluginController;
 
-        public UserFolderController(IUserFolderRegistry registry)
+        public UserFolderController(IEntities entities)
         {
-            this.registry = registry;
+            this.entities = entities;
 
-            pluginFileController = new PluginFileController(RegistryFactory.PluginFileRegistry);
-            pluginController = new PluginController(RegistryFactory.PluginRegistry);
+            pluginFileController = new PluginFileController(EntityFactory.Instance.Entities);
+            pluginController = new PluginController(EntityFactory.Instance.Entities);
         }
 
         public IEnumerable<UserFolder> UserFolders
         {
             get
             {
-                return registry.UserFolders;
+                return entities.UserFolders;
             }
         }
 
@@ -57,7 +58,7 @@
                 return false;
             }
 
-            var collision = registry.UserFolders
+            var collision = entities.UserFolders
                 .FirstOrDefault(x => x.Path.Equals(path, StringComparison.OrdinalIgnoreCase));
 
             if (currentId == 0)
@@ -87,7 +88,7 @@
                 return false;
             }
 
-            var collision = registry.UserFolders
+            var collision = entities.UserFolders
                 .FirstOrDefault(x => x.Alias.Equals(alias, StringComparison.OrdinalIgnoreCase));
 
             if (currentId == 0)
@@ -105,17 +106,17 @@
 
         public void Delete(UserFolder userFolder)
         {
-            registry.Delete(userFolder);
+            entities.UserFolders.DeleteObject(userFolder);
         }
 
         public void Add(UserFolder userFolder)
         {
-            registry.Add(userFolder);
+            entities.UserFolders.AddObject(userFolder);
         }
 
         public void Update(UserFolder userFolder)
         {
-            registry.Update(userFolder);
+            entities.SaveChanges();
         }
 
         public bool IsNotGameFolder(string path)
@@ -149,7 +150,8 @@
         {
             var plugins = pluginController.Plugins;
 
-            var matcher = new PluginMatcher();
+            var matcher = new PluginMatcher(
+                pluginController, new RemotePluginFileController(EntityFactory.Instance.RemoteEntities));
 
             return plugins.Count(matcher.MatchAndUpdate);
         }

@@ -13,10 +13,10 @@ namespace NIHEI.SC4Buddy
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class RemoteEntities : DbContext
+    public partial class RemoteDatabaseEntities : DbContext
     {
-        public RemoteEntities()
-            : base("name=RemoteEntities")
+        public RemoteDatabaseEntities()
+            : base("name=RemoteDatabaseEntities")
         {
         }
     

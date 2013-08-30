@@ -33,32 +33,32 @@ namespace NIHEI.SC4Buddy.Entities.Remote
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class RemoteEntities : ObjectContext
+    public partial class RemoteDatabaseEntities : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new RemoteEntities object using the connection string found in the 'RemoteEntities' section of the application configuration file.
+        /// Initializes a new RemoteDatabaseEntities object using the connection string found in the 'RemoteDatabaseEntities' section of the application configuration file.
         /// </summary>
-        public RemoteEntities() : base("name=RemoteEntities", "RemoteEntities")
+        public RemoteDatabaseEntities() : base("name=RemoteDatabaseEntities", "RemoteDatabaseEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new RemoteEntities object.
+        /// Initialize a new RemoteDatabaseEntities object.
         /// </summary>
-        public RemoteEntities(string connectionString) : base(connectionString, "RemoteEntities")
+        public RemoteDatabaseEntities(string connectionString) : base(connectionString, "RemoteDatabaseEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new RemoteEntities object.
+        /// Initialize a new RemoteDatabaseEntities object.
         /// </summary>
-        public RemoteEntities(EntityConnection connection) : base(connection, "RemoteEntities")
+        public RemoteDatabaseEntities(EntityConnection connection) : base(connection, "RemoteDatabaseEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();

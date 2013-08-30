@@ -6,19 +6,18 @@
     using System.Windows.Forms;
 
     using NIHEI.Common.UI.Elements;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Localization;
 
     public partial class DependenciesForm : Form
     {
-        private readonly RemotePluginRegistry remotePluginRegistry;
+        private readonly RemotePluginController remotePluginController;
 
-        public DependenciesForm(ICollection<RemotePlugin> dependencies)
+        public DependenciesForm(ICollection<RemotePlugin> dependencies, RemotePluginController remotePluginController)
         {
             Dependencies = dependencies;
-
-            remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
+            this.remotePluginController = remotePluginController;
 
             InitializeComponent();
 
@@ -38,7 +37,7 @@
             }
 
             var plugins =
-                remotePluginRegistry.RemotePlugins.Where(x
+                remotePluginController.Plugins.Where(x
                     => x.Name.ToUpper().Contains(text)
                     || x.Author.Name.ToUpper().Contains(text)
                     || x.Link.ToUpper().Replace("//WWW.", "//").Contains(text));

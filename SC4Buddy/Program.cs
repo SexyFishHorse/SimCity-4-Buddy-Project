@@ -8,10 +8,13 @@
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
+    using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
 
     using log4net;
     using log4net.Config;
 
+    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
@@ -30,27 +33,35 @@
             Log.Info("Application starting");
             try
             {
+                var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
 
                 if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation) || !Directory.Exists(Settings.Default.GameLocation))
                 {
-                    var settingsForm = new SettingsForm { StartPosition = FormStartPosition.CenterScreen };
+                    var settingsForm = new SettingsForm(userFolderController) { StartPosition = FormStartPosition.CenterScreen };
 
                     Application.Run(settingsForm);
                     SetDefaultUserFolder();
                 }
 
-                if (RegistryFactory.UserFolderRegistry.UserFolders.Any(x => x.Id == 1 && x.Path.Equals("?")))
+                if (userFolderController.UserFolders.Any(x => x.Id == 1 && x.Path.Equals("?")))
                 {
                     SetDefaultUserFolder();
                 }
 
                 if (Directory.Exists(Settings.Default.GameLocation))
                 {
-                    new SettingsController(RegistryFactory.UserFolderRegistry).UpdateMainFolder();
-                    Application.Run(new Sc4Buddy());
+                    new SettingsController(userFolderController).UpdateMainFolder();
+                    Application.Run(
+                        new Sc4Buddy(
+                            userFolderController,
+                            new PluginController(EntityFactory.Instance.Entities),
+                            new PluginGroupController(EntityFactory.Instance.Entities),
+                            new RemotePluginController(EntityFactory.Instance.RemoteEntities),
+                            new RemotePluginFileController(EntityFactory.Instance.RemoteEntities),
+                            new AuthorController(EntityFactory.Instance.RemoteEntities)));
                 }
             }
             catch (Exception ex)
@@ -80,18 +91,18 @@
 
         private static void SetDefaultUserFolder()
         {
-            var registry = RegistryFactory.UserFolderRegistry;
+            var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
 
             var path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimCity 4");
 
-            if (!Directory.Exists(path) || registry.UserFolders.Any(x => x.Path.Equals(path)))
+            if (!Directory.Exists(path) || userFolderController.UserFolders.Any(x => x.Path.Equals(path)))
             {
                 return;
             }
 
             Log.Info(string.Format("Setting default user folder to {0}", path));
-            registry.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, Path = path });
+            userFolderController.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, Path = path });
         }
     }
 }

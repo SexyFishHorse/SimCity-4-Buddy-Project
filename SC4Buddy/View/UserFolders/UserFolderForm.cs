@@ -9,9 +9,10 @@
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
+    using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.DataAccess.Plugins;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
@@ -24,19 +25,23 @@
     {
         private readonly UserFolder userFolder;
 
-        private readonly PluginGroupRegistry groupRegistry;
+        private readonly PluginGroupController pluginGroupController;
 
-        private readonly PluginRegistry pluginRegistry;
+        private readonly PluginController pluginController;
 
-        private readonly UserFolderController controller;
+        private readonly UserFolderController userFolderController;
 
         private Plugin selectedPlugin;
 
-        public UserFolderForm(UserFolder userFolder)
+        public UserFolderForm(
+            PluginController pluginController,
+            PluginGroupController pluginGroupController,
+            UserFolderController userFolderController,
+            UserFolder userFolder)
         {
-            groupRegistry = RegistryFactory.PluginGroupRegistry;
-            pluginRegistry = RegistryFactory.PluginRegistry;
-            controller = new UserFolderController(RegistryFactory.UserFolderRegistry);
+            this.pluginGroupController = pluginGroupController;
+            this.pluginController = pluginController;
+            this.userFolderController = userFolderController;
 
             if (!Directory.Exists(userFolder.Path))
             {
@@ -48,7 +53,7 @@
                     }
 
                     userFolder.Path = Settings.Default.GameLocation;
-                    controller.Update(userFolder);
+                    userFolderController.Update(userFolder);
                 }
                 else
                 {
@@ -82,21 +87,18 @@
             installedPluginsListView.Items.Clear();
             installedPluginsListView.Groups.Clear();
 
-            foreach (var pluginGroup in groupRegistry.PluginGroups.Where(x => x.Plugins.Any()))
+            foreach (var pluginGroup in pluginGroupController.Groups.Where(x => x.Plugins.Any()))
             {
                 installedPluginsListView.Groups.Add(pluginGroup.Id.ToString(CultureInfo.InvariantCulture), pluginGroup.Name);
             }
 
-            foreach (
-                var listViewItem in
-                    pluginRegistry.Plugins
-                    .Where(x => x.UserFolderId == userFolder.Id)
-                    .Select(
-                        plugin =>
-                        new PluginListViewItem(
-                            plugin,
-                            installedPluginsListView.Groups[plugin.PluginGroupId.ToString()])))
+            foreach (var plugin in
+                pluginController.Plugins.Where(x => x.UserFolderId == userFolder.Id))
             {
+                var listViewItem = new PluginListViewItem(
+                    plugin,
+                    installedPluginsListView.Groups[plugin.PluginGroupId.ToString()]);
+
                 installedPluginsListView.Items.Add(listViewItem);
             }
 
@@ -145,7 +147,7 @@
                 return;
             }
 
-            controller.UninstallPlugin(selectedPlugin);
+            userFolderController.UninstallPlugin(selectedPlugin);
             ClearPluginInformation();
             RepopulateInstalledPluginsListView();
         }
@@ -173,10 +175,10 @@
 
         private void UpdateInfoButtonClick(object sender, EventArgs e)
         {
-            var infoDialog = new EnterPluginInformationForm { Plugin = selectedPlugin };
+            var infoDialog = new EnterPluginInformationForm(pluginGroupController) { Plugin = selectedPlugin };
             if (infoDialog.ShowDialog(this) == DialogResult.OK)
             {
-                pluginRegistry.Update(infoDialog.Plugin);
+                pluginController.Update(infoDialog.Plugin);
             }
 
             RepopulateInstalledPluginsListView();
@@ -205,7 +207,7 @@
                 return;
             }
 
-            new InstallPluginsForm(files, userFolder).ShowDialog(this);
+            new InstallPluginsForm(pluginController, files, userFolder).ShowDialog(this);
 
             RepopulateInstalledPluginsListView();
 
@@ -231,7 +233,11 @@
 
         private void ScanForNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new FolderScannerForm(userFolder).ShowDialog(this);
+            new FolderScannerForm(
+                pluginController,
+                pluginGroupController,
+                new PluginFileController(EntityFactory.Instance.Entities),
+                userFolder).ShowDialog(this);
             RepopulateInstalledPluginsListView();
 
             if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.EnableRemoteDatabaseConnection
@@ -280,7 +286,7 @@
 
         private void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
         {
-            var numUpdated = controller.UpdateInfoForAllPluginsFromServer();
+            var numUpdated = userFolderController.UpdateInfoForAllPluginsFromServer();
             RepopulateInstalledPluginsListView();
 
             MessageBox.Show(
@@ -299,9 +305,9 @@
 
         private void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            controller.UpdateInfoForAllPluginsFromServer();
+            userFolderController.UpdateInfoForAllPluginsFromServer();
 
-            var numRecognizedPlugins = controller.NumberOfRecognizedPlugins(userFolder);
+            var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolder);
 
             if (numRecognizedPlugins < 1)
             {
@@ -315,7 +321,8 @@
                 return;
             }
 
-            var checker = new DependencyChecker();
+            var checker = new DependencyChecker(
+                userFolderController, new RemotePluginController(EntityFactory.Instance.RemoteEntities));
             var missingDependencies = checker.CheckDependencies(userFolder);
 
             if (missingDependencies.Any())
