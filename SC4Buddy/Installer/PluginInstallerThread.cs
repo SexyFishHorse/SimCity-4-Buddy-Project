@@ -194,7 +194,7 @@
 
             if (plugin.Id > 0 || numDeleted > 0)
             {
-                pluginController.Update(plugin);
+                pluginController.SaveChanges();
             }
             else
             {

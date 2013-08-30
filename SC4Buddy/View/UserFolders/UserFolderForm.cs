@@ -178,7 +178,7 @@
             var infoDialog = new EnterPluginInformationForm(pluginGroupController) { Plugin = selectedPlugin };
             if (infoDialog.ShowDialog(this) == DialogResult.OK)
             {
-                pluginController.Update(infoDialog.Plugin);
+                pluginController.SaveChanges();
             }
 
             RepopulateInstalledPluginsListView();
