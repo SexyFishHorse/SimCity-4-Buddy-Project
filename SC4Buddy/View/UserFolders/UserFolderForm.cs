@@ -334,12 +334,59 @@
             {
                 MessageBox.Show(
                     this,
-                    string.Format(LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing, numRecognizedPlugins),
+                    string.Format(
+                        LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
+                        numRecognizedPlugins),
                     LocalizationStrings.NoDependenciesMissing,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information,
                     MessageBoxDefaultButton.Button1);
             }
+        }
+
+        private void MoveOrCopyButtonClick(object sender, EventArgs e)
+        {
+            var dialog = new MoveOrCopyForm(userFolder, userFolderController, pluginController)
+                         {
+                             Plugin =
+                                 selectedPlugin
+                         };
+            dialog.PluginCopied += DialogOnPluginCopied;
+            dialog.PluginMoved += DialogOnPluginMoved;
+            dialog.ErrorDuringCopyOrMove += DialogOnErrorDuringCopyOrMove;
+            dialog.ShowDialog(this);
+
+            RepopulateInstalledPluginsListView();
+        }
+
+        private void DialogOnPluginMoved(object sender, EventArgs eventArgs)
+        {
+            MessageBox.Show(
+                this,
+                LocalizationStrings.PluginHasBeenSuccessfullyMoved,
+                LocalizationStrings.PluginMoved,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
+        private void DialogOnErrorDuringCopyOrMove(object sender, EventArgs eventArgs)
+        {
+            MessageBox.Show(
+                this,
+                LocalizationStrings.ErrorDuringCopyOrMoveOperation,
+                LocalizationStrings.ErrorDuringCopyingOrMovingPlugin,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+        }
+
+        private void DialogOnPluginCopied(object sender, EventArgs eventArgs)
+        {
+            MessageBox.Show(
+                this,
+                LocalizationStrings.PluginHasBeenSuccessfullyCopied,
+                LocalizationStrings.PluginCopied,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
     }
 }

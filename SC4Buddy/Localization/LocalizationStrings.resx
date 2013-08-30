@@ -518,4 +518,22 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="ResolutionMustBeInTheFormatNumberXNumber" xml:space="preserve">
     <value>Resolution must be in the format NUMBERxNUMBER. I.e. "1024x768".</value>
   </data>
+  <data name="PluginHasBeenSuccessfullyMoved" xml:space="preserve">
+    <value>Plugin has been successfully moved.</value>
+  </data>
+  <data name="PluginMoved" xml:space="preserve">
+    <value>Plugin moved</value>
+  </data>
+  <data name="ErrorDuringCopyOrMoveOperation" xml:space="preserve">
+    <value>Error during copy or move operation. Some of the files may or may not have been copied or moved.</value>
+  </data>
+  <data name="ErrorDuringCopyingOrMovingPlugin" xml:space="preserve">
+    <value>Error during copying or moving plugin</value>
+  </data>
+  <data name="PluginHasBeenSuccessfullyCopied" xml:space="preserve">
+    <value>Plugin has been successfully copied.</value>
+  </data>
+  <data name="PluginCopied" xml:space="preserve">
+    <value>Plugin copied</value>
+  </data>
 </root>
