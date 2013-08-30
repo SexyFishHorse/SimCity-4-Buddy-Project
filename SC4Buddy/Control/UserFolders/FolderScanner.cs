@@ -5,17 +5,17 @@
     using System.IO;
     using System.Linq;
 
-    using NIHEI.SC4Buddy.DataAccess.Plugins;
+    using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Installer.FileHandlers;
 
     public class FolderScanner
     {
-        private readonly PluginFileRegistry pluginFileRegistry;
+        private readonly PluginFileController pluginFileController;
 
-        public FolderScanner(PluginFileRegistry pluginFileRegistry, UserFolder userFolder)
+        public FolderScanner(PluginFileController pluginFileController, UserFolder userFolder)
         {
-            this.pluginFileRegistry = pluginFileRegistry;
+            this.pluginFileController = pluginFileController;
             UserFolder = userFolder;
         }
 
@@ -36,7 +36,7 @@
         {
             return entries.Where(
                         entry =>
-                        !pluginFileRegistry.Files.Any(x => x.Path.Equals(entry, StringComparison.OrdinalIgnoreCase)))
+                        !pluginFileController.Files.Any(x => x.Path.Equals(entry, StringComparison.OrdinalIgnoreCase)))
                            .ToList();
         }
 

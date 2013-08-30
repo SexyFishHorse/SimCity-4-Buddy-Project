@@ -5,18 +5,18 @@
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class MyAuthorsForm : Form
     {
-        private readonly AuthorRegistry registry;
+        private readonly AuthorController authorController;
 
-        public MyAuthorsForm()
+        public MyAuthorsForm(AuthorController authorController)
         {
-            registry = RemoteRegistryFactory.AuthorRegistry;
+            this.authorController = authorController;
             InitializeComponent();
         }
 
@@ -40,7 +40,7 @@
         {
             UpdateAuthorListView();
 
-            var sites = registry.Authors.Select(x => x.Site).Distinct().ToArray();
+            var sites = authorController.Authors.Select(x => x.Site).Distinct().ToArray();
             var autoCompleteSource = new AutoCompleteStringCollection();
             autoCompleteSource.AddRange(sites);
 
@@ -157,11 +157,11 @@
             {
                 author.UserId = 0;
                 author.User = null;
-                registry.Update(author);
+                authorController.SaveChanges();
             }
             else
             {
-                registry.Delete(author);
+                authorController.Delete(author);
             }
 
             UpdateAuthorListView();
@@ -169,7 +169,7 @@
 
         private void UpdateAuthorListView()
         {
-            var authors = registry.Authors.Where(x => x.UserId == SessionController.Instance.User.Id);
+            var authors = authorController.Authors.Where(x => x.UserId == SessionController.Instance.User.Id);
 
             authorsListView.BeginUpdate();
             authorsListView.Items.Clear();
@@ -226,7 +226,7 @@
                 author.Name = usernameTextBox.Text.Trim();
                 author.Site = site;
 
-                registry.Update(author);
+                authorController.SaveChanges();
 
                 UpdateAuthorListView();
             }
@@ -281,7 +281,7 @@
                 var site = CleanupSiteUrl(siteComboBox.Text.Trim());
 
                 var author =
-                    registry.Authors.FirstOrDefault(
+                    authorController.Authors.FirstOrDefault(
                         x =>
                         x.Name.Equals(username, StringComparison.OrdinalIgnoreCase)
                         && x.Site.Replace("//www.", string.Empty)
@@ -296,7 +296,7 @@
                                      User = SessionController.Instance.User,
                                      UserId = SessionController.Instance.User.Id
                                  };
-                    registry.Add(author);
+                    authorController.Add(author);
                     UpdateAuthorListView();
                     ClearButtonClick(sender, e);
                     return;
@@ -316,7 +316,7 @@
 
                 author.User = SessionController.Instance.User;
                 author.UserId = SessionController.Instance.User.Id;
-                registry.Update(author);
+                authorController.SaveChanges();
                 UpdateAuthorListView();
                 ClearButtonClick(sender, e);
             }

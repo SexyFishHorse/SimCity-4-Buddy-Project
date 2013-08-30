@@ -1,16 +1,27 @@
 ﻿namespace NIHEI.SC4Buddy.Remote
 {
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
 
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Entities.Remote;
 
     public class DependencyChecker
     {
+        private readonly UserFolderController userFolderController;
+
+        private readonly RemotePluginController remotePluginController;
+
+        public DependencyChecker(
+            UserFolderController userFolderController, RemotePluginController remotePluginController)
+        {
+            this.userFolderController = userFolderController;
+            this.remotePluginController = remotePluginController;
+        }
+
         public List<RemotePlugin> CheckDependencies(UserFolder userFolder)
         {
             var knownPluginsWithDependencies = GetPluginsWithDependencies(userFolder);
@@ -18,11 +29,9 @@
 
             var missingDependencies = GetMissingDependencies(knownPluginsWithDependencies, knownPlugins);
 
-            var controller = new UserFolderController(RegistryFactory.UserFolderRegistry);
-
-            if (!controller.IsMainFolder(userFolder))
+            if (!userFolderController.IsMainFolder(userFolder))
             {
-                var knownMainPlugins = GetKnownPlugins(controller.GetMainUserFolder());
+                var knownMainPlugins = GetKnownPlugins(userFolderController.GetMainUserFolder());
 
                 var mainMissingDependencies = GetMissingDependencies(
                     knownPluginsWithDependencies, knownMainPlugins);
@@ -45,18 +54,16 @@
             return missingDependencies;
         }
 
-        private static List<RemotePlugin> GetPluginsWithDependencies(UserFolder userFolder)
+        private List<RemotePlugin> GetPluginsWithDependencies(UserFolder userFolder)
         {
             var knownPlugins =
                 userFolder.Plugins.Where(x => x.RemotePluginId > 0 && x.UserFolder.Id == userFolder.Id).ToList();
-
-            var remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
 
             var remotePluginsWithDependencies = new List<RemotePlugin>();
 
             foreach (var knownPlugin in knownPlugins)
             {
-                foreach (var remotePlugin in remotePluginRegistry.RemotePlugins.Include("Author"))
+                foreach (var remotePlugin in remotePluginController.Plugins.Include("Author"))
                 {
                     if (remotePlugin.Id == knownPlugin.RemotePluginId)
                     {
@@ -71,18 +78,16 @@
             return remotePluginsWithDependencies;
         }
 
-        private static List<RemotePlugin> GetKnownPlugins(UserFolder userFolder)
+        private List<RemotePlugin> GetKnownPlugins(UserFolder userFolder)
         {
             var knownPlugins =
                 userFolder.Plugins.Where(x => x.RemotePluginId > 0 && x.UserFolder.Id == userFolder.Id).ToList();
-
-            var remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
 
             var remotePluginsWithDependencies = new List<RemotePlugin>();
 
             foreach (var knownPlugin in knownPlugins)
             {
-                foreach (var remotePlugin in remotePluginRegistry.RemotePlugins.Include("Author"))
+                foreach (var remotePlugin in remotePluginController.Plugins.Include("Author"))
                 {
                     if (remotePlugin.Id == knownPlugin.RemotePluginId)
                     {
@@ -94,7 +99,8 @@
             return remotePluginsWithDependencies;
         }
 
-        private static List<RemotePlugin> GetMissingDependencies(List<RemotePlugin> installedPlugins, List<RemotePlugin> pluginsToCheckAgainst)
+        private static List<RemotePlugin> GetMissingDependencies(
+            List<RemotePlugin> installedPlugins, List<RemotePlugin> pluginsToCheckAgainst)
         {
             var allDependencies = installedPlugins.SelectMany(x => x.Dependencies).ToList();
 

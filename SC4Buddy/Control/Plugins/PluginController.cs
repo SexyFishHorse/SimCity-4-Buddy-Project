@@ -3,44 +3,44 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using NIHEI.SC4Buddy.DataAccess.Plugins;
+    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
 
     public class PluginController
     {
-        private readonly IPluginRegistry registry;
+        private readonly IEntities entities;
 
-        public PluginController(IPluginRegistry registry)
+        public PluginController(IEntities entities)
         {
-            this.registry = registry;
+            this.entities = entities;
         }
 
         public IEnumerable<Plugin> Plugins
         {
             get
             {
-                return registry.Plugins;
+                return entities.Plugins;
             }
         }
 
         public void Add(Plugin plugin)
         {
-            registry.Add(plugin);
+            entities.Plugins.AddObject(plugin);
         }
 
         public void Update(Plugin plugin)
         {
-            registry.Update(plugin);
+            entities.SaveChanges();
         }
 
         public void Delete(Plugin plugin)
         {
-            registry.Delete(plugin);
+            entities.Plugins.DeleteObject(plugin);
         }
 
         public int RemoveEmptyPlugins()
         {
-            var emptyPlugins = registry.Plugins.Where(x => !x.Files.Any()).ToList();
+            var emptyPlugins = entities.Plugins.Where(x => !x.Files.Any()).ToList();
 
             var counter = emptyPlugins.Count();
 

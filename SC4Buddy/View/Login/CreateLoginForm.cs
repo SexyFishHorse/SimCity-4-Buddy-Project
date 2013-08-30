@@ -4,8 +4,8 @@
     using System.ComponentModel.DataAnnotations;
     using System.Windows.Forms;
 
-    using NIHEI.SC4Buddy.Control;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
+    using NIHEI.SC4Buddy.Control.Remote;
+    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
 
     public partial class CreateLoginForm : Form
@@ -17,7 +17,7 @@
 
         private void RequestButtonClick(object sender, EventArgs e)
         {
-            var userController = new UserController(RemoteRegistryFactory.UserRegistry);
+            var userController = new UserController(EntityFactory.Instance.RemoteEntities);
 
             try
             {

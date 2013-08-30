@@ -7,9 +7,8 @@
     using System.Windows.Forms;
 
     using NIHEI.Common.IO;
+    using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.DataAccess.Plugins;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Elements;
@@ -18,19 +17,23 @@
     {
         public const int ErrorIconPadding = -18;
 
-        private readonly PluginFileRegistry pluginFileRegistry;
+        private readonly PluginFileController pluginFileController;
 
-        private readonly PluginRegistry pluginRegistry;
+        private readonly PluginController pluginController;
 
-        private readonly PluginGroupRegistry pluginGroupRegistry;
+        private readonly PluginGroupController pluginGroupController;
 
-        public FolderScannerForm(UserFolder userFolder)
+        public FolderScannerForm(
+            PluginController pluginController,
+            PluginGroupController pluginGroupController,
+            PluginFileController pluginFileController,
+            UserFolder userFolder)
         {
-            pluginFileRegistry = RegistryFactory.PluginFileRegistry;
+            this.pluginFileController = pluginFileController;
 
-            pluginRegistry = RegistryFactory.PluginRegistry;
+            this.pluginController = pluginController;
 
-            pluginGroupRegistry = RegistryFactory.PluginGroupRegistry;
+            this.pluginGroupController = pluginGroupController;
 
             UserFolder = userFolder;
 
@@ -205,7 +208,7 @@
         {
             scanningProgressLabel.Visible = true;
             Update();
-            var folderScanner = new FolderScanner(pluginFileRegistry, UserFolder);
+            var folderScanner = new FolderScanner(pluginFileController, UserFolder);
 
             if (!folderScanner.ScanFolder())
             {
@@ -259,16 +262,15 @@
                                  UserFolder = UserFolder
                              };
 
-            pluginRegistry.Add(plugin);
+            pluginController.Add(plugin);
 
             var group = plugin.Group;
             if (group != null)
             {
                 group.Plugins.Add(plugin);
-                pluginGroupRegistry.Update(group);
+                pluginGroupController.SaveChanges();
             }
 
-            pluginFileRegistry.BeginUpdate();
             foreach (var pluginFile in
                 pluginFilesListView.Items.Cast<ListViewItem>()
                                    .Select(item => item.Text)
@@ -281,11 +283,10 @@
                                                Plugin = plugin
                                            }))
             {
-                pluginFileRegistry.Add(pluginFile);
                 plugin.Files.Add(pluginFile);
             }
 
-            pluginFileRegistry.EndUpdate();
+            pluginFileController.SaveChanges();
 
             ClearInfoAndSelectedFilesForms();
 
@@ -350,13 +351,13 @@
             }
 
             var group =
-                pluginGroupRegistry.PluginGroups.FirstOrDefault(
+                pluginGroupController.Groups.FirstOrDefault(
                     x => x.Name.Equals(selectedText, StringComparison.OrdinalIgnoreCase));
 
             if (group == null)
             {
                 group = new PluginGroup { Name = selectedText.Trim() };
-                pluginGroupRegistry.Add(group);
+                pluginGroupController.Add(group);
             }
 
             return group;
@@ -366,7 +367,7 @@
         {
             groupComboBox.BeginUpdate();
 
-            foreach (var pluginGroup in pluginGroupRegistry.PluginGroups)
+            foreach (var pluginGroup in pluginGroupController.Groups)
             {
                 groupComboBox.Items.Add(new ComboBoxItem<PluginGroup>(pluginGroup.Name, pluginGroup));
             }

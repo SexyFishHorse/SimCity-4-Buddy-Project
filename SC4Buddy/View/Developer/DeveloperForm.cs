@@ -7,66 +7,74 @@
     using System.Windows.Forms;
 
     using NIHEI.Common.IO;
-    using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.DataAccess.Plugins;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
+    using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
+    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Properties;
 
     public partial class DeveloperForm : Form
     {
-        private readonly PluginRegistry pluginRegistry;
+        private readonly PluginController pluginController;
 
-        private readonly UserFolderRegistry userFolderRegistry;
+        private readonly PluginGroupController pluginGroupController;
+
+        private readonly UserFolderController userFolderController;
 
         private readonly ICollection<string> selectedFiles;
 
-        private readonly RemotePluginRegistry remotePluginRegistry;
+        private readonly RemotePluginController remotePluginController;
 
-        private readonly AuthorRegistry authorRegistry;
+        private readonly RemotePluginFileController remotePluginFileController;
+
+        private readonly AuthorController authorController;
 
         private readonly List<RemotePlugin> dependencies;
 
-        public DeveloperForm()
+        public DeveloperForm(
+            PluginController pluginController,
+            PluginGroupController pluginGroupController,
+            UserFolderController userFolderController,
+            AuthorController authorController,
+            RemotePluginController remotePluginController,
+            RemotePluginFileController remotePluginFileController)
         {
             InitializeComponent();
 
-            pluginRegistry = RegistryFactory.PluginRegistry;
+            this.pluginController = pluginController;
+            this.pluginGroupController = pluginGroupController;
+            this.userFolderController = userFolderController;
 
-            userFolderRegistry = RegistryFactory.UserFolderRegistry;
-
-            remotePluginRegistry = RemoteRegistryFactory.RemotePluginRegistry;
-
-            authorRegistry = RemoteRegistryFactory.AuthorRegistry;
+            this.authorController = authorController;
+            this.remotePluginController = remotePluginController;
+            this.remotePluginFileController = remotePluginFileController;
 
             selectedFiles = new List<string>();
-
             dependencies = new List<RemotePlugin>();
         }
 
         private void Button1Click(object sender, EventArgs e)
         {
-            foreach (var plugin in pluginRegistry.Plugins)
+            foreach (var plugin in pluginController.Plugins)
             {
-                pluginRegistry.Delete(plugin);
+                pluginController.Delete(plugin);
             }
 
-            var pluginGroupRegistry = RegistryFactory.PluginGroupRegistry;
-            foreach (var pluginGroup in pluginGroupRegistry.PluginGroups)
+            foreach (var pluginGroup in pluginGroupController.Groups)
             {
-                pluginGroupRegistry.Delete(pluginGroup);
+                pluginGroupController.Delete(pluginGroup);
             }
 
-            foreach (var folder in userFolderRegistry.UserFolders.Where(x => x.Id != 1))
+            foreach (var folder in userFolderController.UserFolders.Where(x => x.Id != 1))
             {
-                userFolderRegistry.Delete(folder);
+                userFolderController.Delete(folder);
             }
 
-            var mainFolder = userFolderRegistry.UserFolders.First(x => x.Id == 1);
+            var mainFolder = userFolderController.UserFolders.First(x => x.Id == 1);
             {
                 mainFolder.Alias = "Main plugin folder";
                 mainFolder.Path = " ";
-                userFolderRegistry.Update(mainFolder);
+                userFolderController.Update(mainFolder);
             }
 
             MessageBox.Show(this, @"Database reset.");
@@ -114,7 +122,7 @@
             var remotePlugin = new RemotePlugin
                                    {
                                        Name = nameTB.Text.Trim(),
-                                       Author = authorRegistry.GetAuthorByName(authorTB.Text.Trim()),
+                                       Author = authorController.GetAuthorByName(authorTB.Text.Trim()),
                                        Link = linkTB.Text.Trim(),
                                        Description = descTB.Text.Trim()
                                    };
@@ -123,10 +131,10 @@
             {
                 remotePlugin.Dependencies.Add(dependency);
                 dependency.DependencyFor.Add(remotePlugin);
-                remotePluginRegistry.Update(dependency);
+                remotePluginController.SaveChanges();
             }
 
-            remotePluginRegistry.Add(remotePlugin);
+            remotePluginController.Add(remotePlugin);
 
             foreach (var file in selectedFiles)
             {
@@ -140,7 +148,7 @@
                                          Plugin = remotePlugin
                                      };
                 remotePlugin.PluginFiles.Add(remoteFile);
-                RemoteRegistryFactory.RemotePluginFileRegistry.Add(remoteFile);
+                remotePluginFileController.Add(remoteFile);
             }
 
             ClearRemotePluginForm();
@@ -164,7 +172,7 @@
 
         private void DependenciesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new DeveloperDependenciesForm();
+            var dialog = new DeveloperDependenciesForm(remotePluginController);
             dialog.ShowDialog(this);
 
             dependencies.AddRange(dialog.Dependencies);

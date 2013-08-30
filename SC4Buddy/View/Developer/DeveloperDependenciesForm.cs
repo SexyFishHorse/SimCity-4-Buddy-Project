@@ -6,18 +6,17 @@
     using System.Windows.Forms;
 
     using NIHEI.Common;
-    using NIHEI.SC4Buddy.DataAccess.Remote;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
 
     public partial class DeveloperDependenciesForm : Form
     {
-        private readonly RemotePluginRegistry registry;
+        private readonly RemotePluginController remotePluginController;
 
-        public DeveloperDependenciesForm()
+        public DeveloperDependenciesForm(RemotePluginController remotePluginController)
         {
+            this.remotePluginController = remotePluginController;
             InitializeComponent();
-
-            registry = RemoteRegistryFactory.RemotePluginRegistry;
 
             Dependencies = new List<RemotePlugin>();
         }
@@ -34,7 +33,7 @@
             if (txt.Length > 2)
             {
                 var results =
-                    registry.RemotePlugins.Where(
+                    remotePluginController.Plugins.Where(
                         x => x.Name.ToUpper().Contains(txt.ToUpper()) || x.Author.Name.ToUpper().Contains(txt.ToUpper()));
 
                 foreach (var result in from result in results

@@ -144,7 +144,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NIHEI.SC4Buddy.Entities.Remote" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="RemoteEntities" p1:LazyLoadingEnabled="true">
+        <EntityContainer Name="RemoteDatabaseEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Authors" EntityType="NIHEI.SC4Buddy.Entities.Remote.Author" />
           <EntitySet Name="RemotePlugins" EntityType="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" />
           <EntitySet Name="RemotePluginFiles" EntityType="NIHEI.SC4Buddy.Entities.Remote.RemotePluginFile" />
@@ -259,7 +259,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="NIHEISC4BuddyEntitiesRemoteStoreContainer" CdmEntityContainer="RemoteEntities">
+        <EntityContainerMapping StorageEntityContainer="NIHEISC4BuddyEntitiesRemoteStoreContainer" CdmEntityContainer="RemoteDatabaseEntities">
           <EntitySetMapping Name="Authors">
             <EntityTypeMapping TypeName="NIHEI.SC4Buddy.Entities.Remote.Author">
               <MappingFragment StoreEntitySet="Author">

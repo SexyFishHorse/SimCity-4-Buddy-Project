@@ -4,22 +4,21 @@
     using System.Linq;
     using System.Windows.Forms;
 
-    using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.DataAccess.Plugins;
+    using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class EnterPluginInformationForm : Form
     {
-        private readonly PluginGroupRegistry pluginGroupRegistry;
+        private readonly PluginGroupController pluginGroupController;
 
         private Plugin plugin;
 
-        public EnterPluginInformationForm()
+        public EnterPluginInformationForm(PluginGroupController pluginGroupController)
         {
             InitializeComponent();
 
-            pluginGroupRegistry = RegistryFactory.PluginGroupRegistry;
+            this.pluginGroupController = pluginGroupController;
         }
 
         public Plugin Plugin
@@ -83,13 +82,13 @@
             if (oldGroup != null && !oldGroup.Equals(Plugin.Group))
             {
                 oldGroup.Plugins.Remove(plugin);
-                pluginGroupRegistry.Update(oldGroup);
+                pluginGroupController.SaveChanges();
             }
 
             if (plugin.Group != null)
             {
                 plugin.Group.Plugins.Add(plugin);
-                pluginGroupRegistry.Update(plugin.Group);
+                pluginGroupController.SaveChanges();
             }
 
             Close();
@@ -103,7 +102,7 @@
             }
 
             var foundGroup =
-                pluginGroupRegistry.PluginGroups.FirstOrDefault(
+                pluginGroupController.Groups.FirstOrDefault(
                     x => x.Name.Equals(groupComboBox.Text.Trim(), StringComparison.OrdinalIgnoreCase));
             if (foundGroup != null)
             {
@@ -112,13 +111,13 @@
 
             var newGroup = new PluginGroup { Name = groupComboBox.Text };
 
-            pluginGroupRegistry.Add(newGroup);
+            pluginGroupController.Add(newGroup);
             return newGroup;
         }
 
         private void EnterPluginInformationFormLoad(object sender, EventArgs e)
         {
-            var groups = pluginGroupRegistry.PluginGroups;
+            var groups = pluginGroupController.Groups;
 
             foreach (var pluginGroup in groups)
             {

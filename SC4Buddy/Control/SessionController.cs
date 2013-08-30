@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Control
 {
-    using NIHEI.SC4Buddy.DataAccess.Remote;
+    using NIHEI.SC4Buddy.Control.Remote;
+    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Model;
 
@@ -12,7 +13,7 @@
 
         private SessionController()
         {
-            controller = new UserController(RemoteRegistryFactory.UserRegistry);
+            controller = new UserController(EntityFactory.Instance.RemoteEntities);
         }
 
         public delegate void SessionEventHandler(SessionController sender, SessionEventArgs eventArgs);
