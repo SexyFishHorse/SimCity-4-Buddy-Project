@@ -62,7 +62,7 @@
                 plugin.Link = remotePlugin.Link;
                 plugin.Description = remotePlugin.Description;
 
-                pluginController.Update(plugin);
+                pluginController.SaveChanges();
 
                 return true;
             }
