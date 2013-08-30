@@ -25,7 +25,8 @@
 
         public void Add(Plugin plugin)
         {
-            entities.Plugins.AddObject(plugin);
+            Plugins.AddObject(plugin);
+            SaveChanges();
         }
 
         public void SaveChanges()
@@ -35,7 +36,8 @@
 
         public void Delete(Plugin plugin)
         {
-            entities.Plugins.DeleteObject(plugin);
+            Plugins.DeleteObject(plugin);
+            SaveChanges();
         }
 
         public int RemoveEmptyPlugins()
