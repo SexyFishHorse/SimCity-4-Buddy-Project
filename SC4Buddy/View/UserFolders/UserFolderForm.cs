@@ -334,7 +334,9 @@
             {
                 MessageBox.Show(
                     this,
-                    string.Format(LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing, numRecognizedPlugins),
+                    string.Format(
+                        LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
+                        numRecognizedPlugins),
                     LocalizationStrings.NoDependenciesMissing,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information,
@@ -344,7 +346,11 @@
 
         private void MoveOrCopyButtonClick(object sender, EventArgs e)
         {
-            var dialog = new MoveOrCopyForm(userFolder) { Plugin = selectedPlugin };
+            var dialog = new MoveOrCopyForm(userFolder, userFolderController, pluginController)
+                         {
+                             Plugin =
+                                 selectedPlugin
+                         };
             dialog.PluginCopied += DialogOnPluginCopied;
             dialog.PluginMoved += DialogOnPluginMoved;
             dialog.ErrorDuringCopyOrMove += DialogOnErrorDuringCopyOrMove;

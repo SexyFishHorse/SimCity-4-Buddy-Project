@@ -6,16 +6,18 @@
     using System.Linq;
 
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
 
     public class PluginCopier
     {
-        private readonly PluginController controller;
+        private readonly PluginController pluginController;
 
-        public PluginCopier(PluginController controller)
+        private readonly UserFolderController userFolderController;
+
+        public PluginCopier(PluginController pluginController, UserFolderController userFolderController)
         {
-            this.controller = controller;
+            this.pluginController = pluginController;
+            this.userFolderController = userFolderController;
         }
 
         public void CopyPlugin(Plugin plugin, UserFolder targetUserFolder, bool moveInsteadOfCopy = false)
@@ -38,14 +40,13 @@
                 newPlugin.Files.Add(pluginFile);
             }
 
-            controller.Add(plugin);
+            pluginController.Add(plugin);
 
             if (!moveInsteadOfCopy)
             {
                 return;
             }
 
-            var userFolderController = new UserFolderController(RegistryFactory.UserFolderRegistry);
             userFolderController.UninstallPlugin(plugin);
         }
 

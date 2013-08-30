@@ -9,7 +9,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
     using log4net;
 
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.DataAccess;
+    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.View.Elements;
 
@@ -19,6 +19,10 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private readonly UserFolder currentUserFolder;
 
+        private readonly UserFolderController userFolderController;
+
+        private readonly PluginController pluginController;
+
         private UserFolder selectedUserFolder;
 
         public event EventHandler PluginCopied;
@@ -27,9 +31,11 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         public event EventHandler ErrorDuringCopyOrMove;
 
-        public MoveOrCopyForm(UserFolder currentUserFolder)
+        public MoveOrCopyForm(UserFolder currentUserFolder, UserFolderController userFolderController, PluginController pluginController)
         {
             this.currentUserFolder = currentUserFolder;
+            this.userFolderController = userFolderController;
+            this.pluginController = pluginController;
             InitializeComponent();
         }
 
@@ -72,7 +78,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             userFolderListView.BeginUpdate();
             userFolderListView.Items.Clear();
 
-            var userFolders = RegistryFactory.UserFolderRegistry.UserFolders;
+            var userFolders = userFolderController.UserFolders;
 
             foreach (var userFolder in userFolders.Where(userFolder => !userFolder.Equals(currentUserFolder)))
             {
@@ -100,7 +106,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private void CopyButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier(new PluginController(RegistryFactory.PluginRegistry));
+            var copier = new PluginCopier(pluginController, userFolderController);
             try
             {
                 copier.CopyPlugin(Plugin, selectedUserFolder);
@@ -123,7 +129,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private void MoveButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier(new PluginController(RegistryFactory.PluginRegistry));
+            var copier = new PluginCopier(pluginController, userFolderController);
             try
             {
                 copier.CopyPlugin(Plugin, selectedUserFolder, true);
