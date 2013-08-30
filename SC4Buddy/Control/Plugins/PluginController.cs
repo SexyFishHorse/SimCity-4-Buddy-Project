@@ -1,6 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.Control.Plugins
 {
-    using System.Collections.Generic;
+    using System.Data.Objects;
     using System.Linq;
 
     using NIHEI.SC4Buddy.DataAccess;
@@ -15,7 +15,7 @@
             this.entities = entities;
         }
 
-        public IEnumerable<Plugin> Plugins
+        public IObjectSet<Plugin> Plugins
         {
             get
             {
