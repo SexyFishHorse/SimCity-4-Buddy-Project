@@ -31,7 +31,7 @@
 
         private RemoteEntities CreateRemoteEntities()
         {
-            var originalConnectionString = ConfigurationManager.ConnectionStrings["RemoteEntities"].ConnectionString;
+            var originalConnectionString = ConfigurationManager.ConnectionStrings["RemoteDatabaseEntities"].ConnectionString;
 
             var entityBuilder = new EntityConnectionStringBuilder(originalConnectionString);
             var providerConnectionString = entityBuilder.ProviderConnectionString;
