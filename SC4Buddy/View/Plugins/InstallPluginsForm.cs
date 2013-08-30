@@ -123,13 +123,16 @@
 
         protected void Write(string text)
         {
-            OutputTextBox.BeginInvoke(new Action(
-                () => OutputTextBox.AppendText(text)));
+            if (IsHandleCreated)
+            {
+                OutputTextBox.BeginInvoke(new Action(
+                    () => OutputTextBox.AppendText(text)));
+            }
         }
 
         protected void WriteLine(string message)
         {
-            Write("\n" + message);
+            Write(string.Format("\n{0}", message));
         }
 
         private bool ShowAskToRunExecutable(FileInfo executable)
