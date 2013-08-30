@@ -199,7 +199,7 @@
                                 var result = ShowEnterPluginInformationForm();
                                 if (result == DialogResult.OK)
                                 {
-                                    pluginController.Update(enterPluginInformationForm.Plugin);
+                                    pluginController.SaveChanges();
                                 }
                             }
                         }

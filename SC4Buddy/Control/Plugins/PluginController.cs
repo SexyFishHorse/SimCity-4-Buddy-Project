@@ -28,7 +28,7 @@
             entities.Plugins.AddObject(plugin);
         }
 
-        public void Update(Plugin plugin)
+        public void SaveChanges()
         {
             entities.SaveChanges();
         }
