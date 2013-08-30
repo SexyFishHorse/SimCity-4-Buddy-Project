@@ -92,16 +92,13 @@
                 installedPluginsListView.Groups.Add(pluginGroup.Id.ToString(CultureInfo.InvariantCulture), pluginGroup.Name);
             }
 
-            foreach (
-                var listViewItem in
-                    pluginController.Plugins
-                    .Where(x => x.UserFolderId == userFolder.Id)
-                    .Select(
-                        plugin =>
-                        new PluginListViewItem(
-                            plugin,
-                            installedPluginsListView.Groups[plugin.PluginGroupId.ToString()])))
+            foreach (var plugin in
+                pluginController.Plugins.Where(x => x.UserFolderId == userFolder.Id))
             {
+                var listViewItem = new PluginListViewItem(
+                    plugin,
+                    installedPluginsListView.Groups[plugin.PluginGroupId.ToString()]);
+
                 installedPluginsListView.Items.Add(listViewItem);
             }
 
