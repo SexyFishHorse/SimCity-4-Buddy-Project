@@ -61,12 +61,9 @@
                 newPlugin.Files.Add(pluginFile);
             }
 
-            foreach (var affectedPlugin in affectedPlugins)
+            foreach (var affectedPlugin in affectedPlugins.Where(affectedPlugin => !affectedPlugin.Files.Any()))
             {
-                if (!affectedPlugin.Files.Any())
-                {
-                    pluginController.Delete(affectedPlugin, save: false);
-                }
+                pluginController.Delete(affectedPlugin, save: false);
             }
 
             pluginController.Add(newPlugin, save: false);
@@ -84,6 +81,7 @@
         {
             var currentPath = pluginFile.Path;
             var relativeFilePath = currentPath.Remove(0, pluginFile.Plugin.UserFolder.PluginFolderPath.Length + 1);
+
             var newFilePath = Path.Combine(targetUserFolder.PluginFolderPath, relativeFilePath);
             var newDirectoryPath = targetUserFolder.PluginFolderPath;
             if (relativeFilePath.Contains("\\"))
@@ -96,8 +94,7 @@
             Directory.CreateDirectory(newDirectoryPath);
             File.Copy(currentPath, newFilePath, true);
 
-            var file = new PluginFile { Checksum = pluginFile.Checksum, Path = newFilePath };
-            return file;
+            return new PluginFile { Checksum = pluginFile.Checksum, Path = newFilePath };
         }
     }
 }
