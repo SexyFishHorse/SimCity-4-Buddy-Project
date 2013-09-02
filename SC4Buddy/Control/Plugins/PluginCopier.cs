@@ -40,7 +40,7 @@
                 newPlugin.Files.Add(pluginFile);
             }
 
-            pluginController.Add(plugin);
+            pluginController.Add(newPlugin);
 
             if (!moveInsteadOfCopy)
             {
