@@ -25,10 +25,13 @@
             }
         }
 
-        public void Delete(PluginFile file)
+        public void Delete(PluginFile file, bool save = true)
         {
             entities.Files.DeleteObject(file);
-            SaveChanges();
+            if (save)
+            {
+                SaveChanges();
+            }
         }
 
         public void SaveChanges()
