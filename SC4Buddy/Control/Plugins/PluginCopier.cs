@@ -41,6 +41,8 @@
 
             files.AddRange(plugin.Files.Select(pluginFile => CopyFile(pluginFile, targetUserFolder)));
 
+            var affectedPlugins = new HashSet<Plugin>();
+
             foreach (var pluginFile in files)
             {
                 if (
@@ -51,10 +53,20 @@
                         pluginFileController.Files.First(
                             x => x.Path.Equals(pluginFile.Path, StringComparison.OrdinalIgnoreCase));
 
+                    affectedPlugins.Add(existingFile.Plugin);
+
                     pluginFileController.Delete(existingFile);
                 }
 
                 newPlugin.Files.Add(pluginFile);
+            }
+
+            foreach (var affectedPlugin in affectedPlugins)
+            {
+                if (!affectedPlugin.Files.Any())
+                {
+                    pluginController.Delete(affectedPlugin);
+                }
             }
 
             pluginController.Add(newPlugin);
