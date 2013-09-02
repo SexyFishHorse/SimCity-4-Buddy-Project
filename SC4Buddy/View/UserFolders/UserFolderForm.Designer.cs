@@ -34,6 +34,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.installedPluginsListView = new System.Windows.Forms.ListView();
             this.pluginColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.moveOrCopyButton = new System.Windows.Forms.Button();
             this.isRemoteInfoLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.descriptionRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -96,6 +97,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.moveOrCopyButton);
             this.groupBox1.Controls.Add(this.isRemoteInfoLabel);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.updateInfoButton);
@@ -107,6 +109,13 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // moveOrCopyButton
+            // 
+            resources.ApplyResources(this.moveOrCopyButton, "moveOrCopyButton");
+            this.moveOrCopyButton.Name = "moveOrCopyButton";
+            this.moveOrCopyButton.UseVisualStyleBackColor = true;
+            this.moveOrCopyButton.Click += new System.EventHandler(this.MoveOrCopyButtonClick);
             // 
             // isRemoteInfoLabel
             // 
@@ -288,5 +297,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
         private System.Windows.Forms.ToolStripMenuItem updateInfoForAllPluginsFromServerToolStripMenuItem;
         private System.Windows.Forms.Label isRemoteInfoLabel;
         private System.Windows.Forms.ToolStripMenuItem checkForMissingDependenciesToolStripMenuItem;
+        private System.Windows.Forms.Button moveOrCopyButton;
     }
 }
