@@ -143,12 +143,33 @@
 
         private void Sc4BuddyLoad(object sender, EventArgs e)
         {
-            if (NetworkInterface.GetIsNetworkAvailable())
-            {
-                AttemptAutoLogin();
-            }
-
             UpdateToolsVisibility();
+
+            var loginThread = new Thread(
+                () =>
+                {
+                    if (NetworkInterface.GetIsNetworkAvailable())
+                    {
+                        try
+                        {
+                            var ping = new Ping();
+                            var response = ping.Send("http://google.com");
+                            if (response.Status == IPStatus.Success)
+                            {
+                                AttemptAutoLogin();
+
+                                UpdateToolsVisibility();
+                            }
+
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error("Error from auto-login", ex);
+                        }
+                    }
+                });
+
+            loginThread.Start();
 
             RepopulateUserFolderRelatives();
 
