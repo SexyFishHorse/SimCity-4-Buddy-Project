@@ -55,7 +55,7 @@
 
                     affectedPlugins.Add(existingFile.Plugin);
 
-                    pluginFileController.Delete(existingFile);
+                    pluginFileController.Delete(existingFile, save: false);
                 }
 
                 newPlugin.Files.Add(pluginFile);
@@ -65,11 +65,12 @@
             {
                 if (!affectedPlugin.Files.Any())
                 {
-                    pluginController.Delete(affectedPlugin);
+                    pluginController.Delete(affectedPlugin, save: false);
                 }
             }
 
-            pluginController.Add(newPlugin);
+            pluginController.Add(newPlugin, save: false);
+            pluginController.SaveChanges();
 
             if (!moveInsteadOfCopy)
             {
