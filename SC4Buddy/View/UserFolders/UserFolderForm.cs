@@ -346,11 +346,11 @@
 
         private void MoveOrCopyButtonClick(object sender, EventArgs e)
         {
-            var dialog = new MoveOrCopyForm(userFolder, userFolderController, pluginController)
-                         {
-                             Plugin =
-                                 selectedPlugin
-                         };
+            var dialog = new MoveOrCopyForm(
+                userFolder,
+                userFolderController,
+                pluginController,
+                new PluginFileController(EntityFactory.Instance.Entities)) { Plugin = selectedPlugin };
             dialog.PluginCopied += DialogOnPluginCopied;
             dialog.PluginMoved += DialogOnPluginMoved;
             dialog.ErrorDuringCopyOrMove += DialogOnErrorDuringCopyOrMove;
