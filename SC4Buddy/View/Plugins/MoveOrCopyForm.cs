@@ -23,6 +23,8 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private readonly PluginController pluginController;
 
+        private readonly PluginFileController pluginFileController;
+
         private UserFolder selectedUserFolder;
 
         public event EventHandler PluginCopied;
@@ -31,11 +33,16 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         public event EventHandler ErrorDuringCopyOrMove;
 
-        public MoveOrCopyForm(UserFolder currentUserFolder, UserFolderController userFolderController, PluginController pluginController)
+        public MoveOrCopyForm(
+            UserFolder currentUserFolder,
+            UserFolderController userFolderController,
+            PluginController pluginController,
+            PluginFileController pluginFileController)
         {
             this.currentUserFolder = currentUserFolder;
             this.userFolderController = userFolderController;
             this.pluginController = pluginController;
+            this.pluginFileController = pluginFileController;
             InitializeComponent();
         }
 
@@ -106,7 +113,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private void CopyButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier(pluginController, userFolderController);
+            var copier = new PluginCopier(pluginController, pluginFileController, userFolderController);
             try
             {
                 copier.CopyPlugin(Plugin, selectedUserFolder);
@@ -129,7 +136,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private void MoveButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier(pluginController, userFolderController);
+            var copier = new PluginCopier(pluginController, pluginFileController, userFolderController);
             try
             {
                 copier.CopyPlugin(Plugin, selectedUserFolder, true);

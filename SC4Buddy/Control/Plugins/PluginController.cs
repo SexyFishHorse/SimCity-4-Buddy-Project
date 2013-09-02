@@ -23,10 +23,13 @@
             }
         }
 
-        public void Add(Plugin plugin)
+        public void Add(Plugin plugin, bool save = true)
         {
             Plugins.AddObject(plugin);
-            SaveChanges();
+            if (save)
+            {
+                SaveChanges();
+            }
         }
 
         public void SaveChanges()
@@ -34,10 +37,13 @@
             entities.SaveChanges();
         }
 
-        public void Delete(Plugin plugin)
+        public void Delete(Plugin plugin, bool save = true)
         {
             Plugins.DeleteObject(plugin);
-            SaveChanges();
+            if (save)
+            {
+                SaveChanges();
+            }
         }
 
         public int RemoveEmptyPlugins()
