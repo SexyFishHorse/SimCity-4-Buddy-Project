@@ -12,12 +12,18 @@
     {
         private readonly PluginController pluginController;
 
+        private readonly PluginFileController pluginFileController;
+
         private readonly UserFolderController userFolderController;
 
-        public PluginCopier(PluginController pluginController, UserFolderController userFolderController)
+        public PluginCopier(
+            PluginController pluginController,
+            PluginFileController pluginFileController,
+            UserFolderController userFolderController)
         {
             this.pluginController = pluginController;
             this.userFolderController = userFolderController;
+            this.pluginFileController = pluginFileController;
         }
 
         public void CopyPlugin(Plugin plugin, UserFolder targetUserFolder, bool moveInsteadOfCopy = false)
@@ -37,6 +43,17 @@
 
             foreach (var pluginFile in files)
             {
+                if (
+                    pluginFileController.Files.Any(
+                        x => x.Path.Equals(pluginFile.Path, StringComparison.OrdinalIgnoreCase)))
+                {
+                    var existingFile =
+                        pluginFileController.Files.First(
+                            x => x.Path.Equals(pluginFile.Path, StringComparison.OrdinalIgnoreCase));
+
+                    pluginFileController.Delete(existingFile);
+                }
+
                 newPlugin.Files.Add(pluginFile);
             }
 
