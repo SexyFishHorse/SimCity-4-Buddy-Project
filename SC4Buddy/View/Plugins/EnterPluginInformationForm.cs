@@ -4,9 +4,9 @@
     using System.Linq;
     using System.Windows.Forms;
 
-    using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Entities;
-    using NIHEI.SC4Buddy.View.Elements;
+    using Control.Plugins;
+    using Entities;
+    using Elements;
 
     public partial class EnterPluginInformationForm : Form
     {
@@ -46,9 +46,11 @@
                 installedFilesListView.BeginUpdate();
 
                 installedFilesListView.Items.Clear();
-                foreach (var file in value.Files)
+                foreach (
+                    var relativePath in
+                        value.Files.Select(file => file.Path.Substring(plugin.UserFolder.PluginFolderPath.Length + 1)))
                 {
-                    installedFilesListView.Items.Add(file.Path);
+                    installedFilesListView.Items.Add(relativePath);
                 }
 
                 installedFilesListView.Columns[0].Width = -2;
