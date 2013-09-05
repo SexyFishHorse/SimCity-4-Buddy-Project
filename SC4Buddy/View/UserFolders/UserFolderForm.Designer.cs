@@ -34,7 +34,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.installedPluginsListView = new System.Windows.Forms.ListView();
             this.pluginColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.disableFilesButton = new System.Windows.Forms.Button();
             this.moveOrCopyButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.descriptionRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -96,7 +96,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.disableFilesButton);
             this.groupBox1.Controls.Add(this.moveOrCopyButton);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.updateInfoButton);
@@ -109,12 +109,12 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // button1
+            // disableFilesButton
             // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            resources.ApplyResources(this.disableFilesButton, "disableFilesButton");
+            this.disableFilesButton.Name = "disableFilesButton";
+            this.disableFilesButton.UseVisualStyleBackColor = true;
+            this.disableFilesButton.Click += new System.EventHandler(this.button1_Click);
             // 
             // moveOrCopyButton
             // 
@@ -298,6 +298,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
         private System.Windows.Forms.ToolStripMenuItem updateInfoForAllPluginsFromServerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkForMissingDependenciesToolStripMenuItem;
         private System.Windows.Forms.Button moveOrCopyButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button disableFilesButton;
     }
 }
