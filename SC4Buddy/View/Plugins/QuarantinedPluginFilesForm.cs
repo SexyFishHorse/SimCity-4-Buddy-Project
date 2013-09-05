@@ -1,21 +1,26 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using NIHEI.Common.UI.Elements;
-using NIHEI.SC4Buddy.Entities;
-
-namespace NIHEI.SC4Buddy.View.Plugins
+﻿namespace NIHEI.SC4Buddy.View.Plugins
 {
     using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
     using System.Windows.Forms;
+    
+    using Common.UI.Elements;
+    using Control.Plugins;
+    
+    using Entities;
 
     public partial class QuarantinedPluginFilesForm : Form
     {
         private readonly Plugin _selectedPlugin;
 
-        public QuarantinedPluginFilesForm(Plugin selectedPlugin)
+        private readonly PluginFileController pluginFileController;
+
+        public QuarantinedPluginFilesForm(Plugin selectedPlugin, PluginFileController pluginFileController)
         {
             _selectedPlugin = selectedPlugin;
+            this.pluginFileController = pluginFileController;
 
             InitializeComponent();
         }

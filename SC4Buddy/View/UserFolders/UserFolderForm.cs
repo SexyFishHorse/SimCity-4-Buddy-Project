@@ -389,7 +389,8 @@
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var dialog = new QuarantinedPluginFilesForm(selectedPlugin);
+            var dialog = new QuarantinedPluginFilesForm(selectedPlugin,
+                new PluginFileController(EntityFactory.Instance.Entities));
             var result = dialog.ShowDialog(this);
         }
     }
