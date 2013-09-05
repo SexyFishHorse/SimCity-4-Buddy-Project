@@ -1,4 +1,7 @@
-﻿namespace NIHEI.SC4Buddy.DataAccess
+﻿using System.Collections.Generic;
+using System.Data.Objects.DataClasses;
+
+namespace NIHEI.SC4Buddy.DataAccess
 {
     using System.Data.Objects;
 
@@ -48,6 +51,16 @@
         public void SaveChanges()
         {
             entities.SaveChanges();
+        }
+
+        public void RevertChanges(EntityObject entityObject)
+        {
+            entities.Refresh(RefreshMode.StoreWins, entityObject);
+        }
+
+        public void RevertChanges(ICollection<EntityObject> entityCollection)
+        {
+            entities.Refresh(RefreshMode.StoreWins, entityCollection);
         }
     }
 }

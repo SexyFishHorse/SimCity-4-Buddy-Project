@@ -1,8 +1,11 @@
-﻿namespace NIHEI.SC4Buddy.DataAccess
+﻿using System.Collections.Generic;
+using System.Data.Objects.DataClasses;
+
+namespace NIHEI.SC4Buddy.DataAccess
 {
     using System.Data.Objects;
 
-    using NIHEI.SC4Buddy.Entities;
+    using SC4Buddy.Entities;
 
     public interface IEntities
     {
@@ -15,5 +18,9 @@
         IObjectSet<PluginGroup> Groups { get; }
 
         void SaveChanges();
+
+        void RevertChanges(EntityObject entityObject);
+
+        void RevertChanges(ICollection<EntityObject> entityCollection);
     }
 }
