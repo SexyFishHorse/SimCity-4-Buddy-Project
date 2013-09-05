@@ -57,5 +57,37 @@ namespace NIHEI.SC4Buddy.View.Plugins
         {
             enableButton.Enabled = disabledFilesListView.SelectedItems.Count > 0;
         }
+
+        private void DisableButtonClick(object sender, EventArgs e)
+        {
+            var items = activeFilesListView.SelectedItems;
+
+            MoveItemsBetweenListViews(activeFilesListView, disabledFilesListView, items, true);
+        }
+
+        private void EnableButtonClick(object sender, EventArgs e)
+        {
+            var items = disabledFilesListView.SelectedItems;
+
+            MoveItemsBetweenListViews(disabledFilesListView, activeFilesListView, items, false);
+        }
+
+        private void MoveItemsBetweenListViews(ListView originListView, ListView targetListView,
+            ListView.SelectedListViewItemCollection items, bool quarantined)
+        {
+            originListView.BeginUpdate();
+            targetListView.BeginUpdate();
+
+            foreach (ListViewItemWithObjectValue<PluginFile> item in items)
+            {
+                originListView.Items.Remove(item);
+                targetListView.Items.Add(item);
+
+                item.Value.Quarantined = quarantined;
+            }
+
+            targetListView.EndUpdate();
+            originListView.EndUpdate();
+        }
     }
 }

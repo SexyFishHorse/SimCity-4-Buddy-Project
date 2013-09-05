@@ -111,6 +111,7 @@
             this.disableButton.TabIndex = 1;
             this.disableButton.Text = "Disable";
             this.disableButton.UseVisualStyleBackColor = true;
+            this.disableButton.Click += new System.EventHandler(this.DisableButtonClick);
             // 
             // activeFilesListView
             // 
@@ -149,6 +150,7 @@
             this.enableButton.TabIndex = 1;
             this.enableButton.Text = "Enable";
             this.enableButton.UseVisualStyleBackColor = true;
+            this.enableButton.Click += new System.EventHandler(this.EnableButtonClick);
             // 
             // disabledFilesListView
             // 
