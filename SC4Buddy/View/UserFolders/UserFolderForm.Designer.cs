@@ -34,6 +34,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.installedPluginsListView = new System.Windows.Forms.ListView();
             this.pluginColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.moveOrCopyButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.descriptionRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -54,7 +55,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.scanForNonpluginFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateInfoForAllPluginsFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForMissingDependenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -108,6 +108,13 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // button1
+            // 
+            resources.ApplyResources(this.button1, "button1");
+            this.button1.Name = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // moveOrCopyButton
             // 
@@ -238,12 +245,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.checkForMissingDependenciesToolStripMenuItem.Name = "checkForMissingDependenciesToolStripMenuItem";
             resources.ApplyResources(this.checkForMissingDependenciesToolStripMenuItem, "checkForMissingDependenciesToolStripMenuItem");
             this.checkForMissingDependenciesToolStripMenuItem.Click += new System.EventHandler(this.CheckForMissingDependenciesToolStripMenuItemClick);
-            // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // UserFolderForm
             // 

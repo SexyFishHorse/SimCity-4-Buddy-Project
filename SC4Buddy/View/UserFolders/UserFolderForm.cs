@@ -386,5 +386,11 @@
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var dialog = new QuarantinedPluginFilesForm();
+            var result = dialog.ShowDialog(this);
+        }
     }
 }
