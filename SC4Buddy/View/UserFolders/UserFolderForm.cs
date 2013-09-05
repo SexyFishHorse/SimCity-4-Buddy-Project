@@ -389,7 +389,7 @@
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var dialog = new QuarantinedPluginFilesForm();
+            var dialog = new QuarantinedPluginFilesForm(selectedPlugin);
             var result = dialog.ShowDialog(this);
         }
     }
