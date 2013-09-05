@@ -5,21 +5,25 @@
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-    
+
     using Common.UI.Elements;
     using Control.Plugins;
-    
+
     using Entities;
 
     public partial class QuarantinedPluginFilesForm : Form
     {
         private readonly Plugin _selectedPlugin;
 
+        private readonly PluginController pluginController;
+
         private readonly PluginFileController pluginFileController;
 
-        public QuarantinedPluginFilesForm(Plugin selectedPlugin, PluginFileController pluginFileController)
+        public QuarantinedPluginFilesForm(Plugin selectedPlugin, PluginController pluginController,
+            PluginFileController pluginFileController)
         {
             _selectedPlugin = selectedPlugin;
+            this.pluginController = pluginController;
             this.pluginFileController = pluginFileController;
 
             InitializeComponent();
@@ -27,6 +31,7 @@
 
         private void CancelButtonClick(object sender, EventArgs e)
         {
+            pluginController.RevertChanges(_selectedPlugin);
             Close();
         }
 
