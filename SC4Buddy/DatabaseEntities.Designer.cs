@@ -640,6 +640,30 @@ namespace NIHEI.SC4Buddy.Entities
         private global::System.Int64 _PluginId;
         partial void OnPluginIdChanging(global::System.Int64 value);
         partial void OnPluginIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Quarantined
+        {
+            get
+            {
+                return _Quarantined;
+            }
+            set
+            {
+                OnQuarantinedChanging(value);
+                ReportPropertyChanging("Quarantined");
+                _Quarantined = StructuralObject.SetValidValue(value, "Quarantined");
+                ReportPropertyChanged("Quarantined");
+                OnQuarantinedChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Quarantined;
+        partial void OnQuarantinedChanging(Nullable<global::System.Boolean> value);
+        partial void OnQuarantinedChanged();
 
         #endregion
 
