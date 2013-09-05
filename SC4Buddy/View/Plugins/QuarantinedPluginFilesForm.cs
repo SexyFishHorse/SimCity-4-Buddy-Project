@@ -94,5 +94,12 @@
             targetListView.EndUpdate();
             originListView.EndUpdate();
         }
+
+        private void OkButtonClick(object sender, EventArgs e)
+        {
+            pluginFileController.SaveChanges();
+
+            Close();
+        }
     }
 }
