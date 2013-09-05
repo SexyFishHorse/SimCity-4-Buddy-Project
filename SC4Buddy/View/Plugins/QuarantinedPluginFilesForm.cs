@@ -47,5 +47,15 @@ namespace NIHEI.SC4Buddy.View.Plugins
                 }
             }
         }
+
+        private void ActiveFilesListViewSelectedIndexChanged(object sender, EventArgs e)
+        {
+            disableButton.Enabled = activeFilesListView.SelectedItems.Count > 0;
+        }
+
+        private void DisabledFilesListViewSelectedIndexChanged(object sender, EventArgs e)
+        {
+            enableButton.Enabled = disabledFilesListView.SelectedItems.Count > 0;
+        }
     }
 }

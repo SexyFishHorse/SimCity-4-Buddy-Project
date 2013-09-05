@@ -123,6 +123,7 @@
             this.activeFilesListView.TabIndex = 0;
             this.activeFilesListView.UseCompatibleStateImageBehavior = false;
             this.activeFilesListView.View = System.Windows.Forms.View.List;
+            this.activeFilesListView.SelectedIndexChanged += new System.EventHandler(this.ActiveFilesListViewSelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -160,6 +161,7 @@
             this.disabledFilesListView.TabIndex = 0;
             this.disabledFilesListView.UseCompatibleStateImageBehavior = false;
             this.disabledFilesListView.View = System.Windows.Forms.View.List;
+            this.disabledFilesListView.SelectedIndexChanged += new System.EventHandler(this.DisabledFilesListViewSelectedIndexChanged);
             // 
             // QuarantinedPluginFilesForm
             // 
