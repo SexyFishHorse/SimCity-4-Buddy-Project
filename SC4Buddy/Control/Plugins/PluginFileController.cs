@@ -56,5 +56,10 @@
 
             SaveChanges();
         }
+
+        public void SetQuarantineStatus(PluginFile file, bool quarantined)
+        {
+            file.Quarantined = quarantined;
+        }
     }
 }
