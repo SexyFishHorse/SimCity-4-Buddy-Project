@@ -35,7 +35,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.pluginColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.moveOrCopyButton = new System.Windows.Forms.Button();
-            this.isRemoteInfoLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.descriptionRichTextBox = new System.Windows.Forms.RichTextBox();
             this.updateInfoButton = new System.Windows.Forms.Button();
@@ -76,7 +75,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer1.Panel2Collapsed = true;
             // 
             // installedPluginsListView
             // 
@@ -98,7 +96,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Controls.Add(this.moveOrCopyButton);
-            this.groupBox1.Controls.Add(this.isRemoteInfoLabel);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.updateInfoButton);
             this.groupBox1.Controls.Add(this.uninstallButton);
@@ -116,11 +113,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.moveOrCopyButton.Name = "moveOrCopyButton";
             this.moveOrCopyButton.UseVisualStyleBackColor = true;
             this.moveOrCopyButton.Click += new System.EventHandler(this.MoveOrCopyButtonClick);
-            // 
-            // isRemoteInfoLabel
-            // 
-            resources.ApplyResources(this.isRemoteInfoLabel, "isRemoteInfoLabel");
-            this.isRemoteInfoLabel.Name = "isRemoteInfoLabel";
             // 
             // panel1
             // 
@@ -295,7 +287,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scanForNonpluginFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateInfoForAllPluginsFromServerToolStripMenuItem;
-        private System.Windows.Forms.Label isRemoteInfoLabel;
         private System.Windows.Forms.ToolStripMenuItem checkForMissingDependenciesToolStripMenuItem;
         private System.Windows.Forms.Button moveOrCopyButton;
     }

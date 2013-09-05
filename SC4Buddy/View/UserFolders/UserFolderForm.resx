@@ -142,7 +142,7 @@
     <value>0, 0</value>
   </data>
   <data name="installedPluginsListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>702, 409</value>
+    <value>702, 206</value>
   </data>
   <data name="installedPluginsListView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -201,39 +201,6 @@
   <data name="&gt;&gt;moveOrCopyButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="isRemoteInfoLabel.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="isRemoteInfoLabel.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="isRemoteInfoLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>396, 169</value>
-  </data>
-  <data name="isRemoteInfoLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>293, 13</value>
-  </data>
-  <data name="isRemoteInfoLabel.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="isRemoteInfoLabel.Text" xml:space="preserve">
-    <value>Information are from server and cannot be updated manually.</value>
-  </data>
-  <data name="isRemoteInfoLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;isRemoteInfoLabel.Name" xml:space="preserve">
-    <value>isRemoteInfoLabel</value>
-  </data>
-  <data name="&gt;&gt;isRemoteInfoLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;isRemoteInfoLabel.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;isRemoteInfoLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="panel1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
@@ -283,7 +250,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="updateInfoButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -313,7 +280,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;updateInfoButton.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="uninstallButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -343,7 +310,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;uninstallButton.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="linkLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -370,7 +337,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;linkLabel.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -397,7 +364,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="nameLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -427,7 +394,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;nameLabel.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="authorLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -454,7 +421,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;authorLabel.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -484,7 +451,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>

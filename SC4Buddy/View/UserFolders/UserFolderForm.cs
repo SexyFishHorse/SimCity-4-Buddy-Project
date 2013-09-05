@@ -118,8 +118,6 @@
                 linkLabel.Text = selectedPlugin.Link;
                 descriptionRichTextBox.Text = selectedPlugin.Description;
 
-                isRemoteInfoLabel.Visible = selectedPlugin.RemotePluginId != null;
-
                 uninstallButton.Enabled = true;
                 updateInfoButton.Enabled = selectedPlugin.RemotePluginId == null;
             }
