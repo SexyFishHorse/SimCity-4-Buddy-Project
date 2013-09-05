@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace NIHEI.SC4Buddy.View.Plugins
+﻿namespace NIHEI.SC4Buddy.View.Plugins
 {
+    using System;
+    using System.Windows.Forms;
+
     public partial class QuarantinedPluginFilesForm : Form
     {
         public QuarantinedPluginFilesForm()
         {
             InitializeComponent();
+        }
+
+        private void CancelButtonClick(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
