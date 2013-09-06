@@ -334,11 +334,13 @@
             }
             else
             {
+                var message = string.Format(
+                    LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
+                    numRecognizedPlugins);
+
                 MessageBox.Show(
                     this,
-                    string.Format(
-                        LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
-                        numRecognizedPlugins),
+                    message,
                     LocalizationStrings.NoDependenciesMissing,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information,
