@@ -39,8 +39,12 @@
 
         private void QuarantinedPluginFilesFormLoad(object sender, EventArgs e)
         {
-            var enabledFiles = this.selectedPlugin.Files.Where(x => !x.Quarantined.HasValue || !x.Quarantined.Value).ToList();
-            var disabledFiles = this.selectedPlugin.Files.Where(x => x.Quarantined.HasValue && x.Quarantined.Value).ToList();
+            var enabledFiles = this.selectedPlugin.Files
+                .Where(x => !x.Quarantined.HasValue || !x.Quarantined.Value)
+                .ToList();
+            var disabledFiles = this.selectedPlugin.Files
+                .Where(x => x.Quarantined.HasValue && x.Quarantined.Value)
+                .ToList();
 
             PopulateListView(activeFilesListView, enabledFiles);
             PopulateListView(disabledFilesListView, disabledFiles);
@@ -48,16 +52,19 @@
 
         private void PopulateListView(ListView listView, List<PluginFile> files)
         {
-            if (files.Any())
+            if (!files.Any())
             {
-                listView.BeginUpdate();
-                listView.Items.Clear();
-                foreach (var file in files)
-                {
-                    var filename = new FileInfo(file.Path).Name;
-                    listView.Items.Add(new ListViewItemWithObjectValue<PluginFile>(filename, file));
-                }
+                return;
             }
+
+            listView.BeginUpdate();
+            listView.Items.Clear();
+            foreach (var file in files)
+            {
+                var filename = new FileInfo(file.Path).Name;
+                listView.Items.Add(new ListViewItemWithObjectValue<PluginFile>(filename, file));
+            }
+            listView.EndUpdate();
         }
 
         private void ActiveFilesListViewSelectedIndexChanged(object sender, EventArgs e)
