@@ -4,9 +4,9 @@
     using System.Linq;
     using System.Windows.Forms;
 
-    using Control.Plugins;
-    using Entities;
-    using Elements;
+    using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.View.Elements;
 
     public partial class EnterPluginInformationForm : Form
     {
@@ -23,7 +23,7 @@
 
         public Plugin Plugin
         {
-            get
+            private get
             {
                 return plugin;
             }
