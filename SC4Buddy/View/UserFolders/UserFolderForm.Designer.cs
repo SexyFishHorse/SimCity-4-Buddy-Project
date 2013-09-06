@@ -76,6 +76,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel2Collapsed = true;
             // 
             // installedPluginsListView
             // 

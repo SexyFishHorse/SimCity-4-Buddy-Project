@@ -142,7 +142,7 @@
     <value>0, 0</value>
   </data>
   <data name="installedPluginsListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>702, 206</value>
+    <value>702, 409</value>
   </data>
   <data name="installedPluginsListView.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -174,32 +174,38 @@
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="button1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 163</value>
+  <data name="disableFilesButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="button1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 23</value>
+  <data name="disableFilesButton.Location" type="System.Drawing.Point, System.Drawing">
+    <value>269, 164</value>
   </data>
-  <data name="button1.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+  <data name="disableFilesButton.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 23</value>
   </data>
-  <data name="button1.Text" xml:space="preserve">
-    <value>Disable files</value>
+  <data name="disableFilesButton.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;button1.Name" xml:space="preserve">
-    <value>button1</value>
+  <data name="disableFilesButton.Text" xml:space="preserve">
+    <value>Enable/Disable files</value>
   </data>
-  <data name="&gt;&gt;button1.Type" xml:space="preserve">
+  <data name="&gt;&gt;disableFilesButton.Name" xml:space="preserve">
+    <value>disableFilesButton</value>
+  </data>
+  <data name="&gt;&gt;disableFilesButton.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;button1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;disableFilesButton.Parent" xml:space="preserve">
     <value>groupBox1</value>
   </data>
-  <data name="&gt;&gt;button1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;disableFilesButton.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="moveOrCopyButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
+  </data>
+  <data name="moveOrCopyButton.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="moveOrCopyButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 163</value>

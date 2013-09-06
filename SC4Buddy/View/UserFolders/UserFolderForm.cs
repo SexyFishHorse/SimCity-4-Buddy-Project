@@ -120,6 +120,8 @@
 
                 uninstallButton.Enabled = true;
                 updateInfoButton.Enabled = selectedPlugin.RemotePluginId == null;
+                moveOrCopyButton.Enabled = true;
+                disableFilesButton.Enabled = true;
             }
             else
             {
@@ -127,6 +129,8 @@
 
                 uninstallButton.Enabled = false;
                 updateInfoButton.Enabled = false;
+                moveOrCopyButton.Enabled = false;
+                disableFilesButton.Enabled = false;
             }
         }
 
