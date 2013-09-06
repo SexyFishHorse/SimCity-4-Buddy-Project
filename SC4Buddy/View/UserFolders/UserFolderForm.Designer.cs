@@ -115,7 +115,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             resources.ApplyResources(this.disableFilesButton, "disableFilesButton");
             this.disableFilesButton.Name = "disableFilesButton";
             this.disableFilesButton.UseVisualStyleBackColor = true;
-            this.disableFilesButton.Click += new System.EventHandler(this.button1_Click);
+            this.disableFilesButton.Click += new System.EventHandler(this.DisableFilesButtonClick);
             // 
             // moveOrCopyButton
             // 

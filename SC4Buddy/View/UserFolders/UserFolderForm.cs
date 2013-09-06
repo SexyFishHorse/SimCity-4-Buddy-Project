@@ -391,9 +391,11 @@
                 MessageBoxIcon.Information);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void DisableFilesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new QuarantinedPluginFilesForm(selectedPlugin, pluginController,
+            var dialog = new QuarantinedPluginFilesForm(
+                selectedPlugin,
+                pluginController,
                 new PluginFileController(EntityFactory.Instance.Entities));
             var result = dialog.ShowDialog(this);
         }
