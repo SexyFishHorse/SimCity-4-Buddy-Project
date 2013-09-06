@@ -10,14 +10,14 @@
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
 
+    using log4net;
+
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.Login;
-
-    using log4net;
 
     public partial class SettingsForm : Form
     {
@@ -554,8 +554,8 @@
             var regEx = new Regex(@"\d+x\d+");
             var text = resolutionComboBox.Text.Trim();
 
-            return (regEx.IsMatch(text) || string.IsNullOrWhiteSpace(text)
-                    || text.Equals(LocalizationStrings.Ignore, StringComparison.OrdinalIgnoreCase));
+            return regEx.IsMatch(text) || string.IsNullOrWhiteSpace(text)
+                    || text.Equals(LocalizationStrings.Ignore, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
