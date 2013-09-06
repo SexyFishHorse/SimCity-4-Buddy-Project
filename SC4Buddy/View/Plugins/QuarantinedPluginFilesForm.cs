@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Objects.DataClasses;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
@@ -15,17 +16,13 @@
     {
         private readonly Plugin selectedPlugin;
 
-        private readonly PluginController pluginController;
-
         private readonly PluginFileController pluginFileController;
 
         public QuarantinedPluginFilesForm(
             Plugin selectedPlugin,
-            PluginController pluginController,
             PluginFileController pluginFileController)
         {
             this.selectedPlugin = selectedPlugin;
-            this.pluginController = pluginController;
             this.pluginFileController = pluginFileController;
 
             InitializeComponent();
@@ -34,7 +31,7 @@
         private void CancelButtonClick(object sender, EventArgs e)
         {
             pluginFileController.RevertChanges(selectedPlugin.Files.Cast<EntityObject>().ToList());
-            pluginController.RevertChanges(this.selectedPlugin);
+
             Close();
         }
 

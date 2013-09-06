@@ -397,7 +397,6 @@
         {
             var dialog = new QuarantinedPluginFilesForm(
                 selectedPlugin,
-                pluginController,
                 new PluginFileController(EntityFactory.Instance.Entities));
             var result = dialog.ShowDialog(this);
         }
