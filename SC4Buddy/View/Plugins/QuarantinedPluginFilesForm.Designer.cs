@@ -179,7 +179,7 @@
             this.Name = "QuarantinedPluginFilesForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Disable/enable plugin files";
-            this.Load += new System.EventHandler(this.QuarantinedPluginFilesForm_Load);
+            this.Load += new System.EventHandler(this.QuarantinedPluginFilesFormLoad);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
