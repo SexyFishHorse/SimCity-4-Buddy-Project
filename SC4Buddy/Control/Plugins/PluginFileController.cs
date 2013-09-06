@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
     using System.Linq;
 
     using NIHEI.SC4Buddy.DataAccess;
@@ -60,6 +61,11 @@
         public void SetQuarantineStatus(PluginFile file, bool quarantined)
         {
             file.Quarantined = quarantined;
+        }
+
+        public void RevertChanges(ICollection<EntityObject> files)
+        {
+            entities.RevertChanges(files);
         }
     }
 }
