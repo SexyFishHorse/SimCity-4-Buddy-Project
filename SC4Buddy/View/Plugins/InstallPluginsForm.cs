@@ -175,8 +175,7 @@
             {
                 Invoke(new Action(() =>
                     {
-                        if (NetworkInterface.GetIsNetworkAvailable() && Settings.Default.EnableRemoteDatabaseConnection
-                            && Settings.Default.FetchInfoFromRemote)
+                        if (NetworkInterface.GetIsNetworkAvailable() && Settings.Default.FetchInfoFromRemote)
                         {
                             var matcher = new PluginMatcher(
                                 pluginController, new RemotePluginFileController(EntityFactory.Instance.RemoteEntities));

@@ -68,9 +68,6 @@
     <Setting Name="LauncherLanguage" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="EnableRemoteDatabaseConnection" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="FetchInfoFromRemote" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
@@ -81,7 +78,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="AllowDependencyCheck" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="InstallerAskToRemoveNonPluginFiles" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

@@ -69,7 +69,7 @@
         {
             RepopulateInstalledPluginsListView();
 
-            if (!Settings.Default.EnableRemoteDatabaseConnection || !NetworkInterface.GetIsNetworkAvailable())
+            if (!NetworkInterface.GetIsNetworkAvailable())
             {
                 updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = false;
                 checkForMissingDependenciesToolStripMenuItem.Visible = false;
@@ -213,8 +213,7 @@
 
             RepopulateInstalledPluginsListView();
 
-            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.EnableRemoteDatabaseConnection
-                || !Settings.Default.AllowDependencyCheck)
+            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.AllowDependencyCheck)
             {
                 return;
             }
@@ -242,8 +241,7 @@
                 userFolder).ShowDialog(this);
             RepopulateInstalledPluginsListView();
 
-            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.EnableRemoteDatabaseConnection
-                || !Settings.Default.AllowDependencyCheck)
+            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.AllowDependencyCheck)
             {
                 return;
             }

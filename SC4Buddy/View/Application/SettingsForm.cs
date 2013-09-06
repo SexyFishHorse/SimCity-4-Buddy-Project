@@ -132,8 +132,6 @@
                                                           cpuPriorityComboBox.SelectedItem).Value.ToString()
                                                        : string.Empty;
 
-
-
             Settings.Default.Save();
 
             settingsController.UpdateMainFolder();
@@ -203,6 +201,15 @@
             UpdateBackgroundsListView();
 
             UpdateLoginStatus();
+
+            UpdateRemoteDatabaseAccessSettings();
+        }
+
+        private void UpdateRemoteDatabaseAccessSettings()
+        {
+            enableRemoteDatabaseConnectionCheckbox.Checked =
+                Settings.Default.AllowDependencyCheck
+                && Settings.Default.FetchInfoFromRemote;
         }
 
         private void UpdateCursorColourComboBox()
@@ -539,12 +546,16 @@
         {
             if (enableRemoteDatabaseConnectionCheckbox.Checked)
             {
+                fetchInformationFromRemoteCheckbox.Checked = true;
                 fetchInformationFromRemoteCheckbox.Enabled = true;
+                allowCheckMissingDependenciesCheckBox.Checked = true;
                 allowCheckMissingDependenciesCheckBox.Enabled = true;
             }
             else
             {
+                fetchInformationFromRemoteCheckbox.Checked = false;
                 fetchInformationFromRemoteCheckbox.Enabled = false;
+                allowCheckMissingDependenciesCheckBox.Checked = false;
                 allowCheckMissingDependenciesCheckBox.Enabled = false;
             }
         }

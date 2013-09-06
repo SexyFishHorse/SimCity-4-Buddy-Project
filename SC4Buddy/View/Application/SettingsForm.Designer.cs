@@ -506,6 +506,7 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             resources.ApplyResources(this.allowCheckMissingDependenciesCheckBox, "allowCheckMissingDependenciesCheckBox");
             this.allowCheckMissingDependenciesCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.AllowDependencyCheck;
+            this.allowCheckMissingDependenciesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.allowCheckMissingDependenciesCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "AllowDependencyCheck", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.allowCheckMissingDependenciesCheckBox.Name = "allowCheckMissingDependenciesCheckBox";
             this.allowCheckMissingDependenciesCheckBox.UseVisualStyleBackColor = true;
@@ -513,9 +514,8 @@ namespace NIHEI.SC4Buddy.View.Application
             // enableRemoteDatabaseConnectionCheckbox
             // 
             resources.ApplyResources(this.enableRemoteDatabaseConnectionCheckbox, "enableRemoteDatabaseConnectionCheckbox");
-            this.enableRemoteDatabaseConnectionCheckbox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.EnableRemoteDatabaseConnection;
+            this.enableRemoteDatabaseConnectionCheckbox.Checked = true;
             this.enableRemoteDatabaseConnectionCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.enableRemoteDatabaseConnectionCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "EnableRemoteDatabaseConnection", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.enableRemoteDatabaseConnectionCheckbox.Name = "enableRemoteDatabaseConnectionCheckbox";
             this.enableRemoteDatabaseConnectionCheckbox.UseVisualStyleBackColor = true;
             this.enableRemoteDatabaseConnectionCheckbox.CheckedChanged += new System.EventHandler(this.EnableRemoteDatabaseConnectionCheckboxCheckedChanged);
