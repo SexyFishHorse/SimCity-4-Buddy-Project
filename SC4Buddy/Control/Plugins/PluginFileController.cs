@@ -8,7 +8,7 @@
 
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
-
+    
     public class PluginFileController
     {
         private readonly IEntities entities;
@@ -40,12 +40,7 @@
             entities.SaveChanges();
         }
 
-        public PluginFile GetFileByPath(string path)
-        {
-            return Files.FirstOrDefault(x => x.Path.Equals(path, StringComparison.OrdinalIgnoreCase));
-        }
-
-        public void DeleteFilesByPath(ICollection<string> deletedFiles)
+        public void DeleteFilesByPath(IEnumerable<string> deletedFiles)
         {
             foreach (
                 var pluginFile in deletedFiles
@@ -66,6 +61,15 @@
         public void RevertChanges(ICollection<EntityObject> files)
         {
             entities.RevertChanges(files);
+        }
+
+        public void MoveFilesBasedOnQuarantineStatus(IList<PluginFile> files)
+        {
+        }
+
+        private PluginFile GetFileByPath(string path)
+        {
+            return Files.FirstOrDefault(x => x.Path.Equals(path, StringComparison.OrdinalIgnoreCase));
         }
     }
 }
