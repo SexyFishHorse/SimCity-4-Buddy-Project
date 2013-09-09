@@ -68,6 +68,22 @@
         public void MoveFilesBasedOnQuarantineStatus(IList<PluginFile> files)
         {
             MoveQuarantinedFiles(files.Where(x => x.Quarantined.HasValue && x.Quarantined.Value && File.Exists(x.Path)));
+
+            MoveUnquarantinedFiles(files.Where(x => (!x.Quarantined.HasValue || !x.Quarantined.Value) && !File.Exists(x.Path)));
+        }
+
+        private void MoveUnquarantinedFiles(IEnumerable<PluginFile> files)
+        {
+            foreach (var file in files)
+            {
+                if (file.QuarantinePath != null)
+                {
+                    File.Copy(file.QuarantinePath, file.Path);
+                    File.Delete(file.QuarantinePath);
+                }
+
+                file.QuarantinePath = null;
+            }
         }
 
         private void MoveQuarantinedFiles(IEnumerable<PluginFile> files)
