@@ -7,22 +7,23 @@
     using System.Linq;
     using System.Reflection;
 
+    using log4net;
+
     using Microsoft.Win32;
 
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
 
-    using log4net;
-
     public class SettingsController : ISettingsController
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly string[] regKeys = {
-                                                @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
-                                                @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
-                                            };
+        private readonly string[] regKeys =
+        {
+            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+            @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+        };
 
         private readonly UserFolderController userFolderController;
 
