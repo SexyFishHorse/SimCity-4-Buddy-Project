@@ -37,6 +37,12 @@
                 scanButton.Text = string.Empty;
                 scanButton.Image = Resources.IconZoom;
             }
+
+            if (string.IsNullOrWhiteSpace(Settings.Default.QuarantinedFilesPath))
+            {
+                Settings.Default.QuarantinedFilesPath = settingsController.DefaultQuarantinedFilesPath;
+                Settings.Default.Save();
+            }
         }
 
         private void BrowseButtonClick(object sender, EventArgs e)

@@ -6,6 +6,7 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Windows.Forms;
 
     using log4net;
 
@@ -30,6 +31,18 @@
         public SettingsController(UserFolderController userFolderController)
         {
             this.userFolderController = userFolderController;
+        }
+
+        public string DefaultQuarantinedFilesPath
+        {
+            get
+            {
+                var localAppData = Application.LocalUserAppDataPath.Substring(
+                    0,
+                    Application.LocalUserAppDataPath.LastIndexOf("\\", StringComparison.Ordinal));
+
+                return Path.Combine(localAppData, "QuarantinedFiles");
+            }
         }
 
         public bool ValidateGameLocationPath(string path)
@@ -146,11 +159,6 @@
                            Resources.Wallpaper12,
                            Resources.Wallpaper13
                        };
-        }
-
-        public bool ValidatePathExists(string path)
-        {
-            return Directory.Exists(path);
         }
     }
 }

@@ -5,6 +5,8 @@
 
     public interface ISettingsController
     {
+        string DefaultQuarantinedFilesPath { get; }
+
         bool ValidateGameLocationPath(string path);
 
         void UpdateMainFolder();
@@ -14,7 +16,5 @@
         IEnumerable<string> GetInstalledLanguages();
 
         IList<Bitmap> GetWallpapers();
-
-        bool ValidatePathExists(string path);
     }
 }
