@@ -577,5 +577,33 @@
             return regEx.IsMatch(text) || string.IsNullOrWhiteSpace(text)
                     || text.Equals(LocalizationStrings.Ignore, StringComparison.OrdinalIgnoreCase);
         }
+
+        private void BrowseQuarantinedButtonClick(object sender, EventArgs e)
+        {
+            var result = storeLocationDialog.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                var path = storeLocationDialog.SelectedPath;
+                if (settingsController.ValidatePathExists(path))
+                {
+                    Settings.Default.QuarantinedFilesPath = path;
+                    Log.Info(string.Format("Setting quarantined path to: {0}", path));
+                }
+                else
+                {
+                    MessageBox.Show(
+                        this,
+                        LocalizationStrings.TheSelectedPathDoesNotExist,
+                        LocalizationStrings.PathError,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void QuarantinedFilesLocationTextBoxTextChanged(object sender, EventArgs e)
+        {
+            this.BrowseQuarantinedButtonClick(sender, e);
+        }
     }
 }

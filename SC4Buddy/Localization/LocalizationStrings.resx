@@ -536,4 +536,7 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="PluginCopied" xml:space="preserve">
     <value>Plugin copied</value>
   </data>
+  <data name="TheSelectedPathDoesNotExist" xml:space="preserve">
+    <value>The selected path does not exist.</value>
+  </data>
 </root>

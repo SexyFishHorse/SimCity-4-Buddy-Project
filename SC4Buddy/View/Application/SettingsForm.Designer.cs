@@ -36,6 +36,10 @@ namespace NIHEI.SC4Buddy.View.Application
             this.okButton = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.browseQuarantinedButton = new System.Windows.Forms.Button();
+            this.quarantinedFilesLocationTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.backgroundImageListView = new System.Windows.Forms.ListView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -44,6 +48,11 @@ namespace NIHEI.SC4Buddy.View.Application
             this.gameLocationTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.shortAutosaveIntervalsLabel = new System.Windows.Forms.Label();
+            this.autoSaveIntervalLabel = new System.Windows.Forms.Label();
+            this.autoSaveIntervalTrackBar = new System.Windows.Forms.TrackBar();
+            this.enableAutoSaveButton = new System.Windows.Forms.CheckBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.languageComboBox = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -94,21 +103,15 @@ namespace NIHEI.SC4Buddy.View.Application
             this.AskForAdditionalInfoAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.quarantinedFilesLocationTextBox = new System.Windows.Forms.TextBox();
-            this.browseQuarantinedButton = new System.Windows.Forms.Button();
             this.storeLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.shortAutosaveIntervalsLabel = new System.Windows.Forms.Label();
-            this.autoSaveIntervalLabel = new System.Windows.Forms.Label();
-            this.autoSaveIntervalTrackBar = new System.Windows.Forms.TrackBar();
-            this.enableAutoSaveButton = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.autoSaveIntervalTrackBar)).BeginInit();
             this.groupBox7.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -116,9 +119,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage4.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.autoSaveIntervalTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // closeButton
@@ -155,6 +155,37 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            resources.ApplyResources(this.groupBox8, "groupBox8");
+            this.groupBox8.Controls.Add(this.browseQuarantinedButton);
+            this.groupBox8.Controls.Add(this.quarantinedFilesLocationTextBox);
+            this.groupBox8.Controls.Add(this.label4);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.TabStop = false;
+            // 
+            // browseQuarantinedButton
+            // 
+            resources.ApplyResources(this.browseQuarantinedButton, "browseQuarantinedButton");
+            this.browseQuarantinedButton.Name = "browseQuarantinedButton";
+            this.browseQuarantinedButton.UseVisualStyleBackColor = true;
+            this.browseQuarantinedButton.Click += new System.EventHandler(this.BrowseQuarantinedButtonClick);
+            // 
+            // quarantinedFilesLocationTextBox
+            // 
+            resources.ApplyResources(this.quarantinedFilesLocationTextBox, "quarantinedFilesLocationTextBox");
+            this.quarantinedFilesLocationTextBox.BackColor = System.Drawing.SystemColors.Window;
+            this.quarantinedFilesLocationTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "QuarantinedFilesPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.quarantinedFilesLocationTextBox.Name = "quarantinedFilesLocationTextBox";
+            this.quarantinedFilesLocationTextBox.ReadOnly = true;
+            this.quarantinedFilesLocationTextBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.QuarantinedFilesPath;
+            this.quarantinedFilesLocationTextBox.TextChanged += new System.EventHandler(this.QuarantinedFilesLocationTextBoxTextChanged);
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
             // 
             // groupBox6
             // 
@@ -220,6 +251,45 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            resources.ApplyResources(this.groupBox5, "groupBox5");
+            this.groupBox5.Controls.Add(this.shortAutosaveIntervalsLabel);
+            this.groupBox5.Controls.Add(this.autoSaveIntervalLabel);
+            this.groupBox5.Controls.Add(this.autoSaveIntervalTrackBar);
+            this.groupBox5.Controls.Add(this.enableAutoSaveButton);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.TabStop = false;
+            // 
+            // shortAutosaveIntervalsLabel
+            // 
+            resources.ApplyResources(this.shortAutosaveIntervalsLabel, "shortAutosaveIntervalsLabel");
+            this.shortAutosaveIntervalsLabel.ForeColor = System.Drawing.Color.Red;
+            this.shortAutosaveIntervalsLabel.Name = "shortAutosaveIntervalsLabel";
+            // 
+            // autoSaveIntervalLabel
+            // 
+            resources.ApplyResources(this.autoSaveIntervalLabel, "autoSaveIntervalLabel");
+            this.autoSaveIntervalLabel.Name = "autoSaveIntervalLabel";
+            // 
+            // autoSaveIntervalTrackBar
+            // 
+            resources.ApplyResources(this.autoSaveIntervalTrackBar, "autoSaveIntervalTrackBar");
+            this.autoSaveIntervalTrackBar.BackColor = System.Drawing.SystemColors.Window;
+            this.autoSaveIntervalTrackBar.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::NIHEI.SC4Buddy.Properties.Settings.Default, "AutoSaveWaitTime", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.autoSaveIntervalTrackBar.Maximum = 60;
+            this.autoSaveIntervalTrackBar.Minimum = 5;
+            this.autoSaveIntervalTrackBar.Name = "autoSaveIntervalTrackBar";
+            this.autoSaveIntervalTrackBar.Value = global::NIHEI.SC4Buddy.Properties.Settings.Default.AutoSaveWaitTime;
+            // 
+            // enableAutoSaveButton
+            // 
+            resources.ApplyResources(this.enableAutoSaveButton, "enableAutoSaveButton");
+            this.enableAutoSaveButton.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.EnableAutoSave;
+            this.enableAutoSaveButton.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "EnableAutoSave", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.enableAutoSaveButton.Name = "enableAutoSaveButton";
+            this.enableAutoSaveButton.UseVisualStyleBackColor = true;
             // 
             // groupBox7
             // 
@@ -604,73 +674,9 @@ namespace NIHEI.SC4Buddy.View.Application
             resources.ApplyResources(this.gameLocationDialog, "gameLocationDialog");
             this.gameLocationDialog.ShowNewFolderButton = false;
             // 
-            // groupBox8
-            // 
-            resources.ApplyResources(this.groupBox8, "groupBox8");
-            this.groupBox8.Controls.Add(this.browseQuarantinedButton);
-            this.groupBox8.Controls.Add(this.quarantinedFilesLocationTextBox);
-            this.groupBox8.Controls.Add(this.label4);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.TabStop = false;
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
-            // 
-            // quarantinedFilesLocationTextBox
-            // 
-            resources.ApplyResources(this.quarantinedFilesLocationTextBox, "quarantinedFilesLocationTextBox");
-            this.quarantinedFilesLocationTextBox.Name = "quarantinedFilesLocationTextBox";
-            // 
-            // browseQuarantinedButton
-            // 
-            resources.ApplyResources(this.browseQuarantinedButton, "browseQuarantinedButton");
-            this.browseQuarantinedButton.Name = "browseQuarantinedButton";
-            this.browseQuarantinedButton.UseVisualStyleBackColor = true;
-            // 
             // storeLocationDialog
             // 
             resources.ApplyResources(this.storeLocationDialog, "storeLocationDialog");
-            // 
-            // groupBox5
-            // 
-            resources.ApplyResources(this.groupBox5, "groupBox5");
-            this.groupBox5.Controls.Add(this.shortAutosaveIntervalsLabel);
-            this.groupBox5.Controls.Add(this.autoSaveIntervalLabel);
-            this.groupBox5.Controls.Add(this.autoSaveIntervalTrackBar);
-            this.groupBox5.Controls.Add(this.enableAutoSaveButton);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.TabStop = false;
-            // 
-            // shortAutosaveIntervalsLabel
-            // 
-            resources.ApplyResources(this.shortAutosaveIntervalsLabel, "shortAutosaveIntervalsLabel");
-            this.shortAutosaveIntervalsLabel.ForeColor = System.Drawing.Color.Red;
-            this.shortAutosaveIntervalsLabel.Name = "shortAutosaveIntervalsLabel";
-            // 
-            // autoSaveIntervalLabel
-            // 
-            resources.ApplyResources(this.autoSaveIntervalLabel, "autoSaveIntervalLabel");
-            this.autoSaveIntervalLabel.Name = "autoSaveIntervalLabel";
-            // 
-            // autoSaveIntervalTrackBar
-            // 
-            resources.ApplyResources(this.autoSaveIntervalTrackBar, "autoSaveIntervalTrackBar");
-            this.autoSaveIntervalTrackBar.BackColor = System.Drawing.SystemColors.Window;
-            this.autoSaveIntervalTrackBar.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::NIHEI.SC4Buddy.Properties.Settings.Default, "AutoSaveWaitTime", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.autoSaveIntervalTrackBar.Maximum = 60;
-            this.autoSaveIntervalTrackBar.Minimum = 5;
-            this.autoSaveIntervalTrackBar.Name = "autoSaveIntervalTrackBar";
-            this.autoSaveIntervalTrackBar.Value = global::NIHEI.SC4Buddy.Properties.Settings.Default.AutoSaveWaitTime;
-            // 
-            // enableAutoSaveButton
-            // 
-            resources.ApplyResources(this.enableAutoSaveButton, "enableAutoSaveButton");
-            this.enableAutoSaveButton.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.EnableAutoSave;
-            this.enableAutoSaveButton.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "EnableAutoSave", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.enableAutoSaveButton.Name = "enableAutoSaveButton";
-            this.enableAutoSaveButton.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -686,10 +692,15 @@ namespace NIHEI.SC4Buddy.View.Application
             this.Load += new System.EventHandler(this.SettingsFormLoad);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.autoSaveIntervalTrackBar)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -704,11 +715,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage3.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.autoSaveIntervalTrackBar)).EndInit();
             this.ResumeLayout(false);
 
         }
