@@ -32,6 +32,7 @@
           <Property Name="Checksum" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="Plugin" Type="bigint" Nullable="false" />
           <Property Name="Quarantined" Type="bit" />
+          <Property Name="QuarantinePath" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="Plugin">
           <Key>
@@ -133,6 +134,7 @@
           <Property Name="PluginId" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Plugin" Relationship="NIHEI.SC4Buddy.Entities.FK_Plugin_File" FromRole="File" ToRole="Plugin" />
           <Property Type="Boolean" Name="Quarantined" />
+          <Property Type="String" Name="QuarantinePath" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Plugin">
           <Key>
@@ -216,6 +218,7 @@
           <EntitySetMapping Name="PluginFiles">
             <EntityTypeMapping TypeName="NIHEI.SC4Buddy.Entities.PluginFile">
               <MappingFragment StoreEntitySet="File">
+                <ScalarProperty Name="QuarantinePath" ColumnName="QuarantinePath" />
                 <ScalarProperty Name="Quarantined" ColumnName="Quarantined" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Path" ColumnName="Path" />

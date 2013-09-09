@@ -664,6 +664,30 @@ namespace NIHEI.SC4Buddy.Entities
         private Nullable<global::System.Boolean> _Quarantined;
         partial void OnQuarantinedChanging(Nullable<global::System.Boolean> value);
         partial void OnQuarantinedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String QuarantinePath
+        {
+            get
+            {
+                return _QuarantinePath;
+            }
+            set
+            {
+                OnQuarantinePathChanging(value);
+                ReportPropertyChanging("QuarantinePath");
+                _QuarantinePath = StructuralObject.SetValidValue(value, true, "QuarantinePath");
+                ReportPropertyChanged("QuarantinePath");
+                OnQuarantinePathChanged();
+            }
+        }
+        private global::System.String _QuarantinePath;
+        partial void OnQuarantinePathChanging(global::System.String value);
+        partial void OnQuarantinePathChanged();
 
         #endregion
 
