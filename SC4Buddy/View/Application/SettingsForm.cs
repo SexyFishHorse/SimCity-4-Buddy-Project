@@ -583,27 +583,21 @@
             var result = storeLocationDialog.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                var path = storeLocationDialog.SelectedPath;
-                if (settingsController.ValidatePathExists(path))
-                {
-                    Settings.Default.QuarantinedFilesPath = path;
-                    Log.Info(string.Format("Setting quarantined path to: {0}", path));
-                }
-                else
-                {
-                    MessageBox.Show(
-                        this,
-                        LocalizationStrings.TheSelectedPathDoesNotExist,
-                        LocalizationStrings.PathError,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
+                var path = this.storeLocationDialog.SelectedPath;
+                this.SetQuarantinedPath(path);
             }
         }
 
         private void QuarantinedFilesLocationTextBoxTextChanged(object sender, EventArgs e)
         {
-            this.BrowseQuarantinedButtonClick(sender, e);
+            var path = quarantinedFilesLocationTextBox.Text.Trim();
+            this.SetQuarantinedPath(path);
+        }
+
+        private void SetQuarantinedPath(string path)
+        {
+            Settings.Default.QuarantinedFilesPath = path;
+            Log.Info(string.Format("Setting quarantined path to: {0}", path));
         }
     }
 }
