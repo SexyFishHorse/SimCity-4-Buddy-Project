@@ -149,6 +149,8 @@
         private void CloseButtonClick(object sender, EventArgs e)
         {
             Log.Info("Closing settings form");
+
+            Settings.Default.Reload();
             Close();
         }
 
