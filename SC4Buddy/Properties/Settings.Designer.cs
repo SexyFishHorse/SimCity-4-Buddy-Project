@@ -382,5 +382,17 @@ namespace NIHEI.SC4Buddy.Properties {
                 this["LauncherWindowMode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string QuarantinedFilesPath {
+            get {
+                return ((string)(this["QuarantinedFilesPath"]));
+            }
+            set {
+                this["QuarantinedFilesPath"] = value;
+            }
+        }
     }
 }
