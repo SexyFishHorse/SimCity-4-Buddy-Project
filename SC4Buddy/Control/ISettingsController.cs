@@ -11,8 +11,10 @@
 
         string SearchForGameLocation();
 
-        List<string> GetInstalledLanguages();
+        IEnumerable<string> GetInstalledLanguages();
 
-        List<Bitmap> GetWallpapers();
+        IList<Bitmap> GetWallpapers();
+
+        bool ValidatePathExists(string path);
     }
 }

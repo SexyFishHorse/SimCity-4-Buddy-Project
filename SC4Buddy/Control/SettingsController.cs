@@ -112,7 +112,7 @@
             return gamePath;
         }
 
-        public List<string> GetInstalledLanguages()
+        public IEnumerable<string> GetInstalledLanguages()
         {
             var dirs = Directory.EnumerateDirectories(Settings.Default.GameLocation, "*", SearchOption.TopDirectoryOnly);
 
@@ -128,7 +128,7 @@
             return languages;
         }
 
-        public List<Bitmap> GetWallpapers()
+        public IList<Bitmap> GetWallpapers()
         {
             return new List<Bitmap>
                        {
@@ -146,6 +146,11 @@
                            Resources.Wallpaper12,
                            Resources.Wallpaper13
                        };
+        }
+
+        public bool ValidatePathExists(string path)
+        {
+            return Directory.Exists(path);
         }
     }
 }
