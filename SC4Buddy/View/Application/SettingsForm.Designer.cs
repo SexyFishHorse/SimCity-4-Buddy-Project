@@ -289,6 +289,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.enableAutoSaveButton.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "EnableAutoSave", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.enableAutoSaveButton.Name = "enableAutoSaveButton";
             this.enableAutoSaveButton.UseVisualStyleBackColor = true;
+            this.enableAutoSaveButton.CheckedChanged += new System.EventHandler(this.EnableAutoSaveButtonCheckedChanged);
             // 
             // groupBox7
             // 
