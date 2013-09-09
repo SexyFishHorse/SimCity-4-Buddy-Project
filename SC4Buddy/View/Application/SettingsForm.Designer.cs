@@ -178,7 +178,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.quarantinedFilesLocationTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.quarantinedFilesLocationTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "QuarantinedFilesPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.quarantinedFilesLocationTextBox.Name = "quarantinedFilesLocationTextBox";
-            this.quarantinedFilesLocationTextBox.ReadOnly = true;
             this.quarantinedFilesLocationTextBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.QuarantinedFilesPath;
             this.quarantinedFilesLocationTextBox.TextChanged += new System.EventHandler(this.QuarantinedFilesLocationTextBoxTextChanged);
             // 
