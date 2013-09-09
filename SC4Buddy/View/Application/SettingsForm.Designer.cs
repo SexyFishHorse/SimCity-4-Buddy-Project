@@ -99,6 +99,11 @@ namespace NIHEI.SC4Buddy.View.Application
             this.AskForAdditionalInfoAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.quarantinedFilesLocationTextBox = new System.Windows.Forms.TextBox();
+            this.browseQuarantinedButton = new System.Windows.Forms.Button();
+            this.storeLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -113,6 +118,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage4.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.SuspendLayout();
             // 
             // closeButton
@@ -144,6 +150,7 @@ namespace NIHEI.SC4Buddy.View.Application
             // tabPage1
             // 
             resources.ApplyResources(this.tabPage1, "tabPage1");
+            this.tabPage1.Controls.Add(this.groupBox8);
             this.tabPage1.Controls.Add(this.groupBox6);
             this.tabPage1.Controls.Add(this.groupBox5);
             this.tabPage1.Controls.Add(this.groupBox1);
@@ -638,6 +645,35 @@ namespace NIHEI.SC4Buddy.View.Application
             resources.ApplyResources(this.gameLocationDialog, "gameLocationDialog");
             this.gameLocationDialog.ShowNewFolderButton = false;
             // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.browseQuarantinedButton);
+            this.groupBox8.Controls.Add(this.quarantinedFilesLocationTextBox);
+            this.groupBox8.Controls.Add(this.label4);
+            resources.ApplyResources(this.groupBox8, "groupBox8");
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.TabStop = false;
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // quarantinedFilesLocationTextBox
+            // 
+            resources.ApplyResources(this.quarantinedFilesLocationTextBox, "quarantinedFilesLocationTextBox");
+            this.quarantinedFilesLocationTextBox.Name = "quarantinedFilesLocationTextBox";
+            // 
+            // browseQuarantinedButton
+            // 
+            resources.ApplyResources(this.browseQuarantinedButton, "browseQuarantinedButton");
+            this.browseQuarantinedButton.Name = "browseQuarantinedButton";
+            this.browseQuarantinedButton.UseVisualStyleBackColor = true;
+            // 
+            // storeLocationDialog
+            // 
+            resources.ApplyResources(this.storeLocationDialog, "storeLocationDialog");
+            // 
             // SettingsForm
             // 
             resources.ApplyResources(this, "$this");
@@ -673,6 +709,8 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage3.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -746,5 +784,10 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.ComboBox cpuPriorityComboBox;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.CheckBox windowModeCheckBox;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Button browseQuarantinedButton;
+        private System.Windows.Forms.TextBox quarantinedFilesLocationTextBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.FolderBrowserDialog storeLocationDialog;
     }
 }
