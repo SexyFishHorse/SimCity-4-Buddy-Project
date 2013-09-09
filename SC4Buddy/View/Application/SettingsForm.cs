@@ -30,6 +30,13 @@
             InitializeComponent();
 
             settingsController = new SettingsController(userFolderController);
+
+            var minOs = new Version(6, 2);
+            if (Environment.OSVersion.Version < minOs)
+            {
+                scanButton.Text = string.Empty;
+                scanButton.Image = Resources.IconZoom;
+            }
         }
 
         private void BrowseButtonClick(object sender, EventArgs e)

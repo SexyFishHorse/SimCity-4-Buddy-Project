@@ -438,6 +438,7 @@
     <Content Include="Resources\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\zoom.png" />
     <Content Include="Wallpapers\13.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
