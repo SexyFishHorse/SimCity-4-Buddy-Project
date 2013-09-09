@@ -4,11 +4,13 @@
     using System.Collections.Generic;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
+    using System.IO;
     using System.Linq;
 
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
-    
+    using NIHEI.SC4Buddy.Properties;
+
     public class PluginFileController
     {
         private readonly IEntities entities;
@@ -65,6 +67,20 @@
 
         public void MoveFilesBasedOnQuarantineStatus(IList<PluginFile> files)
         {
+            MoveQuarantinedFiles(files.Where(x => x.Quarantined.HasValue && x.Quarantined.Value && File.Exists(x.Path)));
+        }
+
+        private void MoveQuarantinedFiles(IEnumerable<PluginFile> files)
+        {
+            foreach (var file in files)
+            {
+                var newPath = Path.Combine(Settings.Default.QuarantinedFilesPath, Path.GetRandomFileName());
+
+                File.Copy(file.Path, newPath);
+                File.Delete(file.Path);
+
+                file.QuarantinePath = newPath;
+            }
         }
 
         private PluginFile GetFileByPath(string path)
