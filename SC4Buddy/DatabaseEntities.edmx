@@ -9,7 +9,12 @@
           <EntitySet Name="File" EntityType="Entities.Store.File" store:Type="Tables" />
           <EntitySet Name="Plugin" EntityType="Entities.Store.Plugin" store:Type="Tables" />
           <EntitySet Name="PluginGroup" EntityType="Entities.Store.PluginGroup" store:Type="Tables" />
+          <EntitySet Name="QuarantinedFile" EntityType="Entities.Store.QuarantinedFile" store:Type="Tables" />
           <EntitySet Name="UserFolder" EntityType="Entities.Store.UserFolder" store:Type="Tables" />
+          <AssociationSet Name="FK_File_QuarantinedFile" Association="Entities.Store.FK_File_QuarantinedFile">
+            <End Role="File" EntitySet="File" />
+            <End Role="QuarantinedFile" EntitySet="QuarantinedFile" />
+          </AssociationSet>
           <AssociationSet Name="FK_Plugin_File" Association="Entities.Store.FK_Plugin_File">
             <End Role="Plugin" EntitySet="Plugin" />
             <End Role="File" EntitySet="File" />
@@ -31,8 +36,6 @@
           <Property Name="Path" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="Checksum" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="Plugin" Type="bigint" Nullable="false" />
-          <Property Name="Quarantined" Type="bit" />
-          <Property Name="QuarantinePath" Type="nvarchar" MaxLength="256" />
         </EntityType>
         <EntityType Name="Plugin">
           <Key>
@@ -54,6 +57,13 @@
           <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
         </EntityType>
+        <EntityType Name="QuarantinedFile">
+          <Key>
+            <PropertyRef Name="PluginFile" />
+          </Key>
+          <Property Name="PluginFile" Type="bigint" Nullable="false" />
+          <Property Name="QuarantinedPath" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="UserFolder">
           <Key>
             <PropertyRef Name="Id" />
@@ -62,6 +72,18 @@
           <Property Name="Path" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="Alias" Type="nvarchar" Nullable="false" MaxLength="100" />
         </EntityType>
+        <Association Name="FK_File_QuarantinedFile">
+          <End Role="File" Type="Entities.Store.File" Multiplicity="1" />
+          <End Role="QuarantinedFile" Type="Entities.Store.QuarantinedFile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuarantinedFile">
+              <PropertyRef Name="PluginFile" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Plugin_File">
           <End Role="Plugin" Type="Entities.Store.Plugin" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -123,7 +145,12 @@
             <End Role="UserFolder" EntitySet="UserFolders" />
             <End Role="Plugin" EntitySet="Plugins" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="QuarantinedFile" EntityType="NIHEI.SC4Buddy.Entities.QuarantinedFile" />
+          <AssociationSet Name="FK_File_QuarantinedFile" Association="NIHEI.SC4Buddy.Entities.FK_File_QuarantinedFile">
+            <End Role="PluginFile" EntitySet="PluginFiles" />
+            <End Role="QuarantinedFile" EntitySet="QuarantinedFile" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="PluginFile">
           <Key>
             <PropertyRef Name="Id" />
@@ -133,8 +160,7 @@
           <Property Name="Checksum" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
           <Property Name="PluginId" Type="Int64" Nullable="false" />
           <NavigationProperty Name="Plugin" Relationship="NIHEI.SC4Buddy.Entities.FK_Plugin_File" FromRole="File" ToRole="Plugin" />
-          <Property Type="Boolean" Name="Quarantined" />
-          <Property Type="String" Name="QuarantinePath" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="QuarantinedFile" Relationship="NIHEI.SC4Buddy.Entities.FK_File_QuarantinedFile" FromRole="PluginFile" ToRole="QuarantinedFile" />
         </EntityType>
         <EntityType Name="Plugin">
           <Key>
@@ -209,6 +235,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="QuarantinedFile">
+          <Key>
+            <PropertyRef Name="PluginFile" />
+          </Key>
+          <Property Type="Int64" Name="PluginFile" Nullable="false" />
+          <Property Type="String" Name="QuarantinedPath" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="File" Relationship="NIHEI.SC4Buddy.Entities.FK_File_QuarantinedFile" FromRole="QuarantinedFile" ToRole="PluginFile" />
+        </EntityType>
+        <Association Name="FK_File_QuarantinedFile">
+          <End Type="NIHEI.SC4Buddy.Entities.PluginFile" Role="PluginFile" Multiplicity="1" />
+          <End Type="NIHEI.SC4Buddy.Entities.QuarantinedFile" Role="QuarantinedFile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="PluginFile">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="QuarantinedFile">
+              <PropertyRef Name="PluginFile" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -216,14 +262,12 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EntitiesStoreContainer" CdmEntityContainer="DatabaseEntities">
           <EntitySetMapping Name="PluginFiles">
-            <EntityTypeMapping TypeName="NIHEI.SC4Buddy.Entities.PluginFile">
+            <EntityTypeMapping TypeName="IsTypeOf(NIHEI.SC4Buddy.Entities.PluginFile)">
               <MappingFragment StoreEntitySet="File">
-                <ScalarProperty Name="QuarantinePath" ColumnName="QuarantinePath" />
-                <ScalarProperty Name="Quarantined" ColumnName="Quarantined" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Path" ColumnName="Path" />
-                <ScalarProperty Name="Checksum" ColumnName="Checksum" />
                 <ScalarProperty Name="PluginId" ColumnName="Plugin" />
+                <ScalarProperty Name="Checksum" ColumnName="Checksum" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -258,7 +302,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="QuarantinedFile">
+            <EntityTypeMapping TypeName="NIHEI.SC4Buddy.Entities.QuarantinedFile">
+              <MappingFragment StoreEntitySet="QuarantinedFile">
+                <ScalarProperty Name="QuarantinedPath" ColumnName="QuarantinedPath" />
+                <ScalarProperty Name="PluginFile" ColumnName="PluginFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
