@@ -110,7 +110,6 @@
 
         private void OkButtonClick(object sender, EventArgs e)
         {
-            pluginFileController.MoveFilesBasedOnQuarantineStatus(selectedPlugin.Files.ToList());
             pluginFileController.SaveChanges();
 
             Close();

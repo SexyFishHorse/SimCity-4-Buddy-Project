@@ -60,10 +60,6 @@
             entities.RevertChanges(files);
         }
 
-        public void MoveFilesBasedOnQuarantineStatus(IList<PluginFile> files)
-        {
-        }
-
         public void QuarantineFiles(IEnumerable<PluginFile> files)
         {
             foreach (var file in files)
