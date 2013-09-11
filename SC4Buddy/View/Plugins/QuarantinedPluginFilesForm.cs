@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.View.Plugins
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Data.Objects.DataClasses;
     using System.IO;
@@ -79,21 +80,20 @@
         {
             var items = activeFilesListView.SelectedItems;
 
-            MoveItemsBetweenListViews(activeFilesListView, disabledFilesListView, items, true);
+            MoveItemsBetweenListViews(activeFilesListView, disabledFilesListView, items);
         }
 
         private void EnableButtonClick(object sender, EventArgs e)
         {
             var items = disabledFilesListView.SelectedItems;
 
-            MoveItemsBetweenListViews(disabledFilesListView, activeFilesListView, items, false);
+            MoveItemsBetweenListViews(disabledFilesListView, activeFilesListView, items);
         }
 
         private void MoveItemsBetweenListViews(
             ListView originListView,
             ListView targetListView,
-            ListView.SelectedListViewItemCollection items,
-            bool quarantined)
+            IEnumerable items)
         {
             originListView.BeginUpdate();
             targetListView.BeginUpdate();
