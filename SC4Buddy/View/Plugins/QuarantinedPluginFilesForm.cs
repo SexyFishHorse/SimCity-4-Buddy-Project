@@ -63,6 +63,7 @@
                 var filename = new FileInfo(file.Path).Name;
                 listView.Items.Add(new ListViewItemWithObjectValue<PluginFile>(filename, file));
             }
+
             listView.EndUpdate();
         }
 
