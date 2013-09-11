@@ -111,8 +111,8 @@
 
         private void OkButtonClick(object sender, EventArgs e)
         {
-            var quarantined = (IEnumerable<ListViewItemWithObjectValue<PluginFile>>)disabledFilesListView.Items;
-            var unquarantined = (IEnumerable<ListViewItemWithObjectValue<PluginFile>>)activeFilesListView.Items;
+            var quarantined = disabledFilesListView.Items.Cast<ListViewItemWithObjectValue<PluginFile>>();
+            var unquarantined = activeFilesListView.Items.Cast<ListViewItemWithObjectValue<PluginFile>>();
             pluginFileController.QuarantineFiles(quarantined.Select(x => x.Value));
             pluginFileController.UnquarantineFiles(unquarantined.Select(x => x.Value));
             pluginFileController.SaveChanges();
