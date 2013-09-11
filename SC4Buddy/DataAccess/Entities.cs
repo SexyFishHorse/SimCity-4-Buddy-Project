@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Data.Objects.DataClasses;
-
-namespace NIHEI.SC4Buddy.DataAccess
+﻿namespace NIHEI.SC4Buddy.DataAccess
 {
+    using System.Collections.Generic;
     using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
 
     using NIHEI.SC4Buddy.Entities;
 
@@ -48,6 +47,14 @@ namespace NIHEI.SC4Buddy.DataAccess
             }
         }
 
+        public IObjectSet<QuarantinedFile> QuarantinedFiles
+        {
+            get
+            {
+                return entities.QuarantinedFile;
+            }
+        } 
+
         public void SaveChanges()
         {
             entities.SaveChanges();
@@ -58,7 +65,7 @@ namespace NIHEI.SC4Buddy.DataAccess
             entities.Refresh(RefreshMode.StoreWins, entityObject);
         }
 
-        public void RevertChanges(ICollection<EntityObject> entityCollection)
+        public void RevertChanges(IEnumerable<EntityObject> entityCollection)
         {
             entities.Refresh(RefreshMode.StoreWins, entityCollection);
         }
