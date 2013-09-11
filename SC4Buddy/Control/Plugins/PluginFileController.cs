@@ -65,7 +65,7 @@
             foreach (var file in files)
             {
                 var newPath = Path.Combine(Settings.Default.QuarantinedFilesPath, Path.GetRandomFileName());
-
+                Directory.CreateDirectory(Path.GetDirectoryName(newPath));
                 File.Copy(file.Path, newPath);
                 File.Delete(file.Path);
 
@@ -79,6 +79,7 @@
             {
                 if (file.QuarantinedFile != null)
                 {
+                    Directory.CreateDirectory(Path.GetDirectoryName(file.Path));
                     File.Copy(file.QuarantinedFile.QuarantinedPath, file.Path);
                     File.Delete(file.QuarantinedFile.QuarantinedPath);
                 }
