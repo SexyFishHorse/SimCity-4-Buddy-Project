@@ -10,14 +10,14 @@
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
 
+    using log4net;
+
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.Login;
-
-    using log4net;
 
     public partial class SettingsForm : Form
     {
@@ -30,6 +30,19 @@
             InitializeComponent();
 
             settingsController = new SettingsController(userFolderController);
+
+            var minOs = new Version(6, 2);
+            if (Environment.OSVersion.Version < minOs)
+            {
+                scanButton.Text = string.Empty;
+                scanButton.Image = Resources.IconZoom;
+            }
+
+            if (string.IsNullOrWhiteSpace(Settings.Default.QuarantinedFilesPath))
+            {
+                Settings.Default.QuarantinedFilesPath = settingsController.DefaultQuarantinedFilesPath;
+                Settings.Default.Save();
+            }
         }
 
         private void BrowseButtonClick(object sender, EventArgs e)
@@ -132,8 +145,6 @@
                                                           cpuPriorityComboBox.SelectedItem).Value.ToString()
                                                        : string.Empty;
 
-
-
             Settings.Default.Save();
 
             settingsController.UpdateMainFolder();
@@ -144,6 +155,8 @@
         private void CloseButtonClick(object sender, EventArgs e)
         {
             Log.Info("Closing settings form");
+
+            Settings.Default.Reload();
             Close();
         }
 
@@ -203,6 +216,15 @@
             UpdateBackgroundsListView();
 
             UpdateLoginStatus();
+
+            UpdateRemoteDatabaseAccessSettings();
+        }
+
+        private void UpdateRemoteDatabaseAccessSettings()
+        {
+            enableRemoteDatabaseConnectionCheckbox.Checked =
+                Settings.Default.AllowDependencyCheck
+                && Settings.Default.FetchInfoFromRemote;
         }
 
         private void UpdateCursorColourComboBox()
@@ -539,12 +561,16 @@
         {
             if (enableRemoteDatabaseConnectionCheckbox.Checked)
             {
+                fetchInformationFromRemoteCheckbox.Checked = true;
                 fetchInformationFromRemoteCheckbox.Enabled = true;
+                allowCheckMissingDependenciesCheckBox.Checked = true;
                 allowCheckMissingDependenciesCheckBox.Enabled = true;
             }
             else
             {
+                fetchInformationFromRemoteCheckbox.Checked = false;
                 fetchInformationFromRemoteCheckbox.Enabled = false;
+                allowCheckMissingDependenciesCheckBox.Checked = false;
                 allowCheckMissingDependenciesCheckBox.Enabled = false;
             }
         }
@@ -554,8 +580,30 @@
             var regEx = new Regex(@"\d+x\d+");
             var text = resolutionComboBox.Text.Trim();
 
-            return (regEx.IsMatch(text) || string.IsNullOrWhiteSpace(text)
-                    || text.Equals(LocalizationStrings.Ignore, StringComparison.OrdinalIgnoreCase));
+            return regEx.IsMatch(text) || string.IsNullOrWhiteSpace(text)
+                    || text.Equals(LocalizationStrings.Ignore, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private void BrowseQuarantinedButtonClick(object sender, EventArgs e)
+        {
+            var result = storeLocationDialog.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                var path = this.storeLocationDialog.SelectedPath;
+                this.SetQuarantinedPath(path);
+            }
+        }
+
+        private void QuarantinedFilesLocationTextBoxTextChanged(object sender, EventArgs e)
+        {
+            var path = quarantinedFilesLocationTextBox.Text.Trim();
+            this.SetQuarantinedPath(path);
+        }
+
+        private void SetQuarantinedPath(string path)
+        {
+            Settings.Default.QuarantinedFilesPath = path;
+            Log.Info(string.Format("Setting quarantined path to: {0}", path));
         }
     }
 }

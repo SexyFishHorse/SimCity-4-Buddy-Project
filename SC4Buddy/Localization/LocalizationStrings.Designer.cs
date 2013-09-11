@@ -953,6 +953,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The selected path does not exist..
+        /// </summary>
+        internal static string TheSelectedPathDoesNotExist {
+            get {
+                return ResourceManager.GetString("TheSelectedPathDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The site URL is invalid. Enter it in the format &quot;http://www.example.com&quot;..
         /// </summary>
         internal static string TheSiteUrlIsInvalid {

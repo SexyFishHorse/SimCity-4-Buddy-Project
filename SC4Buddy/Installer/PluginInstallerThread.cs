@@ -186,20 +186,18 @@
                         x => x.Path.Equals(installedFile.Path, StringComparison.OrdinalIgnoreCase));
                 if (existingPlugin != null)
                 {
-                    pluginFileController.Delete(existingPlugin);
+                    pluginFileController.Delete(existingPlugin, false);
                 }
             }
 
             var numDeleted = pluginController.RemoveEmptyPlugins();
 
-            if (plugin.Id > 0 || numDeleted > 0)
+            if (plugin.Id <= 0 && numDeleted <= 0)
             {
-                pluginController.SaveChanges();
+                this.pluginController.Add(plugin, false);
             }
-            else
-            {
-                pluginController.Add(plugin);
-            }
+
+            pluginController.SaveChanges();
         }
 
         private IEnumerable<PluginFile> HandlePluginFiles(PluginInstaller installer)

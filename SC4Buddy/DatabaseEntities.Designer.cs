@@ -22,6 +22,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("NIHEI.SC4Buddy.Entities", "FK_Plugin_File", "Plugin", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIHEI.SC4Buddy.Entities.Plugin), "File", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.PluginFile), true)]
 [assembly: EdmRelationshipAttribute("NIHEI.SC4Buddy.Entities", "FK_PluginGroup_Plugin", "PluginGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIHEI.SC4Buddy.Entities.PluginGroup), "Plugin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Plugin), true)]
 [assembly: EdmRelationshipAttribute("NIHEI.SC4Buddy.Entities", "FK_UserFolder_Plugin", "UserFolder", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIHEI.SC4Buddy.Entities.UserFolder), "Plugin", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIHEI.SC4Buddy.Entities.Plugin), true)]
+[assembly: EdmRelationshipAttribute("NIHEI.SC4Buddy.Entities", "FK_File_QuarantinedFile", "PluginFile", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIHEI.SC4Buddy.Entities.PluginFile), "QuarantinedFile", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIHEI.SC4Buddy.Entities.QuarantinedFile), true)]
 
 #endregion
 
@@ -136,6 +137,22 @@ namespace NIHEI.SC4Buddy.Entities
             }
         }
         private ObjectSet<UserFolder> _UserFolders;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<QuarantinedFile> QuarantinedFile
+        {
+            get
+            {
+                if ((_QuarantinedFile == null))
+                {
+                    _QuarantinedFile = base.CreateObjectSet<QuarantinedFile>("QuarantinedFile");
+                }
+                return _QuarantinedFile;
+            }
+        }
+        private ObjectSet<QuarantinedFile> _QuarantinedFile;
 
         #endregion
 
@@ -171,6 +188,14 @@ namespace NIHEI.SC4Buddy.Entities
         public void AddToUserFolders(UserFolder userFolder)
         {
             base.AddObject("UserFolders", userFolder);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the QuarantinedFile EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToQuarantinedFile(QuarantinedFile quarantinedFile)
+        {
+            base.AddObject("QuarantinedFile", quarantinedFile);
         }
 
         #endregion
@@ -682,6 +707,44 @@ namespace NIHEI.SC4Buddy.Entities
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("NIHEI.SC4Buddy.Entities", "FK_File_QuarantinedFile", "QuarantinedFile")]
+        public QuarantinedFile QuarantinedFile
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<QuarantinedFile>("NIHEI.SC4Buddy.Entities.FK_File_QuarantinedFile", "QuarantinedFile").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<QuarantinedFile>("NIHEI.SC4Buddy.Entities.FK_File_QuarantinedFile", "QuarantinedFile").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<QuarantinedFile> QuarantinedFileReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<QuarantinedFile>("NIHEI.SC4Buddy.Entities.FK_File_QuarantinedFile", "QuarantinedFile");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<QuarantinedFile>("NIHEI.SC4Buddy.Entities.FK_File_QuarantinedFile", "QuarantinedFile", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -787,6 +850,128 @@ namespace NIHEI.SC4Buddy.Entities
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Plugin>("NIHEI.SC4Buddy.Entities.FK_PluginGroup_Plugin", "Plugin", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="NIHEI.SC4Buddy.Entities", Name="QuarantinedFile")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class QuarantinedFile : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new QuarantinedFile object.
+        /// </summary>
+        /// <param name="pluginFile">Initial value of the PluginFile property.</param>
+        public static QuarantinedFile CreateQuarantinedFile(global::System.Int64 pluginFile)
+        {
+            QuarantinedFile quarantinedFile = new QuarantinedFile();
+            quarantinedFile.PluginFile = pluginFile;
+            return quarantinedFile;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 PluginFile
+        {
+            get
+            {
+                return _PluginFile;
+            }
+            set
+            {
+                if (_PluginFile != value)
+                {
+                    OnPluginFileChanging(value);
+                    ReportPropertyChanging("PluginFile");
+                    _PluginFile = StructuralObject.SetValidValue(value, "PluginFile");
+                    ReportPropertyChanged("PluginFile");
+                    OnPluginFileChanged();
+                }
+            }
+        }
+        private global::System.Int64 _PluginFile;
+        partial void OnPluginFileChanging(global::System.Int64 value);
+        partial void OnPluginFileChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String QuarantinedPath
+        {
+            get
+            {
+                return _QuarantinedPath;
+            }
+            set
+            {
+                OnQuarantinedPathChanging(value);
+                ReportPropertyChanging("QuarantinedPath");
+                _QuarantinedPath = StructuralObject.SetValidValue(value, true, "QuarantinedPath");
+                ReportPropertyChanged("QuarantinedPath");
+                OnQuarantinedPathChanged();
+            }
+        }
+        private global::System.String _QuarantinedPath;
+        partial void OnQuarantinedPathChanging(global::System.String value);
+        partial void OnQuarantinedPathChanged();
+
+        #endregion
+
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("NIHEI.SC4Buddy.Entities", "FK_File_QuarantinedFile", "PluginFile")]
+        public PluginFile File
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PluginFile>("NIHEI.SC4Buddy.Entities.FK_File_QuarantinedFile", "PluginFile").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PluginFile>("NIHEI.SC4Buddy.Entities.FK_File_QuarantinedFile", "PluginFile").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<PluginFile> FileReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PluginFile>("NIHEI.SC4Buddy.Entities.FK_File_QuarantinedFile", "PluginFile");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PluginFile>("NIHEI.SC4Buddy.Entities.FK_File_QuarantinedFile", "PluginFile", value);
                 }
             }
         }

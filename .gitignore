@@ -17,6 +17,7 @@ build/
 
 Installer/Installer-cache
 Installer/Installer-SetupFiles
+Installer/Installer-Output
 
 packages/*
 

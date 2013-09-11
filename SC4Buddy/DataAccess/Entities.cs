@@ -1,6 +1,8 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
+    using System.Collections.Generic;
     using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
 
     using NIHEI.SC4Buddy.Entities;
 
@@ -45,9 +47,27 @@
             }
         }
 
+        public IObjectSet<QuarantinedFile> QuarantinedFiles
+        {
+            get
+            {
+                return entities.QuarantinedFile;
+            }
+        } 
+
         public void SaveChanges()
         {
             entities.SaveChanges();
+        }
+
+        public void RevertChanges(EntityObject entityObject)
+        {
+            entities.Refresh(RefreshMode.StoreWins, entityObject);
+        }
+
+        public void RevertChanges(IEnumerable<EntityObject> entityCollection)
+        {
+            entities.Refresh(RefreshMode.StoreWins, entityCollection);
         }
     }
 }

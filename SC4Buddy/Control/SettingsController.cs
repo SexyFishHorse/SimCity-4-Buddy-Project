@@ -6,6 +6,9 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using System.Windows.Forms;
+
+    using log4net;
 
     using Microsoft.Win32;
 
@@ -13,22 +16,33 @@
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
 
-    using log4net;
-
     public class SettingsController : ISettingsController
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly string[] regKeys = {
-                                                @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
-                                                @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
-                                            };
+        private readonly string[] regKeys =
+        {
+            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+            @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+        };
 
         private readonly UserFolderController userFolderController;
 
         public SettingsController(UserFolderController userFolderController)
         {
             this.userFolderController = userFolderController;
+        }
+
+        public string DefaultQuarantinedFilesPath
+        {
+            get
+            {
+                var localAppData = Application.LocalUserAppDataPath.Substring(
+                    0,
+                    Application.LocalUserAppDataPath.LastIndexOf("\\", StringComparison.Ordinal));
+
+                return Path.Combine(localAppData, "QuarantinedFiles");
+            }
         }
 
         public bool ValidateGameLocationPath(string path)
@@ -111,7 +125,7 @@
             return gamePath;
         }
 
-        public List<string> GetInstalledLanguages()
+        public IEnumerable<string> GetInstalledLanguages()
         {
             var dirs = Directory.EnumerateDirectories(Settings.Default.GameLocation, "*", SearchOption.TopDirectoryOnly);
 
@@ -127,7 +141,7 @@
             return languages;
         }
 
-        public List<Bitmap> GetWallpapers()
+        public IList<Bitmap> GetWallpapers()
         {
             return new List<Bitmap>
                        {

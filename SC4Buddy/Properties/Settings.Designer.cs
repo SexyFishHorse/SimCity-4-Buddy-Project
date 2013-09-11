@@ -290,18 +290,6 @@ namespace NIHEI.SC4Buddy.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool EnableRemoteDatabaseConnection {
-            get {
-                return ((bool)(this["EnableRemoteDatabaseConnection"]));
-            }
-            set {
-                this["EnableRemoteDatabaseConnection"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool FetchInfoFromRemote {
             get {
                 return ((bool)(this["FetchInfoFromRemote"]));
@@ -337,7 +325,7 @@ namespace NIHEI.SC4Buddy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool AllowDependencyCheck {
             get {
                 return ((bool)(this["AllowDependencyCheck"]));
@@ -392,6 +380,18 @@ namespace NIHEI.SC4Buddy.Properties {
             }
             set {
                 this["LauncherWindowMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string QuarantinedFilesPath {
+            get {
+                return ((string)(this["QuarantinedFilesPath"]));
+            }
+            set {
+                this["QuarantinedFilesPath"] = value;
             }
         }
     }
