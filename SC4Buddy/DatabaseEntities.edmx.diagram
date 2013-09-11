@@ -12,6 +12,8 @@
         <AssociationConnector Association="NIHEI.SC4Buddy.Entities.FK_PluginGroup_Plugin" />
         <EntityTypeShape EntityType="NIHEI.SC4Buddy.Entities.UserFolder" Width="1.5" PointX="3.125" PointY="0.5" />
         <AssociationConnector Association="NIHEI.SC4Buddy.Entities.FK_UserFolder_Plugin" />
+        <EntityTypeShape EntityType="NIHEI.SC4Buddy.Entities.QuarantinedFile" Width="1.5" PointX="7.625" PointY="3.5" />
+        <AssociationConnector Association="NIHEI.SC4Buddy.Entities.FK_File_QuarantinedFile" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

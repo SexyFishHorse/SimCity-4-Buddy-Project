@@ -34,8 +34,8 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.installedPluginsListView = new System.Windows.Forms.ListView();
             this.pluginColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.disableFilesButton = new System.Windows.Forms.Button();
             this.moveOrCopyButton = new System.Windows.Forms.Button();
-            this.isRemoteInfoLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.descriptionRichTextBox = new System.Windows.Forms.RichTextBox();
             this.updateInfoButton = new System.Windows.Forms.Button();
@@ -97,8 +97,8 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.disableFilesButton);
             this.groupBox1.Controls.Add(this.moveOrCopyButton);
-            this.groupBox1.Controls.Add(this.isRemoteInfoLabel);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.updateInfoButton);
             this.groupBox1.Controls.Add(this.uninstallButton);
@@ -110,17 +110,19 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
+            // disableFilesButton
+            // 
+            resources.ApplyResources(this.disableFilesButton, "disableFilesButton");
+            this.disableFilesButton.Name = "disableFilesButton";
+            this.disableFilesButton.UseVisualStyleBackColor = true;
+            this.disableFilesButton.Click += new System.EventHandler(this.DisableFilesButtonClick);
+            // 
             // moveOrCopyButton
             // 
             resources.ApplyResources(this.moveOrCopyButton, "moveOrCopyButton");
             this.moveOrCopyButton.Name = "moveOrCopyButton";
             this.moveOrCopyButton.UseVisualStyleBackColor = true;
             this.moveOrCopyButton.Click += new System.EventHandler(this.MoveOrCopyButtonClick);
-            // 
-            // isRemoteInfoLabel
-            // 
-            resources.ApplyResources(this.isRemoteInfoLabel, "isRemoteInfoLabel");
-            this.isRemoteInfoLabel.Name = "isRemoteInfoLabel";
             // 
             // panel1
             // 
@@ -295,8 +297,8 @@ namespace NIHEI.SC4Buddy.View.UserFolders
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scanForNonpluginFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateInfoForAllPluginsFromServerToolStripMenuItem;
-        private System.Windows.Forms.Label isRemoteInfoLabel;
         private System.Windows.Forms.ToolStripMenuItem checkForMissingDependenciesToolStripMenuItem;
         private System.Windows.Forms.Button moveOrCopyButton;
+        private System.Windows.Forms.Button disableFilesButton;
     }
 }

@@ -7,13 +7,12 @@
     using System.Reflection;
     using System.Windows.Forms;
 
-    using NIHEI.SC4Buddy.Control;
-    using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Control.Remote;
-
     using log4net;
     using log4net.Config;
 
+    using NIHEI.SC4Buddy.Control;
+    using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;

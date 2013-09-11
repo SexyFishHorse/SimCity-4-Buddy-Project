@@ -69,7 +69,7 @@
         {
             RepopulateInstalledPluginsListView();
 
-            if (!Settings.Default.EnableRemoteDatabaseConnection || !NetworkInterface.GetIsNetworkAvailable())
+            if (!NetworkInterface.GetIsNetworkAvailable())
             {
                 updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = false;
                 checkForMissingDependenciesToolStripMenuItem.Visible = false;
@@ -118,10 +118,10 @@
                 linkLabel.Text = selectedPlugin.Link;
                 descriptionRichTextBox.Text = selectedPlugin.Description;
 
-                isRemoteInfoLabel.Visible = selectedPlugin.RemotePluginId != null;
-
                 uninstallButton.Enabled = true;
                 updateInfoButton.Enabled = selectedPlugin.RemotePluginId == null;
+                moveOrCopyButton.Enabled = true;
+                disableFilesButton.Enabled = true;
             }
             else
             {
@@ -129,6 +129,8 @@
 
                 uninstallButton.Enabled = false;
                 updateInfoButton.Enabled = false;
+                moveOrCopyButton.Enabled = false;
+                disableFilesButton.Enabled = false;
             }
         }
 
@@ -211,8 +213,7 @@
 
             RepopulateInstalledPluginsListView();
 
-            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.EnableRemoteDatabaseConnection
-                || !Settings.Default.AllowDependencyCheck)
+            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.AllowDependencyCheck)
             {
                 return;
             }
@@ -240,8 +241,7 @@
                 userFolder).ShowDialog(this);
             RepopulateInstalledPluginsListView();
 
-            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.EnableRemoteDatabaseConnection
-                || !Settings.Default.AllowDependencyCheck)
+            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.AllowDependencyCheck)
             {
                 return;
             }
@@ -332,11 +332,13 @@
             }
             else
             {
+                var message = string.Format(
+                    LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
+                    numRecognizedPlugins);
+
                 MessageBox.Show(
                     this,
-                    string.Format(
-                        LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
-                        numRecognizedPlugins),
+                    message,
                     LocalizationStrings.NoDependenciesMissing,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information,
@@ -387,6 +389,14 @@
                 LocalizationStrings.PluginCopied,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+        }
+
+        private void DisableFilesButtonClick(object sender, EventArgs e)
+        {
+            var dialog = new QuarantinedPluginFilesForm(
+                selectedPlugin,
+                new PluginFileController(EntityFactory.Instance.Entities));
+            var result = dialog.ShowDialog(this);
         }
     }
 }

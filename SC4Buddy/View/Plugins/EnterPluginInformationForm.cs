@@ -23,7 +23,7 @@
 
         public Plugin Plugin
         {
-            get
+            private get
             {
                 return plugin;
             }
@@ -46,9 +46,11 @@
                 installedFilesListView.BeginUpdate();
 
                 installedFilesListView.Items.Clear();
-                foreach (var file in value.Files)
+                foreach (var relativePath in value.Files
+                    .Where(x => x.QuarantinedFile == null)
+                    .Select(file => file.Path.Substring(plugin.UserFolder.PluginFolderPath.Length + 1)))
                 {
-                    installedFilesListView.Items.Add(file.Path);
+                    installedFilesListView.Items.Add(relativePath);
                 }
 
                 installedFilesListView.Columns[0].Width = -2;

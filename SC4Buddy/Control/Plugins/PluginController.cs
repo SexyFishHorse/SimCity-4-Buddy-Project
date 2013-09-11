@@ -3,8 +3,8 @@
     using System.Data.Objects;
     using System.Linq;
 
-    using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
+    using DataAccess;
+    using Entities;
 
     public class PluginController
     {
@@ -58,6 +58,11 @@
             }
 
             return counter;
+        }
+
+        public void RevertChanges(Plugin selectedPlugin)
+        {
+            entities.RevertChanges(selectedPlugin);
         }
     }
 }
