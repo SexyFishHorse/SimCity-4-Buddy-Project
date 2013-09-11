@@ -62,7 +62,7 @@
 
         public void QuarantineFiles(IEnumerable<PluginFile> files)
         {
-            foreach (var file in files)
+            foreach (var file in files.Where(x => File.Exists(x.Path)))
             {
                 var newPath = Path.Combine(Settings.Default.QuarantinedFilesPath, Path.GetRandomFileName());
                 Directory.CreateDirectory(Path.GetDirectoryName(newPath));
@@ -75,7 +75,7 @@
 
         public void UnquarantineFiles(IEnumerable<PluginFile> files)
         {
-            foreach (var file in files)
+            foreach (var file in files.Where(x => x.QuarantinedFile != null && File.Exists(x.QuarantinedFile.QuarantinedPath)))
             {
                 if (file.QuarantinedFile != null)
                 {
