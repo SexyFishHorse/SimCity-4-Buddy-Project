@@ -47,7 +47,7 @@
 
                 installedFilesListView.Items.Clear();
                 foreach (var relativePath in value.Files
-                    .Where(x => !x.Quarantined.HasValue || !x.Quarantined.Value)
+                    .Where(x => x.QuarantinedFile == null)
                     .Select(file => file.Path.Substring(plugin.UserFolder.PluginFolderPath.Length + 1)))
                 {
                     installedFilesListView.Items.Add(relativePath);
