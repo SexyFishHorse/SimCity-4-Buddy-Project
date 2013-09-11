@@ -102,8 +102,6 @@
             {
                 originListView.Items.Remove(item);
                 targetListView.Items.Add(item);
-
-                pluginFileController.SetQuarantineStatus(item.Value, quarantined);
             }
 
             targetListView.EndUpdate();

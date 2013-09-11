@@ -55,11 +55,6 @@
             SaveChanges();
         }
 
-        public void SetQuarantineStatus(PluginFile file, bool quarantined)
-        {
-            file.Quarantined = quarantined;
-        }
-
         public void RevertChanges(IEnumerable<EntityObject> files)
         {
             entities.RevertChanges(files);
