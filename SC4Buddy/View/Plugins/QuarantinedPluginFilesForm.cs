@@ -38,10 +38,10 @@
         private void QuarantinedPluginFilesFormLoad(object sender, EventArgs e)
         {
             var enabledFiles = this.selectedPlugin.Files
-                .Where(x => !x.Quarantined.HasValue || !x.Quarantined.Value)
+                .Where(x => x.QuarantinedFile == null)
                 .ToList();
             var disabledFiles = this.selectedPlugin.Files
-                .Where(x => x.Quarantined.HasValue && x.Quarantined.Value)
+                .Where(x => x.QuarantinedFile != null)
                 .ToList();
 
             PopulateListView(activeFilesListView, enabledFiles);
