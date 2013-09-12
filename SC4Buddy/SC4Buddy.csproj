@@ -432,6 +432,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\error.png" />
     <Content Include="Resources\icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
