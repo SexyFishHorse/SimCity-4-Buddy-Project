@@ -6,6 +6,7 @@
     using System.IO;
     using System.Linq;
     using System.Net.NetworkInformation;
+    using System.Text;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control;
@@ -122,6 +123,31 @@
                 updateInfoButton.Enabled = selectedPlugin.RemotePluginId == null;
                 moveOrCopyButton.Enabled = true;
                 disableFilesButton.Enabled = true;
+
+                if (selectedPlugin.RemotePlugin != null && selectedPlugin.RemotePlugin.Reports != null && selectedPlugin.RemotePlugin.Reports.Any(x => x.Approved))
+                {
+                    var output = new StringBuilder();
+
+                    foreach (
+                        var report in
+                            selectedPlugin.RemotePlugin.Reports.Where(x => x.Approved).OrderByDescending(x => x.Date))
+                    {
+                        var message = string.Format(
+                            "[{0}] - {1}",
+                            report.Date.ToString(CultureInfo.CurrentUICulture.DateTimeFormat),
+                            report.Body);
+
+                        output.AppendLine(message);
+                        output.AppendLine();
+                    }
+
+                    errorTextBox.Text = output.ToString();
+                    pluginInfoSplitContainer.Panel2Collapsed = false;
+                }
+                else
+                {
+                    pluginInfoSplitContainer.Panel2Collapsed = true;
+                }
             }
             else
             {
