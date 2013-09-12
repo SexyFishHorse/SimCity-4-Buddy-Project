@@ -79,8 +79,9 @@
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Approved" Type="bit" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
           <Property Name="Plugin" Type="int" Nullable="false" />
+          <Property Name="Date" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -221,7 +222,7 @@
           <NavigationProperty Name="PluginFiles" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin" FromRole="Plugin" ToRole="PluginFile" />
           <NavigationProperty Name="Dependencies" Relationship="NIHEI.SC4Buddy.Entities.Remote.PluginDependency" FromRole="Plugin" ToRole="Plugin1" />
           <NavigationProperty Name="DependencyFor" Relationship="NIHEI.SC4Buddy.Entities.Remote.PluginDependency" FromRole="Plugin1" ToRole="Plugin" />
-          <NavigationProperty Name="PluginReports" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_PluginReport_0" FromRole="RemotePlugin" ToRole="PluginReport" />
+          <NavigationProperty Name="Reports" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_PluginReport_0" FromRole="RemotePlugin" ToRole="PluginReport" />
         </EntityType>
         <EntityType Name="RemotePluginFile">
           <Key>
@@ -292,9 +293,10 @@
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="Approved" />
+          <Property Type="Boolean" Name="Approved" Nullable="false" />
           <Property Type="Int32" Name="PluginId" Nullable="false" />
           <NavigationProperty Name="Plugin" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_PluginReport_0" FromRole="PluginReport" ToRole="RemotePlugin" />
+          <Property Type="Int32" Name="Date" Nullable="false" />
         </EntityType>
         <Association Name="FK_PluginReport_0">
           <End Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Role="RemotePlugin" Multiplicity="1" />
@@ -367,6 +369,7 @@
           <EntitySetMapping Name="PluginReports">
             <EntityTypeMapping TypeName="NIHEI.SC4Buddy.Entities.Remote.PluginReport">
               <MappingFragment StoreEntitySet="PluginReport">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="PluginId" ColumnName="Plugin" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="Body" ColumnName="Body" />

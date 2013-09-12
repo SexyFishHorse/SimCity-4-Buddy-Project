@@ -418,13 +418,17 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// </summary>
         /// <param name="id">Initial value of the ID property.</param>
         /// <param name="body">Initial value of the Body property.</param>
+        /// <param name="approved">Initial value of the Approved property.</param>
         /// <param name="pluginId">Initial value of the PluginId property.</param>
-        public static PluginReport CreatePluginReport(global::System.Int32 id, global::System.String body, global::System.Int32 pluginId)
+        /// <param name="date">Initial value of the Date property.</param>
+        public static PluginReport CreatePluginReport(global::System.Int32 id, global::System.String body, global::System.Boolean approved, global::System.Int32 pluginId, global::System.Int32 date)
         {
             PluginReport pluginReport = new PluginReport();
             pluginReport.ID = id;
             pluginReport.Body = body;
+            pluginReport.Approved = approved;
             pluginReport.PluginId = pluginId;
+            pluginReport.Date = date;
             return pluginReport;
         }
 
@@ -486,9 +490,9 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Boolean> Approved
+        public global::System.Boolean Approved
         {
             get
             {
@@ -503,8 +507,8 @@ namespace NIHEI.SC4Buddy.Entities.Remote
                 OnApprovedChanged();
             }
         }
-        private Nullable<global::System.Boolean> _Approved;
-        partial void OnApprovedChanging(Nullable<global::System.Boolean> value);
+        private global::System.Boolean _Approved;
+        partial void OnApprovedChanging(global::System.Boolean value);
         partial void OnApprovedChanged();
     
         /// <summary>
@@ -530,6 +534,30 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         private global::System.Int32 _PluginId;
         partial void OnPluginIdChanging(global::System.Int32 value);
         partial void OnPluginIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Date
+        {
+            get
+            {
+                return _Date;
+            }
+            set
+            {
+                OnDateChanging(value);
+                ReportPropertyChanging("Date");
+                _Date = StructuralObject.SetValidValue(value, "Date");
+                ReportPropertyChanged("Date");
+                OnDateChanged();
+            }
+        }
+        private global::System.Int32 _Date;
+        partial void OnDateChanging(global::System.Int32 value);
+        partial void OnDateChanged();
 
         #endregion
 
@@ -844,7 +872,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("NIHEI.SC4Buddy.Entities.Remote", "FK_PluginReport_0", "PluginReport")]
-        public EntityCollection<PluginReport> PluginReports
+        public EntityCollection<PluginReport> Reports
         {
             get
             {
