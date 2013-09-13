@@ -47,6 +47,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.reportTextBox.Name = "reportTextBox";
             this.reportTextBox.Size = new System.Drawing.Size(378, 219);
             this.reportTextBox.TabIndex = 0;
+            this.reportTextBox.TextChanged += new System.EventHandler(this.ReportTextBoxTextChanged);
             // 
             // label1
             // 
@@ -72,6 +73,8 @@ namespace NIHEI.SC4Buddy.View.Plugins
             // reportButton
             // 
             this.reportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.reportButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.reportButton.Enabled = false;
             this.reportButton.Location = new System.Drawing.Point(234, 250);
             this.reportButton.Name = "reportButton";
             this.reportButton.Size = new System.Drawing.Size(75, 23);
@@ -87,6 +90,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(402, 285);
+            this.ControlBox = false;
             this.Controls.Add(this.reportButton);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.label1);

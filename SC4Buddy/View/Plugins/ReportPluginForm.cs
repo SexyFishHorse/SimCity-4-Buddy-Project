@@ -32,5 +32,10 @@
 
             Close();
         }
+
+        private void ReportTextBoxTextChanged(object sender, System.EventArgs e)
+        {
+            reportButton.Enabled = reportTextBox.Text.Trim().Length > 0;
+        }
     }
 }
