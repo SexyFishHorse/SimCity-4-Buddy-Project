@@ -431,7 +431,14 @@
 
         private void ReportPluginLinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var dialog = new ReportPluginForm { Plugin = this.selectedPlugin.RemotePlugin };
+            var dialog = new ReportPluginForm(new RemotePluginController(EntityFactory.Instance.RemoteEntities))
+                             {
+                                 Plugin
+                                     =
+                                     this
+                                     .selectedPlugin
+                                     .RemotePlugin
+                             };
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {

@@ -2,12 +2,16 @@
 {
     using System.Windows.Forms;
 
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
 
     public partial class ReportPluginForm : Form
     {
-        public ReportPluginForm()
+        private readonly RemotePluginController remotePluginController;
+
+        public ReportPluginForm(RemotePluginController remotePluginController)
         {
+            this.remotePluginController = remotePluginController;
             InitializeComponent();
         }
 
