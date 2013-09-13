@@ -34,17 +34,23 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.installedPluginsListView = new System.Windows.Forms.ListView();
             this.pluginColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.disableFilesButton = new System.Windows.Forms.Button();
-            this.moveOrCopyButton = new System.Windows.Forms.Button();
+            this.reportPluginLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.pluginInfoSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.authorLabel = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.descriptionRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.linkLabel = new System.Windows.Forms.LinkLabel();
+            this.errorPanel = new System.Windows.Forms.Panel();
+            this.errorTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.disableFilesButton = new System.Windows.Forms.Button();
+            this.moveOrCopyButton = new System.Windows.Forms.Button();
             this.updateInfoButton = new System.Windows.Forms.Button();
             this.uninstallButton = new System.Windows.Forms.Button();
-            this.linkLabel = new System.Windows.Forms.LinkLabel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.nameLabel = new System.Windows.Forms.Label();
-            this.authorLabel = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.closeButton = new System.Windows.Forms.Button();
             this.selectFilesToInstallDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -60,7 +66,13 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pluginInfoSplitContainer)).BeginInit();
+            this.pluginInfoSplitContainer.Panel1.SuspendLayout();
+            this.pluginInfoSplitContainer.Panel2.SuspendLayout();
+            this.pluginInfoSplitContainer.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.errorPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,32 +109,66 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.reportPluginLinkLabel);
+            this.groupBox1.Controls.Add(this.pluginInfoSplitContainer);
             this.groupBox1.Controls.Add(this.disableFilesButton);
             this.groupBox1.Controls.Add(this.moveOrCopyButton);
-            this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.updateInfoButton);
             this.groupBox1.Controls.Add(this.uninstallButton);
-            this.groupBox1.Controls.Add(this.linkLabel);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.nameLabel);
-            this.groupBox1.Controls.Add(this.authorLabel);
-            this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
-            // disableFilesButton
+            // reportPluginLinkLabel
             // 
-            resources.ApplyResources(this.disableFilesButton, "disableFilesButton");
-            this.disableFilesButton.Name = "disableFilesButton";
-            this.disableFilesButton.UseVisualStyleBackColor = true;
-            this.disableFilesButton.Click += new System.EventHandler(this.DisableFilesButtonClick);
+            resources.ApplyResources(this.reportPluginLinkLabel, "reportPluginLinkLabel");
+            this.reportPluginLinkLabel.Name = "reportPluginLinkLabel";
+            this.reportPluginLinkLabel.TabStop = true;
+            this.reportPluginLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ReportPluginLinkLabelLinkClicked);
             // 
-            // moveOrCopyButton
+            // pluginInfoSplitContainer
             // 
-            resources.ApplyResources(this.moveOrCopyButton, "moveOrCopyButton");
-            this.moveOrCopyButton.Name = "moveOrCopyButton";
-            this.moveOrCopyButton.UseVisualStyleBackColor = true;
-            this.moveOrCopyButton.Click += new System.EventHandler(this.MoveOrCopyButtonClick);
+            resources.ApplyResources(this.pluginInfoSplitContainer, "pluginInfoSplitContainer");
+            this.pluginInfoSplitContainer.Name = "pluginInfoSplitContainer";
+            // 
+            // pluginInfoSplitContainer.Panel1
+            // 
+            this.pluginInfoSplitContainer.Panel1.Controls.Add(this.panel2);
+            // 
+            // pluginInfoSplitContainer.Panel2
+            // 
+            this.pluginInfoSplitContainer.Panel2.Controls.Add(this.errorPanel);
+            this.pluginInfoSplitContainer.Panel2Collapsed = true;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.nameLabel);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.authorLabel);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.panel1);
+            this.panel2.Controls.Add(this.linkLabel);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // nameLabel
+            // 
+            resources.ApplyResources(this.nameLabel, "nameLabel");
+            this.nameLabel.Name = "nameLabel";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // authorLabel
+            // 
+            resources.ApplyResources(this.authorLabel, "authorLabel");
+            this.authorLabel.Name = "authorLabel";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
             // 
             // panel1
             // 
@@ -138,6 +184,50 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             resources.ApplyResources(this.descriptionRichTextBox, "descriptionRichTextBox");
             this.descriptionRichTextBox.Name = "descriptionRichTextBox";
             // 
+            // linkLabel
+            // 
+            resources.ApplyResources(this.linkLabel, "linkLabel");
+            this.linkLabel.Name = "linkLabel";
+            this.linkLabel.TabStop = true;
+            this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelLinkClicked);
+            // 
+            // errorPanel
+            // 
+            this.errorPanel.BackColor = System.Drawing.SystemColors.Info;
+            this.errorPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.errorPanel.Controls.Add(this.errorTextBox);
+            this.errorPanel.Controls.Add(this.label3);
+            resources.ApplyResources(this.errorPanel, "errorPanel");
+            this.errorPanel.Name = "errorPanel";
+            // 
+            // errorTextBox
+            // 
+            resources.ApplyResources(this.errorTextBox, "errorTextBox");
+            this.errorTextBox.BackColor = System.Drawing.SystemColors.Info;
+            this.errorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.errorTextBox.Name = "errorTextBox";
+            this.errorTextBox.ReadOnly = true;
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Image = global::NIHEI.SC4Buddy.Properties.Resources.IconError;
+            this.label3.Name = "label3";
+            // 
+            // disableFilesButton
+            // 
+            resources.ApplyResources(this.disableFilesButton, "disableFilesButton");
+            this.disableFilesButton.Name = "disableFilesButton";
+            this.disableFilesButton.UseVisualStyleBackColor = true;
+            this.disableFilesButton.Click += new System.EventHandler(this.DisableFilesButtonClick);
+            // 
+            // moveOrCopyButton
+            // 
+            resources.ApplyResources(this.moveOrCopyButton, "moveOrCopyButton");
+            this.moveOrCopyButton.Name = "moveOrCopyButton";
+            this.moveOrCopyButton.UseVisualStyleBackColor = true;
+            this.moveOrCopyButton.Click += new System.EventHandler(this.MoveOrCopyButtonClick);
+            // 
             // updateInfoButton
             // 
             resources.ApplyResources(this.updateInfoButton, "updateInfoButton");
@@ -151,33 +241,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.uninstallButton.Name = "uninstallButton";
             this.uninstallButton.UseVisualStyleBackColor = true;
             this.uninstallButton.Click += new System.EventHandler(this.UninstallButtonClick);
-            // 
-            // linkLabel
-            // 
-            resources.ApplyResources(this.linkLabel, "linkLabel");
-            this.linkLabel.Name = "linkLabel";
-            this.linkLabel.TabStop = true;
-            this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabelLinkClicked);
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
-            // 
-            // nameLabel
-            // 
-            resources.ApplyResources(this.nameLabel, "nameLabel");
-            this.nameLabel.Name = "nameLabel";
-            // 
-            // authorLabel
-            // 
-            resources.ApplyResources(this.authorLabel, "authorLabel");
-            this.authorLabel.Name = "authorLabel";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
             // 
             // closeButton
             // 
@@ -265,7 +328,15 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.pluginInfoSplitContainer.Panel1.ResumeLayout(false);
+            this.pluginInfoSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pluginInfoSplitContainer)).EndInit();
+            this.pluginInfoSplitContainer.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.errorPanel.ResumeLayout(false);
+            this.errorPanel.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -300,5 +371,11 @@ namespace NIHEI.SC4Buddy.View.UserFolders
         private System.Windows.Forms.ToolStripMenuItem checkForMissingDependenciesToolStripMenuItem;
         private System.Windows.Forms.Button moveOrCopyButton;
         private System.Windows.Forms.Button disableFilesButton;
+        private System.Windows.Forms.Panel errorPanel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox errorTextBox;
+        private System.Windows.Forms.SplitContainer pluginInfoSplitContainer;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.LinkLabel reportPluginLinkLabel;
     }
 }

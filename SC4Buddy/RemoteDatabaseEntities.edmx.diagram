@@ -13,6 +13,8 @@
         <AssociationConnector Association="NIHEI.SC4Buddy.Entities.Remote.FK_Plugin_Author" />
         <AssociationConnector Association="NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin" />
         <AssociationConnector Association="NIHEI.SC4Buddy.Entities.Remote.PluginDependency" />
+        <EntityTypeShape EntityType="NIHEI.SC4Buddy.Entities.Remote.PluginReport" Width="1.5" PointX="5.5" PointY="4.25" />
+        <AssociationConnector Association="NIHEI.SC4Buddy.Entities.Remote.FK_PluginReport_0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
