@@ -431,6 +431,17 @@
 
         private void ReportPluginLinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            var dialog = new ReportPluginForm { Plugin = this.selectedPlugin.RemotePlugin };
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.ThePluginHasBeenReportedAnAdministratorWillHaveToApproveItFirst,
+                    LocalizationStrings.PluginSuccessfullyReported,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
         }
     }
 }

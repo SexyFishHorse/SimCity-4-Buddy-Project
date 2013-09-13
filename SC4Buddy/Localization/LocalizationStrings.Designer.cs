@@ -791,6 +791,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Plugin successfully reported.
+        /// </summary>
+        internal static string PluginSuccessfullyReported {
+            get {
+                return ResourceManager.GetString("PluginSuccessfullyReported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Possible error detected..
         /// </summary>
         internal static string PossibleErrorDetected {
@@ -931,6 +940,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string ThePluginHasBeenAddedToTheCentralDatabase {
             get {
                 return ResourceManager.GetString("ThePluginHasBeenAddedToTheCentralDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The plugin has been reported. An administrator will have to approve it first until it shows up in Buddy..
+        /// </summary>
+        internal static string ThePluginHasBeenReportedAnAdministratorWillHaveToApproveItFirst {
+            get {
+                return ResourceManager.GetString("ThePluginHasBeenReportedAnAdministratorWillHaveToApproveItFirst", resourceCulture);
             }
         }
         
