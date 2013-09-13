@@ -24,6 +24,13 @@
 
         private void ReportButtonClick(object sender, System.EventArgs e)
         {
+            var report = new PluginReport { Approved = false, Body = reportTextBox.Text.Trim() };
+
+            Plugin.Reports.Add(report);
+
+            remotePluginController.SaveChanges();
+
+            Close();
         }
     }
 }
