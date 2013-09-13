@@ -5,7 +5,6 @@
     using System.Drawing;
     using System.IO;
     using System.Linq;
-    using System.Net.NetworkInformation;
     using System.Reflection;
     using System.Resources;
     using System.Threading;
@@ -15,14 +14,10 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
-    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
-    using NIHEI.SC4Buddy.View.Author;
-    using NIHEI.SC4Buddy.View.Developer;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.UserFolders;
 
@@ -38,43 +33,18 @@
 
         private readonly PluginGroupController pluginGroupController;
 
-        private readonly RemotePluginController remotePluginController;
-
-        private readonly RemotePluginFileController remotePluginFileController;
-
-        private readonly AuthorController authorController;
-
         public Sc4Buddy(
             UserFolderController userFolderController,
             PluginController pluginController,
-            PluginGroupController pluginGroupController,
-            RemotePluginController remotePluginController,
-            RemotePluginFileController remotePluginFileController,
-            AuthorController authorController)
+            PluginGroupController pluginGroupController)
         {
             this.userFolderController = userFolderController;
-            this.remotePluginController = remotePluginController;
-            this.authorController = authorController;
-            this.remotePluginFileController = remotePluginFileController;
             this.pluginGroupController = pluginGroupController;
             this.pluginController = pluginController;
 
             InitializeComponent();
 
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(Sc4Buddy));
-
-            SessionController.Instance.UserLoggedIn += OnUserLoggedIn;
-            SessionController.Instance.UserLoggedOut += OnUserLoggedOut;
-        }
-
-        private void OnUserLoggedOut(SessionController sender, SessionEventArgs eventargs)
-        {
-            UpdateToolsVisibility();
-        }
-
-        private void OnUserLoggedIn(SessionController sender, SessionEventArgs eventArgs)
-        {
-            UpdateToolsVisibility();
         }
 
         private void UserFolderComboBoxCheckSelectedValue(object sender, EventArgs e)
@@ -143,87 +113,9 @@
 
         private void Sc4BuddyLoad(object sender, EventArgs e)
         {
-            UpdateToolsVisibility();
-
-            var loginThread = new Thread(
-                () =>
-                {
-                    if (NetworkInterface.GetIsNetworkAvailable())
-                    {
-                        try
-                        {
-                            var ping = new Ping();
-                            var response = ping.Send("http://google.com");
-                            if (response.Status == IPStatus.Success)
-                            {
-                                AttemptAutoLogin();
-
-                                UpdateToolsVisibility();
-                            }
-
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Error("Error from auto-login", ex);
-                        }
-                    }
-                });
-
-            loginThread.Start();
-
             RepopulateUserFolderRelatives();
 
             UpdateBackground();
-        }
-
-        private void AttemptAutoLogin()
-        {
-            try
-            {
-                SessionController.Instance.AttemptAutoLogin();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error during auto-login", ex);
-
-                if (MessageBox.Show(
-                    this,
-                    LocalizationStrings.UnableToLogYouIntoTheSystem,
-                    LocalizationStrings.ErrorOccuredDuringLogin,
-                    MessageBoxButtons.RetryCancel,
-                    MessageBoxIcon.Error) == DialogResult.Retry)
-                {
-                    AttemptAutoLogin();
-                }
-            }
-        }
-
-        private void UpdateToolsVisibility()
-        {
-            developerToolStripMenuItem.Visible = false;
-            addPluginInformationToolStripMenuItem.Visible = false;
-            updatePluginInformationToolStripMenuItem.Visible = false;
-            myAuthorsToolStripMenuItem.Visible = false;
-
-            if (!SessionController.Instance.IsLoggedIn)
-            {
-                toolsToolStripMenuItem.Visible = false;
-                return;
-            }
-
-            toolsToolStripMenuItem.Visible = true;
-
-            if (SessionController.Instance.User.IsDeveloper)
-            {
-                developerToolStripMenuItem.Visible = true;
-            }
-
-            if (SessionController.Instance.User.IsAuthor || SessionController.Instance.User.IsDeveloper)
-            {
-                addPluginInformationToolStripMenuItem.Visible = true;
-                updatePluginInformationToolStripMenuItem.Visible = true;
-                myAuthorsToolStripMenuItem.Visible = true;
-            }
         }
 
         private void UpdateBackground()
@@ -326,36 +218,6 @@
             new SettingsForm(userFolderController).ShowDialog(this);
 
             UpdateBackground();
-        }
-
-        private void DeveloperToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            new DeveloperForm(
-                pluginController,
-                pluginGroupController,
-                userFolderController,
-                authorController,
-                remotePluginController,
-                remotePluginFileController).ShowDialog(this);
-        }
-
-        private void MyAuthorsToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            new MyAuthorsForm(authorController).ShowDialog(this);
-        }
-
-        private void AddPluginInformationToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            new AddPluginInformationForm(
-                authorController,
-                remotePluginController).ShowDialog(this);
-        }
-
-        private void UpdatePluginInformationToolStripMenuItemClick(object sender, EventArgs e)
-        {
-            new UpdatePluginInformationForm(
-                authorController,
-                remotePluginController).ShowDialog(this);
         }
 
         private void SupportToolStripMenuItemClick(object sender, EventArgs e)

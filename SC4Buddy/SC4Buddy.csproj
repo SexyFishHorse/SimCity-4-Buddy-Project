@@ -195,42 +195,6 @@
     <Compile Include="View\Application\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Author\FilesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Author\FilesForm.Designer.cs">
-      <DependentUpon>FilesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Author\AddPluginInformationForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Author\AddPluginInformationForm.Designer.cs">
-      <DependentUpon>AddPluginInformationForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Author\DependenciesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Author\DependenciesForm.Designer.cs">
-      <DependentUpon>DependenciesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Author\MyAuthorsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Author\MyAuthorsForm.Designer.cs">
-      <DependentUpon>MyAuthorsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Author\SelectInstalledPluginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Author\SelectInstalledPluginForm.Designer.cs">
-      <DependentUpon>SelectInstalledPluginForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Author\UpdatePluginInformationForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Author\UpdatePluginInformationForm.Designer.cs">
-      <DependentUpon>UpdatePluginInformationForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\Developer\DeveloperDependenciesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -339,24 +303,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Application\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Author\FilesForm.resx">
-      <DependentUpon>FilesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Author\AddPluginInformationForm.resx">
-      <DependentUpon>AddPluginInformationForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Author\DependenciesForm.resx">
-      <DependentUpon>DependenciesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Author\MyAuthorsForm.resx">
-      <DependentUpon>MyAuthorsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Author\SelectInstalledPluginForm.resx">
-      <DependentUpon>SelectInstalledPluginForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Author\UpdatePluginInformationForm.resx">
-      <DependentUpon>UpdatePluginInformationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Developer\DeveloperDependenciesForm.resx">
       <DependentUpon>DeveloperDependenciesForm.cs</DependentUpon>
