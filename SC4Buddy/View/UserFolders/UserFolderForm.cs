@@ -121,6 +121,7 @@
 
                 uninstallButton.Enabled = true;
                 updateInfoButton.Enabled = selectedPlugin.RemotePluginId == null;
+                reportPluginLinkLabel.Visible = selectedPlugin.RemotePluginId != null;
                 moveOrCopyButton.Enabled = true;
                 disableFilesButton.Enabled = true;
 
@@ -128,7 +129,6 @@
                     && selectedPlugin.RemotePlugin.Reports != null
                     && selectedPlugin.RemotePlugin.Reports.Any(x => x.Approved))
                 {
-                    reportPluginLinkLabel.Visible = true;
                     var output = new StringBuilder();
 
                     foreach (var report in selectedPlugin.RemotePlugin.Reports
@@ -149,7 +149,6 @@
                 }
                 else
                 {
-                    reportPluginLinkLabel.Visible = false;
                     pluginInfoSplitContainer.Panel2Collapsed = true;
                 }
             }
@@ -435,8 +434,7 @@
                              {
                                  Plugin
                                      =
-                                     this
-                                     .selectedPlugin
+                                     selectedPlugin
                                      .RemotePlugin
                              };
 
