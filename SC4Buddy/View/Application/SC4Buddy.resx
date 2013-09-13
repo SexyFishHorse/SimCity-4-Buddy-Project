@@ -157,36 +157,6 @@
   <data name="userFoldersToolStripMenuItem.Text" xml:space="preserve">
     <value>User folders</value>
   </data>
-  <data name="developerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 22</value>
-  </data>
-  <data name="developerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Developer</value>
-  </data>
-  <data name="addPluginInformationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 22</value>
-  </data>
-  <data name="addPluginInformationToolStripMenuItem.Text" xml:space="preserve">
-    <value>Add plugin information</value>
-  </data>
-  <data name="updatePluginInformationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 22</value>
-  </data>
-  <data name="updatePluginInformationToolStripMenuItem.Text" xml:space="preserve">
-    <value>Update plugin information</value>
-  </data>
-  <data name="myAuthorsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 22</value>
-  </data>
-  <data name="myAuthorsToolStripMenuItem.Text" xml:space="preserve">
-    <value>My authors</value>
-  </data>
-  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
-  </data>
-  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Tools</value>
-  </data>
   <data name="supportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 22</value>
   </data>
@@ -255,7 +225,7 @@
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAKgAAAA5CAYAAACicWBSAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAAAAd0SU1FB90HHhMRIBZFRxwAABkESURBVHhe7V13cBzXeVciW7IU27LsxJLtOLYs
+        DwAACw8BkvkDpQAAAAd0SU1FB90HHhMRIBZFRxwAABkESURBVHhe7V13cBzXeVciW7IU27LsxJLtOLYs
         2YklK7IUOXYyKbYnmqFmIkWjxLKSTIpkq5uoh3IN5XAFuDsceu8dh14IkOggSLChAwQ7wYZGACIlHoDD
         n/l+i13qsNi93TscaUx438w3xN3te+/b937vK+/7dnmfn+4eRUdH/4FWq/2cRqN9gOOoqKj72Z/vKu0m
         Wfy0CygyUvmMSqUpUao1R6JjYqd1uriTeoNxKlKpbgwOCflQqVR+kb30jhON9bRaoy1WqbW3ZYnTG6Yi
@@ -392,7 +362,7 @@
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAANYAAADWCAYAAACt43wuAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAAAAd0SU1FB90HHhIpJ558BHMAALGYSURBVHhe7F0FnBVVH/0MuktAEAOxke7u7pTu
+        DwAACw8BkvkDpQAAAAd0SU1FB90HHhIpJ558BHMAALGYSURBVHhe7F0FnBVVH/0MuktAEAOxke7u7pTu
         7lRCGlEQUUAERFC6u7thYRcWFnaX7m7Y3Re7e75z7nsPNgYFBEWFH+c3b+fN3Ll35pz7j3vnvv8BeIHn
         DLe9PsedTbUQvKYQQlZmdWFFlmi4uzI/bq6thqubu/A067Je4O+B5c4X+Otxb3d3BG2phaBVBRGy5H2E
         zEsCLIsPrEnwcPB7G4+7u/Bd3FySG9dWV8TlDW1xevtIFml9nRf4a2C58wX+Otzd3QX3VuSmQJIjbH58
@@ -3011,36 +2981,6 @@
   <data name="&gt;&gt;manageFoldersToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolsToolStripMenuItem.Name" xml:space="preserve">
-    <value>toolsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;toolsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;developerToolStripMenuItem.Name" xml:space="preserve">
-    <value>developerToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;developerToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;addPluginInformationToolStripMenuItem.Name" xml:space="preserve">
-    <value>addPluginInformationToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;addPluginInformationToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;updatePluginInformationToolStripMenuItem.Name" xml:space="preserve">
-    <value>updatePluginInformationToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;updatePluginInformationToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;myAuthorsToolStripMenuItem.Name" xml:space="preserve">
-    <value>myAuthorsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;myAuthorsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
     <value>helpToolStripMenuItem</value>
   </data>
@@ -3059,6 +2999,12 @@
   <data name="&gt;&gt;bugsAndFeedbackToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;openLogFileToolStripMenuItem.Name" xml:space="preserve">
+    <value>openLogFileToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;openLogFileToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
     <value>toolStripSeparator3</value>
   </data>
@@ -3069,12 +3015,6 @@
     <value>aboutToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;aboutToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;openLogFileToolStripMenuItem.Name" xml:space="preserve">
-    <value>openLogFileToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;openLogFileToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

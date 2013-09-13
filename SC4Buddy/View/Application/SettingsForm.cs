@@ -4,9 +4,7 @@
     using System.Drawing;
     using System.Globalization;
     using System.Linq;
-    using System.Net.NetworkInformation;
     using System.Reflection;
-    using System.Security.Authentication;
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
 
@@ -17,7 +15,6 @@
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Elements;
-    using NIHEI.SC4Buddy.View.Login;
 
     public partial class SettingsForm : Form
     {
@@ -215,8 +212,6 @@
 
             UpdateBackgroundsListView();
 
-            UpdateLoginStatus();
-
             UpdateRemoteDatabaseAccessSettings();
         }
 
@@ -403,36 +398,6 @@
             backgroundImageListView.EndUpdate();
         }
 
-        private void UpdateLoginStatus()
-        {
-            emailTextBox.Text = string.Empty;
-            passwordTextBox.Text = string.Empty;
-
-            if (SessionController.Instance.IsLoggedIn)
-            {
-                Log.Info("User is logged in");
-
-                logoutButton.Enabled = true;
-                loginButton.Enabled = false;
-                createLoginButton.Enabled = false;
-                emailTextBox.Text = SessionController.Instance.User.Email;
-                emailTextBox.Enabled = false;
-                passwordTextBox.Enabled = false;
-                loginStatusLabel.Text = string.Format(LocalizationStrings.LoggedInAs, SessionController.Instance.User.Email);
-            }
-            else
-            {
-                Log.Info("User is not logged in");
-
-                logoutButton.Enabled = false;
-                loginButton.Enabled = true;
-                createLoginButton.Enabled = true;
-                emailTextBox.Enabled = true;
-                passwordTextBox.Enabled = true;
-                loginStatusLabel.Text = LocalizationStrings.NoUserIsLoggedIn;
-            }
-        }
-
         private void UpdateLanguageComboBox()
         {
             if (!settingsController.ValidateGameLocationPath(Settings.Default.GameLocation))
@@ -485,9 +450,12 @@
         {
             Settings.Default.Reload();
 
-            if (!settingsController.ValidateGameLocationPath(Settings.Default.GameLocation))
+            if (settingsController.ValidateGameLocationPath(Settings.Default.GameLocation))
             {
-                var result = MessageBox.Show(
+                return;
+            }
+
+            var result = MessageBox.Show(
                 this,
                 LocalizationStrings.YouMustSettheGameLocationBeforeYouCanUseThisApplication,
                 LocalizationStrings.GameFolderNotSet,
@@ -495,66 +463,13 @@
                 MessageBoxIcon.Exclamation,
                 MessageBoxDefaultButton.Button1);
 
-                if (result != DialogResult.Retry)
-                {
-                    return;
-                }
-
-                Log.Info("Abort form close");
-                e.Cancel = true;
-            }
-        }
-
-        private void LoginButtonClick(object sender, EventArgs e)
-        {
-            try
-            {
-                Log.Info("Logging in");
-                SessionController.Instance.Login(emailTextBox.Text, passwordTextBox.Text);
-                UpdateLoginStatus();
-            }
-            catch (InvalidCredentialException ex)
-            {
-                Log.Error("error on login", ex);
-
-                MessageBox.Show(
-                    this,
-                    ex.Message,
-                    LocalizationStrings.InvalidCredentials,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation,
-                    MessageBoxDefaultButton.Button1);
-
-                passwordTextBox.Text = null;
-            }
-        }
-
-        private void LogoutButtonClick(object sender, EventArgs e)
-        {
-            SessionController.Instance.Logout();
-            UpdateLoginStatus();
-        }
-
-        private void CreateLoginButtonClick(object sender, EventArgs e)
-        {
-            new CreateLoginForm().ShowDialog(this);
-        }
-
-        private void TabPage3Click(object sender, EventArgs e)
-        {
-            if (NetworkInterface.GetIsNetworkAvailable())
+            if (result != DialogResult.Retry)
             {
                 return;
             }
 
-            Log.Info("No internet connection detected");
-            MessageBox.Show(
-                this,
-                LocalizationStrings.YouDoNotAppearToBeConnectedToTheInternet,
-                LocalizationStrings.NoInternetDetectionDetected,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning,
-                MessageBoxDefaultButton.Button1);
+            Log.Info("Abort form close");
+            e.Cancel = true;
         }
 
         private void EnableRemoteDatabaseConnectionCheckboxCheckedChanged(object sender, EventArgs e)
@@ -589,15 +504,15 @@
             var result = storeLocationDialog.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                var path = this.storeLocationDialog.SelectedPath;
-                this.SetQuarantinedPath(path);
+                var path = storeLocationDialog.SelectedPath;
+                SetQuarantinedPath(path);
             }
         }
 
         private void QuarantinedFilesLocationTextBoxTextChanged(object sender, EventArgs e)
         {
             var path = quarantinedFilesLocationTextBox.Text.Trim();
-            this.SetQuarantinedPath(path);
+            SetQuarantinedPath(path);
         }
 
         private void SetQuarantinedPath(string path)

@@ -12,7 +12,6 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
@@ -57,10 +56,7 @@
                         new Sc4Buddy(
                             userFolderController,
                             new PluginController(EntityFactory.Instance.Entities),
-                            new PluginGroupController(EntityFactory.Instance.Entities),
-                            new RemotePluginController(EntityFactory.Instance.RemoteEntities),
-                            new RemotePluginFileController(EntityFactory.Instance.RemoteEntities),
-                            new AuthorController(EntityFactory.Instance.RemoteEntities)));
+                            new PluginGroupController(EntityFactory.Instance.Entities)));
                 }
             }
             catch (Exception ex)
