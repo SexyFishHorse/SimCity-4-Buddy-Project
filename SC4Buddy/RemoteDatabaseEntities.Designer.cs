@@ -416,15 +416,15 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// <summary>
         /// Create a new PluginReport object.
         /// </summary>
-        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="id">Initial value of the Id property.</param>
         /// <param name="body">Initial value of the Body property.</param>
         /// <param name="approved">Initial value of the Approved property.</param>
         /// <param name="pluginId">Initial value of the PluginId property.</param>
         /// <param name="date">Initial value of the Date property.</param>
-        public static PluginReport CreatePluginReport(global::System.Int32 id, global::System.String body, global::System.Boolean approved, global::System.Int32 pluginId, global::System.Int32 date)
+        public static PluginReport CreatePluginReport(global::System.Int32 id, global::System.String body, global::System.Boolean approved, global::System.Int32 pluginId, global::System.DateTime date)
         {
             PluginReport pluginReport = new PluginReport();
-            pluginReport.ID = id;
+            pluginReport.Id = id;
             pluginReport.Body = body;
             pluginReport.Approved = approved;
             pluginReport.PluginId = pluginId;
@@ -441,27 +441,27 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 ID
+        public global::System.Int32 Id
         {
             get
             {
-                return _ID;
+                return _Id;
             }
             set
             {
-                if (_ID != value)
+                if (_Id != value)
                 {
-                    OnIDChanging(value);
-                    ReportPropertyChanging("ID");
-                    _ID = StructuralObject.SetValidValue(value, "ID");
-                    ReportPropertyChanged("ID");
-                    OnIDChanged();
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value, "Id");
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
                 }
             }
         }
-        private global::System.Int32 _ID;
-        partial void OnIDChanging(global::System.Int32 value);
-        partial void OnIDChanged();
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -540,7 +540,7 @@ namespace NIHEI.SC4Buddy.Entities.Remote
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 Date
+        public global::System.DateTime Date
         {
             get
             {
@@ -555,8 +555,8 @@ namespace NIHEI.SC4Buddy.Entities.Remote
                 OnDateChanged();
             }
         }
-        private global::System.Int32 _Date;
-        partial void OnDateChanging(global::System.Int32 value);
+        private global::System.DateTime _Date;
+        partial void OnDateChanging(global::System.DateTime value);
         partial void OnDateChanged();
 
         #endregion

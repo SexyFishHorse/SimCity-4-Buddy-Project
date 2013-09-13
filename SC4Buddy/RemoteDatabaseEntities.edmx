@@ -75,13 +75,13 @@
         </EntityType>
         <EntityType Name="PluginReport">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Approved" Type="bit" Nullable="false" />
           <Property Name="Plugin" Type="int" Nullable="false" />
-          <Property Name="Date" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -289,14 +289,14 @@
         </Association>
         <EntityType Name="PluginReport">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="Boolean" Name="Approved" Nullable="false" />
           <Property Type="Int32" Name="PluginId" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="0" />
           <NavigationProperty Name="Plugin" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_PluginReport_0" FromRole="PluginReport" ToRole="RemotePlugin" />
-          <Property Type="Int32" Name="Date" Nullable="false" />
         </EntityType>
         <Association Name="FK_PluginReport_0">
           <End Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Role="RemotePlugin" Multiplicity="1" />
@@ -373,7 +373,7 @@
                 <ScalarProperty Name="PluginId" ColumnName="Plugin" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
                 <ScalarProperty Name="Body" ColumnName="Body" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
