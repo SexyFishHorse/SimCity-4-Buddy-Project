@@ -124,13 +124,15 @@
                 moveOrCopyButton.Enabled = true;
                 disableFilesButton.Enabled = true;
 
-                if (selectedPlugin.RemotePlugin != null && selectedPlugin.RemotePlugin.Reports != null && selectedPlugin.RemotePlugin.Reports.Any(x => x.Approved))
+                if (selectedPlugin.RemotePlugin != null
+                    && selectedPlugin.RemotePlugin.Reports != null
+                    && selectedPlugin.RemotePlugin.Reports.Any(x => x.Approved))
                 {
                     var output = new StringBuilder();
 
-                    foreach (
-                        var report in
-                            selectedPlugin.RemotePlugin.Reports.Where(x => x.Approved).OrderByDescending(x => x.Date))
+                    foreach (var report in selectedPlugin.RemotePlugin.Reports
+                        .Where(x => x.Approved)
+                        .OrderByDescending(x => x.Date))
                     {
                         var message = string.Format(
                             "[{0}] - {1}",
