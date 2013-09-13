@@ -38,14 +38,10 @@ namespace NIHEI.SC4Buddy.View.Application
             this.userFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.manageFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.developerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addPluginInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updatePluginInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.myAuthorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.supportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bugsAndFeedbackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openLogFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundPanel = new System.Windows.Forms.Panel();
@@ -54,7 +50,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.panel2 = new System.Windows.Forms.Panel();
             this.userFolderComboBox = new System.Windows.Forms.ComboBox();
             this.playButton = new System.Windows.Forms.Button();
-            this.openLogFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.backgroundPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -67,7 +62,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.programToolStripMenuItem,
             this.userFoldersToolStripMenuItem,
-            this.toolsToolStripMenuItem,
             this.helpToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
@@ -117,40 +111,6 @@ namespace NIHEI.SC4Buddy.View.Application
             resources.ApplyResources(this.manageFoldersToolStripMenuItem, "manageFoldersToolStripMenuItem");
             this.manageFoldersToolStripMenuItem.Click += new System.EventHandler(this.ManageFoldersToolStripMenuItemClick);
             // 
-            // toolsToolStripMenuItem
-            // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.developerToolStripMenuItem,
-            this.addPluginInformationToolStripMenuItem,
-            this.updatePluginInformationToolStripMenuItem,
-            this.myAuthorsToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
-            // 
-            // developerToolStripMenuItem
-            // 
-            this.developerToolStripMenuItem.Name = "developerToolStripMenuItem";
-            resources.ApplyResources(this.developerToolStripMenuItem, "developerToolStripMenuItem");
-            this.developerToolStripMenuItem.Click += new System.EventHandler(this.DeveloperToolStripMenuItemClick);
-            // 
-            // addPluginInformationToolStripMenuItem
-            // 
-            this.addPluginInformationToolStripMenuItem.Name = "addPluginInformationToolStripMenuItem";
-            resources.ApplyResources(this.addPluginInformationToolStripMenuItem, "addPluginInformationToolStripMenuItem");
-            this.addPluginInformationToolStripMenuItem.Click += new System.EventHandler(this.AddPluginInformationToolStripMenuItemClick);
-            // 
-            // updatePluginInformationToolStripMenuItem
-            // 
-            this.updatePluginInformationToolStripMenuItem.Name = "updatePluginInformationToolStripMenuItem";
-            resources.ApplyResources(this.updatePluginInformationToolStripMenuItem, "updatePluginInformationToolStripMenuItem");
-            this.updatePluginInformationToolStripMenuItem.Click += new System.EventHandler(this.UpdatePluginInformationToolStripMenuItemClick);
-            // 
-            // myAuthorsToolStripMenuItem
-            // 
-            this.myAuthorsToolStripMenuItem.Name = "myAuthorsToolStripMenuItem";
-            resources.ApplyResources(this.myAuthorsToolStripMenuItem, "myAuthorsToolStripMenuItem");
-            this.myAuthorsToolStripMenuItem.Click += new System.EventHandler(this.MyAuthorsToolStripMenuItemClick);
-            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -173,6 +133,12 @@ namespace NIHEI.SC4Buddy.View.Application
             this.bugsAndFeedbackToolStripMenuItem.Name = "bugsAndFeedbackToolStripMenuItem";
             resources.ApplyResources(this.bugsAndFeedbackToolStripMenuItem, "bugsAndFeedbackToolStripMenuItem");
             this.bugsAndFeedbackToolStripMenuItem.Click += new System.EventHandler(this.BugsAndFeedbackToolStripMenuItemClick);
+            // 
+            // openLogFileToolStripMenuItem
+            // 
+            this.openLogFileToolStripMenuItem.Name = "openLogFileToolStripMenuItem";
+            resources.ApplyResources(this.openLogFileToolStripMenuItem, "openLogFileToolStripMenuItem");
+            this.openLogFileToolStripMenuItem.Click += new System.EventHandler(this.OpenLogFileToolStripMenuItemClick);
             // 
             // toolStripSeparator3
             // 
@@ -233,12 +199,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.playButton.UseVisualStyleBackColor = true;
             this.playButton.Click += new System.EventHandler(this.PlayButtonClick);
             // 
-            // openLogFileToolStripMenuItem
-            // 
-            this.openLogFileToolStripMenuItem.Name = "openLogFileToolStripMenuItem";
-            resources.ApplyResources(this.openLogFileToolStripMenuItem, "openLogFileToolStripMenuItem");
-            this.openLogFileToolStripMenuItem.Click += new System.EventHandler(this.OpenLogFileToolStripMenuItemClick);
-            // 
             // Sc4Buddy
             // 
             resources.ApplyResources(this, "$this");
@@ -274,11 +234,6 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem developerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addPluginInformationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem updatePluginInformationToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem myAuthorsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem supportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;

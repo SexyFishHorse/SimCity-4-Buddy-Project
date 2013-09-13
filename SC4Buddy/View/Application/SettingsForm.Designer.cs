@@ -87,16 +87,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.allowCheckMissingDependenciesCheckBox = new System.Windows.Forms.CheckBox();
             this.enableRemoteDatabaseConnectionCheckbox = new System.Windows.Forms.CheckBox();
             this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label11 = new System.Windows.Forms.Label();
-            this.passwordTextBox = new System.Windows.Forms.TextBox();
-            this.emailTextBox = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.createLoginButton = new System.Windows.Forms.Button();
-            this.loginStatusLabel = new System.Windows.Forms.Label();
-            this.logoutButton = new System.Windows.Forms.Button();
-            this.loginButton = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.RemoveNonPluginFilesAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
             this.AutoRunInstallerExecutablesCheckBox = new System.Windows.Forms.CheckBox();
@@ -117,7 +107,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,7 +131,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -565,75 +553,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.fetchInformationFromRemoteCheckbox.Name = "fetchInformationFromRemoteCheckbox";
             this.fetchInformationFromRemoteCheckbox.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.label11);
-            this.tabPage3.Controls.Add(this.passwordTextBox);
-            this.tabPage3.Controls.Add(this.emailTextBox);
-            this.tabPage3.Controls.Add(this.label10);
-            this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.createLoginButton);
-            this.tabPage3.Controls.Add(this.loginStatusLabel);
-            this.tabPage3.Controls.Add(this.logoutButton);
-            this.tabPage3.Controls.Add(this.loginButton);
-            resources.ApplyResources(this.tabPage3, "tabPage3");
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            this.tabPage3.Click += new System.EventHandler(this.TabPage3Click);
-            // 
-            // label11
-            // 
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.Name = "label11";
-            // 
-            // passwordTextBox
-            // 
-            resources.ApplyResources(this.passwordTextBox, "passwordTextBox");
-            this.passwordTextBox.Name = "passwordTextBox";
-            // 
-            // emailTextBox
-            // 
-            resources.ApplyResources(this.emailTextBox, "emailTextBox");
-            this.emailTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "UserEmail", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.UserEmail;
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
-            // 
-            // createLoginButton
-            // 
-            resources.ApplyResources(this.createLoginButton, "createLoginButton");
-            this.createLoginButton.Name = "createLoginButton";
-            this.createLoginButton.UseVisualStyleBackColor = true;
-            this.createLoginButton.Click += new System.EventHandler(this.CreateLoginButtonClick);
-            // 
-            // loginStatusLabel
-            // 
-            resources.ApplyResources(this.loginStatusLabel, "loginStatusLabel");
-            this.loginStatusLabel.Name = "loginStatusLabel";
-            // 
-            // logoutButton
-            // 
-            resources.ApplyResources(this.logoutButton, "logoutButton");
-            this.logoutButton.Name = "logoutButton";
-            this.logoutButton.UseVisualStyleBackColor = true;
-            this.logoutButton.Click += new System.EventHandler(this.LogoutButtonClick);
-            // 
-            // loginButton
-            // 
-            resources.ApplyResources(this.loginButton, "loginButton");
-            this.loginButton.Name = "loginButton";
-            this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.LoginButtonClick);
-            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.RemoveNonPluginFilesAfterInstallCheckBox);
@@ -711,8 +630,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.groupBox2.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
             this.ResumeLayout(false);
@@ -764,16 +681,6 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.CheckBox fetchInformationFromRemoteCheckbox;
         private System.Windows.Forms.CheckBox enableRemoteDatabaseConnectionCheckbox;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Label loginStatusLabel;
-        private System.Windows.Forms.Button logoutButton;
-        private System.Windows.Forms.Button loginButton;
-        private System.Windows.Forms.Button createLoginButton;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox passwordTextBox;
-        private System.Windows.Forms.TextBox emailTextBox;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.CheckBox allowCheckMissingDependenciesCheckBox;
         private System.Windows.Forms.TabPage tabPage5;
