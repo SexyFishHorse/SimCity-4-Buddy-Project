@@ -1,5 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.View.Plugins
 {
+    using System;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control.Remote;
@@ -24,7 +25,7 @@
 
         private void ReportButtonClick(object sender, System.EventArgs e)
         {
-            var report = new PluginReport { Approved = false, Body = reportTextBox.Text.Trim() };
+            var report = new PluginReport { Approved = false, Body = reportTextBox.Text.Trim(), Date = DateTime.UtcNow };
 
             Plugin.Reports.Add(report);
 
