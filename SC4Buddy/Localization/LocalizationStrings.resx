@@ -539,4 +539,10 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="TheSelectedPathDoesNotExist" xml:space="preserve">
     <value>The selected path does not exist.</value>
   </data>
+  <data name="PluginSuccessfullyReported" xml:space="preserve">
+    <value>Plugin successfully reported</value>
+  </data>
+  <data name="ThePluginHasBeenReportedAnAdministratorWillHaveToApproveItFirst" xml:space="preserve">
+    <value>The plugin has been reported. An administrator will have to approve it first until it shows up in Buddy.</value>
+  </data>
 </root>

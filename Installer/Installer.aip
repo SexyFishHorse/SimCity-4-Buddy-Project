@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DOCUMENT Type="Advanced Installer" CreateVersion="8.2" version="10.5" Modules="simple" RootPath="." Language="en" Id="{A2168EBB-2C3C-402D-9F50-2A67E1E11290}">
+<DOCUMENT Type="Advanced Installer" CreateVersion="8.2" version="10.5.1" Modules="simple" RootPath="." Language="en" Id="{A2168EBB-2C3C-402D-9F50-2A67E1E11290}">
   <COMPONENT cid="caphyon.advinst.msicomp.MsiValidationComponent">
     <ROW Table="File" Column="Sequence" MinValue="1" MaxValue="2147483647" Description="Sequence with respect to the media images; order must track cabinet order." Options="0" ColumnType="3" ColumnIndex="7" ColumnSize="4" MsiKey="File#Sequence"/>
     <ROW Table="Media" Column="LastSequence" MinValue="0" MaxValue="2147483647" Description="File sequence number for the last file for this media." Options="0" ColumnType="3" ColumnIndex="1" ColumnSize="4" MsiKey="Media#LastSequence"/>
@@ -50,7 +50,7 @@
     <ROW Component="SetupMadeWith" ComponentId="{745C34E2-49CE-4B53-A37C-3A7015AD2E3C}" Directory_="APPDIR" Attributes="4" KeyPath="SetupMadeWith"/>
     <ROW Component="SharpCompress.dll" ComponentId="{E042B390-F028-43B0-AFBE-7B322A62A5A7}" Directory_="APPDIR" Attributes="0" KeyPath="SharpCompress.dll"/>
     <ROW Component="icon.ico" ComponentId="{109B7B6B-4280-4F9A-95EC-BC4C5FE70FBC}" Directory_="Resources_Dir" Attributes="0" KeyPath="icon.ico" Type="0"/>
-    <ROW Component="jpg" ComponentId="{0704D65E-8DD9-4618-B306-EBABDB8F1493}" Directory_="Wallpapers_Dir" Attributes="0" KeyPath="jpg" Type="0"/>
+    <ROW Component="jpg" ComponentId="{8D54ECC8-C80B-49DE-A325-474F444D26E6}" Directory_="Wallpapers_Dir" Attributes="0" KeyPath="jpg" Type="0"/>
     <ROW Component="log4net.dll" ComponentId="{7FADDCAF-3DD9-48CD-B897-DEAF520C8AE2}" Directory_="APPDIR" Attributes="0" KeyPath="log4net.dll"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFeatsComponent">
@@ -58,28 +58,28 @@
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
-    <ROW File="Database.sdf_1" Component_="Database.sdf_1" FileName="Database.sdf" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Entities\Database.sdf" SelfReg="false"/>
+    <ROW File="Database.sdf_1" Component_="Database.sdf_1" FileName="Database.sdf" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Entities\Database.sdf" SelfReg="false" NextFile="jpg"/>
     <ROW File="EntityFramework.dll" Component_="EntityFramework.dll" FileName="Entity~1.dll|EntityFramework.dll" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\EntityFramework.dll" SelfReg="false" NextFile="log4net.dll"/>
     <ROW File="NiheiCommon.dll" Component_="NiheiCommon.dll" FileName="NiheiC~1.dll|NiheiCommon.dll" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\NiheiCommon.dll" SelfReg="false" NextFile="SC4Buddy.exe"/>
     <ROW File="SC4Buddy.exe" Component_="SC4Buddy.exe" FileName="SC4Buddy.exe" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\SC4Buddy.exe" SelfReg="false" NextFile="SC4Buddy.exe.config" DigSign="true"/>
     <ROW File="SC4Buddy.exe.config" Component_="SC4Buddy.exe.config" FileName="SC4Bud~1.con|SC4Buddy.exe.config" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\SC4Buddy.exe.config" SelfReg="false" NextFile="SharpCompress.dll"/>
     <ROW File="SharpCompress.dll" Component_="SharpCompress.dll" FileName="SharpC~1.dll|SharpCompress.dll" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\SharpCompress.dll" SelfReg="false" NextFile="icon.ico"/>
     <ROW File="icon.ico" Component_="icon.ico" FileName="icon.ico" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Resources\icon.ico" SelfReg="false" NextFile="logo.png"/>
-    <ROW File="jpg" Component_="jpg" FileName="1.jpg" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Wallpapers\1.jpg" SelfReg="false" NextFile="jpg_1"/>
-    <ROW File="jpg_1" Component_="jpg" FileName="10.jpg" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Wallpapers\10.jpg" SelfReg="false" NextFile="jpg_2"/>
-    <ROW File="jpg_10" Component_="jpg" FileName="7.jpg" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Wallpapers\7.jpg" SelfReg="false" NextFile="jpg_11"/>
-    <ROW File="jpg_11" Component_="jpg" FileName="8.jpg" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Wallpapers\8.jpg" SelfReg="false" NextFile="jpg_12"/>
-    <ROW File="jpg_12" Component_="jpg" FileName="9.jpg" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Wallpapers\9.jpg" SelfReg="false" NextFile="Database.sdf_1"/>
-    <ROW File="jpg_2" Component_="jpg" FileName="11.jpg" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Wallpapers\11.jpg" SelfReg="false" NextFile="jpg_3"/>
-    <ROW File="jpg_3" Component_="jpg" FileName="12.jpg" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Wallpapers\12.jpg" SelfReg="false" NextFile="jpg_4"/>
-    <ROW File="jpg_4" Component_="jpg" FileName="13.jpg" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Wallpapers\13.jpg" SelfReg="false" NextFile="jpg_5"/>
-    <ROW File="jpg_5" Component_="jpg" FileName="2.jpg" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Wallpapers\2.jpg" SelfReg="false" NextFile="jpg_6"/>
-    <ROW File="jpg_6" Component_="jpg" FileName="3.jpg" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Wallpapers\3.jpg" SelfReg="false" NextFile="jpg_7"/>
-    <ROW File="jpg_7" Component_="jpg" FileName="4.jpg" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Wallpapers\4.jpg" SelfReg="false" NextFile="jpg_8"/>
-    <ROW File="jpg_8" Component_="jpg" FileName="5.jpg" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Wallpapers\5.jpg" SelfReg="false" NextFile="jpg_9"/>
-    <ROW File="jpg_9" Component_="jpg" FileName="6.jpg" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Wallpapers\6.jpg" SelfReg="false" NextFile="jpg_10"/>
+    <ROW File="jpg" Component_="jpg" FileName="1.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\1.jpg" SelfReg="false" NextFile="jpg_1"/>
+    <ROW File="jpg_1" Component_="jpg" FileName="2.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\2.jpg" SelfReg="false" NextFile="jpg_2"/>
+    <ROW File="jpg_10" Component_="jpg" FileName="11.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\11.jpg" SelfReg="false" NextFile="jpg_11"/>
+    <ROW File="jpg_11" Component_="jpg" FileName="12.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\12.jpg" SelfReg="false" NextFile="jpg_12"/>
+    <ROW File="jpg_12" Component_="jpg" FileName="13.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\13.jpg" SelfReg="false"/>
+    <ROW File="jpg_2" Component_="jpg" FileName="3.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\3.jpg" SelfReg="false" NextFile="jpg_3"/>
+    <ROW File="jpg_3" Component_="jpg" FileName="4.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\4.jpg" SelfReg="false" NextFile="jpg_4"/>
+    <ROW File="jpg_4" Component_="jpg" FileName="5.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\5.jpg" SelfReg="false" NextFile="jpg_5"/>
+    <ROW File="jpg_5" Component_="jpg" FileName="6.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\6.jpg" SelfReg="false" NextFile="jpg_6"/>
+    <ROW File="jpg_6" Component_="jpg" FileName="7.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\7.jpg" SelfReg="false" NextFile="jpg_7"/>
+    <ROW File="jpg_7" Component_="jpg" FileName="8.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\8.jpg" SelfReg="false" NextFile="jpg_8"/>
+    <ROW File="jpg_8" Component_="jpg" FileName="9.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\9.jpg" SelfReg="false" NextFile="jpg_9"/>
+    <ROW File="jpg_9" Component_="jpg" FileName="10.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\10.jpg" SelfReg="false" NextFile="jpg_10"/>
     <ROW File="log4net.dll" Component_="log4net.dll" FileName="log4net.dll" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\log4net.dll" SelfReg="false" NextFile="NiheiCommon.dll"/>
-    <ROW File="logo.png" Component_="icon.ico" FileName="logo.png" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Resources\logo.png" SelfReg="false" NextFile="jpg"/>
+    <ROW File="logo.png" Component_="icon.ico" FileName="logo.png" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Resources\logo.png" SelfReg="false" NextFile="Database.sdf_1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
     <ROW BuildKey="DefaultBuild" BuildName="DefaultBuild" BuildOrder="1" BuildType="0" PackageFolder="Installer-Output" PackageFileName="Install SimCity 4 Buddy" Languages="en" InstallationType="4"/>

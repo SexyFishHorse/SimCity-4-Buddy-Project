@@ -10,6 +10,7 @@
           <EntitySet Name="Plugin" EntityType="NIHEI.SC4Buddy.Entities.Remote.Store.Plugin" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PluginDependency" EntityType="NIHEI.SC4Buddy.Entities.Remote.Store.PluginDependency" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="PluginFile" EntityType="NIHEI.SC4Buddy.Entities.Remote.Store.PluginFile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PluginReport" EntityType="NIHEI.SC4Buddy.Entities.Remote.Store.PluginReport" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="NIHEI.SC4Buddy.Entities.Remote.Store.User" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Author_User" Association="NIHEI.SC4Buddy.Entities.Remote.Store.FK_Author_User">
             <End Role="User" EntitySet="User" />
@@ -30,6 +31,10 @@
           <AssociationSet Name="FK_PluginFile_Plugin" Association="NIHEI.SC4Buddy.Entities.Remote.Store.FK_PluginFile_Plugin">
             <End Role="Plugin" EntitySet="Plugin" />
             <End Role="PluginFile" EntitySet="PluginFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PluginReport_0" Association="NIHEI.SC4Buddy.Entities.Remote.Store.FK_PluginReport_0">
+            <End Role="Plugin" EntitySet="Plugin" />
+            <End Role="PluginReport" EntitySet="PluginReport" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Author">
@@ -67,6 +72,16 @@
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="255" />
           <Property Name="Checksum" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PluginId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PluginReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
+          <Property Name="Plugin" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -140,6 +155,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_PluginReport_0">
+          <End Role="Plugin" Type="NIHEI.SC4Buddy.Entities.Remote.Store.Plugin" Multiplicity="1" />
+          <End Role="PluginReport" Type="NIHEI.SC4Buddy.Entities.Remote.Store.PluginReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plugin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PluginReport">
+              <PropertyRef Name="Plugin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -164,6 +191,11 @@
           <AssociationSet Name="PluginDependency" Association="NIHEI.SC4Buddy.Entities.Remote.PluginDependency">
             <End Role="Plugin" EntitySet="RemotePlugins" />
             <End Role="Plugin1" EntitySet="RemotePlugins" />
+          </AssociationSet>
+          <EntitySet Name="PluginReports" EntityType="NIHEI.SC4Buddy.Entities.Remote.PluginReport" />
+          <AssociationSet Name="FK_PluginReport_0" Association="NIHEI.SC4Buddy.Entities.Remote.FK_PluginReport_0">
+            <End Role="RemotePlugin" EntitySet="RemotePlugins" />
+            <End Role="PluginReport" EntitySet="PluginReports" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Author">
@@ -190,6 +222,7 @@
           <NavigationProperty Name="PluginFiles" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_PluginFile_Plugin" FromRole="Plugin" ToRole="PluginFile" />
           <NavigationProperty Name="Dependencies" Relationship="NIHEI.SC4Buddy.Entities.Remote.PluginDependency" FromRole="Plugin" ToRole="Plugin1" />
           <NavigationProperty Name="DependencyFor" Relationship="NIHEI.SC4Buddy.Entities.Remote.PluginDependency" FromRole="Plugin1" ToRole="Plugin" />
+          <NavigationProperty Name="Reports" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_PluginReport_0" FromRole="RemotePlugin" ToRole="PluginReport" />
         </EntityType>
         <EntityType Name="RemotePluginFile">
           <Key>
@@ -254,6 +287,29 @@
           <End Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Role="Plugin" Multiplicity="*" />
           <End Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Role="Plugin1" Multiplicity="*" />
         </Association>
+        <EntityType Name="PluginReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Body" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="Approved" Nullable="false" />
+          <Property Type="Int32" Name="PluginId" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Plugin" Relationship="NIHEI.SC4Buddy.Entities.Remote.FK_PluginReport_0" FromRole="PluginReport" ToRole="RemotePlugin" />
+        </EntityType>
+        <Association Name="FK_PluginReport_0">
+          <End Type="NIHEI.SC4Buddy.Entities.Remote.RemotePlugin" Role="RemotePlugin" Multiplicity="1" />
+          <End Type="NIHEI.SC4Buddy.Entities.Remote.PluginReport" Role="PluginReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RemotePlugin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PluginReport">
+              <PropertyRef Name="PluginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -310,6 +366,17 @@
               <ScalarProperty Name="Id" ColumnName="PluginId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="PluginReports">
+            <EntityTypeMapping TypeName="NIHEI.SC4Buddy.Entities.Remote.PluginReport">
+              <MappingFragment StoreEntitySet="PluginReport">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PluginId" ColumnName="Plugin" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="Body" ColumnName="Body" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
