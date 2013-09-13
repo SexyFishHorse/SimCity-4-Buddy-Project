@@ -18,12 +18,12 @@
 
         public RemotePlugin Plugin { get; set; }
 
-        private void CancelButtonClick(object sender, System.EventArgs e)
+        private void CancelButtonClick(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void ReportButtonClick(object sender, System.EventArgs e)
+        private void ReportButtonClick(object sender, EventArgs e)
         {
             var report = new PluginReport { Approved = false, Body = reportTextBox.Text.Trim(), Date = DateTime.UtcNow };
 
@@ -34,7 +34,7 @@
             Close();
         }
 
-        private void ReportTextBoxTextChanged(object sender, System.EventArgs e)
+        private void ReportTextBoxTextChanged(object sender, EventArgs e)
         {
             reportButton.Enabled = reportTextBox.Text.Trim().Length > 0;
         }
