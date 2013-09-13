@@ -16,5 +16,14 @@
         }
 
         public RemotePlugin Plugin { get; set; }
+
+        private void CancelButtonClick(object sender, System.EventArgs e)
+        {
+            Close();
+        }
+
+        private void ReportButtonClick(object sender, System.EventArgs e)
+        {
+        }
     }
 }
