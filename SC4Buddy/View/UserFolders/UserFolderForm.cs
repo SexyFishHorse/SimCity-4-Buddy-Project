@@ -128,6 +128,7 @@
                     && selectedPlugin.RemotePlugin.Reports != null
                     && selectedPlugin.RemotePlugin.Reports.Any(x => x.Approved))
                 {
+                    reportPluginLinkLabel.Visible = true;
                     var output = new StringBuilder();
 
                     foreach (var report in selectedPlugin.RemotePlugin.Reports
@@ -148,6 +149,7 @@
                 }
                 else
                 {
+                    reportPluginLinkLabel.Visible = false;
                     pluginInfoSplitContainer.Panel2Collapsed = true;
                 }
             }
@@ -425,6 +427,10 @@
                 selectedPlugin,
                 new PluginFileController(EntityFactory.Instance.Entities));
             var result = dialog.ShowDialog(this);
+        }
+
+        private void ReportPluginLinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
         }
     }
 }
