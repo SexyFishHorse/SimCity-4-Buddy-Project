@@ -385,6 +385,9 @@
     <EmbeddedResource Include="View\Plugins\QuarantinedPluginFilesForm.resx">
       <DependentUpon>QuarantinedPluginFilesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Plugins\ReportPluginForm.resx">
+      <DependentUpon>ReportPluginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\UserFolders\UserFolderForm.resx">
       <DependentUpon>UserFolderForm.cs</DependentUpon>
     </EmbeddedResource>
