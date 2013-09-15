@@ -423,6 +423,7 @@
 
         private void AutoGroupKnownPluginsClick(object sender, EventArgs e)
         {
+            folderScannerController.AutoGroupKnownFiles();
             RepopulateNewFilesListView();
         }
     }
