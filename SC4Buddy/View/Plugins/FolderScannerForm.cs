@@ -5,14 +5,10 @@
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
-    using System.Reflection;
     using System.Windows.Forms;
-
-    using log4net;
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Elements;
@@ -21,11 +17,7 @@
     {
         public const int ErrorIconPadding = -18;
 
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
         private readonly FolderScannerController folderScannerController;
-
-        private readonly PluginFileController pluginFileController;
 
         private readonly PluginController pluginController;
 
@@ -35,12 +27,9 @@
             FolderScannerController folderScannerController,
             PluginController pluginController,
             PluginGroupController pluginGroupController,
-            PluginFileController pluginFileController,
             UserFolder userFolder)
         {
             this.folderScannerController = folderScannerController;
-
-            this.pluginFileController = pluginFileController;
 
             this.pluginController = pluginController;
 
@@ -58,9 +47,44 @@
                     scanStatusLabel.Visible = false;
                     scanButton.Enabled = true;
                 };
+
+            folderScannerController.NewFilesFound += FolderScannerControllerOnNewFilesFound;
         }
 
         public UserFolder UserFolder { get; private set; }
+
+        private void FolderScannerControllerOnNewFilesFound(object sender, EventArgs eventArgs)
+        {
+            Invoke(new MethodInvoker(
+                () =>
+                {
+                    newFilesListView.BeginUpdate();
+                    newFilesListView.Items.Clear();
+
+                    foreach (var file in folderScannerController.NewFiles)
+                    {
+                        if (fileScannerBackgroundWorker.CancellationPending)
+                        {
+                            return;
+                        }
+
+                        var filename = file.Remove(0, UserFolder.PluginFolderPath.Length + 1);
+                        newFilesListView.Items.Add(filename);
+                    }
+
+                    ResizeColumns();
+
+                    newFilesListView.EndUpdate();
+
+                    if (!folderScannerController.NewFiles.Any())
+                    {
+                        return;
+                    }
+
+                    addAllButton.Enabled = true;
+                    autoGroupKnownPlugins.Enabled = true;
+                }));
+        }
 
         private void FileScannerBackgroundWorkerOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)
         {
@@ -69,72 +93,20 @@
 
         private void ScanFolder(object sender, EventArgs e)
         {
-            try
+            if (!folderScannerController.ScanFolder(UserFolder))
             {
-                var folderScanner = new FolderScanner(pluginFileController, UserFolder);
-
-                if (!folderScanner.ScanFolder())
-                {
-                    MessageBox.Show(
-                        this,
-                        LocalizationStrings.NoNewDeletedOrUpdatedFilesDetected,
-                        LocalizationStrings.NoFileChangesDetected,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information,
-                        MessageBoxDefaultButton.Button1);
-                    Close();
-                }
-
-                var newFiles = folderScanner.NewFiles.ToList();
-
-                newFilesListView.Invoke(
-                    new MethodInvoker(
-                        delegate
-                        {
-                            newFilesListView.BeginUpdate();
-                            newFilesListView.Items.Clear();
-
-                            foreach (var file in newFiles)
-                            {
-                                if (fileScannerBackgroundWorker.CancellationPending)
-                                {
-                                    return;
-                                }
-
-                                var filename = file.Remove(0, UserFolder.PluginFolderPath.Length + 1);
-                                newFilesListView.Items.Add(filename);
-                            }
-
-                            ResizeColumns();
-
-                            newFilesListView.EndUpdate();
-                        }));
-
-                if (!newFiles.Any())
-                {
-                    return;
-                }
-
-                addAllButton.Invoke(
-                    new MethodInvoker(
-                        delegate
-                        {
-                            addAllButton.Enabled = true;
-                        }));
-                autoGroupKnownPlugins.Invoke(new MethodInvoker(() => autoGroupKnownPlugins.Enabled = true));
-            }
-            catch (Exception ex)
-            {
-                Log.Error(string.Format("Error during folder scan: {0}", ex));
-
                 Invoke(new MethodInvoker(
                     () =>
-                    MessageBox.Show(
-                        this,
-                        string.Format(LocalizationStrings.TheFollowingErrorOccuredDuringTheFolderScan, ex.Message),
-                        LocalizationStrings.ErrorDuringFolderScan,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error)));
+                    {
+                        MessageBox.Show(
+                    this,
+                    LocalizationStrings.NoNewDeletedOrUpdatedFilesDetected,
+                    LocalizationStrings.NoFileChangesDetected,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
+                        Close();
+                    }));
             }
         }
 
@@ -349,7 +321,7 @@
                 plugin.Files.Add(pluginFile);
             }
 
-            pluginFileController.SaveChanges();
+            pluginController.SaveChanges();
 
             ClearInfoAndSelectedFilesForms();
 
@@ -450,7 +422,6 @@
 
         private void AutoGroupKnownPluginsClick(object sender, EventArgs e)
         {
-
         }
     }
 }

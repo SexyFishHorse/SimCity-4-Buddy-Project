@@ -264,10 +264,9 @@
         private void ScanForNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
             new FolderScannerForm(
-                new FolderScannerController(),
+                new FolderScannerController(new PluginFileController(EntityFactory.Instance.Entities)),
                 pluginController,
                 pluginGroupController,
-                new PluginFileController(EntityFactory.Instance.Entities),
                 userFolder).ShowDialog(this);
             RepopulateInstalledPluginsListView();
 
