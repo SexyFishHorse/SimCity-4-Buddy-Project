@@ -66,6 +66,14 @@
             return true;
         }
 
+        public RemotePlugin GetMostLikelyRemotePluginForFile(PluginFile file)
+        {
+            var matches = GetPossibleRemotePluginFilesForFile(file);
+            var remotePluginFile = matches.FirstOrDefault();
+
+            return remotePluginFile != null ? remotePluginFile.Plugin : null;
+        }
+
         private IEnumerable<RemotePluginFile> GetPossibleRemotePluginFilesForFile(PluginFile file)
         {
             var fileInfo = new FileInfo(file.Path);
