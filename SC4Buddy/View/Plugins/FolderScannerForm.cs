@@ -5,7 +5,10 @@
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Windows.Forms;
+
+    using log4net;
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
@@ -17,6 +20,8 @@
     public partial class FolderScannerForm : Form
     {
         public const int ErrorIconPadding = -18;
+
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly PluginFileController pluginFileController;
 
@@ -58,53 +63,69 @@
 
         private void ScanFolder(object sender, EventArgs e)
         {
-            var folderScanner = new FolderScanner(pluginFileController, UserFolder);
-
-            if (!folderScanner.ScanFolder())
+            try
             {
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.NoNewDeletedOrUpdatedFilesDetected,
-                    LocalizationStrings.NoFileChangesDetected,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1);
-                Close();
-            }
+                var folderScanner = new FolderScanner(pluginFileController, UserFolder);
 
-            var newFiles = folderScanner.NewFiles.ToList();
+                if (!folderScanner.ScanFolder())
+                {
+                    MessageBox.Show(
+                        this,
+                        LocalizationStrings.NoNewDeletedOrUpdatedFilesDetected,
+                        LocalizationStrings.NoFileChangesDetected,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button1);
+                    Close();
+                }
 
-            newFilesListView.Invoke(
-                new MethodInvoker(
-                    delegate
-                    {
-                        newFilesListView.BeginUpdate();
-                        newFilesListView.Items.Clear();
+                var newFiles = folderScanner.NewFiles.ToList();
 
-                        foreach (var file in newFiles)
-                        {
-                            if (fileScannerBackgroundWorker.CancellationPending)
-                            {
-                                return;
-                            }
-
-                            var filename = file.Remove(0, UserFolder.PluginFolderPath.Length + 1);
-                            newFilesListView.Items.Add(filename);
-                        }
-
-                        ResizeColumns();
-
-                        newFilesListView.EndUpdate();
-                    }));
-
-            if (newFiles.Any())
-            {
-                addAllButton.Invoke(
+                newFilesListView.Invoke(
                     new MethodInvoker(
                         delegate
                         {
-                            addAllButton.Enabled = true;
+                            newFilesListView.BeginUpdate();
+                            newFilesListView.Items.Clear();
+
+                            foreach (var file in newFiles)
+                            {
+                                if (fileScannerBackgroundWorker.CancellationPending)
+                                {
+                                    return;
+                                }
+
+                                var filename = file.Remove(0, UserFolder.PluginFolderPath.Length + 1);
+                                newFilesListView.Items.Add(filename);
+                            }
+
+                            ResizeColumns();
+
+                            newFilesListView.EndUpdate();
                         }));
+
+                if (newFiles.Any())
+                {
+                    addAllButton.Invoke(
+                        new MethodInvoker(
+                            delegate
+                            {
+                                addAllButton.Enabled = true;
+                            }));
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(string.Format("Error during folder scan: {0}", ex));
+
+                Invoke(new MethodInvoker(
+                    () =>
+                    MessageBox.Show(
+                        this,
+                        string.Format(LocalizationStrings.TheFollowingErrorOccuredDuringTheFolderScan, ex.Message),
+                        LocalizationStrings.ErrorDuringFolderScan,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error)));
             }
         }
 
