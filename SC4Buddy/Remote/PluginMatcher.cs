@@ -54,20 +54,20 @@
         public bool MatchAndUpdate(Plugin plugin)
         {
             var remotePlugin = GetMostLikelyRemotePlugin(plugin.Files.ToList());
-            if (remotePlugin != null)
+            if (remotePlugin == null)
             {
-                plugin.RemotePluginId = remotePlugin.Id;
-                plugin.Name = remotePlugin.Name;
-                plugin.Author = remotePlugin.Author.Name;
-                plugin.Link = remotePlugin.Link;
-                plugin.Description = remotePlugin.Description;
-
-                pluginController.SaveChanges();
-
-                return true;
+                return false;
             }
 
-            return false;
+            plugin.RemotePluginId = remotePlugin.Id;
+            plugin.Name = remotePlugin.Name;
+            plugin.Author = remotePlugin.Author.Name;
+            plugin.Link = remotePlugin.Link;
+            plugin.Description = remotePlugin.Description;
+
+            pluginController.SaveChanges();
+
+            return true;
         }
     }
 }
