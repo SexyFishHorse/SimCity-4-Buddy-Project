@@ -438,6 +438,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.autoGroupKnownPlugins.TabIndex = 9;
             this.autoGroupKnownPlugins.Text = "Auto-group known plugins";
             this.autoGroupKnownPlugins.UseVisualStyleBackColor = true;
+            this.autoGroupKnownPlugins.Click += new System.EventHandler(this.AutoGroupKnownPluginsClick);
             // 
             // FolderScannerForm
             // 

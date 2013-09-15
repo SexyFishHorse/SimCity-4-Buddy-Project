@@ -442,5 +442,10 @@
         {
             fileScannerBackgroundWorker.CancelAsync();
         }
+
+        private void AutoGroupKnownPluginsClick(object sender, EventArgs e)
+        {
+
+        }
     }
 }
