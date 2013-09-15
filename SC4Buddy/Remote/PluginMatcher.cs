@@ -28,7 +28,7 @@
 
             foreach (var file in files)
             {
-                fileMatches.AddRange(GetPossibleRemotePluginFilesForFile(file));
+                fileMatches.AddRange(GetPossibleRemotePluginFilesForFile(file.Path, file.Checksum));
             }
 
             var allPlugins = fileMatches.Select(match => match.Plugin).ToList();
@@ -66,19 +66,19 @@
             return true;
         }
 
-        public RemotePlugin GetMostLikelyRemotePluginForFile(PluginFile file)
+        public RemotePlugin GetMostLikelyRemotePluginForFile(string filePath, string checksum)
         {
-            var matches = GetPossibleRemotePluginFilesForFile(file);
+            var matches = GetPossibleRemotePluginFilesForFile(filePath, checksum);
             var remotePluginFile = matches.FirstOrDefault();
 
             return remotePluginFile != null ? remotePluginFile.Plugin : null;
         }
 
-        private IEnumerable<RemotePluginFile> GetPossibleRemotePluginFilesForFile(PluginFile file)
+        private IEnumerable<RemotePluginFile> GetPossibleRemotePluginFilesForFile(string filePath, string checksum)
         {
-            var fileInfo = new FileInfo(file.Path);
+            var fileInfo = new FileInfo(filePath);
             return remotePluginFileController.Files.Where(
-                    x => x.Name.Equals(fileInfo.Name, StringComparison.OrdinalIgnoreCase) && x.Checksum.Equals(file.Checksum));
+                    x => x.Name.Equals(fileInfo.Name, StringComparison.OrdinalIgnoreCase) && x.Checksum.Equals(checksum));
         }
     }
 }
