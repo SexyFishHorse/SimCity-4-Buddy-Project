@@ -204,7 +204,7 @@
             }
         }
 
-        private void RescanButtonClick(object sender, EventArgs e)
+        private void ScanButtonClick(object sender, EventArgs e)
         {
             scanningProgressLabel.Visible = true;
             Update();
