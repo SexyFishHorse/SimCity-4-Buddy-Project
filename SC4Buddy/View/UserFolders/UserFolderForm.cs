@@ -264,6 +264,7 @@
         private void ScanForNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
             new FolderScannerForm(
+                new FolderScannerController(),
                 pluginController,
                 pluginGroupController,
                 new PluginFileController(EntityFactory.Instance.Entities),

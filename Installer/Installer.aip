@@ -7,7 +7,9 @@
   <COMPONENT cid="caphyon.advinst.msicomp.MsiPropsComponent">
     <ROW Property="AI_BITMAP_DISPLAY_MODE" Value="0"/>
     <ROW Property="AI_MINDOTNETVERSION" MultiBuildValue="DefaultBuild:4.5" ValueLocId="-"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_App.config" Value="..\SC4Buddy"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_SC4Buddy.exe" Value="..\SC4Buddy\obj\Release"/>
+    <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_App.config" Value="App.config"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_SC4Buddy.exe" Value="SC4Buddy.exe"/>
     <ROW Property="AI_SQL_COMPACT" MultiBuildValue="DefaultBuild:SQL Server Compact 4.0" ValueLocId="-"/>
     <ROW Property="ALLUSERS" Value="2"/>
@@ -60,6 +62,7 @@
     <ATTRIBUTE name="CurrentFeature" value="MainFeature"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.MsiFilesComponent">
+    <ROW File="App.config" Component_="SC4Buddy_Built" FileName="App~2.con|[|AI_PROPPATH_FILENAME_PERBUILD_App.config]" Attributes="0" SourcePath="&lt;AI_APPPATH_PERBUILD_App.config&gt;" SelfReg="false"/>
     <ROW File="Database.sdf_1" Component_="Database.sdf_1" FileName="Database.sdf" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Entities\Database.sdf" SelfReg="false" NextFile="jpg"/>
     <ROW File="EntityFramework.dll" Component_="EntityFramework.dll" FileName="Entity~1.dll|EntityFramework.dll" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\EntityFramework.dll" SelfReg="false" NextFile="log4net.dll"/>
     <ROW File="NiheiCommon.dll" Component_="NiheiCommon.dll" FileName="NiheiC~1.dll|NiheiCommon.dll" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\NiheiCommon.dll" SelfReg="false" NextFile="SC4Buddy.exe"/>
@@ -71,7 +74,7 @@
     <ROW File="jpg_1" Component_="jpg" FileName="2.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\2.jpg" SelfReg="false" NextFile="jpg_2"/>
     <ROW File="jpg_10" Component_="jpg" FileName="11.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\11.jpg" SelfReg="false" NextFile="jpg_11"/>
     <ROW File="jpg_11" Component_="jpg" FileName="12.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\12.jpg" SelfReg="false" NextFile="jpg_12"/>
-    <ROW File="jpg_12" Component_="jpg" FileName="13.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\13.jpg" SelfReg="false"/>
+    <ROW File="jpg_12" Component_="jpg" FileName="13.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\13.jpg" SelfReg="false" NextFile="App.config"/>
     <ROW File="jpg_2" Component_="jpg" FileName="3.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\3.jpg" SelfReg="false" NextFile="jpg_3"/>
     <ROW File="jpg_3" Component_="jpg" FileName="4.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\4.jpg" SelfReg="false" NextFile="jpg_4"/>
     <ROW File="jpg_4" Component_="jpg" FileName="5.jpg" Attributes="0" SourcePath="..\SC4Buddy\Wallpapers\5.jpg" SelfReg="false" NextFile="jpg_5"/>
@@ -84,6 +87,7 @@
     <ROW File="logo.png" Component_="icon.ico" FileName="logo.png" Attributes="0" SourcePath="..\SC4Buddy\bin\Release\Resources\logo.png" SelfReg="false" NextFile="Database.sdf_1"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppPathsComponent">
+    <ROW Name="AI_APPPATH_PERBUILD_App.config" Path="[|AI_PROPPATH_DIR_PERBUILD_App.config]\[|AI_PROPPATH_FILENAME_PERBUILD_App.config]" Type="2" Content="0"/>
     <ROW Name="AI_APPPATH_PERBUILD_SC4Buddy.exe" Path="[|AI_PROPPATH_DIR_PERBUILD_SC4Buddy.exe]\[|AI_PROPPATH_FILENAME_PERBUILD_SC4Buddy.exe]" Type="2" Content="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">

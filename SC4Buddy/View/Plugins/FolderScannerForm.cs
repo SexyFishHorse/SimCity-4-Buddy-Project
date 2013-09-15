@@ -23,6 +23,8 @@
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        private readonly FolderScannerController folderScannerController;
+
         private readonly PluginFileController pluginFileController;
 
         private readonly PluginController pluginController;
@@ -30,11 +32,14 @@
         private readonly PluginGroupController pluginGroupController;
 
         public FolderScannerForm(
+            FolderScannerController folderScannerController,
             PluginController pluginController,
             PluginGroupController pluginGroupController,
             PluginFileController pluginFileController,
             UserFolder userFolder)
         {
+            this.folderScannerController = folderScannerController;
+
             this.pluginFileController = pluginFileController;
 
             this.pluginController = pluginController;
