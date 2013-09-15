@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections;
+    using System.ComponentModel;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
@@ -38,9 +39,74 @@
             UserFolder = userFolder;
 
             InitializeComponent();
+
+            fileScannerBackgroundWorker.DoWork += ScanFolder;
+            fileScannerBackgroundWorker.ProgressChanged += FileScannerBackgroundWorkerOnProgressChanged;
+            fileScannerBackgroundWorker.RunWorkerCompleted += delegate(object sender, RunWorkerCompletedEventArgs args)
+                {
+                    scanProgressBar.Visible = false;
+                    scanStatusLabel.Visible = false;
+                };
         }
 
         public UserFolder UserFolder { get; private set; }
+
+        private void FileScannerBackgroundWorkerOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)
+        {
+            scanProgressBar.Value = progressChangedEventArgs.ProgressPercentage;
+        }
+
+        private void ScanFolder(object sender, EventArgs e)
+        {
+            var folderScanner = new FolderScanner(pluginFileController, UserFolder);
+
+            if (!folderScanner.ScanFolder())
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.NoNewDeletedOrUpdatedFilesDetected,
+                    LocalizationStrings.NoFileChangesDetected,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
+                Close();
+            }
+
+            var newFiles = folderScanner.NewFiles.ToList();
+
+            newFilesListView.Invoke(
+                new MethodInvoker(
+                    delegate
+                    {
+                        newFilesListView.BeginUpdate();
+                        newFilesListView.Items.Clear();
+
+                        foreach (var file in newFiles)
+                        {
+                            if (fileScannerBackgroundWorker.CancellationPending)
+                            {
+                                return;
+                            }
+
+                            var filename = file.Remove(0, UserFolder.PluginFolderPath.Length + 1);
+                            newFilesListView.Items.Add(filename);
+                        }
+
+                        ResizeColumns();
+
+                        newFilesListView.EndUpdate();
+                    }));
+
+            if (newFiles.Any())
+            {
+                addAllButton.Invoke(
+                    new MethodInvoker(
+                        delegate
+                        {
+                            addAllButton.Enabled = true;
+                        }));
+            }
+        }
 
         private void NewFilesListViewSelectedIndexChanged(object sender, EventArgs e)
         {
@@ -206,43 +272,9 @@
 
         private void ScanButtonClick(object sender, EventArgs e)
         {
-            scanningProgressLabel.Visible = true;
-            Update();
-            var folderScanner = new FolderScanner(pluginFileController, UserFolder);
-
-            if (!folderScanner.ScanFolder())
-            {
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.NoNewDeletedOrUpdatedFilesDetected,
-                    LocalizationStrings.NoFileChangesDetected,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1);
-                Close();
-            }
-
-            var newFiles = folderScanner.NewFiles.ToList();
-
-            newFilesListView.BeginUpdate();
-            newFilesListView.Items.Clear();
-
-            foreach (var file in newFiles)
-            {
-                var filename = file.Remove(0, UserFolder.PluginFolderPath.Length + 1);
-                newFilesListView.Items.Add(filename);
-            }
-
-            ResizeColumns();
-
-            newFilesListView.EndUpdate();
-
-            if (newFiles.Any())
-            {
-                addAllButton.Enabled = true;
-            }
-
-            scanningProgressLabel.Visible = false;
+            fileScannerBackgroundWorker.RunWorkerAsync();
+            scanProgressBar.Visible = true;
+            scanStatusLabel.Visible = true;
         }
 
         private void SaveButtonClick(object sender, EventArgs e)
@@ -378,6 +410,11 @@
         private void NameTextBoxTextChanged(object sender, EventArgs e)
         {
             ValidatePluginInfo(false);
+        }
+
+        private void ScanProgressBarClick(object sender, EventArgs e)
+        {
+            fileScannerBackgroundWorker.CancelAsync();
         }
     }
 }
