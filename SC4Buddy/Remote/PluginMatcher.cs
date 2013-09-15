@@ -28,11 +28,7 @@
 
             foreach (var file in files)
             {
-                var fileInfo = new FileInfo(file.Path);
-                fileMatches.AddRange(
-                    remotePluginFileController.Files.Where(
-                        x =>
-                        x.Name.Equals(fileInfo.Name, StringComparison.OrdinalIgnoreCase) && x.Checksum.Equals(file.Checksum)));
+                fileMatches.AddRange(GetPossibleRemotePluginFilesForFile(file));
             }
 
             var allPlugins = fileMatches.Select(match => match.Plugin).ToList();
@@ -68,6 +64,13 @@
             pluginController.SaveChanges();
 
             return true;
+        }
+
+        private IEnumerable<RemotePluginFile> GetPossibleRemotePluginFilesForFile(PluginFile file)
+        {
+            var fileInfo = new FileInfo(file.Path);
+            return remotePluginFileController.Files.Where(
+                    x => x.Name.Equals(fileInfo.Name, StringComparison.OrdinalIgnoreCase) && x.Checksum.Equals(file.Checksum));
         }
     }
 }
