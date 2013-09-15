@@ -51,6 +51,7 @@
                 {
                     scanProgressBar.Visible = false;
                     scanStatusLabel.Visible = false;
+                    scanButton.Enabled = true;
                 };
         }
 
@@ -296,6 +297,7 @@
             fileScannerBackgroundWorker.RunWorkerAsync();
             scanProgressBar.Visible = true;
             scanStatusLabel.Visible = true;
+            scanButton.Enabled = false;
         }
 
         private void SaveButtonClick(object sender, EventArgs e)
