@@ -331,6 +331,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during folder scan.
+        /// </summary>
+        internal static string ErrorDuringFolderScan {
+            get {
+                return ResourceManager.GetString("ErrorDuringFolderScan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured during login..
         /// </summary>
         internal static string ErrorOccuredDuringLogin {
@@ -913,6 +922,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string TheFirstTimeYouRunThisProgramYouMustRunItAsAnAdministrator {
             get {
                 return ResourceManager.GetString("TheFirstTimeYouRunThisProgramYouMustRunItAsAnAdministrator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following error occured during the folder scan: &quot;{0}&quot;.
+        /// </summary>
+        internal static string TheFollowingErrorOccuredDuringTheFolderScan {
+            get {
+                return ResourceManager.GetString("TheFollowingErrorOccuredDuringTheFolderScan", resourceCulture);
             }
         }
         
