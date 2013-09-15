@@ -105,15 +105,18 @@
                             newFilesListView.EndUpdate();
                         }));
 
-                if (newFiles.Any())
+                if (!newFiles.Any())
                 {
-                    addAllButton.Invoke(
-                        new MethodInvoker(
-                            delegate
-                            {
-                                addAllButton.Enabled = true;
-                            }));
+                    return;
                 }
+
+                addAllButton.Invoke(
+                    new MethodInvoker(
+                        delegate
+                        {
+                            addAllButton.Enabled = true;
+                        }));
+                autoGroupKnownPlugins.Invoke(new MethodInvoker(() => autoGroupKnownPlugins.Enabled = true));
             }
             catch (Exception ex)
             {
