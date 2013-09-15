@@ -55,35 +55,36 @@
 
         private void FolderScannerControllerOnNewFilesFound(object sender, EventArgs eventArgs)
         {
-            Invoke(new MethodInvoker(
-                () =>
+            Invoke(new MethodInvoker(RepopulateNewFilesListView));
+        }
+
+        private void RepopulateNewFilesListView()
+        {
+            newFilesListView.BeginUpdate();
+            newFilesListView.Items.Clear();
+
+            foreach (var file in folderScannerController.NewFiles)
+            {
+                if (fileScannerBackgroundWorker.CancellationPending)
                 {
-                    newFilesListView.BeginUpdate();
-                    newFilesListView.Items.Clear();
+                    return;
+                }
 
-                    foreach (var file in folderScannerController.NewFiles)
-                    {
-                        if (fileScannerBackgroundWorker.CancellationPending)
-                        {
-                            return;
-                        }
+                var filename = file.Remove(0, UserFolder.PluginFolderPath.Length + 1);
+                newFilesListView.Items.Add(filename);
+            }
 
-                        var filename = file.Remove(0, UserFolder.PluginFolderPath.Length + 1);
-                        newFilesListView.Items.Add(filename);
-                    }
+            ResizeColumns();
 
-                    ResizeColumns();
+            newFilesListView.EndUpdate();
 
-                    newFilesListView.EndUpdate();
+            if (!folderScannerController.NewFiles.Any())
+            {
+                return;
+            }
 
-                    if (!folderScannerController.NewFiles.Any())
-                    {
-                        return;
-                    }
-
-                    addAllButton.Enabled = true;
-                    autoGroupKnownPlugins.Enabled = true;
-                }));
+            addAllButton.Enabled = true;
+            autoGroupKnownPlugins.Enabled = true;
         }
 
         private void FileScannerBackgroundWorkerOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)
@@ -422,6 +423,7 @@
 
         private void AutoGroupKnownPluginsClick(object sender, EventArgs e)
         {
+            RepopulateNewFilesListView();
         }
     }
 }
