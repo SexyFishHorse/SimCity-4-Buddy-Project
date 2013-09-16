@@ -23,7 +23,11 @@
 
         public IEnumerable<string> NewFiles { get; private set; }
 
-        public bool ScanFolder()
+        /// <summary>
+        /// Scans the folder for new files.
+        /// </summary>
+        /// <returns>TRUE on new files</returns>
+        public bool ScanFolderForNewFiles()
         {
             var entries = GetFiles();
 

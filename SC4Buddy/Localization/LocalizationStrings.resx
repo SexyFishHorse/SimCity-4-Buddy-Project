@@ -545,4 +545,11 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="ThePluginHasBeenReportedAnAdministratorWillHaveToApproveItFirst" xml:space="preserve">
     <value>The plugin has been reported. An administrator will have to approve it first until it shows up in Buddy.</value>
   </data>
+  <data name="ErrorDuringFolderScan" xml:space="preserve">
+    <value>Error during folder scan</value>
+  </data>
+  <data name="TheFollowingErrorOccuredDuringTheFolderScan" xml:space="preserve">
+    <value>The following error occured during the folder scan: "{0}"</value>
+    <comment>{0} will be replaced by an error message.</comment>
+  </data>
 </root>

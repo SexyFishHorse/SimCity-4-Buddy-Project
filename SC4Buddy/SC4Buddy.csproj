@@ -120,6 +120,7 @@
     <Compile Include="Control\GameLauncher.cs" />
     <Compile Include="Control\ISettingsController.cs" />
     <Compile Include="Control\NonPluginFilesScanner.cs" />
+    <Compile Include="Control\Plugins\FolderScannerController.cs" />
     <Compile Include="Control\Plugins\PluginCopier.cs" />
     <Compile Include="Control\Plugins\PluginGroupController.cs" />
     <Compile Include="Control\Remote\RemotePluginController.cs" />

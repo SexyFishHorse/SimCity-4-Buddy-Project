@@ -2,45 +2,116 @@
 {
     using System;
     using System.Collections;
+    using System.ComponentModel;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Control.UserFolders;
+    using NIHEI.SC4Buddy.Control.Remote;
+    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class FolderScannerForm : Form
     {
-        public const int ErrorIconPadding = -18;
+        private const int ErrorIconPadding = -18;
 
-        private readonly PluginFileController pluginFileController;
+        private readonly FolderScannerController folderScannerController;
 
         private readonly PluginController pluginController;
 
         private readonly PluginGroupController pluginGroupController;
 
+        private readonly UserFolder userFolder;
+
         public FolderScannerForm(
+            FolderScannerController folderScannerController,
             PluginController pluginController,
             PluginGroupController pluginGroupController,
-            PluginFileController pluginFileController,
             UserFolder userFolder)
         {
-            this.pluginFileController = pluginFileController;
+            this.folderScannerController = folderScannerController;
 
             this.pluginController = pluginController;
 
             this.pluginGroupController = pluginGroupController;
 
-            UserFolder = userFolder;
+            this.userFolder = userFolder;
 
             InitializeComponent();
+
+            fileScannerBackgroundWorker.DoWork += ScanFolder;
+            fileScannerBackgroundWorker.ProgressChanged += FileScannerBackgroundWorkerOnProgressChanged;
+            fileScannerBackgroundWorker.RunWorkerCompleted += delegate(object sender, RunWorkerCompletedEventArgs args)
+                {
+                    scanProgressBar.Visible = false;
+                    scanStatusLabel.Visible = false;
+                    scanButton.Enabled = true;
+                };
+
+            folderScannerController.NewFilesFound += FolderScannerControllerOnNewFilesFound;
         }
 
-        public UserFolder UserFolder { get; private set; }
+        private void FolderScannerControllerOnNewFilesFound(object sender, EventArgs eventArgs)
+        {
+            Invoke(new MethodInvoker(RepopulateNewFilesListView));
+        }
+
+        private void RepopulateNewFilesListView()
+        {
+            newFilesListView.BeginUpdate();
+            newFilesListView.Items.Clear();
+
+            foreach (var file in folderScannerController.NewFiles)
+            {
+                if (fileScannerBackgroundWorker.CancellationPending)
+                {
+                    return;
+                }
+
+                var filename = file.Remove(0, userFolder.PluginFolderPath.Length + 1);
+                newFilesListView.Items.Add(filename);
+            }
+
+            ResizeColumns();
+
+            newFilesListView.EndUpdate();
+
+            if (!folderScannerController.NewFiles.Any())
+            {
+                return;
+            }
+
+            addAllButton.Enabled = true;
+            autoGroupKnownPlugins.Enabled = true;
+        }
+
+        private void FileScannerBackgroundWorkerOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)
+        {
+            scanProgressBar.Value = progressChangedEventArgs.ProgressPercentage;
+        }
+
+        private void ScanFolder(object sender, EventArgs e)
+        {
+            if (!folderScannerController.ScanFolder(userFolder))
+            {
+                Invoke(new MethodInvoker(
+                    () =>
+                    {
+                        MessageBox.Show(
+                    this,
+                    LocalizationStrings.NoNewDeletedOrUpdatedFilesDetected,
+                    LocalizationStrings.NoFileChangesDetected,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
+                        Close();
+                    }));
+            }
+        }
 
         private void NewFilesListViewSelectedIndexChanged(object sender, EventArgs e)
         {
@@ -204,45 +275,12 @@
             }
         }
 
-        private void RescanButtonClick(object sender, EventArgs e)
+        private void ScanButtonClick(object sender, EventArgs e)
         {
-            scanningProgressLabel.Visible = true;
-            Update();
-            var folderScanner = new FolderScanner(pluginFileController, UserFolder);
-
-            if (!folderScanner.ScanFolder())
-            {
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.NoNewDeletedOrUpdatedFilesDetected,
-                    LocalizationStrings.NoFileChangesDetected,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1);
-                Close();
-            }
-
-            var newFiles = folderScanner.NewFiles.ToList();
-
-            newFilesListView.BeginUpdate();
-            newFilesListView.Items.Clear();
-
-            foreach (var file in newFiles)
-            {
-                var filename = file.Remove(0, UserFolder.PluginFolderPath.Length + 1);
-                newFilesListView.Items.Add(filename);
-            }
-
-            ResizeColumns();
-
-            newFilesListView.EndUpdate();
-
-            if (newFiles.Any())
-            {
-                addAllButton.Enabled = true;
-            }
-
-            scanningProgressLabel.Visible = false;
+            fileScannerBackgroundWorker.RunWorkerAsync();
+            scanProgressBar.Visible = true;
+            scanStatusLabel.Visible = true;
+            scanButton.Enabled = false;
         }
 
         private void SaveButtonClick(object sender, EventArgs e)
@@ -259,7 +297,7 @@
                                  Link = linkTextBox.Text.Trim(),
                                  Group = GetSelectedGroup(),
                                  Description = descriptionTextBox.Text.Trim(),
-                                 UserFolder = UserFolder
+                                 UserFolder = userFolder
                              };
 
             pluginController.Add(plugin);
@@ -278,15 +316,15 @@
                                        path =>
                                        new PluginFile
                                            {
-                                               Path = Path.Combine(UserFolder.PluginFolderPath, path),
-                                               Checksum = Md5ChecksumUtility.CalculateChecksum(Path.Combine(UserFolder.PluginFolderPath, path)).ToHex(),
+                                               Path = Path.Combine(userFolder.PluginFolderPath, path),
+                                               Checksum = Md5ChecksumUtility.CalculateChecksum(Path.Combine(userFolder.PluginFolderPath, path)).ToHex(),
                                                Plugin = plugin
                                            }))
             {
                 plugin.Files.Add(pluginFile);
             }
 
-            pluginFileController.SaveChanges();
+            pluginController.SaveChanges();
 
             ClearInfoAndSelectedFilesForms();
 
@@ -378,6 +416,20 @@
         private void NameTextBoxTextChanged(object sender, EventArgs e)
         {
             ValidatePluginInfo(false);
+        }
+
+        private void ScanProgressBarClick(object sender, EventArgs e)
+        {
+            fileScannerBackgroundWorker.CancelAsync();
+        }
+
+        private void AutoGroupKnownPluginsClick(object sender, EventArgs e)
+        {
+            folderScannerController.AutoGroupKnownFiles(
+                userFolder,
+                pluginController,
+                new RemotePluginFileController(EntityFactory.Instance.RemoteEntities));
+            RepopulateNewFilesListView();
         }
     }
 }

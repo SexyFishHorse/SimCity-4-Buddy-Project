@@ -54,12 +54,15 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.rescanButton = new System.Windows.Forms.Button();
+            this.scanButton = new System.Windows.Forms.Button();
             this.closeButton = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.scanningProgressLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.scanProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.scanStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.fileScannerBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.autoGroupKnownPlugins = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -82,10 +85,9 @@ namespace NIHEI.SC4Buddy.View.Plugins
             | System.Windows.Forms.AnchorStyles.Right)));
             this.newFilesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-            this.newFilesListView.Location = new System.Drawing.Point(9, 22);
-            this.newFilesListView.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
+            this.newFilesListView.Location = new System.Drawing.Point(6, 22);
             this.newFilesListView.Name = "newFilesListView";
-            this.newFilesListView.Size = new System.Drawing.Size(233, 352);
+            this.newFilesListView.Size = new System.Drawing.Size(239, 352);
             this.newFilesListView.TabIndex = 1;
             this.newFilesListView.UseCompatibleStateImageBehavior = false;
             this.newFilesListView.View = System.Windows.Forms.View.Details;
@@ -105,7 +107,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.columnHeader2});
             this.pluginFilesListView.Location = new System.Drawing.Point(3, 3);
             this.pluginFilesListView.Name = "pluginFilesListView";
-            this.pluginFilesListView.Size = new System.Drawing.Size(231, 352);
+            this.pluginFilesListView.Size = new System.Drawing.Size(230, 352);
             this.pluginFilesListView.TabIndex = 3;
             this.pluginFilesListView.UseCompatibleStateImageBehavior = false;
             this.pluginFilesListView.View = System.Windows.Forms.View.Details;
@@ -135,7 +137,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             // 
             this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.addButton.Enabled = false;
-            this.addButton.Location = new System.Drawing.Point(152, 380);
+            this.addButton.Location = new System.Drawing.Point(155, 380);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(90, 23);
             this.addButton.TabIndex = 3;
@@ -147,7 +149,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             // 
             this.addAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.addAllButton.Enabled = false;
-            this.addAllButton.Location = new System.Drawing.Point(9, 380);
+            this.addAllButton.Location = new System.Drawing.Point(6, 380);
             this.addAllButton.Name = "addAllButton";
             this.addAllButton.Size = new System.Drawing.Size(90, 23);
             this.addAllButton.TabIndex = 2;
@@ -196,7 +198,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.splitContainer2.Panel2.Controls.Add(this.nameTextBox);
             this.splitContainer2.Panel2.Controls.Add(this.label1);
             this.splitContainer2.Size = new System.Drawing.Size(490, 393);
-            this.splitContainer2.SplitterDistance = 237;
+            this.splitContainer2.SplitterDistance = 236;
             this.splitContainer2.SplitterWidth = 6;
             this.splitContainer2.TabIndex = 4;
             // 
@@ -204,7 +206,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             // 
             this.removeAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.removeAllButton.Enabled = false;
-            this.removeAllButton.Location = new System.Drawing.Point(143, 361);
+            this.removeAllButton.Location = new System.Drawing.Point(142, 361);
             this.removeAllButton.Name = "removeAllButton";
             this.removeAllButton.Size = new System.Drawing.Size(90, 23);
             this.removeAllButton.TabIndex = 5;
@@ -228,7 +230,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             // 
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.saveButton.Enabled = false;
-            this.saveButton.Location = new System.Drawing.Point(165, 361);
+            this.saveButton.Location = new System.Drawing.Point(168, 361);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 11;
@@ -246,7 +248,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.descriptionTextBox.Location = new System.Drawing.Point(6, 134);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(234, 221);
+            this.descriptionTextBox.Size = new System.Drawing.Size(237, 221);
             this.descriptionTextBox.TabIndex = 10;
             // 
             // label5
@@ -275,7 +277,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.groupComboBox.FormattingEnabled = true;
             this.groupComboBox.Location = new System.Drawing.Point(69, 81);
             this.groupComboBox.Name = "groupComboBox";
-            this.groupComboBox.Size = new System.Drawing.Size(171, 21);
+            this.groupComboBox.Size = new System.Drawing.Size(174, 21);
             this.groupComboBox.TabIndex = 6;
             // 
             // linkTextBox
@@ -284,7 +286,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             | System.Windows.Forms.AnchorStyles.Right)));
             this.linkTextBox.Location = new System.Drawing.Point(69, 55);
             this.linkTextBox.Name = "linkTextBox";
-            this.linkTextBox.Size = new System.Drawing.Size(171, 20);
+            this.linkTextBox.Size = new System.Drawing.Size(174, 20);
             this.linkTextBox.TabIndex = 5;
             // 
             // label3
@@ -311,7 +313,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             | System.Windows.Forms.AnchorStyles.Right)));
             this.authorTextBox.Location = new System.Drawing.Point(69, 29);
             this.authorTextBox.Name = "authorTextBox";
-            this.authorTextBox.Size = new System.Drawing.Size(171, 20);
+            this.authorTextBox.Size = new System.Drawing.Size(174, 20);
             this.authorTextBox.TabIndex = 2;
             // 
             // nameTextBox
@@ -320,7 +322,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             | System.Windows.Forms.AnchorStyles.Right)));
             this.nameTextBox.Location = new System.Drawing.Point(69, 3);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(171, 20);
+            this.nameTextBox.Size = new System.Drawing.Size(174, 20);
             this.nameTextBox.TabIndex = 1;
             this.nameTextBox.TextChanged += new System.EventHandler(this.NameTextBoxTextChanged);
             // 
@@ -354,22 +356,22 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.splitContainer1.SplitterWidth = 6;
             this.splitContainer1.TabIndex = 6;
             // 
-            // rescanButton
+            // scanButton
             // 
-            this.rescanButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.rescanButton.Location = new System.Drawing.Point(15, 430);
-            this.rescanButton.Name = "rescanButton";
-            this.rescanButton.Size = new System.Drawing.Size(75, 23);
-            this.rescanButton.TabIndex = 7;
-            this.rescanButton.Text = "Rescan";
-            this.rescanButton.UseVisualStyleBackColor = true;
-            this.rescanButton.Click += new System.EventHandler(this.RescanButtonClick);
+            this.scanButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.scanButton.Location = new System.Drawing.Point(12, 430);
+            this.scanButton.Name = "scanButton";
+            this.scanButton.Size = new System.Drawing.Size(75, 23);
+            this.scanButton.TabIndex = 7;
+            this.scanButton.Text = "Scan";
+            this.scanButton.UseVisualStyleBackColor = true;
+            this.scanButton.Click += new System.EventHandler(this.ScanButtonClick);
             // 
             // closeButton
             // 
             this.closeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Location = new System.Drawing.Point(687, 430);
+            this.closeButton.Location = new System.Drawing.Point(689, 430);
             this.closeButton.Name = "closeButton";
             this.closeButton.Size = new System.Drawing.Size(75, 23);
             this.closeButton.TabIndex = 8;
@@ -385,8 +387,9 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.autoGroupKnownPlugins);
             this.panel1.Controls.Add(this.splitContainer1);
-            this.panel1.Controls.Add(this.rescanButton);
+            this.panel1.Controls.Add(this.scanButton);
             this.panel1.Controls.Add(this.closeButton);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
@@ -397,19 +400,45 @@ namespace NIHEI.SC4Buddy.View.Plugins
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.scanningProgressLabel});
+            this.scanProgressBar,
+            this.scanStatusLabel});
             this.statusStrip1.Location = new System.Drawing.Point(0, 456);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(783, 22);
             this.statusStrip1.TabIndex = 10;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // scanningProgressLabel
+            // scanProgressBar
             // 
-            this.scanningProgressLabel.Name = "scanningProgressLabel";
-            this.scanningProgressLabel.Size = new System.Drawing.Size(149, 17);
-            this.scanningProgressLabel.Text = "Scanning for file changes...";
-            this.scanningProgressLabel.Visible = false;
+            this.scanProgressBar.MarqueeAnimationSpeed = 33;
+            this.scanProgressBar.Name = "scanProgressBar";
+            this.scanProgressBar.Size = new System.Drawing.Size(100, 16);
+            this.scanProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.scanProgressBar.Visible = false;
+            this.scanProgressBar.Click += new System.EventHandler(this.ScanProgressBarClick);
+            // 
+            // scanStatusLabel
+            // 
+            this.scanStatusLabel.Name = "scanStatusLabel";
+            this.scanStatusLabel.Size = new System.Drawing.Size(444, 17);
+            this.scanStatusLabel.Text = "Scanning folder. This may take a few minutes if you have a very large plugin fold" +
+    "er.";
+            this.scanStatusLabel.Visible = false;
+            // 
+            // fileScannerBackgroundWorker
+            // 
+            this.fileScannerBackgroundWorker.WorkerReportsProgress = true;
+            // 
+            // autoGroupKnownPlugins
+            // 
+            this.autoGroupKnownPlugins.Enabled = false;
+            this.autoGroupKnownPlugins.Location = new System.Drawing.Point(93, 430);
+            this.autoGroupKnownPlugins.Name = "autoGroupKnownPlugins";
+            this.autoGroupKnownPlugins.Size = new System.Drawing.Size(146, 23);
+            this.autoGroupKnownPlugins.TabIndex = 9;
+            this.autoGroupKnownPlugins.Text = "Auto-group known plugins";
+            this.autoGroupKnownPlugins.UseVisualStyleBackColor = true;
+            this.autoGroupKnownPlugins.Click += new System.EventHandler(this.AutoGroupKnownPluginsClick);
             // 
             // FolderScannerForm
             // 
@@ -470,11 +499,14 @@ namespace NIHEI.SC4Buddy.View.Plugins
         private System.Windows.Forms.ComboBox groupComboBox;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.Button rescanButton;
+        private System.Windows.Forms.Button scanButton;
         private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStripStatusLabel scanningProgressLabel;
+        private System.ComponentModel.BackgroundWorker fileScannerBackgroundWorker;
+        private System.Windows.Forms.ToolStripProgressBar scanProgressBar;
+        private System.Windows.Forms.ToolStripStatusLabel scanStatusLabel;
+        private System.Windows.Forms.Button autoGroupKnownPlugins;
     }
 }
