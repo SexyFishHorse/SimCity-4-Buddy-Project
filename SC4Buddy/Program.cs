@@ -108,7 +108,7 @@
             }
             else
             {
-                // TODO: Version check before move.
+                // TODO: Update database
             }
         }
 
