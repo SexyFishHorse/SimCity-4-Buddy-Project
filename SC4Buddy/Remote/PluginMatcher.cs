@@ -28,11 +28,7 @@
 
             foreach (var file in files)
             {
-                var fileInfo = new FileInfo(file.Path);
-                fileMatches.AddRange(
-                    remotePluginFileController.Files.Where(
-                        x =>
-                        x.Name.Equals(fileInfo.Name, StringComparison.OrdinalIgnoreCase) && x.Checksum.Equals(file.Checksum)));
+                fileMatches.AddRange(GetPossibleRemotePluginFilesForFile(file.Path, file.Checksum));
             }
 
             var allPlugins = fileMatches.Select(match => match.Plugin).ToList();
@@ -54,20 +50,35 @@
         public bool MatchAndUpdate(Plugin plugin)
         {
             var remotePlugin = GetMostLikelyRemotePlugin(plugin.Files.ToList());
-            if (remotePlugin != null)
+            if (remotePlugin == null)
             {
-                plugin.RemotePluginId = remotePlugin.Id;
-                plugin.Name = remotePlugin.Name;
-                plugin.Author = remotePlugin.Author.Name;
-                plugin.Link = remotePlugin.Link;
-                plugin.Description = remotePlugin.Description;
-
-                pluginController.SaveChanges();
-
-                return true;
+                return false;
             }
 
-            return false;
+            plugin.RemotePluginId = remotePlugin.Id;
+            plugin.Name = remotePlugin.Name;
+            plugin.Author = remotePlugin.Author.Name;
+            plugin.Link = remotePlugin.Link;
+            plugin.Description = remotePlugin.Description;
+
+            pluginController.SaveChanges();
+
+            return true;
+        }
+
+        public RemotePlugin GetMostLikelyRemotePluginForFile(string filePath, string checksum)
+        {
+            var matches = GetPossibleRemotePluginFilesForFile(filePath, checksum);
+            var remotePluginFile = matches.FirstOrDefault();
+
+            return remotePluginFile != null ? remotePluginFile.Plugin : null;
+        }
+
+        private IEnumerable<RemotePluginFile> GetPossibleRemotePluginFilesForFile(string filePath, string checksum)
+        {
+            var fileInfo = new FileInfo(filePath);
+            return remotePluginFileController.Files.Where(
+                    x => x.Name.Equals(fileInfo.Name, StringComparison.OrdinalIgnoreCase) && x.Checksum.Equals(checksum));
         }
     }
 }
