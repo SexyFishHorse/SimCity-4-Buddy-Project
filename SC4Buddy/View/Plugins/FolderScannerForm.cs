@@ -17,7 +17,7 @@
 
     public partial class FolderScannerForm : Form
     {
-        public const int ErrorIconPadding = -18;
+        private const int ErrorIconPadding = -18;
 
         private readonly FolderScannerController folderScannerController;
 
