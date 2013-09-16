@@ -459,7 +459,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Entities\Database.sdf">
+    <Content Include="Temp\Database.sdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
