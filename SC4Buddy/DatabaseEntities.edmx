@@ -6,6 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="Entities.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="EntitiesStoreContainer">
+          <EntitySet Name="DatabaseVersion" EntityType="Entities.Store.DatabaseVersion" store:Type="Tables" />
           <EntitySet Name="File" EntityType="Entities.Store.File" store:Type="Tables" />
           <EntitySet Name="Plugin" EntityType="Entities.Store.Plugin" store:Type="Tables" />
           <EntitySet Name="PluginGroup" EntityType="Entities.Store.PluginGroup" store:Type="Tables" />
@@ -28,6 +29,12 @@
             <End Role="Plugin" EntitySet="Plugin" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="DatabaseVersion">
+          <Key>
+            <PropertyRef Name="Version" />
+          </Key>
+          <Property Name="Version" Type="bigint" Nullable="false" />
+        </EntityType>
         <EntityType Name="File">
           <Key>
             <PropertyRef Name="Id" />
@@ -150,6 +157,7 @@
             <End Role="PluginFile" EntitySet="PluginFiles" />
             <End Role="QuarantinedFile" EntitySet="QuarantinedFile" />
           </AssociationSet>
+          <EntitySet Name="DatabaseVersion" EntityType="NIHEI.SC4Buddy.Entities.DatabaseVersion" />
           </EntityContainer>
         <EntityType Name="PluginFile">
           <Key>
@@ -255,6 +263,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DatabaseVersion">
+          <Key>
+            <PropertyRef Name="Version" />
+          </Key>
+          <Property Type="Int64" Name="Version" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -307,6 +321,13 @@
               <MappingFragment StoreEntitySet="QuarantinedFile">
                 <ScalarProperty Name="QuarantinedPath" ColumnName="QuarantinedPath" />
                 <ScalarProperty Name="PluginFile" ColumnName="PluginFile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DatabaseVersion">
+            <EntityTypeMapping TypeName="NIHEI.SC4Buddy.Entities.DatabaseVersion">
+              <MappingFragment StoreEntitySet="DatabaseVersion">
+                <ScalarProperty Name="Version" ColumnName="Version" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

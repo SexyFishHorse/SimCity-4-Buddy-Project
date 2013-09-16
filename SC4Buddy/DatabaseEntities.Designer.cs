@@ -153,6 +153,22 @@ namespace NIHEI.SC4Buddy.Entities
             }
         }
         private ObjectSet<QuarantinedFile> _QuarantinedFile;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<DatabaseVersion> DatabaseVersion
+        {
+            get
+            {
+                if ((_DatabaseVersion == null))
+                {
+                    _DatabaseVersion = base.CreateObjectSet<DatabaseVersion>("DatabaseVersion");
+                }
+                return _DatabaseVersion;
+            }
+        }
+        private ObjectSet<DatabaseVersion> _DatabaseVersion;
 
         #endregion
 
@@ -197,6 +213,14 @@ namespace NIHEI.SC4Buddy.Entities
         {
             base.AddObject("QuarantinedFile", quarantinedFile);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the DatabaseVersion EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToDatabaseVersion(DatabaseVersion databaseVersion)
+        {
+            base.AddObject("DatabaseVersion", databaseVersion);
+        }
 
         #endregion
 
@@ -205,6 +229,62 @@ namespace NIHEI.SC4Buddy.Entities
     #endregion
 
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="NIHEI.SC4Buddy.Entities", Name="DatabaseVersion")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class DatabaseVersion : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new DatabaseVersion object.
+        /// </summary>
+        /// <param name="version">Initial value of the Version property.</param>
+        public static DatabaseVersion CreateDatabaseVersion(global::System.Int64 version)
+        {
+            DatabaseVersion databaseVersion = new DatabaseVersion();
+            databaseVersion.Version = version;
+            return databaseVersion;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int64 Version
+        {
+            get
+            {
+                return _Version;
+            }
+            set
+            {
+                if (_Version != value)
+                {
+                    OnVersionChanging(value);
+                    ReportPropertyChanging("Version");
+                    _Version = StructuralObject.SetValidValue(value, "Version");
+                    ReportPropertyChanged("Version");
+                    OnVersionChanged();
+                }
+            }
+        }
+        private global::System.Int64 _Version;
+        partial void OnVersionChanging(global::System.Int64 value);
+        partial void OnVersionChanged();
+
+        #endregion
+
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
