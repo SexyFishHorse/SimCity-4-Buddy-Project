@@ -9,6 +9,8 @@
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
+    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Elements;
@@ -23,6 +25,8 @@
 
         private readonly PluginGroupController pluginGroupController;
 
+        private readonly UserFolder userFolder;
+
         public FolderScannerForm(
             FolderScannerController folderScannerController,
             PluginController pluginController,
@@ -35,7 +39,7 @@
 
             this.pluginGroupController = pluginGroupController;
 
-            UserFolder = userFolder;
+            this.userFolder = userFolder;
 
             InitializeComponent();
 
@@ -50,8 +54,6 @@
 
             folderScannerController.NewFilesFound += FolderScannerControllerOnNewFilesFound;
         }
-
-        public UserFolder UserFolder { get; private set; }
 
         private void FolderScannerControllerOnNewFilesFound(object sender, EventArgs eventArgs)
         {
@@ -70,7 +72,7 @@
                     return;
                 }
 
-                var filename = file.Remove(0, UserFolder.PluginFolderPath.Length + 1);
+                var filename = file.Remove(0, userFolder.PluginFolderPath.Length + 1);
                 newFilesListView.Items.Add(filename);
             }
 
@@ -94,7 +96,7 @@
 
         private void ScanFolder(object sender, EventArgs e)
         {
-            if (!folderScannerController.ScanFolder(UserFolder))
+            if (!folderScannerController.ScanFolder(userFolder))
             {
                 Invoke(new MethodInvoker(
                     () =>
@@ -295,7 +297,7 @@
                                  Link = linkTextBox.Text.Trim(),
                                  Group = GetSelectedGroup(),
                                  Description = descriptionTextBox.Text.Trim(),
-                                 UserFolder = UserFolder
+                                 UserFolder = userFolder
                              };
 
             pluginController.Add(plugin);
@@ -314,8 +316,8 @@
                                        path =>
                                        new PluginFile
                                            {
-                                               Path = Path.Combine(UserFolder.PluginFolderPath, path),
-                                               Checksum = Md5ChecksumUtility.CalculateChecksum(Path.Combine(UserFolder.PluginFolderPath, path)).ToHex(),
+                                               Path = Path.Combine(userFolder.PluginFolderPath, path),
+                                               Checksum = Md5ChecksumUtility.CalculateChecksum(Path.Combine(userFolder.PluginFolderPath, path)).ToHex(),
                                                Plugin = plugin
                                            }))
             {
@@ -423,7 +425,10 @@
 
         private void AutoGroupKnownPluginsClick(object sender, EventArgs e)
         {
-            folderScannerController.AutoGroupKnownFiles();
+            folderScannerController.AutoGroupKnownFiles(
+                userFolder,
+                pluginController,
+                new RemotePluginFileController(EntityFactory.Instance.RemoteEntities));
             RepopulateNewFilesListView();
         }
     }
