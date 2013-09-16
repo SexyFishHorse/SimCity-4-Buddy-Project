@@ -96,6 +96,20 @@
             {
                 return;
             }
+
+            var newDatabaseOutputPath = Path.Combine(
+                Path.GetDirectoryName(Application.LocalUserAppDataPath),
+                "Entities",
+                "Database.sdf");
+
+            if (!File.Exists(newDatabaseOutputPath))
+            {
+                // TODO: Move database
+            }
+            else
+            {
+                // TODO: Version check before move.
+            }
         }
 
         private static void SetDefaultUserFolder()
