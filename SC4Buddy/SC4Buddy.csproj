@@ -142,6 +142,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DatabaseEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseVersion.cs">
+      <DependentUpon>TemporaryDatabaseEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Plugin.cs" />
     <Compile Include="Entities\Remote\User.cs" />
     <Compile Include="Entities\UserFolder.cs" />
@@ -187,6 +190,21 @@
       <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Remote\PluginMatcher.cs" />
+    <Compile Include="TemporaryDatabaseEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TemporaryDatabaseEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TemporaryDatabaseEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TemporaryDatabaseEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TemporaryDatabaseEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TemporaryDatabaseEntities.edmx</DependentUpon>
+    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
@@ -382,6 +400,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EntityDeploy Include="TemporaryDatabaseEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TemporaryDatabaseEntities.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Entities.Temp</CustomToolNamespace>
+    </EntityDeploy>
+    <None Include="TemporaryDatabaseEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TemporaryDatabaseEntities.edmx</DependentUpon>
+      <LastGenOutput>TemporaryDatabaseEntities.Context.cs</LastGenOutput>
+    </None>
+    <None Include="TemporaryDatabaseEntities.edmx.diagram">
+      <DependentUpon>TemporaryDatabaseEntities.edmx</DependentUpon>
+    </None>
+    <None Include="TemporaryDatabaseEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TemporaryDatabaseEntities.edmx</DependentUpon>
+      <LastGenOutput>TemporaryDatabaseEntities.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
