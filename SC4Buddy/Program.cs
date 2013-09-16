@@ -88,6 +88,14 @@
 
         private static void MoveDatabaseIfExists()
         {
+            var exeFolder = Path.GetDirectoryName(Application.ExecutablePath);
+
+            var newDatabaseInputPath = Path.Combine(exeFolder, "Entities", "Database.sdf");
+
+            if (exeFolder == null || !File.Exists(newDatabaseInputPath))
+            {
+                return;
+            }
         }
 
         private static void SetDefaultUserFolder()
