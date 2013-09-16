@@ -61,19 +61,7 @@
         {
             var matcher = new PluginMatcher(pluginController, remotePluginFileController);
 
-            var fileDictionary = new Dictionary<string, RemotePlugin>();
-
-            foreach (var file in NewFiles)
-            {
-                var match = matcher.GetMostLikelyRemotePluginForFile(
-                    file,
-                    Md5ChecksumUtility.CalculateChecksum(file).ToHex());
-
-                if (match != null)
-                {
-                    fileDictionary.Add(file, match);
-                }
-            }
+            var fileDictionary = GetRemotePluginFileMatches(matcher, NewFiles);
 
             var plugins = new Dictionary<string, Plugin>();
 
@@ -114,6 +102,27 @@
             {
                 pluginController.Add(plugin, false);
             }
+        }
+
+        private Dictionary<string, RemotePlugin> GetRemotePluginFileMatches(
+            PluginMatcher matcher,
+            IEnumerable<string> files)
+        {
+            var fileDictionary = new Dictionary<string, RemotePlugin>();
+
+            foreach (var file in files)
+            {
+                var match = matcher.GetMostLikelyRemotePluginForFile(
+                    file,
+                    Md5ChecksumUtility.CalculateChecksum(file).ToHex());
+
+                if (match != null)
+                {
+                    fileDictionary.Add(file, match);
+                }
+            }
+
+            return fileDictionary;
         }
     }
 }
