@@ -31,6 +31,8 @@
             Log.Info("Application starting");
             try
             {
+                MoveDatabaseIfExists();
+
                 var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -82,6 +84,10 @@
 
                 Process.Start(Path.Combine(path, file));
             }
+        }
+
+        private static void MoveDatabaseIfExists()
+        {
         }
 
         private static void SetDefaultUserFolder()
