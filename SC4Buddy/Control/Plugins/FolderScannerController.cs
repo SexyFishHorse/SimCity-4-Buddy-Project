@@ -75,28 +75,44 @@
                 }
             }
 
-            var plugins = new HashSet<Plugin>();
+            var plugins = new Dictionary<string, Plugin>();
 
             foreach (var remotePlugin in fileDictionary)
             {
                 NewFiles.Remove(remotePlugin.Key);
-                var plugin = new Plugin
-                                 {
-                                     Author = remotePlugin.Value.Author.Name,
-                                     Description = remotePlugin.Value.Description,
-                                     Link = remotePlugin.Value.Link,
-                                     RemotePluginId = remotePlugin.Value.Id,
-                                     UserFolder = userFolder
-                                 };
-                plugin.Files.Add(
-                    new PluginFile
-                        {
-                            Checksum = Md5ChecksumUtility.CalculateChecksum(remotePlugin.Key).ToHex(),
-                            Path = remotePlugin.Key
-                        });
-                plugin.GetHashCode()
-                if(plugins.Contains())
-                plugins.Add(plugin);
+
+                var pluginFile = new PluginFile
+                                     {
+                                         Checksum =
+                                             Md5ChecksumUtility.CalculateChecksum(remotePlugin.Key).ToHex(),
+                                         Path = remotePlugin.Key
+                                     };
+
+                Plugin plugin;
+                if (plugins.ContainsKey(remotePlugin.Value.Link))
+                {
+                    plugin = plugins[remotePlugin.Value.Link];
+                }
+                else
+                {
+                    plugin = new Plugin
+                                     {
+                                         Author = remotePlugin.Value.Author.Name,
+                                         Description = remotePlugin.Value.Description,
+                                         Link = remotePlugin.Value.Link,
+                                         RemotePluginId = remotePlugin.Value.Id,
+                                         UserFolder = userFolder
+                                     };
+
+                    plugins.Add(plugin.Link, plugin);
+                }
+
+                plugin.Files.Add(pluginFile);
+            }
+
+            foreach (var plugin in plugins.Select(x => x.Value))
+            {
+                pluginController.Add(plugin, false);
             }
         }
     }
