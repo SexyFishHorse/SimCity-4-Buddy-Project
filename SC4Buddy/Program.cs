@@ -104,11 +104,8 @@
 
             if (!File.Exists(newDatabaseOutputPath))
             {
-                // TODO: Move database
-            }
-            else
-            {
-                // TODO: Version check before move.
+                File.Copy(newDatabaseInputPath, newDatabaseOutputPath);
+                File.Delete(newDatabaseInputPath);
             }
         }
 
