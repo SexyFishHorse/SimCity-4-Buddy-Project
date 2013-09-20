@@ -2,13 +2,25 @@
 {
     using System.Configuration;
     using System.Data.EntityClient;
+    using System.IO;
+    using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Entities.Remote;
 
     public class EntityFactory
     {
+        private const string LocalConnectionString =
+            @"metadata=res://*/DatabaseEntities.csdl|res://*/DatabaseEntities.ssdl|res://*/DatabaseEntities.msl;provider=System.Data.SqlServerCe.4.0;provider connection string='data source={0}\Database.sdf'";
+
         private static EntityFactory instance;
+
+        private EntityFactory()
+        {
+            RemoteEntities = CreateRemoteEntities();
+
+            Entities = CreateEntities();
+        }
 
         public static EntityFactory Instance
         {
@@ -16,13 +28,6 @@
             {
                 return instance ?? (instance = new EntityFactory());
             }
-        }
-
-        private EntityFactory()
-        {
-            RemoteEntities = CreateRemoteEntities();
-
-            Entities = new Entities(new DatabaseEntities());
         }
 
         public Entities Entities { get; private set; }
@@ -42,6 +47,17 @@
             var entities = new RemoteDatabaseEntities(entityBuilder.ConnectionString);
 
             return new RemoteEntities(entities);
+        }
+
+        private Entities CreateEntities()
+        {
+            var outputLocation = Path.Combine(Path.GetDirectoryName(Application.LocalUserAppDataPath), "Entities");
+
+            var connectionString = string.Format(LocalConnectionString, outputLocation);
+
+            var entities = new DatabaseEntities(connectionString);
+
+            return new Entities(entities);
         }
     }
 }
