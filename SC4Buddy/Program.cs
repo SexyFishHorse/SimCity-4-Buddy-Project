@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy
 {
     using System;
+    using System.Configuration;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
@@ -90,23 +91,24 @@
         {
             var exeFolder = Path.GetDirectoryName(Application.ExecutablePath);
 
-            var newDatabaseInputPath = Path.Combine(exeFolder, "Entities", "Database.sdf");
+            var inputPath = Path.Combine(exeFolder, "Temp", "Database.sdf");
 
-            if (exeFolder == null || !File.Exists(newDatabaseInputPath))
+            if (exeFolder == null || !File.Exists(inputPath))
             {
                 return;
             }
 
-            var newDatabaseOutputPath = Path.Combine(
-                Path.GetDirectoryName(Application.LocalUserAppDataPath),
-                "Entities",
-                "Database.sdf");
+            var outputLocation = Path.Combine(Path.GetDirectoryName(Application.LocalUserAppDataPath), "Entities");
+            var outputPath = Path.Combine(outputLocation, "Database.sdf");
 
-            if (!File.Exists(newDatabaseOutputPath))
+            if (File.Exists(outputPath))
             {
-                File.Copy(newDatabaseInputPath, newDatabaseOutputPath);
-                File.Delete(newDatabaseInputPath);
+                return;
             }
+
+            Directory.CreateDirectory(outputLocation);
+            File.Copy(inputPath, outputPath);
+            File.Delete(inputPath);
         }
 
         private static void SetDefaultUserFolder()
