@@ -82,7 +82,7 @@
 
                 var file = string.Format("log-{0}.txt", DateTime.Now.ToString("yyyy-MM-dd"));
 
-                Process.Start(Path.Combine(path, file));
+                Process.Start(Path.Combine(path, "Logs", file));
             }
         }
 
