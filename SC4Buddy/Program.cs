@@ -31,6 +31,8 @@
             Log.Info("Application starting");
             try
             {
+                MoveDatabaseIfExists();
+
                 var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -81,6 +83,32 @@
                 var file = string.Format("log-{0}.txt", DateTime.Now.ToString("yyyy-MM-dd"));
 
                 Process.Start(Path.Combine(path, file));
+            }
+        }
+
+        private static void MoveDatabaseIfExists()
+        {
+            var exeFolder = Path.GetDirectoryName(Application.ExecutablePath);
+
+            var newDatabaseInputPath = Path.Combine(exeFolder, "Entities", "Database.sdf");
+
+            if (exeFolder == null || !File.Exists(newDatabaseInputPath))
+            {
+                return;
+            }
+
+            var newDatabaseOutputPath = Path.Combine(
+                Path.GetDirectoryName(Application.LocalUserAppDataPath),
+                "Entities",
+                "Database.sdf");
+
+            if (!File.Exists(newDatabaseOutputPath))
+            {
+                // TODO: Move database
+            }
+            else
+            {
+                // TODO: Update database
             }
         }
 
