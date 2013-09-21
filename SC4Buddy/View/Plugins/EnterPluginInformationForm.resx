@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="splitContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 39</value>
+    <value>12, 25</value>
   </data>
   <data name="groupBox1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -138,7 +138,7 @@
     <value>6, 19</value>
   </data>
   <data name="installedFilesListView.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 300</value>
+    <value>295, 314</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="installedFilesListView.TabIndex" type="System.Int32, mscorlib">
@@ -160,7 +160,7 @@
     <value>3, 6</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 326</value>
+    <value>307, 340</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -205,7 +205,7 @@
     <value>0, 0</value>
   </data>
   <data name="descriptionTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>353, 175</value>
+    <value>359, 189</value>
   </data>
   <data name="descriptionTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -229,7 +229,7 @@
     <value>6, 143</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>355, 177</value>
+    <value>361, 191</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -307,7 +307,7 @@
     <value>77, 45</value>
   </data>
   <data name="authorTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 20</value>
+    <value>290, 20</value>
   </data>
   <data name="authorTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -385,7 +385,7 @@
     <value>77, 19</value>
   </data>
   <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 20</value>
+    <value>290, 20</value>
   </data>
   <data name="nameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -409,7 +409,7 @@
     <value>77, 97</value>
   </data>
   <data name="groupComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 21</value>
+    <value>290, 21</value>
   </data>
   <data name="groupComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -433,7 +433,7 @@
     <value>77, 71</value>
   </data>
   <data name="linkTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>284, 20</value>
+    <value>290, 20</value>
   </data>
   <data name="linkTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -481,7 +481,7 @@
     <value>3, 6</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 326</value>
+    <value>373, 340</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -514,7 +514,7 @@
     <value>1</value>
   </data>
   <data name="splitContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>698, 336</value>
+    <value>698, 350</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
     <value>313</value>

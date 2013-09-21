@@ -72,13 +72,6 @@
             installerThread.Start();
         }
 
-        private void OnNotPartOneOfMultipartDetected(PluginInstallerThread sender, InstallPluginEventArgs args)
-        {
-            WriteLine(string.Format(LocalizationStrings.FileXSkipped, args.FileInfo.Name));
-            WriteLine(LocalizationStrings.YouCanOnlySelectPart1OfAMultipartPlugin);
-            IncrementInstalledPlugins();
-        }
-
         public bool AskToRunExecutable(FileInfo executable)
         {
             return (bool)Invoke(new Func<bool>(() => ShowAskToRunExecutable(executable)));
@@ -97,31 +90,31 @@
                         MessageBoxIcon.Stop)));
         }
 
-        protected void IncrementInstalledPlugins()
+        private void IncrementInstalledPlugins()
         {
             SetOverallProgresBar(OverallProgressBar.Value + 1);
             SetCurrentProgressBar(100);
         }
 
-        protected void ResetCurrentProgressBar()
+        private void ResetCurrentProgressBar()
         {
             CurrentProgressBar.BeginInvoke(new Action(
                 () => CurrentProgressBar.Value = 0));
         }
 
-        protected void SetOverallProgresBar(int value)
+        private void SetOverallProgresBar(int value)
         {
             OverallProgressBar.BeginInvoke(new Action(
                 () => OverallProgressBar.Value = value));
         }
 
-        protected void SetCurrentProgressBar(int value)
+        private void SetCurrentProgressBar(int value)
         {
             CurrentProgressBar.BeginInvoke(new Action(
                 () => CurrentProgressBar.Value = value));
         }
 
-        protected void Write(string text)
+        private void Write(string text)
         {
             if (IsHandleCreated)
             {
@@ -130,9 +123,16 @@
             }
         }
 
-        protected void WriteLine(string message)
+        private void WriteLine(string message)
         {
             Write(string.Format("\n{0}", message));
+        }
+
+        private void OnNotPartOneOfMultipartDetected(PluginInstallerThread sender, InstallPluginEventArgs args)
+        {
+            WriteLine(string.Format(LocalizationStrings.FileXSkipped, args.FileInfo.Name));
+            WriteLine(LocalizationStrings.YouCanOnlySelectPart1OfAMultipartPlugin);
+            IncrementInstalledPlugins();
         }
 
         private bool ShowAskToRunExecutable(FileInfo executable)
