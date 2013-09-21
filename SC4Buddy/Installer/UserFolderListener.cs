@@ -27,15 +27,15 @@
             Watcher.Renamed += WatcherEventListener;
         }
 
-        public UserFolder UserFolder { get; private set; }
+        public ICollection<string> ChangedFiles { get; private set; }
 
-        public ICollection<string> ChangedFiles { get; set; }
+        public ICollection<string> CreatedFiles { get; private set; }
 
-        public ICollection<string> CreatedFiles { get; set; }
+        public ICollection<string> DeletedFiles { get; private set; }
 
-        public ICollection<string> DeletedFiles { get; set; }
+        public IDictionary<string, string> RenamedFiles { get; private set; }
 
-        public IDictionary<string, string> RenamedFiles { get; set; }
+        private UserFolder UserFolder { get; set; }
 
         private FileSystemWatcher Watcher { get; set; }
 
@@ -65,6 +65,12 @@
                 case WatcherChangeTypes.Renamed:
                     {
                         var renamedEventArgs = (RenamedEventArgs)fileSystemEventArgs;
+
+                        if (RenamedFiles.ContainsKey(renamedEventArgs.OldFullPath))
+                        {
+                            RenamedFiles.Remove(renamedEventArgs.OldFullPath);
+                        }
+
                         RenamedFiles.Add(renamedEventArgs.OldFullPath, renamedEventArgs.FullPath);
                     }
 
