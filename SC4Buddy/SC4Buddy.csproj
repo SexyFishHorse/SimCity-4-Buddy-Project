@@ -208,6 +208,10 @@
     <Compile Include="User.cs">
       <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="View\Admin\AdminPanel.cs" />
+    <Compile Include="View\Admin\AdminPanel.Designer.cs">
+      <DependentUpon>AdminPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Application\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
