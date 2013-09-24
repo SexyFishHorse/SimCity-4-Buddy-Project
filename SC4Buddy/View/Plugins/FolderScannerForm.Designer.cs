@@ -105,7 +105,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.columnHeader2});
             this.pluginFilesListView.Location = new System.Drawing.Point(3, 3);
             this.pluginFilesListView.Name = "pluginFilesListView";
-            this.pluginFilesListView.Size = new System.Drawing.Size(233, 343);
+            this.pluginFilesListView.Size = new System.Drawing.Size(232, 343);
             this.pluginFilesListView.TabIndex = 3;
             this.pluginFilesListView.UseCompatibleStateImageBehavior = false;
             this.pluginFilesListView.View = System.Windows.Forms.View.Details;
@@ -163,7 +163,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.groupBox2.Controls.Add(this.splitContainer2);
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(526, 409);
+            this.groupBox2.Size = new System.Drawing.Size(524, 409);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Group into plugin";
@@ -195,8 +195,8 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.splitContainer2.Panel2.Controls.Add(this.authorTextBox);
             this.splitContainer2.Panel2.Controls.Add(this.nameTextBox);
             this.splitContainer2.Panel2.Controls.Add(this.label1);
-            this.splitContainer2.Size = new System.Drawing.Size(514, 384);
-            this.splitContainer2.SplitterDistance = 239;
+            this.splitContainer2.Size = new System.Drawing.Size(512, 384);
+            this.splitContainer2.SplitterDistance = 238;
             this.splitContainer2.SplitterWidth = 6;
             this.splitContainer2.TabIndex = 4;
             // 
@@ -204,7 +204,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             // 
             this.removeAllButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.removeAllButton.Enabled = false;
-            this.removeAllButton.Location = new System.Drawing.Point(145, 352);
+            this.removeAllButton.Location = new System.Drawing.Point(144, 352);
             this.removeAllButton.Name = "removeAllButton";
             this.removeAllButton.Size = new System.Drawing.Size(90, 23);
             this.removeAllButton.TabIndex = 5;
@@ -228,7 +228,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             // 
             this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.saveButton.Enabled = false;
-            this.saveButton.Location = new System.Drawing.Point(187, 352);
+            this.saveButton.Location = new System.Drawing.Point(184, 352);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 11;
@@ -246,7 +246,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.descriptionTextBox.Location = new System.Drawing.Point(6, 134);
             this.descriptionTextBox.Multiline = true;
             this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(256, 212);
+            this.descriptionTextBox.Size = new System.Drawing.Size(253, 212);
             this.descriptionTextBox.TabIndex = 10;
             // 
             // label5
@@ -275,7 +275,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.groupComboBox.FormattingEnabled = true;
             this.groupComboBox.Location = new System.Drawing.Point(69, 81);
             this.groupComboBox.Name = "groupComboBox";
-            this.groupComboBox.Size = new System.Drawing.Size(193, 21);
+            this.groupComboBox.Size = new System.Drawing.Size(190, 21);
             this.groupComboBox.TabIndex = 6;
             // 
             // linkTextBox
@@ -284,7 +284,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             | System.Windows.Forms.AnchorStyles.Right)));
             this.linkTextBox.Location = new System.Drawing.Point(69, 55);
             this.linkTextBox.Name = "linkTextBox";
-            this.linkTextBox.Size = new System.Drawing.Size(193, 20);
+            this.linkTextBox.Size = new System.Drawing.Size(190, 20);
             this.linkTextBox.TabIndex = 5;
             // 
             // label3
@@ -311,7 +311,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             | System.Windows.Forms.AnchorStyles.Right)));
             this.authorTextBox.Location = new System.Drawing.Point(69, 29);
             this.authorTextBox.Name = "authorTextBox";
-            this.authorTextBox.Size = new System.Drawing.Size(193, 20);
+            this.authorTextBox.Size = new System.Drawing.Size(190, 20);
             this.authorTextBox.TabIndex = 2;
             // 
             // nameTextBox
@@ -320,7 +320,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             | System.Windows.Forms.AnchorStyles.Right)));
             this.nameTextBox.Location = new System.Drawing.Point(69, 3);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(193, 20);
+            this.nameTextBox.Size = new System.Drawing.Size(190, 20);
             this.nameTextBox.TabIndex = 1;
             this.nameTextBox.TextChanged += new System.EventHandler(this.NameTextBoxTextChanged);
             // 
@@ -375,6 +375,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             this.closeButton.TabIndex = 8;
             this.closeButton.Text = "Close";
             this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.CloseButtonClick);
             // 
             // errorProvider1
             // 

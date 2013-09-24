@@ -431,5 +431,10 @@
                 new RemotePluginFileController(EntityFactory.Instance.RemoteEntities));
             RepopulateNewFilesListView();
         }
+
+        private void CloseButtonClick(object sender, EventArgs e)
+        {
+            fileScannerBackgroundWorker.CancelAsync();
+        }
     }
 }

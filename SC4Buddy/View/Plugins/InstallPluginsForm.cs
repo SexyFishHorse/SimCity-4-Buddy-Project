@@ -5,8 +5,11 @@
     using System.IO;
     using System.Linq;
     using System.Net.NetworkInformation;
+    using System.Reflection;
     using System.Threading;
     using System.Windows.Forms;
+
+    using log4net;
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
@@ -22,6 +25,8 @@
 
     public partial class InstallPluginsForm : Form
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly UserFolder userFolder;
 
         private readonly IList<string> installedPlugins;
@@ -274,8 +279,15 @@
 
         private void OnInstallingPlugin(PluginInstallerThread sender, InstallPluginEventArgs e)
         {
-            WriteLine(string.Format(LocalizationStrings.InstallingPluginNam, e.FileInfo.Name));
-            ResetCurrentProgressBar();
+            try
+            {
+                WriteLine(string.Format(LocalizationStrings.InstallingPluginNam, e.FileInfo.Name));
+                ResetCurrentProgressBar();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error during OnInstallingPlugin", ex);
+            }
         }
 
         private void CloseButtonClick(object sender, EventArgs e)
