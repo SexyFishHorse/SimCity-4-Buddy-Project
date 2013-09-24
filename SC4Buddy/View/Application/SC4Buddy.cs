@@ -255,5 +255,10 @@
                 new RemotePluginController(EntityFactory.Instance.RemoteEntities),
                 new AuthorController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
         }
+
+        private void ReportsToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            new ManageReportsForm().ShowDialog(this);
+        }
     }
 }
