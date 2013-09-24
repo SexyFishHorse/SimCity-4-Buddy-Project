@@ -198,7 +198,8 @@
                                                        Settings.Default.GameLocation,
                                                        "Apps",
                                                        "SimCity 4.exe"),
-                                               Arguments = arguments
+                                               Arguments = arguments,
+                                               WorkingDirectory = Settings.Default.GameLocation
                                            };
 
             var gameLauncher = new GameLauncher(gameProcessStartInfo, Settings.Default.AutoSaveWaitTime);
