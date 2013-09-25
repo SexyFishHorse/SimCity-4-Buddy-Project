@@ -332,6 +332,9 @@
       <LastGenOutput>LocalizationStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Admin\ManagePluginsForm.resx">
+      <DependentUpon>ManagePluginsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Application\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
