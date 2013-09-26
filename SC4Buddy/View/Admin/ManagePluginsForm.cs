@@ -3,10 +3,14 @@
     using System;
     using System.Windows.Forms;
 
+    using NIHEI.SC4Buddy.Control.Remote;
     public partial class ManagePluginsForm : Form
     {
-        public ManagePluginsForm()
+        private readonly RemotePluginController remotePluginController;
+
+        public ManagePluginsForm(RemotePluginController remotePluginController)
         {
+            this.remotePluginController = remotePluginController;
             InitializeComponent();
         }
     }

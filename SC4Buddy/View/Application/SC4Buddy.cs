@@ -14,7 +14,9 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
+    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
@@ -248,7 +250,7 @@
 
         private void ManagePluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new ManagePluginsForm().ShowDialog(this);
+            new ManagePluginsForm(new RemotePluginController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
         }
     }
 }
