@@ -341,6 +341,9 @@
     <EmbeddedResource Include="View\Admin\ManagePluginsForm.resx">
       <DependentUpon>ManagePluginsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Admin\ManagePlugins\ManagePluginFilesForm.resx">
+      <DependentUpon>ManagePluginFilesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Application\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
