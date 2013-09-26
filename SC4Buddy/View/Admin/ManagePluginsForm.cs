@@ -13,5 +13,9 @@
             this.remotePluginController = remotePluginController;
             InitializeComponent();
         }
+
+        private void SearchComboBoxValueChanged(object sender, EventArgs e)
+        {
+        }
     }
 }

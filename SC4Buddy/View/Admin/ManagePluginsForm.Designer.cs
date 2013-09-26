@@ -30,29 +30,29 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManagePluginsForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.filesButton = new System.Windows.Forms.Button();
-            this.dependenciesButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.authorComboBox = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.linkTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.siteComboBox = new System.Windows.Forms.ComboBox();
             this.descriptionTextBox = new System.Windows.Forms.RichTextBox();
+            this.linkTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.authorComboBox = new System.Windows.Forms.ComboBox();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dependenciesButton = new System.Windows.Forms.Button();
+            this.filesButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.pluginsListView = new System.Windows.Forms.ListView();
-            this.addButton = new System.Windows.Forms.Button();
-            this.removeButton = new System.Windows.Forms.Button();
-            this.updateButton = new System.Windows.Forms.Button();
-            this.searchComboBox = new System.Windows.Forms.ComboBox();
             this.importButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
-            this.okButton = new System.Windows.Forms.Button();
+            this.searchComboBox = new System.Windows.Forms.ComboBox();
+            this.updateButton = new System.Windows.Forms.Button();
+            this.removeButton = new System.Windows.Forms.Button();
+            this.addButton = new System.Windows.Forms.Button();
+            this.pluginsListView = new System.Windows.Forms.ListView();
             this.authorColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.siteColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.nameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.siteComboBox = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.okButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -80,80 +80,24 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Plugin data";
             // 
-            // filesButton
+            // label4
             // 
-            this.filesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.filesButton.Location = new System.Drawing.Point(6, 390);
-            this.filesButton.Name = "filesButton";
-            this.filesButton.Size = new System.Drawing.Size(75, 23);
-            this.filesButton.TabIndex = 0;
-            this.filesButton.Text = "Files";
-            this.filesButton.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 75);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(25, 13);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "Site";
             // 
-            // dependenciesButton
+            // siteComboBox
             // 
-            this.dependenciesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dependenciesButton.Location = new System.Drawing.Point(87, 390);
-            this.dependenciesButton.Name = "dependenciesButton";
-            this.dependenciesButton.Size = new System.Drawing.Size(91, 23);
-            this.dependenciesButton.TabIndex = 1;
-            this.dependenciesButton.Text = "Dependencies";
-            this.dependenciesButton.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Name";
-            // 
-            // nameTextBox
-            // 
-            this.nameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.siteComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.nameTextBox.Location = new System.Drawing.Point(50, 19);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(346, 20);
-            this.nameTextBox.TabIndex = 3;
-            // 
-            // authorComboBox
-            // 
-            this.authorComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.authorComboBox.FormattingEnabled = true;
-            this.authorComboBox.Location = new System.Drawing.Point(50, 45);
-            this.authorComboBox.Name = "authorComboBox";
-            this.authorComboBox.Size = new System.Drawing.Size(346, 21);
-            this.authorComboBox.TabIndex = 4;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 48);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Author";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 102);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(27, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Link";
-            // 
-            // linkTextBox
-            // 
-            this.linkTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkTextBox.Location = new System.Drawing.Point(50, 99);
-            this.linkTextBox.Name = "linkTextBox";
-            this.linkTextBox.Size = new System.Drawing.Size(346, 20);
-            this.linkTextBox.TabIndex = 8;
+            this.siteComboBox.FormattingEnabled = true;
+            this.siteComboBox.Location = new System.Drawing.Point(50, 72);
+            this.siteComboBox.Name = "siteComboBox";
+            this.siteComboBox.Size = new System.Drawing.Size(346, 21);
+            this.siteComboBox.TabIndex = 10;
             // 
             // descriptionTextBox
             // 
@@ -166,6 +110,81 @@
             this.descriptionTextBox.Size = new System.Drawing.Size(387, 259);
             this.descriptionTextBox.TabIndex = 9;
             this.descriptionTextBox.Text = "";
+            // 
+            // linkTextBox
+            // 
+            this.linkTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkTextBox.Location = new System.Drawing.Point(50, 99);
+            this.linkTextBox.Name = "linkTextBox";
+            this.linkTextBox.Size = new System.Drawing.Size(346, 20);
+            this.linkTextBox.TabIndex = 8;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(9, 102);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(27, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Link";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Author";
+            // 
+            // authorComboBox
+            // 
+            this.authorComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.authorComboBox.FormattingEnabled = true;
+            this.authorComboBox.Location = new System.Drawing.Point(50, 45);
+            this.authorComboBox.Name = "authorComboBox";
+            this.authorComboBox.Size = new System.Drawing.Size(346, 21);
+            this.authorComboBox.TabIndex = 4;
+            // 
+            // nameTextBox
+            // 
+            this.nameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nameTextBox.Location = new System.Drawing.Point(50, 19);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(346, 20);
+            this.nameTextBox.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Name";
+            // 
+            // dependenciesButton
+            // 
+            this.dependenciesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dependenciesButton.Location = new System.Drawing.Point(87, 390);
+            this.dependenciesButton.Name = "dependenciesButton";
+            this.dependenciesButton.Size = new System.Drawing.Size(91, 23);
+            this.dependenciesButton.TabIndex = 1;
+            this.dependenciesButton.Text = "Dependencies";
+            this.dependenciesButton.UseVisualStyleBackColor = true;
+            // 
+            // filesButton
+            // 
+            this.filesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.filesButton.Location = new System.Drawing.Point(6, 390);
+            this.filesButton.Name = "filesButton";
+            this.filesButton.Size = new System.Drawing.Size(75, 23);
+            this.filesButton.TabIndex = 0;
+            this.filesButton.Text = "Files";
+            this.filesButton.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -184,21 +203,51 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Plugins";
             // 
-            // pluginsListView
+            // importButton
             // 
-            this.pluginsListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.importButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.importButton.Location = new System.Drawing.Point(249, 390);
+            this.importButton.Name = "importButton";
+            this.importButton.Size = new System.Drawing.Size(98, 23);
+            this.importButton.TabIndex = 10;
+            this.importButton.Text = "Import plugin";
+            this.importButton.UseVisualStyleBackColor = true;
+            // 
+            // searchComboBox
+            // 
+            this.searchComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pluginsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.authorColumnHeader,
-            this.siteColumnHeader,
-            this.nameColumnHeader});
-            this.pluginsListView.Location = new System.Drawing.Point(6, 49);
-            this.pluginsListView.Name = "pluginsListView";
-            this.pluginsListView.Size = new System.Drawing.Size(341, 335);
-            this.pluginsListView.TabIndex = 0;
-            this.pluginsListView.UseCompatibleStateImageBehavior = false;
-            this.pluginsListView.View = System.Windows.Forms.View.List;
+            this.searchComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.searchComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.searchComboBox.FormattingEnabled = true;
+            this.searchComboBox.Location = new System.Drawing.Point(6, 22);
+            this.searchComboBox.Name = "searchComboBox";
+            this.searchComboBox.Size = new System.Drawing.Size(341, 21);
+            this.searchComboBox.TabIndex = 4;
+            this.searchComboBox.SelectedIndexChanged += new System.EventHandler(this.SearchComboBoxValueChanged);
+            this.searchComboBox.TextUpdate += new System.EventHandler(this.SearchComboBoxValueChanged);
+            // 
+            // updateButton
+            // 
+            this.updateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.updateButton.Enabled = false;
+            this.updateButton.Location = new System.Drawing.Point(168, 390);
+            this.updateButton.Name = "updateButton";
+            this.updateButton.Size = new System.Drawing.Size(75, 23);
+            this.updateButton.TabIndex = 3;
+            this.updateButton.Text = "Update";
+            this.updateButton.UseVisualStyleBackColor = true;
+            // 
+            // removeButton
+            // 
+            this.removeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.removeButton.Enabled = false;
+            this.removeButton.Location = new System.Drawing.Point(87, 390);
+            this.removeButton.Name = "removeButton";
+            this.removeButton.Size = new System.Drawing.Size(75, 23);
+            this.removeButton.TabIndex = 2;
+            this.removeButton.Text = "Remove";
+            this.removeButton.UseVisualStyleBackColor = true;
             // 
             // addButton
             // 
@@ -212,49 +261,36 @@
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
             // 
-            // removeButton
+            // pluginsListView
             // 
-            this.removeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.removeButton.Enabled = false;
-            this.removeButton.Location = new System.Drawing.Point(87, 390);
-            this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(75, 23);
-            this.removeButton.TabIndex = 2;
-            this.removeButton.Text = "Remove";
-            this.removeButton.UseVisualStyleBackColor = true;
-            // 
-            // updateButton
-            // 
-            this.updateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.updateButton.Enabled = false;
-            this.updateButton.Location = new System.Drawing.Point(168, 390);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(75, 23);
-            this.updateButton.TabIndex = 3;
-            this.updateButton.Text = "Update";
-            this.updateButton.UseVisualStyleBackColor = true;
-            // 
-            // searchComboBox
-            // 
-            this.searchComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.pluginsListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.searchComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.searchComboBox.FormattingEnabled = true;
-            this.searchComboBox.Location = new System.Drawing.Point(6, 22);
-            this.searchComboBox.Name = "searchComboBox";
-            this.searchComboBox.Size = new System.Drawing.Size(341, 21);
-            this.searchComboBox.TabIndex = 4;
+            this.pluginsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.nameColumnHeader,
+            this.authorColumnHeader,
+            this.siteColumnHeader});
+            this.pluginsListView.Location = new System.Drawing.Point(6, 49);
+            this.pluginsListView.Name = "pluginsListView";
+            this.pluginsListView.Size = new System.Drawing.Size(341, 335);
+            this.pluginsListView.TabIndex = 0;
+            this.pluginsListView.UseCompatibleStateImageBehavior = false;
+            this.pluginsListView.View = System.Windows.Forms.View.List;
             // 
-            // importButton
+            // authorColumnHeader
             // 
-            this.importButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.importButton.Location = new System.Drawing.Point(249, 390);
-            this.importButton.Name = "importButton";
-            this.importButton.Size = new System.Drawing.Size(98, 23);
-            this.importButton.TabIndex = 10;
-            this.importButton.Text = "Import plugin";
-            this.importButton.UseVisualStyleBackColor = true;
+            this.authorColumnHeader.DisplayIndex = 0;
+            this.authorColumnHeader.Text = "Author";
+            // 
+            // siteColumnHeader
+            // 
+            this.siteColumnHeader.DisplayIndex = 1;
+            this.siteColumnHeader.Text = "Site";
+            // 
+            // nameColumnHeader
+            // 
+            this.nameColumnHeader.DisplayIndex = 2;
+            this.nameColumnHeader.Text = "Name";
             // 
             // cancelButton
             // 
@@ -277,37 +313,6 @@
             this.okButton.TabIndex = 3;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
-            // 
-            // authorColumnHeader
-            // 
-            this.authorColumnHeader.Text = "Author";
-            // 
-            // siteColumnHeader
-            // 
-            this.siteColumnHeader.Text = "Site";
-            // 
-            // nameColumnHeader
-            // 
-            this.nameColumnHeader.Text = "Name";
-            // 
-            // siteComboBox
-            // 
-            this.siteComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.siteComboBox.FormattingEnabled = true;
-            this.siteComboBox.Location = new System.Drawing.Point(50, 72);
-            this.siteComboBox.Name = "siteComboBox";
-            this.siteComboBox.Size = new System.Drawing.Size(346, 21);
-            this.siteComboBox.TabIndex = 10;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 75);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(25, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Site";
             // 
             // ManagePluginsForm
             // 
