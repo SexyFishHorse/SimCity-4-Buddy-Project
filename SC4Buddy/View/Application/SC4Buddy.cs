@@ -245,5 +245,10 @@
 
             Process.Start(Path.Combine(path, file));
         }
+
+        private void ManagePluginsToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            new ManagePluginsForm().ShowDialog(this);
+        }
     }
 }
