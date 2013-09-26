@@ -12,11 +12,14 @@
     {
         private readonly RemotePluginController remotePluginController;
 
+        private readonly AuthorController authorController;
+
         private RemotePlugin selectedPlugin;
 
-        public ManagePluginsForm(RemotePluginController remotePluginController)
+        public ManagePluginsForm(RemotePluginController remotePluginController, AuthorController authorController)
         {
             this.remotePluginController = remotePluginController;
+            this.authorController = authorController;
             InitializeComponent();
         }
 

@@ -250,7 +250,9 @@
 
         private void ManagePluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new ManagePluginsForm(new RemotePluginController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
+            new ManagePluginsForm(
+                new RemotePluginController(EntityFactory.Instance.RemoteEntities),
+                new AuthorController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
         }
     }
 }
