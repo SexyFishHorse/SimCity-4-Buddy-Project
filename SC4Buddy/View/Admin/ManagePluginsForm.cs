@@ -7,6 +7,7 @@
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.View.Admin.ManagePlugins;
 
     public partial class ManagePluginsForm : Form
     {
@@ -117,6 +118,17 @@
 
             var source = new AutoCompleteStringCollection();
             source.AddRange(authors.Select(x => x.Name).ToArray());
+        }
+
+        private void FilesButtonClick(object sender, EventArgs e)
+        {
+            using (var dialog = new ManagePluginFilesForm(selectedPlugin.PluginFiles))
+            {
+                if (dialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    selectedPlugin.PluginFiles = dialog.PluginFiles;
+                }
+            }
         }
     }
 }

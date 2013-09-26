@@ -164,6 +164,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.filesButton.TabIndex = 0;
             this.filesButton.Text = "Files";
             this.filesButton.UseVisualStyleBackColor = true;
+            this.filesButton.Click += new System.EventHandler(this.FilesButtonClick);
             // 
             // groupBox2
             // 
