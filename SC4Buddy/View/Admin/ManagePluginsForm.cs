@@ -46,5 +46,10 @@
             pluginsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             pluginsListView.EndUpdate();
         }
+
+        private void PluginsListViewSelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
