@@ -106,6 +106,17 @@
 
         private void AuthorComboBoxTextUpdated(object sender, EventArgs e)
         {
+            var text = authorComboBox.Text.Trim();
+
+            if (text.Count() < 2)
+            {
+                return;
+            }
+
+            var authors = authorController.Authors.Where(x => x.Name.ToUpper().Contains(text));
+
+            var source = new AutoCompleteStringCollection();
+            source.AddRange(authors.Select(x => x.Name).ToArray());
         }
     }
 }
