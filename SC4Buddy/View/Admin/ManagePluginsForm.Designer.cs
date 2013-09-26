@@ -31,8 +31,6 @@ namespace NIHEI.SC4Buddy.View.Admin
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManagePluginsForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.siteComboBox = new System.Windows.Forms.ComboBox();
             this.descriptionTextBox = new System.Windows.Forms.RichTextBox();
             this.linkTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -63,8 +61,6 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.siteComboBox);
             this.groupBox1.Controls.Add(this.descriptionTextBox);
             this.groupBox1.Controls.Add(this.linkTextBox);
             this.groupBox1.Controls.Add(this.label3);
@@ -81,34 +77,15 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Plugin data";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 75);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(25, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Site";
-            // 
-            // siteComboBox
-            // 
-            this.siteComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.siteComboBox.FormattingEnabled = true;
-            this.siteComboBox.Location = new System.Drawing.Point(50, 72);
-            this.siteComboBox.Name = "siteComboBox";
-            this.siteComboBox.Size = new System.Drawing.Size(346, 21);
-            this.siteComboBox.TabIndex = 10;
-            // 
             // descriptionTextBox
             // 
             this.descriptionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.descriptionTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.descriptionTextBox.Location = new System.Drawing.Point(9, 125);
+            this.descriptionTextBox.Location = new System.Drawing.Point(9, 98);
             this.descriptionTextBox.Name = "descriptionTextBox";
-            this.descriptionTextBox.Size = new System.Drawing.Size(387, 259);
+            this.descriptionTextBox.Size = new System.Drawing.Size(387, 286);
             this.descriptionTextBox.TabIndex = 9;
             this.descriptionTextBox.Text = "";
             // 
@@ -116,7 +93,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             // 
             this.linkTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkTextBox.Location = new System.Drawing.Point(50, 99);
+            this.linkTextBox.Location = new System.Drawing.Point(50, 72);
             this.linkTextBox.Name = "linkTextBox";
             this.linkTextBox.Size = new System.Drawing.Size(346, 20);
             this.linkTextBox.TabIndex = 8;
@@ -124,7 +101,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 102);
+            this.label3.Location = new System.Drawing.Point(9, 75);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(27, 13);
             this.label3.TabIndex = 7;
@@ -341,8 +318,6 @@ namespace NIHEI.SC4Buddy.View.Admin
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox siteComboBox;
         private System.Windows.Forms.RichTextBox descriptionTextBox;
         private System.Windows.Forms.TextBox linkTextBox;
         private System.Windows.Forms.Label label3;
