@@ -12,6 +12,8 @@
     {
         private readonly RemotePluginController remotePluginController;
 
+        private RemotePlugin selectedPlugin;
+
         public ManagePluginsForm(RemotePluginController remotePluginController)
         {
             this.remotePluginController = remotePluginController;
@@ -35,7 +37,7 @@
 
             pluginsListView.BeginUpdate();
             pluginsListView.Items.Clear();
-            
+
             foreach (var plugin in matches)
             {
                 var item = new ListViewItemWithObjectValue<RemotePlugin>(plugin.Name, plugin);
@@ -49,7 +51,54 @@
 
         private void PluginsListViewSelectedIndexChanged(object sender, EventArgs e)
         {
+            var plugin = pluginsListView.SelectedItems.Count > 0
+                           ? ((ListViewItemWithObjectValue<RemotePlugin>)pluginsListView.SelectedItems[0]).Value
+                           : null;
 
+            if (plugin == null)
+            {
+                addButton.Enabled = false;
+                removeButton.Enabled = false;
+                updateButton.Enabled = false;
+                importButton.Enabled = true;
+
+                filesButton.Enabled = false;
+                dependenciesButton.Enabled = false;
+
+                nameTextBox.Text = string.Empty;
+                nameTextBox.Enabled = false;
+
+                authorComboBox.Text = string.Empty;
+                authorComboBox.Enabled = false;
+
+                linkTextBox.Text = string.Empty;
+                linkTextBox.Enabled = false;
+
+                descriptionTextBox.Text = string.Empty;
+                descriptionTextBox.Enabled = false;
+
+                return;
+            }
+
+            selectedPlugin = plugin;
+
+            nameTextBox.Text = plugin.Name;
+            authorComboBox.Text = plugin.Author.Name;
+            linkTextBox.Text = plugin.Link;
+            descriptionTextBox.Text = plugin.Description;
+
+            nameTextBox.Enabled = false;
+            authorComboBox.Enabled = false;
+            linkTextBox.Enabled = false;
+            descriptionTextBox.Enabled = false;
+
+            addButton.Enabled = false;
+            removeButton.Enabled = true;
+            updateButton.Enabled = true;
+            importButton.Enabled = false;
+
+            filesButton.Enabled = true;
+            dependenciesButton.Enabled = true;
         }
     }
 }
