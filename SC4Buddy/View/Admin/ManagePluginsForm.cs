@@ -22,7 +22,7 @@
 
         private void SearchComboBoxValueChanged(object sender, EventArgs e)
         {
-            var text = searchComboBox.Text.ToUpper();
+            var text = searchComboBox.Text.Trim().ToUpper();
 
             if (text.Length < 3)
             {
