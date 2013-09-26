@@ -125,6 +125,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.authorComboBox.Name = "authorComboBox";
             this.authorComboBox.Size = new System.Drawing.Size(346, 21);
             this.authorComboBox.TabIndex = 4;
+            this.authorComboBox.TextUpdate += new System.EventHandler(this.AuthorComboBoxTextUpdated);
             // 
             // nameTextBox
             // 

@@ -103,5 +103,9 @@
             filesButton.Enabled = true;
             dependenciesButton.Enabled = true;
         }
+
+        private void AuthorComboBoxTextUpdated(object sender, EventArgs e)
+        {
+        }
     }
 }
