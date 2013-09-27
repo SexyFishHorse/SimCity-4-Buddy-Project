@@ -48,6 +48,7 @@ namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
             this.nameColumnHeader,
             this.checksumColumnHeader});
             this.filesListView.Location = new System.Drawing.Point(12, 12);
+            this.filesListView.MultiSelect = false;
             this.filesListView.Name = "filesListView";
             this.filesListView.Size = new System.Drawing.Size(572, 292);
             this.filesListView.TabIndex = 0;
