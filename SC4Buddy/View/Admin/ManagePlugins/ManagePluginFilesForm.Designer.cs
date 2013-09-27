@@ -34,6 +34,8 @@
             this.okButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
+            this.nameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.checksumColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // filesListView
@@ -41,11 +43,15 @@
             this.filesListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.filesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.nameColumnHeader,
+            this.checksumColumnHeader});
             this.filesListView.Location = new System.Drawing.Point(12, 12);
             this.filesListView.Name = "filesListView";
             this.filesListView.Size = new System.Drawing.Size(572, 292);
             this.filesListView.TabIndex = 0;
             this.filesListView.UseCompatibleStateImageBehavior = false;
+            this.filesListView.View = System.Windows.Forms.View.List;
             // 
             // cancelButton
             // 
@@ -89,6 +95,14 @@
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
             // 
+            // nameColumnHeader
+            // 
+            this.nameColumnHeader.Text = "Filename";
+            // 
+            // checksumColumnHeader
+            // 
+            this.checksumColumnHeader.Text = "Checksum";
+            // 
             // ManagePluginFilesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -114,5 +128,7 @@
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button removeButton;
+        private System.Windows.Forms.ColumnHeader nameColumnHeader;
+        private System.Windows.Forms.ColumnHeader checksumColumnHeader;
     }
 }
