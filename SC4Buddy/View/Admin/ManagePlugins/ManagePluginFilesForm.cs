@@ -58,5 +58,12 @@
 
             removeButton.Enabled = true;
         }
+
+        private void RemoveButtonClick(object sender, System.EventArgs e)
+        {
+            var selectedItem = ((ListViewItemWithObjectValue<RemotePluginFile>)filesListView.SelectedItems[0]).Value;
+
+            pluginFiles.Remove(selectedItem);
+        }
     }
 }

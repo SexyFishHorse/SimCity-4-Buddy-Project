@@ -104,6 +104,7 @@ namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
             this.removeButton.TabIndex = 4;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
+            this.removeButton.Click += new System.EventHandler(this.RemoveButtonClick);
             // 
             // ManagePluginFilesForm
             // 
