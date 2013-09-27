@@ -30,12 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManagePluginFilesForm));
             this.filesListView = new System.Windows.Forms.ListView();
+            this.nameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.checksumColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
-            this.nameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.checksumColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // filesListView
@@ -52,6 +52,15 @@
             this.filesListView.TabIndex = 0;
             this.filesListView.UseCompatibleStateImageBehavior = false;
             this.filesListView.View = System.Windows.Forms.View.List;
+            this.filesListView.SelectedIndexChanged += new System.EventHandler(this.FilesListViewSelectedIndexChanged);
+            // 
+            // nameColumnHeader
+            // 
+            this.nameColumnHeader.Text = "Filename";
+            // 
+            // checksumColumnHeader
+            // 
+            this.checksumColumnHeader.Text = "Checksum";
             // 
             // cancelButton
             // 
@@ -94,14 +103,6 @@
             this.removeButton.TabIndex = 4;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
-            // 
-            // nameColumnHeader
-            // 
-            this.nameColumnHeader.Text = "Filename";
-            // 
-            // checksumColumnHeader
-            // 
-            this.checksumColumnHeader.Text = "Checksum";
             // 
             // ManagePluginFilesForm
             // 

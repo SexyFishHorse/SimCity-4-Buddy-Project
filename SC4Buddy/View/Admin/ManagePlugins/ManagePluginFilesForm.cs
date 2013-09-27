@@ -48,5 +48,15 @@
             filesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             filesListView.EndUpdate();
         }
+
+        private void FilesListViewSelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (filesListView.SelectedItems.Count < 1)
+            {
+                removeButton.Enabled = false;
+            }
+
+            removeButton.Enabled = true;
+        }
     }
 }
