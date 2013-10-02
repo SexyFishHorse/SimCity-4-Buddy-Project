@@ -146,6 +146,7 @@
       <DependentUpon>TemporaryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Plugin.cs" />
+    <Compile Include="Entities\Remote\RemotePluginFile.cs" />
     <Compile Include="Entities\Remote\User.cs" />
     <Compile Include="Entities\UserFolder.cs" />
     <Compile Include="Installer\FileHandlers\ArchiveHandler.cs" />
