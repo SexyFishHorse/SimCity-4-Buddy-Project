@@ -122,7 +122,7 @@
 
         private void FilesButtonClick(object sender, EventArgs e)
         {
-            using (var dialog = new ManagePluginFilesForm(selectedPlugin.PluginFiles))
+            using (var dialog = new ManagePluginFilesForm(selectedPlugin))
             {
                 if (dialog.ShowDialog(this) == DialogResult.OK)
                 {

@@ -10,12 +10,15 @@
 
     public partial class ManagePluginFilesForm : Form
     {
+        public RemotePlugin Plugin { get; set; }
+
         private EntityCollection<RemotePluginFile> pluginFiles;
 
-        public ManagePluginFilesForm(EntityCollection<RemotePluginFile> pluginFiles)
+        public ManagePluginFilesForm(RemotePlugin remotePlugin)
         {
-            PluginFiles = pluginFiles;
             InitializeComponent();
+            Plugin = remotePlugin;
+            PluginFiles = Plugin.PluginFiles;
         }
 
         public EntityCollection<RemotePluginFile> PluginFiles
