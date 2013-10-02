@@ -36,12 +36,12 @@
             }
         }
 
-        private void UpdateListView(IEnumerable<RemotePluginFile> pluginFiles)
+        private void UpdateListView(IEnumerable<RemotePluginFile> files)
         {
             filesListView.BeginUpdate();
             filesListView.Items.Clear();
 
-            foreach (var file in pluginFiles)
+            foreach (var file in files)
             {
                 var item = new ListViewItemWithObjectValue<RemotePluginFile>(Path.GetFileName(file.Name), file);
                 item.SubItems.Add(file.Checksum);
