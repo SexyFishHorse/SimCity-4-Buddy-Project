@@ -1,6 +1,8 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
+    using System.Collections.Generic;
     using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
 
     using SC4Buddy.Entities.Remote;
 
@@ -48,6 +50,16 @@
         public void SaveChanges()
         {
             entities.SaveChanges();
+        }
+
+        public void RevertChanges(EntityObject entityObject)
+        {
+            entities.Refresh(RefreshMode.StoreWins, entityObject);
+        }
+
+        public void RevertChanges(IEnumerable<EntityObject> entityCollection)
+        {
+            entities.Refresh(RefreshMode.StoreWins, entityCollection);
         }
     }
 }
