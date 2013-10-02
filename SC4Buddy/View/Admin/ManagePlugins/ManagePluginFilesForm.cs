@@ -71,6 +71,10 @@
 
         private void AddButtonClick(object sender, System.EventArgs e)
         {
+            if (selectFileDialog.ShowDialog(this) != DialogResult.OK)
+            {
+                return;
+            }
         }
     }
 }
