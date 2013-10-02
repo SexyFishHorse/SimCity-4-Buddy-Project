@@ -7,15 +7,21 @@
 
     using NIHEI.Common.IO;
     using NIHEI.Common.UI.Elements;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
 
     public partial class ManagePluginFilesForm : Form
     {
+        private readonly RemotePluginController remotePluginController;
+
         private EntityCollection<RemotePluginFile> pluginFiles;
 
-        public ManagePluginFilesForm(RemotePlugin remotePlugin)
+        public ManagePluginFilesForm(RemotePluginController remotePluginController, RemotePlugin remotePlugin)
         {
+            this.remotePluginController = remotePluginController;
+
             InitializeComponent();
+
             Plugin = remotePlugin;
             PluginFiles = Plugin.PluginFiles;
         }
@@ -93,6 +99,11 @@
                     PluginFiles.Add(remoteFile);
                 }
             }
+        }
+
+        private void OkButtonClick(object sender, System.EventArgs e)
+        {
+            remotePluginController.SaveChanges();
         }
     }
 }

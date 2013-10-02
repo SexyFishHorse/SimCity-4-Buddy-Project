@@ -85,6 +85,7 @@ namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
             this.okButton.TabIndex = 2;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.OkButtonClick);
             // 
             // addButton
             // 
