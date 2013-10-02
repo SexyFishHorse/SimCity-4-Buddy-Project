@@ -1,6 +1,8 @@
 ﻿namespace NIHEI.SC4Buddy.View.Admin
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -17,10 +19,15 @@
 
         private RemotePlugin selectedPlugin;
 
+        private ICollection<RemotePluginFile> pluginFiles;
+
         public ManagePluginsForm(RemotePluginController remotePluginController, AuthorController authorController)
         {
             this.remotePluginController = remotePluginController;
             this.authorController = authorController;
+
+            pluginFiles = new Collection<RemotePluginFile>();
+
             InitializeComponent();
         }
 
@@ -122,7 +129,7 @@
 
         private void FilesButtonClick(object sender, EventArgs e)
         {
-            using (var dialog = new ManagePluginFilesForm(selectedPlugin))
+            using (var dialog = new ManagePluginFilesForm(pluginFiles))
             {
                 if (dialog.ShowDialog(this) == DialogResult.OK)
                 {

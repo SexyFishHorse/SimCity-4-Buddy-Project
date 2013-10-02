@@ -1,24 +1,20 @@
 ﻿namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
 {
     using System.Collections.Generic;
-    using System.Data.Objects.DataClasses;
     using System.IO;
     using System.Windows.Forms;
 
     using NIHEI.Common.IO;
     using NIHEI.Common.UI.Elements;
-    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
-    using NIHEI.SC4Buddy.Localization;
 
     public partial class ManagePluginFilesForm : Form
     {
-        public ManagePluginFilesForm(RemotePluginController remotePluginController, RemotePlugin remotePlugin)
+        public ManagePluginFilesForm(ICollection<RemotePluginFile> files)
         {
             InitializeComponent();
 
-            Plugin = remotePlugin;
-            PluginFiles = Plugin.PluginFiles;
+            PluginFiles = files;
         }
 
         public ICollection<RemotePluginFile> PluginFiles { get; private set; }
@@ -80,15 +76,8 @@
                     PluginFiles.Add(remoteFile);
                 }
             }
-        }
 
-        private void OkButtonClick(object sender, System.EventArgs e)
-        {
-        }
-
-        private void CancelButtonClick(object sender, System.EventArgs e)
-        {
-
+            UpdateListView(PluginFiles);
         }
     }
 }
