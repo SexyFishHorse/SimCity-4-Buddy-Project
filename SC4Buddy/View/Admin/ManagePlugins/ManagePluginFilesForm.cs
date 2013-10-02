@@ -77,7 +77,9 @@
         {
             var selectedItem = ((ListViewItemWithObjectValue<RemotePluginFile>)filesListView.SelectedItems[0]).Value;
 
-            pluginFiles.Remove(selectedItem);
+            PluginFiles.Remove(selectedItem);
+
+            UpdateListView(PluginFiles);
         }
 
         private void AddButtonClick(object sender, System.EventArgs e)
