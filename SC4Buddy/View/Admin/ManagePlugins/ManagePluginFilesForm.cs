@@ -15,6 +15,8 @@
             InitializeComponent();
 
             PluginFiles = files;
+
+            UpdateListView(PluginFiles);
         }
 
         public ICollection<RemotePluginFile> PluginFiles { get; private set; }
