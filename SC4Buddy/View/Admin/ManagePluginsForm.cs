@@ -29,6 +29,8 @@
             pluginFiles = new Collection<RemotePluginFile>();
 
             InitializeComponent();
+
+            filesButton.Text = string.Format("Files ({0})", pluginFiles.Count);
         }
 
         private void SearchComboBoxValueChanged(object sender, EventArgs e)
@@ -133,7 +135,8 @@
             {
                 if (dialog.ShowDialog(this) == DialogResult.OK)
                 {
-                    selectedPlugin.PluginFiles = dialog.PluginFiles;
+                    pluginFiles = dialog.PluginFiles;
+                    filesButton.Text = string.Format("Files ({0})", pluginFiles.Count);
                 }
             }
         }
