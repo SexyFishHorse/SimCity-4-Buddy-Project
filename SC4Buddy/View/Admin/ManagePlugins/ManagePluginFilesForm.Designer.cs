@@ -90,7 +90,6 @@ namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
             // addButton
             // 
             this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.addButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.addButton.Location = new System.Drawing.Point(12, 310);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(75, 23);
