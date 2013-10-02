@@ -54,7 +54,7 @@ namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
             this.filesListView.Size = new System.Drawing.Size(572, 292);
             this.filesListView.TabIndex = 0;
             this.filesListView.UseCompatibleStateImageBehavior = false;
-            this.filesListView.View = System.Windows.Forms.View.List;
+            this.filesListView.View = System.Windows.Forms.View.Details;
             this.filesListView.SelectedIndexChanged += new System.EventHandler(this.FilesListViewSelectedIndexChanged);
             // 
             // nameColumnHeader
@@ -68,13 +68,13 @@ namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Location = new System.Drawing.Point(509, 310);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 1;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.CancelButtonClick);
             // 
             // okButton
             // 
@@ -86,11 +86,11 @@ namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
             this.okButton.TabIndex = 2;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.OkButtonClick);
             // 
             // addButton
             // 
             this.addButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.addButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.addButton.Location = new System.Drawing.Point(12, 310);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(75, 23);
@@ -119,8 +119,10 @@ namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
             // 
             // ManagePluginFilesForm
             // 
+            this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(596, 345);
             this.Controls.Add(this.removeButton);
             this.Controls.Add(this.addButton);
