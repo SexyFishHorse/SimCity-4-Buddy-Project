@@ -48,6 +48,11 @@
             entities.SaveChanges();
         }
 
+        public void RevertChanges(RemotePlugin remotePlugin)
+        {
+            entities.RevertChanges(remotePlugin);
+        }
+
         public static bool ValidateLinkAndAuthor(string link, Author author)
         {
             var siteUri = new UriBuilder(author.Site);
