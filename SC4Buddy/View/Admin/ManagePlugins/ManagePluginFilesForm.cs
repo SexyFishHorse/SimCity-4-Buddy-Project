@@ -105,5 +105,10 @@
         {
             remotePluginController.SaveChanges();
         }
+
+        private void CancelButtonClick(object sender, System.EventArgs e)
+        {
+            remotePluginController.RevertChanges(Plugin);
+        }
     }
 }
