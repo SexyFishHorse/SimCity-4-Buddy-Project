@@ -169,6 +169,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm cancellation.
+        /// </summary>
+        internal static string ConfirmCancellation {
+            get {
+                return ResourceManager.GetString("ConfirmCancellation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm deletion of author.
         /// </summary>
         internal static string ConfirmDeletionOfAuthor {
@@ -1274,6 +1283,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string YouDoNotAppearToBeConnectedToTheInternet {
             get {
                 return ResourceManager.GetString("YouDoNotAppearToBeConnectedToTheInternet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have unsaved changes to this plugin. Are you sure you want to cancel?.
+        /// </summary>
+        internal static string YouHaveUnsavedChangesToThisPluginAreYouSureYouWantToCancel {
+            get {
+                return ResourceManager.GetString("YouHaveUnsavedChangesToThisPluginAreYouSureYouWantToCancel", resourceCulture);
             }
         }
         

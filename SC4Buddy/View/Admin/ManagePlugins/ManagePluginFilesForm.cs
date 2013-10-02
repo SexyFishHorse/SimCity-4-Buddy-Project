@@ -9,15 +9,19 @@
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Localization;
 
     public partial class ManagePluginFilesForm : Form
     {
         private readonly RemotePluginController remotePluginController;
 
+        private bool hasChanges;
+
         private EntityCollection<RemotePluginFile> pluginFiles;
 
         public ManagePluginFilesForm(RemotePluginController remotePluginController, RemotePlugin remotePlugin)
         {
+            hasChanges = false;
             this.remotePluginController = remotePluginController;
 
             InitializeComponent();
@@ -96,6 +100,7 @@
 
                 if (!PluginFiles.Contains(remoteFile))
                 {
+                    hasChanges = true;
                     PluginFiles.Add(remoteFile);
                 }
             }
@@ -104,10 +109,27 @@
         private void OkButtonClick(object sender, System.EventArgs e)
         {
             remotePluginController.SaveChanges();
+            hasChanges = false;
         }
 
         private void CancelButtonClick(object sender, System.EventArgs e)
         {
+            if (!hasChanges)
+            {
+                return;
+            }
+
+            if (MessageBox.Show(
+                this,
+                LocalizationStrings.YouHaveUnsavedChangesToThisPluginAreYouSureYouWantToCancel,
+                LocalizationStrings.ConfirmCancellation,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2) == DialogResult.No)
+            {
+                return;
+            }
+
             remotePluginController.RevertChanges(Plugin);
         }
     }
