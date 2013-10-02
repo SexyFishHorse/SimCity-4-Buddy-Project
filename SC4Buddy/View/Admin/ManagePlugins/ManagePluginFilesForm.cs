@@ -21,8 +21,6 @@
             PluginFiles = Plugin.PluginFiles;
         }
 
-        public RemotePlugin Plugin { get; set; }
-
         public ICollection<RemotePluginFile> PluginFiles { get; private set; }
 
         private void UpdateListView(IEnumerable<RemotePluginFile> files)
@@ -75,7 +73,6 @@
                                      {
                                          Name = Path.GetFileName(file),
                                          Checksum = Md5ChecksumUtility.CalculateChecksum(file).ToHex(),
-                                         Plugin = Plugin
                                      };
 
                 if (!PluginFiles.Contains(remoteFile))
