@@ -13,8 +13,6 @@
 
     public partial class ManagePluginFilesForm : Form
     {
-        private EntityCollection<RemotePluginFile> pluginFiles;
-
         public ManagePluginFilesForm(RemotePluginController remotePluginController, RemotePlugin remotePlugin)
         {
             InitializeComponent();
@@ -25,20 +23,7 @@
 
         public RemotePlugin Plugin { get; set; }
 
-        public EntityCollection<RemotePluginFile> PluginFiles
-        {
-            get
-            {
-                return pluginFiles;
-            }
-
-            private set
-            {
-                pluginFiles = value;
-
-                UpdateListView(pluginFiles);
-            }
-        }
+        public ICollection<RemotePluginFile> PluginFiles { get; private set; }
 
         private void UpdateListView(IEnumerable<RemotePluginFile> files)
         {
