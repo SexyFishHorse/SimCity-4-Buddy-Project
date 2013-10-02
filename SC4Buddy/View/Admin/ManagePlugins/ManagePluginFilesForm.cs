@@ -10,8 +10,6 @@
 
     public partial class ManagePluginFilesForm : Form
     {
-        public RemotePlugin Plugin { get; set; }
-
         private EntityCollection<RemotePluginFile> pluginFiles;
 
         public ManagePluginFilesForm(RemotePlugin remotePlugin)
@@ -20,6 +18,8 @@
             Plugin = remotePlugin;
             PluginFiles = Plugin.PluginFiles;
         }
+
+        public RemotePlugin Plugin { get; set; }
 
         public EntityCollection<RemotePluginFile> PluginFiles
         {
