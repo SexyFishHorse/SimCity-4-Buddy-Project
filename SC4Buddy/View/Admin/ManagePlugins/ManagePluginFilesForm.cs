@@ -68,5 +68,9 @@
 
             pluginFiles.Remove(selectedItem);
         }
+
+        private void AddButtonClick(object sender, System.EventArgs e)
+        {
+        }
     }
 }

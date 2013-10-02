@@ -37,6 +37,7 @@ namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
             this.okButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
+            this.selectFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // filesListView
@@ -94,6 +95,7 @@ namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
             this.addButton.TabIndex = 3;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
+            this.addButton.Click += new System.EventHandler(this.AddButtonClick);
             // 
             // removeButton
             // 
@@ -106,6 +108,12 @@ namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
             this.removeButton.Click += new System.EventHandler(this.RemoveButtonClick);
+            // 
+            // selectFileDialog
+            // 
+            this.selectFileDialog.Multiselect = true;
+            this.selectFileDialog.Title = "Select one or more files you want to add to the plugin (The files will not be upl" +
+    "oaded)";
             // 
             // ManagePluginFilesForm
             // 
@@ -134,5 +142,6 @@ namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.ColumnHeader nameColumnHeader;
         private System.Windows.Forms.ColumnHeader checksumColumnHeader;
+        private System.Windows.Forms.OpenFileDialog selectFileDialog;
     }
 }
