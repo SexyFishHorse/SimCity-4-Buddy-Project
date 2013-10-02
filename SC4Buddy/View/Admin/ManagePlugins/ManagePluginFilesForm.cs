@@ -5,6 +5,7 @@
     using System.IO;
     using System.Windows.Forms;
 
+    using NIHEI.Common.IO;
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Entities.Remote;
 
@@ -74,6 +75,23 @@
             if (selectFileDialog.ShowDialog(this) != DialogResult.OK)
             {
                 return;
+            }
+
+            var files = selectFileDialog.FileNames;
+
+            foreach (var file in files)
+            {
+                var remoteFile = new RemotePluginFile
+                                     {
+                                         Name = Path.GetFileName(file),
+                                         Checksum = Md5ChecksumUtility.CalculateChecksum(file).ToHex(),
+                                         Plugin = Plugin
+                                     };
+
+                if (!PluginFiles.Contains(remoteFile))
+                {
+                    PluginFiles.Add(remoteFile);
+                }
             }
         }
     }
