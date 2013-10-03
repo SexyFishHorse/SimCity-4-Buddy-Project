@@ -52,6 +52,8 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.siteColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
+            this.cancelDataButton = new System.Windows.Forms.Button();
+            this.saveDataButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +63,8 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.saveDataButton);
+            this.groupBox1.Controls.Add(this.cancelDataButton);
             this.groupBox1.Controls.Add(this.descriptionTextBox);
             this.groupBox1.Controls.Add(this.linkTextBox);
             this.groupBox1.Controls.Add(this.label3);
@@ -295,6 +299,28 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             // 
+            // cancelDataButton
+            // 
+            this.cancelDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cancelDataButton.Enabled = false;
+            this.cancelDataButton.Location = new System.Drawing.Point(321, 390);
+            this.cancelDataButton.Name = "cancelDataButton";
+            this.cancelDataButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelDataButton.TabIndex = 10;
+            this.cancelDataButton.Text = "Cancel";
+            this.cancelDataButton.UseVisualStyleBackColor = true;
+            // 
+            // saveDataButton
+            // 
+            this.saveDataButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveDataButton.Enabled = false;
+            this.saveDataButton.Location = new System.Drawing.Point(240, 390);
+            this.saveDataButton.Name = "saveDataButton";
+            this.saveDataButton.Size = new System.Drawing.Size(75, 23);
+            this.saveDataButton.TabIndex = 11;
+            this.saveDataButton.Text = "Save";
+            this.saveDataButton.UseVisualStyleBackColor = true;
+            // 
             // ManagePluginsForm
             // 
             this.AcceptButton = this.okButton;
@@ -341,5 +367,7 @@ namespace NIHEI.SC4Buddy.View.Admin
         private System.Windows.Forms.ColumnHeader nameColumnHeader;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.Button saveDataButton;
+        private System.Windows.Forms.Button cancelDataButton;
     }
 }
