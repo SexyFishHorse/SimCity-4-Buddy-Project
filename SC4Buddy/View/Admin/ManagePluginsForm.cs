@@ -64,6 +64,11 @@
                            ? ((ListViewItemWithObjectValue<RemotePlugin>)pluginsListView.SelectedItems[0]).Value
                            : null;
 
+            if (plugin != null && plugin.Id < 1)
+            {
+                return;
+            }
+
             if (plugin == null)
             {
                 addButton.Enabled = false;
