@@ -165,5 +165,38 @@
 
             pluginFiles = new Collection<RemotePluginFile>();
         }
+
+        private void CancelDataButtonClick(object sender, EventArgs e)
+        {
+            selectedPlugin = null;
+            pluginFiles = null;
+
+            saveDataButton.Enabled = false;
+            cancelDataButton.Enabled = false;
+
+            addButton.Enabled = true;
+
+            pluginsListView.Items.Remove(new ListViewItem("(new)"));
+
+            nameTextBox.Enabled = false;
+            nameTextBox.Text = string.Empty;
+            authorComboBox.Enabled = false;
+            authorComboBox.Text = string.Empty;
+            linkTextBox.Enabled = false;
+            linkTextBox.Text = string.Empty;
+            descriptionTextBox.Enabled = false;
+            descriptionTextBox.Text = string.Empty;
+
+            filesButton.Enabled = false;
+            filesButton.Text = "Files";
+            dependenciesButton.Enabled = false;
+            dependenciesButton.Text = "Dependencies";
+
+            searchComboBox.Enabled = true;
+
+            importButton.Enabled = true;
+            removeButton.Enabled = false;
+            updateButton.Enabled = false;
+        }
     }
 }

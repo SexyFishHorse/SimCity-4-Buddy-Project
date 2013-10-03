@@ -308,6 +308,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.cancelDataButton.TabIndex = 10;
             this.cancelDataButton.Text = "Cancel";
             this.cancelDataButton.UseVisualStyleBackColor = true;
+            this.cancelDataButton.Click += new System.EventHandler(this.CancelDataButtonClick);
             // 
             // saveDataButton
             // 
