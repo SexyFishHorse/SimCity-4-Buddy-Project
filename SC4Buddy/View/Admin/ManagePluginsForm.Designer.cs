@@ -186,6 +186,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.dependenciesButton.TabIndex = 1;
             this.dependenciesButton.Text = "Dependencies";
             this.dependenciesButton.UseVisualStyleBackColor = true;
+            this.dependenciesButton.Click += new System.EventHandler(this.DependenciesButtonClick);
             // 
             // filesButton
             // 

@@ -208,5 +208,14 @@
             removeButton.Enabled = false;
             updateButton.Enabled = false;
         }
+
+        private void DependenciesButtonClick(object sender, EventArgs e)
+        {
+            var dialog = new ManagePluginDependenciesForm();
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+
+            }
+        }
     }
 }
