@@ -190,6 +190,18 @@
   <data name="helpToolStripMenuItem.Text" xml:space="preserve">
     <value>Help</value>
   </data>
+  <data name="adminPanelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="adminPanelToolStripMenuItem.Text" xml:space="preserve">
+    <value>Admin panel</value>
+  </data>
+  <data name="adminToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 20</value>
+  </data>
+  <data name="adminToolStripMenuItem.Text" xml:space="preserve">
+    <value>Admin</value>
+  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -225,7 +237,7 @@
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAKgAAAA5CAYAAACicWBSAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DwAACw8BkvkDpQAAAAd0SU1FB90HHhMRIBZFRxwAABkESURBVHhe7V13cBzXeVciW7IU27LsxJLtOLYs
+        DAAACwwBP0AiyAAAAAd0SU1FB90HHhMRIBZFRxwAABkESURBVHhe7V13cBzXeVciW7IU27LsxJLtOLYs
         2YklK7IUOXYyKbYnmqFmIkWjxLKSTIpkq5uoh3IN5XAFuDsceu8dh14IkOggSLChAwQ7wYZGACIlHoDD
         n/l+i13qsNi93TscaUx438w3xN3te+/b937vK+/7dnmfn+4eRUdH/4FWq/2cRqN9gOOoqKj72Z/vKu0m
         Wfy0CygyUvmMSqUpUao1R6JjYqd1uriTeoNxKlKpbgwOCflQqVR+kb30jhON9bRaoy1WqbW3ZYnTG6Yi
@@ -362,7 +374,7 @@
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAANYAAADWCAYAAACt43wuAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DwAACw8BkvkDpQAAAAd0SU1FB90HHhIpJ558BHMAALGYSURBVHhe7F0FnBVVH/0MuktAEAOxke7u7pTu
+        DAAACwwBP0AiyAAAAAd0SU1FB90HHhIpJ558BHMAALGYSURBVHhe7F0FnBVVH/0MuktAEAOxke7u7pTu
         7lRCGlEQUUAERFC6u7thYRcWFnaX7m7Y3Re7e75z7nsPNgYFBEWFH+c3b+fN3Ll35pz7j3vnvv8BeIHn
         DLe9PsedTbUQvKYQQlZmdWFFlmi4uzI/bq6thqubu/A067Je4O+B5c4X+Otxb3d3BG2phaBVBRGy5H2E
         zEsCLIsPrEnwcPB7G4+7u/Bd3FySG9dWV8TlDW1xevtIFml9nRf4a2C58wX+Otzd3QX3VuSmQJIjbH58
@@ -3015,6 +3027,18 @@
     <value>aboutToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;aboutToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;adminToolStripMenuItem.Name" xml:space="preserve">
+    <value>adminToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;adminToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;adminPanelToolStripMenuItem.Name" xml:space="preserve">
+    <value>adminPanelToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;adminPanelToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
