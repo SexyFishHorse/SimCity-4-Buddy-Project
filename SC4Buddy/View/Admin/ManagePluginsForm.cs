@@ -26,8 +26,6 @@
             this.remotePluginController = remotePluginController;
             this.authorController = authorController;
 
-            pluginFiles = new Collection<RemotePluginFile>();
-
             InitializeComponent();
         }
 
