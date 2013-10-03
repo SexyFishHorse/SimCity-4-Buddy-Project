@@ -154,8 +154,8 @@
             searchComboBox.Enabled = false;
             searchComboBox.Text = string.Empty;
 
-            pluginsListView.Items.Add(new ListViewItem("(new)"));
 
+            pluginsListView.Items.Add(new ListViewItemWithObjectValue<RemotePlugin>(selectedPlugin.Name, selectedPlugin));
             nameTextBox.Focus();
 
             selectedPlugin = new RemotePlugin();
@@ -173,7 +173,7 @@
 
             addButton.Enabled = true;
 
-            pluginsListView.Items.Remove(new ListViewItem("(new)"));
+            pluginsListView.Items.Remove(new ListViewItemWithObjectValue<RemotePlugin>(selectedPlugin.Name, selectedPlugin));
 
             nameTextBox.Enabled = false;
             nameTextBox.Text = string.Empty;
