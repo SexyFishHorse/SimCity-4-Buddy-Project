@@ -221,6 +221,12 @@
     <Compile Include="View\Admin\ManagePluginsForm.Designer.cs">
       <DependentUpon>ManagePluginsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Admin\ManagePlugins\ManagePluginDependenciesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Admin\ManagePlugins\ManagePluginDependenciesForm.Designer.cs">
+      <DependentUpon>ManagePluginDependenciesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Admin\ManagePlugins\ManagePluginFilesForm.cs">
       <SubType>Form</SubType>
     </Compile>
