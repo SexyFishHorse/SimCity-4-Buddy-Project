@@ -140,5 +140,22 @@
                 }
             }
         }
+
+        private void AddButtonClick(object sender, EventArgs e)
+        {
+            selectedPlugin = new RemotePlugin();
+
+            pluginFiles = new Collection<RemotePluginFile>();
+
+            nameTextBox.Enabled = true;
+            nameTextBox.Text = string.Empty;
+            authorComboBox.Enabled = true;
+            authorComboBox.Text = string.Empty;
+            linkTextBox.Enabled = true;
+            linkTextBox.Text = string.Empty;
+            descriptionTextBox.Enabled = true;
+            descriptionTextBox.Text = string.Empty;
+            cancelDataButton.Enabled = true;
+        }
     }
 }
