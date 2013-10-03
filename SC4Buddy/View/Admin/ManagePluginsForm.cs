@@ -149,6 +149,7 @@
             descriptionTextBox.Text = string.Empty;
             cancelDataButton.Enabled = true;
 
+            addButton.Enabled = false;
             importButton.Enabled = false;
             searchComboBox.Enabled = false;
             searchComboBox.Text = string.Empty;
