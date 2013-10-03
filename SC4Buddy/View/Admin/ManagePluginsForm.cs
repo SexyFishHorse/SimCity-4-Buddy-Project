@@ -154,13 +154,12 @@
             searchComboBox.Enabled = false;
             searchComboBox.Text = string.Empty;
 
+            pluginFiles = new Collection<RemotePluginFile>();
+            selectedPlugin = new RemotePlugin { Name = "(new)" };
 
             pluginsListView.Items.Add(new ListViewItemWithObjectValue<RemotePlugin>(selectedPlugin.Name, selectedPlugin));
+
             nameTextBox.Focus();
-
-            selectedPlugin = new RemotePlugin();
-
-            pluginFiles = new Collection<RemotePluginFile>();
         }
 
         private void CancelDataButtonClick(object sender, EventArgs e)
