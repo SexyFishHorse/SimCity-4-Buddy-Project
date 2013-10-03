@@ -143,10 +143,6 @@
 
         private void AddButtonClick(object sender, EventArgs e)
         {
-            selectedPlugin = new RemotePlugin();
-
-            pluginFiles = new Collection<RemotePluginFile>();
-
             nameTextBox.Enabled = true;
             nameTextBox.Text = string.Empty;
             authorComboBox.Enabled = true;
@@ -156,6 +152,18 @@
             descriptionTextBox.Enabled = true;
             descriptionTextBox.Text = string.Empty;
             cancelDataButton.Enabled = true;
+
+            importButton.Enabled = false;
+            searchComboBox.Enabled = false;
+            searchComboBox.Text = string.Empty;
+
+            pluginsListView.Items.Add(new ListViewItem("(new)"));
+
+            nameTextBox.Focus();
+
+            selectedPlugin = new RemotePlugin();
+
+            pluginFiles = new Collection<RemotePluginFile>();
         }
     }
 }
