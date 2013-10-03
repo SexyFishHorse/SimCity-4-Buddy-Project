@@ -169,6 +169,15 @@
 
         private void CancelDataButtonClick(object sender, EventArgs e)
         {
+            foreach (ListViewItemWithObjectValue<RemotePlugin> item in pluginsListView.Items)
+            {
+                if (item.Value == selectedPlugin)
+                {
+                    pluginsListView.Items.Remove(item);
+                    break;
+                }
+            }
+
             selectedPlugin = null;
             pluginFiles = null;
 
@@ -176,8 +185,6 @@
             cancelDataButton.Enabled = false;
 
             addButton.Enabled = true;
-
-            pluginsListView.Items.Remove(new ListViewItemWithObjectValue<RemotePlugin>(selectedPlugin.Name, selectedPlugin));
 
             nameTextBox.Enabled = false;
             nameTextBox.Text = string.Empty;
