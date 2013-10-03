@@ -172,13 +172,12 @@
 
         private void CancelDataButtonClick(object sender, EventArgs e)
         {
-            foreach (ListViewItemWithObjectValue<RemotePlugin> item in pluginsListView.Items)
+            foreach (var item in
+                pluginsListView.Items.Cast<ListViewItemWithObjectValue<RemotePlugin>>()
+                    .Where(item => item.Value == selectedPlugin))
             {
-                if (item.Value == selectedPlugin)
-                {
-                    pluginsListView.Items.Remove(item);
-                    break;
-                }
+                pluginsListView.Items.Remove(item);
+                break;
             }
 
             selectedPlugin = null;
