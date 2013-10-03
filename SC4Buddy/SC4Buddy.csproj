@@ -348,6 +348,9 @@
     <EmbeddedResource Include="View\Admin\ManagePluginsForm.resx">
       <DependentUpon>ManagePluginsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\Admin\ManagePlugins\ManagePluginDependenciesForm.resx">
+      <DependentUpon>ManagePluginDependenciesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Admin\ManagePlugins\ManagePluginFilesForm.resx">
       <DependentUpon>ManagePluginFilesForm.cs</DependentUpon>
     </EmbeddedResource>
