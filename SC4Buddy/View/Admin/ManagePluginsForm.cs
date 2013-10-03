@@ -159,6 +159,9 @@
             searchComboBox.Enabled = false;
             searchComboBox.Text = string.Empty;
 
+            filesButton.Enabled = true;
+            dependenciesButton.Enabled = true;
+
             pluginFiles = new Collection<RemotePluginFile>();
             selectedPlugin = new RemotePlugin { Name = "(new)" };
 
