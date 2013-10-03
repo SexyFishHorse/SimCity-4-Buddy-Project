@@ -21,6 +21,8 @@
 
         private ICollection<RemotePluginFile> pluginFiles;
 
+        private Collection<RemotePlugin> pluginDependencies;
+
         public ManagePluginsForm(RemotePluginController remotePluginController, AuthorController authorController)
         {
             this.remotePluginController = remotePluginController;
@@ -163,6 +165,7 @@
             dependenciesButton.Enabled = true;
 
             pluginFiles = new Collection<RemotePluginFile>();
+            pluginDependencies = new Collection<RemotePlugin>();
             selectedPlugin = new RemotePlugin { Name = "(new)" };
 
             pluginsListView.Items.Add(new ListViewItemWithObjectValue<RemotePlugin>(selectedPlugin.Name, selectedPlugin));
@@ -211,10 +214,10 @@
 
         private void DependenciesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new ManagePluginDependenciesForm();
+            var dialog = new ManagePluginDependenciesForm(pluginDependencies);
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
-
+                pluginDependencies = dialog.Dependencies;
             }
         }
     }

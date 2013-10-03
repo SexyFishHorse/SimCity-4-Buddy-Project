@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
+﻿namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
 {
+    using System.Collections.ObjectModel;
+    using System.Windows.Forms;
+
+    using NIHEI.SC4Buddy.Entities.Remote;
+
     public partial class ManagePluginDependenciesForm : Form
     {
-        public ManagePluginDependenciesForm()
+        public ManagePluginDependenciesForm(Collection<RemotePlugin> pluginDependencies)
         {
+            Dependencies = pluginDependencies;
             InitializeComponent();
         }
+
+        public Collection<RemotePlugin> Dependencies { get; private set; }
     }
 }
