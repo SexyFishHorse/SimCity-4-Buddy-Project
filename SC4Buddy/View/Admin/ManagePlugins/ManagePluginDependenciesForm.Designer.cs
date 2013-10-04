@@ -254,6 +254,7 @@
             this.resultsListView.TabIndex = 2;
             this.resultsListView.UseCompatibleStateImageBehavior = false;
             this.resultsListView.View = System.Windows.Forms.View.Details;
+            this.resultsListView.SelectedIndexChanged += new System.EventHandler(this.ResultsListViewSelectedIndexChanged);
             // 
             // groupBox3
             // 

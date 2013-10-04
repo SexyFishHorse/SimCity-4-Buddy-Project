@@ -14,6 +14,8 @@
 
         private RemotePlugin selectedDependency;
 
+        private RemotePlugin selectedSearchResult;
+
         public ManagePluginDependenciesForm(
             Collection<RemotePlugin> pluginDependencies,
             RemotePluginController remotePluginController)
@@ -75,6 +77,16 @@
             var results = remotePluginController.SearchForPlugin(text);
 
             UpdateListView(resultsListView, results);
+        }
+
+        private void ResultsListViewSelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            selectedSearchResult = resultsListView.SelectedItems.Count > 0
+                                       ? ((ListViewItemWithObjectValue<RemotePlugin>)resultsListView.SelectedItems[0])
+                                             .Value
+                                       : null;
+
+            selectButton.Enabled = selectedSearchResult != null;
         }
     }
 }
