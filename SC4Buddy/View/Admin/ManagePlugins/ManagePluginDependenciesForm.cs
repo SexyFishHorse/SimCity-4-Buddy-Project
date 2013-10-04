@@ -5,15 +5,19 @@
     using System.Windows.Forms;
 
     using NIHEI.Common.UI.Elements;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
 
     public partial class ManagePluginDependenciesForm : Form
     {
+        private readonly RemotePluginController remotePluginController;
+
         private RemotePlugin selectedDependency;
 
-        public ManagePluginDependenciesForm(Collection<RemotePlugin> pluginDependencies)
+        public ManagePluginDependenciesForm(Collection<RemotePlugin> pluginDependencies, RemotePluginController remotePluginController)
         {
             Dependencies = pluginDependencies;
+            this.remotePluginController = remotePluginController;
             InitializeComponent();
 
             UpdateListView(dependenciesListView, Dependencies);
