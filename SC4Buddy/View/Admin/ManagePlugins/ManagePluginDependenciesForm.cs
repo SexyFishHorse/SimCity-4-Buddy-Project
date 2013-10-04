@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Windows.Forms;
 
     using NIHEI.Common.UI.Elements;
@@ -120,6 +121,32 @@
             newPlugin = new RemotePlugin();
 
             dependenciesListView.Items.Add(new ListViewItemWithObjectValue<RemotePlugin>("(new)", newPlugin));
+        }
+
+        private void CancelAddButtonClick(object sender, System.EventArgs e)
+        {
+            nameTextBox.Enabled = false;
+            nameTextBox.Text = string.Empty;
+            authorComboBox.Enabled = false;
+            authorComboBox.Text = string.Empty;
+            linkTextBox.Enabled = false;
+            linkTextBox.Text = string.Empty;
+
+            cancelAddButton.Enabled = false;
+            saveAndAddButton.Enabled = false;
+
+            addDependencyButton.Enabled = true;
+
+            foreach (
+                ListViewItemWithObjectValue<RemotePlugin> item in
+                    dependenciesListView.Items.Cast<ListViewItemWithObjectValue<RemotePlugin>>()
+                        .Where(item => item.Value.Equals(newPlugin)))
+            {
+                dependenciesListView.Items.Remove(item);
+                break;
+            }
+
+            newPlugin = null;
         }
     }
 }
