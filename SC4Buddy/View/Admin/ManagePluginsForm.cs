@@ -215,10 +215,13 @@
         private void DependenciesButtonClick(object sender, EventArgs e)
         {
             var dialog = new ManagePluginDependenciesForm(pluginDependencies, remotePluginController, authorController);
-            if (dialog.ShowDialog(this) == DialogResult.OK)
+            if (dialog.ShowDialog(this) != DialogResult.OK)
             {
-                pluginDependencies = dialog.Dependencies;
+                return;
             }
+
+            pluginDependencies = dialog.Dependencies;
+            dependenciesButton.Text = string.Format("Dependencies ({0})", pluginDependencies.Count);
         }
     }
 }
