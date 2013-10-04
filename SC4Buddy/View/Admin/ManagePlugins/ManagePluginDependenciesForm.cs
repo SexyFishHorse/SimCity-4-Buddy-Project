@@ -14,7 +14,9 @@
 
         private RemotePlugin selectedDependency;
 
-        public ManagePluginDependenciesForm(Collection<RemotePlugin> pluginDependencies, RemotePluginController remotePluginController)
+        public ManagePluginDependenciesForm(
+            Collection<RemotePlugin> pluginDependencies,
+            RemotePluginController remotePluginController)
         {
             Dependencies = pluginDependencies;
             this.remotePluginController = remotePluginController;
@@ -44,15 +46,17 @@
         private void DependenciesListViewSelectedIndexChanged(object sender, System.EventArgs e)
         {
             selectedDependency = dependenciesListView.SelectedItems.Count > 0
-                                   ? ((ListViewItemWithObjectValue<RemotePlugin>)dependenciesListView.SelectedItems[0]).Value
-                                   : null;
+                                     ? ((ListViewItemWithObjectValue<RemotePlugin>)dependenciesListView.SelectedItems[0])
+                                           .Value
+                                     : null;
 
             removeDependencyButton.Enabled = selectedDependency != null;
         }
 
         private void RemoveDependencyButtonClick(object sender, System.EventArgs e)
         {
-            dependenciesListView.Items.Remove(new ListViewItemWithObjectValue<RemotePlugin>(selectedDependency.Name, selectedDependency));
+            dependenciesListView.Items.Remove(
+                new ListViewItemWithObjectValue<RemotePlugin>(selectedDependency.Name, selectedDependency));
 
             selectedDependency = null;
 
