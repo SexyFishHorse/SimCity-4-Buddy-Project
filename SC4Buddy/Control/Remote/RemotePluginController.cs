@@ -1,6 +1,8 @@
 ﻿namespace NIHEI.SC4Buddy.Control.Remote
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Data.Objects;
     using System.Linq;
 
@@ -59,6 +61,17 @@
             var linkUri = new UriBuilder(link);
 
             return linkUri.Host.EndsWith(siteUri.Host, StringComparison.OrdinalIgnoreCase);
+        }
+
+        public IEnumerable<RemotePlugin> SearchForPlugin(string text)
+        {
+            var upperText = text.ToUpper();
+            return
+                Plugins.Where(
+                    x =>
+                    x.Name.ToUpper().Contains(upperText)
+                    || x.Link.ToUpper().Contains(upperText)
+                    || x.Author.Name.ToUpper().Contains(upperText));
         }
     }
 }
