@@ -45,5 +45,14 @@
 
             removeDependencyButton.Enabled = selectedDependency != null;
         }
+
+        private void RemoveDependencyButtonClick(object sender, System.EventArgs e)
+        {
+            dependenciesListView.Items.Remove(new ListViewItemWithObjectValue<RemotePlugin>(selectedDependency.Name, selectedDependency));
+
+            selectedDependency = null;
+
+            removeDependencyButton.Enabled = false;
+        }
     }
 }

@@ -147,6 +147,7 @@
             this.removeDependencyButton.TabIndex = 4;
             this.removeDependencyButton.Text = "Remove";
             this.removeDependencyButton.UseVisualStyleBackColor = true;
+            this.removeDependencyButton.Click += new System.EventHandler(this.RemoveDependencyButtonClick);
             // 
             // groupBox1
             // 
