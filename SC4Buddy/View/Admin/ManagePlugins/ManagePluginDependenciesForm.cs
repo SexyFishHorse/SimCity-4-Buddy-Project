@@ -7,7 +7,6 @@
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
-    using NIHEI.SC4Buddy.Remote;
 
     public partial class ManagePluginDependenciesForm : Form
     {
