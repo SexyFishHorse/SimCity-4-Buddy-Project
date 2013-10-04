@@ -58,5 +58,19 @@
 
             removeDependencyButton.Enabled = false;
         }
+
+        private void SearchTextBoxTextChanged(object sender, System.EventArgs e)
+        {
+            var text = searchTextBox.Text.Trim();
+
+            if (text.Length < 3)
+            {
+                return;
+            }
+
+            var results = remotePluginController.SearchForPlugin(text);
+
+            UpdateListView(resultsListView, results);
+        }
     }
 }
