@@ -9,6 +9,8 @@
 
     public partial class ManagePluginDependenciesForm : Form
     {
+        private RemotePlugin selectedDependency;
+
         public ManagePluginDependenciesForm(Collection<RemotePlugin> pluginDependencies)
         {
             Dependencies = pluginDependencies;
@@ -33,6 +35,15 @@
             }
 
             dependenciesListView.EndUpdate();
+        }
+
+        private void DependenciesListViewSelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            selectedDependency = dependenciesListView.SelectedItems.Count > 0
+                                   ? ((ListViewItemWithObjectValue<RemotePlugin>)dependenciesListView.SelectedItems[0]).Value
+                                   : null;
+
+            removeDependencyButton.Enabled = selectedDependency != null;
         }
     }
 }

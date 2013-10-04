@@ -40,21 +40,21 @@
             this.removeDependencyButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.resultsListView = new System.Windows.Forms.ListView();
-            this.selectButton = new System.Windows.Forms.Button();
-            this.authorColumnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.searchTextBox = new System.Windows.Forms.TextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.nameTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.linkTextBox = new System.Windows.Forms.TextBox();
-            this.authorComboBox = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.saveAndAddButton = new System.Windows.Forms.Button();
-            this.cancelAddButton = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
+            this.selectButton = new System.Windows.Forms.Button();
+            this.resultsListView = new System.Windows.Forms.ListView();
+            this.authorColumnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cancelAddButton = new System.Windows.Forms.Button();
+            this.saveAndAddButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.authorComboBox = new System.Windows.Forms.ComboBox();
+            this.linkTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
             nameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             authorColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             nameColumnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -64,13 +64,29 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // nameColumnHeader
+            // 
+            nameColumnHeader.Text = "Name";
+            // 
+            // authorColumnHeader
+            // 
+            authorColumnHeader.Text = "Author";
+            // 
+            // nameColumnHeader2
+            // 
+            nameColumnHeader2.Text = "Name";
+            // 
+            // linkColumnHeader
+            // 
+            linkColumnHeader.Text = "Link";
             // 
             // cancelButton
             // 
@@ -109,6 +125,7 @@
             this.dependenciesListView.TabIndex = 2;
             this.dependenciesListView.UseCompatibleStateImageBehavior = false;
             this.dependenciesListView.View = System.Windows.Forms.View.Details;
+            this.dependenciesListView.SelectedIndexChanged += new System.EventHandler(this.DependenciesListViewSelectedIndexChanged);
             // 
             // addDependencyButton
             // 
@@ -165,13 +182,25 @@
             this.splitContainer1.SplitterDistance = 221;
             this.splitContainer1.TabIndex = 6;
             // 
-            // nameColumnHeader
+            // splitContainer2
             // 
-            nameColumnHeader.Text = "Name";
+            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // authorColumnHeader
+            // splitContainer2.Panel1
             // 
-            authorColumnHeader.Text = "Author";
+            this.splitContainer2.Panel1.Controls.Add(this.groupBox2);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.groupBox3);
+            this.splitContainer2.Size = new System.Drawing.Size(490, 334);
+            this.splitContainer2.SplitterDistance = 191;
+            this.splitContainer2.TabIndex = 2;
             // 
             // groupBox2
             // 
@@ -188,6 +217,26 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Search for plugin";
             // 
+            // searchTextBox
+            // 
+            this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchTextBox.Location = new System.Drawing.Point(6, 19);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(472, 20);
+            this.searchTextBox.TabIndex = 4;
+            // 
+            // selectButton
+            // 
+            this.selectButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.selectButton.Enabled = false;
+            this.selectButton.Location = new System.Drawing.Point(6, 156);
+            this.selectButton.Name = "selectButton";
+            this.selectButton.Size = new System.Drawing.Size(75, 23);
+            this.selectButton.TabIndex = 3;
+            this.selectButton.Text = "Select";
+            this.selectButton.UseVisualStyleBackColor = true;
+            // 
             // resultsListView
             // 
             this.resultsListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -203,34 +252,6 @@
             this.resultsListView.TabIndex = 2;
             this.resultsListView.UseCompatibleStateImageBehavior = false;
             this.resultsListView.View = System.Windows.Forms.View.Details;
-            // 
-            // selectButton
-            // 
-            this.selectButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.selectButton.Enabled = false;
-            this.selectButton.Location = new System.Drawing.Point(6, 156);
-            this.selectButton.Name = "selectButton";
-            this.selectButton.Size = new System.Drawing.Size(75, 23);
-            this.selectButton.TabIndex = 3;
-            this.selectButton.Text = "Select";
-            this.selectButton.UseVisualStyleBackColor = true;
-            // 
-            // nameColumnHeader2
-            // 
-            nameColumnHeader2.Text = "Name";
-            // 
-            // linkColumnHeader
-            // 
-            linkColumnHeader.Text = "Link";
-            // 
-            // searchTextBox
-            // 
-            this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchTextBox.Location = new System.Drawing.Point(6, 19);
-            this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(472, 20);
-            this.searchTextBox.TabIndex = 4;
             // 
             // groupBox3
             // 
@@ -252,34 +273,45 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Add unknown plugin dependency";
             // 
-            // nameTextBox
+            // cancelAddButton
             // 
-            this.nameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.nameTextBox.Enabled = false;
-            this.nameTextBox.Location = new System.Drawing.Point(50, 19);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(428, 20);
-            this.nameTextBox.TabIndex = 0;
+            this.cancelAddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cancelAddButton.Enabled = false;
+            this.cancelAddButton.Location = new System.Drawing.Point(106, 104);
+            this.cancelAddButton.Name = "cancelAddButton";
+            this.cancelAddButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelAddButton.TabIndex = 8;
+            this.cancelAddButton.Text = "Cancel";
+            this.cancelAddButton.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // saveAndAddButton
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Name";
+            this.saveAndAddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.saveAndAddButton.Enabled = false;
+            this.saveAndAddButton.Location = new System.Drawing.Point(6, 104);
+            this.saveAndAddButton.Name = "saveAndAddButton";
+            this.saveAndAddButton.Size = new System.Drawing.Size(94, 23);
+            this.saveAndAddButton.TabIndex = 7;
+            this.saveAndAddButton.Text = "Save and add";
+            this.saveAndAddButton.UseVisualStyleBackColor = true;
             // 
-            // linkTextBox
+            // label3
             // 
-            this.linkTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.linkTextBox.Enabled = false;
-            this.linkTextBox.Location = new System.Drawing.Point(50, 72);
-            this.linkTextBox.Name = "linkTextBox";
-            this.linkTextBox.Size = new System.Drawing.Size(428, 20);
-            this.linkTextBox.TabIndex = 3;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 75);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(27, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Link";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Author";
             // 
             // authorComboBox
             // 
@@ -293,65 +325,34 @@
             this.authorComboBox.Size = new System.Drawing.Size(428, 21);
             this.authorComboBox.TabIndex = 4;
             // 
-            // label2
+            // linkTextBox
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 48);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Author";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 75);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(27, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Link";
-            // 
-            // saveAndAddButton
-            // 
-            this.saveAndAddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.saveAndAddButton.Enabled = false;
-            this.saveAndAddButton.Location = new System.Drawing.Point(6, 104);
-            this.saveAndAddButton.Name = "saveAndAddButton";
-            this.saveAndAddButton.Size = new System.Drawing.Size(94, 23);
-            this.saveAndAddButton.TabIndex = 7;
-            this.saveAndAddButton.Text = "Save and add";
-            this.saveAndAddButton.UseVisualStyleBackColor = true;
-            // 
-            // cancelAddButton
-            // 
-            this.cancelAddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cancelAddButton.Enabled = false;
-            this.cancelAddButton.Location = new System.Drawing.Point(106, 104);
-            this.cancelAddButton.Name = "cancelAddButton";
-            this.cancelAddButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelAddButton.TabIndex = 8;
-            this.cancelAddButton.Text = "Cancel";
-            this.cancelAddButton.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.linkTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.linkTextBox.Enabled = false;
+            this.linkTextBox.Location = new System.Drawing.Point(50, 72);
+            this.linkTextBox.Name = "linkTextBox";
+            this.linkTextBox.Size = new System.Drawing.Size(428, 20);
+            this.linkTextBox.TabIndex = 3;
             // 
-            // splitContainer2.Panel1
+            // label1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.groupBox2);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Name";
             // 
-            // splitContainer2.Panel2
+            // nameTextBox
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.groupBox3);
-            this.splitContainer2.Size = new System.Drawing.Size(490, 334);
-            this.splitContainer2.SplitterDistance = 191;
-            this.splitContainer2.TabIndex = 2;
+            this.nameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nameTextBox.Enabled = false;
+            this.nameTextBox.Location = new System.Drawing.Point(50, 19);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(428, 20);
+            this.nameTextBox.TabIndex = 0;
             // 
             // ManagePluginDependenciesForm
             // 
@@ -372,14 +373,14 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
