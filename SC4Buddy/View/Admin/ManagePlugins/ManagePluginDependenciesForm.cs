@@ -7,6 +7,7 @@
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Remote;
 
     public partial class ManagePluginDependenciesForm : Form
     {
@@ -87,6 +88,18 @@
                                        : null;
 
             selectButton.Enabled = selectedSearchResult != null;
+        }
+
+        private void SelectButtonClick(object sender, System.EventArgs e)
+        {
+            if (!Dependencies.Contains(selectedSearchResult))
+            {
+                Dependencies.Add(selectedSearchResult);
+            }
+
+            selectedSearchResult = null;
+
+            selectButton.Enabled = false;
         }
     }
 }

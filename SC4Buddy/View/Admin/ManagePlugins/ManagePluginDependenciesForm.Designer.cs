@@ -238,6 +238,7 @@
             this.selectButton.TabIndex = 3;
             this.selectButton.Text = "Select";
             this.selectButton.UseVisualStyleBackColor = true;
+            this.selectButton.Click += new System.EventHandler(this.SelectButtonClick);
             // 
             // resultsListView
             // 
