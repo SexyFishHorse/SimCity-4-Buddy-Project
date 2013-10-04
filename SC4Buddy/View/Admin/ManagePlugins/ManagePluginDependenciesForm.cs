@@ -16,25 +16,25 @@
             Dependencies = pluginDependencies;
             InitializeComponent();
 
-            UpdateDependencyListView(Dependencies);
+            UpdateListView(dependenciesListView, Dependencies);
         }
 
         public Collection<RemotePlugin> Dependencies { get; private set; }
 
-        private void UpdateDependencyListView(IEnumerable<RemotePlugin> dependencies)
+        private void UpdateListView(ListView listView, IEnumerable<RemotePlugin> dependencies)
         {
-            dependenciesListView.BeginUpdate();
-            dependenciesListView.Items.Clear();
+            listView.BeginUpdate();
+            listView.Items.Clear();
 
             foreach (var dependency in dependencies)
             {
                 var item = new ListViewItemWithObjectValue<RemotePlugin>(dependency.Name, dependency);
                 item.SubItems.Add(dependency.Author.Name);
 
-                dependenciesListView.Items.Add(item);
+                listView.Items.Add(item);
             }
 
-            dependenciesListView.EndUpdate();
+            listView.EndUpdate();
         }
 
         private void DependenciesListViewSelectedIndexChanged(object sender, System.EventArgs e)
