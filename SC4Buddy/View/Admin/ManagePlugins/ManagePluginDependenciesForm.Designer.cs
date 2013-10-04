@@ -136,6 +136,7 @@
             this.addDependencyButton.TabIndex = 3;
             this.addDependencyButton.Text = "Add";
             this.addDependencyButton.UseVisualStyleBackColor = true;
+            this.addDependencyButton.Click += new System.EventHandler(this.AddDependencyButtonClick);
             // 
             // removeDependencyButton
             // 

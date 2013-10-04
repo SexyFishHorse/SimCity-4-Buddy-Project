@@ -16,6 +16,8 @@
 
         private RemotePlugin selectedSearchResult;
 
+        private RemotePlugin newPlugin;
+
         public ManagePluginDependenciesForm(
             Collection<RemotePlugin> pluginDependencies,
             RemotePluginController remotePluginController)
@@ -99,6 +101,25 @@
             selectedSearchResult = null;
 
             selectButton.Enabled = false;
+        }
+
+        private void AddDependencyButtonClick(object sender, System.EventArgs e)
+        {
+            nameTextBox.Enabled = true;
+            nameTextBox.Text = string.Empty;
+            authorComboBox.Enabled = true;
+            authorComboBox.Text = string.Empty;
+            linkTextBox.Enabled = true;
+            linkTextBox.Text = string.Empty;
+
+            nameTextBox.Focus();
+
+            addDependencyButton.Enabled = false;
+            cancelAddButton.Enabled = true;
+
+            newPlugin = new RemotePlugin();
+
+            dependenciesListView.Items.Add(new ListViewItemWithObjectValue<RemotePlugin>("(new)", newPlugin));
         }
     }
 }
