@@ -301,6 +301,7 @@
             this.saveAndAddButton.TabIndex = 7;
             this.saveAndAddButton.Text = "Save and add";
             this.saveAndAddButton.UseVisualStyleBackColor = true;
+            this.saveAndAddButton.Click += new System.EventHandler(this.SaveAndAddButtonClick);
             // 
             // label3
             // 

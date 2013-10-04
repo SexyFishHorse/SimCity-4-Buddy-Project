@@ -214,7 +214,7 @@
 
         private void DependenciesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new ManagePluginDependenciesForm(pluginDependencies, remotePluginController);
+            var dialog = new ManagePluginDependenciesForm(pluginDependencies, remotePluginController, authorController);
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
                 pluginDependencies = dialog.Dependencies;

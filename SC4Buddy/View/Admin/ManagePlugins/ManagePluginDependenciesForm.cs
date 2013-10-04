@@ -1,5 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -13,6 +14,8 @@
     {
         private readonly RemotePluginController remotePluginController;
 
+        private readonly AuthorController authorController;
+
         private RemotePlugin selectedDependency;
 
         private RemotePlugin selectedSearchResult;
@@ -21,10 +24,12 @@
 
         public ManagePluginDependenciesForm(
             Collection<RemotePlugin> pluginDependencies,
-            RemotePluginController remotePluginController)
+            RemotePluginController remotePluginController,
+            AuthorController authorController)
         {
             Dependencies = pluginDependencies;
             this.remotePluginController = remotePluginController;
+            this.authorController = authorController;
             InitializeComponent();
 
             UpdateListView(dependenciesListView, Dependencies);
@@ -48,7 +53,7 @@
             listView.EndUpdate();
         }
 
-        private void DependenciesListViewSelectedIndexChanged(object sender, System.EventArgs e)
+        private void DependenciesListViewSelectedIndexChanged(object sender, EventArgs e)
         {
             selectedDependency = dependenciesListView.SelectedItems.Count > 0
                                      ? ((ListViewItemWithObjectValue<RemotePlugin>)dependenciesListView.SelectedItems[0])
@@ -58,7 +63,7 @@
             removeDependencyButton.Enabled = selectedDependency != null;
         }
 
-        private void RemoveDependencyButtonClick(object sender, System.EventArgs e)
+        private void RemoveDependencyButtonClick(object sender, EventArgs e)
         {
             dependenciesListView.Items.Remove(
                 new ListViewItemWithObjectValue<RemotePlugin>(selectedDependency.Name, selectedDependency));
@@ -68,7 +73,7 @@
             removeDependencyButton.Enabled = false;
         }
 
-        private void SearchTextBoxTextChanged(object sender, System.EventArgs e)
+        private void SearchTextBoxTextChanged(object sender, EventArgs e)
         {
             var text = searchTextBox.Text.Trim();
 
@@ -82,7 +87,7 @@
             UpdateListView(resultsListView, results);
         }
 
-        private void ResultsListViewSelectedIndexChanged(object sender, System.EventArgs e)
+        private void ResultsListViewSelectedIndexChanged(object sender, EventArgs e)
         {
             selectedSearchResult = resultsListView.SelectedItems.Count > 0
                                        ? ((ListViewItemWithObjectValue<RemotePlugin>)resultsListView.SelectedItems[0])
@@ -92,7 +97,7 @@
             selectButton.Enabled = selectedSearchResult != null;
         }
 
-        private void SelectButtonClick(object sender, System.EventArgs e)
+        private void SelectButtonClick(object sender, EventArgs e)
         {
             if (!Dependencies.Contains(selectedSearchResult))
             {
@@ -104,7 +109,7 @@
             selectButton.Enabled = false;
         }
 
-        private void AddDependencyButtonClick(object sender, System.EventArgs e)
+        private void AddDependencyButtonClick(object sender, EventArgs e)
         {
             nameTextBox.Enabled = true;
             nameTextBox.Text = string.Empty;
@@ -123,7 +128,7 @@
             dependenciesListView.Items.Add(new ListViewItemWithObjectValue<RemotePlugin>("(new)", newPlugin));
         }
 
-        private void CancelAddButtonClick(object sender, System.EventArgs e)
+        private void CancelAddButtonClick(object sender, EventArgs e)
         {
             nameTextBox.Enabled = false;
             nameTextBox.Text = string.Empty;
@@ -137,16 +142,29 @@
 
             addDependencyButton.Enabled = true;
 
-            foreach (
-                ListViewItemWithObjectValue<RemotePlugin> item in
-                    dependenciesListView.Items.Cast<ListViewItemWithObjectValue<RemotePlugin>>()
-                        .Where(item => item.Value.Equals(newPlugin)))
+            foreach (var item in
+                dependenciesListView.Items.Cast<ListViewItemWithObjectValue<RemotePlugin>>()
+                    .Where(item => item.Value.Equals(newPlugin)))
             {
                 dependenciesListView.Items.Remove(item);
                 break;
             }
 
             newPlugin = null;
+        }
+
+        private void SaveAndAddButtonClick(object sender, EventArgs e)
+        {
+            newPlugin.Name = nameTextBox.Text.Trim();
+            newPlugin.Link = linkTextBox.Text.Trim();
+            var authorText = authorComboBox.Text;
+
+            var author = authorController.GetAuthorByName(authorText)
+                         ?? new Author { Name = authorText, Site = new Uri(newPlugin.Link).Host };
+
+            newPlugin.Author = author;
+
+            remotePluginController.Add(newPlugin);
         }
     }
 }
