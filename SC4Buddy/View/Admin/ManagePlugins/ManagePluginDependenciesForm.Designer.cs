@@ -251,6 +251,7 @@
             this.authorColumnHeader2,
             linkColumnHeader});
             this.resultsListView.Location = new System.Drawing.Point(6, 45);
+            this.resultsListView.MultiSelect = false;
             this.resultsListView.Name = "resultsListView";
             this.resultsListView.Size = new System.Drawing.Size(472, 105);
             this.resultsListView.TabIndex = 2;
