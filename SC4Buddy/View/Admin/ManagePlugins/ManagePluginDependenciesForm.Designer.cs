@@ -332,6 +332,7 @@
             this.authorComboBox.Name = "authorComboBox";
             this.authorComboBox.Size = new System.Drawing.Size(428, 21);
             this.authorComboBox.TabIndex = 4;
+            this.authorComboBox.TextUpdate += new System.EventHandler(this.UnknownDependencyAddFieldChanged);
             // 
             // linkTextBox
             // 
@@ -342,6 +343,7 @@
             this.linkTextBox.Name = "linkTextBox";
             this.linkTextBox.Size = new System.Drawing.Size(428, 20);
             this.linkTextBox.TabIndex = 3;
+            this.linkTextBox.TextChanged += new System.EventHandler(this.UnknownDependencyAddFieldChanged);
             // 
             // label1
             // 
@@ -361,6 +363,7 @@
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(428, 20);
             this.nameTextBox.TabIndex = 0;
+            this.nameTextBox.TextChanged += new System.EventHandler(this.UnknownDependencyAddFieldChanged);
             // 
             // ManagePluginDependenciesForm
             // 

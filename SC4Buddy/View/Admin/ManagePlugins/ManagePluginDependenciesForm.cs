@@ -166,5 +166,10 @@
 
             remotePluginController.Add(newPlugin);
         }
+
+        private void UnknownDependencyAddFieldChanged(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
