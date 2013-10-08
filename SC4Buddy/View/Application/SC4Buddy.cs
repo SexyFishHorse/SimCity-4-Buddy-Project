@@ -18,6 +18,7 @@
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
+    using NIHEI.SC4Buddy.View.Admin;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.UserFolders;
 
@@ -244,6 +245,11 @@
             var file = string.Format("log-{0}.txt", DateTime.Now.ToString("yyyy-MM-dd"));
 
             Process.Start(Path.Combine(path, file));
+        }
+
+        private void AdminPanelToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            new AdminPanel().ShowDialog(this);
         }
     }
 }
