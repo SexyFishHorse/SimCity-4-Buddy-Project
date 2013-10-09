@@ -168,6 +168,24 @@
                 newPlugin.Author = author;
 
                 remotePluginController.Add(newPlugin);
+
+                Dependencies.Add(newPlugin);
+
+                UpdateListView(dependenciesListView, Dependencies);
+
+                nameTextBox.Text = string.Empty;
+                nameTextBox.Enabled = false;
+                authorComboBox.Text = string.Empty;
+                authorComboBox.Enabled = false;
+                linkTextBox.Text = string.Empty;
+                linkTextBox.Enabled = false;
+
+                saveAndAddButton.Enabled = false;
+                cancelAddButton.Enabled = false;
+
+                addDependencyButton.Enabled = true;
+
+                newPlugin = null;
             }
             catch (Exception ex)
             {
