@@ -55,6 +55,7 @@
             this.linkTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.linkColumnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             nameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             authorColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             nameColumnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -117,7 +118,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dependenciesListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             nameColumnHeader,
-            authorColumnHeader});
+            authorColumnHeader,
+            this.linkColumnHeader1});
             this.dependenciesListView.Location = new System.Drawing.Point(6, 19);
             this.dependenciesListView.MultiSelect = false;
             this.dependenciesListView.Name = "dependenciesListView";
@@ -259,6 +261,10 @@
             this.resultsListView.View = System.Windows.Forms.View.Details;
             this.resultsListView.SelectedIndexChanged += new System.EventHandler(this.ResultsListViewSelectedIndexChanged);
             // 
+            // authorColumnHeader2
+            // 
+            this.authorColumnHeader2.Text = "Author";
+            // 
             // groupBox3
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -365,6 +371,10 @@
             this.nameTextBox.TabIndex = 0;
             this.nameTextBox.TextChanged += new System.EventHandler(this.UnknownDependencyAddFieldChanged);
             // 
+            // linkColumnHeader1
+            // 
+            this.linkColumnHeader1.Text = "Link";
+            // 
             // ManagePluginDependenciesForm
             // 
             this.AcceptButton = this.okButton;
@@ -420,5 +430,6 @@
         private System.Windows.Forms.TextBox linkTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox nameTextBox;
+        private System.Windows.Forms.ColumnHeader linkColumnHeader1;
     }
 }
