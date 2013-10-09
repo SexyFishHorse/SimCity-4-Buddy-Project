@@ -169,7 +169,9 @@
 
         private void UnknownDependencyAddFieldChanged(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            saveAndAddButton.Enabled = !string.IsNullOrWhiteSpace(nameTextBox.Text.Trim())
+                                       && !string.IsNullOrWhiteSpace(authorComboBox.Text.Trim())
+                                       && !string.IsNullOrWhiteSpace(linkTextBox.Text.Trim());
         }
     }
 }
