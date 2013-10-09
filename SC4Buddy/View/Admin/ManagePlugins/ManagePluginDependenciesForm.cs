@@ -9,6 +9,7 @@
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Localization;
 
     public partial class ManagePluginDependenciesForm : Form
     {
@@ -155,16 +156,23 @@
 
         private void SaveAndAddButtonClick(object sender, EventArgs e)
         {
-            newPlugin.Name = nameTextBox.Text.Trim();
-            newPlugin.Link = linkTextBox.Text.Trim();
-            var authorText = authorComboBox.Text;
+            try
+            {
+                newPlugin.Name = nameTextBox.Text.Trim();
+                newPlugin.Link = linkTextBox.Text.Trim();
+                var authorText = authorComboBox.Text;
 
-            var author = authorController.GetAuthorByName(authorText)
-                         ?? new Author { Name = authorText, Site = new Uri(newPlugin.Link).Host };
+                var author = authorController.GetAuthorByName(authorText)
+                             ?? new Author { Name = authorText, Site = new Uri(newPlugin.Link).Host };
 
-            newPlugin.Author = author;
+                newPlugin.Author = author;
 
-            remotePluginController.Add(newPlugin);
+                remotePluginController.Add(newPlugin);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error during save operation");
+            }
         }
 
         private void UnknownDependencyAddFieldChanged(object sender, EventArgs e)
