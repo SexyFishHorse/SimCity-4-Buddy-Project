@@ -110,6 +110,8 @@
             selectedSearchResult = null;
 
             selectButton.Enabled = false;
+
+            UpdateListView(dependenciesListView, Dependencies);
         }
 
         private void AddDependencyButtonClick(object sender, EventArgs e)
