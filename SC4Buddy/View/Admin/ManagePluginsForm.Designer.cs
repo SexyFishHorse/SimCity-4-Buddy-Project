@@ -182,7 +182,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.dependenciesButton.Enabled = false;
             this.dependenciesButton.Location = new System.Drawing.Point(87, 390);
             this.dependenciesButton.Name = "dependenciesButton";
-            this.dependenciesButton.Size = new System.Drawing.Size(91, 23);
+            this.dependenciesButton.Size = new System.Drawing.Size(118, 23);
             this.dependenciesButton.TabIndex = 1;
             this.dependenciesButton.Text = "Dependencies";
             this.dependenciesButton.UseVisualStyleBackColor = true;
