@@ -51,6 +51,7 @@
                 listView.Items.Add(item);
             }
 
+            listView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             listView.EndUpdate();
         }
 
