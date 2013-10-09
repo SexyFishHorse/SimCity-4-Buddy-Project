@@ -47,6 +47,7 @@
             {
                 var item = new ListViewItemWithObjectValue<RemotePlugin>(dependency.Name, dependency);
                 item.SubItems.Add(dependency.Author.Name);
+                item.SubItems.Add(dependency.Link);
 
                 listView.Items.Add(item);
             }
