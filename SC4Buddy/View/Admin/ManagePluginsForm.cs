@@ -208,5 +208,9 @@
             pluginDependencies = dialog.Dependencies;
             dependenciesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Dependencies, pluginDependencies.Count);
         }
+
+        private void SaveDataButtonClick(object sender, EventArgs e)
+        {
+        }
     }
 }

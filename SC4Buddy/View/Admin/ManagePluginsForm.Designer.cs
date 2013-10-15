@@ -91,6 +91,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.saveDataButton.TabIndex = 11;
             this.saveDataButton.Text = "Save";
             this.saveDataButton.UseVisualStyleBackColor = true;
+            this.saveDataButton.Click += new System.EventHandler(this.SaveDataButtonClick);
             // 
             // cancelDataButton
             // 
