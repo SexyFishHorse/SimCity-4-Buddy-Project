@@ -228,6 +228,9 @@
             {
                 plugin.Dependencies.Add(dependency);
             }
+
+            remotePluginController.Add(plugin);
+
         }
     }
 }
