@@ -231,6 +231,13 @@
 
             remotePluginController.Add(plugin);
 
+            ClearAddPluginFieldsAndVariables();
+            SetAddPluginFieldsAndButtonsEnabledState(false);
+
+            cancelDataButton.Enabled = false;
+            saveDataButton.Enabled = false;
+
+            addButton.Enabled = true;
         }
     }
 }
