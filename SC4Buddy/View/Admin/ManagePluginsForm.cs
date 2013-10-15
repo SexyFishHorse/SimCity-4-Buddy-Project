@@ -79,20 +79,9 @@
                 updateButton.Enabled = false;
                 importButton.Enabled = true;
 
-                filesButton.Enabled = false;
-                dependenciesButton.Enabled = false;
+                ClearAddPluginFieldsAndVariables();
 
-                nameTextBox.Text = string.Empty;
-                nameTextBox.Enabled = false;
-
-                authorComboBox.Text = string.Empty;
-                authorComboBox.Enabled = false;
-
-                linkTextBox.Text = string.Empty;
-                linkTextBox.Enabled = false;
-
-                descriptionTextBox.Text = string.Empty;
-                descriptionTextBox.Enabled = false;
+                SetAddPluginFieldsAndButtonsEnabledState(false);
 
                 return;
             }
@@ -104,18 +93,37 @@
             linkTextBox.Text = plugin.Link;
             descriptionTextBox.Text = plugin.Description;
 
-            nameTextBox.Enabled = false;
-            authorComboBox.Enabled = false;
-            linkTextBox.Enabled = false;
-            descriptionTextBox.Enabled = false;
+            SetAddPluginFieldsAndButtonsEnabledState(true);
 
             addButton.Enabled = false;
             removeButton.Enabled = true;
             updateButton.Enabled = true;
             importButton.Enabled = false;
+        }
 
-            filesButton.Enabled = true;
-            dependenciesButton.Enabled = true;
+        private void SetAddPluginFieldsAndButtonsEnabledState(bool enabled)
+        {
+            nameTextBox.Enabled = enabled;
+            authorComboBox.Enabled = enabled;
+            linkTextBox.Enabled = enabled;
+            descriptionTextBox.Enabled = enabled;
+
+            filesButton.Enabled = enabled;
+            dependenciesButton.Enabled = enabled;
+        }
+
+        private void ClearAddPluginFieldsAndVariables()
+        {
+            nameTextBox.Text = string.Empty;
+            authorComboBox.Text = string.Empty;
+            linkTextBox.Text = string.Empty;
+            descriptionTextBox.Text = string.Empty;
+
+            pluginFiles = new Collection<RemotePluginFile>();
+            pluginDependencies = new Collection<RemotePlugin>();
+
+            filesButton.Text = LocalizationStrings.Files;
+            dependenciesButton.Text = LocalizationStrings.Dependencies;
         }
 
         private void AuthorComboBoxTextUpdated(object sender, EventArgs e)
@@ -147,27 +155,15 @@
 
         private void AddButtonClick(object sender, EventArgs e)
         {
-            nameTextBox.Enabled = true;
-            nameTextBox.Text = string.Empty;
-            authorComboBox.Enabled = true;
-            authorComboBox.Text = string.Empty;
-            linkTextBox.Enabled = true;
-            linkTextBox.Text = string.Empty;
-            descriptionTextBox.Enabled = true;
-            descriptionTextBox.Text = string.Empty;
-            cancelDataButton.Enabled = true;
+            ClearAddPluginFieldsAndVariables();
+            SetAddPluginFieldsAndButtonsEnabledState(true);
 
             addButton.Enabled = false;
             importButton.Enabled = false;
             searchComboBox.Enabled = false;
             searchComboBox.Text = string.Empty;
 
-            filesButton.Enabled = true;
-            dependenciesButton.Enabled = true;
-
-            pluginFiles = new Collection<RemotePluginFile>();
-            pluginDependencies = new Collection<RemotePlugin>();
-            selectedPlugin = new RemotePlugin { Name = "(new)" };
+            selectedPlugin = new RemotePlugin { Name = LocalizationStrings.NewInParanthesis };
 
             pluginsListView.Items.Add(new ListViewItemWithObjectValue<RemotePlugin>(selectedPlugin.Name, selectedPlugin));
 
@@ -185,26 +181,14 @@
             }
 
             selectedPlugin = null;
-            pluginFiles = null;
 
             saveDataButton.Enabled = false;
             cancelDataButton.Enabled = false;
 
             addButton.Enabled = true;
 
-            nameTextBox.Enabled = false;
-            nameTextBox.Text = string.Empty;
-            authorComboBox.Enabled = false;
-            authorComboBox.Text = string.Empty;
-            linkTextBox.Enabled = false;
-            linkTextBox.Text = string.Empty;
-            descriptionTextBox.Enabled = false;
-            descriptionTextBox.Text = string.Empty;
-
-            filesButton.Enabled = false;
-            filesButton.Text = "Files";
-            dependenciesButton.Enabled = false;
-            dependenciesButton.Text = "Dependencies";
+            ClearAddPluginFieldsAndVariables();
+            SetAddPluginFieldsAndButtonsEnabledState(false);
 
             searchComboBox.Enabled = true;
 
