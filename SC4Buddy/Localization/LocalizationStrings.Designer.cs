@@ -250,6 +250,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dependencies.
+        /// </summary>
+        internal static string Dependencies {
+            get {
+                return ResourceManager.GetString("Dependencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dependency check.
         /// </summary>
         internal static string DependencyCheck {
@@ -381,6 +390,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string FailedPlugins {
             get {
                 return ResourceManager.GetString("FailedPlugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files.
+        /// </summary>
+        internal static string Files {
+            get {
+                return ResourceManager.GetString("Files", resourceCulture);
             }
         }
         
@@ -561,6 +579,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string Medium {
             get {
                 return ResourceManager.GetString("Medium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (new).
+        /// </summary>
+        internal static string NewInParanthesis {
+            get {
+                return ResourceManager.GetString("NewInParanthesis", resourceCulture);
             }
         }
         

@@ -558,4 +558,13 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="YouHaveUnsavedChangesToThisPluginAreYouSureYouWantToCancel" xml:space="preserve">
     <value>You have unsaved changes to this plugin. Are you sure you want to cancel?</value>
   </data>
+  <data name="Files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="Dependencies" xml:space="preserve">
+    <value>Dependencies</value>
+  </data>
+  <data name="NewInParanthesis" xml:space="preserve">
+    <value>(new)</value>
+  </data>
 </root>

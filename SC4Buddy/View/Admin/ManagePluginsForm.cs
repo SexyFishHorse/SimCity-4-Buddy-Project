@@ -9,6 +9,7 @@
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Admin.ManagePlugins;
 
     public partial class ManagePluginsForm : Form
@@ -139,7 +140,7 @@
                 if (dialog.ShowDialog(this) == DialogResult.OK)
                 {
                     pluginFiles = dialog.PluginFiles;
-                    filesButton.Text = string.Format("Files ({0})", pluginFiles.Count);
+                    filesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Files, pluginFiles.Count);
                 }
             }
         }
@@ -221,7 +222,7 @@
             }
 
             pluginDependencies = dialog.Dependencies;
-            dependenciesButton.Text = string.Format("Dependencies ({0})", pluginDependencies.Count);
+            dependenciesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Dependencies, pluginDependencies.Count);
         }
     }
 }
