@@ -2,14 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Forms;
 
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
-    using NIHEI.SC4Buddy.Localization;
 
     public partial class ManagePluginDependenciesForm : Form
     {
@@ -24,7 +22,7 @@
         private RemotePlugin newPlugin;
 
         public ManagePluginDependenciesForm(
-            Collection<RemotePlugin> pluginDependencies,
+            ICollection<RemotePlugin> pluginDependencies,
             RemotePluginController remotePluginController,
             AuthorController authorController)
         {
@@ -36,7 +34,7 @@
             UpdateListView(dependenciesListView, Dependencies);
         }
 
-        public Collection<RemotePlugin> Dependencies { get; private set; }
+        public ICollection<RemotePlugin> Dependencies { get; private set; }
 
         private void UpdateListView(ListView listView, IEnumerable<RemotePlugin> dependencies)
         {

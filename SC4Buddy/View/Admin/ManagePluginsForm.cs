@@ -22,7 +22,7 @@
 
         private ICollection<RemotePluginFile> pluginFiles;
 
-        private Collection<RemotePlugin> pluginDependencies;
+        private ICollection<RemotePlugin> pluginDependencies;
 
         public ManagePluginsForm(RemotePluginController remotePluginController, AuthorController authorController)
         {
