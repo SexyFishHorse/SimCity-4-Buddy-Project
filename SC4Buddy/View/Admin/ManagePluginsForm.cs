@@ -211,6 +211,23 @@
 
         private void SaveDataButtonClick(object sender, EventArgs e)
         {
+            var plugin = new RemotePlugin
+                             {
+                                 Name = nameTextBox.Text.Trim(),
+                                 Link = linkTextBox.Text.Trim(),
+                                 Description = descriptionTextBox.Text.Trim(),
+                                 Author = authorController.GetAuthorByName(authorComboBox.Text.Trim())
+                             };
+
+            foreach (var file in pluginFiles)
+            {
+                plugin.PluginFiles.Add(file);
+            }
+
+            foreach (var dependency in pluginDependencies)
+            {
+                plugin.Dependencies.Add(dependency);
+            }
         }
     }
 }
