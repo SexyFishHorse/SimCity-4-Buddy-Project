@@ -117,6 +117,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.descriptionTextBox.Size = new System.Drawing.Size(387, 286);
             this.descriptionTextBox.TabIndex = 9;
             this.descriptionTextBox.Text = "";
+            this.descriptionTextBox.TextChanged += new System.EventHandler(this.DescriptionTextBoxTextChanged);
             // 
             // linkTextBox
             // 
@@ -127,6 +128,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.linkTextBox.Name = "linkTextBox";
             this.linkTextBox.Size = new System.Drawing.Size(346, 20);
             this.linkTextBox.TabIndex = 8;
+            this.linkTextBox.TextChanged += new System.EventHandler(this.LinkTextBoxTextChanged);
             // 
             // label3
             // 
@@ -156,7 +158,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.authorComboBox.Name = "authorComboBox";
             this.authorComboBox.Size = new System.Drawing.Size(346, 21);
             this.authorComboBox.TabIndex = 4;
-            this.authorComboBox.TextUpdate += new System.EventHandler(this.AuthorComboBoxTextUpdated);
+            this.authorComboBox.TextChanged += new System.EventHandler(this.AuthorComboBoxTextChanged);
             // 
             // nameTextBox
             // 

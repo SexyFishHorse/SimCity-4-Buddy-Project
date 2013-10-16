@@ -126,21 +126,6 @@
             dependenciesButton.Text = LocalizationStrings.Dependencies;
         }
 
-        private void AuthorComboBoxTextUpdated(object sender, EventArgs e)
-        {
-            var text = authorComboBox.Text.Trim();
-
-            if (text.Count() < 2)
-            {
-                return;
-            }
-
-            var authors = authorController.Authors.Where(x => x.Name.ToUpper().Contains(text));
-
-            var source = new AutoCompleteStringCollection();
-            source.AddRange(authors.Select(x => x.Name).ToArray());
-        }
-
         private void FilesButtonClick(object sender, EventArgs e)
         {
             using (var dialog = new ManagePluginFilesForm(pluginFiles))
@@ -151,6 +136,8 @@
                     filesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Files, pluginFiles.Count);
                 }
             }
+
+            ValidateAddPluginFormFieldsFilled();
         }
 
         private void AddButtonClick(object sender, EventArgs e)
@@ -158,8 +145,11 @@
             ClearAddPluginFieldsAndVariables();
             SetAddPluginFieldsAndButtonsEnabledState(true);
 
+            cancelDataButton.Enabled = true;
+
             addButton.Enabled = false;
             importButton.Enabled = false;
+
             searchComboBox.Enabled = false;
             searchComboBox.Text = string.Empty;
 
@@ -270,6 +260,33 @@
             }
 
             saveDataButton.Enabled = enableSave;
+        }
+
+        private void LinkTextBoxTextChanged(object sender, EventArgs e)
+        {
+            ValidateAddPluginFormFieldsFilled();
+        }
+
+        private void DescriptionTextBoxTextChanged(object sender, EventArgs e)
+        {
+            ValidateAddPluginFormFieldsFilled();
+        }
+
+        private void AuthorComboBoxTextChanged(object sender, EventArgs e)
+        {
+            ValidateAddPluginFormFieldsFilled();
+
+            var text = authorComboBox.Text.Trim();
+
+            if (text.Count() < 2)
+            {
+                return;
+            }
+
+            var authors = authorController.Authors.Where(x => x.Name.ToUpper().Contains(text));
+
+            var source = new AutoCompleteStringCollection();
+            source.AddRange(authors.Select(x => x.Name).ToArray());
         }
     }
 }
