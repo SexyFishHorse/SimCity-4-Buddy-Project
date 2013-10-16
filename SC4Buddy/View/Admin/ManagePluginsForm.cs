@@ -239,5 +239,10 @@
 
             addButton.Enabled = true;
         }
+
+        private void NameTextBoxTextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

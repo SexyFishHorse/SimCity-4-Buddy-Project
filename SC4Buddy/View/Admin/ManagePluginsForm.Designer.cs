@@ -167,6 +167,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(346, 20);
             this.nameTextBox.TabIndex = 3;
+            this.nameTextBox.TextChanged += new System.EventHandler(this.NameTextBoxTextChanged);
             // 
             // label1
             // 
