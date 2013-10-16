@@ -242,7 +242,34 @@
 
         private void NameTextBoxTextChanged(object sender, EventArgs e)
         {
+            ValidateAddPluginFormFieldsFilled();
+        }
 
+        private void ValidateAddPluginFormFieldsFilled()
+        {
+            var enableSave = !(nameTextBox.Text.Trim().Length < 3);
+
+            if (authorComboBox.Text.Trim().Length < 3)
+            {
+                enableSave = false;
+            }
+
+            if (linkTextBox.Text.Trim().Length < 3)
+            {
+                enableSave = false;
+            }
+
+            if (descriptionTextBox.Text.Trim().Length < 3)
+            {
+                enableSave = false;
+            }
+
+            if (pluginFiles.Count < 1)
+            {
+                enableSave = false;
+            }
+
+            saveDataButton.Enabled = enableSave;
         }
     }
 }
