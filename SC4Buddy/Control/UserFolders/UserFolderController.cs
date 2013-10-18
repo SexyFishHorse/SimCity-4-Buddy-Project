@@ -119,6 +119,11 @@
             entities.SaveChanges();
         }
 
+        public void SaveChanges()
+        {
+            entities.SaveChanges();
+        }
+
         public bool IsNotGameFolder(string path)
         {
             if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation))
