@@ -226,5 +226,10 @@
         {
             Close();
         }
+
+        private void SaveButtonClick(object sender, EventArgs e)
+        {
+            controller.SaveChanges();
+        }
     }
 }

@@ -47,6 +47,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.addButton = new System.Windows.Forms.Button();
             this.pathBrowseDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.saveButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -177,12 +178,21 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // saveButton
+            // 
+            resources.ApplyResources(this.saveButton, "saveButton");
+            this.saveButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.saveButton.Name = "saveButton";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButtonClick);
+            // 
             // ManageUserFoldersForm
             // 
-            this.AcceptButton = this.closeButton;
+            this.AcceptButton = this.saveButton;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeButton;
+            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.closeButton);
             this.Name = "ManageUserFoldersForm";
@@ -217,5 +227,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Button saveButton;
     }
 }
