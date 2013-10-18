@@ -44,8 +44,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.openLogFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.adminPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundPanel = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -64,8 +62,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.programToolStripMenuItem,
             this.userFoldersToolStripMenuItem,
-            this.helpToolStripMenuItem,
-            this.adminToolStripMenuItem});
+            this.helpToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
             // 
@@ -153,19 +150,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItemClick);
-            // 
-            // adminToolStripMenuItem
-            // 
-            this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.adminPanelToolStripMenuItem});
-            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            resources.ApplyResources(this.adminToolStripMenuItem, "adminToolStripMenuItem");
-            // 
-            // adminPanelToolStripMenuItem
-            // 
-            this.adminPanelToolStripMenuItem.Name = "adminPanelToolStripMenuItem";
-            resources.ApplyResources(this.adminPanelToolStripMenuItem, "adminPanelToolStripMenuItem");
-            this.adminPanelToolStripMenuItem.Click += new System.EventHandler(this.AdminPanelToolStripMenuItemClick);
             // 
             // backgroundPanel
             // 
@@ -258,8 +242,6 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem openLogFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem adminPanelToolStripMenuItem;
     }
 }
 
