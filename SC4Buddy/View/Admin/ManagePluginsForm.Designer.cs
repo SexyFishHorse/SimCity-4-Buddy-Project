@@ -43,6 +43,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.dependenciesButton = new System.Windows.Forms.Button();
             this.filesButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
             this.importButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
@@ -53,7 +54,6 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.siteColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
-            this.searchTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -221,6 +221,16 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Plugins";
             // 
+            // searchTextBox
+            // 
+            this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchTextBox.Location = new System.Drawing.Point(6, 19);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(341, 20);
+            this.searchTextBox.TabIndex = 11;
+            this.searchTextBox.TextChanged += new System.EventHandler(this.SearchTextBoxTextChanged);
+            // 
             // importButton
             // 
             this.importButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -278,7 +288,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.pluginsListView.Size = new System.Drawing.Size(341, 339);
             this.pluginsListView.TabIndex = 0;
             this.pluginsListView.UseCompatibleStateImageBehavior = false;
-            this.pluginsListView.View = System.Windows.Forms.View.List;
+            this.pluginsListView.View = System.Windows.Forms.View.Details;
             this.pluginsListView.SelectedIndexChanged += new System.EventHandler(this.PluginsListViewSelectedIndexChanged);
             // 
             // nameColumnHeader
@@ -317,16 +327,6 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.okButton.TabIndex = 3;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
-            // 
-            // searchTextBox
-            // 
-            this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchTextBox.Location = new System.Drawing.Point(6, 19);
-            this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(341, 20);
-            this.searchTextBox.TabIndex = 11;
-            this.searchTextBox.TextChanged += new System.EventHandler(this.SearchTextBoxTextChanged);
             // 
             // ManagePluginsForm
             // 
