@@ -55,6 +55,8 @@
                 var item = new ListViewItemWithObjectValue<RemotePlugin>(plugin.Name, plugin);
                 item.SubItems.Add(plugin.Author.Name);
                 item.SubItems.Add(plugin.Link);
+
+                pluginsListView.Items.Add(item);
             }
 
             pluginsListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
