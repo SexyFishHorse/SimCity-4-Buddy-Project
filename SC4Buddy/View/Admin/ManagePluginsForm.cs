@@ -278,9 +278,9 @@
         {
             ValidateAddPluginFormFieldsFilled();
 
-            var text = authorComboBox.Text.Trim();
+            var text = authorComboBox.Text.Trim().ToUpper();
 
-            if (text.Count() < 2)
+            if (text.Count() < 3)
             {
                 return;
             }
@@ -289,6 +289,8 @@
 
             var source = new AutoCompleteStringCollection();
             source.AddRange(authors.Select(x => x.Name).ToArray());
+
+            authorComboBox.AutoCompleteCustomSource = source;
         }
     }
 }

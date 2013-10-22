@@ -152,6 +152,8 @@ namespace NIHEI.SC4Buddy.View.Admin
             // 
             this.authorComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.authorComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.authorComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.authorComboBox.Enabled = false;
             this.authorComboBox.FormattingEnabled = true;
             this.authorComboBox.Location = new System.Drawing.Point(50, 45);
