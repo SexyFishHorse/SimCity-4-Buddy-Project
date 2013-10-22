@@ -44,7 +44,6 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.filesButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.importButton = new System.Windows.Forms.Button();
-            this.searchComboBox = new System.Windows.Forms.ComboBox();
             this.updateButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
@@ -54,6 +53,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.siteColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -208,8 +208,8 @@ namespace NIHEI.SC4Buddy.View.Admin
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox2.Controls.Add(this.searchTextBox);
             this.groupBox2.Controls.Add(this.importButton);
-            this.groupBox2.Controls.Add(this.searchComboBox);
             this.groupBox2.Controls.Add(this.updateButton);
             this.groupBox2.Controls.Add(this.removeButton);
             this.groupBox2.Controls.Add(this.addButton);
@@ -230,20 +230,6 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.importButton.TabIndex = 10;
             this.importButton.Text = "Import plugin";
             this.importButton.UseVisualStyleBackColor = true;
-            // 
-            // searchComboBox
-            // 
-            this.searchComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.searchComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.searchComboBox.FormattingEnabled = true;
-            this.searchComboBox.Location = new System.Drawing.Point(6, 22);
-            this.searchComboBox.Name = "searchComboBox";
-            this.searchComboBox.Size = new System.Drawing.Size(341, 21);
-            this.searchComboBox.TabIndex = 4;
-            this.searchComboBox.SelectedIndexChanged += new System.EventHandler(this.SearchComboBoxValueChanged);
-            this.searchComboBox.TextUpdate += new System.EventHandler(this.SearchComboBoxValueChanged);
             // 
             // updateButton
             // 
@@ -287,9 +273,9 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.nameColumnHeader,
             this.authorColumnHeader,
             this.siteColumnHeader});
-            this.pluginsListView.Location = new System.Drawing.Point(6, 49);
+            this.pluginsListView.Location = new System.Drawing.Point(6, 45);
             this.pluginsListView.Name = "pluginsListView";
-            this.pluginsListView.Size = new System.Drawing.Size(341, 335);
+            this.pluginsListView.Size = new System.Drawing.Size(341, 339);
             this.pluginsListView.TabIndex = 0;
             this.pluginsListView.UseCompatibleStateImageBehavior = false;
             this.pluginsListView.View = System.Windows.Forms.View.List;
@@ -332,6 +318,16 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             // 
+            // searchTextBox
+            // 
+            this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchTextBox.Location = new System.Drawing.Point(6, 19);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(341, 20);
+            this.searchTextBox.TabIndex = 11;
+            this.searchTextBox.TextChanged += new System.EventHandler(this.SearchTextBoxTextChanged);
+            // 
             // ManagePluginsForm
             // 
             this.AcceptButton = this.okButton;
@@ -350,6 +346,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -368,7 +365,6 @@ namespace NIHEI.SC4Buddy.View.Admin
         private System.Windows.Forms.Button filesButton;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button importButton;
-        private System.Windows.Forms.ComboBox searchComboBox;
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button addButton;
@@ -380,5 +376,6 @@ namespace NIHEI.SC4Buddy.View.Admin
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button saveDataButton;
         private System.Windows.Forms.Button cancelDataButton;
+        private System.Windows.Forms.TextBox searchTextBox;
     }
 }

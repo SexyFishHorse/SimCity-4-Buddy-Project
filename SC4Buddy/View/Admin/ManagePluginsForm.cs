@@ -32,9 +32,9 @@
             InitializeComponent();
         }
 
-        private void SearchComboBoxValueChanged(object sender, EventArgs e)
+        private void SearchTextBoxTextChanged(object sender, EventArgs e)
         {
-            var text = searchComboBox.Text.Trim().ToUpper();
+            var text = searchTextBox.Text.Trim().ToUpper();
 
             if (text.Length < 3)
             {
@@ -150,8 +150,8 @@
             addButton.Enabled = false;
             importButton.Enabled = false;
 
-            searchComboBox.Enabled = false;
-            searchComboBox.Text = string.Empty;
+            searchTextBox.Enabled = false;
+            searchTextBox.Text = string.Empty;
 
             selectedPlugin = new RemotePlugin { Name = LocalizationStrings.NewInParanthesis };
 
@@ -180,7 +180,7 @@
             ClearAddPluginFieldsAndVariables();
             SetAddPluginFieldsAndButtonsEnabledState(false);
 
-            searchComboBox.Enabled = true;
+            searchTextBox.Enabled = true;
 
             importButton.Enabled = true;
             removeButton.Enabled = false;
