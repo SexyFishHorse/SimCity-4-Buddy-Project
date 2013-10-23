@@ -1,8 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.View.Admin
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -19,10 +17,6 @@
         private readonly AuthorController authorController;
 
         private RemotePlugin selectedPlugin;
-
-        private ICollection<RemotePluginFile> pluginFiles;
-
-        private ICollection<RemotePlugin> pluginDependencies;
 
         public ManagePluginsForm(RemotePluginController remotePluginController, AuthorController authorController)
         {
@@ -89,8 +83,6 @@
             }
 
             selectedPlugin = plugin;
-            pluginFiles = selectedPlugin.PluginFiles;
-            pluginDependencies = selectedPlugin.Dependencies;
 
             nameTextBox.Text = plugin.Name;
             authorComboBox.Text = plugin.Author.Name;
@@ -123,21 +115,17 @@
             linkTextBox.Text = string.Empty;
             descriptionTextBox.Text = string.Empty;
 
-            pluginFiles = new Collection<RemotePluginFile>();
-            pluginDependencies = new Collection<RemotePlugin>();
-
             filesButton.Text = LocalizationStrings.Files;
             dependenciesButton.Text = LocalizationStrings.Dependencies;
         }
 
         private void FilesButtonClick(object sender, EventArgs e)
         {
-            using (var dialog = new ManagePluginFilesForm(pluginFiles))
+            using (var dialog = new ManagePluginFilesForm(selectedPlugin.PluginFiles))
             {
                 if (dialog.ShowDialog(this) == DialogResult.OK)
                 {
-                    pluginFiles = dialog.PluginFiles;
-                    filesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Files, pluginFiles.Count);
+                    filesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Files, selectedPlugin.PluginFiles.Count);
                 }
             }
 
@@ -193,14 +181,13 @@
 
         private void DependenciesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new ManagePluginDependenciesForm(pluginDependencies, remotePluginController, authorController);
+            var dialog = new ManagePluginDependenciesForm(selectedPlugin.Dependencies, remotePluginController, authorController);
             if (dialog.ShowDialog(this) != DialogResult.OK)
             {
                 return;
             }
 
-            pluginDependencies = dialog.Dependencies;
-            dependenciesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Dependencies, pluginDependencies.Count);
+            dependenciesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Dependencies, selectedPlugin.Dependencies.Count);
         }
 
         private void SaveDataButtonClick(object sender, EventArgs e)
@@ -248,7 +235,7 @@
                 enableSave = false;
             }
 
-            if (pluginFiles.Count < 1)
+            if (selectedPlugin.PluginFiles.Count < 1)
             {
                 enableSave = false;
             }
