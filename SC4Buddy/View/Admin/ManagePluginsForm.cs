@@ -193,6 +193,12 @@
                 return;
             }
 
+            selectedPlugin.Dependencies.Clear();
+            foreach (var dependency in dialog.Dependencies)
+            {
+                selectedPlugin.Dependencies.Add(dependency);
+            }
+
             dependenciesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Dependencies, selectedPlugin.Dependencies.Count);
         }
 
