@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.View.Admin.ManagePlugins
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IO;
     using System.Windows.Forms;
 
@@ -10,16 +11,21 @@
 
     public partial class ManagePluginFilesForm : Form
     {
-        public ManagePluginFilesForm(ICollection<RemotePluginFile> files)
+        public ManagePluginFilesForm(IEnumerable<RemotePluginFile> files)
         {
             InitializeComponent();
 
-            PluginFiles = files;
+            PluginFiles = new Collection<RemotePluginFile>();
+
+            foreach (var file in files)
+            {
+                PluginFiles.Add(file);
+            }
 
             UpdateListView(PluginFiles);
         }
 
-        public ICollection<RemotePluginFile> PluginFiles { get; private set; }
+        public ICollection<RemotePluginFile> PluginFiles { get; set; }
 
         private void UpdateListView(IEnumerable<RemotePluginFile> files)
         {
