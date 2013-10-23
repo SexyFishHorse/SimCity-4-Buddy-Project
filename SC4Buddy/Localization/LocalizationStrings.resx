@@ -567,4 +567,7 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="NewInParanthesis" xml:space="preserve">
     <value>(new)</value>
   </data>
+  <data name="ErrorDuringSaveOperation" xml:space="preserve">
+    <value>Error during save operation.</value>
+  </data>
 </root>
