@@ -16,8 +16,6 @@
 
         private readonly AuthorController authorController;
 
-        private RemotePlugin selectedPlugin;
-
         public ManagePluginsForm(RemotePluginController remotePluginController, AuthorController authorController)
         {
             this.remotePluginController = remotePluginController;
@@ -25,6 +23,8 @@
 
             InitializeComponent();
         }
+
+        private RemotePlugin SelectedPlugin { get; set; }
 
         private void SearchTextBoxTextChanged(object sender, EventArgs e)
         {
@@ -82,7 +82,7 @@
                 return;
             }
 
-            selectedPlugin = plugin;
+            SelectedPlugin = plugin;
 
             nameTextBox.Text = plugin.Name;
             authorComboBox.Text = plugin.Author.Name;
@@ -121,17 +121,17 @@
 
         private void FilesButtonClick(object sender, EventArgs e)
         {
-            using (var dialog = new ManagePluginFilesForm(selectedPlugin.PluginFiles))
+            using (var dialog = new ManagePluginFilesForm(SelectedPlugin.PluginFiles))
             {
                 if (dialog.ShowDialog(this) == DialogResult.OK)
                 {
-                    selectedPlugin.PluginFiles.Clear();
+                    SelectedPlugin.PluginFiles.Clear();
                     foreach (var file in dialog.PluginFiles)
                     {
-                        selectedPlugin.PluginFiles.Add(file);
+                        SelectedPlugin.PluginFiles.Add(file);
                     }
 
-                    filesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Files, selectedPlugin.PluginFiles.Count);
+                    filesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Files, SelectedPlugin.PluginFiles.Count);
                 }
             }
 
@@ -151,9 +151,9 @@
             searchTextBox.Enabled = false;
             searchTextBox.Text = string.Empty;
 
-            selectedPlugin = new RemotePlugin { Name = LocalizationStrings.NewInParanthesis };
+            SelectedPlugin = new RemotePlugin { Name = LocalizationStrings.NewInParanthesis };
 
-            pluginsListView.Items.Add(new ListViewItemWithObjectValue<RemotePlugin>(selectedPlugin.Name, selectedPlugin));
+            pluginsListView.Items.Add(new ListViewItemWithObjectValue<RemotePlugin>(SelectedPlugin.Name, SelectedPlugin));
 
             nameTextBox.Focus();
         }
@@ -162,13 +162,13 @@
         {
             foreach (var item in
                 pluginsListView.Items.Cast<ListViewItemWithObjectValue<RemotePlugin>>()
-                    .Where(item => item.Value == selectedPlugin))
+                    .Where(item => item.Value == SelectedPlugin))
             {
                 pluginsListView.Items.Remove(item);
                 break;
             }
 
-            selectedPlugin = null;
+            SelectedPlugin = null;
 
             saveDataButton.Enabled = false;
             cancelDataButton.Enabled = false;
@@ -187,31 +187,31 @@
 
         private void DependenciesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new ManagePluginDependenciesForm(selectedPlugin.Dependencies, remotePluginController, authorController);
+            var dialog = new ManagePluginDependenciesForm(SelectedPlugin.Dependencies, remotePluginController, authorController);
             if (dialog.ShowDialog(this) != DialogResult.OK)
             {
                 return;
             }
 
-            selectedPlugin.Dependencies.Clear();
+            SelectedPlugin.Dependencies.Clear();
             foreach (var dependency in dialog.Dependencies)
             {
-                selectedPlugin.Dependencies.Add(dependency);
+                SelectedPlugin.Dependencies.Add(dependency);
             }
 
-            dependenciesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Dependencies, selectedPlugin.Dependencies.Count);
+            dependenciesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Dependencies, SelectedPlugin.Dependencies.Count);
         }
 
         private void SaveDataButtonClick(object sender, EventArgs e)
         {
-            selectedPlugin.Name = nameTextBox.Text.Trim();
-            selectedPlugin.Link = linkTextBox.Text.Trim();
-            selectedPlugin.Description = descriptionTextBox.Text.Trim();
-            selectedPlugin.Author = authorController.GetAuthorByName(authorComboBox.Text.Trim());
+            SelectedPlugin.Name = nameTextBox.Text.Trim();
+            SelectedPlugin.Link = linkTextBox.Text.Trim();
+            SelectedPlugin.Description = descriptionTextBox.Text.Trim();
+            SelectedPlugin.Author = authorController.GetAuthorByName(authorComboBox.Text.Trim());
 
-            if (selectedPlugin.Id < 1)
+            if (SelectedPlugin.Id < 1)
             {
-                remotePluginController.Add(selectedPlugin);
+                remotePluginController.Add(SelectedPlugin);
             }
 
             ClearAddPluginFieldsAndVariables();
@@ -247,7 +247,7 @@
                 enableSave = false;
             }
 
-            if (selectedPlugin.PluginFiles.Count < 1)
+            if (SelectedPlugin.PluginFiles.Count < 1)
             {
                 enableSave = false;
             }
