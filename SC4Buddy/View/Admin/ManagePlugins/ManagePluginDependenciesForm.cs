@@ -2,12 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Forms;
 
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Localization;
 
     public partial class ManagePluginDependenciesForm : Form
     {
@@ -22,11 +24,17 @@
         private RemotePlugin newPlugin;
 
         public ManagePluginDependenciesForm(
-            ICollection<RemotePlugin> pluginDependencies,
+            IEnumerable<RemotePlugin> pluginDependencies,
             RemotePluginController remotePluginController,
             AuthorController authorController)
         {
-            Dependencies = pluginDependencies;
+            Dependencies = new Collection<RemotePlugin>();
+
+            foreach (var dependency in pluginDependencies)
+            {
+                Dependencies.Add(dependency);
+            }
+
             this.remotePluginController = remotePluginController;
             this.authorController = authorController;
             InitializeComponent();
@@ -192,7 +200,7 @@
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.Message, "Error during save operation");
+                MessageBox.Show(this, ex.Message, LocalizationStrings.ErrorDuringSaveOperation);
             }
         }
 
