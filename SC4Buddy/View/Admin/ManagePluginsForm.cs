@@ -16,6 +16,8 @@
 
         private readonly AuthorController authorController;
 
+        private RemotePlugin selectedPlugin;
+
         public ManagePluginsForm(RemotePluginController remotePluginController, AuthorController authorController)
         {
             this.remotePluginController = remotePluginController;
@@ -24,7 +26,20 @@
             InitializeComponent();
         }
 
-        private RemotePlugin SelectedPlugin { get; set; }
+        private RemotePlugin SelectedPlugin
+        {
+            get
+            {
+                return selectedPlugin;
+            }
+            set
+            {
+                selectedPlugin = value;
+
+                filesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Files, SelectedPlugin.PluginFiles.Count);
+                dependenciesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Dependencies, SelectedPlugin.Dependencies.Count);
+            }
+        }
 
         private void SearchTextBoxTextChanged(object sender, EventArgs e)
         {
