@@ -125,6 +125,12 @@
             {
                 if (dialog.ShowDialog(this) == DialogResult.OK)
                 {
+                    selectedPlugin.PluginFiles.Clear();
+                    foreach (var file in dialog.PluginFiles)
+                    {
+                        selectedPlugin.PluginFiles.Add(file);
+                    }
+
                     filesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Files, selectedPlugin.PluginFiles.Count);
                 }
             }
