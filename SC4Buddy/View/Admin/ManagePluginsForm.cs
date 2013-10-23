@@ -89,6 +89,8 @@
             }
 
             selectedPlugin = plugin;
+            pluginFiles = selectedPlugin.PluginFiles;
+            pluginDependencies = selectedPlugin.Dependencies;
 
             nameTextBox.Text = plugin.Name;
             authorComboBox.Text = plugin.Author.Name;
