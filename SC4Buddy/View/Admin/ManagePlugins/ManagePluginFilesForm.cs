@@ -60,6 +60,8 @@
             PluginFiles.Remove(selectedItem);
 
             UpdateListView(PluginFiles);
+
+            removeButton.Enabled = false;
         }
 
         private void AddButtonClick(object sender, System.EventArgs e)
