@@ -6,6 +6,7 @@
 
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Control.Remote;
+    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.View.Admin.ManagePlugins;
@@ -297,6 +298,11 @@
             source.AddRange(authors.Select(x => x.Name).ToArray());
 
             authorComboBox.AutoCompleteCustomSource = source;
+        }
+
+        private void CancelButtonClick(object sender, EventArgs e)
+        {
+            EntityFactory.Instance.RemoteEntities.Dispose();
         }
     }
 }
