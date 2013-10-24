@@ -15,6 +15,10 @@
 
         private static EntityFactory instance;
 
+        private Entities entities;
+
+        private RemoteEntities remoteEntities;
+
         private EntityFactory()
         {
             RemoteEntities = CreateRemoteEntities();
@@ -30,9 +34,39 @@
             }
         }
 
-        public Entities Entities { get; private set; }
+        public Entities Entities
+        {
+            get
+            {
+                if (entities == null || entities.Disposed)
+                {
+                    entities = CreateEntities();
+                }
 
-        public RemoteEntities RemoteEntities { get; private set; }
+                return entities;
+            }
+            private set
+            {
+                entities = value;
+            }
+        }
+
+        public RemoteEntities RemoteEntities
+        {
+            get
+            {
+                if (remoteEntities == null || remoteEntities.Disposed)
+                {
+                    remoteEntities = CreateRemoteEntities();
+                }
+
+                return remoteEntities;
+            }
+            private set
+            {
+                remoteEntities = value;
+            }
+        }
 
         private RemoteEntities CreateRemoteEntities()
         {
