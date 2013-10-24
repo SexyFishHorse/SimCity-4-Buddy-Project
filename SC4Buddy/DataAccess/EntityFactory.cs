@@ -1,5 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
+    using System;
     using System.Configuration;
     using System.Data.EntityClient;
     using System.IO;
@@ -78,20 +79,27 @@
 
             entityBuilder.ProviderConnectionString = providerConnectionString;
 
-            var entities = new RemoteDatabaseEntities(entityBuilder.ConnectionString);
+            var databaseEntities = new RemoteDatabaseEntities(entityBuilder.ConnectionString);
 
-            return new RemoteEntities(entities);
+            return new RemoteEntities(databaseEntities);
         }
 
         private Entities CreateEntities()
         {
-            var outputLocation = Path.Combine(Path.GetDirectoryName(Application.LocalUserAppDataPath), "Entities");
+            var appDataPath = Path.GetDirectoryName(Application.LocalUserAppDataPath);
+
+            if (appDataPath == null || string.IsNullOrWhiteSpace(appDataPath))
+            {
+                throw new InvalidOperationException("Unable to locate local user app data path.");
+            }
+
+            var outputLocation = Path.Combine(appDataPath, "Entities");
 
             var connectionString = string.Format(LocalConnectionString, outputLocation);
 
-            var entities = new DatabaseEntities(connectionString);
+            var databaseEntities = new DatabaseEntities(connectionString);
 
-            return new Entities(entities);
+            return new Entities(databaseEntities);
         }
     }
 }
