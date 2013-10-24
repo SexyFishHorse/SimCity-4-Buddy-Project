@@ -89,7 +89,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.saveDataButton.Name = "saveDataButton";
             this.saveDataButton.Size = new System.Drawing.Size(75, 23);
             this.saveDataButton.TabIndex = 11;
-            this.saveDataButton.Text = "Save";
+            this.saveDataButton.Text = "OK";
             this.saveDataButton.UseVisualStyleBackColor = true;
             this.saveDataButton.Click += new System.EventHandler(this.SaveDataButtonClick);
             // 
@@ -242,6 +242,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.importButton.TabIndex = 10;
             this.importButton.Text = "Import plugin";
             this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.ImportButtonClick);
             // 
             // updateButton
             // 
@@ -264,6 +265,7 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.removeButton.TabIndex = 2;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
+            this.removeButton.Click += new System.EventHandler(this.RemoveButtonClick);
             // 
             // addButton
             // 
@@ -311,7 +313,6 @@ namespace NIHEI.SC4Buddy.View.Admin
             // cancelButton
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.cancelButton.Location = new System.Drawing.Point(698, 437);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
@@ -324,11 +325,11 @@ namespace NIHEI.SC4Buddy.View.Admin
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(617, 437);
+            this.okButton.Location = new System.Drawing.Point(592, 437);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 23);
+            this.okButton.Size = new System.Drawing.Size(100, 23);
             this.okButton.TabIndex = 3;
-            this.okButton.Text = "OK";
+            this.okButton.Text = "Save changes";
             this.okButton.UseVisualStyleBackColor = true;
             // 
             // ManagePluginsForm
@@ -336,7 +337,6 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.AcceptButton = this.okButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(785, 472);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.cancelButton);

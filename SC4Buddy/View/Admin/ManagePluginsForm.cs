@@ -17,10 +17,14 @@
 
         private readonly AuthorController authorController;
 
+        private bool changed;
+
         private RemotePlugin selectedPlugin;
 
         public ManagePluginsForm(RemotePluginController remotePluginController, AuthorController authorController)
         {
+            changed = false;
+
             this.remotePluginController = remotePluginController;
             this.authorController = authorController;
 
@@ -237,6 +241,8 @@
             saveDataButton.Enabled = false;
 
             addButton.Enabled = true;
+
+            changed = true;
         }
 
         private void NameTextBoxTextChanged(object sender, EventArgs e)
@@ -302,7 +308,35 @@
 
         private void CancelButtonClick(object sender, EventArgs e)
         {
+            if (changed)
+            {
+                var result = MessageBox.Show(
+                    this,
+                    LocalizationStrings.AreYouSureYouWantToCloseThisForm,
+                    LocalizationStrings.UnsavedChangesWarning,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (result != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
+
             EntityFactory.Instance.RemoteEntities.Dispose();
+            DialogResult = DialogResult.Cancel;
+        }
+
+        private void RemoveButtonClick(object sender, EventArgs e)
+        {
+            changed = true;
+
+            throw new NotImplementedException();
+        }
+
+        private void ImportButtonClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

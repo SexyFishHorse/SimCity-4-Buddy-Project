@@ -79,6 +79,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to close this form? Any unsaved changes will be lost.
+        /// </summary>
+        internal static string AreYouSureYouWantToCloseThisForm {
+            get {
+                return ResourceManager.GetString("AreYouSureYouWantToCloseThisForm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to delete this plugin from the server? This will NOT remove the plugins from the users plugin folders..
         /// </summary>
         internal static string AreYouSureYouWantToDeleteThisPluginFromTheServer {
@@ -1166,6 +1175,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string Unknown {
             get {
                 return ResourceManager.GetString("Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unsaved changes warning.
+        /// </summary>
+        internal static string UnsavedChangesWarning {
+            get {
+                return ResourceManager.GetString("UnsavedChangesWarning", resourceCulture);
             }
         }
         

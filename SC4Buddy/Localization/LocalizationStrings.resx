@@ -570,4 +570,10 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="ErrorDuringSaveOperation" xml:space="preserve">
     <value>Error during save operation.</value>
   </data>
+  <data name="UnsavedChangesWarning" xml:space="preserve">
+    <value>Unsaved changes warning</value>
+  </data>
+  <data name="AreYouSureYouWantToCloseThisForm" xml:space="preserve">
+    <value>Are you sure you want to close this form? Any unsaved changes will be lost</value>
+  </data>
 </root>
