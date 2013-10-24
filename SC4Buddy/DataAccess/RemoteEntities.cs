@@ -12,8 +12,12 @@
 
         public RemoteEntities(RemoteDatabaseEntities entities)
         {
+            Disposed = false;
+
             this.entities = entities;
         }
+
+        public bool Disposed { get; private set; }
 
         public IObjectSet<Author> Authors
         {
@@ -60,6 +64,12 @@
         public void RevertChanges(IEnumerable<EntityObject> entityCollection)
         {
             entities.Refresh(RefreshMode.StoreWins, entityCollection);
+        }
+
+        public void Dispose()
+        {
+            entities.Dispose();
+            Disposed = true;
         }
     }
 }

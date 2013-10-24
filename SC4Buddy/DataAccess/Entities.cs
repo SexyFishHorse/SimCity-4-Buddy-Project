@@ -12,8 +12,12 @@
 
         public Entities(DatabaseEntities entities)
         {
+            Disposed = false;
+
             this.entities = entities;
         }
+
+        public bool Disposed { get; private set; }
 
         public IObjectSet<Plugin> Plugins
         {
@@ -53,7 +57,7 @@
             {
                 return entities.QuarantinedFile;
             }
-        } 
+        }
 
         public void SaveChanges()
         {
@@ -68,6 +72,12 @@
         public void RevertChanges(IEnumerable<EntityObject> entityCollection)
         {
             entities.Refresh(RefreshMode.StoreWins, entityCollection);
+        }
+
+        public void Dispose()
+        {
+            entities.Dispose();
+            Disposed = true;
         }
     }
 }

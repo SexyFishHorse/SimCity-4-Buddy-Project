@@ -1,12 +1,13 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
 
     using NIHEI.SC4Buddy.Entities;
 
-    public interface IEntities
+    public interface IEntities : IDisposable
     {
         IObjectSet<Plugin> Plugins { get; }
 
@@ -16,7 +17,7 @@
 
         IObjectSet<PluginGroup> Groups { get; }
 
-        IObjectSet<QuarantinedFile> QuarantinedFiles { get; } 
+        IObjectSet<QuarantinedFile> QuarantinedFiles { get; }
 
         void SaveChanges();
 
