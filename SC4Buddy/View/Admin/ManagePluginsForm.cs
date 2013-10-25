@@ -248,6 +248,8 @@
             addButton.Enabled = true;
 
             changed = true;
+
+            SelectedPlugin = null;
         }
 
         private void NameTextBoxTextChanged(object sender, EventArgs e)
