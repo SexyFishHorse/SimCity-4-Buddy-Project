@@ -41,6 +41,11 @@
             {
                 selectedPlugin = value;
 
+                if (value == null)
+                {
+                    return;
+                }
+
                 filesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Files, SelectedPlugin.PluginFiles.Count);
                 dependenciesButton.Text = string.Format("{0} ({1})", LocalizationStrings.Dependencies, SelectedPlugin.Dependencies.Count);
             }
