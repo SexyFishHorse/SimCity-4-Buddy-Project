@@ -231,6 +231,17 @@
             SelectedPlugin.Description = descriptionTextBox.Text.Trim();
             SelectedPlugin.Author = authorController.GetAuthorByName(authorComboBox.Text.Trim());
 
+            if (!RemotePluginController.ValidateLinkAndAuthor(SelectedPlugin.Link, SelectedPlugin.Author))
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.TheLinkToTheDownloadInfoPageAndTheSiteOfTheAuthorDoesNotMatch,
+                    LocalizationStrings.LinkAndAuthorSiteDoesNotMatch,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             if (SelectedPlugin.Id < 1)
             {
                 remotePluginController.Add(SelectedPlugin);
