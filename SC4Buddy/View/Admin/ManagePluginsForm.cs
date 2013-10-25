@@ -335,7 +335,20 @@
         {
             changed = true;
 
-            throw new NotImplementedException();
+            foreach (
+                var item in
+                    pluginsListView.Items.Cast<ListViewItemWithObjectValue<RemotePlugin>>()
+                        .Where(item => item.Value.Equals(SelectedPlugin)))
+            {
+                pluginsListView.Items.Remove(item);
+                break;
+            }
+
+            remotePluginController.Delete(SelectedPlugin);
+
+            SelectedPlugin = null;
+
+            removeButton.Enabled = false;
         }
 
         private void ImportButtonClick(object sender, EventArgs e)
