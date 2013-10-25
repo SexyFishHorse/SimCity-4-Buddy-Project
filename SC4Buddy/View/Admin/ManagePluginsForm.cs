@@ -97,7 +97,6 @@
             {
                 addButton.Enabled = false;
                 removeButton.Enabled = false;
-                updateButton.Enabled = false;
                 importButton.Enabled = true;
 
                 ClearAddPluginFieldsAndVariables();
@@ -118,7 +117,6 @@
 
             addButton.Enabled = false;
             removeButton.Enabled = true;
-            updateButton.Enabled = true;
             importButton.Enabled = false;
         }
 
@@ -207,7 +205,6 @@
 
             importButton.Enabled = true;
             removeButton.Enabled = false;
-            updateButton.Enabled = false;
         }
 
         private void DependenciesButtonClick(object sender, EventArgs e)
