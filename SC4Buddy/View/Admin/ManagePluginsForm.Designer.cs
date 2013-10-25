@@ -45,7 +45,6 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.importButton = new System.Windows.Forms.Button();
-            this.updateButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.pluginsListView = new System.Windows.Forms.ListView();
@@ -212,7 +211,6 @@ namespace NIHEI.SC4Buddy.View.Admin
             | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox2.Controls.Add(this.searchTextBox);
             this.groupBox2.Controls.Add(this.importButton);
-            this.groupBox2.Controls.Add(this.updateButton);
             this.groupBox2.Controls.Add(this.removeButton);
             this.groupBox2.Controls.Add(this.addButton);
             this.groupBox2.Controls.Add(this.pluginsListView);
@@ -243,17 +241,6 @@ namespace NIHEI.SC4Buddy.View.Admin
             this.importButton.Text = "Import plugin";
             this.importButton.UseVisualStyleBackColor = true;
             this.importButton.Click += new System.EventHandler(this.ImportButtonClick);
-            // 
-            // updateButton
-            // 
-            this.updateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.updateButton.Enabled = false;
-            this.updateButton.Location = new System.Drawing.Point(168, 390);
-            this.updateButton.Name = "updateButton";
-            this.updateButton.Size = new System.Drawing.Size(75, 23);
-            this.updateButton.TabIndex = 3;
-            this.updateButton.Text = "Update";
-            this.updateButton.UseVisualStyleBackColor = true;
             // 
             // removeButton
             // 
@@ -368,7 +355,6 @@ namespace NIHEI.SC4Buddy.View.Admin
         private System.Windows.Forms.Button filesButton;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button importButton;
-        private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.ListView pluginsListView;
