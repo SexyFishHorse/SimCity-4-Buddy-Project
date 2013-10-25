@@ -1,7 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.Control.Remote
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Data.Objects;
     using System.Linq;
@@ -47,7 +46,6 @@
             }
 
             entities.Plugins.DeleteObject(item);
-            entities.SaveChanges();
         }
 
         public void RevertChanges(RemotePlugin remotePlugin)
