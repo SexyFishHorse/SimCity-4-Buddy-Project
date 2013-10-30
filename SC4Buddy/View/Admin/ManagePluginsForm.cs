@@ -316,7 +316,7 @@
             var authors = authorController.Authors.Where(x => x.Name.ToUpper().Contains(text) || x.Site.ToUpper().Contains(text));
 
             var source = new AutoCompleteStringCollection();
-            source.AddRange(authors.Select(x => string.Format("{0} ({1})", x.Name, x.Site)).ToArray());
+            source.AddRange(authors.Select(x => x.Name + " (" + x.Site + ")").ToArray());
 
             authorComboBox.AutoCompleteCustomSource = source;
         }
