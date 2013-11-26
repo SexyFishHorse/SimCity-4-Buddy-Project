@@ -260,5 +260,10 @@
         {
             new ManageReportsForm().ShowDialog(this);
         }
+
+        private void AdminPanelToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            new AdminPanel().ShowDialog(this);
+        }
     }
 }
