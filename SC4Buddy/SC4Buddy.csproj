@@ -146,6 +146,7 @@
       <DependentUpon>TemporaryEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Plugin.cs" />
+    <Compile Include="Entities\Remote\RemotePluginFile.cs" />
     <Compile Include="Entities\Remote\User.cs" />
     <Compile Include="Entities\UserFolder.cs" />
     <Compile Include="Installer\FileHandlers\ArchiveHandler.cs" />
@@ -207,6 +208,30 @@
     </Compile>
     <Compile Include="User.cs">
       <DependentUpon>RemoteEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\AdminPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Admin\AdminPanel.Designer.cs">
+      <DependentUpon>AdminPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\ManagePluginsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Admin\ManagePluginsForm.Designer.cs">
+      <DependentUpon>ManagePluginsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\ManagePlugins\ManagePluginDependenciesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Admin\ManagePlugins\ManagePluginDependenciesForm.Designer.cs">
+      <DependentUpon>ManagePluginDependenciesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\ManagePlugins\ManagePluginFilesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Admin\ManagePlugins\ManagePluginFilesForm.Designer.cs">
+      <DependentUpon>ManagePluginFilesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Application\AboutBox.cs">
       <SubType>Form</SubType>
@@ -319,6 +344,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LocalizationStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Admin\ManagePluginsForm.resx">
+      <DependentUpon>ManagePluginsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Admin\ManagePlugins\ManagePluginDependenciesForm.resx">
+      <DependentUpon>ManagePluginDependenciesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Admin\ManagePlugins\ManagePluginFilesForm.resx">
+      <DependentUpon>ManagePluginFilesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Application\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>

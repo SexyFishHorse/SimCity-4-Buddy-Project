@@ -14,7 +14,9 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
+    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
+    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
@@ -244,6 +246,13 @@
             var file = string.Format("log-{0}.txt", DateTime.Now.ToString("yyyy-MM-dd"));
 
             Process.Start(Path.Combine(path, file));
+        }
+
+        private void ManagePluginsToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            new ManagePluginsForm(
+                new RemotePluginController(EntityFactory.Instance.RemoteEntities),
+                new AuthorController(EntityFactory.Instance.RemoteEntities)).ShowDialog(this);
         }
     }
 }

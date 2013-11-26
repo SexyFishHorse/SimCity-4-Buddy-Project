@@ -1,5 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
+    using System;
     using System.Configuration;
     using System.Data.EntityClient;
     using System.IO;
@@ -14,6 +15,10 @@
             @"metadata=res://*/DatabaseEntities.csdl|res://*/DatabaseEntities.ssdl|res://*/DatabaseEntities.msl;provider=System.Data.SqlServerCe.4.0;provider connection string='data source={0}\Database.sdf'";
 
         private static EntityFactory instance;
+
+        private Entities entities;
+
+        private RemoteEntities remoteEntities;
 
         private EntityFactory()
         {
@@ -30,9 +35,39 @@
             }
         }
 
-        public Entities Entities { get; private set; }
+        public Entities Entities
+        {
+            get
+            {
+                if (entities == null || entities.Disposed)
+                {
+                    entities = CreateEntities();
+                }
 
-        public RemoteEntities RemoteEntities { get; private set; }
+                return entities;
+            }
+            private set
+            {
+                entities = value;
+            }
+        }
+
+        public RemoteEntities RemoteEntities
+        {
+            get
+            {
+                if (remoteEntities == null || remoteEntities.Disposed)
+                {
+                    remoteEntities = CreateRemoteEntities();
+                }
+
+                return remoteEntities;
+            }
+            private set
+            {
+                remoteEntities = value;
+            }
+        }
 
         private RemoteEntities CreateRemoteEntities()
         {
@@ -44,20 +79,27 @@
 
             entityBuilder.ProviderConnectionString = providerConnectionString;
 
-            var entities = new RemoteDatabaseEntities(entityBuilder.ConnectionString);
+            var databaseEntities = new RemoteDatabaseEntities(entityBuilder.ConnectionString);
 
-            return new RemoteEntities(entities);
+            return new RemoteEntities(databaseEntities);
         }
 
         private Entities CreateEntities()
         {
-            var outputLocation = Path.Combine(Path.GetDirectoryName(Application.LocalUserAppDataPath), "Entities");
+            var appDataPath = Path.GetDirectoryName(Application.LocalUserAppDataPath);
+
+            if (appDataPath == null || string.IsNullOrWhiteSpace(appDataPath))
+            {
+                throw new InvalidOperationException("Unable to locate local user app data path.");
+            }
+
+            var outputLocation = Path.Combine(appDataPath, "Entities");
 
             var connectionString = string.Format(LocalConnectionString, outputLocation);
 
-            var entities = new DatabaseEntities(connectionString);
+            var databaseEntities = new DatabaseEntities(connectionString);
 
-            return new Entities(entities);
+            return new Entities(databaseEntities);
         }
     }
 }

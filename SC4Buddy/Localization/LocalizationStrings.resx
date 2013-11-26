@@ -552,4 +552,28 @@ Note that plugins not known to the central server was not checked.</value>
     <value>The following error occured during the folder scan: "{0}"</value>
     <comment>{0} will be replaced by an error message.</comment>
   </data>
+  <data name="ConfirmCancellation" xml:space="preserve">
+    <value>Confirm cancellation</value>
+  </data>
+  <data name="YouHaveUnsavedChangesToThisPluginAreYouSureYouWantToCancel" xml:space="preserve">
+    <value>You have unsaved changes to this plugin. Are you sure you want to cancel?</value>
+  </data>
+  <data name="Files" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="Dependencies" xml:space="preserve">
+    <value>Dependencies</value>
+  </data>
+  <data name="NewInParanthesis" xml:space="preserve">
+    <value>(new)</value>
+  </data>
+  <data name="ErrorDuringSaveOperation" xml:space="preserve">
+    <value>Error during save operation.</value>
+  </data>
+  <data name="UnsavedChangesWarning" xml:space="preserve">
+    <value>Unsaved changes warning</value>
+  </data>
+  <data name="AreYouSureYouWantToCloseThisForm" xml:space="preserve">
+    <value>Are you sure you want to close this form? Any unsaved changes will be lost</value>
+  </data>
 </root>

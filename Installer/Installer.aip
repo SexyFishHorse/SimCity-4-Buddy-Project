@@ -9,7 +9,7 @@
     <ROW Property="AI_MINDOTNETVERSION" MultiBuildValue="DefaultBuild:4.5" ValueLocId="-"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_App.config" Value="..\SC4Buddy"/>
     <ROW Property="AI_PROPPATH_DIR_PERBUILD_App.config_1" Value="..\SC4Buddy"/>
-    <ROW Property="AI_PROPPATH_DIR_PERBUILD_SC4Buddy.exe" Value="..\SC4Buddy\obj\Release"/>
+    <ROW Property="AI_PROPPATH_DIR_PERBUILD_SC4Buddy.exe" Value="..\SC4Buddy\obj\Debug"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_App.config" Value="App.config"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_App.config_1" Value="App.config"/>
     <ROW Property="AI_PROPPATH_FILENAME_PERBUILD_SC4Buddy.exe" Value="SC4Buddy.exe"/>
