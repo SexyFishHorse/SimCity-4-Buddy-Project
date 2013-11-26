@@ -122,16 +122,16 @@
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>116, 22</value>
   </data>
   <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
+    <value>113, 6</value>
   </data>
   <data name="exitToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
+    <value>116, 22</value>
   </data>
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>Exit</value>
@@ -190,16 +190,10 @@
   <data name="helpToolStripMenuItem.Text" xml:space="preserve">
     <value>Help</value>
   </data>
-  <data name="adminPanelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="managePluginsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 22</value>
   </data>
-  <data name="adminPanelToolStripMenuItem.Text" xml:space="preserve">
-    <value>Admin panel</value>
-  </data>
-  <data name="managePluginsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 22</value>
-  </data>
-  <data name="managePluginsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="managePluginsToolStripMenuItem1.Text" xml:space="preserve">
     <value>Manage plugins</value>
   </data>
   <data name="adminToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -1266,6 +1260,12 @@
   </data>
   <data name="&gt;&gt;backgroundPanel.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="managePluginsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>159, 22</value>
+  </data>
+  <data name="managePluginsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Manage plugins</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -3039,6 +3039,18 @@
     <value>managePluginsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;managePluginsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;adminToolStripMenuItem.Name" xml:space="preserve">
+    <value>adminToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;adminToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;managePluginsToolStripMenuItem1.Name" xml:space="preserve">
+    <value>managePluginsToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;managePluginsToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
