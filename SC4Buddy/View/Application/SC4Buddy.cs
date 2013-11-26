@@ -20,6 +20,7 @@
     using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
+    using NIHEI.SC4Buddy.View.Admin;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.UserFolders;
 
