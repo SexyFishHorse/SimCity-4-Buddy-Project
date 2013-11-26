@@ -233,6 +233,12 @@
     <Compile Include="View\Admin\ManagePlugins\ManagePluginFilesForm.Designer.cs">
       <DependentUpon>ManagePluginFilesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Admin\ManageReportsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Admin\ManageReportsForm.Designer.cs">
+      <DependentUpon>ManageReportsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Application\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -353,6 +359,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Admin\ManagePlugins\ManagePluginFilesForm.resx">
       <DependentUpon>ManagePluginFilesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Admin\ManageReportsForm.resx">
+      <DependentUpon>ManageReportsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Application\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>

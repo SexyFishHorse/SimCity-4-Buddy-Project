@@ -44,15 +44,16 @@ namespace NIHEI.SC4Buddy.View.Application
             this.openLogFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.managePluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundPanel = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.userFolderComboBox = new System.Windows.Forms.ComboBox();
             this.playButton = new System.Windows.Forms.Button();
-            this.managePluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.managePluginsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.backgroundPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -155,6 +156,27 @@ namespace NIHEI.SC4Buddy.View.Application
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItemClick);
             // 
+            // adminToolStripMenuItem
+            // 
+            this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.adminPanelToolStripMenuItem,
+            this.managePluginsToolStripMenuItem,
+            this.reportsToolStripMenuItem});
+            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
+            resources.ApplyResources(this.adminToolStripMenuItem, "adminToolStripMenuItem");
+            // 
+            // managePluginsToolStripMenuItem
+            // 
+            this.managePluginsToolStripMenuItem.Name = "managePluginsToolStripMenuItem";
+            resources.ApplyResources(this.managePluginsToolStripMenuItem, "managePluginsToolStripMenuItem");
+            this.managePluginsToolStripMenuItem.Click += new System.EventHandler(this.ManagePluginsToolStripMenuItemClick);
+            // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            resources.ApplyResources(this.reportsToolStripMenuItem, "reportsToolStripMenuItem");
+            this.reportsToolStripMenuItem.Click += new System.EventHandler(this.ReportsToolStripMenuItemClick);
+            // 
             // backgroundPanel
             // 
             resources.ApplyResources(this.backgroundPanel, "backgroundPanel");
@@ -203,24 +225,11 @@ namespace NIHEI.SC4Buddy.View.Application
             this.playButton.UseVisualStyleBackColor = true;
             this.playButton.Click += new System.EventHandler(this.PlayButtonClick);
             // 
-            // managePluginsToolStripMenuItem
+            // adminPanelToolStripMenuItem
             // 
-            this.managePluginsToolStripMenuItem.Name = "managePluginsToolStripMenuItem";
-            resources.ApplyResources(this.managePluginsToolStripMenuItem, "managePluginsToolStripMenuItem");
-            this.managePluginsToolStripMenuItem.Click += new System.EventHandler(this.ManagePluginsToolStripMenuItemClick);
-            // 
-            // adminToolStripMenuItem
-            // 
-            this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.managePluginsToolStripMenuItem1});
-            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            resources.ApplyResources(this.adminToolStripMenuItem, "adminToolStripMenuItem");
-            // 
-            // managePluginsToolStripMenuItem1
-            // 
-            this.managePluginsToolStripMenuItem1.Name = "managePluginsToolStripMenuItem1";
-            resources.ApplyResources(this.managePluginsToolStripMenuItem1, "managePluginsToolStripMenuItem1");
-            this.managePluginsToolStripMenuItem1.Click += new System.EventHandler(this.ManagePluginsToolStripMenuItemClick);
+            this.adminPanelToolStripMenuItem.Name = "adminPanelToolStripMenuItem";
+            resources.ApplyResources(this.adminPanelToolStripMenuItem, "adminPanelToolStripMenuItem");
+            this.adminPanelToolStripMenuItem.Click += new System.EventHandler(this.AdminPanelToolStripMenuItemClick);
             // 
             // Sc4Buddy
             // 
@@ -267,7 +276,8 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.ToolStripMenuItem openLogFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem managePluginsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem managePluginsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem adminPanelToolStripMenuItem;
     }
 }
 
