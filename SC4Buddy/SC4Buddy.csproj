@@ -209,47 +209,11 @@
     <Compile Include="User.cs">
       <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="View\Admin\AdminPanel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Admin\AdminPanel.Designer.cs">
-      <DependentUpon>AdminPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Admin\ManagePluginsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Admin\ManagePluginsForm.Designer.cs">
-      <DependentUpon>ManagePluginsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Admin\ManagePlugins\ManagePluginDependenciesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Admin\ManagePlugins\ManagePluginDependenciesForm.Designer.cs">
-      <DependentUpon>ManagePluginDependenciesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Admin\ManagePlugins\ManagePluginFilesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Admin\ManagePlugins\ManagePluginFilesForm.Designer.cs">
-      <DependentUpon>ManagePluginFilesForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\Application\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\Application\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Developer\DeveloperDependenciesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Developer\DeveloperDependenciesForm.Designer.cs">
-      <DependentUpon>DeveloperDependenciesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\Developer\DeveloperForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Developer\DeveloperForm.Designer.cs">
-      <DependentUpon>DeveloperForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Elements\ListViewItemWithObjectValue.cs" />
     <Compile Include="View\Elements\UserFolderListViewItem.cs" />
@@ -345,23 +309,8 @@
       <LastGenOutput>LocalizationStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Admin\ManagePluginsForm.resx">
-      <DependentUpon>ManagePluginsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Admin\ManagePlugins\ManagePluginDependenciesForm.resx">
-      <DependentUpon>ManagePluginDependenciesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Admin\ManagePlugins\ManagePluginFilesForm.resx">
-      <DependentUpon>ManagePluginFilesForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\Application\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Developer\DeveloperDependenciesForm.resx">
-      <DependentUpon>DeveloperDependenciesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Developer\DeveloperForm.resx">
-      <DependentUpon>DeveloperForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Login\CreateLoginForm.resx">
       <DependentUpon>CreateLoginForm.cs</DependentUpon>
