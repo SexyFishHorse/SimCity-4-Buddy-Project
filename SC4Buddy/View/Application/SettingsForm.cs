@@ -198,6 +198,8 @@
             autoSaveIntervalTrackBar.Enabled = Settings.Default.EnableAutoSave;
             UpdateAutoSaveLabel(Settings.Default.AutoSaveWaitTime);
 
+            UpdateResolutionComboBox();
+
             UpdateRenderModeComboBox();
 
             UpdateColourDepthComboBox();
@@ -211,6 +213,11 @@
             UpdateLanguageComboBox();
 
             UpdateBackgroundsListView();
+        }
+
+        private void UpdateResolutionComboBox()
+        {
+            resolutionComboBox.Text = Settings.Default.LauncherResolution;
         }
 
         private void UpdateCursorColourComboBox()
