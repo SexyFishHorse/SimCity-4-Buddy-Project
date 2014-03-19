@@ -137,14 +137,6 @@
     <Compile Include="DataAccess\IEntities.cs" />
     <Compile Include="DataAccess\IRemoteEntities.cs" />
     <Compile Include="DataAccess\RemoteEntities.cs" />
-    <Compile Include="DatabaseEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DatabaseEntities.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="DatabaseVersion.cs">
-      <DependentUpon>TemporaryEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\Plugin.cs" />
     <Compile Include="Entities\Remote\RemotePluginFile.cs" />
     <Compile Include="Entities\Remote\User.cs" />
@@ -196,21 +188,6 @@
       <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Remote\PluginMatcher.cs" />
-    <Compile Include="TemporaryEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TemporaryEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TemporaryEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TemporaryEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TemporaryEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TemporaryEntities.edmx</DependentUpon>
-    </Compile>
     <Compile Include="User.cs">
       <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
@@ -365,14 +342,6 @@
       <DependentUpon>ManageUserFoldersForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EntityDeploy Include="DatabaseEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DatabaseEntities.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>NIHEI.SC4Buddy.Entities</CustomToolNamespace>
-    </EntityDeploy>
-    <None Include="DatabaseEntities.edmx.diagram">
-      <DependentUpon>DatabaseEntities.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\DataSources\DatabaseEntities.datasource" />
@@ -388,24 +357,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EntityDeploy Include="TemporaryEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TemporaryEntities.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>Entities.Temp</CustomToolNamespace>
-    </EntityDeploy>
-    <None Include="TemporaryEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TemporaryEntities.edmx</DependentUpon>
-      <LastGenOutput>TemporaryEntities.Context.cs</LastGenOutput>
-    </None>
-    <None Include="TemporaryEntities.edmx.diagram">
-      <DependentUpon>TemporaryEntities.edmx</DependentUpon>
-    </None>
-    <None Include="TemporaryEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TemporaryEntities.edmx</DependentUpon>
-      <LastGenOutput>TemporaryEntities.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -413,9 +364,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database.sdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\error.png" />
     <Content Include="Resources\icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -482,11 +430,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Wallpapers\9.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Temp\Database.sdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
