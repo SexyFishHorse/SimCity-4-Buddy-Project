@@ -11,7 +11,7 @@
     using Common.UI.Elements;
     using Control.Plugins;
 
-    using Entities;
+    using NIHEI.SC4Buddy.Model;
 
     public partial class QuarantinedPluginFilesForm : Form
     {

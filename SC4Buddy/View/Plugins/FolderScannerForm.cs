@@ -11,8 +11,8 @@
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class FolderScannerForm : Form

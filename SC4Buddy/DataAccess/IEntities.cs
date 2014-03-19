@@ -5,7 +5,7 @@
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
 
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
 
     public interface IEntities : IDisposable
     {

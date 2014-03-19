@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
 
     public class PluginFileComparer : IEqualityComparer<PluginFile>
     {

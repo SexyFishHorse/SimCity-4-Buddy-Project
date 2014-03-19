@@ -6,7 +6,7 @@
     using System.Linq;
 
     using NIHEI.Common.IO;
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
 
     public abstract class BaseHandler
     {

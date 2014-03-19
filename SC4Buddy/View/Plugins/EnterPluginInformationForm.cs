@@ -5,7 +5,7 @@
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class EnterPluginInformationForm : Form

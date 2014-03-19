@@ -9,10 +9,10 @@
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Installer.FileHandlers;
     using NIHEI.SC4Buddy.Installer.InstallerEventArgs;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Plugins;
 
