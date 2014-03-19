@@ -167,6 +167,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LocalizationStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\Plugin.cs" />
     <Compile Include="Model\PluginFile.cs" />
     <Compile Include="Model\PluginGroup.cs" />
