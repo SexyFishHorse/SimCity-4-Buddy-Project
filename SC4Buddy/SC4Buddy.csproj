@@ -116,7 +116,6 @@
     <Compile Include="Author.cs">
       <DependentUpon>RemoteEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Control\FileSystemController.cs" />
     <Compile Include="Control\GameArgumentsHelper.cs" />
     <Compile Include="Control\GameLauncher.cs" />
     <Compile Include="Control\ISettingsController.cs" />
