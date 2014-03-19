@@ -21,6 +21,8 @@ namespace NIHEI.SC4Buddy.Model
 
         public Guid UserFolderId { get; set; }
 
+        public IEnumerable<Guid> PluginFileIds { get; set; }
+
         public Plugin(Guid id)
         {
             Id = id;

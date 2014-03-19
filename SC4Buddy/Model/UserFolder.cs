@@ -16,6 +16,8 @@
 
         public string Alias { get; set; }
 
+        public IEnumerable<Guid> PluginIds { get; set; } 
+
         private bool Equals(UserFolder other)
         {
             return Id.Equals(other.Id);

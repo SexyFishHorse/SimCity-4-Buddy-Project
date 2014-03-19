@@ -9,6 +9,8 @@ namespace NIHEI.SC4Buddy.Model
 
         public string Name { get; set; }
 
+        public IEnumerable<Guid> PluginIds { get; set; }
+
         public PluginGroup(Guid id)
         {
             Id = id;
