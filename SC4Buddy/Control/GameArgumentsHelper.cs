@@ -8,7 +8,7 @@
     using System.Text;
     using System.Text.RegularExpressions;
 
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
 
     using log4net;

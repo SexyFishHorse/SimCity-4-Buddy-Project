@@ -7,8 +7,8 @@
     using Microsoft.VisualBasic.FileIO;
 
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Installer.FileHandlers;
+    using NIHEI.SC4Buddy.Model;
 
     using SearchOption = System.IO.SearchOption;
 

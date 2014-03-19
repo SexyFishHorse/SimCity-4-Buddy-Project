@@ -4,7 +4,8 @@
     using System.Linq;
 
     using DataAccess;
-    using Entities;
+
+    using NIHEI.SC4Buddy.Model;
 
     public class PluginController
     {

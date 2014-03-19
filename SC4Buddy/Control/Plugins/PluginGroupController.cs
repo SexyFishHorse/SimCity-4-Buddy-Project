@@ -3,7 +3,7 @@
     using System.Data.Objects;
 
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
 
     public class PluginGroupController
     {

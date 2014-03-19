@@ -10,8 +10,8 @@
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Remote;
 
     public class FolderScannerController

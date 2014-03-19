@@ -6,8 +6,8 @@
     using System.Linq;
 
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Installer.FileHandlers;
+    using NIHEI.SC4Buddy.Model;
 
     public class FolderScanner
     {

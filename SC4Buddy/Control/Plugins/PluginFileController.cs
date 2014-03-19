@@ -8,7 +8,7 @@
     using System.Linq;
 
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
 
     public class PluginFileController

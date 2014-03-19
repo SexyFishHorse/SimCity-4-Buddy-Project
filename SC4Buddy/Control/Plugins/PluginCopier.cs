@@ -6,7 +6,7 @@
     using System.Linq;
 
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
 
     public class PluginCopier
     {
