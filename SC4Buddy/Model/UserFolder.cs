@@ -3,46 +3,17 @@
     using System;
     using System.Collections.Generic;
 
-    public class UserFolder
+    public class UserFolder : ModelBase
     {
-        public UserFolder(Guid id)
-        {
-            Id = id;
-        }
-
-        public Guid Id { get; set; }
-
         public string Path { get; set; }
 
         public string Alias { get; set; }
 
-        public IEnumerable<Guid> PluginIds { get; set; } 
+        public IEnumerable<Guid> PluginIds { get; set; }
 
-        private bool Equals(UserFolder other)
+        public UserFolder(Guid id)
+            : base(id)
         {
-            return Id.Equals(other.Id);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-            if (obj.GetType() != this.GetType())
-            {
-                return false;
-            }
-            return Equals((UserFolder)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
         }
 
         private sealed class AliasEqualityComparer : IEqualityComparer<UserFolder>

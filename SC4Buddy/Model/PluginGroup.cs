@@ -3,44 +3,15 @@ using System.Collections.Generic;
 
 namespace NIHEI.SC4Buddy.Model
 {
-    public class PluginGroup
+    public class PluginGroup : ModelBase
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public IEnumerable<Guid> PluginIds { get; set; }
 
         public PluginGroup(Guid id)
+            : base(id)
         {
-            Id = id;
-        }
-
-        protected bool Equals(PluginGroup other)
-        {
-            return Id.Equals(other.Id);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-            if (obj.GetType() != this.GetType())
-            {
-                return false;
-            }
-            return Equals((PluginGroup)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
         }
 
         private sealed class NameEqualityComparer : IEqualityComparer<PluginGroup>

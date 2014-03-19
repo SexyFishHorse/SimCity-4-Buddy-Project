@@ -5,10 +5,8 @@ namespace NIHEI.SC4Buddy.Model
 {
     using System.Security.Policy;
 
-    public class Plugin
+    public class Plugin : ModelBase
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public string Author { get; set; }
@@ -24,35 +22,8 @@ namespace NIHEI.SC4Buddy.Model
         public IEnumerable<Guid> PluginFileIds { get; set; }
 
         public Plugin(Guid id)
+            : base(id)
         {
-            Id = id;
-        }
-
-        private bool Equals(Plugin other)
-        {
-            return Id.Equals(other.Id);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-            if (obj.GetType() != this.GetType())
-            {
-                return false;
-            }
-            return Equals((Plugin)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
         }
 
         private sealed class NameEqualityComparer : IEqualityComparer<Plugin>

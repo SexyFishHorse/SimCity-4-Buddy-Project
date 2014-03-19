@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace NIHEI.SC4Buddy.Model
 {
-    public class PluginFile
+    public class PluginFile : ModelBase
     {
-        public Guid Id { get; set; }
-
         public string Path { get; set; }
 
         public string Checksum { get; set; }
@@ -14,35 +12,8 @@ namespace NIHEI.SC4Buddy.Model
         public Guid PluginId { get; set; }
 
         public PluginFile(Guid id)
+            : base(id)
         {
-            Id = id;
-        }
-
-        private bool Equals(PluginFile other)
-        {
-            return Id.Equals(other.Id);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-            if (ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-            if (obj.GetType() != this.GetType())
-            {
-                return false;
-            }
-            return Equals((PluginFile)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
         }
 
         private sealed class PathEqualityComparer : IEqualityComparer<PluginFile>
