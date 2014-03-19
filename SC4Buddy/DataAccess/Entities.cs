@@ -1,5 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.Objects;
     using System.Data.Objects.DataClasses;
@@ -8,22 +9,11 @@
 
     public class Entities : IEntities
     {
-        private readonly DatabaseEntities entities;
-
-        public Entities(DatabaseEntities entities)
-        {
-            Disposed = false;
-
-            this.entities = entities;
-        }
-
-        public bool Disposed { get; private set; }
-
         public IObjectSet<Plugin> Plugins
         {
             get
             {
-                return entities.Plugins;
+                throw new NotImplementedException();
             }
         }
 
@@ -31,7 +21,7 @@
         {
             get
             {
-                return entities.PluginFiles;
+                throw new NotImplementedException();
             }
         }
 
@@ -39,7 +29,7 @@
         {
             get
             {
-                return entities.UserFolders;
+                throw new NotImplementedException();
             }
         }
 
@@ -47,29 +37,25 @@
         {
             get
             {
-                return entities.PluginGroups;
+                throw new NotImplementedException();
             }
         }
 
         public void SaveChanges()
         {
-            entities.SaveChanges();
+            throw new NotImplementedException();
         }
 
         public void RevertChanges(EntityObject entityObject)
         {
-            entities.Refresh(RefreshMode.StoreWins, entityObject);
         }
 
         public void RevertChanges(IEnumerable<EntityObject> entityCollection)
         {
-            entities.Refresh(RefreshMode.StoreWins, entityCollection);
         }
 
         public void Dispose()
         {
-            entities.Dispose();
-            Disposed = true;
         }
     }
 }
