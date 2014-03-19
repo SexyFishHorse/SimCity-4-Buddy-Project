@@ -51,14 +51,6 @@
             }
         }
 
-        public IObjectSet<QuarantinedFile> QuarantinedFiles
-        {
-            get
-            {
-                return entities.QuarantinedFile;
-            }
-        }
-
         public void SaveChanges()
         {
             entities.SaveChanges();

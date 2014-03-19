@@ -17,8 +17,6 @@
 
         IObjectSet<PluginGroup> Groups { get; }
 
-        IObjectSet<QuarantinedFile> QuarantinedFiles { get; }
-
         void SaveChanges();
 
         void RevertChanges(EntityObject entityObject);
