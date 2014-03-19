@@ -45,7 +45,7 @@
 
             fileScannerBackgroundWorker.DoWork += ScanFolder;
             fileScannerBackgroundWorker.ProgressChanged += FileScannerBackgroundWorkerOnProgressChanged;
-            fileScannerBackgroundWorker.RunWorkerCompleted += delegate(object sender, RunWorkerCompletedEventArgs args)
+            fileScannerBackgroundWorker.RunWorkerCompleted += delegate
                 {
                     scanProgressBar.Visible = false;
                     scanStatusLabel.Visible = false;
@@ -277,7 +277,15 @@
 
         private void ScanButtonClick(object sender, EventArgs e)
         {
-            fileScannerBackgroundWorker.RunWorkerAsync();
+            try
+            {
+                fileScannerBackgroundWorker.RunWorkerAsync();
+            }
+            catch (Exception ex)
+            {
+                // TODO: reload entities
+            }
+
             scanProgressBar.Visible = true;
             scanStatusLabel.Visible = true;
             scanButton.Enabled = false;
@@ -434,7 +442,14 @@
 
         private void CloseButtonClick(object sender, EventArgs e)
         {
-            fileScannerBackgroundWorker.CancelAsync();
+            try
+            {
+                fileScannerBackgroundWorker.CancelAsync();
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
     }
 }
