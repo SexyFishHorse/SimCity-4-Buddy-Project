@@ -34,7 +34,7 @@ namespace NIHEI.SC4Buddy.Model
             }
         }
 
-        public Guid RemotePluginId
+        public int RemotePluginId
         {
             get
             {
