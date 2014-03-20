@@ -1,6 +1,5 @@
 namespace NIHEI.SC4Buddy.View.Elements
 {
-    using System.Globalization;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Model;
@@ -10,7 +9,7 @@ namespace NIHEI.SC4Buddy.View.Elements
         public UserFolderListViewItem(UserFolder userFolder)
         {
             Text = userFolder.Alias;
-            Name = userFolder.Id.ToString(CultureInfo.InvariantCulture);
+            Name = userFolder.Id.ToString();
             UserFolder = userFolder;
         }
 
