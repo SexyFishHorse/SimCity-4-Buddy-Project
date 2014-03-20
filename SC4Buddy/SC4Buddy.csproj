@@ -161,6 +161,7 @@
     <Compile Include="Model\Plugin.cs" />
     <Compile Include="Model\PluginFile.cs" />
     <Compile Include="Model\PluginGroup.cs" />
+    <Compile Include="Model\QuarantinedFile.cs" />
     <Compile Include="Model\SessionEventArgs.cs" />
     <Compile Include="Model\UserFolder.cs" />
     <Compile Include="Model\ValidationResult.cs" />
