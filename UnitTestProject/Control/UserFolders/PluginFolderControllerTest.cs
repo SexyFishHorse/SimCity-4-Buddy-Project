@@ -1,12 +1,12 @@
 ﻿namespace NIHEI.SC4Buddy.Control.UserFolders
 {
+    using System;
     using System.Data.Objects;
     using System.Linq;
 
     using Moq;
 
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Model;
 
     using Should;
@@ -23,7 +23,7 @@
             var value = string.Empty;
             var instance = new UserFolderController(entities.Object);
 
-            var result = instance.ValidatePath(value);
+            var result = instance.ValidatePath(value, Guid.Empty);
 
             result.ShouldBeFalse();
             entities.Verify(x => x.UserFolders, Times.Never());
@@ -35,10 +35,10 @@
             var entities = new Mock<IEntities>();
 
             var path = string.Empty;
-            const int CurrentId = 1;
+            var currentId = Guid.NewGuid();
             var instance = new UserFolderController(entities.Object);
 
-            var result = instance.ValidatePath(path, CurrentId);
+            var result = instance.ValidatePath(path, currentId);
 
             result.ShouldBeFalse();
             entities.Verify(x => x.UserFolders, Times.Never());
@@ -51,7 +51,7 @@
 
             var instance = new UserFolderController(entities.Object);
 
-            var result = instance.ValidatePath(null);
+            var result = instance.ValidatePath(null, Guid.Empty);
 
             result.ShouldBeFalse();
             entities.Verify(x => x.UserFolders, Times.Never());
@@ -62,10 +62,10 @@
         {
             var entities = new Mock<IEntities>();
 
-            const int CurrentId = 1;
+            var currentId = Guid.NewGuid();
             var instance = new UserFolderController(entities.Object);
 
-            var result = instance.ValidatePath(null, CurrentId);
+            var result = instance.ValidatePath(null, currentId);
 
             result.ShouldBeFalse();
             entities.Verify(x => x.UserFolders, Times.Never());
@@ -79,7 +79,7 @@
             const string Path = " ";
             var instance = new UserFolderController(entities.Object);
 
-            var result = instance.ValidatePath(Path);
+            var result = instance.ValidatePath(Path, Guid.Empty);
 
             result.ShouldBeFalse();
             entities.Verify(x => x.UserFolders, Times.Never());
@@ -91,10 +91,10 @@
             var entities = new Mock<IEntities>();
 
             const string Path = " ";
-            const int CurrentId = 1;
+            var currentId = Guid.NewGuid();
             var instance = new UserFolderController(entities.Object);
 
-            var result = instance.ValidatePath(Path, CurrentId);
+            var result = instance.ValidatePath(Path, currentId);
 
             result.ShouldBeFalse();
             entities.Verify(x => x.UserFolders, Times.Never());
@@ -108,7 +108,7 @@
             const string Path = "example";
             var instance = new UserFolderController(entities.Object);
 
-            var result = instance.ValidatePath(Path);
+            var result = instance.ValidatePath(Path, Guid.Empty);
 
             result.ShouldBeFalse();
             entities.Verify(x => x.UserFolders, Times.Never());
@@ -120,10 +120,10 @@
             var entities = new Mock<IEntities>();
 
             const string Path = "example";
-            const int Id = 1;
+            var id = Guid.NewGuid();
             var instance = new UserFolderController(entities.Object);
 
-            var result = instance.ValidatePath(Path, Id);
+            var result = instance.ValidatePath(Path, id);
 
             result.ShouldBeFalse();
             entities.Verify(x => x.UserFolders, Times.Never());
@@ -139,7 +139,7 @@
             const string Path = @"C:\Windows";
             var instance = new UserFolderController(entities.Object);
 
-            var result = instance.ValidatePath(Path);
+            var result = instance.ValidatePath(Path, Guid.Empty);
 
             result.ShouldBeTrue();
             entities.Verify(x => x.UserFolders, Times.Once());
@@ -148,16 +148,16 @@
         [Fact]
         public void ValidatePath_ValidPath_CurrentId_PopulatedRegistryWithMatchOnIdButNotPath_ReturnTrue()
         {
+            var id = Guid.NewGuid();
             var entities = new Mock<IEntities>();
             var objectSetMock = new Mock<IObjectSet<UserFolder>>();
             objectSetMock.Setup(x => x.FirstOrDefault())
-                .Returns(() => new UserFolder { Id = 1, Alias = "example", Path = @"C:\example" });
+                .Returns(() => new UserFolder(id) { Alias = "example", Path = @"C:\example" });
 
             const string Path = @"C:\Windows";
-            const int Id = 1;
             var instance = new UserFolderController(entities.Object);
 
-            var result = instance.ValidatePath(Path, Id);
+            var result = instance.ValidatePath(Path, id);
 
             result.ShouldBeTrue();
             entities.Verify(x => x.UserFolders, Times.Once());
@@ -169,13 +169,13 @@
             var entities = new Mock<IEntities>();
             var objectSetMock = new Mock<IObjectSet<UserFolder>>();
             objectSetMock.Setup(x => x.FirstOrDefault())
-                .Returns(() => new UserFolder { Id = 3, Alias = "bar", Path = @"C:\Windows" });
+                .Returns(() => new UserFolder(Guid.NewGuid()) { Alias = "bar", Path = @"C:\Windows" });
 
             const string Path = @"C:\Windows";
-            const int Id = 1;
+            var id = Guid.NewGuid();
             var instance = new UserFolderController(entities.Object);
 
-            var result = instance.ValidatePath(Path, Id);
+            var result = instance.ValidatePath(Path, id);
 
             result.ShouldBeFalse();
             entities.Verify(x => x.UserFolders, Times.Once());
@@ -184,16 +184,17 @@
         [Fact]
         public void ValidatePath_ValidPath_CurrentId_PopulatedRegistryWithMatchInPathAndId_ReturnTrue()
         {
+            var id = Guid.NewGuid();
+
             var entities = new Mock<IEntities>();
             var objectSetMock = new Mock<IObjectSet<UserFolder>>();
             objectSetMock.Setup(x => x.FirstOrDefault())
-                .Returns(new UserFolder { Id = 3, Alias = "bar", Path = @"C:\Windows" });
+                .Returns(new UserFolder(id) { Alias = "bar", Path = @"C:\Windows" });
 
             const string Path = @"C:\Windows";
-            const int Id = 3;
             var instance = new UserFolderController(entities.Object);
 
-            var result = instance.ValidatePath(Path, Id);
+            var result = instance.ValidatePath(Path, id);
 
             result.ShouldBeTrue();
             entities.Verify(x => x.UserFolders, Times.Once());

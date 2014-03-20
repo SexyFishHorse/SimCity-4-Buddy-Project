@@ -97,7 +97,7 @@
         public void MoveFilesToUserFolderTest2()
         {
             var instance = new ArchiveHandler();
-            var userFolder = new UserFolder
+            var userFolder = new UserFolder(Guid.Empty)
                                    {
                                        Alias = "Main plugin folder",
                                        Path =
@@ -138,16 +138,16 @@
             }
 
             var instance = new ArchiveHandler { FileInfo = new FileInfo(archivePath), TempFolder = tempFolder };
-            var userFolder = new UserFolder { Alias = "Main plugin folder", Path = outputFolder };
+            var userFolder = new UserFolder(Guid.Empty) { Alias = "Main plugin folder", Path = outputFolder };
 
             Assert.DoesNotThrow(() => instance.ExtractFilesToTemp());
             var installedFiles = instance.MoveToPluginFolder(userFolder).ToList();
 
             installedFiles.ShouldContain(
-                new PluginFile { Path = outputFile1, Checksum = "7c1e41fd4219c43db85ca75bbba9d1ad" },
+                new PluginFile(Guid.Empty) { Path = outputFile1, Checksum = "7c1e41fd4219c43db85ca75bbba9d1ad" },
                 new BaseHandlerTest.PluginFileTestComparer());
             installedFiles.ShouldContain(
-                new PluginFile { Path = outputFile2, Checksum = "95f09d6e18bc1775b487eaf11909776c" },
+                new PluginFile(Guid.Empty) { Path = outputFile2, Checksum = "95f09d6e18bc1775b487eaf11909776c" },
                 new BaseHandlerTest.PluginFileTestComparer());
 
             File.Exists(outputFile1).ShouldBeTrue("File 1 not in plugin folder.");
