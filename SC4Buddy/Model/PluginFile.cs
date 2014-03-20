@@ -62,5 +62,7 @@ namespace NIHEI.SC4Buddy.Model
                 return PathComparerInstance;
             }
         }
+
+        public QuarantinedFile QuarantinedFile { get; set; }
     }
 }
