@@ -55,7 +55,7 @@
             SaveChanges();
         }
 
-        public void RevertChanges(IEnumerable<EntityObject> files)
+        public void RevertChanges(IEnumerable<ModelBase> files)
         {
             entities.RevertChanges(files);
         }

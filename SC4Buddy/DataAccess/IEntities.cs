@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
 
     using NIHEI.SC4Buddy.Model;
 
@@ -19,8 +18,8 @@
 
         void SaveChanges();
 
-        void RevertChanges(EntityObject entityObject);
+        void RevertChanges(ModelBase entityObject);
 
-        void RevertChanges(IEnumerable<EntityObject> entityCollection);
+        void RevertChanges(IEnumerable<ModelBase> entityCollection);
     }
 }

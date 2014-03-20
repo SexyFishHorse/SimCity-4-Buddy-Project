@@ -46,11 +46,11 @@
             throw new NotImplementedException();
         }
 
-        public void RevertChanges(EntityObject entityObject)
+        public void RevertChanges(ModelBase entityObject)
         {
         }
 
-        public void RevertChanges(IEnumerable<EntityObject> entityCollection)
+        public void RevertChanges(IEnumerable<ModelBase> entityCollection)
         {
         }
 
