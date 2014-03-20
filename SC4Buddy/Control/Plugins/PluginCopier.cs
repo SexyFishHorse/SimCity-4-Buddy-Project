@@ -28,7 +28,7 @@
 
         public void CopyPlugin(Plugin plugin, UserFolder targetUserFolder, bool moveInsteadOfCopy = false)
         {
-            var newPlugin = new Plugin(-)
+            var newPlugin = new Plugin(Guid.Empty)
                             {
                                 Name = plugin.Name,
                                 Link = plugin.Link,
