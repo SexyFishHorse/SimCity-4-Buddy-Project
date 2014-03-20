@@ -3,6 +3,7 @@
     using System;
     using System.Configuration;
     using System.Data.EntityClient;
+    using System.IO;
 
     using NIHEI.SC4Buddy.Entities.Remote;
 
@@ -33,17 +34,12 @@
         {
             get
             {
-                return entities ?? (entities = LoadEntities());
+                return entities ?? (entities = CreateEntities());
             }
             private set
             {
                 entities = value;
             }
-        }
-
-        private Entities LoadEntities()
-        {
-            throw new NotImplementedException();
         }
 
         public RemoteEntities RemoteEntities
@@ -80,7 +76,17 @@
 
         private Entities CreateEntities()
         {
-            throw new NotImplementedException();
+            var loadEntities =
+                new Entities(
+                    Path.Combine(
+                        Environment.GetFolderPath(
+                            Environment.SpecialFolder.LocalApplicationData,
+                            Environment.SpecialFolderOption.Create),
+                        "DataStorage"));
+
+            loadEntities.LoadAllEntitiesFromDisc();
+
+            return loadEntities;
         }
     }
 }

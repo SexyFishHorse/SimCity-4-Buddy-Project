@@ -63,5 +63,10 @@
         public void Dispose()
         {
         }
+
+        public void LoadAllEntitiesFromDisc()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
