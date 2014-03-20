@@ -88,7 +88,7 @@
             var insertIndex = 0;
             foreach (var userFolder in userFolderController.UserFolders)
             {
-                if (userFolder.Id != 1)
+                if (!userFolder.IsMainFolder)
                 {
                     userFolderComboBox.Items.Add(new ComboBoxItem<UserFolder>(userFolder.Alias, userFolder));
                 }

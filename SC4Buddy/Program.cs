@@ -46,7 +46,7 @@
                     SetDefaultUserFolder();
                 }
 
-                if (userFolderController.UserFolders.Any(x => x.Id == 1 && x.FolderPath.Equals("?")))
+                if (userFolderController.UserFolders.Any(x => x.IsMainFolder && x.FolderPath.Equals("?")))
                 {
                     SetDefaultUserFolder();
                 }

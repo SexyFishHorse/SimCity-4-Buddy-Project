@@ -172,7 +172,7 @@
 
         public static bool IsBackgroundImage(string entity, UserFolder userFolder)
         {
-            if (userFolder.Id != 1)
+            if (!userFolder.IsMainFolder)
             {
                 return false;
             }
@@ -191,14 +191,9 @@
             return pluginController.Plugins.Count(x => x.RemotePluginId > 0 && x.UserFolder.Id == userFolder.Id);
         }
 
-        public bool IsMainFolder(UserFolder userFolder)
-        {
-            return userFolder.Id == 1;
-        }
-
         public UserFolder GetMainUserFolder()
         {
-            return UserFolders.First(x => x.Id == 1);
+            return UserFolders.First(x => x.IsMainFolder);
         }
     }
 }

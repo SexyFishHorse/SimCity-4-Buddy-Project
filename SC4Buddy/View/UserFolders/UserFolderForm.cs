@@ -46,7 +46,7 @@
 
             if (!Directory.Exists(userFolder.FolderPath))
             {
-                if (userFolder.Id == 1)
+                if (userFolder.IsMainFolder)
                 {
                     if (userFolder.Alias.Equals("?"))
                     {

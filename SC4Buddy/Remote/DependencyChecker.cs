@@ -29,7 +29,7 @@
 
             var missingDependencies = GetMissingDependencies(knownPluginsWithDependencies, knownPlugins);
 
-            if (!userFolderController.IsMainFolder(userFolder))
+            if (!userFolder.IsMainFolder)
             {
                 var knownMainPlugins = GetKnownPlugins(userFolderController.GetMainUserFolder());
 

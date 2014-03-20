@@ -37,7 +37,7 @@
 
         private void ReloadUserFoldersListView()
         {
-            var userFolders = controller.UserFolders.Where(x => x.Id != 1);
+            var userFolders = controller.UserFolders.Where(x => !x.IsMainFolder);
 
             UserFoldersListView.BeginUpdate();
             UserFoldersListView.Items.Clear();

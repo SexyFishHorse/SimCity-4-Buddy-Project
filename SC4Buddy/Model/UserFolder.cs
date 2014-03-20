@@ -10,6 +10,8 @@
 
         public string Alias { get; set; }
 
+        public bool IsMainFolder { get; set; }
+
         public IEnumerable<Guid> PluginIds
         {
             get
