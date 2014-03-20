@@ -5,6 +5,7 @@
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
+    using System.Security.Policy;
     using System.Windows.Forms;
 
     using NIHEI.Common.IO;
@@ -302,7 +303,7 @@
                              {
                                  Name = nameTextBox.Text.Trim(),
                                  Author = authorTextBox.Text.Trim(),
-                                 Link = linkTextBox.Text.Trim(),
+                                 Link = new Url(linkTextBox.Text.Trim()),
                                  Group = GetSelectedGroup(),
                                  Description = descriptionTextBox.Text.Trim(),
                                  UserFolder = userFolder
@@ -448,7 +449,7 @@
             }
             catch (Exception ex)
             {
-                
+
             }
         }
     }

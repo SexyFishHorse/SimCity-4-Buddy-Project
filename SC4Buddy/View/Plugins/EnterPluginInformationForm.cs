@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Security.Policy;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control.Plugins;
@@ -35,7 +36,7 @@
                 nameTextBox.Text = plugin.Name;
                 pluginNameLabel.Text = plugin.Name;
                 authorTextBox.Text = plugin.Author;
-                linkTextBox.Text = plugin.Link;
+                linkTextBox.Text = plugin.Link.ToString();
                 descriptionTextBox.Text = plugin.Description;
 
                 if (plugin.Group != null)
@@ -78,7 +79,7 @@
             Plugin.Name = nameTextBox.Text.Trim();
             Plugin.Author = authorTextBox.Text.Trim();
             Plugin.Description = descriptionTextBox.Text.Trim();
-            Plugin.Link = linkTextBox.Text.Trim();
+            Plugin.Link = new Url(linkTextBox.Text.Trim());
             Plugin.Group = GetOrCreateGroup();
 
             if (oldGroup != null && !oldGroup.Equals(Plugin.Group))

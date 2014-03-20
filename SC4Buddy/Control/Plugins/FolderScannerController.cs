@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using System.Security.Policy;
 
     using log4net;
 
@@ -99,12 +100,12 @@
                                  {
                                      Author = remotePlugin.Value.Author.Name,
                                      Description = remotePlugin.Value.Description,
-                                     Link = remotePlugin.Value.Link,
+                                     Link = new Url(remotePlugin.Value.Link),
                                      RemotePluginId = remotePlugin.Value.Id,
                                      UserFolder = userFolder
                                  };
 
-                    plugins.Add(plugin.Link, plugin);
+                    plugins.Add(plugin.Link.ToString(), plugin);
                 }
 
                 plugin.Files.Add(pluginFile);
