@@ -10,6 +10,8 @@
     {
         private static EntityFactory instance;
 
+        private Entities entities;
+
         private RemoteEntities remoteEntities;
 
         private EntityFactory()
@@ -31,12 +33,17 @@
         {
             get
             {
-                throw new NotImplementedException();
+                return entities ?? (entities = LoadEntities());
             }
             private set
             {
-                throw new NotImplementedException();
+                entities = value;
             }
+        }
+
+        private Entities LoadEntities()
+        {
+            throw new NotImplementedException();
         }
 
         public RemoteEntities RemoteEntities
