@@ -9,7 +9,15 @@ namespace NIHEI.SC4Buddy.Model
 
         public string Checksum { get; set; }
 
-        public Guid PluginId { get; set; }
+        public Guid PluginId
+        {
+            get
+            {
+                return Plugin.Id;
+            }
+        }
+
+        public Plugin Plugin { get; set; }
 
         public PluginFile(Guid id)
             : base(id)

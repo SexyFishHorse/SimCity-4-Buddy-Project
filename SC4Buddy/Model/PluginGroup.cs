@@ -3,11 +3,21 @@ using System.Collections.Generic;
 
 namespace NIHEI.SC4Buddy.Model
 {
+    using System.Linq;
+
     public class PluginGroup : ModelBase
     {
         public string Name { get; set; }
 
-        public IEnumerable<Guid> PluginIds { get; set; }
+        public IEnumerable<Plugin> Plugins { get; set; }
+
+        public IEnumerable<Guid> PluginIds
+        {
+            get
+            {
+                return Plugins.Select(x => x.Id);
+            }
+        }
 
         public PluginGroup(Guid id)
             : base(id)

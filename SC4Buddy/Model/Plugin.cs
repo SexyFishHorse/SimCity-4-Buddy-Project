@@ -3,7 +3,10 @@ using System.Collections.Generic;
 
 namespace NIHEI.SC4Buddy.Model
 {
+    using System.Linq;
     using System.Security.Policy;
+
+    using NIHEI.SC4Buddy.Entities.Remote;
 
     public class Plugin : ModelBase
     {
@@ -13,13 +16,47 @@ namespace NIHEI.SC4Buddy.Model
 
         public string Description { get; set; }
 
-        public Guid PluginGroupId { get; set; }
+        public Guid PluginGroupId
+        {
+            get
+            {
+                return Group.Id;
+            }
+        }
 
         public Url Link { get; set; }
 
-        public Guid UserFolderId { get; set; }
+        public Guid UserFolderId
+        {
+            get
+            {
+                return UserFolder.Id;
+            }
+        }
 
-        public IEnumerable<Guid> PluginFileIds { get; set; }
+        public Guid RemotePluginId
+        {
+            get
+            {
+                return RemotePlugin.Id;
+            }
+        }
+
+        public UserFolder UserFolder { get; set; }
+
+        public RemotePlugin RemotePlugin { get; set; }
+
+        public PluginGroup Group { get; set; }
+
+        public ICollection<PluginFile> Files { get; set; }
+
+        public IEnumerable<Guid> PluginFileIds
+        {
+            get
+            {
+                return Files.Select(x => x.Id);
+            }
+        }
 
         public Plugin(Guid id)
             : base(id)
