@@ -5,6 +5,7 @@
     using System.Linq;
 
     using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
 
     using Should;
 
