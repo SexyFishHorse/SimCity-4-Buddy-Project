@@ -40,6 +40,10 @@ namespace NIHEI.SC4Buddy.Model
             {
                 return RemotePlugin.Id;
             }
+            set
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public UserFolder UserFolder { get; set; }
