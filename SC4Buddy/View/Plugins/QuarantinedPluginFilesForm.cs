@@ -31,7 +31,7 @@
 
         private void CancelButtonClick(object sender, EventArgs e)
         {
-            pluginFileController.RevertChanges(selectedPlugin.Files.Cast<EntityObject>().ToList());
+            pluginFileController.RevertChanges(selectedPlugin.Files.Cast<ModelBase>().ToList());
 
             Close();
         }
