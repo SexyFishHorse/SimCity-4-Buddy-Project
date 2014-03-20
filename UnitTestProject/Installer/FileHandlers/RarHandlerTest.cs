@@ -100,7 +100,7 @@
             var userFolder = new UserFolder(Guid.Empty)
                                    {
                                        Alias = "Main plugin folder",
-                                       Path =
+                                       FolderPath =
                                            Path.Combine(PathToTestMaterial, "MoveFilesToUserFolderOutput")
                                    };
 
@@ -138,7 +138,7 @@
             }
 
             var instance = new ArchiveHandler { FileInfo = new FileInfo(archivePath), TempFolder = tempFolder };
-            var userFolder = new UserFolder(Guid.Empty) { Alias = "Main plugin folder", Path = outputFolder };
+            var userFolder = new UserFolder(Guid.Empty) { Alias = "Main plugin folder", FolderPath = outputFolder };
 
             Assert.DoesNotThrow(() => instance.ExtractFilesToTemp());
             var installedFiles = instance.MoveToPluginFolder(userFolder).ToList();
