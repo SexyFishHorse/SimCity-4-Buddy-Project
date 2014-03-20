@@ -9,7 +9,7 @@ namespace NIHEI.SC4Buddy.Model
     {
         public string Name { get; set; }
 
-        public IEnumerable<Plugin> Plugins { get; set; }
+        public ICollection<Plugin> Plugins { get; set; }
 
         public IEnumerable<Guid> PluginIds
         {
