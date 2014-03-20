@@ -298,7 +298,7 @@
                 return;
             }
 
-            var plugin = new Plugin
+            var plugin = new Plugin(Guid.Empty)
                              {
                                  Name = nameTextBox.Text.Trim(),
                                  Author = authorTextBox.Text.Trim(),
@@ -322,7 +322,7 @@
                                    .Select(item => item.Text)
                                    .Select(
                                        path =>
-                                       new PluginFile
+                                       new PluginFile(Guid.Empty)
                                            {
                                                Path = Path.Combine(userFolder.PluginFolderPath, path),
                                                Checksum = Md5ChecksumUtility.CalculateChecksum(Path.Combine(userFolder.PluginFolderPath, path)).ToHex(),
@@ -402,7 +402,7 @@
 
             if (group == null)
             {
-                group = new PluginGroup { Name = selectedText.Trim() };
+                group = new PluginGroup(Guid.Empty) { Name = selectedText.Trim() };
                 pluginGroupController.Add(group);
             }
 

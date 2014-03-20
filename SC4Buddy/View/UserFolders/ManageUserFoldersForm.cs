@@ -149,7 +149,7 @@
 
         private void AddButtonClick(object sender, EventArgs e)
         {
-            var newFolder = new UserFolder { FolderPath = pathTextBox.Text, Alias = aliasTextBox.Text };
+            var newFolder = new UserFolder(Guid.Empty) { FolderPath = pathTextBox.Text, Alias = aliasTextBox.Text };
             var hasErrors = false;
 
             var pathOk = !controller.ValidatePath(newFolder.FolderPath);

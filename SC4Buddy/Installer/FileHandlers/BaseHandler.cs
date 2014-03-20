@@ -78,7 +78,7 @@
             return
                 entries.Where(File.Exists)
                        .Select(entry => new { entry, checksum = Md5ChecksumUtility.CalculateChecksum(entry).ToHex() })
-                       .Select(@t => new PluginFile { Path = @t.entry, Checksum = @t.checksum });
+                       .Select(@t => new PluginFile(Guid.Empty) { Path = @t.entry, Checksum = @t.checksum });
         }
 
         public abstract IEnumerable<FileSystemInfo> ExtractFilesToTemp();

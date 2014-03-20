@@ -116,7 +116,7 @@
 
                     RaiseInstallProgressEvent(fileInfo, 75, LocalizationStrings.FilesMovedToUserFolder);
 
-                    var plugin = new Plugin { Name = new FileInfo(file).Name, UserFolder = UserFolder };
+                    var plugin = new Plugin(Guid.Empty) { Name = new FileInfo(file).Name, UserFolder = UserFolder };
 
                     SavePluginInformation(plugin, installedFiles);
 
@@ -262,13 +262,13 @@
 
             installedFiles.AddRange(
                 folderListener.CreatedFiles.Where(File.Exists).Select(
-                    file => new PluginFile { Path = file, Checksum = Md5ChecksumUtility.CalculateChecksum(file).ToHex() }));
+                    file => new PluginFile(Guid.Empty) { Path = file, Checksum = Md5ChecksumUtility.CalculateChecksum(file).ToHex() }));
 
             pluginFileController.DeleteFilesByPath(folderListener.ChangedFiles);
 
             installedFiles.AddRange(
                 folderListener.ChangedFiles.Where(File.Exists).Select(
-                    file => new PluginFile { Path = file, Checksum = Md5ChecksumUtility.CalculateChecksum(file).ToHex() }));
+                    file => new PluginFile(Guid.Empty) { Path = file, Checksum = Md5ChecksumUtility.CalculateChecksum(file).ToHex() }));
 
             var oldPaths = new List<string>();
             var newPaths = new List<string>();
@@ -282,7 +282,7 @@
 
             installedFiles.AddRange(
                 newPaths.Where(File.Exists).Select(
-                    file => new PluginFile { Path = file, Checksum = Md5ChecksumUtility.CalculateChecksum(file).ToHex() }));
+                    file => new PluginFile(Guid.Empty) { Path = file, Checksum = Md5ChecksumUtility.CalculateChecksum(file).ToHex() }));
 
             return installedFiles;
         }
