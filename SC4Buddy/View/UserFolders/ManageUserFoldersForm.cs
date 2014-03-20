@@ -152,7 +152,7 @@
             var newFolder = new UserFolder(Guid.Empty) { FolderPath = pathTextBox.Text, Alias = aliasTextBox.Text };
             var hasErrors = false;
 
-            var pathOk = !controller.ValidatePath(newFolder.FolderPath);
+            var pathOk = !controller.ValidatePath(newFolder.FolderPath, Guid.NewGuid());
             var notMainFolder = !controller.IsNotGameFolder(newFolder.FolderPath);
 
             if (pathOk || notMainFolder)
@@ -162,7 +162,7 @@
                 errorProvider.SetError(pathTextBox, LocalizationStrings.PathError);
             }
 
-            if (!controller.ValidateAlias(newFolder.Alias))
+            if (!controller.ValidateAlias(newFolder.Alias, Guid.Empty))
             {
                 hasErrors = true;
                 errorProvider.SetIconPadding(aliasTextBox, ErrorIconPadding);

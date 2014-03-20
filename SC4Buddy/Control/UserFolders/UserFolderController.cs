@@ -46,7 +46,7 @@
         /// <param name="path">The path to validate.</param>
         /// <param name="currentId">The id of the object to skip when checking for uniqueness.</param>
         /// <returns>TRUE if the path complies with the above rules.</returns>
-        public bool ValidatePath(string path, long currentId = 0)
+        public bool ValidatePath(string path, Guid currentId)
         {
             if (string.IsNullOrWhiteSpace(path))
             {
@@ -61,7 +61,7 @@
             var collision = entities.UserFolders
                 .FirstOrDefault(x => x.FolderPath.Equals(path, StringComparison.OrdinalIgnoreCase));
 
-            if (currentId == 0)
+            if (currentId == Guid.Empty)
             {
                 return collision == null;
             }
@@ -81,7 +81,7 @@
         /// <param name="alias">The alias to validate.</param>
         /// <param name="currentId">The id of the object to skip when checking for uniqueness.</param>
         /// <returns>TRUE if the alias complies with the above rules.</returns>
-        public bool ValidateAlias(string alias, long currentId = 0)
+        public bool ValidateAlias(string alias, Guid currentId)
         {
             if (string.IsNullOrWhiteSpace(alias))
             {
@@ -91,7 +91,7 @@
             var collision = entities.UserFolders
                 .FirstOrDefault(x => x.Alias.Equals(alias, StringComparison.OrdinalIgnoreCase));
 
-            if (currentId == 0)
+            if (currentId == Guid.Empty)
             {
                 return collision == null;
             }
