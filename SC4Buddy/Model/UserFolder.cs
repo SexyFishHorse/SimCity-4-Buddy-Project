@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class UserFolder : ModelBase
     {
@@ -9,7 +10,15 @@
 
         public string Alias { get; set; }
 
-        public IEnumerable<Guid> PluginIds { get; set; }
+        public IEnumerable<Guid> PluginIds
+        {
+            get
+            {
+                return Plugins.Select(x => x.Id);
+            }
+        }
+
+        public ICollection<Plugin> Plugins { get; set; }
 
         public UserFolder(Guid id)
             : base(id)
