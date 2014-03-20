@@ -3,12 +3,18 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
 
     using NIHEI.SC4Buddy.Model;
 
     public class Entities : IEntities
     {
+        public string StorageLocation { get; set; }
+
+        public Entities(string storageLocation)
+        {
+            StorageLocation = storageLocation;
+        }
+
         public IObjectSet<Plugin> Plugins
         {
             get
