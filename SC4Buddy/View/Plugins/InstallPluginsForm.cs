@@ -144,7 +144,7 @@
         {
             var messageString = string.Format(
                 LocalizationStrings.DoYouWantToRunTheNamExecutable,
-                new object[] { executable.Name, Path.Combine(userFolder.Path, "Plugins") });
+                new object[] { executable.Name, Path.Combine(userFolder.FolderPath, "Plugins") });
 
             return MessageBox.Show(
                 this,

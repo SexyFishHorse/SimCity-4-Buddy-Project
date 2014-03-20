@@ -1,7 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy
 {
     using System;
-    using System.Configuration;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
@@ -15,8 +14,8 @@
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Application;
 
@@ -47,7 +46,7 @@
                     SetDefaultUserFolder();
                 }
 
-                if (userFolderController.UserFolders.Any(x => x.Id == 1 && x.Path.Equals("?")))
+                if (userFolderController.UserFolders.Any(x => x.Id == 1 && x.FolderPath.Equals("?")))
                 {
                     SetDefaultUserFolder();
                 }
@@ -118,13 +117,13 @@
             var path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimCity 4");
 
-            if (!Directory.Exists(path) || userFolderController.UserFolders.Any(x => x.Path.Equals(path)))
+            if (!Directory.Exists(path) || userFolderController.UserFolders.Any(x => x.FolderPath.Equals(path)))
             {
                 return;
             }
 
             Log.Info(string.Format("Setting default user folder to {0}", path));
-            userFolderController.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, Path = path });
+            userFolderController.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, FolderPath = path });
         }
     }
 }

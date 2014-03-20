@@ -59,7 +59,7 @@
             }
 
             var collision = entities.UserFolders
-                .FirstOrDefault(x => x.Path.Equals(path, StringComparison.OrdinalIgnoreCase));
+                .FirstOrDefault(x => x.FolderPath.Equals(path, StringComparison.OrdinalIgnoreCase));
 
             if (currentId == 0)
             {

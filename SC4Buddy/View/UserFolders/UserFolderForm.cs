@@ -44,7 +44,7 @@
             this.pluginController = pluginController;
             this.userFolderController = userFolderController;
 
-            if (!Directory.Exists(userFolder.Path))
+            if (!Directory.Exists(userFolder.FolderPath))
             {
                 if (userFolder.Id == 1)
                 {
@@ -53,7 +53,7 @@
                         userFolder.Alias = LocalizationStrings.GameUserFolderName;
                     }
 
-                    userFolder.Path = Settings.Default.GameLocation;
+                    userFolder.FolderPath = Settings.Default.GameLocation;
                     userFolderController.Update(userFolder);
                 }
                 else
@@ -90,7 +90,7 @@
 
             foreach (var pluginGroup in pluginGroupController.Groups.Where(x => x.Plugins.Any()))
             {
-                installedPluginsListView.Groups.Add(pluginGroup.Id.ToString(CultureInfo.InvariantCulture), pluginGroup.Name);
+                installedPluginsListView.Groups.Add(pluginGroup.Id.ToString(), pluginGroup.Name);
             }
 
             foreach (var plugin in
@@ -116,7 +116,7 @@
                 selectedPlugin = ((PluginListViewItem)selectedItems[0]).Plugin;
                 nameLabel.Text = selectedPlugin.Name;
                 authorLabel.Text = selectedPlugin.Author;
-                linkLabel.Text = selectedPlugin.Link;
+                linkLabel.Text = selectedPlugin.Link.ToString();
                 descriptionRichTextBox.Text = selectedPlugin.Description;
 
                 uninstallButton.Enabled = true;
@@ -201,7 +201,7 @@
 
         private void LinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(selectedPlugin.Link);
+            Process.Start(selectedPlugin.Link.ToString());
         }
 
         private void UpdateInfoButtonClick(object sender, EventArgs e)

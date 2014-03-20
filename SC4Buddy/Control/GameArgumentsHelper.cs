@@ -206,7 +206,7 @@
 
         protected string GetStringForUserDir(UserFolder selectedUserFolder)
         {
-            return string.Format("-userDir:\"{0}\\\"", selectedUserFolder.Path);
+            return string.Format("-userDir:\"{0}\\\"", selectedUserFolder.FolderPath);
         }
 
         public string GetArgumentString(UserFolder selectedUserFolder)

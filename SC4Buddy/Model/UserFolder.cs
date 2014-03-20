@@ -5,7 +5,7 @@
 
     public class UserFolder : ModelBase
     {
-        public string Path { get; set; }
+        public string FolderPath { get; set; }
 
         public string Alias { get; set; }
 
@@ -52,6 +52,14 @@
             get
             {
                 return AliasComparerInstance;
+            }
+        }
+
+        public string PluginFolderPath
+        {
+            get
+            {
+                return System.IO.Path.Combine(FolderPath, "Plugins");
             }
         }
     }
