@@ -4,27 +4,34 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using Newtonsoft.Json;
+
+    [JsonObject(MemberSerialization.OptIn)]
     public class UserFolder : ModelBase
     {
+        [JsonProperty]
         public string FolderPath { get; set; }
 
+        [JsonProperty]
         public string Alias { get; set; }
 
+        [JsonProperty]
         public bool IsMainFolder { get; set; }
-
-        public IEnumerable<Guid> PluginIds
-        {
-            get
-            {
-                return Plugins.Select(x => x.Id);
-            }
-        }
 
         public ICollection<Plugin> Plugins { get; set; }
 
         public UserFolder(Guid id)
             : base(id)
         {
+        }
+
+        [JsonProperty]
+        public IEnumerable<Guid> PluginIds
+        {
+            get
+            {
+                return Plugins.Select(x => x.Id);
+            }
         }
 
         private sealed class AliasEqualityComparer : IEqualityComparer<UserFolder>

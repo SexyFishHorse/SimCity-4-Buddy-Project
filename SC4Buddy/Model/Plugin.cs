@@ -6,26 +6,34 @@ namespace NIHEI.SC4Buddy.Model
     using System.Linq;
     using System.Security.Policy;
 
+    using Newtonsoft.Json;
+
     using NIHEI.SC4Buddy.Entities.Remote;
 
+    [JsonObject(MemberSerialization.OptIn)]
     public class Plugin : ModelBase
     {
+        [JsonProperty]
         public string Name { get; set; }
 
+        [JsonProperty]
         public string Author { get; set; }
 
+        [JsonProperty]
         public string Description { get; set; }
 
-        public Guid PluginGroupId
-        {
-            get
-            {
-                return Group.Id;
-            }
-        }
-
+        [JsonProperty]
         public Url Link { get; set; }
 
+        public UserFolder UserFolder { get; set; }
+
+        public RemotePlugin RemotePlugin { get; set; }
+
+        public PluginGroup Group { get; set; }
+
+        public ICollection<PluginFile> Files { get; set; }
+
+        [JsonProperty]
         public Guid UserFolderId
         {
             get
@@ -34,6 +42,7 @@ namespace NIHEI.SC4Buddy.Model
             }
         }
 
+        [JsonProperty]
         public int RemotePluginId
         {
             get
@@ -46,14 +55,16 @@ namespace NIHEI.SC4Buddy.Model
             }
         }
 
-        public UserFolder UserFolder { get; set; }
+        [JsonProperty]
+        public Guid PluginGroupId
+        {
+            get
+            {
+                return Group.Id;
+            }
+        }
 
-        public RemotePlugin RemotePlugin { get; set; }
-
-        public PluginGroup Group { get; set; }
-
-        public ICollection<PluginFile> Files { get; set; }
-
+        [JsonProperty]
         public IEnumerable<Guid> PluginFileIds
         {
             get

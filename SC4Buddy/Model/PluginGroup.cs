@@ -5,12 +5,17 @@ namespace NIHEI.SC4Buddy.Model
 {
     using System.Linq;
 
+    using Newtonsoft.Json;
+
+    [JsonObject(MemberSerialization.OptIn)]
     public class PluginGroup : ModelBase
     {
+        [JsonProperty]
         public string Name { get; set; }
 
         public ICollection<Plugin> Plugins { get; set; }
 
+        [JsonProperty]
         public IEnumerable<Guid> PluginIds
         {
             get

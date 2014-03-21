@@ -3,12 +3,20 @@ using System.Collections.Generic;
 
 namespace NIHEI.SC4Buddy.Model
 {
+    using Newtonsoft.Json;
+
+    [JsonObject(MemberSerialization.OptIn)]
     public class PluginFile : ModelBase
     {
+        [JsonProperty]
         public string Path { get; set; }
 
+        [JsonProperty]
         public string Checksum { get; set; }
 
+        public Plugin Plugin { get; set; }
+
+        [JsonProperty]
         public Guid PluginId
         {
             get
@@ -16,8 +24,6 @@ namespace NIHEI.SC4Buddy.Model
                 return Plugin.Id;
             }
         }
-
-        public Plugin Plugin { get; set; }
 
         public PluginFile(Guid id)
             : base(id)

@@ -2,8 +2,12 @@
 
 namespace NIHEI.SC4Buddy.Model
 {
+    using Newtonsoft.Json;
+
+    [JsonObject(MemberSerialization.OptIn)]
     public abstract class ModelBase
     {
+        [JsonProperty]
         public Guid Id { get; set; }
 
         protected ModelBase(Guid id)
