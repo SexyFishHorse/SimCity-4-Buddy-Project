@@ -83,7 +83,7 @@
 
             foreach (var remotePlugin in fileDictionary)
             {
-                var pluginFile = new PluginFile(Guid.Empty)
+                var pluginFile = new PluginFile
                                      {
                                          Checksum = Md5ChecksumUtility.CalculateChecksum(remotePlugin.Key).ToHex(),
                                          Path = remotePlugin.Key
@@ -96,7 +96,7 @@
                 }
                 else
                 {
-                    plugin = new Plugin(Guid.Empty)
+                    plugin = new Plugin
                                  {
                                      Author = remotePlugin.Value.Author.Name,
                                      Description = remotePlugin.Value.Description,

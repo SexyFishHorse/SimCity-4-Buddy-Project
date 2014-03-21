@@ -28,7 +28,7 @@
 
         public void CopyPlugin(Plugin plugin, UserFolder targetUserFolder, bool moveInsteadOfCopy = false)
         {
-            var newPlugin = new Plugin(Guid.Empty)
+            var newPlugin = new Plugin
                             {
                                 Name = plugin.Name,
                                 Link = plugin.Link,
@@ -94,7 +94,7 @@
             Directory.CreateDirectory(newDirectoryPath);
             File.Copy(currentPath, newFilePath, true);
 
-            return new PluginFile(Guid.Empty) { Checksum = pluginFile.Checksum, Path = newFilePath };
+            return new PluginFile { Checksum = pluginFile.Checksum, Path = newFilePath };
         }
     }
 }

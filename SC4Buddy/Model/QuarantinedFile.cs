@@ -20,10 +20,5 @@
                 return File.Id;
             }
         }
-
-        public QuarantinedFile(Guid id)
-            : base(id)
-        {
-        }
     }
 }

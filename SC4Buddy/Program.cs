@@ -123,7 +123,7 @@
             }
 
             Log.Info(string.Format("Setting default user folder to {0}", path));
-            userFolderController.Add(new UserFolder(Guid.Empty) { Alias = LocalizationStrings.DefaultUserFolderName, FolderPath = path });
+            userFolderController.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, FolderPath = path });
         }
     }
 }

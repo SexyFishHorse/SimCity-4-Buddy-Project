@@ -120,8 +120,8 @@
                 descriptionRichTextBox.Text = selectedPlugin.Description;
 
                 uninstallButton.Enabled = true;
-                updateInfoButton.Enabled = selectedPlugin.RemotePluginId == null;
-                reportPluginLinkLabel.Visible = selectedPlugin.RemotePluginId != null;
+                updateInfoButton.Enabled = selectedPlugin.RemotePluginId == 0;
+                reportPluginLinkLabel.Visible = selectedPlugin.RemotePluginId != 0;
                 moveOrCopyButton.Enabled = true;
                 disableFilesButton.Enabled = true;
 

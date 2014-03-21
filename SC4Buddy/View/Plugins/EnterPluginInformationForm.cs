@@ -112,7 +112,7 @@
                 return foundGroup;
             }
 
-            var newGroup = new PluginGroup(Guid.Empty) { Name = groupComboBox.Text };
+            var newGroup = new PluginGroup { Name = groupComboBox.Text };
 
             pluginGroupController.Add(newGroup);
             return newGroup;

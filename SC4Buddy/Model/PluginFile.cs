@@ -25,11 +25,6 @@ namespace NIHEI.SC4Buddy.Model
             }
         }
 
-        public PluginFile(Guid id)
-            : base(id)
-        {
-        }
-
         private sealed class PathEqualityComparer : IEqualityComparer<PluginFile>
         {
             public bool Equals(PluginFile x, PluginFile y)

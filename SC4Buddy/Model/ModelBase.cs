@@ -10,9 +10,9 @@ namespace NIHEI.SC4Buddy.Model
         [JsonProperty]
         public Guid Id { get; set; }
 
-        protected ModelBase(Guid id)
+        protected ModelBase()
         {
-            Id = id;
+            Id = Guid.Empty;
         }
 
         private bool Equals(ModelBase other)

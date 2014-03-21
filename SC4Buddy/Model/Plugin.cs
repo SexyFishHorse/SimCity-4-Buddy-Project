@@ -73,11 +73,6 @@ namespace NIHEI.SC4Buddy.Model
             }
         }
 
-        public Plugin(Guid id)
-            : base(id)
-        {
-        }
-
         private sealed class NameEqualityComparer : IEqualityComparer<Plugin>
         {
             public bool Equals(Plugin x, Plugin y)

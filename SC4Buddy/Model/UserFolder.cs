@@ -20,11 +20,6 @@
 
         public ICollection<Plugin> Plugins { get; set; }
 
-        public UserFolder(Guid id)
-            : base(id)
-        {
-        }
-
         [JsonProperty]
         public IEnumerable<Guid> PluginIds
         {

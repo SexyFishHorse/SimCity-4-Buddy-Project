@@ -152,7 +152,7 @@
             var entities = new Mock<IEntities>();
             var objectSetMock = new Mock<IObjectSet<UserFolder>>();
             objectSetMock.Setup(x => x.FirstOrDefault())
-                .Returns(() => new UserFolder(id) { Alias = "example", FolderPath = @"C:\example" });
+                .Returns(() => new UserFolder { Id = id, Alias = "example", FolderPath = @"C:\example" });
 
             const string Path = @"C:\Windows";
             var instance = new UserFolderController(entities.Object);
@@ -169,7 +169,7 @@
             var entities = new Mock<IEntities>();
             var objectSetMock = new Mock<IObjectSet<UserFolder>>();
             objectSetMock.Setup(x => x.FirstOrDefault())
-                .Returns(() => new UserFolder(Guid.NewGuid()) { Alias = "bar", FolderPath = @"C:\Windows" });
+                .Returns(() => new UserFolder { Alias = "bar", FolderPath = @"C:\Windows" });
 
             const string Path = @"C:\Windows";
             var id = Guid.NewGuid();
@@ -189,7 +189,7 @@
             var entities = new Mock<IEntities>();
             var objectSetMock = new Mock<IObjectSet<UserFolder>>();
             objectSetMock.Setup(x => x.FirstOrDefault())
-                .Returns(new UserFolder(id) { Alias = "bar", FolderPath = @"C:\Windows" });
+                .Returns(new UserFolder { Id = id, Alias = "bar", FolderPath = @"C:\Windows" });
 
             const string Path = @"C:\Windows";
             var instance = new UserFolderController(entities.Object);
