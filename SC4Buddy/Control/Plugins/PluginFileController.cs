@@ -69,7 +69,7 @@
                 File.Copy(file.Path, newPath);
                 File.Delete(file.Path);
 
-                file.QuarantinedFile = new QuarantinedFile { File = file, QuarantinedPath = newPath };
+                file.QuarantinedFile = new QuarantinedFile { PluginFile = file, QuarantinedPath = newPath };
             }
         }
 

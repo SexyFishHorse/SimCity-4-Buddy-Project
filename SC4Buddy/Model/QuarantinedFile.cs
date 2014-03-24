@@ -10,14 +10,14 @@
         [JsonProperty]
         public string QuarantinedPath { get; set; }
 
-        public PluginFile File { get; set; }
+        public PluginFile PluginFile { get; set; }
 
         [JsonProperty]
         public Guid FileId
         {
             get
             {
-                return File != null ? File.Id : Guid.Empty;
+                return PluginFile != null ? PluginFile.Id : Guid.Empty;
             }
         }
     }
