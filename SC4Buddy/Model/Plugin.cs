@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace NIHEI.SC4Buddy.Model
+﻿namespace NIHEI.SC4Buddy.Model
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Security.Policy;
 
@@ -38,7 +38,7 @@ namespace NIHEI.SC4Buddy.Model
         {
             get
             {
-                return UserFolder.Id;
+                return UserFolder != null ? UserFolder.Id : Guid.Empty;
             }
         }
 
@@ -47,7 +47,7 @@ namespace NIHEI.SC4Buddy.Model
         {
             get
             {
-                return RemotePlugin.Id;
+                return RemotePlugin != null ? RemotePlugin.Id : 0;
             }
             set
             {
@@ -60,7 +60,7 @@ namespace NIHEI.SC4Buddy.Model
         {
             get
             {
-                return Group.Id;
+                return Group != null ? Group.Id : Guid.Empty;
             }
         }
 
@@ -69,7 +69,7 @@ namespace NIHEI.SC4Buddy.Model
         {
             get
             {
-                return Files.Select(x => x.Id);
+                return Files != null ? Files.Select(x => x.Id) : new Collection<Guid>();
             }
         }
 

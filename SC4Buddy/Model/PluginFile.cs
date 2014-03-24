@@ -21,7 +21,7 @@ namespace NIHEI.SC4Buddy.Model
         {
             get
             {
-                return Plugin.Id;
+                return Plugin != null ? Plugin.Id : Guid.Empty;
             }
         }
 

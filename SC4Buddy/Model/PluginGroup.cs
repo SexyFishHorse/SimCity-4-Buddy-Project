@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace NIHEI.SC4Buddy.Model
 {
+    using System.Collections.ObjectModel;
     using System.Linq;
 
     using Newtonsoft.Json;
@@ -20,7 +21,7 @@ namespace NIHEI.SC4Buddy.Model
         {
             get
             {
-                return Plugins.Select(x => x.Id);
+                return Plugins != null ? Plugins.Select(x => x.Id) : new Collection<Guid>();
             }
         }
 

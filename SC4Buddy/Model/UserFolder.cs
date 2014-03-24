@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
 
     using Newtonsoft.Json;
@@ -25,7 +26,7 @@
         {
             get
             {
-                return Plugins.Select(x => x.Id);
+                return Plugins != null ? Plugins.Select(x => x.Id) : new Collection<Guid>();
             }
         }
 

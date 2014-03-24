@@ -17,7 +17,7 @@
         {
             get
             {
-                return File.Id;
+                return File != null ? File.Id : Guid.Empty;
             }
         }
     }
