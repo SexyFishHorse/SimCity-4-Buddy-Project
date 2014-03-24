@@ -57,6 +57,12 @@
             var userFolders = GetDataFromFile<UserFolder>(userFoldersLocation);
 
             SetReferences(pluginFiles, plugins, pluginGroups, userFolders);
+
+            Plugins = plugins;
+            Files = pluginFiles;
+            Groups = pluginGroups;
+            UserFolders = userFolders;
+
         }
 
         private void SetReferences(
