@@ -106,12 +106,12 @@
 
         public void Delete(UserFolder userFolder)
         {
-            entities.UserFolders.DeleteObject(userFolder);
+            entities.UserFolders.Remove(userFolder);
         }
 
         public void Add(UserFolder userFolder)
         {
-            entities.UserFolders.AddObject(userFolder);
+            entities.UserFolders.Add(userFolder);
         }
 
         public void Update(UserFolder userFolder)

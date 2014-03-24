@@ -2,19 +2,18 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Objects;
 
     using NIHEI.SC4Buddy.Model;
 
     public interface IEntities : IDisposable
     {
-        IObjectSet<Plugin> Plugins { get; }
+        ICollection<Plugin> Plugins { get; }
 
-        IObjectSet<PluginFile> Files { get; }
+        ICollection<PluginFile> Files { get; }
 
-        IObjectSet<UserFolder> UserFolders { get; }
+        ICollection<UserFolder> UserFolders { get; }
 
-        IObjectSet<PluginGroup> Groups { get; }
+        ICollection<PluginGroup> Groups { get; }
 
         void SaveChanges();
 

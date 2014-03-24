@@ -304,14 +304,14 @@
                                  Name = nameTextBox.Text.Trim(),
                                  Author = authorTextBox.Text.Trim(),
                                  Link = new Url(linkTextBox.Text.Trim()),
-                                 Group = GetSelectedGroup(),
+                                 PluginGroup = GetSelectedGroup(),
                                  Description = descriptionTextBox.Text.Trim(),
                                  UserFolder = userFolder
                              };
 
             pluginController.Add(plugin);
 
-            var group = plugin.Group;
+            var group = plugin.PluginGroup;
             if (group != null)
             {
                 group.Plugins.Add(plugin);
@@ -330,7 +330,7 @@
                                                Plugin = plugin
                                            }))
             {
-                plugin.Files.Add(pluginFile);
+                plugin.PluginFiles.Add(pluginFile);
             }
 
             pluginController.SaveChanges();

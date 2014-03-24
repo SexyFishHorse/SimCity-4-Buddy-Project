@@ -1,6 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.Control.Plugins
 {
-    using System.Data.Objects;
+    using System.Collections.Generic;
     using System.Linq;
 
     using DataAccess;
@@ -16,7 +16,7 @@
             this.entities = entities;
         }
 
-        public IObjectSet<Plugin> Plugins
+        public ICollection<Plugin> Plugins
         {
             get
             {
@@ -26,7 +26,7 @@
 
         public void Add(Plugin plugin, bool save = true)
         {
-            Plugins.AddObject(plugin);
+            Plugins.Add(plugin);
             if (save)
             {
                 SaveChanges();
@@ -40,7 +40,7 @@
 
         public void Delete(Plugin plugin, bool save = true)
         {
-            Plugins.DeleteObject(plugin);
+            Plugins.Remove(plugin);
             if (save)
             {
                 SaveChanges();

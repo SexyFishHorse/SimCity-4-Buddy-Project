@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Data.Objects;
     using System.IO;
     using System.Linq;
 
@@ -20,13 +19,13 @@
             StorageLocation = storageLocation;
         }
 
-        public IObjectSet<Plugin> Plugins { get; private set; }
+        public ICollection<Plugin> Plugins { get; private set; }
 
-        public IObjectSet<PluginFile> Files { get; private set; }
+        public ICollection<PluginFile> Files { get; private set; }
 
-        public IObjectSet<UserFolder> UserFolders { get; set; }
+        public ICollection<UserFolder> UserFolders { get; private set; }
 
-        public IObjectSet<PluginGroup> Groups { get; set; }
+        public ICollection<PluginGroup> Groups { get; private set; }
 
         public void SaveChanges()
         {

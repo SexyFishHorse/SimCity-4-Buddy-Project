@@ -2,8 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
     using System.IO;
     using System.Linq;
 
@@ -20,7 +18,7 @@
             this.entities = entities;
         }
 
-        public IObjectSet<PluginFile> Files
+        public IEnumerable<PluginFile> Files
         {
             get
             {
@@ -30,7 +28,7 @@
 
         public void Delete(PluginFile file, bool save = true)
         {
-            entities.Files.DeleteObject(file);
+            entities.Files.Remove(file);
             if (save)
             {
                 SaveChanges();
