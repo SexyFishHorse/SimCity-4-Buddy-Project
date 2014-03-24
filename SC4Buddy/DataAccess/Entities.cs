@@ -56,6 +56,50 @@
             var pluginFiles = GetDataFromFile<PluginFile>(pluginFilesLocation);
             var pluginGroups = GetDataFromFile<PluginGroup>(groupsLocation);
             var userFolders = GetDataFromFile<UserFolder>(userFoldersLocation);
+
+            SetReferences(pluginFiles, plugins, pluginGroups, userFolders);
+        }
+
+        private void SetReferences(
+            IEnumerable<PluginFile> pluginFiles,
+            ICollection<Plugin> plugins,
+            ICollection<PluginGroup> pluginGroups,
+            ICollection<UserFolder> userFolders)
+        {
+            foreach (var pluginFile in pluginFiles)
+            {
+                var plugin = plugins.First(x => x.Id == pluginFile.PluginId);
+                var userFolder = userFolders.First(x => x.Id == plugin.UserFolderId);
+                var pluginGroup = pluginGroups.First(x => x.Id == plugin.PluginGroupId);
+
+                plugin.PluginFiles.Add(pluginFile);
+                pluginFile.Plugin = plugin;
+
+                if (pluginFile.QuarantinedFile != null)
+                {
+                    pluginFile.QuarantinedFile.PluginFile = pluginFile;
+                }
+
+                if (!userFolder.Plugins.Contains(plugin))
+                {
+                    userFolder.Plugins.Add(plugin);
+                }
+
+                if (plugin.UserFolder == null)
+                {
+                    plugin.UserFolder = userFolder;
+                }
+
+                if (!pluginGroup.Plugins.Contains(plugin))
+                {
+                    pluginGroup.Plugins.Add(plugin);
+                }
+
+                if (plugin.PluginGroup == null)
+                {
+                    plugin.PluginGroup = pluginGroup;
+                }
+            }
         }
 
         private static ICollection<T> GetDataFromFile<T>(string dataLocation)
