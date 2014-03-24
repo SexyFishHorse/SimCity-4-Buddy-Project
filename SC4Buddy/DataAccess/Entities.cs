@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Data.Objects;
 
     using NIHEI.SC4Buddy.Model;
@@ -15,37 +16,13 @@
             StorageLocation = storageLocation;
         }
 
-        public IObjectSet<Plugin> Plugins
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IObjectSet<Plugin> Plugins { get; private set; }
 
-        public IObjectSet<PluginFile> Files
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IObjectSet<PluginFile> Files { get; private set; }
 
-        public IObjectSet<UserFolder> UserFolders
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IObjectSet<UserFolder> UserFolders { get; set; }
 
-        public IObjectSet<PluginGroup> Groups
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IObjectSet<PluginGroup> Groups { get; set; }
 
         public void SaveChanges()
         {
