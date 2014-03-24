@@ -50,7 +50,7 @@
 
         public bool MatchAndUpdate(Plugin plugin)
         {
-            var remotePlugin = GetMostLikelyRemotePlugin(plugin.Files.ToList());
+            var remotePlugin = GetMostLikelyRemotePlugin(plugin.PluginFiles.ToList());
             if (remotePlugin == null)
             {
                 return false;

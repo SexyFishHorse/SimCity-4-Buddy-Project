@@ -31,7 +31,7 @@
 
         public PluginGroup PluginGroup { get; set; }
 
-        public ICollection<PluginFile> Files { get; set; }
+        public ICollection<PluginFile> PluginFiles { get; set; }
 
         [JsonProperty]
         public Guid UserFolderId
@@ -69,7 +69,7 @@
         {
             get
             {
-                return Files != null ? Files.Select(x => x.Id) : new Collection<Guid>();
+                return PluginFiles != null ? PluginFiles.Select(x => x.Id) : new Collection<Guid>();
             }
         }
 

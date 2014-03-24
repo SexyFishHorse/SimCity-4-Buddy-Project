@@ -108,7 +108,7 @@
                     plugins.Add(plugin.Link.ToString(), plugin);
                 }
 
-                plugin.Files.Add(pluginFile);
+                plugin.PluginFiles.Add(pluginFile);
 
                 allNewFiles.Remove(remotePlugin.Key);
             }

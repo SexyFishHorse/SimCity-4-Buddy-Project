@@ -49,7 +49,7 @@
 
         public int RemoveEmptyPlugins()
         {
-            var emptyPlugins = entities.Plugins.Where(x => !x.Files.Any()).ToList();
+            var emptyPlugins = entities.Plugins.Where(x => !x.PluginFiles.Any()).ToList();
 
             var counter = emptyPlugins.Count();
 

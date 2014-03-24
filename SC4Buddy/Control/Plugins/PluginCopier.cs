@@ -37,9 +37,9 @@
                                 UserFolder = targetUserFolder
                             };
 
-            var files = new List<PluginFile>(plugin.Files.Count);
+            var files = new List<PluginFile>(plugin.PluginFiles.Count);
 
-            files.AddRange(plugin.Files.Select(pluginFile => CopyFile(pluginFile, targetUserFolder)));
+            files.AddRange(plugin.PluginFiles.Select(pluginFile => CopyFile(pluginFile, targetUserFolder)));
 
             var affectedPlugins = new HashSet<Plugin>();
 
@@ -58,10 +58,10 @@
                     pluginFileController.Delete(existingFile, save: false);
                 }
 
-                newPlugin.Files.Add(pluginFile);
+                newPlugin.PluginFiles.Add(pluginFile);
             }
 
-            foreach (var affectedPlugin in affectedPlugins.Where(affectedPlugin => !affectedPlugin.Files.Any()))
+            foreach (var affectedPlugin in affectedPlugins.Where(affectedPlugin => !affectedPlugin.PluginFiles.Any()))
             {
                 pluginController.Delete(affectedPlugin, save: false);
             }

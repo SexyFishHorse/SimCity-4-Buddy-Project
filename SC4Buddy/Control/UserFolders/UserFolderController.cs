@@ -136,8 +136,8 @@
 
         public void UninstallPlugin(Plugin selectedPlugin)
         {
-            var files = new PluginFile[selectedPlugin.Files.Count];
-            selectedPlugin.Files.CopyTo(files, 0);
+            var files = new PluginFile[selectedPlugin.PluginFiles.Count];
+            selectedPlugin.PluginFiles.CopyTo(files, 0);
             foreach (var file in files)
             {
                 if (File.Exists(file.Path))

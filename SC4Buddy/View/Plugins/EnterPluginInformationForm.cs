@@ -47,7 +47,7 @@
                 installedFilesListView.BeginUpdate();
 
                 installedFilesListView.Items.Clear();
-                foreach (var relativePath in value.Files
+                foreach (var relativePath in value.PluginFiles
                     .Where(x => x.QuarantinedFile == null)
                     .Select(file => file.Path.Substring(plugin.UserFolder.PluginFolderPath.Length + 1)))
                 {

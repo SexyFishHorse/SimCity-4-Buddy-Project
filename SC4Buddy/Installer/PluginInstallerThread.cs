@@ -179,7 +179,7 @@
             foreach (var installedFile in installedFiles.Distinct(new PluginFileComparer()))
             {
                 installedFile.Plugin = plugin;
-                plugin.Files.Add(installedFile);
+                plugin.PluginFiles.Add(installedFile);
 
                 var existingPlugin =
                     pluginFileController.Files.FirstOrDefault(
