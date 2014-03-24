@@ -29,7 +29,7 @@
 
         public RemotePlugin RemotePlugin { get; set; }
 
-        public PluginGroup Group { get; set; }
+        public PluginGroup PluginGroup { get; set; }
 
         public ICollection<PluginFile> Files { get; set; }
 
@@ -60,7 +60,7 @@
         {
             get
             {
-                return Group != null ? Group.Id : Guid.Empty;
+                return PluginGroup != null ? PluginGroup.Id : Guid.Empty;
             }
         }
 

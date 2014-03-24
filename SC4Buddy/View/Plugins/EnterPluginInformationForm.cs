@@ -39,9 +39,9 @@
                 linkTextBox.Text = plugin.Link.ToString();
                 descriptionTextBox.Text = plugin.Description;
 
-                if (plugin.Group != null)
+                if (plugin.PluginGroup != null)
                 {
-                    groupComboBox.Text = plugin.Group.Name;
+                    groupComboBox.Text = plugin.PluginGroup.Name;
                 }
 
                 installedFilesListView.BeginUpdate();
@@ -75,22 +75,22 @@
 
         private void OkButtonClick(object sender, EventArgs e)
         {
-            var oldGroup = plugin.Group;
+            var oldGroup = plugin.PluginGroup;
             Plugin.Name = nameTextBox.Text.Trim();
             Plugin.Author = authorTextBox.Text.Trim();
             Plugin.Description = descriptionTextBox.Text.Trim();
             Plugin.Link = new Url(linkTextBox.Text.Trim());
-            Plugin.Group = GetOrCreateGroup();
+            Plugin.PluginGroup = GetOrCreateGroup();
 
-            if (oldGroup != null && !oldGroup.Equals(Plugin.Group))
+            if (oldGroup != null && !oldGroup.Equals(Plugin.PluginGroup))
             {
                 oldGroup.Plugins.Remove(plugin);
                 pluginGroupController.SaveChanges();
             }
 
-            if (plugin.Group != null)
+            if (plugin.PluginGroup != null)
             {
-                plugin.Group.Plugins.Add(plugin);
+                plugin.PluginGroup.Plugins.Add(plugin);
                 pluginGroupController.SaveChanges();
             }
 
