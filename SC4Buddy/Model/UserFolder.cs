@@ -30,6 +30,11 @@
             }
         }
 
+        public UserFolder()
+        {
+            Plugins = new Collection<Plugin>();
+        }
+
         private sealed class AliasEqualityComparer : IEqualityComparer<UserFolder>
         {
             public bool Equals(UserFolder x, UserFolder y)

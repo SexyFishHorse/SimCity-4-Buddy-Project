@@ -25,6 +25,11 @@ namespace NIHEI.SC4Buddy.Model
             }
         }
 
+        public PluginGroup()
+        {
+            Plugins = new Collection<Plugin>();
+        }
+
         private sealed class NameEqualityComparer : IEqualityComparer<PluginGroup>
         {
             public bool Equals(PluginGroup x, PluginGroup y)

@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Linq;
     using System.Security.Policy;
 
     using Newtonsoft.Json;
@@ -31,6 +30,7 @@
 
         public PluginGroup PluginGroup { get; set; }
 
+        [JsonProperty]
         public ICollection<PluginFile> PluginFiles { get; set; }
 
         [JsonProperty]
@@ -64,13 +64,9 @@
             }
         }
 
-        [JsonProperty]
-        public IEnumerable<Guid> PluginFileIds
+        public Plugin()
         {
-            get
-            {
-                return PluginFiles != null ? PluginFiles.Select(x => x.Id) : new Collection<Guid>();
-            }
+            PluginFiles = new Collection<PluginFile>();
         }
 
         private sealed class NameEqualityComparer : IEqualityComparer<Plugin>
