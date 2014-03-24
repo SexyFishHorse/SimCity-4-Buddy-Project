@@ -4,6 +4,10 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Data.Objects;
+    using System.IO;
+    using System.Linq;
+
+    using Newtonsoft.Json;
 
     using NIHEI.SC4Buddy.Model;
 
@@ -44,6 +48,22 @@
         public void LoadAllEntitiesFromDisc()
         {
             throw new NotImplementedException();
+        }
+
+        private static ICollection<T> GetDataFromFile<T>(string dataLocation)
+        {
+            ICollection<T> output = new Collection<T>();
+
+            if (File.Exists(dataLocation))
+            {
+                using (var reader = new StreamReader(dataLocation))
+                {
+                    var json = reader.ReadToEnd();
+                    output = JsonConvert.DeserializeObject<ICollection<T>>(json);
+                }
+            }
+
+            return output;
         }
     }
 }
