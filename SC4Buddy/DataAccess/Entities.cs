@@ -47,7 +47,15 @@
 
         public void LoadAllEntitiesFromDisc()
         {
-            throw new NotImplementedException();
+            var pluginsLocation = Path.Combine(StorageLocation, "Plugins.json");
+            var pluginFilesLocation = Path.Combine(StorageLocation, "PluginFiles.json");
+            var groupsLocation = Path.Combine(StorageLocation, "PluginGroups.json");
+            var userFoldersLocation = Path.Combine(StorageLocation, "UserFolders.json");
+
+            var plugins = GetDataFromFile<Plugin>(pluginsLocation);
+            var pluginFiles = GetDataFromFile<PluginFile>(pluginFilesLocation);
+            var pluginGroups = GetDataFromFile<PluginGroup>(groupsLocation);
+            var userFolders = GetDataFromFile<UserFolder>(userFoldersLocation);
         }
 
         private static ICollection<T> GetDataFromFile<T>(string dataLocation)
