@@ -8,7 +8,7 @@
 
     public class Entities : IEntities
     {
-        public string StorageLocation { get; set; }
+        private string StorageLocation { get; set; }
 
         public Entities(string storageLocation)
         {
