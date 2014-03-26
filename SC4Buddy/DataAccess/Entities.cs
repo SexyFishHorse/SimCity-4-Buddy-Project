@@ -12,11 +12,24 @@
 
     public class Entities : IEntities
     {
+        private readonly string pluginsLocation;
+
+        private readonly string pluginFilesLocation;
+
+        private readonly string groupsLocation;
+
+        private readonly string userFoldersLocation;
+
         private string StorageLocation { get; set; }
 
         public Entities(string storageLocation)
         {
             StorageLocation = storageLocation;
+
+            pluginsLocation = Path.Combine(StorageLocation, "Plugins.json");
+            pluginFilesLocation = Path.Combine(StorageLocation, "PluginFiles.json");
+            groupsLocation = Path.Combine(StorageLocation, "PluginGroups.json");
+            userFoldersLocation = Path.Combine(StorageLocation, "UserFolders.json");
         }
 
         public ICollection<Plugin> Plugins { get; private set; }
@@ -46,11 +59,6 @@
 
         public void LoadAllEntitiesFromDisc()
         {
-            var pluginsLocation = Path.Combine(StorageLocation, "Plugins.json");
-            var pluginFilesLocation = Path.Combine(StorageLocation, "PluginFiles.json");
-            var groupsLocation = Path.Combine(StorageLocation, "PluginGroups.json");
-            var userFoldersLocation = Path.Combine(StorageLocation, "UserFolders.json");
-
             var plugins = GetDataFromFile<Plugin>(pluginsLocation);
             var pluginFiles = GetDataFromFile<PluginFile>(pluginFilesLocation);
             var pluginGroups = GetDataFromFile<PluginGroup>(groupsLocation);
