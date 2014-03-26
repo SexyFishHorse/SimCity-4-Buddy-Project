@@ -1,6 +1,5 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
@@ -42,7 +41,10 @@
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            StoreDataInFile(Plugins, pluginsLocation);
+            StoreDataInFile(Files, pluginFilesLocation);
+            StoreDataInFile(UserFolders, userFoldersLocation);
+            StoreDataInFile(Groups, groupsLocation);
         }
 
         public void RevertChanges(ModelBase entityObject)
