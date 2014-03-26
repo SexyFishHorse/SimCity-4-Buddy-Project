@@ -31,8 +31,6 @@
             Log.Info("Application starting");
             try
             {
-                MoveDatabaseIfExists();
-
                 var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -84,30 +82,6 @@
 
                 Process.Start(Path.Combine(path, "Logs", file));
             }
-        }
-
-        private static void MoveDatabaseIfExists()
-        {
-            var exeFolder = Path.GetDirectoryName(Application.ExecutablePath);
-
-            var inputPath = Path.Combine(exeFolder, "Temp", "Database.sdf");
-
-            if (exeFolder == null || !File.Exists(inputPath))
-            {
-                return;
-            }
-
-            var outputLocation = Path.Combine(Path.GetDirectoryName(Application.LocalUserAppDataPath), "Entities");
-            var outputPath = Path.Combine(outputLocation, "Database.sdf");
-
-            if (File.Exists(outputPath))
-            {
-                return;
-            }
-
-            Directory.CreateDirectory(outputLocation);
-            File.Copy(inputPath, outputPath);
-            File.Delete(inputPath);
         }
 
         private static void SetDefaultUserFolder()
