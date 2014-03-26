@@ -130,5 +130,14 @@
 
             return output;
         }
+
+        private static void StoreDataInFile(IEnumerable<ModelBase> data, string dataLocation)
+        {
+            using (var writer = new StreamWriter(dataLocation))
+            {
+                var json = JsonConvert.SerializeObject(data);
+                writer.Write(json);
+            }
+        }
     }
 }
