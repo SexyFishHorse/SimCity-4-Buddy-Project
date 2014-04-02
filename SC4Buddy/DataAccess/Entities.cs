@@ -1,12 +1,15 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
 
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
+    using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Model;
 
     public class Entities : IEntities
@@ -61,76 +64,134 @@
 
         public void LoadAllEntitiesFromDisc()
         {
-            var plugins = GetDataFromFile<Plugin>(pluginsLocation);
-            var pluginFiles = GetDataFromFile<PluginFile>(pluginFilesLocation);
-            var pluginGroups = GetDataFromFile<PluginGroup>(groupsLocation);
-            var userFolders = GetDataFromFile<UserFolder>(userFoldersLocation);
+            UserFolders = new Collection<UserFolder>();
+            Groups = new Collection<PluginGroup>();
+            Plugins = new Collection<Plugin>();
+            Files = new Collection<PluginFile>();
 
-            SetReferences(pluginFiles, plugins, pluginGroups, userFolders);
-
-            Plugins = plugins;
-            Files = pluginFiles;
-            Groups = pluginGroups;
-            UserFolders = userFolders;
-
-        }
-
-        private void SetReferences(
-            IEnumerable<PluginFile> pluginFiles,
-            ICollection<Plugin> plugins,
-            ICollection<PluginGroup> pluginGroups,
-            ICollection<UserFolder> userFolders)
-        {
-            foreach (var pluginFile in pluginFiles)
+            using (var reader = new StreamReader(userFoldersLocation))
             {
-                var plugin = plugins.First(x => x.Id == pluginFile.PluginId);
-                var userFolder = userFolders.First(x => x.Id == plugin.UserFolderId);
-                var pluginGroup = pluginGroups.First(x => x.Id == plugin.PluginGroupId);
+                var json = reader.ReadToEnd();
 
-                plugin.PluginFiles.Add(pluginFile);
-                pluginFile.Plugin = plugin;
+                dynamic dynamicUserFolders = JArray.Parse(json);
 
-                if (pluginFile.QuarantinedFile != null)
+                foreach (var dynamicUserFolder in dynamicUserFolders)
                 {
-                    pluginFile.QuarantinedFile.PluginFile = pluginFile;
-                }
+                    var userFolder = new UserFolder
+                                            {
+                                                Id = dynamicUserFolder.Id,
+                                                Alias = dynamicUserFolder.Alias,
+                                                FolderPath = dynamicUserFolder.FolderPath,
+                                                IsMainFolder = dynamicUserFolder.IsMainFolder
+                                            };
 
-                if (!userFolder.Plugins.Contains(plugin))
-                {
-                    userFolder.Plugins.Add(plugin);
-                }
+                    var pluginIds = new Collection<Plugin>();
 
-                if (plugin.UserFolder == null)
-                {
-                    plugin.UserFolder = userFolder;
-                }
+                    foreach (var pluginId in dynamicUserFolder.PluginIds)
+                    {
+                        pluginIds.Add(new Plugin { Id = pluginId });
+                    }
 
-                if (!pluginGroup.Plugins.Contains(plugin))
-                {
-                    pluginGroup.Plugins.Add(plugin);
-                }
+                    userFolder.Plugins = pluginIds;
 
-                if (plugin.PluginGroup == null)
-                {
-                    plugin.PluginGroup = pluginGroup;
-                }
-            }
-        }
-
-        private static ICollection<T> GetDataFromFile<T>(string dataLocation)
-        {
-            ICollection<T> output = new Collection<T>();
-
-            if (File.Exists(dataLocation))
-            {
-                using (var reader = new StreamReader(dataLocation))
-                {
-                    var json = reader.ReadToEnd();
-                    output = JsonConvert.DeserializeObject<ICollection<T>>(json);
+                    UserFolders.Add(userFolder);
                 }
             }
 
-            return output;
+            using (var reader = new StreamReader(groupsLocation))
+            {
+                var json = reader.ReadToEnd();
+
+                dynamic dynamicGroups = JArray.Parse(json);
+
+                foreach (var dynamicGroup in dynamicGroups)
+                {
+                    var pluginGroup = new PluginGroup { Id = dynamicGroup.Id, Name = dynamicGroup.Name };
+                    var groupPlugins = new Collection<Plugin>();
+
+                    foreach (var pluginId in dynamicGroup.PluginIds)
+                    {
+                        groupPlugins.Add(new Plugin { Id = pluginId });
+                    }
+
+                    pluginGroup.Plugins = groupPlugins;
+                    Groups.Add(pluginGroup);
+                }
+            }
+
+            using (var reader = new StreamReader(pluginsLocation))
+            {
+                var json = reader.ReadToEnd();
+
+                dynamic dynamicPlugins = JArray.Parse(json);
+
+                foreach (var dynamicPlugin in dynamicPlugins)
+                {
+                    var plugin = new Plugin
+                                     {
+                                         Id = dynamicPlugin.Id,
+                                         Author = dynamicPlugin.Author,
+                                         Description = dynamicPlugin.Description,
+                                         Name = dynamicPlugin.Name,
+                                         Link = dynamicPlugin.Link,
+                                         UserFolder = UserFolders.First(x => x.Id == (Guid)dynamicPlugin.UserFolderId)
+                                     };
+
+                    if (dynamicPlugin.PluginGroupId != Guid.Empty)
+                    {
+                        plugin.PluginGroup = Groups.First(x => x.Id == (Guid)dynamicPlugin.PluginGroupId);
+                    }
+
+                    if (dynamicPlugin.RemotePluginId > 0)
+                    {
+                        plugin.RemotePlugin = new RemotePlugin { Id = dynamicPlugin.RemotePluginId };
+                    }
+
+                    var files = new Collection<PluginFile>();
+
+                    foreach (var pluginFileId in dynamicPlugin.PluginFileIds)
+                    {
+                        files.Add(new PluginFile { Id = pluginFileId });
+                    }
+
+                    plugin.PluginFiles = files;
+
+                    UserFolders.First(x => x.Id == plugin.UserFolderId).Plugins.Remove(plugin);
+                    UserFolders.First(x => x.Id == plugin.UserFolderId).Plugins.Add(plugin);
+
+                    Plugins.Add(plugin);
+
+                    if (plugin.PluginGroupId != Guid.Empty)
+                    {
+                        Groups.First(x => x.Id == plugin.PluginGroupId).Plugins.Remove(plugin);
+                        Groups.First(x => x.Id == plugin.PluginGroupId).Plugins.Add(plugin);
+                    }
+                }
+            }
+
+            using (var reader = new StreamReader(pluginFilesLocation))
+            {
+                var json = reader.ReadToEnd();
+
+                dynamic dynamicPluginFiles = JArray.Parse(json);
+
+                foreach (var dynamicPluginFile in dynamicPluginFiles)
+                {
+                    var file = new PluginFile
+                                   {
+                                       Id = dynamicPluginFile.Id,
+                                       Checksum = dynamicPluginFile.Checksum,
+                                       Path = dynamicPluginFile.Path,
+                                       Plugin = Plugins.First(x => x.Id == (Guid)dynamicPluginFile.PluginId),
+                                       QuarantinedFile = dynamicPluginFile.QuarantinedFile
+                                   };
+                    file.Plugin.PluginFiles.Remove(file);
+                    file.Plugin.PluginFiles.Add(file);
+
+                    Files.Add(file);
+
+                }
+            }
         }
 
         private static void StoreDataInFile(IEnumerable<ModelBase> data, string dataLocation)
