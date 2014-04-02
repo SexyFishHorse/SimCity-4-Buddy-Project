@@ -193,7 +193,22 @@
 
         public UserFolder GetMainUserFolder()
         {
-            return UserFolders.First(x => x.IsMainFolder);
+            var folder = UserFolders.FirstOrDefault(x => x.IsMainFolder);
+
+            if (folder == null)
+            {
+                folder = new UserFolder
+                             {
+                                 Id = Guid.NewGuid(),
+                                 Alias = "Main user folder",
+                                 IsMainFolder = true,
+                                 FolderPath = Path.Combine(Settings.Default.GameLocation, "Plugins")
+                             };
+                Add(folder);
+                SaveChanges();
+            }
+
+            return folder;
         }
     }
 }

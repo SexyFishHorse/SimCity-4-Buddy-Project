@@ -61,7 +61,7 @@
         {
             Log.Info("Updating main folder");
 
-            var folder = userFolderController.UserFolders.FirstOrDefault(x => x.IsMainFolder);
+            var folder = userFolderController.GetMainUserFolder();
             if (folder == null)
             {
                 throw new InvalidOperationException("Main plugin folder has been deleted from the database.");
