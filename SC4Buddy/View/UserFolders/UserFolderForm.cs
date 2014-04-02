@@ -58,7 +58,7 @@
                 }
                 else
                 {
-                    throw new DirectoryNotFoundException("The plugin folder does not exist.");
+                    throw new DirectoryNotFoundException("The plugin folder does not exist or you don't have access to one or more of the folders in the path.");
                 }
             }
 
