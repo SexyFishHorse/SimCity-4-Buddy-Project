@@ -27,6 +27,11 @@
         public void Add(Plugin plugin, bool save = true)
         {
             Plugins.Add(plugin);
+            foreach (var file in plugin.PluginFiles)
+            {
+                entities.Files.Add(file);
+            }
+
             if (save)
             {
                 SaveChanges();
