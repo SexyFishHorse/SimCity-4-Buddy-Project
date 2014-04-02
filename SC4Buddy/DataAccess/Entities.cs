@@ -69,56 +69,43 @@
             Plugins = new Collection<Plugin>();
             Files = new Collection<PluginFile>();
 
-            using (var reader = new StreamReader(userFoldersLocation))
+            LoadUserFolders();
+
+            LoadPluginGroups();
+
+            LoadPlugins();
+
+            LoadPluginFiles();
+        }
+
+        private void LoadPluginFiles()
+        {
+            using (var reader = new StreamReader(pluginFilesLocation))
             {
                 var json = reader.ReadToEnd();
 
-                dynamic dynamicUserFolders = JArray.Parse(json);
+                dynamic dynamicPluginFiles = JArray.Parse(json);
 
-                foreach (var dynamicUserFolder in dynamicUserFolders)
+                foreach (var dynamicPluginFile in dynamicPluginFiles)
                 {
-                    var userFolder = new UserFolder
-                                            {
-                                                Id = dynamicUserFolder.Id,
-                                                Alias = dynamicUserFolder.Alias,
-                                                FolderPath = dynamicUserFolder.FolderPath,
-                                                IsMainFolder = dynamicUserFolder.IsMainFolder
-                                            };
+                    var file = new PluginFile
+                                   {
+                                       Id = dynamicPluginFile.Id,
+                                       Checksum = dynamicPluginFile.Checksum,
+                                       Path = dynamicPluginFile.Path,
+                                       Plugin = Plugins.First(x => x.Id == (Guid)dynamicPluginFile.PluginId),
+                                       QuarantinedFile = dynamicPluginFile.QuarantinedFile
+                                   };
+                    file.Plugin.PluginFiles.Remove(file);
+                    file.Plugin.PluginFiles.Add(file);
 
-                    var pluginIds = new Collection<Plugin>();
-
-                    foreach (var pluginId in dynamicUserFolder.PluginIds)
-                    {
-                        pluginIds.Add(new Plugin { Id = pluginId });
-                    }
-
-                    userFolder.Plugins = pluginIds;
-
-                    UserFolders.Add(userFolder);
+                    Files.Add(file);
                 }
             }
+        }
 
-            using (var reader = new StreamReader(groupsLocation))
-            {
-                var json = reader.ReadToEnd();
-
-                dynamic dynamicGroups = JArray.Parse(json);
-
-                foreach (var dynamicGroup in dynamicGroups)
-                {
-                    var pluginGroup = new PluginGroup { Id = dynamicGroup.Id, Name = dynamicGroup.Name };
-                    var groupPlugins = new Collection<Plugin>();
-
-                    foreach (var pluginId in dynamicGroup.PluginIds)
-                    {
-                        groupPlugins.Add(new Plugin { Id = pluginId });
-                    }
-
-                    pluginGroup.Plugins = groupPlugins;
-                    Groups.Add(pluginGroup);
-                }
-            }
-
+        private void LoadPlugins()
+        {
             using (var reader = new StreamReader(pluginsLocation))
             {
                 var json = reader.ReadToEnd();
@@ -168,28 +155,60 @@
                     }
                 }
             }
+        }
 
-            using (var reader = new StreamReader(pluginFilesLocation))
+        private void LoadPluginGroups()
+        {
+            using (var reader = new StreamReader(groupsLocation))
             {
                 var json = reader.ReadToEnd();
 
-                dynamic dynamicPluginFiles = JArray.Parse(json);
+                dynamic dynamicGroups = JArray.Parse(json);
 
-                foreach (var dynamicPluginFile in dynamicPluginFiles)
+                foreach (var dynamicGroup in dynamicGroups)
                 {
-                    var file = new PluginFile
-                                   {
-                                       Id = dynamicPluginFile.Id,
-                                       Checksum = dynamicPluginFile.Checksum,
-                                       Path = dynamicPluginFile.Path,
-                                       Plugin = Plugins.First(x => x.Id == (Guid)dynamicPluginFile.PluginId),
-                                       QuarantinedFile = dynamicPluginFile.QuarantinedFile
-                                   };
-                    file.Plugin.PluginFiles.Remove(file);
-                    file.Plugin.PluginFiles.Add(file);
+                    var pluginGroup = new PluginGroup { Id = dynamicGroup.Id, Name = dynamicGroup.Name };
+                    var groupPlugins = new Collection<Plugin>();
 
-                    Files.Add(file);
+                    foreach (var pluginId in dynamicGroup.PluginIds)
+                    {
+                        groupPlugins.Add(new Plugin { Id = pluginId });
+                    }
 
+                    pluginGroup.Plugins = groupPlugins;
+                    Groups.Add(pluginGroup);
+                }
+            }
+        }
+
+        private void LoadUserFolders()
+        {
+            using (var reader = new StreamReader(userFoldersLocation))
+            {
+                var json = reader.ReadToEnd();
+
+                dynamic dynamicUserFolders = JArray.Parse(json);
+
+                foreach (var dynamicUserFolder in dynamicUserFolders)
+                {
+                    var userFolder = new UserFolder
+                                         {
+                                             Id = dynamicUserFolder.Id,
+                                             Alias = dynamicUserFolder.Alias,
+                                             FolderPath = dynamicUserFolder.FolderPath,
+                                             IsMainFolder = dynamicUserFolder.IsMainFolder
+                                         };
+
+                    var pluginIds = new Collection<Plugin>();
+
+                    foreach (var pluginId in dynamicUserFolder.PluginIds)
+                    {
+                        pluginIds.Add(new Plugin { Id = pluginId });
+                    }
+
+                    userFolder.Plugins = pluginIds;
+
+                    UserFolders.Add(userFolder);
                 }
             }
         }
