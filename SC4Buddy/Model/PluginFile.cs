@@ -17,6 +17,9 @@ namespace NIHEI.SC4Buddy.Model
         public Plugin Plugin { get; set; }
 
         [JsonProperty]
+        public QuarantinedFile QuarantinedFile { get; set; }
+
+        [JsonProperty]
         public Guid PluginId
         {
             get
@@ -63,7 +66,5 @@ namespace NIHEI.SC4Buddy.Model
                 return PathComparerInstance;
             }
         }
-
-        public QuarantinedFile QuarantinedFile { get; set; }
     }
 }
