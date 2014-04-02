@@ -299,11 +299,18 @@
                 return;
             }
 
+            var linkString = linkTextBox.Text.Trim();
+            Url link = null;
+            if (!string.IsNullOrWhiteSpace(linkString))
+            {
+                link = new Url(linkString);
+            }
+
             var plugin = new Plugin
                              {
                                  Name = nameTextBox.Text.Trim(),
                                  Author = authorTextBox.Text.Trim(),
-                                 Link = new Url(linkTextBox.Text.Trim()),
+                                 Link = link,
                                  PluginGroup = GetSelectedGroup(),
                                  Description = descriptionTextBox.Text.Trim(),
                                  UserFolder = userFolder

@@ -116,8 +116,11 @@
                 selectedPlugin = ((PluginListViewItem)selectedItems[0]).Plugin;
                 nameLabel.Text = selectedPlugin.Name;
                 authorLabel.Text = selectedPlugin.Author;
-                linkLabel.Text = selectedPlugin.Link.ToString();
                 descriptionRichTextBox.Text = selectedPlugin.Description;
+                if (selectedPlugin.Link != null)
+                {
+                    linkLabel.Text = selectedPlugin.Link.ToString();
+                }
 
                 uninstallButton.Enabled = true;
                 updateInfoButton.Enabled = selectedPlugin.RemotePluginId == 0;

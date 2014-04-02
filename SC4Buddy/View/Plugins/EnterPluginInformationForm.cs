@@ -36,8 +36,12 @@
                 nameTextBox.Text = plugin.Name;
                 pluginNameLabel.Text = plugin.Name;
                 authorTextBox.Text = plugin.Author;
-                linkTextBox.Text = plugin.Link.ToString();
                 descriptionTextBox.Text = plugin.Description;
+
+                if (plugin.Link != null)
+                {
+                    linkTextBox.Text = plugin.Link.ToString();
+                }
 
                 if (plugin.PluginGroup != null)
                 {
@@ -79,7 +83,12 @@
             Plugin.Name = nameTextBox.Text.Trim();
             Plugin.Author = authorTextBox.Text.Trim();
             Plugin.Description = descriptionTextBox.Text.Trim();
-            Plugin.Link = new Url(linkTextBox.Text.Trim());
+
+            if (!string.IsNullOrWhiteSpace(linkTextBox.Text))
+            {
+                Plugin.Link = new Url(linkTextBox.Text.Trim());
+            }
+
             Plugin.PluginGroup = GetOrCreateGroup();
 
             if (oldGroup != null && !oldGroup.Equals(Plugin.PluginGroup))
