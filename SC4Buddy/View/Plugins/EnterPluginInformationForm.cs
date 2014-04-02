@@ -40,7 +40,7 @@
 
                 if (plugin.Link != null)
                 {
-                    linkTextBox.Text = plugin.Link.ToString();
+                    linkTextBox.Text = plugin.Link.Value;
                 }
 
                 if (plugin.PluginGroup != null)

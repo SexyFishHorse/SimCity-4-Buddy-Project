@@ -119,7 +119,7 @@
                 descriptionRichTextBox.Text = selectedPlugin.Description;
                 if (selectedPlugin.Link != null)
                 {
-                    linkLabel.Text = selectedPlugin.Link.ToString();
+                    linkLabel.Text = selectedPlugin.Link.Value;
                 }
 
                 uninstallButton.Enabled = true;

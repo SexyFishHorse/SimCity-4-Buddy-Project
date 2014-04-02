@@ -5,6 +5,7 @@
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
+    using System.Security.Policy;
 
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -120,9 +121,14 @@
                                          Author = dynamicPlugin.Author,
                                          Description = dynamicPlugin.Description,
                                          Name = dynamicPlugin.Name,
-                                         Link = dynamicPlugin.Link,
                                          UserFolder = UserFolders.First(x => x.Id == (Guid)dynamicPlugin.UserFolderId)
                                      };
+
+                    if (dynamicPlugin.Link != null)
+                    {
+                        string link = dynamicPlugin.Link.Value;
+                        plugin.Link = new Url(link);
+                    }
 
                     if (dynamicPlugin.PluginGroupId != Guid.Empty)
                     {
