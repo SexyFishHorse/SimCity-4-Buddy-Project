@@ -79,9 +79,7 @@
             var loadEntities =
                 new Entities(
                     Path.Combine(
-                        Environment.GetFolderPath(
-                            Environment.SpecialFolder.LocalApplicationData,
-                            Environment.SpecialFolderOption.Create),
+                        AppDomain.CurrentDomain.BaseDirectory,
                         "DataStorage"));
 
             loadEntities.LoadAllEntitiesFromDisc();
