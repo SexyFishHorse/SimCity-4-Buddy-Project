@@ -12,7 +12,7 @@ namespace NIHEI.SC4Buddy.Model
 
         protected ModelBase()
         {
-            Id = Guid.Empty;
+            Id = Guid.NewGuid();
         }
 
         private bool Equals(ModelBase other)
