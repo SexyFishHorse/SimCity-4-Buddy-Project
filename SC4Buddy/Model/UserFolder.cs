@@ -26,7 +26,7 @@
         {
             get
             {
-                return Plugins != null ? Plugins.Select(x => x.Id) : new Collection<Guid>();
+                return Plugins.Select(x => x.Id);
             }
         }
 
