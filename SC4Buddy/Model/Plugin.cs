@@ -49,10 +49,6 @@
             {
                 return RemotePlugin != null ? RemotePlugin.Id : 0;
             }
-            set
-            {
-                throw new NotImplementedException();
-            }
         }
 
         [JsonProperty]

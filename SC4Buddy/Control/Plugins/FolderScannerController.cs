@@ -101,7 +101,7 @@
                                      Author = remotePlugin.Value.Author.Name,
                                      Description = remotePlugin.Value.Description,
                                      Link = new Url(remotePlugin.Value.Link),
-                                     RemotePluginId = remotePlugin.Value.Id,
+                                     RemotePlugin = remotePlugin.Value,
                                      UserFolder = userFolder
                                  };
 

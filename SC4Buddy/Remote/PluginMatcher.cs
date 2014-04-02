@@ -56,7 +56,7 @@
                 return false;
             }
 
-            plugin.RemotePluginId = remotePlugin.Id;
+            plugin.RemotePlugin = remotePlugin;
             plugin.Name = remotePlugin.Name;
             plugin.Author = remotePlugin.Author.Name;
             plugin.Link = new Url(remotePlugin.Link);
