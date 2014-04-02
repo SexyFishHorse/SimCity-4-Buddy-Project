@@ -1,7 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy
 {
     using System;
-    using System.Configuration;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
@@ -15,8 +14,8 @@
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Application;
 
@@ -32,8 +31,6 @@
             Log.Info("Application starting");
             try
             {
-                MoveDatabaseIfExists();
-
                 var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -47,7 +44,7 @@
                     SetDefaultUserFolder();
                 }
 
-                if (userFolderController.UserFolders.Any(x => x.Id == 1 && x.Path.Equals("?")))
+                if (userFolderController.UserFolders.Any(x => x.IsMainFolder && x.FolderPath.Equals("?")))
                 {
                     SetDefaultUserFolder();
                 }
@@ -87,30 +84,6 @@
             }
         }
 
-        private static void MoveDatabaseIfExists()
-        {
-            var exeFolder = Path.GetDirectoryName(Application.ExecutablePath);
-
-            var inputPath = Path.Combine(exeFolder, "Temp", "Database.sdf");
-
-            if (exeFolder == null || !File.Exists(inputPath))
-            {
-                return;
-            }
-
-            var outputLocation = Path.Combine(Path.GetDirectoryName(Application.LocalUserAppDataPath), "Entities");
-            var outputPath = Path.Combine(outputLocation, "Database.sdf");
-
-            if (File.Exists(outputPath))
-            {
-                return;
-            }
-
-            Directory.CreateDirectory(outputLocation);
-            File.Copy(inputPath, outputPath);
-            File.Delete(inputPath);
-        }
-
         private static void SetDefaultUserFolder()
         {
             var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
@@ -118,13 +91,13 @@
             var path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimCity 4");
 
-            if (!Directory.Exists(path) || userFolderController.UserFolders.Any(x => x.Path.Equals(path)))
+            if (!Directory.Exists(path) || userFolderController.UserFolders.Any(x => x.FolderPath.Equals(path)))
             {
                 return;
             }
 
             Log.Info(string.Format("Setting default user folder to {0}", path));
-            userFolderController.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, Path = path });
+            userFolderController.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, FolderPath = path });
         }
     }
 }

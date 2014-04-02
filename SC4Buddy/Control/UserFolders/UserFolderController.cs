@@ -10,7 +10,7 @@
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
 
@@ -46,7 +46,7 @@
         /// <param name="path">The path to validate.</param>
         /// <param name="currentId">The id of the object to skip when checking for uniqueness.</param>
         /// <returns>TRUE if the path complies with the above rules.</returns>
-        public bool ValidatePath(string path, long currentId = 0)
+        public bool ValidatePath(string path, Guid currentId)
         {
             if (string.IsNullOrWhiteSpace(path))
             {
@@ -59,9 +59,9 @@
             }
 
             var collision = entities.UserFolders
-                .FirstOrDefault(x => x.Path.Equals(path, StringComparison.OrdinalIgnoreCase));
+                .FirstOrDefault(x => x.FolderPath.Equals(path, StringComparison.OrdinalIgnoreCase));
 
-            if (currentId == 0)
+            if (currentId == Guid.Empty)
             {
                 return collision == null;
             }
@@ -81,7 +81,7 @@
         /// <param name="alias">The alias to validate.</param>
         /// <param name="currentId">The id of the object to skip when checking for uniqueness.</param>
         /// <returns>TRUE if the alias complies with the above rules.</returns>
-        public bool ValidateAlias(string alias, long currentId = 0)
+        public bool ValidateAlias(string alias, Guid currentId)
         {
             if (string.IsNullOrWhiteSpace(alias))
             {
@@ -91,7 +91,7 @@
             var collision = entities.UserFolders
                 .FirstOrDefault(x => x.Alias.Equals(alias, StringComparison.OrdinalIgnoreCase));
 
-            if (currentId == 0)
+            if (currentId == Guid.Empty)
             {
                 return collision == null;
             }
@@ -106,12 +106,12 @@
 
         public void Delete(UserFolder userFolder)
         {
-            entities.UserFolders.DeleteObject(userFolder);
+            entities.UserFolders.Remove(userFolder);
         }
 
         public void Add(UserFolder userFolder)
         {
-            entities.UserFolders.AddObject(userFolder);
+            entities.UserFolders.Add(userFolder);
         }
 
         public void Update(UserFolder userFolder)
@@ -136,8 +136,8 @@
 
         public void UninstallPlugin(Plugin selectedPlugin)
         {
-            var files = new PluginFile[selectedPlugin.Files.Count];
-            selectedPlugin.Files.CopyTo(files, 0);
+            var files = new PluginFile[selectedPlugin.PluginFiles.Count];
+            selectedPlugin.PluginFiles.CopyTo(files, 0);
             foreach (var file in files)
             {
                 if (File.Exists(file.Path))
@@ -172,7 +172,7 @@
 
         public static bool IsBackgroundImage(string entity, UserFolder userFolder)
         {
-            if (userFolder.Id != 1)
+            if (!userFolder.IsMainFolder)
             {
                 return false;
             }
@@ -191,14 +191,24 @@
             return pluginController.Plugins.Count(x => x.RemotePluginId > 0 && x.UserFolder.Id == userFolder.Id);
         }
 
-        public bool IsMainFolder(UserFolder userFolder)
-        {
-            return userFolder.Id == 1;
-        }
-
         public UserFolder GetMainUserFolder()
         {
-            return UserFolders.First(x => x.Id == 1);
+            var folder = UserFolders.FirstOrDefault(x => x.IsMainFolder);
+
+            if (folder == null)
+            {
+                folder = new UserFolder
+                             {
+                                 Id = Guid.NewGuid(),
+                                 Alias = "Main user folder",
+                                 IsMainFolder = true,
+                                 FolderPath = Path.Combine(Settings.Default.GameLocation, "Plugins")
+                             };
+                Add(folder);
+                SaveChanges();
+            }
+
+            return folder;
         }
     }
 }

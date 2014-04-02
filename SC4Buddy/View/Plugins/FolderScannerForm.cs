@@ -5,14 +5,15 @@
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
+    using System.Security.Policy;
     using System.Windows.Forms;
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class FolderScannerForm : Form
@@ -298,23 +299,27 @@
                 return;
             }
 
+            var linkString = linkTextBox.Text.Trim();
+            Url link = null;
+            if (!string.IsNullOrWhiteSpace(linkString))
+            {
+                link = new Url(linkString);
+            }
+
             var plugin = new Plugin
                              {
                                  Name = nameTextBox.Text.Trim(),
                                  Author = authorTextBox.Text.Trim(),
-                                 Link = linkTextBox.Text.Trim(),
-                                 Group = GetSelectedGroup(),
+                                 Link = link,
+                                 PluginGroup = GetSelectedGroup(),
                                  Description = descriptionTextBox.Text.Trim(),
                                  UserFolder = userFolder
                              };
 
-            pluginController.Add(plugin);
-
-            var group = plugin.Group;
+            var group = plugin.PluginGroup;
             if (group != null)
             {
                 group.Plugins.Add(plugin);
-                pluginGroupController.SaveChanges();
             }
 
             foreach (var pluginFile in
@@ -329,10 +334,10 @@
                                                Plugin = plugin
                                            }))
             {
-                plugin.Files.Add(pluginFile);
+                plugin.PluginFiles.Add(pluginFile);
             }
 
-            pluginController.SaveChanges();
+            pluginController.Add(plugin);
 
             ClearInfoAndSelectedFilesForms();
 
@@ -448,7 +453,7 @@
             }
             catch (Exception ex)
             {
-                
+
             }
         }
     }

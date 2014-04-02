@@ -8,7 +8,7 @@
     using System.Text;
     using System.Text.RegularExpressions;
 
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
 
     using log4net;
@@ -206,7 +206,7 @@
 
         protected string GetStringForUserDir(UserFolder selectedUserFolder)
         {
-            return string.Format("-userDir:\"{0}\\\"", selectedUserFolder.Path);
+            return string.Format("-userDir:\"{0}\\\"", selectedUserFolder.FolderPath);
         }
 
         public string GetArgumentString(UserFolder selectedUserFolder)

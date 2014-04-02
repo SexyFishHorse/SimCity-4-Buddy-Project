@@ -11,7 +11,7 @@
     using Common.UI.Elements;
     using Control.Plugins;
 
-    using Entities;
+    using NIHEI.SC4Buddy.Model;
 
     public partial class QuarantinedPluginFilesForm : Form
     {
@@ -31,17 +31,17 @@
 
         private void CancelButtonClick(object sender, EventArgs e)
         {
-            pluginFileController.RevertChanges(selectedPlugin.Files.Cast<EntityObject>().ToList());
+            pluginFileController.RevertChanges(selectedPlugin.PluginFiles.Cast<ModelBase>().ToList());
 
             Close();
         }
 
         private void QuarantinedPluginFilesFormLoad(object sender, EventArgs e)
         {
-            var enabledFiles = this.selectedPlugin.Files
+            var enabledFiles = this.selectedPlugin.PluginFiles
                 .Where(x => x.QuarantinedFile == null)
                 .ToList();
-            var disabledFiles = this.selectedPlugin.Files
+            var disabledFiles = this.selectedPlugin.PluginFiles
                 .Where(x => x.QuarantinedFile != null)
                 .ToList();
 

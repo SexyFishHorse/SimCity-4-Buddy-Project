@@ -4,14 +4,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using System.Security.Policy;
 
     using log4net;
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Remote;
 
     public class FolderScannerController
@@ -99,15 +100,15 @@
                                  {
                                      Author = remotePlugin.Value.Author.Name,
                                      Description = remotePlugin.Value.Description,
-                                     Link = remotePlugin.Value.Link,
-                                     RemotePluginId = remotePlugin.Value.Id,
+                                     Link = new Url(remotePlugin.Value.Link),
+                                     RemotePlugin = remotePlugin.Value,
                                      UserFolder = userFolder
                                  };
 
-                    plugins.Add(plugin.Link, plugin);
+                    plugins.Add(plugin.Link.ToString(), plugin);
                 }
 
-                plugin.Files.Add(pluginFile);
+                plugin.PluginFiles.Add(pluginFile);
 
                 allNewFiles.Remove(remotePlugin.Key);
             }

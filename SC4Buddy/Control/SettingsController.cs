@@ -61,13 +61,13 @@
         {
             Log.Info("Updating main folder");
 
-            var folder = userFolderController.UserFolders.FirstOrDefault(x => x.Id == 1);
+            var folder = userFolderController.GetMainUserFolder();
             if (folder == null)
             {
                 throw new InvalidOperationException("Main plugin folder has been deleted from the database.");
             }
 
-            folder.Path = Settings.Default.GameLocation;
+            folder.FolderPath = Settings.Default.GameLocation;
             folder.Alias = LocalizationStrings.GameUserFolderName;
             userFolderController.Update(folder);
         }

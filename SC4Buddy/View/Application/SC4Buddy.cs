@@ -15,8 +15,8 @@
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.UserFolders;
@@ -88,7 +88,7 @@
             var insertIndex = 0;
             foreach (var userFolder in userFolderController.UserFolders)
             {
-                if (userFolder.Id != 1)
+                if (!userFolder.IsMainFolder)
                 {
                     userFolderComboBox.Items.Add(new ComboBoxItem<UserFolder>(userFolder.Alias, userFolder));
                 }
@@ -243,7 +243,7 @@
 
             var file = string.Format("log-{0}.txt", DateTime.Now.ToString("yyyy-MM-dd"));
 
-            Process.Start(Path.Combine(path, file));
+            Process.Start(Path.Combine(path, "Logs", file));
         }
     }
 }

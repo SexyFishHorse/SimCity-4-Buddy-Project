@@ -3,7 +3,7 @@
     using System;
     using System.Windows.Forms;
 
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
 
     public class UserFolderToolStripMenuItem : ToolStripMenuItem
     {

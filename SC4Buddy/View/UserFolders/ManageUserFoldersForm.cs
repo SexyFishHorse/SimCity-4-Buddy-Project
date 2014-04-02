@@ -8,8 +8,8 @@
 
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class ManageUserFoldersForm : Form
@@ -37,7 +37,7 @@
 
         private void ReloadUserFoldersListView()
         {
-            var userFolders = controller.UserFolders.Where(x => x.Id != 1);
+            var userFolders = controller.UserFolders.Where(x => !x.IsMainFolder);
 
             UserFoldersListView.BeginUpdate();
             UserFoldersListView.Items.Clear();
@@ -69,7 +69,7 @@
             {
                 SelectedFolder = ((UserFolderListViewItem)UserFoldersListView.SelectedItems[0]).UserFolder;
 
-                pathTextBox.Text = SelectedFolder.Path;
+                pathTextBox.Text = SelectedFolder.FolderPath;
                 aliasTextBox.Text = SelectedFolder.Alias;
                 updateButton.Enabled = true;
                 removeButton.Enabled = true;
@@ -149,11 +149,11 @@
 
         private void AddButtonClick(object sender, EventArgs e)
         {
-            var newFolder = new UserFolder { Path = pathTextBox.Text, Alias = aliasTextBox.Text };
+            var newFolder = new UserFolder { FolderPath = pathTextBox.Text, Alias = aliasTextBox.Text };
             var hasErrors = false;
 
-            var pathOk = !controller.ValidatePath(newFolder.Path);
-            var notMainFolder = !controller.IsNotGameFolder(newFolder.Path);
+            var pathOk = !controller.ValidatePath(newFolder.FolderPath, Guid.NewGuid());
+            var notMainFolder = !controller.IsNotGameFolder(newFolder.FolderPath);
 
             if (pathOk || notMainFolder)
             {
@@ -162,7 +162,7 @@
                 errorProvider.SetError(pathTextBox, LocalizationStrings.PathError);
             }
 
-            if (!controller.ValidateAlias(newFolder.Alias))
+            if (!controller.ValidateAlias(newFolder.Alias, Guid.Empty))
             {
                 hasErrors = true;
                 errorProvider.SetIconPadding(aliasTextBox, ErrorIconPadding);
@@ -209,7 +209,7 @@
                 return;
             }
 
-            SelectedFolder.Path = pathTextBox.Text;
+            SelectedFolder.FolderPath = pathTextBox.Text;
             SelectedFolder.Alias = aliasTextBox.Text;
 
             controller.Update(SelectedFolder);

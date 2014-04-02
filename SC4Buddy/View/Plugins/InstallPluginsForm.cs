@@ -15,10 +15,10 @@
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Installer;
     using NIHEI.SC4Buddy.Installer.InstallerEventArgs;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Helpers;
@@ -144,7 +144,7 @@
         {
             var messageString = string.Format(
                 LocalizationStrings.DoYouWantToRunTheNamExecutable,
-                new object[] { executable.Name, Path.Combine(userFolder.Path, "Plugins") });
+                new object[] { executable.Name, Path.Combine(userFolder.FolderPath, "Plugins") });
 
             return MessageBox.Show(
                 this,

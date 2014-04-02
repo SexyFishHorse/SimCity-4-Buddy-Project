@@ -14,8 +14,8 @@
     using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Elements;
@@ -44,21 +44,21 @@
             this.pluginController = pluginController;
             this.userFolderController = userFolderController;
 
-            if (!Directory.Exists(userFolder.Path))
+            if (!Directory.Exists(userFolder.FolderPath))
             {
-                if (userFolder.Id == 1)
+                if (userFolder.IsMainFolder)
                 {
                     if (userFolder.Alias.Equals("?"))
                     {
                         userFolder.Alias = LocalizationStrings.GameUserFolderName;
                     }
 
-                    userFolder.Path = Settings.Default.GameLocation;
+                    userFolder.FolderPath = Settings.Default.GameLocation;
                     userFolderController.Update(userFolder);
                 }
                 else
                 {
-                    throw new DirectoryNotFoundException("The plugin folder does not exist.");
+                    throw new DirectoryNotFoundException("The plugin folder does not exist or you don't have access to one or more of the folders in the path.");
                 }
             }
 
@@ -90,7 +90,7 @@
 
             foreach (var pluginGroup in pluginGroupController.Groups.Where(x => x.Plugins.Any()))
             {
-                installedPluginsListView.Groups.Add(pluginGroup.Id.ToString(CultureInfo.InvariantCulture), pluginGroup.Name);
+                installedPluginsListView.Groups.Add(pluginGroup.Id.ToString(), pluginGroup.Name);
             }
 
             foreach (var plugin in
@@ -116,12 +116,19 @@
                 selectedPlugin = ((PluginListViewItem)selectedItems[0]).Plugin;
                 nameLabel.Text = selectedPlugin.Name;
                 authorLabel.Text = selectedPlugin.Author;
-                linkLabel.Text = selectedPlugin.Link;
                 descriptionRichTextBox.Text = selectedPlugin.Description;
+                if (selectedPlugin.Link != null)
+                {
+                    linkLabel.Text = selectedPlugin.Link.Value;
+                }
+                else
+                {
+                    linkLabel.Text = string.Empty;
+                }
 
                 uninstallButton.Enabled = true;
-                updateInfoButton.Enabled = selectedPlugin.RemotePluginId == null;
-                reportPluginLinkLabel.Visible = selectedPlugin.RemotePluginId != null;
+                updateInfoButton.Enabled = selectedPlugin.RemotePluginId == 0;
+                reportPluginLinkLabel.Visible = selectedPlugin.RemotePluginId != 0;
                 moveOrCopyButton.Enabled = true;
                 disableFilesButton.Enabled = true;
 
@@ -201,7 +208,7 @@
 
         private void LinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(selectedPlugin.Link);
+            Process.Start(selectedPlugin.Link.ToString());
         }
 
         private void UpdateInfoButtonClick(object sender, EventArgs e)

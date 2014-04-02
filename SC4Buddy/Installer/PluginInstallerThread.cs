@@ -9,10 +9,10 @@
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Installer.FileHandlers;
     using NIHEI.SC4Buddy.Installer.InstallerEventArgs;
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Plugins;
 
@@ -179,7 +179,7 @@
             foreach (var installedFile in installedFiles.Distinct(new PluginFileComparer()))
             {
                 installedFile.Plugin = plugin;
-                plugin.Files.Add(installedFile);
+                plugin.PluginFiles.Add(installedFile);
 
                 var existingPlugin =
                     pluginFileController.Files.FirstOrDefault(
@@ -192,9 +192,9 @@
 
             var numDeleted = pluginController.RemoveEmptyPlugins();
 
-            if (plugin.Id <= 0 && numDeleted <= 0)
+            if (plugin.Id == Guid.Empty && numDeleted <= 0)
             {
-                this.pluginController.Add(plugin, false);
+                pluginController.Add(plugin, false);
             }
 
             pluginController.SaveChanges();

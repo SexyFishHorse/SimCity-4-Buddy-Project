@@ -4,11 +4,12 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Security.Policy;
 
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.Remote;
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Entities.Remote;
+    using NIHEI.SC4Buddy.Model;
 
     public class PluginMatcher
     {
@@ -49,16 +50,16 @@
 
         public bool MatchAndUpdate(Plugin plugin)
         {
-            var remotePlugin = GetMostLikelyRemotePlugin(plugin.Files.ToList());
+            var remotePlugin = GetMostLikelyRemotePlugin(plugin.PluginFiles.ToList());
             if (remotePlugin == null)
             {
                 return false;
             }
 
-            plugin.RemotePluginId = remotePlugin.Id;
+            plugin.RemotePlugin = remotePlugin;
             plugin.Name = remotePlugin.Name;
             plugin.Author = remotePlugin.Author.Name;
-            plugin.Link = remotePlugin.Link;
+            plugin.Link = new Url(remotePlugin.Link);
             plugin.Description = remotePlugin.Description;
 
             pluginController.SaveChanges();

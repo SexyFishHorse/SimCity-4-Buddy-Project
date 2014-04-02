@@ -1,9 +1,9 @@
 ﻿namespace NIHEI.SC4Buddy.Control.Plugins
 {
-    using System.Data.Objects;
+    using System.Collections.Generic;
 
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
 
     public class PluginGroupController
     {
@@ -14,7 +14,7 @@
             this.entities = entities;
         }
 
-        public IObjectSet<PluginGroup> Groups
+        public ICollection<PluginGroup> Groups
         {
             get
             {
@@ -24,7 +24,7 @@
 
         public void Delete(PluginGroup pluginGroup)
         {
-            Groups.DeleteObject(pluginGroup);
+            Groups.Remove(pluginGroup);
             SaveChanges();
         }
 
@@ -35,7 +35,7 @@
 
         public void Add(PluginGroup pluginGroup)
         {
-            entities.Groups.AddObject(pluginGroup);
+            entities.Groups.Add(pluginGroup);
             SaveChanges();
         }
     }

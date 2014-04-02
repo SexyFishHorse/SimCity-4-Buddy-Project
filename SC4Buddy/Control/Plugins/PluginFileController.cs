@@ -2,13 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
     using System.IO;
     using System.Linq;
 
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
 
     public class PluginFileController
@@ -20,7 +18,7 @@
             this.entities = entities;
         }
 
-        public IObjectSet<PluginFile> Files
+        public IEnumerable<PluginFile> Files
         {
             get
             {
@@ -30,7 +28,7 @@
 
         public void Delete(PluginFile file, bool save = true)
         {
-            entities.Files.DeleteObject(file);
+            entities.Files.Remove(file);
             if (save)
             {
                 SaveChanges();
@@ -55,7 +53,7 @@
             SaveChanges();
         }
 
-        public void RevertChanges(IEnumerable<EntityObject> files)
+        public void RevertChanges(IEnumerable<ModelBase> files)
         {
             entities.RevertChanges(files);
         }
@@ -69,7 +67,7 @@
                 File.Copy(file.Path, newPath);
                 File.Delete(file.Path);
 
-                file.QuarantinedFile = new QuarantinedFile { File = file, QuarantinedPath = newPath };
+                file.QuarantinedFile = new QuarantinedFile { PluginFile = file, QuarantinedPath = newPath };
             }
         }
 

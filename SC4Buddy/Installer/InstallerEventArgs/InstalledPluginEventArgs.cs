@@ -2,7 +2,7 @@
 {
     using System.IO;
 
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
 
     public class InstalledPluginEventArgs : InstallPluginEventArgs
     {

@@ -2,10 +2,11 @@
 {
     using System;
     using System.Linq;
+    using System.Security.Policy;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Entities;
+    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class EnterPluginInformationForm : Form
@@ -35,18 +36,22 @@
                 nameTextBox.Text = plugin.Name;
                 pluginNameLabel.Text = plugin.Name;
                 authorTextBox.Text = plugin.Author;
-                linkTextBox.Text = plugin.Link;
                 descriptionTextBox.Text = plugin.Description;
 
-                if (plugin.Group != null)
+                if (plugin.Link != null)
                 {
-                    groupComboBox.Text = plugin.Group.Name;
+                    linkTextBox.Text = plugin.Link.Value;
+                }
+
+                if (plugin.PluginGroup != null)
+                {
+                    groupComboBox.Text = plugin.PluginGroup.Name;
                 }
 
                 installedFilesListView.BeginUpdate();
 
                 installedFilesListView.Items.Clear();
-                foreach (var relativePath in value.Files
+                foreach (var relativePath in value.PluginFiles
                     .Where(x => x.QuarantinedFile == null)
                     .Select(file => file.Path.Substring(plugin.UserFolder.PluginFolderPath.Length + 1)))
                 {
@@ -74,22 +79,27 @@
 
         private void OkButtonClick(object sender, EventArgs e)
         {
-            var oldGroup = plugin.Group;
+            var oldGroup = plugin.PluginGroup;
             Plugin.Name = nameTextBox.Text.Trim();
             Plugin.Author = authorTextBox.Text.Trim();
             Plugin.Description = descriptionTextBox.Text.Trim();
-            Plugin.Link = linkTextBox.Text.Trim();
-            Plugin.Group = GetOrCreateGroup();
 
-            if (oldGroup != null && !oldGroup.Equals(Plugin.Group))
+            if (!string.IsNullOrWhiteSpace(linkTextBox.Text))
+            {
+                Plugin.Link = new Url(linkTextBox.Text.Trim());
+            }
+
+            Plugin.PluginGroup = GetOrCreateGroup();
+
+            if (oldGroup != null && !oldGroup.Equals(Plugin.PluginGroup))
             {
                 oldGroup.Plugins.Remove(plugin);
                 pluginGroupController.SaveChanges();
             }
 
-            if (plugin.Group != null)
+            if (plugin.PluginGroup != null)
             {
-                plugin.Group.Plugins.Add(plugin);
+                plugin.PluginGroup.Plugins.Add(plugin);
                 pluginGroupController.SaveChanges();
             }
 

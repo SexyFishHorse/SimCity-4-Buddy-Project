@@ -4,16 +4,11 @@
     using System.Configuration;
     using System.Data.EntityClient;
     using System.IO;
-    using System.Windows.Forms;
 
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Entities.Remote;
 
     public class EntityFactory
     {
-        private const string LocalConnectionString =
-            @"metadata=res://*/DatabaseEntities.csdl|res://*/DatabaseEntities.ssdl|res://*/DatabaseEntities.msl;provider=System.Data.SqlServerCe.4.0;provider connection string='data source={0}\Database.sdf'";
-
         private static EntityFactory instance;
 
         private Entities entities;
@@ -39,12 +34,7 @@
         {
             get
             {
-                if (entities == null || entities.Disposed)
-                {
-                    entities = CreateEntities();
-                }
-
-                return entities;
+                return entities ?? (entities = CreateEntities());
             }
             private set
             {
@@ -86,20 +76,15 @@
 
         private Entities CreateEntities()
         {
-            var appDataPath = Path.GetDirectoryName(Application.LocalUserAppDataPath);
+            var loadEntities =
+                new Entities(
+                    Path.Combine(
+                        AppDomain.CurrentDomain.BaseDirectory,
+                        "DataStorage"));
 
-            if (appDataPath == null || string.IsNullOrWhiteSpace(appDataPath))
-            {
-                throw new InvalidOperationException("Unable to locate local user app data path.");
-            }
+            loadEntities.LoadAllEntitiesFromDisc();
 
-            var outputLocation = Path.Combine(appDataPath, "Entities");
-
-            var connectionString = string.Format(LocalConnectionString, outputLocation);
-
-            var databaseEntities = new DatabaseEntities(connectionString);
-
-            return new Entities(databaseEntities);
+            return loadEntities;
         }
     }
 }
