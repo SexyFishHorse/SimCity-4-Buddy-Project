@@ -121,6 +121,10 @@
                 {
                     linkLabel.Text = selectedPlugin.Link.Value;
                 }
+                else
+                {
+                    linkLabel.Text = string.Empty;
+                }
 
                 uninstallButton.Enabled = true;
                 updateInfoButton.Enabled = selectedPlugin.RemotePluginId == 0;
