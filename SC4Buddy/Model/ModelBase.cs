@@ -15,7 +15,7 @@ namespace NIHEI.SC4Buddy.Model
             Id = Guid.NewGuid();
         }
 
-        private bool Equals(ModelBase other)
+        protected bool Equals(ModelBase other)
         {
             return Id.Equals(other.Id);
         }
@@ -26,17 +26,12 @@ namespace NIHEI.SC4Buddy.Model
             {
                 return false;
             }
-
             if (ReferenceEquals(this, obj))
             {
                 return true;
             }
-
-            if (obj.GetType() != GetType())
-            {
-                return false;
-            }
-            return Equals((ModelBase)obj);
+            var other = obj as ModelBase;
+            return other != null && Equals(other);
         }
 
         public override int GetHashCode()
