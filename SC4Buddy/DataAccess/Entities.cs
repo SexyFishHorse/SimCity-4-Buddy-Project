@@ -94,9 +94,20 @@
                                        Id = dynamicPluginFile.Id,
                                        Checksum = dynamicPluginFile.Checksum,
                                        Path = dynamicPluginFile.Path,
-                                       Plugin = Plugins.First(x => x.Id == (Guid)dynamicPluginFile.PluginId),
-                                       QuarantinedFile = dynamicPluginFile.QuarantinedFile
+                                       Plugin = Plugins.First(x => x.Id == (Guid)dynamicPluginFile.PluginId)
                                    };
+
+                    if (dynamicPluginFile.QuarantinedFile != null)
+                    {
+                        var quarantinedFile = new QuarantinedFile
+                                                  {
+                                                      Id = dynamicPluginFile.QuarantinedFile.Id,
+                                                      PluginFile = file,
+                                                      QuarantinedPath = dynamicPluginFile.QuarantinedFile.QuarantinedPath
+                                                  };
+                        file.QuarantinedFile = quarantinedFile;
+                    }
+
                     file.Plugin.PluginFiles.Remove(file);
                     file.Plugin.PluginFiles.Add(file);
 
