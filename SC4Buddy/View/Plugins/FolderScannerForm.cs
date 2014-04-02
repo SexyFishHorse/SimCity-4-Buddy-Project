@@ -316,13 +316,10 @@
                                  UserFolder = userFolder
                              };
 
-            pluginController.Add(plugin);
-
             var group = plugin.PluginGroup;
             if (group != null)
             {
                 group.Plugins.Add(plugin);
-                pluginGroupController.SaveChanges();
             }
 
             foreach (var pluginFile in
@@ -340,7 +337,7 @@
                 plugin.PluginFiles.Add(pluginFile);
             }
 
-            pluginController.SaveChanges();
+            pluginController.Add(plugin);
 
             ClearInfoAndSelectedFilesForms();
 
