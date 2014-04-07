@@ -1,11 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
     using System;
-    using System.Configuration;
-    using System.Data.EntityClient;
     using System.IO;
-
-    using NIHEI.SC4Buddy.Entities.Remote;
 
     public class EntityFactory
     {
@@ -61,17 +57,7 @@
 
         private RemoteEntities CreateRemoteEntities()
         {
-            var originalConnectionString = ConfigurationManager.ConnectionStrings["RemoteDatabaseEntities"].ConnectionString;
-
-            var entityBuilder = new EntityConnectionStringBuilder(originalConnectionString);
-            var providerConnectionString = entityBuilder.ProviderConnectionString;
-            providerConnectionString += ";password=_VslefXPl5Tg8pBcSYzI";
-
-            entityBuilder.ProviderConnectionString = providerConnectionString;
-
-            var databaseEntities = new RemoteDatabaseEntities(entityBuilder.ConnectionString);
-
-            return new RemoteEntities(databaseEntities);
+            return new RemoteEntities();
         }
 
         private Entities CreateEntities()
