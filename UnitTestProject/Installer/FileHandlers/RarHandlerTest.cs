@@ -4,7 +4,6 @@
     using System.IO;
     using System.Linq;
 
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Model;
 
     using Should;
@@ -15,7 +14,8 @@
     {
         #region Strings
 
-        private const string PathToTestMaterial = @"D:\users\asbjorn\SkyDrive\Code\Projects\SC4Buddy\TEST";
+        //private const string PathToTestMaterial = @"D:\users\asbjorn\SkyDrive\Code\Projects\SC4Buddy\TEST";
+        private const string PathToTestMaterial = @"C:\users\asbjorn\git\sc4buddy\TEST";
 
         private const int ExpectedNumberOfFiles = 2;
 

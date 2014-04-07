@@ -13,7 +13,8 @@
 
     public class DatHandlerTest
     {
-        private const string PathToTestMaterial = @"D:\users\asbjorn\SkyDrive\Code\Projects\SC4Buddy\TEST";
+        //private const string PathToTestMaterial = @"D:\users\asbjorn\SkyDrive\Code\Projects\SC4Buddy\TEST"; 
+        private const string PathToTestMaterial = @"C:\users\asbjorn\git\sc4buddy\TEST";
 
         private readonly string archivePath = Path.Combine(PathToTestMaterial, @"dat\file.dat");
 
@@ -41,7 +42,7 @@
         }
 
         [Fact(DisplayName = "ExtractFilesToTemp(), Valid datfile, Files moved to temp folder")]
-        public void ExtractFilesTioTempTest2()
+        public void ExtractFilesToTempTest2()
         {
             var instance = new DatHandler
                                {

@@ -35,6 +35,11 @@
                     throw new FileNotFoundException("FileInfo does not point to an existing file.");
                 }
 
+                if (RequiredExtension != "*" && value.Extension != RequiredExtension)
+                {
+                    throw new ArgumentException(string.Format("FileInfo must point to a {0} file.", RequiredExtension));
+                }
+
                 fileInfo = value;
             }
         }
