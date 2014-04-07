@@ -2,7 +2,7 @@
 {
     using System;
 
-    public partial class User
+    public class User
     {
         public bool IsDeveloper
         {
@@ -19,5 +19,13 @@
                 return Rights.Equals("Author", StringComparison.OrdinalIgnoreCase);
             }
         }
+
+        public string Email { get; set; }
+
+        public string Salt { get; set; }
+
+        public byte[] Passphrase { get; set; }
+
+        public string Rights { get; set; }
     }
 }

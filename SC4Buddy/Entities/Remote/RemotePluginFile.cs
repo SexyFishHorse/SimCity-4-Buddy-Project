@@ -1,6 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.Entities.Remote
 {
-    public partial class RemotePluginFile
+    public class RemotePluginFile
     {
         public override bool Equals(object obj)
         {
@@ -25,6 +25,12 @@
                        ^ (Checksum != null ? Checksum.GetHashCode() : 0);
             }
         }
+
+        public string Checksum { get; set; }
+
+        public string Name { get; set; }
+
+        public RemotePlugin Plugin { get; set; }
 
         private bool Equals(RemotePluginFile other)
         {

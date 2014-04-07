@@ -126,6 +126,9 @@
     <Compile Include="DataAccess\IEntities.cs" />
     <Compile Include="DataAccess\IRemoteEntities.cs" />
     <Compile Include="DataAccess\RemoteEntities.cs" />
+    <Compile Include="Entities\Remote\Author.cs" />
+    <Compile Include="Entities\Remote\PluginReport.cs" />
+    <Compile Include="Entities\Remote\RemotePlugin.cs" />
     <Compile Include="Entities\Remote\RemotePluginFile.cs" />
     <Compile Include="Entities\Remote\User.cs" />
     <Compile Include="Installer\FileHandlers\ArchiveHandler.cs" />
