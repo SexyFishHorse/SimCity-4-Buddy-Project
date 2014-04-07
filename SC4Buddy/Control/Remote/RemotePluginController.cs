@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Objects;
     using System.Linq;
 
     using NIHEI.SC4Buddy.DataAccess;
@@ -17,7 +16,7 @@
             this.entities = entities;
         }
 
-        public IObjectSet<RemotePlugin> Plugins
+        public IEnumerable<RemotePlugin> Plugins
         {
             get
             {
@@ -27,7 +26,7 @@
 
         public void Add(RemotePlugin remotePlugin)
         {
-            entities.Plugins.AddObject(remotePlugin);
+            entities.Plugins.Add(remotePlugin);
             SaveChanges();
         }
 
@@ -42,10 +41,10 @@
 
             foreach (var file in files)
             {
-                entities.PluginFiles.DeleteObject(file);
+                entities.PluginFiles.Remove(file);
             }
 
-            entities.Plugins.DeleteObject(item);
+            entities.Plugins.Remove(item);
         }
 
         public void RevertChanges(RemotePlugin remotePlugin)

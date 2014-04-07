@@ -1,7 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.Remote
 {
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Linq;
 
     using NIHEI.SC4Buddy.Control.Remote;
@@ -63,7 +62,7 @@
 
             foreach (var knownPlugin in knownPlugins)
             {
-                foreach (var remotePlugin in remotePluginController.Plugins.Include("Author"))
+                foreach (var remotePlugin in remotePluginController.Plugins)
                 {
                     if (remotePlugin.Id == knownPlugin.RemotePluginId)
                     {
@@ -87,7 +86,7 @@
 
             foreach (var knownPlugin in knownPlugins)
             {
-                foreach (var remotePlugin in remotePluginController.Plugins.Include("Author"))
+                foreach (var remotePlugin in remotePluginController.Plugins)
                 {
                     if (remotePlugin.Id == knownPlugin.RemotePluginId)
                     {

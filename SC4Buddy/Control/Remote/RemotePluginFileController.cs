@@ -1,6 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.Control.Remote
 {
-    using System.Data.Objects;
+    using System.Collections.Generic;
 
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Entities.Remote;
@@ -14,7 +14,7 @@
             this.entities = entities;
         }
 
-        public IObjectSet<RemotePluginFile> Files
+        public ICollection<RemotePluginFile> Files
         {
             get
             {
@@ -24,7 +24,7 @@
 
         public void Add(RemotePluginFile remoteFile)
         {
-            Files.AddObject(remoteFile);
+            Files.Add(remoteFile);
             SaveChanges();
         }
 
