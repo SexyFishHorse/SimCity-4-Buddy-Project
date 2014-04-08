@@ -57,9 +57,9 @@
             return File.Exists(Path.Combine(path, @"Apps\SimCity 4.exe"));
         }
 
-        public void UpdateMainFolder()
+        public void CheckMainFolder()
         {
-            Log.Info("Updating main folder");
+            Log.Info("Checking main folder");
 
             var folder = userFolderController.GetMainUserFolder();
             if (folder == null)
