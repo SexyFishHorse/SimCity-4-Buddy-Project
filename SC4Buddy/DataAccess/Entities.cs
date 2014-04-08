@@ -16,26 +16,16 @@
     public class Entities : IEntities
     {
         private const string PluginsFilename = "Plugins.json";
-        private readonly string pluginsLocation;
 
         private const string PluginFilesFilename = "PluginFiles.json";
-        private readonly string pluginFilesLocation;
 
         private const string PluginGroupsFilename = "PluginGroups.json";
-        private readonly string groupsLocation;
-
-        private readonly string userFoldersLocation;
 
         private const string UserFoldersFilename = "UserFolders.json";
 
         public Entities(string storageLocation)
         {
             StorageLocation = storageLocation;
-
-            pluginsLocation = Path.Combine(StorageLocation, "Plugins.json");
-            pluginFilesLocation = Path.Combine(StorageLocation, "PluginFiles.json");
-            groupsLocation = Path.Combine(StorageLocation, "PluginGroups.json");
-            userFoldersLocation = Path.Combine(StorageLocation, "UserFolders.json");
         }
 
         public ICollection<Plugin> Plugins { get; private set; }
@@ -82,10 +72,10 @@
 
         public void SaveChanges()
         {
-            StoreDataInFile(Plugins, pluginsLocation);
-            StoreDataInFile(Files, pluginFilesLocation);
-            StoreDataInFile(UserFolders, userFoldersLocation);
-            StoreDataInFile(Groups, groupsLocation);
+            StoreDataInFile(Plugins, PluginsLocation);
+            StoreDataInFile(Files, PluginFilesLocation);
+            StoreDataInFile(UserFolders, UserFoldersLocation);
+            StoreDataInFile(Groups, GroupsLocation);
         }
 
         public void RevertChanges(ModelBase entityObject)
@@ -107,18 +97,16 @@
             Plugins = new Collection<Plugin>();
             Files = new Collection<PluginFile>();
 
-            LoadUserFolders();
-
-            LoadPluginGroups();
-
-            LoadPlugins();
-
-            LoadPluginFiles();
+            LoadUserFolders(UserFoldersLocation);
+            LoadPluginGroups(PluginGroupsFilename);
+            LoadPlugins(PluginsFilename);
+            LoadPluginFiles(PluginFilesFilename);
         }
 
-        private void LoadPluginFiles()
+        private void LoadPluginFiles(string fileLocation)
         {
-            using (var reader = new StreamReader(pluginFilesLocation))
+
+            using (var reader = new StreamReader(fileLocation))
             {
                 var json = reader.ReadToEnd();
 
@@ -153,9 +141,9 @@
             }
         }
 
-        private void LoadPlugins()
+        private void LoadPlugins(string fileLocation)
         {
-            using (var reader = new StreamReader(pluginsLocation))
+            using (var reader = new StreamReader(fileLocation))
             {
                 var json = reader.ReadToEnd();
 
@@ -211,9 +199,9 @@
             }
         }
 
-        private void LoadPluginGroups()
+        private void LoadPluginGroups(string fileLocation)
         {
-            using (var reader = new StreamReader(groupsLocation))
+            using (var reader = new StreamReader(fileLocation))
             {
                 var json = reader.ReadToEnd();
 
@@ -235,9 +223,9 @@
             }
         }
 
-        private void LoadUserFolders()
+        private void LoadUserFolders(string fileLocation)
         {
-            using (var reader = new StreamReader(userFoldersLocation))
+            using (var reader = new StreamReader(fileLocation))
             {
                 var json = reader.ReadToEnd();
 
