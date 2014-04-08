@@ -15,14 +15,18 @@
 
     public class Entities : IEntities
     {
+        private const string PluginsFilename = "Plugins.json";
         private readonly string pluginsLocation;
 
+        private const string PluginFilesFilename = "PluginFiles.json";
         private readonly string pluginFilesLocation;
 
+        private const string PluginGroupsFilename = "PluginGroups.json";
         private readonly string groupsLocation;
 
         private readonly string userFoldersLocation;
 
+        private const string UserFoldersFilename = "UserFolders.json";
 
         public Entities(string storageLocation)
         {
@@ -45,6 +49,37 @@
         private string StorageLocation { get; set; }
 
         private string PluginsLocation
+        {
+            get
+            {
+                return Path.Combine(StorageLocation, PluginsFilename);
+            }
+        }
+
+        private string PluginFilesLocation
+        {
+            get
+            {
+                return Path.Combine(StorageLocation, PluginFilesFilename);
+            }
+        }
+
+        private string GroupsLocation
+        {
+            get
+            {
+                return Path.Combine(StorageLocation, PluginGroupsFilename);
+            }
+        }
+
+        private string UserFoldersLocation
+        {
+            get
+            {
+                return Path.Combine(StorageLocation, UserFoldersFilename);
+            }
+        }
+
         public void SaveChanges()
         {
             StoreDataInFile(Plugins, pluginsLocation);
