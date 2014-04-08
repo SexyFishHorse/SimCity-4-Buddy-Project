@@ -54,7 +54,7 @@
             }
         }
 
-        private string GroupsLocation
+        private string PluginGroupsLocation
         {
             get
             {
@@ -75,7 +75,7 @@
             StoreDataInFile(Plugins, PluginsLocation);
             StoreDataInFile(Files, PluginFilesLocation);
             StoreDataInFile(UserFolders, UserFoldersLocation);
-            StoreDataInFile(Groups, GroupsLocation);
+            StoreDataInFile(Groups, PluginGroupsLocation);
         }
 
         public void RevertChanges(ModelBase entityObject)
@@ -98,9 +98,9 @@
             Files = new Collection<PluginFile>();
 
             LoadUserFolders(UserFoldersLocation);
-            LoadPluginGroups(PluginGroupsFilename);
-            LoadPlugins(PluginsFilename);
-            LoadPluginFiles(PluginFilesFilename);
+            LoadPluginGroups(PluginGroupsLocation);
+            LoadPlugins(PluginsLocation);
+            LoadPluginFiles(PluginFilesLocation);
         }
 
         private static void StoreDataInFile(IEnumerable<ModelBase> data, string dataLocation)
