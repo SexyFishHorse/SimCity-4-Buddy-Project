@@ -23,7 +23,6 @@
 
         private readonly string userFoldersLocation;
 
-        private string StorageLocation { get; set; }
 
         public Entities(string storageLocation)
         {
@@ -43,6 +42,9 @@
 
         public ICollection<PluginGroup> Groups { get; private set; }
 
+        private string StorageLocation { get; set; }
+
+        private string PluginsLocation
         public void SaveChanges()
         {
             StoreDataInFile(Plugins, pluginsLocation);
