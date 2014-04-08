@@ -86,14 +86,13 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.allowCheckMissingDependenciesCheckBox = new System.Windows.Forms.CheckBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
             this.RemoveNonPluginFilesAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
             this.AutoRunInstallerExecutablesCheckBox = new System.Windows.Forms.CheckBox();
             this.AskForAdditionalInfoAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.storeLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.label9 = new System.Windows.Forms.Label();
+            this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -519,7 +518,6 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.label9);
             this.tabPage4.Controls.Add(this.allowCheckMissingDependenciesCheckBox);
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
@@ -529,6 +527,7 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             resources.ApplyResources(this.allowCheckMissingDependenciesCheckBox, "allowCheckMissingDependenciesCheckBox");
             this.allowCheckMissingDependenciesCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.AllowDependencyCheck;
+            this.allowCheckMissingDependenciesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.allowCheckMissingDependenciesCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "AllowDependencyCheck", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.allowCheckMissingDependenciesCheckBox.Name = "allowCheckMissingDependenciesCheckBox";
             this.allowCheckMissingDependenciesCheckBox.UseVisualStyleBackColor = true;
@@ -542,15 +541,6 @@ namespace NIHEI.SC4Buddy.View.Application
             resources.ApplyResources(this.tabPage5, "tabPage5");
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // fetchInformationFromRemoteCheckbox
-            // 
-            resources.ApplyResources(this.fetchInformationFromRemoteCheckbox, "fetchInformationFromRemoteCheckbox");
-            this.fetchInformationFromRemoteCheckbox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.FetchInfoFromRemote;
-            this.fetchInformationFromRemoteCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fetchInformationFromRemoteCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "FetchInfoFromRemote", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.fetchInformationFromRemoteCheckbox.Name = "fetchInformationFromRemoteCheckbox";
-            this.fetchInformationFromRemoteCheckbox.UseVisualStyleBackColor = true;
             // 
             // RemoveNonPluginFilesAfterInstallCheckBox
             // 
@@ -587,10 +577,14 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             resources.ApplyResources(this.storeLocationDialog, "storeLocationDialog");
             // 
-            // label9
+            // fetchInformationFromRemoteCheckbox
             // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
+            resources.ApplyResources(this.fetchInformationFromRemoteCheckbox, "fetchInformationFromRemoteCheckbox");
+            this.fetchInformationFromRemoteCheckbox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.FetchInfoFromRemote;
+            this.fetchInformationFromRemoteCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.fetchInformationFromRemoteCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "FetchInfoFromRemote", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.fetchInformationFromRemoteCheckbox.Name = "fetchInformationFromRemoteCheckbox";
+            this.fetchInformationFromRemoteCheckbox.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -694,6 +688,5 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.TrackBar autoSaveIntervalTrackBar;
         private System.Windows.Forms.CheckBox enableAutoSaveButton;
         private System.Windows.Forms.CheckBox fetchInformationFromRemoteCheckbox;
-        private System.Windows.Forms.Label label9;
     }
 }

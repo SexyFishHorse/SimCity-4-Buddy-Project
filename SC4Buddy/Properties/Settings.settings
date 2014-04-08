@@ -78,7 +78,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="AllowDependencyCheck" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="InstallerAskToRemoveNonPluginFiles" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
