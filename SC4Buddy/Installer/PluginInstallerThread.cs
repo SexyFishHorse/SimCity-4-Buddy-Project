@@ -192,7 +192,7 @@
 
             var numDeleted = pluginController.RemoveEmptyPlugins();
 
-            if (plugin.Id == Guid.Empty && numDeleted <= 0)
+            if (numDeleted <= 0)
             {
                 pluginController.Add(plugin, false);
             }
