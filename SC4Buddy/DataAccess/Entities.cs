@@ -15,24 +15,17 @@
 
     public class Entities : IEntities
     {
-        private readonly string pluginsLocation;
+        private const string PluginsFilename = "Plugins.json";
 
-        private readonly string pluginFilesLocation;
+        private const string PluginFilesFilename = "PluginFiles.json";
 
-        private readonly string groupsLocation;
+        private const string PluginGroupsFilename = "PluginGroups.json";
 
-        private readonly string userFoldersLocation;
-
-        private string StorageLocation { get; set; }
+        private const string UserFoldersFilename = "UserFolders.json";
 
         public Entities(string storageLocation)
         {
             StorageLocation = storageLocation;
-
-            pluginsLocation = Path.Combine(StorageLocation, "Plugins.json");
-            pluginFilesLocation = Path.Combine(StorageLocation, "PluginFiles.json");
-            groupsLocation = Path.Combine(StorageLocation, "PluginGroups.json");
-            userFoldersLocation = Path.Combine(StorageLocation, "UserFolders.json");
         }
 
         public ICollection<Plugin> Plugins { get; private set; }
@@ -43,12 +36,46 @@
 
         public ICollection<PluginGroup> Groups { get; private set; }
 
+        private string StorageLocation { get; set; }
+
+        private string PluginsLocation
+        {
+            get
+            {
+                return Path.Combine(StorageLocation, PluginsFilename);
+            }
+        }
+
+        private string PluginFilesLocation
+        {
+            get
+            {
+                return Path.Combine(StorageLocation, PluginFilesFilename);
+            }
+        }
+
+        private string GroupsLocation
+        {
+            get
+            {
+                return Path.Combine(StorageLocation, PluginGroupsFilename);
+            }
+        }
+
+        private string UserFoldersLocation
+        {
+            get
+            {
+                return Path.Combine(StorageLocation, UserFoldersFilename);
+            }
+        }
+
         public void SaveChanges()
         {
-            StoreDataInFile(Plugins, pluginsLocation);
-            StoreDataInFile(Files, pluginFilesLocation);
-            StoreDataInFile(UserFolders, userFoldersLocation);
-            StoreDataInFile(Groups, groupsLocation);
+            StoreDataInFile(Plugins, PluginsLocation);
+            StoreDataInFile(Files, PluginFilesLocation);
+            StoreDataInFile(UserFolders, UserFoldersLocation);
+            StoreDataInFile(Groups, GroupsLocation);
         }
 
         public void RevertChanges(ModelBase entityObject)
@@ -70,18 +97,37 @@
             Plugins = new Collection<Plugin>();
             Files = new Collection<PluginFile>();
 
-            LoadUserFolders();
-
-            LoadPluginGroups();
-
-            LoadPlugins();
-
-            LoadPluginFiles();
+            LoadUserFolders(UserFoldersLocation);
+            LoadPluginGroups(PluginGroupsFilename);
+            LoadPlugins(PluginsFilename);
+            LoadPluginFiles(PluginFilesFilename);
         }
 
-        private void LoadPluginFiles()
+        private static void StoreDataInFile(IEnumerable<ModelBase> data, string dataLocation)
         {
-            using (var reader = new StreamReader(pluginFilesLocation))
+            var fileInfo = new FileInfo(dataLocation);
+            if (fileInfo.DirectoryName == null)
+            {
+                throw new DirectoryNotFoundException(string.Format("The location string {0} does not contain a directory name.", dataLocation));
+            }
+
+            Directory.CreateDirectory(fileInfo.DirectoryName);
+
+            using (var writer = new StreamWriter(dataLocation))
+            {
+                var json = JsonConvert.SerializeObject(data);
+                writer.Write(json);
+            }
+        }
+
+        private void LoadPluginFiles(string fileLocation)
+        {
+            if (!File.Exists(fileLocation))
+            {
+                return;
+            }
+
+            using (var reader = new StreamReader(fileLocation))
             {
                 var json = reader.ReadToEnd();
 
@@ -116,9 +162,14 @@
             }
         }
 
-        private void LoadPlugins()
+        private void LoadPlugins(string fileLocation)
         {
-            using (var reader = new StreamReader(pluginsLocation))
+            if (!File.Exists(fileLocation))
+            {
+                return;
+            }
+
+            using (var reader = new StreamReader(fileLocation))
             {
                 var json = reader.ReadToEnd();
 
@@ -174,9 +225,14 @@
             }
         }
 
-        private void LoadPluginGroups()
+        private void LoadPluginGroups(string fileLocation)
         {
-            using (var reader = new StreamReader(groupsLocation))
+            if (!File.Exists(fileLocation))
+            {
+                return;
+            }
+
+            using (var reader = new StreamReader(fileLocation))
             {
                 var json = reader.ReadToEnd();
 
@@ -198,9 +254,14 @@
             }
         }
 
-        private void LoadUserFolders()
+        private void LoadUserFolders(string fileLocation)
         {
-            using (var reader = new StreamReader(userFoldersLocation))
+            if (!File.Exists(fileLocation))
+            {
+                return;
+            }
+
+            using (var reader = new StreamReader(fileLocation))
             {
                 var json = reader.ReadToEnd();
 
@@ -227,23 +288,6 @@
 
                     UserFolders.Add(userFolder);
                 }
-            }
-        }
-
-        private static void StoreDataInFile(IEnumerable<ModelBase> data, string dataLocation)
-        {
-            var fileInfo = new FileInfo(dataLocation);
-            if (fileInfo.DirectoryName == null)
-            {
-                throw new DirectoryNotFoundException(string.Format("The location string {0} does not contain a directory name.", dataLocation));
-            }
-
-            Directory.CreateDirectory(fileInfo.DirectoryName);
-
-            using (var writer = new StreamWriter(dataLocation))
-            {
-                var json = JsonConvert.SerializeObject(data);
-                writer.Write(json);
             }
         }
     }
