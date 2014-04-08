@@ -103,6 +103,23 @@
             LoadPluginFiles(PluginFilesFilename);
         }
 
+        private static void StoreDataInFile(IEnumerable<ModelBase> data, string dataLocation)
+        {
+            var fileInfo = new FileInfo(dataLocation);
+            if (fileInfo.DirectoryName == null)
+            {
+                throw new DirectoryNotFoundException(string.Format("The location string {0} does not contain a directory name.", dataLocation));
+            }
+
+            Directory.CreateDirectory(fileInfo.DirectoryName);
+
+            using (var writer = new StreamWriter(dataLocation))
+            {
+                var json = JsonConvert.SerializeObject(data);
+                writer.Write(json);
+            }
+        }
+
         private void LoadPluginFiles(string fileLocation)
         {
             if (!File.Exists(fileLocation))
@@ -271,23 +288,6 @@
 
                     UserFolders.Add(userFolder);
                 }
-            }
-        }
-
-        private static void StoreDataInFile(IEnumerable<ModelBase> data, string dataLocation)
-        {
-            var fileInfo = new FileInfo(dataLocation);
-            if (fileInfo.DirectoryName == null)
-            {
-                throw new DirectoryNotFoundException(string.Format("The location string {0} does not contain a directory name.", dataLocation));
-            }
-
-            Directory.CreateDirectory(fileInfo.DirectoryName);
-
-            using (var writer = new StreamWriter(dataLocation))
-            {
-                var json = JsonConvert.SerializeObject(data);
-                writer.Write(json);
             }
         }
     }
