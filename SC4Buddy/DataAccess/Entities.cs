@@ -105,6 +105,10 @@
 
         private void LoadPluginFiles(string fileLocation)
         {
+            if (!File.Exists(fileLocation))
+            {
+                return;
+            }
 
             using (var reader = new StreamReader(fileLocation))
             {
@@ -143,6 +147,11 @@
 
         private void LoadPlugins(string fileLocation)
         {
+            if (!File.Exists(fileLocation))
+            {
+                return;
+            }
+
             using (var reader = new StreamReader(fileLocation))
             {
                 var json = reader.ReadToEnd();
@@ -201,6 +210,11 @@
 
         private void LoadPluginGroups(string fileLocation)
         {
+            if (!File.Exists(fileLocation))
+            {
+                return;
+            }
+
             using (var reader = new StreamReader(fileLocation))
             {
                 var json = reader.ReadToEnd();
@@ -225,6 +239,11 @@
 
         private void LoadUserFolders(string fileLocation)
         {
+            if (!File.Exists(fileLocation))
+            {
+                return;
+            }
+
             using (var reader = new StreamReader(fileLocation))
             {
                 var json = reader.ReadToEnd();
