@@ -1,7 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Control.Remote
 {
     using System;
-    using System.Data.Objects;
+    using System.Collections.Generic;
     using System.Linq;
 
     using NIHEI.SC4Buddy.DataAccess;
@@ -16,7 +16,7 @@
             this.entities = entities;
         }
 
-        public IObjectSet<Author> Authors
+        public IEnumerable<Author> Authors
         {
             get
             {
@@ -36,13 +36,13 @@
 
         public void Add(Author author)
         {
-            entities.Authors.AddObject(author);
+            entities.Authors.Add(author);
             SaveChanges();
         }
 
         public void Delete(Author author)
         {
-            entities.Authors.DeleteObject(author);
+            entities.Authors.Remove(author);
             SaveChanges();
         }
 

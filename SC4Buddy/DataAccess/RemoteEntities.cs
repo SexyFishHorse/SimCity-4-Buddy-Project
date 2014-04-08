@@ -1,74 +1,68 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
+    using System;
     using System.Collections.Generic;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
 
     using SC4Buddy.Entities.Remote;
 
     public class RemoteEntities : IRemoteEntities
     {
-        private readonly RemoteDatabaseEntities entities;
-
-        public RemoteEntities(RemoteDatabaseEntities entities)
+        public RemoteEntities()
         {
             Disposed = false;
-
-            this.entities = entities;
         }
 
         public bool Disposed { get; private set; }
 
-        public IObjectSet<Author> Authors
+        public ICollection<Author> Authors
         {
             get
             {
-                return entities.Authors;
+                throw new NotImplementedException();
             }
         }
 
-        public IObjectSet<RemotePlugin> Plugins
+        public ICollection<RemotePlugin> Plugins
         {
             get
             {
-                return entities.RemotePlugins;
+                throw new NotImplementedException();
             }
         }
 
-        public IObjectSet<RemotePluginFile> PluginFiles
+        public ICollection<RemotePluginFile> PluginFiles
         {
             get
             {
-                return entities.RemotePluginFiles;
+                throw new NotImplementedException();
             }
         }
 
-        public IObjectSet<User> Users
+        public ICollection<User> Users
         {
             get
             {
-                return entities.Users;
+                throw new NotImplementedException();
             }
         }
 
         public void SaveChanges()
         {
-            entities.SaveChanges();
+            throw new NotImplementedException();
         }
 
-        public void RevertChanges(EntityObject entityObject)
+        public void RevertChanges(object entityObject)
         {
-            entities.Refresh(RefreshMode.StoreWins, entityObject);
+            throw new NotImplementedException();
         }
 
-        public void RevertChanges(IEnumerable<EntityObject> entityCollection)
+        public void RevertChanges(IEnumerable<object> entityCollection)
         {
-            entities.Refresh(RefreshMode.StoreWins, entityCollection);
+            throw new NotImplementedException();
         }
 
         public void Dispose()
         {
-            entities.Dispose();
             Disposed = true;
         }
     }

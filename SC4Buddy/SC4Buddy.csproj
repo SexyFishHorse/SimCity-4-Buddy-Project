@@ -84,10 +84,6 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
@@ -102,24 +98,13 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Author.cs">
-      <DependentUpon>RemoteEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Control\GameArgumentsHelper.cs" />
     <Compile Include="Control\GameLauncher.cs" />
     <Compile Include="Control\ISettingsController.cs" />
@@ -141,6 +126,9 @@
     <Compile Include="DataAccess\IEntities.cs" />
     <Compile Include="DataAccess\IRemoteEntities.cs" />
     <Compile Include="DataAccess\RemoteEntities.cs" />
+    <Compile Include="Entities\Remote\Author.cs" />
+    <Compile Include="Entities\Remote\PluginReport.cs" />
+    <Compile Include="Entities\Remote\RemotePlugin.cs" />
     <Compile Include="Entities\Remote\RemotePluginFile.cs" />
     <Compile Include="Entities\Remote\User.cs" />
     <Compile Include="Installer\FileHandlers\ArchiveHandler.cs" />
@@ -169,31 +157,7 @@
     <Compile Include="Model\SessionEventArgs.cs" />
     <Compile Include="Model\UserFolder.cs" />
     <Compile Include="Model\ValidationResult.cs" />
-    <Compile Include="RemoteEntities.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RemoteEntities.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RemoteEntities.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RemoteEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RemoteDatabaseEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="RemotePlugin.cs">
-      <DependentUpon>RemoteEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RemotePluginFile.cs">
-      <DependentUpon>RemoteEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Remote\PluginMatcher.cs" />
-    <Compile Include="User.cs">
-      <DependentUpon>RemoteEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="View\Application\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -387,24 +351,6 @@
     <EmbeddedResource Include="View\Application\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EntityDeploy Include="RemoteDatabaseEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RemoteDatabaseEntities.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>NIHEI.SC4Buddy.Entities.Remote</CustomToolNamespace>
-    </EntityDeploy>
-    <None Include="RemoteEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
-      <LastGenOutput>RemoteEntities.Context.cs</LastGenOutput>
-    </None>
-    <None Include="RemoteDatabaseEntities.edmx.diagram">
-      <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
-    </None>
-    <None Include="RemoteEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RemoteDatabaseEntities.edmx</DependentUpon>
-      <LastGenOutput>RemoteEntities.cs</LastGenOutput>
-    </None>
     <Content Include="Wallpapers\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

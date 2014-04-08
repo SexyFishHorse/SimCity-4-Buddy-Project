@@ -180,7 +180,8 @@
             {
                 Invoke(new Action(() =>
                     {
-                        if (NetworkInterface.GetIsNetworkAvailable() && Settings.Default.FetchInfoFromRemote)
+                        // TODO
+                        if (false == true && NetworkInterface.GetIsNetworkAvailable() && Settings.Default.FetchInfoFromRemote)
                         {
                             var matcher = new PluginMatcher(
                                 pluginController, new RemotePluginFileController(EntityFactory.Instance.RemoteEntities));

@@ -37,7 +37,7 @@
 
         public void Add(User user)
         {
-            entities.Users.AddObject(user);
+            entities.Users.Add(user);
             entities.SaveChanges();
         }
 

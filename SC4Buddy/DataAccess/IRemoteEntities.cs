@@ -2,25 +2,23 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Objects;
-    using System.Data.Objects.DataClasses;
 
     using SC4Buddy.Entities.Remote;
 
     public interface IRemoteEntities : IDisposable
     {
-        IObjectSet<Author> Authors { get; }
+        ICollection<Author> Authors { get; }
 
-        IObjectSet<RemotePlugin> Plugins { get; }
+        ICollection<RemotePlugin> Plugins { get; }
 
-        IObjectSet<RemotePluginFile> PluginFiles { get; }
+        ICollection<RemotePluginFile> PluginFiles { get; }
 
-        IObjectSet<User> Users { get; }
+        ICollection<User> Users { get; }
 
         void SaveChanges();
 
-        void RevertChanges(EntityObject entityObject);
+        void RevertChanges(object entityObject);
 
-        void RevertChanges(IEnumerable<EntityObject> entityCollection);
+        void RevertChanges(IEnumerable<object> entityCollection);
     }
 }
