@@ -5,7 +5,10 @@
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Security.Policy;
+
+    using log4net;
 
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -22,6 +25,8 @@
         private const string PluginGroupsFilename = "PluginGroups.json";
 
         private const string UserFoldersFilename = "UserFolders.json";
+
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public Entities(string storageLocation)
         {
@@ -54,7 +59,7 @@
             }
         }
 
-        private string GroupsLocation
+        private string PluginGroupsLocation
         {
             get
             {
@@ -75,7 +80,7 @@
             StoreDataInFile(Plugins, PluginsLocation);
             StoreDataInFile(Files, PluginFilesLocation);
             StoreDataInFile(UserFolders, UserFoldersLocation);
-            StoreDataInFile(Groups, GroupsLocation);
+            StoreDataInFile(Groups, PluginGroupsLocation);
         }
 
         public void RevertChanges(ModelBase entityObject)
@@ -98,13 +103,19 @@
             Files = new Collection<PluginFile>();
 
             LoadUserFolders(UserFoldersLocation);
-            LoadPluginGroups(PluginGroupsFilename);
-            LoadPlugins(PluginsFilename);
-            LoadPluginFiles(PluginFilesFilename);
+            LoadPluginGroups(PluginGroupsLocation);
+            LoadPlugins(PluginsLocation);
+            LoadPluginFiles(PluginFilesLocation);
         }
 
         private static void StoreDataInFile(IEnumerable<ModelBase> data, string dataLocation)
         {
+            if (!data.Any())
+            {
+                Log.Info(string.Format("Empty collection for {0}, skipping storage.", dataLocation));
+                return;
+            }
+
             var fileInfo = new FileInfo(dataLocation);
             if (fileInfo.DirectoryName == null)
             {

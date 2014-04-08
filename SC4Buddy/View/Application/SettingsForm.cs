@@ -144,7 +144,7 @@
 
             Settings.Default.Save();
 
-            settingsController.UpdateMainFolder();
+            settingsController.CheckMainFolder();
 
             Close();
         }

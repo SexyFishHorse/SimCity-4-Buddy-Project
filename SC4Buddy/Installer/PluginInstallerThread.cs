@@ -7,6 +7,8 @@
     using System.Linq;
     using System.Reflection;
 
+    using log4net;
+
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Installer.FileHandlers;
@@ -17,8 +19,6 @@
     using NIHEI.SC4Buddy.View.Plugins;
 
     using SharpCompress.Common;
-
-    using log4net;
 
     public class PluginInstallerThread
     {
@@ -192,7 +192,7 @@
 
             var numDeleted = pluginController.RemoveEmptyPlugins();
 
-            if (plugin.Id == Guid.Empty && numDeleted <= 0)
+            if (numDeleted <= 0)
             {
                 pluginController.Add(plugin, false);
             }

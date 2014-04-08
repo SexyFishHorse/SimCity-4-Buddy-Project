@@ -32,6 +32,7 @@
             {
                 return entities ?? (entities = CreateEntities());
             }
+
             private set
             {
                 entities = value;
@@ -49,6 +50,7 @@
 
                 return remoteEntities;
             }
+
             private set
             {
                 remoteEntities = value;

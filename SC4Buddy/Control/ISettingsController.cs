@@ -9,7 +9,7 @@
 
         bool ValidateGameLocationPath(string path);
 
-        void UpdateMainFolder();
+        void CheckMainFolder();
 
         string SearchForGameLocation();
 

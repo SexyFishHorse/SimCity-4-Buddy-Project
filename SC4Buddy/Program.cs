@@ -51,7 +51,7 @@
 
                 if (Directory.Exists(Settings.Default.GameLocation))
                 {
-                    new SettingsController(userFolderController).UpdateMainFolder();
+                    new SettingsController(userFolderController).CheckMainFolder();
                     Application.Run(
                         new Sc4Buddy(
                             userFolderController,
