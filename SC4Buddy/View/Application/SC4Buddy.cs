@@ -76,6 +76,8 @@
 
         private void RepopulateUserFolderRelatives()
         {
+            Log.Info("Repopulating user folder lists");
+
             userFolderComboBox.BeginUpdate();
             userFolderComboBox.Items.Clear();
 
@@ -128,6 +130,7 @@
 
         private void ExitToolStripMenuItemClick(object sender, EventArgs e)
         {
+            Log.Info("Application closing (menu item click)");
             Close();
         }
 
@@ -198,6 +201,7 @@
 
         private void PlayButtonClick(object sender, EventArgs e)
         {
+            Log.Info("Launching game");
             playButton.Enabled = false;
             playButton.Text = LocalizationStrings.StartingGame;
             playButton.ForeColor = Color.Gray;
@@ -207,6 +211,15 @@
             if (userFolderComboBox.SelectedItem != null)
             {
                 selectedUserFolder = ((ComboBoxItem<UserFolder>)userFolderComboBox.SelectedItem).Value;
+                Log.Info(
+                    string.Format(
+                        "Selected user folder is {0} (id: {1})",
+                        selectedUserFolder.Alias,
+                        selectedUserFolder.Id));
+            }
+            else
+            {
+                Log.Info("No user folder selected.");
             }
 
             var arguments = new GameArgumentsHelper().GetArgumentString(selectedUserFolder);
