@@ -202,7 +202,7 @@
                                  Id = Guid.NewGuid(),
                                  Alias = "Main user folder",
                                  IsMainFolder = true,
-                                 FolderPath = Path.Combine(Settings.Default.GameLocation, "Plugins")
+                                 FolderPath = Path.Combine(Settings.Default.GameLocation, UserFolder.PluginFolderName)
                              };
                 Add(folder);
                 SaveChanges();
