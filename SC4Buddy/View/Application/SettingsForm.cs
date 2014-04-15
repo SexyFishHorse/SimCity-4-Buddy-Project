@@ -434,14 +434,13 @@
         {
             var interval = autoSaveIntervalTrackBar.Value;
 
-            shortAutosaveIntervalsLabel.Visible = interval < 10;
-
             UpdateAutoSaveLabel(interval);
         }
 
         private void UpdateAutoSaveLabel(int interval)
         {
             autoSaveIntervalLabel.Text = string.Format(LocalizationStrings.NumMinutes, interval);
+            shortAutosaveIntervalsLabel.Visible = interval < 10;
         }
 
         private void SettingsFormFormClosing(object sender, FormClosingEventArgs e)
