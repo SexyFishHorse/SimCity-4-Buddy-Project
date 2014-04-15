@@ -86,6 +86,7 @@
             }
 
             var insertIndex = 0;
+            var comboboxIndex = 0;
             var startupFolderIndex = -1;
             foreach (var userFolder in userFolderController.UserFolders)
             {
@@ -95,8 +96,10 @@
 
                     if (userFolder.IsStartupFolder)
                     {
-                        startupFolderIndex = insertIndex;
+                        startupFolderIndex = comboboxIndex;
                     }
+
+                    comboboxIndex++;
                 }
 
                 if (userFolder.Alias.Equals("?"))
@@ -112,6 +115,12 @@
             if (startupFolderIndex >= 0)
             {
                 userFolderComboBox.SelectedIndex = startupFolderIndex;
+            }
+            else
+            {
+                userFolderComboBox.SelectedItem = null;
+                userFolderComboBox.Text = localizationManager.GetString("userFolderComboBox.Text");
+                userFolderComboBox.ForeColor = Color.Gray;
             }
 
             userFolderComboBox.EndUpdate();
