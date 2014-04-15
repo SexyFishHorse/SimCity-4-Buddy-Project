@@ -10,6 +10,8 @@
     [JsonObject(MemberSerialization.OptIn)]
     public class UserFolder : ModelBase
     {
+        public const string PluginFolderName = "Plugins";
+
         private static readonly IEqualityComparer<UserFolder> AliasComparerInstance = new AliasEqualityComparer();
 
         public UserFolder()
@@ -53,7 +55,7 @@
         {
             get
             {
-                return System.IO.Path.Combine(FolderPath, "Plugins");
+                return System.IO.Path.Combine(FolderPath, PluginFolderName);
             }
         }
 
