@@ -276,6 +276,16 @@
 
             var file = string.Format("log-{0}.txt", DateTime.Now.ToString("yyyy-MM-dd"));
 
+            if (!File.Exists(file))
+            {
+                MessageBox.Show(
+                    this,
+                    string.Format("No log file was found. Check the folder ({0}) manually.", path),
+                    "No logfile was found",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+
             Process.Start(Path.Combine(path, "Logs", file));
         }
     }
