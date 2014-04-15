@@ -166,13 +166,13 @@
     <value>6, 97</value>
   </data>
   <data name="startupFolderCheckbox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 17</value>
+    <value>252, 17</value>
   </data>
   <data name="startupFolderCheckbox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="startupFolderCheckbox.Text" xml:space="preserve">
-    <value>Use this folder as my default folder</value>
+    <value>Use this folder as default when launching game.</value>
   </data>
   <data name="&gt;&gt;startupFolderCheckbox.Name" xml:space="preserve">
     <value>startupFolderCheckbox</value>

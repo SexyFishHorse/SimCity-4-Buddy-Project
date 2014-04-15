@@ -34,6 +34,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.UserFoldersListView = new System.Windows.Forms.ListView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.startupFolderCheckbox = new System.Windows.Forms.CheckBox();
             this.aliasTextBox = new System.Windows.Forms.TextBox();
             this.aliasLabel = new System.Windows.Forms.Label();
             this.browseButton = new System.Windows.Forms.Button();
@@ -48,7 +49,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.pathBrowseDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.saveButton = new System.Windows.Forms.Button();
-            this.startupFolderCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -92,6 +92,12 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.groupBox1.Controls.Add(this.pathLabel);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // startupFolderCheckbox
+            // 
+            resources.ApplyResources(this.startupFolderCheckbox, "startupFolderCheckbox");
+            this.startupFolderCheckbox.Name = "startupFolderCheckbox";
+            this.startupFolderCheckbox.UseVisualStyleBackColor = true;
             // 
             // aliasTextBox
             // 
@@ -187,12 +193,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.saveButton.Name = "saveButton";
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButtonClick);
-            // 
-            // startupFolderCheckbox
-            // 
-            resources.ApplyResources(this.startupFolderCheckbox, "startupFolderCheckbox");
-            this.startupFolderCheckbox.Name = "startupFolderCheckbox";
-            this.startupFolderCheckbox.UseVisualStyleBackColor = true;
             // 
             // ManageUserFoldersForm
             // 
