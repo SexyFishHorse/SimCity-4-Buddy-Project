@@ -111,11 +111,21 @@
 
         public void Add(UserFolder userFolder)
         {
+            UpdateIsStartupFolder(userFolder);
+
             entities.UserFolders.Add(userFolder);
         }
 
         public void Update(UserFolder userFolder)
         {
+            if (userFolder.IsStartupFolder)
+            {
+                foreach (var folder in UserFolders.Where(x => x.IsStartupFolder && x.Id != userFolder.Id))
+                {
+                    folder.IsStartupFolder = false;
+                }
+            }
+
             entities.SaveChanges();
         }
 
@@ -209,6 +219,19 @@
             }
 
             return folder;
+        }
+
+        private void UpdateIsStartupFolder(UserFolder userFolder)
+        {
+            if (!userFolder.IsStartupFolder)
+            {
+                return;
+            }
+
+            foreach (var folder in UserFolders.Where(x => x.IsStartupFolder && x.Id != userFolder.Id))
+            {
+                folder.IsStartupFolder = false;
+            }
         }
     }
 }
