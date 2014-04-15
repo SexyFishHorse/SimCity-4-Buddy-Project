@@ -71,7 +71,8 @@
 
                 pathTextBox.Text = SelectedFolder.FolderPath;
                 aliasTextBox.Text = SelectedFolder.Alias;
-                startupFolderCheckbox.Checked = SelectedFolder.IsStartupFolder;
+                startupFolderCheckbox.Checked = !SelectedFolder.IsMainFolder && SelectedFolder.IsStartupFolder;
+
                 updateButton.Enabled = true;
                 removeButton.Enabled = true;
                 clearButton.Enabled = true;
@@ -82,6 +83,7 @@
 
                 pathTextBox.Text = string.Empty;
                 aliasTextBox.Text = string.Empty;
+
                 updateButton.Enabled = false;
                 removeButton.Enabled = false;
             }
