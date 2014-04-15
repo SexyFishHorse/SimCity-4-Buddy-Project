@@ -48,6 +48,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.pathBrowseDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.saveButton = new System.Windows.Forms.Button();
+            this.startupFolderCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -83,6 +84,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.startupFolderCheckbox);
             this.groupBox1.Controls.Add(this.aliasTextBox);
             this.groupBox1.Controls.Add(this.aliasLabel);
             this.groupBox1.Controls.Add(this.browseButton);
@@ -186,6 +188,12 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.SaveButtonClick);
             // 
+            // startupFolderCheckbox
+            // 
+            resources.ApplyResources(this.startupFolderCheckbox, "startupFolderCheckbox");
+            this.startupFolderCheckbox.Name = "startupFolderCheckbox";
+            this.startupFolderCheckbox.UseVisualStyleBackColor = true;
+            // 
             // ManageUserFoldersForm
             // 
             this.AcceptButton = this.saveButton;
@@ -228,5 +236,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.CheckBox startupFolderCheckbox;
     }
 }
