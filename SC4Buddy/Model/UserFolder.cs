@@ -19,6 +19,10 @@
         [JsonProperty]
         public bool IsMainFolder { get; set; }
 
+
+        [JsonProperty]
+        public bool IsStartupFolder { get; set; }
+
         public ICollection<Plugin> Plugins { get; set; }
 
         [JsonProperty]
