@@ -71,6 +71,9 @@
 
                 pathTextBox.Text = SelectedFolder.FolderPath;
                 aliasTextBox.Text = SelectedFolder.Alias;
+                startupFolderCheckbox.Checked = !SelectedFolder.IsMainFolder && SelectedFolder.IsStartupFolder;
+
+                startupFolderCheckbox.Enabled = !SelectedFolder.IsMainFolder;
                 updateButton.Enabled = true;
                 removeButton.Enabled = true;
                 clearButton.Enabled = true;
@@ -81,6 +84,7 @@
 
                 pathTextBox.Text = string.Empty;
                 aliasTextBox.Text = string.Empty;
+
                 updateButton.Enabled = false;
                 removeButton.Enabled = false;
             }
@@ -149,7 +153,12 @@
 
         private void AddButtonClick(object sender, EventArgs e)
         {
-            var newFolder = new UserFolder { FolderPath = pathTextBox.Text, Alias = aliasTextBox.Text };
+            var newFolder = new UserFolder
+                                {
+                                    FolderPath = pathTextBox.Text,
+                                    Alias = aliasTextBox.Text,
+                                    IsStartupFolder = startupFolderCheckbox.Checked
+                                };
             var hasErrors = false;
 
             var pathOk = !controller.ValidatePath(newFolder.FolderPath, Guid.NewGuid());
@@ -211,6 +220,7 @@
 
             SelectedFolder.FolderPath = pathTextBox.Text;
             SelectedFolder.Alias = aliasTextBox.Text;
+            SelectedFolder.IsStartupFolder = startupFolderCheckbox.Checked;
 
             controller.Update(SelectedFolder);
             ClearForm();

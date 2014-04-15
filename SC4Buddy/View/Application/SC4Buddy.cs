@@ -76,6 +76,8 @@
 
         private void RepopulateUserFolderRelatives()
         {
+            Log.Info("Repopulating user folder lists");
+
             userFolderComboBox.BeginUpdate();
             userFolderComboBox.Items.Clear();
 
@@ -86,11 +88,20 @@
             }
 
             var insertIndex = 0;
+            var comboboxIndex = 0;
+            var startupFolderIndex = -1;
             foreach (var userFolder in userFolderController.UserFolders)
             {
                 if (!userFolder.IsMainFolder)
                 {
                     userFolderComboBox.Items.Add(new ComboBoxItem<UserFolder>(userFolder.Alias, userFolder));
+
+                    if (userFolder.IsStartupFolder)
+                    {
+                        startupFolderIndex = comboboxIndex;
+                    }
+
+                    comboboxIndex++;
                 }
 
                 if (userFolder.Alias.Equals("?"))
@@ -103,11 +114,23 @@
                 insertIndex++;
             }
 
+            if (startupFolderIndex >= 0)
+            {
+                userFolderComboBox.SelectedIndex = startupFolderIndex;
+            }
+            else
+            {
+                userFolderComboBox.SelectedItem = null;
+                userFolderComboBox.Text = localizationManager.GetString("userFolderComboBox.Text");
+                userFolderComboBox.ForeColor = Color.Gray;
+            }
+
             userFolderComboBox.EndUpdate();
         }
 
         private void ExitToolStripMenuItemClick(object sender, EventArgs e)
         {
+            Log.Info("Application closing (menu item click)");
             Close();
         }
 
@@ -178,6 +201,7 @@
 
         private void PlayButtonClick(object sender, EventArgs e)
         {
+            Log.Info("Launching game");
             playButton.Enabled = false;
             playButton.Text = LocalizationStrings.StartingGame;
             playButton.ForeColor = Color.Gray;
@@ -187,6 +211,15 @@
             if (userFolderComboBox.SelectedItem != null)
             {
                 selectedUserFolder = ((ComboBoxItem<UserFolder>)userFolderComboBox.SelectedItem).Value;
+                Log.Info(
+                    string.Format(
+                        "Selected user folder is {0} (id: {1})",
+                        selectedUserFolder.Alias,
+                        selectedUserFolder.Id));
+            }
+            else
+            {
+                Log.Info("No user folder selected.");
             }
 
             var arguments = new GameArgumentsHelper().GetArgumentString(selectedUserFolder);
@@ -242,6 +275,16 @@
                     0, Application.LocalUserAppDataPath.LastIndexOf(@"\", StringComparison.Ordinal));
 
             var file = string.Format("log-{0}.txt", DateTime.Now.ToString("yyyy-MM-dd"));
+
+            if (!File.Exists(file))
+            {
+                MessageBox.Show(
+                    this,
+                    string.Format("No log file was found. Check the folder ({0}) manually.", path),
+                    "No logfile was found",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
 
             Process.Start(Path.Combine(path, "Logs", file));
         }
