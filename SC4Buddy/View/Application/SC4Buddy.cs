@@ -86,11 +86,17 @@
             }
 
             var insertIndex = 0;
+            var startupFolderIndex = -1;
             foreach (var userFolder in userFolderController.UserFolders)
             {
                 if (!userFolder.IsMainFolder)
                 {
                     userFolderComboBox.Items.Add(new ComboBoxItem<UserFolder>(userFolder.Alias, userFolder));
+
+                    if (userFolder.IsStartupFolder)
+                    {
+                        startupFolderIndex = insertIndex;
+                    }
                 }
 
                 if (userFolder.Alias.Equals("?"))
@@ -101,6 +107,11 @@
 
                 userFoldersToolStripMenuItem.DropDownItems.Insert(insertIndex, new UserFolderToolStripMenuItem(userFolder, UserFolderMenuItemClick));
                 insertIndex++;
+            }
+
+            if (startupFolderIndex >= 0)
+            {
+                userFolderComboBox.SelectedIndex = startupFolderIndex;
             }
 
             userFolderComboBox.EndUpdate();
