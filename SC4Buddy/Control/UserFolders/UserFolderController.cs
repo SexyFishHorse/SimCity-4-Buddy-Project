@@ -223,6 +223,11 @@
 
         private void UpdateIsStartupFolder(UserFolder userFolder)
         {
+            if (userFolder.IsMainFolder)
+            {
+                userFolder.IsStartupFolder = false;
+            }
+
             if (!userFolder.IsStartupFolder)
             {
                 return;
