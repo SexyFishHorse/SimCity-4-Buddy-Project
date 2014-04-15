@@ -36,7 +36,6 @@
         [JsonProperty]
         public bool IsMainFolder { get; set; }
 
-
         [JsonProperty]
         public bool IsStartupFolder { get; set; }
 
@@ -67,24 +66,28 @@
                 {
                     return true;
                 }
+
                 if (ReferenceEquals(x, null))
                 {
                     return false;
                 }
+
                 if (ReferenceEquals(y, null))
                 {
                     return false;
                 }
+
                 if (x.GetType() != y.GetType())
                 {
                     return false;
                 }
+
                 return string.Equals(x.Alias, y.Alias);
             }
 
             public int GetHashCode(UserFolder obj)
             {
-                return (obj.Alias != null ? obj.Alias.GetHashCode() : 0);
+                return obj.Alias != null ? obj.Alias.GetHashCode() : 0;
             }
         }
     }
