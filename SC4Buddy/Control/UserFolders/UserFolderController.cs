@@ -38,6 +38,31 @@
             }
         }
 
+        public static bool IsDamnFile(UserFolder userFolder, string path)
+        {
+            var relativePath = path.Replace(userFolder.PluginFolderPath, string.Empty);
+
+            return relativePath.StartsWith(@"\DAMN", StringComparison.OrdinalIgnoreCase)
+                   && (relativePath.EndsWith("placeholder", StringComparison.OrdinalIgnoreCase)
+                       || relativePath.EndsWith("DAMN-Indexer.cmd"));
+        }
+
+        public static bool IsBackgroundImage(string entity, UserFolder userFolder)
+        {
+            if (!userFolder.IsMainFolder)
+            {
+                return false;
+            }
+
+            var validFilenames = new[]
+                                     {
+                                         "Background3D0.png", "Background3D1.png", "Background3D2.png",
+                                         "Background3D3.png", "Background3D4.png"
+                                     };
+
+            return validFilenames.Any(entity.EndsWith);
+        }
+
         /// <summary>
         /// Validates that the specified path is not empty or a whitespace 
         /// and that the path exist on the local machine.
@@ -169,31 +194,6 @@
                 pluginController, new RemotePluginFileController(EntityFactory.Instance.RemoteEntities));
 
             return plugins.Count(matcher.MatchAndUpdate);
-        }
-
-        public static bool IsDamnFile(UserFolder userFolder, string path)
-        {
-            var relativePath = path.Replace(userFolder.PluginFolderPath, string.Empty);
-
-            return relativePath.StartsWith(@"\DAMN", StringComparison.OrdinalIgnoreCase)
-                   && (relativePath.EndsWith("placeholder", StringComparison.OrdinalIgnoreCase)
-                       || relativePath.EndsWith("DAMN-Indexer.cmd"));
-        }
-
-        public static bool IsBackgroundImage(string entity, UserFolder userFolder)
-        {
-            if (!userFolder.IsMainFolder)
-            {
-                return false;
-            }
-
-            var validFilenames = new[]
-                                     {
-                                         "Background3D0.png", "Background3D1.png", "Background3D2.png",
-                                         "Background3D3.png", "Background3D4.png"
-                                     };
-
-            return validFilenames.Any(entity.EndsWith);
         }
 
         public int NumberOfRecognizedPlugins(UserFolder userFolder)
