@@ -47,14 +47,18 @@
 
         public bool ValidateGameLocationPath(string path)
         {
-            Log.Error(string.Format("Validating game path: {0}", path));
-            if (string.IsNullOrWhiteSpace(path))
+            Log.Info(string.Format("Validating game path: {0}", path));
+
+            if (string.IsNullOrWhiteSpace(path) || path.Equals(LocalizationStrings.SelectGameLocation))
             {
                 Log.Error("Game location is empty");
                 return false;
             }
 
-            return File.Exists(Path.Combine(path, @"Apps\SimCity 4.exe"));
+            var exists = File.Exists(Path.Combine(path, @"Apps\SimCity 4.exe"));
+
+            Log.Info("Path is " + (exists ? "valid" : "invalid"));
+            return exists;
         }
 
         public void CheckMainFolder()
@@ -75,9 +79,6 @@
         public string SearchForGameLocation()
         {
             Log.Info("Searching for game location");
-            var match = false;
-
-            var gamePath = string.Empty;
 
             foreach (var regKey in regKeys)
             {
@@ -108,21 +109,14 @@
 
                             Log.Info(string.Format("Found a match. Name: {0}, Path: {1}", name, path));
 
-                            match = true;
-                            gamePath = path;
-
-                            break;
+                            return path;
                         }
-                    }
-
-                    if (match)
-                    {
-                        break;
                     }
                 }
             }
 
-            return gamePath;
+            Log.Error("Unable to auto locate game.");
+            return string.Empty;
         }
 
         public IEnumerable<string> GetInstalledLanguages()
