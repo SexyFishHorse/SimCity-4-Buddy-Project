@@ -285,7 +285,8 @@
                                              Id = dynamicUserFolder.Id,
                                              Alias = dynamicUserFolder.Alias,
                                              FolderPath = dynamicUserFolder.FolderPath,
-                                             IsMainFolder = dynamicUserFolder.IsMainFolder
+                                             IsMainFolder = dynamicUserFolder.IsMainFolder,
+                                             IsStartupFolder = dynamicUserFolder.IsStartupFolder
                                          };
 
                     var pluginIds = new Collection<Plugin>();
