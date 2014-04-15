@@ -10,6 +10,21 @@
     [JsonObject(MemberSerialization.OptIn)]
     public class UserFolder : ModelBase
     {
+        private static readonly IEqualityComparer<UserFolder> AliasComparerInstance = new AliasEqualityComparer();
+
+        public UserFolder()
+        {
+            Plugins = new Collection<Plugin>();
+        }
+
+        public static IEqualityComparer<UserFolder> AliasComparer
+        {
+            get
+            {
+                return AliasComparerInstance;
+            }
+        }
+
         [JsonProperty]
         public string FolderPath { get; set; }
 
@@ -34,9 +49,12 @@
             }
         }
 
-        public UserFolder()
+        public string PluginFolderPath
         {
-            Plugins = new Collection<Plugin>();
+            get
+            {
+                return System.IO.Path.Combine(FolderPath, "Plugins");
+            }
         }
 
         private sealed class AliasEqualityComparer : IEqualityComparer<UserFolder>
@@ -65,24 +83,6 @@
             public int GetHashCode(UserFolder obj)
             {
                 return (obj.Alias != null ? obj.Alias.GetHashCode() : 0);
-            }
-        }
-
-        private static readonly IEqualityComparer<UserFolder> AliasComparerInstance = new AliasEqualityComparer();
-
-        public static IEqualityComparer<UserFolder> AliasComparer
-        {
-            get
-            {
-                return AliasComparerInstance;
-            }
-        }
-
-        public string PluginFolderPath
-        {
-            get
-            {
-                return System.IO.Path.Combine(FolderPath, "Plugins");
             }
         }
     }
