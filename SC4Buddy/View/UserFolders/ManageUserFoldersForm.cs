@@ -73,7 +73,7 @@
                 aliasTextBox.Text = SelectedFolder.Alias;
                 startupFolderCheckbox.Checked = !SelectedFolder.IsMainFolder && SelectedFolder.IsStartupFolder;
 
-                startupFolderCheckbox.Enabled = false;
+                startupFolderCheckbox.Enabled = !SelectedFolder.IsMainFolder;
                 updateButton.Enabled = true;
                 removeButton.Enabled = true;
                 clearButton.Enabled = true;
