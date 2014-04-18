@@ -140,6 +140,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Plugin.cs" />
+    <Compile Include="Models\PluginFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IPluginRepository.cs" />
   </ItemGroup>
