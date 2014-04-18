@@ -1,10 +1,9 @@
-﻿namespace Sc4BuddyServer.Controllers
+﻿namespace Sc4BuddyServer.Services
 {
     using System;
     using System.Collections.Generic;
 
     using Sc4BuddyServer.Models;
-    using Sc4BuddyServer.Services;
 
     public class PluginRepository : IPluginRepository
     {
