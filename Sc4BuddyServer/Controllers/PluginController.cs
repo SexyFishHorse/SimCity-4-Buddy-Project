@@ -13,6 +13,11 @@
     {
         private readonly IPluginRepository repository;
 
+        public PluginController()
+        {
+            repository = new PluginRepository();
+        }
+
         public Plugin GetPlugin(Guid id)
         {
             return repository.GetPlugin(id);
