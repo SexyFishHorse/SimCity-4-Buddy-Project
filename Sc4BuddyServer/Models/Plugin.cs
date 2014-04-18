@@ -22,5 +22,7 @@
         public DateTime DateModified { get; set; }
 
         public IEnumerable<PluginFile> Files { get; set; }
+
+        public IEnumerable<Plugin> Dependencies { get; set; }
     }
 }
