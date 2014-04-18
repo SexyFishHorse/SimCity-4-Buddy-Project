@@ -24,5 +24,7 @@
         public IEnumerable<PluginFile> Files { get; set; }
 
         public IEnumerable<Plugin> Dependencies { get; set; }
+
+        public IEnumerable<Plugin> ConflictPlugins { get; set; }
     }
 }
