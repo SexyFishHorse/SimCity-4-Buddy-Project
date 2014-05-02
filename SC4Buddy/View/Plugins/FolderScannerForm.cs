@@ -438,14 +438,6 @@
 
         private void AutoGroupKnownPluginsClick(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                this,
-                "This feature is disabled in this version of SimCity 4 Buddy.",
-                "Feature disabled",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-            return;
-
             folderScannerController.AutoGroupKnownFiles(
                 userFolder,
                 pluginController,
