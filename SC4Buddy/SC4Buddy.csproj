@@ -93,6 +93,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Sc4BuddyApiClient">
+      <HintPath>..\packages\Sc4BuddyApiClient\Sc4BuddyApiClient.dll</HintPath>
+    </Reference>
     <Reference Include="SharpCompress">
       <HintPath>..\packages\sharpcompress.0.10\lib\net40\SharpCompress.dll</HintPath>
     </Reference>
@@ -119,8 +122,6 @@
     <Compile Include="Control\UserFolders\FolderScanner.cs" />
     <Compile Include="Control\Plugins\PluginController.cs" />
     <Compile Include="Control\Plugins\PluginFileController.cs" />
-    <Compile Include="Control\SessionController.cs" />
-    <Compile Include="Control\Remote\UserController.cs" />
     <Compile Include="DataAccess\Entities.cs" />
     <Compile Include="DataAccess\EntityFactory.cs" />
     <Compile Include="DataAccess\IEntities.cs" />
@@ -171,12 +172,6 @@
     </Compile>
     <Compile Include="View\Elements\PluginListViewItem.cs" />
     <Compile Include="View\Helpers\NonPluginFilesScannerUiHelper.cs" />
-    <Compile Include="View\Login\CreateLoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Login\CreateLoginForm.Designer.cs">
-      <DependentUpon>CreateLoginForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\Plugins\EnterPluginInformationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -260,9 +255,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Application\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Login\CreateLoginForm.resx">
-      <DependentUpon>CreateLoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Plugins\EnterPluginInformationForm.resx">
       <DependentUpon>EnterPluginInformationForm.cs</DependentUpon>

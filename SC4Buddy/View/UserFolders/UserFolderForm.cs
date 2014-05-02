@@ -322,14 +322,6 @@
 
         private void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                this,
-                "This feature is disabled in this version of SimCity 4 Buddy.",
-                "Feature disabled",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-            return;
-
             var numUpdated = userFolderController.UpdateInfoForAllPluginsFromServer();
             RepopulateInstalledPluginsListView();
 
@@ -349,14 +341,6 @@
 
         private void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            MessageBox.Show(
-                this,
-                "This feature is disabled in this version of SimCity 4 Buddy.",
-                "Feature disabled",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-            return;
-
             userFolderController.UpdateInfoForAllPluginsFromServer();
 
             var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolder);
@@ -453,14 +437,6 @@
 
         private void ReportPluginLinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            MessageBox.Show(
-                this,
-                "This feature is disabled in this version of SimCity 4 Buddy.",
-                "Feature disabled",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-            return;
-
             var dialog = new ReportPluginForm(new RemotePluginController(EntityFactory.Instance.RemoteEntities))
                              {
                                  Plugin
