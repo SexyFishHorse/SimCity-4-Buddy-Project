@@ -126,7 +126,6 @@
     <Compile Include="Entities\Remote\PluginReport.cs" />
     <Compile Include="Entities\Remote\RemotePlugin.cs" />
     <Compile Include="Entities\Remote\RemotePluginFile.cs" />
-    <Compile Include="Entities\Remote\User.cs" />
     <Compile Include="Installer\FileHandlers\ArchiveHandler.cs" />
     <Compile Include="Installer\InstallerEventArgs\InstalledPluginEventArgs.cs" />
     <Compile Include="Installer\InstallerEventArgs\InstallPluginEventArgs.cs" />
@@ -150,7 +149,6 @@
     <Compile Include="Model\PluginFile.cs" />
     <Compile Include="Model\PluginGroup.cs" />
     <Compile Include="Model\QuarantinedFile.cs" />
-    <Compile Include="Model\SessionEventArgs.cs" />
     <Compile Include="Model\UserFolder.cs" />
     <Compile Include="Model\ValidationResult.cs" />
     <Compile Include="Remote\IDependencyChecker.cs" />
