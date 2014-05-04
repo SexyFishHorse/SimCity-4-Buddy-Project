@@ -1,11 +1,14 @@
 ﻿namespace NIHEI.SC4Buddy
 {
     using System;
+    using System.Configuration;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Windows.Forms;
+
+    using Irradiated.Sc4Buddy.ApiClient;
 
     using log4net;
     using log4net.Config;
@@ -58,7 +61,8 @@
                             userFolderController,
                             new PluginController(EntityFactory.Instance.Entities),
                             new PluginGroupController(EntityFactory.Instance.Entities),
-                            new PluginMatcher(),
+                            new PluginMatcher(
+                                new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty)),
                             null));
                 }
             }
