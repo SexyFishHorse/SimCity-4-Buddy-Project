@@ -18,6 +18,7 @@
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
+    using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.UserFolders;
 
@@ -33,13 +34,21 @@
 
         private readonly PluginGroupController pluginGroupController;
 
+        private readonly IPluginMatcher pluginMatcher;
+
+        private readonly IDependencyChecker dependencyChecker;
+
         public Sc4Buddy(
             UserFolderController userFolderController,
             PluginController pluginController,
-            PluginGroupController pluginGroupController)
+            PluginGroupController pluginGroupController,
+            IPluginMatcher pluginMatcher,
+            IDependencyChecker dependencyChecker)
         {
             this.userFolderController = userFolderController;
             this.pluginGroupController = pluginGroupController;
+            this.pluginMatcher = pluginMatcher;
+            this.dependencyChecker = dependencyChecker;
             this.pluginController = pluginController;
 
             InitializeComponent();
@@ -196,7 +205,8 @@
                 pluginController,
                 pluginGroupController,
                 userFolderController,
-                ((UserFolderToolStripMenuItem)sender).UserFolder).ShowDialog(this);
+                ((UserFolderToolStripMenuItem)sender).UserFolder,
+                pluginMatcher, dependencyChecker).ShowDialog(this);
         }
 
         private void PlayButtonClick(object sender, EventArgs e)

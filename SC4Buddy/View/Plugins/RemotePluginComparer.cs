@@ -2,7 +2,8 @@
 {
     using System.Collections.Generic;
 
-    using NIHEI.SC4Buddy.Entities.Remote;
+    using RemotePlugin = Irradiated.Sc4Buddy.ApiClient.Model.Plugin;
+    using RemotePluginFile = Irradiated.Sc4Buddy.ApiClient.Model.PluginFile;
 
     public class RemotePluginComparer : IEqualityComparer<RemotePlugin>
     {
@@ -13,7 +14,7 @@
 
         public int GetHashCode(RemotePlugin obj)
         {
-            return obj.Id;
+            return obj.GetHashCode();
         }
     }
 }

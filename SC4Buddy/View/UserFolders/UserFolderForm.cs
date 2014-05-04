@@ -11,7 +11,6 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
@@ -32,13 +31,19 @@
 
         private readonly UserFolderController userFolderController;
 
+        private readonly IPluginMatcher pluginMatcher;
+
+        private readonly IDependencyChecker dependencyChecker;
+
         private Plugin selectedPlugin;
 
         public UserFolderForm(
             PluginController pluginController,
             PluginGroupController pluginGroupController,
             UserFolderController userFolderController,
-            UserFolder userFolder)
+            UserFolder userFolder,
+            IPluginMatcher pluginMatcher,
+            IDependencyChecker dependencyChecker)
         {
             this.pluginGroupController = pluginGroupController;
             this.pluginController = pluginController;
@@ -63,6 +68,8 @@
             }
 
             this.userFolder = userFolder;
+            this.pluginMatcher = pluginMatcher;
+            this.dependencyChecker = dependencyChecker;
             InitializeComponent();
         }
 
@@ -127,37 +134,39 @@
                 }
 
                 uninstallButton.Enabled = true;
-                updateInfoButton.Enabled = selectedPlugin.RemotePluginId == 0;
-                reportPluginLinkLabel.Visible = selectedPlugin.RemotePluginId != 0;
+                updateInfoButton.Enabled = selectedPlugin.RemotePlugin != null;
+                reportPluginLinkLabel.Visible = selectedPlugin.RemotePlugin != null;
                 moveOrCopyButton.Enabled = true;
                 disableFilesButton.Enabled = true;
 
-                if (selectedPlugin.RemotePlugin != null
-                    && selectedPlugin.RemotePlugin.Reports != null
-                    && selectedPlugin.RemotePlugin.Reports.Any(x => x.Approved))
-                {
-                    var output = new StringBuilder();
+                // TODO: Show reports
+                ////if (selectedPlugin.RemotePlugin != null
+                ////    && selectedPlugin.RemotePlugin.Reports != null
+                ////    && selectedPlugin.RemotePlugin.Reports.Any(x => x.Approved))
+                ////{
+                ////    var output = new StringBuilder();
 
-                    foreach (var report in selectedPlugin.RemotePlugin.Reports
-                        .Where(x => x.Approved)
-                        .OrderByDescending(x => x.Date))
-                    {
-                        var message = string.Format(
-                            "[{0}] - {1}",
-                            report.Date.ToString(CultureInfo.CurrentUICulture.DateTimeFormat),
-                            report.Body);
+                ////    foreach (var report in selectedPlugin.RemotePlugin.Reports
+                ////        .Where(x => x.Approved)
+                ////        .OrderByDescending(x => x.Date))
+                ////    {
+                ////        var message = string.Format(
+                ////            "[{0}] - {1}",
+                ////            report.Date.ToString(CultureInfo.CurrentUICulture.DateTimeFormat),
+                ////            report.Body);
 
-                        output.AppendLine(message);
-                        output.AppendLine();
-                    }
+                ////        output.AppendLine(message);
+                ////        output.AppendLine();
+                ////    }
 
-                    errorTextBox.Text = output.ToString();
-                    pluginInfoSplitContainer.Panel2Collapsed = false;
-                }
-                else
-                {
-                    pluginInfoSplitContainer.Panel2Collapsed = true;
-                }
+                ////    errorTextBox.Text = output.ToString();
+                ////    pluginInfoSplitContainer.Panel2Collapsed = false;
+                ////}
+                ////else
+                ////{
+                ////    pluginInfoSplitContainer.Panel2Collapsed = true;
+                ////}
+                pluginInfoSplitContainer.Panel2Collapsed = true;
             }
             else
             {
@@ -245,7 +254,7 @@
                 return;
             }
 
-            new InstallPluginsForm(pluginController, files, userFolder).ShowDialog(this);
+            new InstallPluginsForm(pluginController, files, userFolder, pluginMatcher).ShowDialog(this);
 
             RepopulateInstalledPluginsListView();
 
@@ -274,7 +283,8 @@
                 new FolderScannerController(new PluginFileController(EntityFactory.Instance.Entities)),
                 pluginController,
                 pluginGroupController,
-                userFolder).ShowDialog(this);
+                userFolder,
+                pluginMatcher).ShowDialog(this);
             RepopulateInstalledPluginsListView();
 
             if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.AllowDependencyCheck)
@@ -322,7 +332,7 @@
 
         private void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
         {
-            var numUpdated = userFolderController.UpdateInfoForAllPluginsFromServer();
+            var numUpdated = userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
             RepopulateInstalledPluginsListView();
 
             MessageBox.Show(
@@ -341,7 +351,7 @@
 
         private void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            userFolderController.UpdateInfoForAllPluginsFromServer();
+            userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
 
             var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolder);
 
@@ -357,9 +367,7 @@
                 return;
             }
 
-            var checker = new DependencyChecker(
-                userFolderController, new RemotePluginController(EntityFactory.Instance.RemoteEntities));
-            var missingDependencies = checker.CheckDependencies(userFolder);
+            var missingDependencies = dependencyChecker.CheckDependencies(userFolder);
 
             if (missingDependencies.Any())
             {
@@ -437,13 +445,13 @@
 
         private void ReportPluginLinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var dialog = new ReportPluginForm(new RemotePluginController(EntityFactory.Instance.RemoteEntities))
-                             {
-                                 Plugin
-                                     =
-                                     selectedPlugin
-                                     .RemotePlugin
-                             };
+            var dialog = new ReportPluginForm
+            {
+                Plugin
+                    =
+                    selectedPlugin
+                    .RemotePlugin
+            };
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {

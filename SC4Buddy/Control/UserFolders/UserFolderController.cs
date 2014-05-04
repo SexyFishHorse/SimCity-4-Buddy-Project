@@ -8,7 +8,6 @@
     using Microsoft.VisualBasic.FileIO;
 
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
@@ -186,19 +185,16 @@
             pluginController.Delete(selectedPlugin);
         }
 
-        public int UpdateInfoForAllPluginsFromServer()
+        public int UpdateInfoForAllPluginsFromServer(IPluginMatcher pluginMatcher)
         {
             var plugins = pluginController.Plugins;
 
-            var matcher = new PluginMatcher(
-                pluginController, new RemotePluginFileController(EntityFactory.Instance.RemoteEntities));
-
-            return plugins.Count(matcher.MatchAndUpdate);
+            return plugins.Count(pluginMatcher.MatchAndUpdate);
         }
 
         public int NumberOfRecognizedPlugins(UserFolder userFolder)
         {
-            return pluginController.Plugins.Count(x => x.RemotePluginId > 0 && x.UserFolder.Id == userFolder.Id);
+            return pluginController.Plugins.Count(x => x.RemotePlugin != null && x.UserFolder.Id == userFolder.Id);
         }
 
         public UserFolder GetMainUserFolder()

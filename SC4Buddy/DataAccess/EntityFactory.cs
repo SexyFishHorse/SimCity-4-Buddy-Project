@@ -9,12 +9,8 @@
 
         private Entities entities;
 
-        private RemoteEntities remoteEntities;
-
         private EntityFactory()
         {
-            RemoteEntities = CreateRemoteEntities();
-
             Entities = CreateEntities();
         }
 
@@ -37,29 +33,6 @@
             {
                 entities = value;
             }
-        }
-
-        public RemoteEntities RemoteEntities
-        {
-            get
-            {
-                if (remoteEntities == null || remoteEntities.Disposed)
-                {
-                    remoteEntities = CreateRemoteEntities();
-                }
-
-                return remoteEntities;
-            }
-
-            private set
-            {
-                remoteEntities = value;
-            }
-        }
-
-        private RemoteEntities CreateRemoteEntities()
-        {
-            return new RemoteEntities();
         }
 
         private Entities CreateEntities()

@@ -56,7 +56,9 @@
                         new Sc4Buddy(
                             userFolderController,
                             new PluginController(EntityFactory.Instance.Entities),
-                            new PluginGroupController(EntityFactory.Instance.Entities)));
+                            new PluginGroupController(EntityFactory.Instance.Entities),
+                            null,
+                            null));
                 }
             }
             catch (Exception ex)
