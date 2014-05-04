@@ -150,6 +150,7 @@
     <Compile Include="Model\ValidationResult.cs" />
     <Compile Include="Remote\IDependencyChecker.cs" />
     <Compile Include="Remote\IPluginMatcher.cs" />
+    <Compile Include="Remote\PluginMatcher.cs" />
     <Compile Include="View\Application\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
