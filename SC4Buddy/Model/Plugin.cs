@@ -8,7 +8,8 @@
 
     using Newtonsoft.Json;
 
-    using NIHEI.SC4Buddy.Entities.Remote;
+    using RemotePlugin = Irradiated.Sc4Buddy.ApiClient.Model.Plugin;
+    using RemotePluginFile = Irradiated.Sc4Buddy.ApiClient.Model.PluginFile;
 
     [JsonObject(MemberSerialization.OptIn)]
     public class Plugin : ModelBase
@@ -43,11 +44,11 @@
         }
 
         [JsonProperty]
-        public int RemotePluginId
+        public Guid? RemotePluginId
         {
             get
             {
-                return RemotePlugin != null ? RemotePlugin.Id : 0;
+                return RemotePlugin != null ? RemotePlugin.Id : new Guid?();
             }
         }
 

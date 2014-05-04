@@ -8,8 +8,10 @@ namespace NIHEI.SC4Buddy.View.Plugins
     using System.Linq;
 
     using NIHEI.Common.UI.Elements;
-    using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Localization;
+
+    using RemotePlugin = Irradiated.Sc4Buddy.ApiClient.Model.Plugin;
+    using RemotePluginFile = Irradiated.Sc4Buddy.ApiClient.Model.PluginFile;
 
     public partial class MissingDependenciesForm : Form
     {
@@ -49,8 +51,8 @@ namespace NIHEI.SC4Buddy.View.Plugins
             foreach (var remotePlugin in dependencies)
             {
                 var item = new ListViewItemWithObjectValue<RemotePlugin>(remotePlugin.Name, remotePlugin);
-                item.SubItems.Add(remotePlugin.AuthorId > 0 ? remotePlugin.Author.Name : LocalizationStrings.Unknown);
-                item.SubItems.Add(remotePlugin.Link);
+                item.SubItems.Add(remotePlugin.AuthorName);
+                item.SubItems.Add(remotePlugin.LinkToDownloadPage);
                 item.SubItems.Add(visitedDependencies.Contains(remotePlugin) ? LocalizationStrings.Visited : string.Empty);
                 dependencyListView.Items.Add(item);
             }
@@ -83,7 +85,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private void GoToDownloadButtonClick(object sender, EventArgs e)
         {
-            Process.Start(selectedItem.Link);
+            Process.Start(selectedItem.LinkToDownloadPage);
             if (!visitedDependencies.Contains(selectedItem))
             {
                 visitedDependencies.Add(selectedItem);

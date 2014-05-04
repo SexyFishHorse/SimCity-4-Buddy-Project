@@ -134,37 +134,39 @@
                 }
 
                 uninstallButton.Enabled = true;
-                updateInfoButton.Enabled = selectedPlugin.RemotePluginId == 0;
-                reportPluginLinkLabel.Visible = selectedPlugin.RemotePluginId != 0;
+                updateInfoButton.Enabled = selectedPlugin.RemotePlugin != null;
+                reportPluginLinkLabel.Visible = selectedPlugin.RemotePlugin != null;
                 moveOrCopyButton.Enabled = true;
                 disableFilesButton.Enabled = true;
 
-                if (selectedPlugin.RemotePlugin != null
-                    && selectedPlugin.RemotePlugin.Reports != null
-                    && selectedPlugin.RemotePlugin.Reports.Any(x => x.Approved))
-                {
-                    var output = new StringBuilder();
+                // TODO: Show reports
+                ////if (selectedPlugin.RemotePlugin != null
+                ////    && selectedPlugin.RemotePlugin.Reports != null
+                ////    && selectedPlugin.RemotePlugin.Reports.Any(x => x.Approved))
+                ////{
+                ////    var output = new StringBuilder();
 
-                    foreach (var report in selectedPlugin.RemotePlugin.Reports
-                        .Where(x => x.Approved)
-                        .OrderByDescending(x => x.Date))
-                    {
-                        var message = string.Format(
-                            "[{0}] - {1}",
-                            report.Date.ToString(CultureInfo.CurrentUICulture.DateTimeFormat),
-                            report.Body);
+                ////    foreach (var report in selectedPlugin.RemotePlugin.Reports
+                ////        .Where(x => x.Approved)
+                ////        .OrderByDescending(x => x.Date))
+                ////    {
+                ////        var message = string.Format(
+                ////            "[{0}] - {1}",
+                ////            report.Date.ToString(CultureInfo.CurrentUICulture.DateTimeFormat),
+                ////            report.Body);
 
-                        output.AppendLine(message);
-                        output.AppendLine();
-                    }
+                ////        output.AppendLine(message);
+                ////        output.AppendLine();
+                ////    }
 
-                    errorTextBox.Text = output.ToString();
-                    pluginInfoSplitContainer.Panel2Collapsed = false;
-                }
-                else
-                {
-                    pluginInfoSplitContainer.Panel2Collapsed = true;
-                }
+                ////    errorTextBox.Text = output.ToString();
+                ////    pluginInfoSplitContainer.Panel2Collapsed = false;
+                ////}
+                ////else
+                ////{
+                ////    pluginInfoSplitContainer.Panel2Collapsed = true;
+                ////}
+                pluginInfoSplitContainer.Panel2Collapsed = true;
             }
             else
             {

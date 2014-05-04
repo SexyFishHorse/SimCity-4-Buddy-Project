@@ -5,6 +5,9 @@
 
     using NIHEI.SC4Buddy.Entities.Remote;
 
+    using RemotePlugin = Irradiated.Sc4Buddy.ApiClient.Model.Plugin;
+    using RemotePluginFile = Irradiated.Sc4Buddy.ApiClient.Model.PluginFile;
+
     public partial class ReportPluginForm : Form
     {
 
@@ -24,7 +27,7 @@
         {
             var report = new PluginReport { Approved = false, Body = reportTextBox.Text.Trim(), Date = DateTime.UtcNow };
 
-            Plugin.Reports.Add(report);
+            throw new NotImplementedException();
 
             Close();
         }

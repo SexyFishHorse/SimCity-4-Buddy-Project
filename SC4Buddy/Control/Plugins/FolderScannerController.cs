@@ -10,9 +10,11 @@
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Remote;
+
+    using RemotePlugin = Irradiated.Sc4Buddy.ApiClient.Model.Plugin;
+    using RemotePluginFile = Irradiated.Sc4Buddy.ApiClient.Model.PluginFile;
 
     public class FolderScannerController
     {
@@ -87,17 +89,17 @@
                                      };
 
                 Plugin plugin;
-                if (plugins.ContainsKey(remotePlugin.Value.Link))
+                if (plugins.ContainsKey(remotePlugin.Value.LinkToDownloadPage))
                 {
-                    plugin = plugins[remotePlugin.Value.Link];
+                    plugin = plugins[remotePlugin.Value.LinkToDownloadPage];
                 }
                 else
                 {
                     plugin = new Plugin
                                  {
-                                     Author = remotePlugin.Value.Author.Name,
+                                     Author = remotePlugin.Value.AuthorName,
                                      Description = remotePlugin.Value.Description,
-                                     Link = new Url(remotePlugin.Value.Link),
+                                     Link = new Url(remotePlugin.Value.LinkToDownloadPage),
                                      RemotePlugin = remotePlugin.Value,
                                      UserFolder = userFolder
                                  };

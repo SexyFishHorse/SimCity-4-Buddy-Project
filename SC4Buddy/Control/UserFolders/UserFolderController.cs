@@ -194,7 +194,7 @@
 
         public int NumberOfRecognizedPlugins(UserFolder userFolder)
         {
-            return pluginController.Plugins.Count(x => x.RemotePluginId > 0 && x.UserFolder.Id == userFolder.Id);
+            return pluginController.Plugins.Count(x => x.RemotePlugin != null && x.UserFolder.Id == userFolder.Id);
         }
 
         public UserFolder GetMainUserFolder()
