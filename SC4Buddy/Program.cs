@@ -17,6 +17,7 @@
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
+    using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Application;
 
     public static class Program
@@ -57,7 +58,7 @@
                             userFolderController,
                             new PluginController(EntityFactory.Instance.Entities),
                             new PluginGroupController(EntityFactory.Instance.Entities),
-                            null,
+                            new PluginMatcher(),
                             null));
                 }
             }
