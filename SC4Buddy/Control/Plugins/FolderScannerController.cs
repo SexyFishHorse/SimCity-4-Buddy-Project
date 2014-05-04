@@ -9,7 +9,6 @@
     using log4net;
 
     using NIHEI.Common.IO;
-    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Entities.Remote;
     using NIHEI.SC4Buddy.Model;
@@ -58,11 +57,9 @@
         public void AutoGroupKnownFiles(
             UserFolder userFolder,
             PluginController pluginController,
-            RemotePluginFileController remotePluginFileController)
+            IPluginMatcher pluginMatcher)
         {
-            var matcher = new PluginMatcher(pluginController, remotePluginFileController);
-
-            var fileDictionary = GetRemotePluginFileMatches(matcher, NewFiles);
+            var fileDictionary = GetRemotePluginFileMatches(pluginMatcher, NewFiles);
 
             var plugins = GroupFilesIntoPlugins(userFolder, fileDictionary, NewFiles);
 
@@ -117,7 +114,7 @@
         }
 
         private Dictionary<string, RemotePlugin> GetRemotePluginFileMatches(
-            PluginMatcher matcher,
+            IPluginMatcher matcher,
             IEnumerable<string> files)
         {
             var fileDictionary = new Dictionary<string, RemotePlugin>();

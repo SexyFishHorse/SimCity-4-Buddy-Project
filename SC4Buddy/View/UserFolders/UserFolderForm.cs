@@ -11,7 +11,6 @@
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Control.Remote;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
@@ -32,13 +31,19 @@
 
         private readonly UserFolderController userFolderController;
 
+        private readonly IPluginMatcher pluginMatcher;
+
+        private readonly IDependencyChecker dependencyChecker;
+
         private Plugin selectedPlugin;
 
         public UserFolderForm(
             PluginController pluginController,
             PluginGroupController pluginGroupController,
             UserFolderController userFolderController,
-            UserFolder userFolder)
+            UserFolder userFolder,
+            IPluginMatcher pluginMatcher,
+            IDependencyChecker dependencyChecker)
         {
             this.pluginGroupController = pluginGroupController;
             this.pluginController = pluginController;
@@ -63,6 +68,8 @@
             }
 
             this.userFolder = userFolder;
+            this.pluginMatcher = pluginMatcher;
+            this.dependencyChecker = dependencyChecker;
             InitializeComponent();
         }
 
@@ -245,7 +252,7 @@
                 return;
             }
 
-            new InstallPluginsForm(pluginController, files, userFolder).ShowDialog(this);
+            new InstallPluginsForm(pluginController, files, userFolder, pluginMatcher).ShowDialog(this);
 
             RepopulateInstalledPluginsListView();
 
@@ -274,7 +281,8 @@
                 new FolderScannerController(new PluginFileController(EntityFactory.Instance.Entities)),
                 pluginController,
                 pluginGroupController,
-                userFolder).ShowDialog(this);
+                userFolder,
+                pluginMatcher).ShowDialog(this);
             RepopulateInstalledPluginsListView();
 
             if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.AllowDependencyCheck)
@@ -322,7 +330,7 @@
 
         private void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
         {
-            var numUpdated = userFolderController.UpdateInfoForAllPluginsFromServer();
+            var numUpdated = userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
             RepopulateInstalledPluginsListView();
 
             MessageBox.Show(
@@ -341,7 +349,7 @@
 
         private void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            userFolderController.UpdateInfoForAllPluginsFromServer();
+            userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
 
             var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolder);
 
@@ -357,9 +365,7 @@
                 return;
             }
 
-            var checker = new DependencyChecker(
-                userFolderController, new RemotePluginController(EntityFactory.Instance.RemoteEntities));
-            var missingDependencies = checker.CheckDependencies(userFolder);
+            var missingDependencies = dependencyChecker.CheckDependencies(userFolder);
 
             if (missingDependencies.Any())
             {
@@ -437,13 +443,13 @@
 
         private void ReportPluginLinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var dialog = new ReportPluginForm(new RemotePluginController(EntityFactory.Instance.RemoteEntities))
-                             {
-                                 Plugin
-                                     =
-                                     selectedPlugin
-                                     .RemotePlugin
-                             };
+            var dialog = new ReportPluginForm
+            {
+                Plugin
+                    =
+                    selectedPlugin
+                    .RemotePlugin
+            };
 
             if (dialog.ShowDialog() == DialogResult.OK)
             {

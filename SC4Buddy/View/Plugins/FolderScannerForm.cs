@@ -10,10 +10,9 @@
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Control.Remote;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class FolderScannerForm : Form
@@ -28,11 +27,14 @@
 
         private readonly UserFolder userFolder;
 
+        private readonly IPluginMatcher pluginMatcher;
+
         public FolderScannerForm(
             FolderScannerController folderScannerController,
             PluginController pluginController,
             PluginGroupController pluginGroupController,
-            UserFolder userFolder)
+            UserFolder userFolder,
+            IPluginMatcher pluginMatcher)
         {
             this.folderScannerController = folderScannerController;
 
@@ -41,6 +43,7 @@
             this.pluginGroupController = pluginGroupController;
 
             this.userFolder = userFolder;
+            this.pluginMatcher = pluginMatcher;
 
             InitializeComponent();
 
@@ -441,7 +444,7 @@
             folderScannerController.AutoGroupKnownFiles(
                 userFolder,
                 pluginController,
-                new RemotePluginFileController(EntityFactory.Instance.RemoteEntities));
+                pluginMatcher);
             RepopulateNewFilesListView();
         }
 

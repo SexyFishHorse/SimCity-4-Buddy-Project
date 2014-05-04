@@ -115,9 +115,6 @@
     <Compile Include="Control\Plugins\FolderScannerController.cs" />
     <Compile Include="Control\Plugins\PluginCopier.cs" />
     <Compile Include="Control\Plugins\PluginGroupController.cs" />
-    <Compile Include="Control\Remote\RemotePluginController.cs" />
-    <Compile Include="Control\Remote\AuthorController.cs" />
-    <Compile Include="Control\Remote\RemotePluginFileController.cs" />
     <Compile Include="Control\SettingsController.cs" />
     <Compile Include="Control\UserFolders\FolderScanner.cs" />
     <Compile Include="Control\Plugins\PluginController.cs" />
@@ -158,7 +155,8 @@
     <Compile Include="Model\SessionEventArgs.cs" />
     <Compile Include="Model\UserFolder.cs" />
     <Compile Include="Model\ValidationResult.cs" />
-    <Compile Include="Remote\PluginMatcher.cs" />
+    <Compile Include="Remote\IDependencyChecker.cs" />
+    <Compile Include="Remote\IPluginMatcher.cs" />
     <Compile Include="View\Application\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -196,7 +194,6 @@
     <Compile Include="View\Plugins\MissingDependenciesForm.Designer.cs">
       <DependentUpon>MissingDependenciesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Remote\DependencyChecker.cs" />
     <Compile Include="View\Plugins\MoveOrCopyForm.cs">
       <SubType>Form</SubType>
     </Compile>
