@@ -7,7 +7,10 @@
     using System.Linq;
     using System.Net.NetworkInformation;
     using System.Text;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
+
+    using Irradiated.Sc4Buddy.ApiClient.Model;
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
@@ -20,6 +23,8 @@
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.Helpers;
     using NIHEI.SC4Buddy.View.Plugins;
+
+    using Plugin = NIHEI.SC4Buddy.Model.Plugin;
 
     public partial class UserFolderForm : Form
     {
@@ -134,8 +139,9 @@
                 }
 
                 uninstallButton.Enabled = true;
-                updateInfoButton.Enabled = selectedPlugin.RemotePlugin != null;
-                reportPluginLinkLabel.Visible = selectedPlugin.RemotePlugin != null;
+                updateInfoButton.Enabled = selectedPlugin.RemotePlugin == null;
+                ////reportPluginLinkLabel.Visible = selectedPlugin.RemotePlugin != null;
+                reportPluginLinkLabel.Visible = false;
                 moveOrCopyButton.Enabled = true;
                 disableFilesButton.Enabled = true;
 
@@ -330,18 +336,41 @@
             NonPluginFilesScannerUiHelper.ShowRemovalSummary(this, numFiles, numFolders);
         }
 
-        private void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
+        private async void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
         {
-            var numUpdated = userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
-            RepopulateInstalledPluginsListView();
+            await UpdateInfoForAllPluginsFromServer();
+        }
 
-            MessageBox.Show(
-                this,
-                string.Format(LocalizationStrings.InformationForNumPluginsWereUpdated, numUpdated),
-                LocalizationStrings.PluginInformationUpdated,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1);
+        private async Task UpdateInfoForAllPluginsFromServer()
+        {
+            try
+            {
+                var numUpdated = await userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
+                userFolderController.SaveChanges();
+                RepopulateInstalledPluginsListView();
+
+                MessageBox.Show(
+                    this,
+                    string.Format(LocalizationStrings.InformationForNumPluginsWereUpdated, numUpdated),
+                    LocalizationStrings.PluginInformationUpdated,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
+            }
+            catch (Sc4BuddyClientException ex)
+            {
+                var dialogResult = MessageBox.Show(
+                    this,
+                    string.Format(LocalizationStrings.UnableToUpdatePluginsFromServerTheFollowingErrorWasReturned, ex.Message),
+                    LocalizationStrings.ErrorWhileTryingToUpdatePlugins,
+                    MessageBoxButtons.RetryCancel,
+                    MessageBoxIcon.Warning);
+
+                if (dialogResult == DialogResult.Retry)
+                {
+                    UpdateInfoForAllPluginsFromServer();
+                }
+            }
         }
 
         private void UserFolderFormActivated(object sender, EventArgs e)

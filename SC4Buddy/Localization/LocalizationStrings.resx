@@ -576,4 +576,12 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="AreYouSureYouWantToCloseThisForm" xml:space="preserve">
     <value>Are you sure you want to close this form? Any unsaved changes will be lost</value>
   </data>
+  <data name="ErrorWhileTryingToUpdatePlugins" xml:space="preserve">
+    <value>Error while trying to update plugins.</value>
+  </data>
+  <data name="UnableToUpdatePluginsFromServerTheFollowingErrorWasReturned" xml:space="preserve">
+    <value>Unable to update plugins from server. The following error was retuned:
+{0}</value>
+    <comment>{0} is the actual error message.</comment>
+  </data>
 </root>
