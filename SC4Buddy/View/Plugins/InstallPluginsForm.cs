@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
     using System.Net.NetworkInformation;
@@ -184,7 +185,13 @@
                     {
                         if (NetworkInterface.GetIsNetworkAvailable() && Settings.Default.FetchInfoFromRemote)
                         {
-                            var matched = tempPluginInfo.Where(pluginMatcher.MatchAndUpdate).ToList();
+                            var matched = new Collection<Plugin>();
+                            foreach (
+                                var plugin in
+                                    tempPluginInfo.Where(plugin => pluginMatcher.MatchAndUpdateAsync(plugin).Result))
+                            {
+                                matched.Add(plugin);
+                            }
 
                             foreach (var match in matched)
                             {
