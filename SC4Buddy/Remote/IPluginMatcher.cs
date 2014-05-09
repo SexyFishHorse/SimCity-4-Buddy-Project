@@ -1,6 +1,8 @@
 ﻿namespace NIHEI.SC4Buddy.Remote
 {
+    using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using NIHEI.SC4Buddy.Model;
 
@@ -9,12 +11,11 @@
 
     public interface IPluginMatcher
     {
-        IEnumerable<RemotePlugin> GetPossibleRemotePlugins(IList<PluginFile> files);
+        Task<bool> MatchAndUpdateAsync(Plugin plugin);
 
-        RemotePlugin GetMostLikelyRemotePlugin(IList<PluginFile> files);
+        Task<IDictionary<string, IEnumerable<RemotePlugin>>> GetMostLikelyRemotePluginsForFilesAsync(
+            IEnumerable<Tuple<string, string>> filePathAndChecksum);
 
-        bool MatchAndUpdate(Plugin plugin);
-
-        RemotePlugin GetMostLikelyRemotePluginForFile(string filePath, string checksum);
+        Task<IEnumerable<RemotePlugin>> GetMostLikelyRemotePluginForFileAsync(string filepath, string checksum);
     }
 }

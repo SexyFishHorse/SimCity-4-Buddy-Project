@@ -123,14 +123,17 @@
 
             foreach (var file in files)
             {
-                var match = matcher.GetMostLikelyRemotePluginForFile(
+                var match = matcher.GetMostLikelyRemotePluginForFileAsync(
                     file,
-                    Md5ChecksumUtility.CalculateChecksum(file).ToHex());
+                    Md5ChecksumUtility.CalculateChecksum(file).ToHex()).Result.ToList();
 
-                if (match != null)
+                if (!match.Any())
                 {
-                    fileDictionary.Add(file, match);
+                    continue;
                 }
+
+                var plugin = match.First();
+                fileDictionary.Add(file, plugin);
             }
 
             return fileDictionary;

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using Microsoft.VisualBasic.FileIO;
 
@@ -185,11 +186,20 @@
             pluginController.Delete(selectedPlugin);
         }
 
-        public int UpdateInfoForAllPluginsFromServer(IPluginMatcher pluginMatcher)
+        public async Task<int> UpdateInfoForAllPluginsFromServer(IPluginMatcher pluginMatcher)
         {
             var plugins = pluginController.Plugins;
 
-            return plugins.Count(pluginMatcher.MatchAndUpdate);
+            var count = 0;
+            foreach (var plugin in plugins)
+            {
+                if (await pluginMatcher.MatchAndUpdateAsync(plugin))
+                {
+                    count++;
+                }
+            }
+
+            return count;
         }
 
         public int NumberOfRecognizedPlugins(UserFolder userFolder)
