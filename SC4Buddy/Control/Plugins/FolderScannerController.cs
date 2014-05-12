@@ -78,43 +78,47 @@
             return true;
         }
 
-        private Dictionary<string, Plugin> GroupFilesIntoPlugins(
+        private IEnumerable<Plugin> GroupFilesIntoPlugins(
             UserFolder userFolder,
             Dictionary<string, RemotePlugin> fileDictionary,
             ICollection<string> allNewFiles)
         {
-            var plugins = new Dictionary<string, Plugin>();
+            var plugins = new Collection<Plugin>();
+            var filesInPlugins = fileDictionary.GroupBy(x => x.Value).ToList();
 
-            foreach (var remotePlugin in fileDictionary)
+            foreach (var pluginGroup in filesInPlugins.Where(x => x.Key != null))
             {
-                var pluginFile = new PluginFile
-                                     {
-                                         Checksum = Md5ChecksumUtility.CalculateChecksum(remotePlugin.Key).ToHex(),
-                                         Path = remotePlugin.Key
-                                     };
+                var remotePlugin = pluginGroup.Key;
 
-                Plugin plugin;
-                if (plugins.ContainsKey(remotePlugin.Value.LinkToDownloadPage))
+                var plugin = new Plugin
                 {
-                    plugin = plugins[remotePlugin.Value.LinkToDownloadPage];
-                }
-                else
+                    Id = Guid.NewGuid(),
+                    Name = remotePlugin.Name,
+                    Description = remotePlugin.Description,
+                    Link = new Url(remotePlugin.LinkToDownloadPage),
+                    Author = remotePlugin.AuthorName,
+                    UserFolder = userFolder,
+                    RemotePlugin = remotePlugin
+                };
+
+                var files = new HashSet<PluginFile>();
+
+                foreach (var filePath in pluginGroup.Select(x => x.Key))
                 {
-                    plugin = new Plugin
-                                 {
-                                     Author = remotePlugin.Value.AuthorName,
-                                     Description = remotePlugin.Value.Description,
-                                     Link = new Url(remotePlugin.Value.LinkToDownloadPage),
-                                     RemotePlugin = remotePlugin.Value,
-                                     UserFolder = userFolder
-                                 };
+                    var pluginFile = new PluginFile
+                    {
+                        Id = Guid.NewGuid(),
+                        Checksum = Md5ChecksumUtility.CalculateChecksum(filePath).ToHex(),
+                        Path = filePath,
+                        Plugin = plugin
+                    };
 
-                    plugins.Add(plugin.Link.ToString(), plugin);
+                    files.Add(pluginFile);
+                    allNewFiles.Remove(filePath);
                 }
 
-                plugin.PluginFiles.Add(pluginFile);
-
-                allNewFiles.Remove(remotePlugin.Key);
+                plugin.PluginFiles = files;
+                plugins.Add(plugin);
             }
 
             return plugins;
