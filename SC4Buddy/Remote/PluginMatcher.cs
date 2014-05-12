@@ -63,7 +63,13 @@
                                           };
 
             var guidCollection = await client.GetPluginsByFileInfoAsync(filenameAndChecksum);
-            var guid = guidCollection.Select(x => x.Value).First();
+            var guid = guidCollection.SelectMany(x => x.Value).ToList();
+
+            if (!guid.Any())
+            {
+                return new Collection<RemotePlugin>();
+            }
+
             var plugins = await client.GetPluginsAsync(guid);
 
             return plugins.Plugins;
