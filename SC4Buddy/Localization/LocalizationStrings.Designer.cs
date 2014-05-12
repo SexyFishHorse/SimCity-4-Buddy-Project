@@ -79,6 +79,16 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured when trying to auto group plugins.
+        ///{0}.
+        /// </summary>
+        internal static string AnErrorOccuredWhenTryingToAutoGroupPlugins {
+            get {
+                return ResourceManager.GetString("AnErrorOccuredWhenTryingToAutoGroupPlugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to close this form? Any unsaved changes will be lost.
         /// </summary>
         internal static string AreYouSureYouWantToCloseThisForm {
@@ -336,6 +346,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string EnterPluginInformation {
             get {
                 return ResourceManager.GetString("EnterPluginInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error during auto grouping of plugins.
+        /// </summary>
+        internal static string ErrorDuringAutoGroupingOfPlugins {
+            get {
+                return ResourceManager.GetString("ErrorDuringAutoGroupingOfPlugins", resourceCulture);
             }
         }
         
@@ -917,6 +936,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scanning folder. This may take a few minutes if you have a very large plugin folder..
+        /// </summary>
+        internal static string ScandingFolderThisMayTakeAFewMinutesIfYouHaveAVeryLargePluginFolder {
+            get {
+                return ResourceManager.GetString("ScandingFolderThisMayTakeAFewMinutesIfYouHaveAVeryLargePluginFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (Click browse to select the games folder).
         /// </summary>
         internal static string SelectGameLocation {
@@ -1129,6 +1157,16 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string ThisWillRemoveNumFilesAndAtLeastNumFolders {
             get {
                 return ResourceManager.GetString("ThisWillRemoveNumFilesAndAtLeastNumFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trying to auto group plugins. This may take a few minutes if you have a large plugin folder or a slow internet connection..
+        /// </summary>
+        internal static string TryingToAutoGroupPluginsThisMayTakeAFewMinutesIfYouHaveALargePluginFolderOrASlowInternetConnection {
+            get {
+                return ResourceManager.GetString("TryingToAutoGroupPluginsThisMayTakeAFewMinutesIfYouHaveALargePluginFolderOrASlowI" +
+                        "nternetConnection", resourceCulture);
             }
         }
         
