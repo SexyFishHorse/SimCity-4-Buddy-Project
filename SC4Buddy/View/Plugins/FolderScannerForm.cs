@@ -6,7 +6,10 @@
     using System.IO;
     using System.Linq;
     using System.Security.Policy;
+    using System.Threading.Tasks;
     using System.Windows.Forms;
+
+    using Irradiated.Sc4Buddy.ApiClient.Model;
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
@@ -14,6 +17,9 @@
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Elements;
+
+    using Plugin = NIHEI.SC4Buddy.Model.Plugin;
+    using PluginFile = NIHEI.SC4Buddy.Model.PluginFile;
 
     public partial class FolderScannerForm : Form
     {
@@ -51,8 +57,8 @@
             fileScannerBackgroundWorker.ProgressChanged += FileScannerBackgroundWorkerOnProgressChanged;
             fileScannerBackgroundWorker.RunWorkerCompleted += delegate
                 {
-                    scanProgressBar.Visible = false;
-                    scanStatusLabel.Visible = false;
+                    statusProgressBar.Visible = false;
+                    statusLabel.Visible = false;
                     scanButton.Enabled = true;
                 };
 
@@ -95,7 +101,7 @@
 
         private void FileScannerBackgroundWorkerOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)
         {
-            scanProgressBar.Value = progressChangedEventArgs.ProgressPercentage;
+            statusProgressBar.Value = progressChangedEventArgs.ProgressPercentage;
         }
 
         private void ScanFolder(object sender, EventArgs e)
@@ -290,8 +296,9 @@
                 // TODO: reload entities
             }
 
-            scanProgressBar.Visible = true;
-            scanStatusLabel.Visible = true;
+            statusProgressBar.Visible = true;
+            statusLabel.Text = LocalizationStrings.ScandingFolderThisMayTakeAFewMinutesIfYouHaveAVeryLargePluginFolder;
+            statusLabel.Visible = true;
             scanButton.Enabled = false;
         }
 
@@ -434,18 +441,45 @@
             ValidatePluginInfo(false);
         }
 
-        private void ScanProgressBarClick(object sender, EventArgs e)
+        private async Task<bool> AutoGroupKnownPlugins()
         {
-            fileScannerBackgroundWorker.CancelAsync();
+            try
+            {
+                statusProgressBar.Visible = true;
+                statusLabel.Text = LocalizationStrings.TryingToAutoGroupPluginsThisMayTakeAFewMinutesIfYouHaveALargePluginFolderOrASlowInternetConnection;
+                statusLabel.Visible = true;
+                autoGroupKnownPlugins.Enabled = false;
+                await folderScannerController.AutoGroupKnownFiles(userFolder, pluginController, pluginMatcher);
+                RepopulateNewFilesListView();
+            }
+            catch (Sc4BuddyClientException ex)
+            {
+                var result = MessageBox.Show(
+                    this,
+                    string.Format(LocalizationStrings.AnErrorOccuredWhenTryingToAutoGroupPlugins, ex.Message),
+                    LocalizationStrings.ErrorDuringAutoGroupingOfPlugins,
+                    MessageBoxButtons.RetryCancel,
+                    MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Retry)
+                {
+                    AutoGroupKnownPlugins();
+                }
+            }
+            finally
+            {
+                statusProgressBar.Visible = false;
+                statusLabel.Text = string.Empty;
+                statusLabel.Visible = true;
+                autoGroupKnownPlugins.Enabled = true;
+            }
+
+            return true;
         }
 
-        private void AutoGroupKnownPluginsClick(object sender, EventArgs e)
+        private async void AutoGroupKnownPluginsClick(object sender, EventArgs e)
         {
-            folderScannerController.AutoGroupKnownFiles(
-                userFolder,
-                pluginController,
-                pluginMatcher);
-            RepopulateNewFilesListView();
+            await AutoGroupKnownPlugins();
         }
 
         private void CloseButtonClick(object sender, EventArgs e)

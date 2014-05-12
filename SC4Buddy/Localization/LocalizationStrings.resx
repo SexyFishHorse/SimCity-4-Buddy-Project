@@ -584,4 +584,17 @@ Note that plugins not known to the central server was not checked.</value>
 {0}</value>
     <comment>{0} is the actual error message.</comment>
   </data>
+  <data name="ScandingFolderThisMayTakeAFewMinutesIfYouHaveAVeryLargePluginFolder" xml:space="preserve">
+    <value>Scanning folder. This may take a few minutes if you have a very large plugin folder.</value>
+  </data>
+  <data name="TryingToAutoGroupPluginsThisMayTakeAFewMinutesIfYouHaveALargePluginFolderOrASlowInternetConnection" xml:space="preserve">
+    <value>Trying to auto group plugins. This may take a few minutes if you have a large plugin folder or a slow internet connection.</value>
+  </data>
+  <data name="AnErrorOccuredWhenTryingToAutoGroupPlugins" xml:space="preserve">
+    <value>An error occured when trying to auto group plugins.
+{0}</value>
+  </data>
+  <data name="ErrorDuringAutoGroupingOfPlugins" xml:space="preserve">
+    <value>Error during auto grouping of plugins</value>
+  </data>
 </root>

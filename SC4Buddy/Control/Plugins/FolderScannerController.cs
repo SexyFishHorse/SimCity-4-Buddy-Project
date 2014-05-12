@@ -2,9 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Security.Policy;
+    using System.Threading.Tasks;
 
     using log4net;
 
@@ -56,84 +59,111 @@
             }
         }
 
-        public void AutoGroupKnownFiles(
+        public async Task<bool> AutoGroupKnownFiles(
             UserFolder userFolder,
             PluginController pluginController,
             IPluginMatcher pluginMatcher)
         {
-            var fileDictionary = GetRemotePluginFileMatches(pluginMatcher, NewFiles);
+            var fileDictionary = await GetRemotePluginFileMatches(pluginMatcher, NewFiles);
 
             var plugins = GroupFilesIntoPlugins(userFolder, fileDictionary, NewFiles);
 
-            foreach (var plugin in plugins.Select(x => x.Value))
+            foreach (var plugin in plugins)
             {
                 pluginController.Add(plugin, false);
             }
 
             pluginController.SaveChanges();
+
+            return true;
         }
 
-        private Dictionary<string, Plugin> GroupFilesIntoPlugins(
+        private IEnumerable<Plugin> GroupFilesIntoPlugins(
             UserFolder userFolder,
             Dictionary<string, RemotePlugin> fileDictionary,
             ICollection<string> allNewFiles)
         {
-            var plugins = new Dictionary<string, Plugin>();
+            var plugins = new Collection<Plugin>();
+            var filesInPlugins = fileDictionary.GroupBy(x => x.Value).ToList();
 
-            foreach (var remotePlugin in fileDictionary)
+            foreach (var pluginGroup in filesInPlugins.Where(x => x.Key != null))
             {
-                var pluginFile = new PluginFile
-                                     {
-                                         Checksum = Md5ChecksumUtility.CalculateChecksum(remotePlugin.Key).ToHex(),
-                                         Path = remotePlugin.Key
-                                     };
+                var remotePlugin = pluginGroup.Key;
 
-                Plugin plugin;
-                if (plugins.ContainsKey(remotePlugin.Value.LinkToDownloadPage))
+                var plugin = new Plugin
                 {
-                    plugin = plugins[remotePlugin.Value.LinkToDownloadPage];
-                }
-                else
+                    Id = Guid.NewGuid(),
+                    Name = remotePlugin.Name,
+                    Description = remotePlugin.Description,
+                    Link = new Url(remotePlugin.LinkToDownloadPage),
+                    Author = remotePlugin.AuthorName,
+                    UserFolder = userFolder,
+                    RemotePlugin = remotePlugin
+                };
+
+                var files = new HashSet<PluginFile>();
+
+                foreach (var filePath in pluginGroup.Select(x => x.Key))
                 {
-                    plugin = new Plugin
-                                 {
-                                     Author = remotePlugin.Value.AuthorName,
-                                     Description = remotePlugin.Value.Description,
-                                     Link = new Url(remotePlugin.Value.LinkToDownloadPage),
-                                     RemotePlugin = remotePlugin.Value,
-                                     UserFolder = userFolder
-                                 };
+                    var pluginFile = new PluginFile
+                    {
+                        Id = Guid.NewGuid(),
+                        Checksum = Md5ChecksumUtility.CalculateChecksum(filePath).ToHex(),
+                        Path = filePath,
+                        Plugin = plugin
+                    };
 
-                    plugins.Add(plugin.Link.ToString(), plugin);
+                    files.Add(pluginFile);
+                    allNewFiles.Remove(filePath);
                 }
 
-                plugin.PluginFiles.Add(pluginFile);
-
-                allNewFiles.Remove(remotePlugin.Key);
+                plugin.PluginFiles = files;
+                plugins.Add(plugin);
             }
 
             return plugins;
         }
 
-        private Dictionary<string, RemotePlugin> GetRemotePluginFileMatches(
+        private async Task<Dictionary<string, RemotePlugin>> GetRemotePluginFileMatches(
             IPluginMatcher matcher,
-            IEnumerable<string> files)
+            ICollection<string> files)
         {
             var fileDictionary = new Dictionary<string, RemotePlugin>();
 
-            foreach (var file in files)
+            var filenamesAndChecksums = new Collection<Tuple<string, string>>();
+
+            foreach (
+                var tuple in
+                    files.Select(file => new FileInfo(file))
+                        .Select(
+                            fileInfo =>
+                            new Tuple<string, string>(
+                                fileInfo.Name,
+                                Md5ChecksumUtility.CalculateChecksum(fileInfo).ToHex())))
             {
-                var match = matcher.GetMostLikelyRemotePluginForFileAsync(
-                    file,
-                    Md5ChecksumUtility.CalculateChecksum(file).ToHex()).Result.ToList();
+                filenamesAndChecksums.Add(tuple);
+            }
 
-                if (!match.Any())
+            var matches = await matcher.GetMostLikelyRemotePluginsForFilesAsync(filenamesAndChecksums);
+
+            foreach (var match in matches)
+            {
+                foreach (var file in files)
                 {
-                    continue;
-                }
+                    var fileInfo = new FileInfo(file);
+                    var key = string.Format(
+                        "{0}+{1}",
+                        fileInfo.Name,
+                        Md5ChecksumUtility.CalculateChecksum(fileInfo).ToHex());
 
-                var plugin = match.First();
-                fileDictionary.Add(file, plugin);
+                    if (key != match.Key)
+                    {
+                        continue;
+                    }
+
+                    fileDictionary.Add(file, match.Value.FirstOrDefault());
+                    break;
+                }
             }
 
             return fileDictionary;
