@@ -124,25 +124,46 @@
             return plugins;
         }
 
-        private Dictionary<string, RemotePlugin> GetRemotePluginFileMatches(
+        private async Task<Dictionary<string, RemotePlugin>> GetRemotePluginFileMatches(
             IPluginMatcher matcher,
-            IEnumerable<string> files)
+            ICollection<string> files)
         {
             var fileDictionary = new Dictionary<string, RemotePlugin>();
 
-            foreach (var file in files)
+            var filenamesAndChecksums = new Collection<Tuple<string, string>>();
+
+            foreach (
+                var tuple in
+                    files.Select(file => new FileInfo(file))
+                        .Select(
+                            fileInfo =>
+                            new Tuple<string, string>(
+                                fileInfo.Name,
+                                Md5ChecksumUtility.CalculateChecksum(fileInfo).ToHex())))
             {
-                var match = matcher.GetMostLikelyRemotePluginForFileAsync(
-                    file,
-                    Md5ChecksumUtility.CalculateChecksum(file).ToHex()).Result.ToList();
+                filenamesAndChecksums.Add(tuple);
+            }
 
-                if (!match.Any())
+            var matches = await matcher.GetMostLikelyRemotePluginsForFilesAsync(filenamesAndChecksums);
+
+            foreach (var match in matches)
+            {
+                foreach (var file in files)
                 {
-                    continue;
-                }
+                    var fileInfo = new FileInfo(file);
+                    var key = string.Format(
+                        "{0}+{1}",
+                        fileInfo.Name,
+                        Md5ChecksumUtility.CalculateChecksum(fileInfo).ToHex());
 
-                var plugin = match.First();
-                fileDictionary.Add(file, plugin);
+                    if (key != match.Key)
+                    {
+                        continue;
+                    }
+
+                    fileDictionary.Add(file, match.Value.FirstOrDefault());
+                    break;
+                }
             }
 
             return fileDictionary;
