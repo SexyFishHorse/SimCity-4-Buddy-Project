@@ -2,9 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Security.Policy;
+    using System.Threading.Tasks;
 
     using log4net;
 
@@ -56,21 +59,23 @@
             }
         }
 
-        public void AutoGroupKnownFiles(
+        public async Task<bool> AutoGroupKnownFiles(
             UserFolder userFolder,
             PluginController pluginController,
             IPluginMatcher pluginMatcher)
         {
-            var fileDictionary = GetRemotePluginFileMatches(pluginMatcher, NewFiles);
+            var fileDictionary = await GetRemotePluginFileMatches(pluginMatcher, NewFiles);
 
             var plugins = GroupFilesIntoPlugins(userFolder, fileDictionary, NewFiles);
 
-            foreach (var plugin in plugins.Select(x => x.Value))
+            foreach (var plugin in plugins)
             {
                 pluginController.Add(plugin, false);
             }
 
             pluginController.SaveChanges();
+
+            return true;
         }
 
         private Dictionary<string, Plugin> GroupFilesIntoPlugins(
