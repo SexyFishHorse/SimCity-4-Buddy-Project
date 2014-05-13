@@ -267,6 +267,15 @@
                 }
             }
 
+            RenderMode renderMode;
+
+            if (Enum.TryParse(Settings.Default.LauncherRenderMode, out renderMode))
+            {
+                output.Add(GetStringForRenderMode(renderMode));
+            }
+
+            output.Add(GetStringForWindowMode(Settings.Default.LauncherWindowMode));
+
             return output;
         }
 
