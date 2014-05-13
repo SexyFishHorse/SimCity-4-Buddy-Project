@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Irradiated.Sc4Buddy.ApiClient;
@@ -25,6 +26,26 @@
         public async Task<IEnumerable<RemotePlugin>> CheckDependenciesAsync(UserFolder userFolder)
         {
             throw new NotImplementedException();
+        }
+
+        private HashSet<Guid> GetAllKnownPluginGuids(UserFolder userFolder)
+        {
+            var knownUserFolderPlugins = userFolder.Plugins.Where(x => x.RemotePlugin != null);
+            var knownMainPlugins = mainUserFolder.Plugins.Where(x => x.RemotePlugin != null);
+
+            var knownPlugins = new HashSet<Guid>();
+
+            foreach (var plugin in knownMainPlugins)
+            {
+                knownPlugins.Add(plugin.RemotePlugin.Id);
+            }
+
+            foreach (var plugin in knownUserFolderPlugins)
+            {
+                knownPlugins.Add(plugin.RemotePlugin.Id);
+            }
+
+            return knownPlugins;
         }
     }
 }
