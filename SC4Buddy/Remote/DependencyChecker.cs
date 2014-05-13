@@ -25,7 +25,25 @@
 
         public async Task<IEnumerable<RemotePlugin>> CheckDependenciesAsync(UserFolder userFolder)
         {
-            throw new NotImplementedException();
+            var knownPlugins = GetAllKnownPluginGuids(userFolder);
+
+            var pluginsWithDependencies = userFolder.Plugins
+                .Where(x => x.RemotePlugin != null)
+                .Where(x => x.RemotePlugin.PluginDependencies != null)
+                .Where(x => x.RemotePlugin.PluginDependencies.Any());
+
+            var missingDependencyGuids = new HashSet<Guid>();
+
+            foreach (var dependency in pluginsWithDependencies
+                .SelectMany(x => x.RemotePlugin.PluginDependencies)
+                .Where(dependency => !knownPlugins.Contains(dependency)))
+            {
+                missingDependencyGuids.Add(dependency);
+            }
+
+            var plugins = await client.GetPluginsAsync(missingDependencyGuids);
+
+            return plugins.Plugins;
         }
 
         private HashSet<Guid> GetAllKnownPluginGuids(UserFolder userFolder)
