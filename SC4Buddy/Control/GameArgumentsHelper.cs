@@ -8,10 +8,10 @@
     using System.Text;
     using System.Text.RegularExpressions;
 
+    using log4net;
+
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
-
-    using log4net;
 
     public class GameArgumentsHelper
     {
@@ -53,27 +53,47 @@
             Low = 1, Medium = 2, High = 3
         }
 
-        protected string GetStringForAudio(bool enabled)
+        public string GetArgumentString(UserFolder selectedUserFolder)
         {
-            return string.Format("-audio:{0}", (enabled ? "on" : "off"));
+            var arguments = new List<string>();
+
+            arguments.AddRange(GetAudioArguments());
+
+            arguments.AddRange(GetVideoArguments());
+
+            arguments.AddRange(GetPerformanceArguments());
+
+            arguments.AddRange(GetOtherArguments());
+
+            if (selectedUserFolder != null)
+            {
+                arguments.Add(GetStringForUserDir(selectedUserFolder));
+            }
+
+            return string.Join(" ", arguments.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray());
         }
 
-        protected string GetStringForMusic(bool enabled)
+        private string GetStringForAudio(bool enabled)
         {
-            return string.Format("-music:{0}", (enabled ? "on" : "off"));
+            return string.Format("-audio:{0}", enabled ? "on" : "off");
         }
 
-        protected string GetStringForSounds(bool enabled)
+        private string GetStringForMusic(bool enabled)
         {
-            return string.Format("-sounds:{0}", (enabled ? "on" : "off"));
+            return string.Format("-music:{0}", enabled ? "on" : "off");
         }
 
-        protected string GetStringForCustomResolution(bool enabled)
+        private string GetStringForSounds(bool enabled)
         {
-            return string.Format("-customResolution:{0}", (enabled ? "enabled" : "disabled"));
+            return string.Format("-sounds:{0}", enabled ? "on" : "off");
         }
 
-        protected string GetStringForResolution(string widthTimesHeight, bool depth32)
+        private string GetStringForCustomResolution(bool enabled)
+        {
+            return string.Format("-customResolution:{0}", enabled ? "enabled" : "disabled");
+        }
+
+        private string GetStringForResolution(string widthTimesHeight, bool depth32)
         {
             var regEx = new Regex(@"\d+x\d+");
             if (!regEx.IsMatch(widthTimesHeight))
@@ -81,15 +101,15 @@
                 throw new ArgumentException(@"Must be in the format \d+x\d+", widthTimesHeight);
             }
 
-            return string.Format("-r{0}x{1}", widthTimesHeight, (depth32 ? "32" : "16"));
+            return string.Format("-r{0}x{1}", widthTimesHeight, depth32 ? "32" : "16");
         }
 
-        protected string GetStringForWindowMode(bool enabled)
+        private string GetStringForWindowMode(bool enabled)
         {
             return enabled ? "-w" : "-f";
         }
 
-        protected string GetStringForRenderMode(RenderMode renderMode)
+        private string GetStringForRenderMode(RenderMode renderMode)
         {
             var builder = new StringBuilder("-d:");
             switch (renderMode)
@@ -108,12 +128,12 @@
             return builder.ToString();
         }
 
-        protected string GetStringForCustomCursors(CursorColorDepth cursorColorDepth)
+        private string GetStringForCustomCursors(CursorColorDepth cursorColorDepth)
         {
             return "-customCursors:" + (cursorColorDepth == CursorColorDepth.SystemCursors ? "enabled" : "disabled");
         }
 
-        protected string GetStringForCursors(CursorColorDepth cursorColorDepth)
+        private string GetStringForCursors(CursorColorDepth cursorColorDepth)
         {
             var builder = new StringBuilder("-cursors:");
             switch (cursorColorDepth)
@@ -140,12 +160,12 @@
             return builder.ToString();
         }
 
-        protected string GetStringForNumberOfCpus(int numCpus)
+        private string GetStringForNumberOfCpus(int numCpus)
         {
             return numCpus > 0 ? string.Format("-cpuCount:{0}", numCpus) : string.Empty;
         }
 
-        protected string GetStringForCpuPriority(CpuPriority priority)
+        private string GetStringForCpuPriority(CpuPriority priority)
         {
             var builder = new StringBuilder("-cpuPriority:");
             switch (priority)
@@ -164,69 +184,49 @@
             return builder.ToString();
         }
 
-        protected string GetStringForIntroSequence(bool enabled)
+        private string GetStringForIntroSequence(bool enabled)
         {
-            return string.Format("-intro:{0}", (enabled ? "on" : "off"));
+            return string.Format("-intro:{0}", enabled ? "on" : "off");
         }
 
-        protected string GetStringForPauseWhenMinimized(bool enabled)
+        private string GetStringForPauseWhenMinimized(bool enabled)
         {
             return enabled ? "-gp" : string.Empty;
         }
 
-        protected string GetStringForExceptionHandling(bool enabled)
+        private string GetStringForExceptionHandling(bool enabled)
         {
-            return string.Format("-exceptionHandling:{0}", (enabled ? "on" : "off"));
+            return string.Format("-exceptionHandling:{0}", enabled ? "on" : "off");
         }
 
-        protected string GetStringForBackgroundLoading(bool enabled)
+        private string GetStringForBackgroundLoading(bool enabled)
         {
-            return string.Format("-backgroundLoader:{0}", (enabled ? "on" : "off"));
+            return string.Format("-backgroundLoader:{0}", enabled ? "on" : "off");
         }
 
-        protected string GetStringForIgnoreMissingModels(bool enabled)
+        private string GetStringForIgnoreMissingModels(bool enabled)
         {
-            return string.Format("-ignoreMissingModelDataBugs:{0}", (enabled ? "on" : "off"));
+            return string.Format("-ignoreMissingModelDataBugs:{0}", enabled ? "on" : "off");
         }
 
-        protected string GetStringForImeEnabled(bool enabled)
+        private string GetStringForImeEnabled(bool enabled)
         {
-            return string.Format("-ime:{0}", (enabled ? "enabled" : "disabled"));
+            return string.Format("-ime:{0}", enabled ? "enabled" : "disabled");
         }
 
-        protected string GetStringForWriteLog(bool enabled)
+        private string GetStringForWriteLog(bool enabled)
         {
-            return string.Format("-writeLog:" + (enabled ? "enabled" : "disabled"));
+            return string.Format("-writeLog:{0}", enabled ? "enabled" : "disabled");
         }
 
-        protected string GetStringForLanguage(string language)
+        private string GetStringForLanguage(string language)
         {
             return string.Format("-l:{0}", language);
         }
 
-        protected string GetStringForUserDir(UserFolder selectedUserFolder)
+        private string GetStringForUserDir(UserFolder selectedUserFolder)
         {
             return string.Format("-userDir:\"{0}\\\"", selectedUserFolder.FolderPath);
-        }
-
-        public string GetArgumentString(UserFolder selectedUserFolder)
-        {
-            var arguments = new List<string>();
-
-            arguments.AddRange(GetAudioArguments());
-
-            arguments.AddRange(GetVideoArguments());
-
-            arguments.AddRange(GetPerformanceArguments());
-
-            arguments.AddRange(GetOtherArguments());
-
-            if (selectedUserFolder != null)
-            {
-                arguments.Add(GetStringForUserDir(selectedUserFolder));
-            }
-
-            return string.Join(" ", arguments.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray());
         }
 
         private IEnumerable<string> GetAudioArguments()
@@ -302,7 +302,7 @@
             return output;
         }
 
-        public IEnumerable<string> GetOtherArguments()
+        private IEnumerable<string> GetOtherArguments()
         {
             var output = new Collection<string>
                              {
