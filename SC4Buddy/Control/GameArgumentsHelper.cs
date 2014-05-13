@@ -8,10 +8,10 @@
     using System.Text;
     using System.Text.RegularExpressions;
 
+    using log4net;
+
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
-
-    using log4net;
 
     public class GameArgumentsHelper
     {
@@ -24,13 +24,13 @@
             Bits32 = 2
         }
 
-        public enum RenderMode
+        public enum CpuPriority
         {
-            OpenGl = 1,
+            Low = 1,
 
-            DirectX = 2,
+            Medium = 2,
 
-            Software = 3
+            High = 3
         }
 
         public enum CursorColorDepth
@@ -48,72 +48,118 @@
             SystemCursors = 6
         }
 
-        public enum CpuPriority
+        public enum RenderMode
         {
-            Low = 1, Medium = 2, High = 3
+            OpenGl = 1,
+
+            DirectX = 2,
+
+            Software = 3
         }
 
-        protected string GetStringForAudio(bool enabled)
+        public string GetArgumentString(UserFolder selectedUserFolder)
         {
-            return string.Format("-audio:{0}", (enabled ? "on" : "off"));
-        }
+            var arguments = new List<string>();
+            arguments.AddRange(GetAudioArguments());
+            arguments.AddRange(GetVideoArguments());
+            arguments.AddRange(GetPerformanceArguments());
+            arguments.AddRange(GetOtherArguments());
 
-        protected string GetStringForMusic(bool enabled)
-        {
-            return string.Format("-music:{0}", (enabled ? "on" : "off"));
-        }
-
-        protected string GetStringForSounds(bool enabled)
-        {
-            return string.Format("-sounds:{0}", (enabled ? "on" : "off"));
-        }
-
-        protected string GetStringForCustomResolution(bool enabled)
-        {
-            return string.Format("-customResolution:{0}", (enabled ? "enabled" : "disabled"));
-        }
-
-        protected string GetStringForResolution(string widthTimesHeight, bool depth32)
-        {
-            var regEx = new Regex(@"\d+x\d+");
-            if (!regEx.IsMatch(widthTimesHeight))
+            if (selectedUserFolder != null)
             {
-                throw new ArgumentException(@"Must be in the format \d+x\d+", widthTimesHeight);
+                arguments.Add(string.Format("-userDir:\"{0}\\\"", selectedUserFolder));
             }
 
-            return string.Format("-r{0}x{1}", widthTimesHeight, (depth32 ? "32" : "16"));
+            return string.Join(" ", arguments.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray());
         }
 
-        protected string GetStringForWindowMode(bool enabled)
+        private IEnumerable<string> GetAudioArguments()
         {
-            return enabled ? "-w" : "-f";
-        }
-
-        protected string GetStringForRenderMode(RenderMode renderMode)
-        {
-            var builder = new StringBuilder("-d:");
-            switch (renderMode)
+            var output = new Collection<string>
             {
-                case RenderMode.DirectX:
-                    builder.Append("directX");
+                string.Format("-audio:{0}", Settings.Default.LauncherDisableAudio ? "off" : "on"), 
+                string.Format("-music:{0}", Settings.Default.LauncherDisableMusic ? "off" : "on"), 
+                string.Format("-sounds:{0}", Settings.Default.LauncherDisableSound ? "off" : "on")
+            };
+
+            return output;
+        }
+
+        private IEnumerable<string> GetOtherArguments()
+        {
+            var output = new Collection<string>
+            {
+                string.Format("-l:{0}", Settings.Default.LauncherLanguage), 
+                string.Format(
+                    "-ignoreMissingModelDataBugs:{0}", 
+                    Settings.Default.LauncherIgnoreMissingModels ? "on" : "off"), 
+                string.Format("-ime:{0}", Settings.Default.LauncherDisableIME ? "disabled" : "enabled"), 
+                string.Format("-writeLog:{0}", Settings.Default.LauncherWriteLog ? "enabled" : "disabled")
+            };
+
+            return output;
+        }
+
+        private IEnumerable<string> GetPerformanceArguments()
+        {
+            var output = new Collection<string>
+            {
+                string.Format("-intro:{0}", Settings.Default.LauncherSkipIntro ? "off" : "on"), 
+                string.Format(
+                    "-exceptionHandling:{0}", 
+                    Settings.Default.LauncherDisableExceptionHandling ? "off" : "on"), 
+                string.Format("-backgroundLoader:{0}", Settings.Default.LauncherDisableBackgroundLoader ? "off" : "on")
+            };
+
+            if (Settings.Default.LauncherCpuCount > 0)
+            {
+                output.Add(string.Format("-cpuCount:{0}", Settings.Default.LauncherCpuCount));
+            }
+
+            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCpuPriority))
+            {
+                CpuPriority priority;
+                if (Enum.TryParse(Settings.Default.LauncherCpuPriority, true, out priority))
+                {
+                    output.Add(GetStringForCpuPriority(priority));
+                }
+                else
+                {
+                    Log.Warn(
+                        string.Format(
+                            "Unknown CPU priority: \"{0}\", skipping argument.",
+                            Settings.Default.LauncherCpuPriority));
+                }
+            }
+
+            if (Settings.Default.LauncherPauseMinimized)
+            {
+                output.Add("-gp");
+            }
+
+            return output;
+        }
+
+        private string GetStringForCpuPriority(CpuPriority priority)
+        {
+            var builder = new StringBuilder("-cpuPriority:");
+            switch (priority)
+            {
+                case CpuPriority.Low:
+                    builder.Append("low");
                     break;
-                case RenderMode.OpenGl:
-                    builder.Append("openGl");
+                case CpuPriority.Medium:
+                    builder.Append("medium");
                     break;
-                case RenderMode.Software:
-                    builder.Append("software");
+                case CpuPriority.High:
+                    builder.Append("high");
                     break;
             }
 
             return builder.ToString();
         }
 
-        protected string GetStringForCustomCursors(CursorColorDepth cursorColorDepth)
-        {
-            return "-customCursors:" + (cursorColorDepth == CursorColorDepth.SystemCursors ? "enabled" : "disabled");
-        }
-
-        protected string GetStringForCursors(CursorColorDepth cursorColorDepth)
+        private string GetStringForCursors(CursorColorDepth cursorColorDepth)
         {
             var builder = new StringBuilder("-cursors:");
             switch (cursorColorDepth)
@@ -140,178 +186,73 @@
             return builder.ToString();
         }
 
-        protected string GetStringForNumberOfCpus(int numCpus)
+        private string GetStringForRenderMode(RenderMode renderMode)
         {
-            return numCpus > 0 ? string.Format("-cpuCount:{0}", numCpus) : string.Empty;
-        }
-
-        protected string GetStringForCpuPriority(CpuPriority priority)
-        {
-            var builder = new StringBuilder("-cpuPriority:");
-            switch (priority)
+            var builder = new StringBuilder("-d:");
+            switch (renderMode)
             {
-                case CpuPriority.Low:
-                    builder.Append("low");
+                case RenderMode.DirectX:
+                    builder.Append("directX");
                     break;
-                case CpuPriority.Medium:
-                    builder.Append("medium");
+                case RenderMode.OpenGl:
+                    builder.Append("openGl");
                     break;
-                case CpuPriority.High:
-                    builder.Append("high");
+                case RenderMode.Software:
+                    builder.Append("software");
                     break;
             }
 
             return builder.ToString();
         }
 
-        protected string GetStringForIntroSequence(bool enabled)
+        private string GetStringForResolution(string widthTimesHeight, bool depth32)
         {
-            return string.Format("-intro:{0}", (enabled ? "on" : "off"));
-        }
-
-        protected string GetStringForPauseWhenMinimized(bool enabled)
-        {
-            return enabled ? "-gp" : string.Empty;
-        }
-
-        protected string GetStringForExceptionHandling(bool enabled)
-        {
-            return string.Format("-exceptionHandling:{0}", (enabled ? "on" : "off"));
-        }
-
-        protected string GetStringForBackgroundLoading(bool enabled)
-        {
-            return string.Format("-backgroundLoader:{0}", (enabled ? "on" : "off"));
-        }
-
-        protected string GetStringForIgnoreMissingModels(bool enabled)
-        {
-            return string.Format("-ignoreMissingModelDataBugs:{0}", (enabled ? "on" : "off"));
-        }
-
-        protected string GetStringForImeEnabled(bool enabled)
-        {
-            return string.Format("-ime:{0}", (enabled ? "enabled" : "disabled"));
-        }
-
-        protected string GetStringForWriteLog(bool enabled)
-        {
-            return string.Format("-writeLog:" + (enabled ? "enabled" : "disabled"));
-        }
-
-        protected string GetStringForLanguage(string language)
-        {
-            return string.Format("-l:{0}", language);
-        }
-
-        protected string GetStringForUserDir(UserFolder selectedUserFolder)
-        {
-            return string.Format("-userDir:\"{0}\\\"", selectedUserFolder.FolderPath);
-        }
-
-        public string GetArgumentString(UserFolder selectedUserFolder)
-        {
-            var arguments = new List<string>();
-
-            arguments.AddRange(GetAudioArguments());
-
-            arguments.AddRange(GetVideoArguments());
-
-            arguments.AddRange(GetPerformanceArguments());
-
-            arguments.AddRange(GetOtherArguments());
-
-            if (selectedUserFolder != null)
+            var regEx = new Regex(@"\d+x\d+");
+            if (!regEx.IsMatch(widthTimesHeight))
             {
-                arguments.Add(GetStringForUserDir(selectedUserFolder));
+                throw new ArgumentException(@"Must be in the format \d+x\d+", widthTimesHeight);
             }
 
-            return string.Join(" ", arguments.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray());
-        }
-
-        private IEnumerable<string> GetAudioArguments()
-        {
-            var output = new Collection<string>
-                             {
-                                 GetStringForAudio(!Settings.Default.LauncherDisableAudio),
-                                 GetStringForMusic(!Settings.Default.LauncherDisableMusic),
-                                 GetStringForSounds(!Settings.Default.LauncherDisableSound)
-                             };
-
-            return output;
+            return string.Format("-r{0}x{1}", widthTimesHeight, depth32 ? "32" : "16");
         }
 
         private IEnumerable<string> GetVideoArguments()
         {
             var output = new Collection<string>
-                             {
-                                 GetStringForCustomResolution(
-                                     Settings.Default.LauncherCustomResolution)
-                             };
+            {
+                string.Format(
+                    "-customResolution:{0}", 
+                    Settings.Default.LauncherCustomResolution ? "enabled" : "disabled")
+            };
 
             if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherResolution))
             {
                 output.Add(
                     GetStringForResolution(
-                        Settings.Default.LauncherResolution, Settings.Default.Launcher32BitColourDepth));
+                        Settings.Default.LauncherResolution,
+                        Settings.Default.Launcher32BitColourDepth));
             }
 
             if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCursorColour))
             {
                 CursorColorDepth cursorColorDepth;
-                if (Enum.TryParse(
-                    Settings.Default.LauncherCursorColour, true, out cursorColorDepth))
+                if (Enum.TryParse(Settings.Default.LauncherCursorColour, true, out cursorColorDepth))
                 {
-                    output.Add(GetStringForCustomCursors(cursorColorDepth));
+                    output.Add(
+                        string.Format(
+                            "-customCursors:{0}",
+                            cursorColorDepth == CursorColorDepth.SystemCursors ? "enabled" : "disabled"));
                     output.Add(GetStringForCursors(cursorColorDepth));
                 }
             }
 
-            return output;
-        }
-
-        private IEnumerable<string> GetPerformanceArguments()
-        {
-            var output = new Collection<string>();
-
-            if (Settings.Default.LauncherCpuCount > 0)
+            RenderMode renderMode;
+            if (Enum.TryParse(Settings.Default.LauncherRenderMode, out renderMode))
             {
-                output.Add(GetStringForNumberOfCpus(Settings.Default.LauncherCpuCount));
+                output.Add(GetStringForRenderMode(renderMode));
             }
 
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCpuPriority))
-            {
-                CpuPriority priority;
-                if (Enum.TryParse(Settings.Default.LauncherCpuPriority, true, out priority))
-                {
-                    output.Add(GetStringForCpuPriority(priority));
-                }
-                else
-                {
-                    Log.Warn(
-                        string.Format(
-                            "Unknown CPU priority: \"{0}\", skipping argument.", Settings.Default.LauncherCpuPriority));
-                }
-            }
-
-            output.Add(GetStringForIntroSequence(!Settings.Default.LauncherSkipIntro));
-            output.Add(GetStringForPauseWhenMinimized(Settings.Default.LauncherPauseMinimized));
-            output.Add(GetStringForExceptionHandling(!Settings.Default.LauncherDisableExceptionHandling));
-            output.Add(GetStringForBackgroundLoading(!Settings.Default.LauncherDisableBackgroundLoader));
-
-            return output;
-        }
-
-        public IEnumerable<string> GetOtherArguments()
-        {
-            var output = new Collection<string>
-                             {
-                                 GetStringForLanguage(Settings.Default.LauncherLanguage),
-                                 GetStringForIgnoreMissingModels(
-                                     Settings.Default.LauncherIgnoreMissingModels),
-                                 GetStringForImeEnabled(!Settings.Default.LauncherDisableIME),
-                                 GetStringForWriteLog(Settings.Default.LauncherWriteLog)
-                             };
+            output.Add(Settings.Default.LauncherWindowMode ? "-w" : "-f");
 
             return output;
         }
