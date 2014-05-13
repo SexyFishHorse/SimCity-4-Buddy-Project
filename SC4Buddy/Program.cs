@@ -63,7 +63,7 @@
                             new PluginGroupController(EntityFactory.Instance.Entities),
                             new PluginMatcher(
                                 new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty)),
-                            null));
+                            new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFolderController.GetMainUserFolder())));
                 }
             }
             catch (Exception ex)

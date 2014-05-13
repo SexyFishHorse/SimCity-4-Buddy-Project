@@ -2,11 +2,9 @@
 {
     using System;
     using System.Diagnostics;
-    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Net.NetworkInformation;
-    using System.Text;
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
@@ -378,9 +376,9 @@
             updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Default.FetchInfoFromRemote;
         }
 
-        private void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
+        private async void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
+            await userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
 
             var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolder);
 
@@ -396,7 +394,7 @@
                 return;
             }
 
-            var missingDependencies = dependencyChecker.CheckDependencies(userFolder);
+            var missingDependencies = (await dependencyChecker.CheckDependenciesAsync(userFolder)).ToList();
 
             if (missingDependencies.Any())
             {
