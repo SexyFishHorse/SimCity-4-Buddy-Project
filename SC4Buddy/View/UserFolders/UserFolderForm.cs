@@ -368,6 +368,7 @@
             }
             catch (Exception ex)
             {
+                Log.Error("Fetch information for plugins error", ex);
                 MessageBox.Show(
                     this,
                     LocalizationStrings.ErrorOccuredDuringFetchOfInformationForPlugins + ex.Message,
@@ -395,6 +396,7 @@
             }
             catch (Sc4BuddyClientException ex)
             {
+                Log.Warn(ex);
                 var message =
                     string.Format(
                         LocalizationStrings.UnableToUpdatePluginsFromServerTheFollowingErrorWasReturned,
@@ -465,6 +467,7 @@
             }
             catch (Exception ex)
             {
+                Log.Error("Dependency check error", ex);
                 MessageBox.Show(
                     this,
                     LocalizationStrings.ErrorOccuredDuringDependencyCheck + ex.Message,
