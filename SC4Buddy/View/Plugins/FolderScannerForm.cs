@@ -298,6 +298,7 @@
             }
             catch (Exception ex)
             {
+                Log.Error("Error during folder scanner", ex);
                 // TODO: reload entities
             }
 
@@ -509,7 +510,7 @@
             }
             catch (Exception ex)
             {
-
+                Log.Warn("Exception during folder scanner form close", ex);
             }
         }
     }
