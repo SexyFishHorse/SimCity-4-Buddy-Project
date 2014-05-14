@@ -604,4 +604,10 @@ Note that plugins not known to the central server was not checked.</value>
     <value>Unable to launch browser: {0}</value>
     <comment>{0} is replaced by the error message from the underlying system.</comment>
   </data>
+  <data name="ErrorDuringDependencyCheck" xml:space="preserve">
+    <value>Error during dependency check</value>
+  </data>
+  <data name="ErrorOccuredDuringDependencyCheck" xml:space="preserve">
+    <value>Error occured during dependency check: </value>
+  </data>
 </root>

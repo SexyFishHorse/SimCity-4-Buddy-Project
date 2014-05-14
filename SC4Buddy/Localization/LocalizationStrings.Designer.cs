@@ -377,6 +377,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during dependency check.
+        /// </summary>
+        internal static string ErrorDuringDependencyCheck {
+            get {
+                return ResourceManager.GetString("ErrorDuringDependencyCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error during folder scan.
         /// </summary>
         internal static string ErrorDuringFolderScan {
@@ -400,6 +409,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string ErrorDuringSaveOperation {
             get {
                 return ResourceManager.GetString("ErrorDuringSaveOperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured during dependency check: .
+        /// </summary>
+        internal static string ErrorOccuredDuringDependencyCheck {
+            get {
+                return ResourceManager.GetString("ErrorOccuredDuringDependencyCheck", resourceCulture);
             }
         }
         

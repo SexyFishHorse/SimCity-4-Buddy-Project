@@ -408,45 +408,57 @@
 
         private async void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            await userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
-
-            var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolder);
-
-            if (numRecognizedPlugins < 1)
+            try
             {
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked,
-                    LocalizationStrings.NoRecognizablePluginsFound,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation,
-                    MessageBoxDefaultButton.Button1);
-                return;
-            }
+                await userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
 
-            var missingDependencies = (await dependencyChecker.CheckDependenciesAsync(userFolder)).ToList();
+                var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolder);
 
-            if (missingDependencies.Any())
-            {
-                var dialog = new MissingDependenciesForm
+                if (numRecognizedPlugins < 1)
                 {
-                    MissingDependencies = missingDependencies
-                };
-                dialog.ShowDialog(this);
-            }
-            else
-            {
-                var message = string.Format(
-                    LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
-                    numRecognizedPlugins);
+                    MessageBox.Show(
+                        this,
+                        LocalizationStrings.NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked,
+                        LocalizationStrings.NoRecognizablePluginsFound,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button1);
+                    return;
+                }
 
+                var missingDependencies = (await dependencyChecker.CheckDependenciesAsync(userFolder)).ToList();
+
+                if (missingDependencies.Any())
+                {
+                    var dialog = new MissingDependenciesForm
+                    {
+                        MissingDependencies = missingDependencies
+                    };
+                    dialog.ShowDialog(this);
+                }
+                else
+                {
+                    var message = string.Format(
+                        LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
+                        numRecognizedPlugins);
+
+                    MessageBox.Show(
+                        this,
+                        message,
+                        LocalizationStrings.NoDependenciesMissing,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button1);
+                }
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show(
                     this,
-                    message,
-                    LocalizationStrings.NoDependenciesMissing,
+                    LocalizationStrings.ErrorOccuredDuringDependencyCheck + ex.Message,
+                    LocalizationStrings.ErrorDuringDependencyCheck,
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1);
+                    MessageBoxIcon.Warning);
             }
         }
 
