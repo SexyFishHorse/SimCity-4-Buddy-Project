@@ -26,9 +26,9 @@
 
     public partial class FolderScannerForm : Form
     {
-        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
         private const int ErrorIconPadding = -18;
+
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private readonly FolderScannerController folderScannerController;
 
@@ -36,15 +36,15 @@
 
         private readonly PluginGroupController pluginGroupController;
 
-        private readonly UserFolder userFolder;
-
         private readonly IPluginMatcher pluginMatcher;
 
+        private readonly UserFolder userFolder;
+
         public FolderScannerForm(
-            FolderScannerController folderScannerController,
-            PluginController pluginController,
-            PluginGroupController pluginGroupController,
-            UserFolder userFolder,
+            FolderScannerController folderScannerController, 
+            PluginController pluginController, 
+            PluginGroupController pluginGroupController, 
+            UserFolder userFolder, 
             IPluginMatcher pluginMatcher)
         {
             this.folderScannerController = folderScannerController;
@@ -104,7 +104,9 @@
             autoGroupKnownPlugins.Enabled = true;
         }
 
-        private void FileScannerBackgroundWorkerOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)
+        private void FileScannerBackgroundWorkerOnProgressChanged(
+            object sender, 
+            ProgressChangedEventArgs progressChangedEventArgs)
         {
             statusProgressBar.Value = progressChangedEventArgs.ProgressPercentage;
         }
@@ -113,18 +115,19 @@
         {
             if (!folderScannerController.ScanFolder(userFolder))
             {
-                Invoke(new MethodInvoker(
-                    () =>
-                    {
-                        MessageBox.Show(
-                    this,
-                    LocalizationStrings.NoNewDeletedOrUpdatedFilesDetected,
-                    LocalizationStrings.NoFileChangesDetected,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1);
-                        Close();
-                    }));
+                Invoke(
+                    new MethodInvoker(
+                        () =>
+                            {
+                                MessageBox.Show(
+                                    this, 
+                                    LocalizationStrings.NoNewDeletedOrUpdatedFilesDetected, 
+                                    LocalizationStrings.NoFileChangesDetected, 
+                                    MessageBoxButtons.OK, 
+                                    MessageBoxIcon.Information, 
+                                    MessageBoxDefaultButton.Button1);
+                                Close();
+                            }));
             }
         }
 
@@ -299,6 +302,7 @@
             catch (Exception ex)
             {
                 Log.Error("Error during folder scanner", ex);
+
                 // TODO: reload entities
             }
 
@@ -323,14 +327,14 @@
             }
 
             var plugin = new Plugin
-                             {
-                                 Name = nameTextBox.Text.Trim(),
-                                 Author = authorTextBox.Text.Trim(),
-                                 Link = link,
-                                 PluginGroup = GetSelectedGroup(),
-                                 Description = descriptionTextBox.Text.Trim(),
-                                 UserFolder = userFolder
-                             };
+            {
+                Name = nameTextBox.Text.Trim(), 
+                Author = authorTextBox.Text.Trim(), 
+                Link = link, 
+                PluginGroup = GetSelectedGroup(), 
+                Description = descriptionTextBox.Text.Trim(), 
+                UserFolder = userFolder
+            };
 
             var group = plugin.PluginGroup;
             if (group != null)
@@ -339,16 +343,15 @@
             }
 
             foreach (var pluginFile in
-                pluginFilesListView.Items.Cast<ListViewItem>()
-                                   .Select(item => item.Text)
-                                   .Select(
-                                       path =>
-                                       new PluginFile
-                                           {
-                                               Path = Path.Combine(userFolder.PluginFolderPath, path),
-                                               Checksum = Md5ChecksumUtility.CalculateChecksum(Path.Combine(userFolder.PluginFolderPath, path)).ToHex(),
-                                               Plugin = plugin
-                                           }))
+                pluginFilesListView.Items.Cast<ListViewItem>().Select(item => item.Text).Select(
+                    path => new PluginFile
+                    {
+                        Path = Path.Combine(userFolder.PluginFolderPath, path), 
+                        Checksum =
+                            Md5ChecksumUtility.CalculateChecksum(Path.Combine(userFolder.PluginFolderPath, path))
+                                .ToHex(), 
+                        Plugin = plugin
+                    }))
             {
                 plugin.PluginFiles.Add(pluginFile);
             }
@@ -423,7 +426,10 @@
 
             if (group == null)
             {
-                group = new PluginGroup { Name = selectedText.Trim() };
+                group = new PluginGroup
+                {
+                    Name = selectedText.Trim()
+                };
                 pluginGroupController.Add(group);
             }
 
@@ -452,7 +458,9 @@
             try
             {
                 statusProgressBar.Visible = true;
-                statusLabel.Text = LocalizationStrings.TryingToAutoGroupPluginsThisMayTakeAFewMinutesIfYouHaveALargePluginFolderOrASlowInternetConnection;
+                statusLabel.Text =
+                    LocalizationStrings
+                        .TryingToAutoGroupPluginsThisMayTakeAFewMinutesIfYouHaveALargePluginFolderOrASlowInternetConnection;
                 statusLabel.Visible = true;
                 autoGroupKnownPlugins.Enabled = false;
                 await folderScannerController.AutoGroupKnownFiles(userFolder, pluginController, pluginMatcher);
@@ -462,10 +470,10 @@
             {
                 Log.Warn("Api error during auto group known plugins", ex);
                 var result = MessageBox.Show(
-                    this,
-                    string.Format(LocalizationStrings.AnErrorOccuredWhenTryingToAutoGroupPlugins, ex.Message),
-                    LocalizationStrings.ErrorDuringAutoGroupingOfPlugins,
-                    MessageBoxButtons.RetryCancel,
+                    this, 
+                    string.Format(LocalizationStrings.AnErrorOccuredWhenTryingToAutoGroupPlugins, ex.Message), 
+                    LocalizationStrings.ErrorDuringAutoGroupingOfPlugins, 
+                    MessageBoxButtons.RetryCancel, 
                     MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Retry)
@@ -494,10 +502,10 @@
             {
                 Log.Error("Auto group known plugins error", ex);
                 MessageBox.Show(
-                    this,
-                    LocalizationStrings.ErrorOccuredDuringAutoGroupKnownPlugins + ex.Message,
-                    LocalizationStrings.ErrorDuringAutoGroupKnownPlugins,
-                    MessageBoxButtons.OK,
+                    this, 
+                    LocalizationStrings.ErrorOccuredDuringAutoGroupKnownPlugins + ex.Message, 
+                    LocalizationStrings.ErrorDuringAutoGroupKnownPlugins, 
+                    MessageBoxButtons.OK, 
                     MessageBoxIcon.Warning);
             }
         }
