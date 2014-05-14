@@ -281,12 +281,13 @@
 
         private void OpenLogFileToolStripMenuItemClick(object sender, EventArgs e)
         {
-            var path = Application.LocalUserAppDataPath.Substring(
-                    0, Application.LocalUserAppDataPath.LastIndexOf(@"\", StringComparison.Ordinal));
+            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Irradiated Games", "SimCity 4 Buddy", "Logs");
 
             var file = string.Format("log-{0}.txt", DateTime.Now.ToString("yyyy-MM-dd"));
 
-            if (!File.Exists(file))
+            var filePath = Path.Combine(path, file);
+
+            if (!File.Exists(filePath))
             {
                 MessageBox.Show(
                     this,
@@ -296,7 +297,7 @@
                     MessageBoxIcon.Error);
             }
 
-            Process.Start(Path.Combine(path, "Logs", file));
+            Process.Start(filePath);
         }
     }
 }
