@@ -31,17 +31,17 @@
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly UserFolder userFolder;
-
-        private readonly PluginGroupController pluginGroupController;
+        private readonly IDependencyChecker dependencyChecker;
 
         private readonly PluginController pluginController;
 
-        private readonly UserFolderController userFolderController;
+        private readonly PluginGroupController pluginGroupController;
 
         private readonly IPluginMatcher pluginMatcher;
 
-        private readonly IDependencyChecker dependencyChecker;
+        private readonly UserFolder userFolder;
+
+        private readonly UserFolderController userFolderController;
 
         private Plugin selectedPlugin;
 
@@ -71,7 +71,8 @@
                 }
                 else
                 {
-                    throw new DirectoryNotFoundException("The plugin folder does not exist or you don't have access to one or more of the folders in the path.");
+                    throw new DirectoryNotFoundException(
+                        "The plugin folder does not exist or you don't have access to one or more of the folders in the path.");
                 }
             }
 
@@ -143,6 +144,7 @@
 
                 uninstallButton.Enabled = true;
                 updateInfoButton.Enabled = selectedPlugin.RemotePlugin == null;
+
                 ////reportPluginLinkLabel.Visible = selectedPlugin.RemotePlugin != null;
                 reportPluginLinkLabel.Visible = false;
                 moveOrCopyButton.Enabled = true;
@@ -247,7 +249,10 @@
 
         private void UpdateInfoButtonClick(object sender, EventArgs e)
         {
-            var infoDialog = new EnterPluginInformationForm(pluginGroupController) { Plugin = selectedPlugin };
+            var infoDialog = new EnterPluginInformationForm(pluginGroupController)
+            {
+                Plugin = selectedPlugin
+            };
             if (infoDialog.ShowDialog(this) == DialogResult.OK)
             {
                 pluginController.SaveChanges();
@@ -378,9 +383,13 @@
             }
             catch (Sc4BuddyClientException ex)
             {
+                var message =
+                    string.Format(
+                        LocalizationStrings.UnableToUpdatePluginsFromServerTheFollowingErrorWasReturned,
+                        ex.Message);
                 var dialogResult = MessageBox.Show(
                     this,
-                    string.Format(LocalizationStrings.UnableToUpdatePluginsFromServerTheFollowingErrorWasReturned, ex.Message),
+                    message,
                     LocalizationStrings.ErrorWhileTryingToUpdatePlugins,
                     MessageBoxButtons.RetryCancel,
                     MessageBoxIcon.Warning);
@@ -419,7 +428,10 @@
 
             if (missingDependencies.Any())
             {
-                var dialog = new MissingDependenciesForm { MissingDependencies = missingDependencies };
+                var dialog = new MissingDependenciesForm
+                {
+                    MissingDependencies = missingDependencies
+                };
                 dialog.ShowDialog(this);
             }
             else
@@ -444,7 +456,10 @@
                 userFolder,
                 userFolderController,
                 pluginController,
-                new PluginFileController(EntityFactory.Instance.Entities)) { Plugin = selectedPlugin };
+                new PluginFileController(EntityFactory.Instance.Entities))
+            {
+                Plugin = selectedPlugin
+            };
             dialog.PluginCopied += DialogOnPluginCopied;
             dialog.PluginMoved += DialogOnPluginMoved;
             dialog.ErrorDuringCopyOrMove += DialogOnErrorDuringCopyOrMove;
@@ -495,10 +510,7 @@
         {
             var dialog = new ReportPluginForm
             {
-                Plugin
-                    =
-                    selectedPlugin
-                    .RemotePlugin
+                Plugin = selectedPlugin.RemotePlugin
             };
 
             if (dialog.ShowDialog() == DialogResult.OK)
