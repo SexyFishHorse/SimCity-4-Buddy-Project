@@ -40,7 +40,9 @@
             var loadEntities =
                 new Entities(
                     Path.Combine(
-                        AppDomain.CurrentDomain.BaseDirectory,
+                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                        "Irradiated Games",
+                        "SimCity 4 Buddy",
                         "DataStorage"));
 
             loadEntities.LoadAllEntitiesFromDisc();

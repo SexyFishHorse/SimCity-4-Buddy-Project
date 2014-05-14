@@ -6,7 +6,6 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Windows.Forms;
 
     using log4net;
 
@@ -37,11 +36,9 @@
         {
             get
             {
-                var localAppData = Application.LocalUserAppDataPath.Substring(
-                    0,
-                    Application.LocalUserAppDataPath.LastIndexOf("\\", StringComparison.Ordinal));
+                var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-                return Path.Combine(localAppData, "QuarantinedFiles");
+                return Path.Combine(localAppData, "Irradiated Games", "SimCity 4 Buddy", "QuarantinedFiles");
             }
         }
 
