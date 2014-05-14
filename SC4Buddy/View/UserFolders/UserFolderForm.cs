@@ -5,10 +5,13 @@
     using System.IO;
     using System.Linq;
     using System.Net.NetworkInformation;
+    using System.Reflection;
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
     using Irradiated.Sc4Buddy.ApiClient.Model;
+
+    using log4net;
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
@@ -26,6 +29,8 @@
 
     public partial class UserFolderForm : Form
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly UserFolder userFolder;
 
         private readonly PluginGroupController pluginGroupController;
@@ -221,7 +226,23 @@
 
         private void LinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(selectedPlugin.Link.ToString());
+            try
+            {
+                var link = selectedPlugin.Link.Value;
+                Log.Info(string.Format("Launching browser: {0}", link));
+
+                Process.Start(link);
+            }
+            catch (Exception ex)
+            {
+                Log.Warn("Unable to launch browser", ex);
+                MessageBox.Show(
+                    this,
+                    string.Format(LocalizationStrings.UnableToLaunchBrowser, ex.Message),
+                    LocalizationStrings.ErrorDuringLaunchOfBrowser,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
         }
 
         private void UpdateInfoButtonClick(object sender, EventArgs e)

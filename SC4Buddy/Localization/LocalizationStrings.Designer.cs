@@ -386,6 +386,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during launch of browser.
+        /// </summary>
+        internal static string ErrorDuringLaunchOfBrowser {
+            get {
+                return ResourceManager.GetString("ErrorDuringLaunchOfBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error during save operation..
         /// </summary>
         internal static string ErrorDuringSaveOperation {
@@ -1167,6 +1176,15 @@ namespace NIHEI.SC4Buddy.Localization {
             get {
                 return ResourceManager.GetString("TryingToAutoGroupPluginsThisMayTakeAFewMinutesIfYouHaveALargePluginFolderOrASlowI" +
                         "nternetConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to launch browser: {0}.
+        /// </summary>
+        internal static string UnableToLaunchBrowser {
+            get {
+                return ResourceManager.GetString("UnableToLaunchBrowser", resourceCulture);
             }
         }
         

@@ -597,4 +597,11 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="ErrorDuringAutoGroupingOfPlugins" xml:space="preserve">
     <value>Error during auto grouping of plugins</value>
   </data>
+  <data name="ErrorDuringLaunchOfBrowser" xml:space="preserve">
+    <value>Error during launch of browser</value>
+  </data>
+  <data name="UnableToLaunchBrowser" xml:space="preserve">
+    <value>Unable to launch browser: {0}</value>
+    <comment>{0} is replaced by the error message from the underlying system.</comment>
+  </data>
 </root>
