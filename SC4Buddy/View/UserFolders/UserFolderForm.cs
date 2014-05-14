@@ -5,10 +5,13 @@
     using System.IO;
     using System.Linq;
     using System.Net.NetworkInformation;
+    using System.Reflection;
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
     using Irradiated.Sc4Buddy.ApiClient.Model;
+
+    using log4net;
 
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
@@ -26,17 +29,19 @@
 
     public partial class UserFolderForm : Form
     {
-        private readonly UserFolder userFolder;
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly PluginGroupController pluginGroupController;
+        private readonly IDependencyChecker dependencyChecker;
 
         private readonly PluginController pluginController;
 
-        private readonly UserFolderController userFolderController;
+        private readonly PluginGroupController pluginGroupController;
 
         private readonly IPluginMatcher pluginMatcher;
 
-        private readonly IDependencyChecker dependencyChecker;
+        private readonly UserFolder userFolder;
+
+        private readonly UserFolderController userFolderController;
 
         private Plugin selectedPlugin;
 
@@ -66,7 +71,8 @@
                 }
                 else
                 {
-                    throw new DirectoryNotFoundException("The plugin folder does not exist or you don't have access to one or more of the folders in the path.");
+                    throw new DirectoryNotFoundException(
+                        "The plugin folder does not exist or you don't have access to one or more of the folders in the path.");
                 }
             }
 
@@ -138,6 +144,7 @@
 
                 uninstallButton.Enabled = true;
                 updateInfoButton.Enabled = selectedPlugin.RemotePlugin == null;
+
                 ////reportPluginLinkLabel.Visible = selectedPlugin.RemotePlugin != null;
                 reportPluginLinkLabel.Visible = false;
                 moveOrCopyButton.Enabled = true;
@@ -221,12 +228,31 @@
 
         private void LinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(selectedPlugin.Link.ToString());
+            try
+            {
+                var link = selectedPlugin.Link.Value;
+                Log.Info(string.Format("Launching browser: {0}", link));
+
+                Process.Start(link);
+            }
+            catch (Exception ex)
+            {
+                Log.Warn("Unable to launch browser", ex);
+                MessageBox.Show(
+                    this,
+                    string.Format(LocalizationStrings.UnableToLaunchBrowser, ex.Message),
+                    LocalizationStrings.ErrorDuringLaunchOfBrowser,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
         }
 
         private void UpdateInfoButtonClick(object sender, EventArgs e)
         {
-            var infoDialog = new EnterPluginInformationForm(pluginGroupController) { Plugin = selectedPlugin };
+            var infoDialog = new EnterPluginInformationForm(pluginGroupController)
+            {
+                Plugin = selectedPlugin
+            };
             if (infoDialog.ShowDialog(this) == DialogResult.OK)
             {
                 pluginController.SaveChanges();
@@ -336,7 +362,20 @@
 
         private async void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
         {
-            await UpdateInfoForAllPluginsFromServer();
+            try
+            {
+                await UpdateInfoForAllPluginsFromServer();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Fetch information for plugins error", ex);
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.ErrorOccuredDuringFetchOfInformationForPlugins + ex.Message,
+                    LocalizationStrings.ErrorDuringFetchInformationForPlugins,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
         }
 
         private async Task UpdateInfoForAllPluginsFromServer()
@@ -357,9 +396,14 @@
             }
             catch (Sc4BuddyClientException ex)
             {
+                Log.Warn(ex);
+                var message =
+                    string.Format(
+                        LocalizationStrings.UnableToUpdatePluginsFromServerTheFollowingErrorWasReturned,
+                        ex.Message);
                 var dialogResult = MessageBox.Show(
                     this,
-                    string.Format(LocalizationStrings.UnableToUpdatePluginsFromServerTheFollowingErrorWasReturned, ex.Message),
+                    message,
                     LocalizationStrings.ErrorWhileTryingToUpdatePlugins,
                     MessageBoxButtons.RetryCancel,
                     MessageBoxIcon.Warning);
@@ -378,42 +422,58 @@
 
         private async void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            await userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
-
-            var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolder);
-
-            if (numRecognizedPlugins < 1)
+            try
             {
+                await userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
+
+                var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolder);
+
+                if (numRecognizedPlugins < 1)
+                {
+                    MessageBox.Show(
+                        this,
+                        LocalizationStrings.NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked,
+                        LocalizationStrings.NoRecognizablePluginsFound,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button1);
+                    return;
+                }
+
+                var missingDependencies = (await dependencyChecker.CheckDependenciesAsync(userFolder)).ToList();
+
+                if (missingDependencies.Any())
+                {
+                    var dialog = new MissingDependenciesForm
+                    {
+                        MissingDependencies = missingDependencies
+                    };
+                    dialog.ShowDialog(this);
+                }
+                else
+                {
+                    var message = string.Format(
+                        LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
+                        numRecognizedPlugins);
+
+                    MessageBox.Show(
+                        this,
+                        message,
+                        LocalizationStrings.NoDependenciesMissing,
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information,
+                        MessageBoxDefaultButton.Button1);
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Dependency check error", ex);
                 MessageBox.Show(
                     this,
-                    LocalizationStrings.NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked,
-                    LocalizationStrings.NoRecognizablePluginsFound,
+                    LocalizationStrings.ErrorOccuredDuringDependencyCheck + ex.Message,
+                    LocalizationStrings.ErrorDuringDependencyCheck,
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation,
-                    MessageBoxDefaultButton.Button1);
-                return;
-            }
-
-            var missingDependencies = (await dependencyChecker.CheckDependenciesAsync(userFolder)).ToList();
-
-            if (missingDependencies.Any())
-            {
-                var dialog = new MissingDependenciesForm { MissingDependencies = missingDependencies };
-                dialog.ShowDialog(this);
-            }
-            else
-            {
-                var message = string.Format(
-                    LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
-                    numRecognizedPlugins);
-
-                MessageBox.Show(
-                    this,
-                    message,
-                    LocalizationStrings.NoDependenciesMissing,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1);
+                    MessageBoxIcon.Warning);
             }
         }
 
@@ -423,7 +483,10 @@
                 userFolder,
                 userFolderController,
                 pluginController,
-                new PluginFileController(EntityFactory.Instance.Entities)) { Plugin = selectedPlugin };
+                new PluginFileController(EntityFactory.Instance.Entities))
+            {
+                Plugin = selectedPlugin
+            };
             dialog.PluginCopied += DialogOnPluginCopied;
             dialog.PluginMoved += DialogOnPluginMoved;
             dialog.ErrorDuringCopyOrMove += DialogOnErrorDuringCopyOrMove;
@@ -474,10 +537,7 @@
         {
             var dialog = new ReportPluginForm
             {
-                Plugin
-                    =
-                    selectedPlugin
-                    .RemotePlugin
+                Plugin = selectedPlugin.RemotePlugin
             };
 
             if (dialog.ShowDialog() == DialogResult.OK)

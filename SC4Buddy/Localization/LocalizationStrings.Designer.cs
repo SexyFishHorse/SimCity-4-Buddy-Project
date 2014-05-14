@@ -359,6 +359,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during auto group known plugins.
+        /// </summary>
+        internal static string ErrorDuringAutoGroupKnownPlugins {
+            get {
+                return ResourceManager.GetString("ErrorDuringAutoGroupKnownPlugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error during copying or moving plugin.
         /// </summary>
         internal static string ErrorDuringCopyingOrMovingPlugin {
@@ -377,6 +386,24 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during dependency check.
+        /// </summary>
+        internal static string ErrorDuringDependencyCheck {
+            get {
+                return ResourceManager.GetString("ErrorDuringDependencyCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error during fetch information for plugins.
+        /// </summary>
+        internal static string ErrorDuringFetchInformationForPlugins {
+            get {
+                return ResourceManager.GetString("ErrorDuringFetchInformationForPlugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error during folder scan.
         /// </summary>
         internal static string ErrorDuringFolderScan {
@@ -386,11 +413,47 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during launch of browser.
+        /// </summary>
+        internal static string ErrorDuringLaunchOfBrowser {
+            get {
+                return ResourceManager.GetString("ErrorDuringLaunchOfBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error during save operation..
         /// </summary>
         internal static string ErrorDuringSaveOperation {
             get {
                 return ResourceManager.GetString("ErrorDuringSaveOperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured during auto group known plugins: .
+        /// </summary>
+        internal static string ErrorOccuredDuringAutoGroupKnownPlugins {
+            get {
+                return ResourceManager.GetString("ErrorOccuredDuringAutoGroupKnownPlugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured during dependency check: .
+        /// </summary>
+        internal static string ErrorOccuredDuringDependencyCheck {
+            get {
+                return ResourceManager.GetString("ErrorOccuredDuringDependencyCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured during fetch of information for plugins: .
+        /// </summary>
+        internal static string ErrorOccuredDuringFetchOfInformationForPlugins {
+            get {
+                return ResourceManager.GetString("ErrorOccuredDuringFetchOfInformationForPlugins", resourceCulture);
             }
         }
         
@@ -1167,6 +1230,15 @@ namespace NIHEI.SC4Buddy.Localization {
             get {
                 return ResourceManager.GetString("TryingToAutoGroupPluginsThisMayTakeAFewMinutesIfYouHaveALargePluginFolderOrASlowI" +
                         "nternetConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to launch browser: {0}.
+        /// </summary>
+        internal static string UnableToLaunchBrowser {
+            get {
+                return ResourceManager.GetString("UnableToLaunchBrowser", resourceCulture);
             }
         }
         
