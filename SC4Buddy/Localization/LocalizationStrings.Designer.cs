@@ -359,6 +359,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during auto group known plugins.
+        /// </summary>
+        internal static string ErrorDuringAutoGroupKnownPlugins {
+            get {
+                return ResourceManager.GetString("ErrorDuringAutoGroupKnownPlugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error during copying or moving plugin.
         /// </summary>
         internal static string ErrorDuringCopyingOrMovingPlugin {
@@ -418,6 +427,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string ErrorDuringSaveOperation {
             get {
                 return ResourceManager.GetString("ErrorDuringSaveOperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured during auto group known plugins: .
+        /// </summary>
+        internal static string ErrorOccuredDuringAutoGroupKnownPlugins {
+            get {
+                return ResourceManager.GetString("ErrorOccuredDuringAutoGroupKnownPlugins", resourceCulture);
             }
         }
         

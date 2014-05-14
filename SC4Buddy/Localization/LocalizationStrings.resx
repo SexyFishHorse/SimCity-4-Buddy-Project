@@ -616,4 +616,10 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="ErrorOccuredDuringFetchOfInformationForPlugins" xml:space="preserve">
     <value>Error occured during fetch of information for plugins: </value>
   </data>
+  <data name="ErrorOccuredDuringAutoGroupKnownPlugins" xml:space="preserve">
+    <value>Error occured during auto group known plugins: </value>
+  </data>
+  <data name="ErrorDuringAutoGroupKnownPlugins" xml:space="preserve">
+    <value>Error during auto group known plugins</value>
+  </data>
 </root>

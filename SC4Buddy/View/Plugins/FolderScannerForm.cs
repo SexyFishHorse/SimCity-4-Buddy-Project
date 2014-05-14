@@ -5,11 +5,14 @@
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Security.Policy;
     using System.Threading.Tasks;
     using System.Windows.Forms;
 
     using Irradiated.Sc4Buddy.ApiClient.Model;
+
+    using log4net;
 
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Control.Plugins;
@@ -23,6 +26,8 @@
 
     public partial class FolderScannerForm : Form
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private const int ErrorIconPadding = -18;
 
         private readonly FolderScannerController folderScannerController;
@@ -454,6 +459,7 @@
             }
             catch (Sc4BuddyClientException ex)
             {
+                Log.Warn("Api error during auto group known plugins", ex);
                 var result = MessageBox.Show(
                     this,
                     string.Format(LocalizationStrings.AnErrorOccuredWhenTryingToAutoGroupPlugins, ex.Message),
@@ -479,7 +485,20 @@
 
         private async void AutoGroupKnownPluginsClick(object sender, EventArgs e)
         {
-            await AutoGroupKnownPlugins();
+            try
+            {
+                await AutoGroupKnownPlugins();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Auto group known plugins error", ex);
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.ErrorOccuredDuringAutoGroupKnownPlugins + ex.Message,
+                    LocalizationStrings.ErrorDuringAutoGroupKnownPlugins,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
         }
 
         private void CloseButtonClick(object sender, EventArgs e)
