@@ -362,7 +362,19 @@
 
         private async void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
         {
-            await UpdateInfoForAllPluginsFromServer();
+            try
+            {
+                await UpdateInfoForAllPluginsFromServer();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    this,
+                    LocalizationStrings.ErrorOccuredDuringFetchOfInformationForPlugins + ex.Message,
+                    LocalizationStrings.ErrorDuringFetchInformationForPlugins,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
         }
 
         private async Task UpdateInfoForAllPluginsFromServer()

@@ -386,6 +386,15 @@ namespace NIHEI.SC4Buddy.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error during fetch information for plugins.
+        /// </summary>
+        internal static string ErrorDuringFetchInformationForPlugins {
+            get {
+                return ResourceManager.GetString("ErrorDuringFetchInformationForPlugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error during folder scan.
         /// </summary>
         internal static string ErrorDuringFolderScan {
@@ -418,6 +427,15 @@ namespace NIHEI.SC4Buddy.Localization {
         internal static string ErrorOccuredDuringDependencyCheck {
             get {
                 return ResourceManager.GetString("ErrorOccuredDuringDependencyCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error occured during fetch of information for plugins: .
+        /// </summary>
+        internal static string ErrorOccuredDuringFetchOfInformationForPlugins {
+            get {
+                return ResourceManager.GetString("ErrorOccuredDuringFetchOfInformationForPlugins", resourceCulture);
             }
         }
         
