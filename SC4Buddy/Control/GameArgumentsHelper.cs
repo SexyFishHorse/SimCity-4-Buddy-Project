@@ -67,7 +67,7 @@
 
             if (selectedUserFolder != null)
             {
-                arguments.Add(string.Format("-userDir:\"{0}\\\"", selectedUserFolder));
+                arguments.Add(string.Format("-userDir:\"{0}\\\"", selectedUserFolder.FolderPath));
             }
 
             return string.Join(" ", arguments.Where(x => !string.IsNullOrWhiteSpace(x)).ToArray());
