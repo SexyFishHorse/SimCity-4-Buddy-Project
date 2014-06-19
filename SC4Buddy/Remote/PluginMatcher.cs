@@ -1,6 +1,5 @@
 ﻿namespace NIHEI.SC4Buddy.Remote
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
@@ -9,9 +8,9 @@
     using System.Threading.Tasks;
 
     using Irradiated.Sc4Buddy.ApiClient;
+    using Irradiated.Sc4Buddy.ApiClient.Model;
 
-    using NIHEI.SC4Buddy.Model;
-
+    using Plugin = NIHEI.SC4Buddy.Model.Plugin;
     using RemotePlugin = Irradiated.Sc4Buddy.ApiClient.Model.Plugin;
     using RemotePluginFile = Irradiated.Sc4Buddy.ApiClient.Model.PluginFile;
 
@@ -26,7 +25,9 @@
 
         public async Task<bool> MatchAndUpdateAsync(Plugin plugin)
         {
-            var filesAndChecksums = plugin.PluginFiles.Select(x => new Tuple<string, string>(x.Path, x.Checksum));
+            var filesAndChecksums =
+                plugin.PluginFiles.Select(
+                    x => new PluginFileMetaInfo { Filename = new FileInfo(x.Path).Name, Checksum = x.Checksum });
             var possiblePlugins = await GetMostLikelyRemotePluginsForFilesAsync(filesAndChecksums);
 
             if (!possiblePlugins.Any())
@@ -47,7 +48,7 @@
             return true;
         }
 
-        public async Task<IDictionary<string, IEnumerable<RemotePlugin>>> GetMostLikelyRemotePluginsForFilesAsync(IEnumerable<Tuple<string, string>> filePathAndChecksum)
+        public async Task<IDictionary<PluginFileMetaInfo, IEnumerable<RemotePlugin>>> GetMostLikelyRemotePluginsForFilesAsync(IEnumerable<PluginFileMetaInfo> filePathAndChecksum)
         {
             return await GetMostLikelyPluginsForFilesAsync(filePathAndChecksum);
         }
@@ -55,14 +56,18 @@
         public async Task<IEnumerable<RemotePlugin>> GetMostLikelyRemotePluginForFileAsync(string filepath, string checksum)
         {
             var filename = new FileInfo(filepath).Name;
-            var filenameAndChecksum = new Collection<Tuple<string, string>>
+            var pluginFileMetaInfos = new Collection<PluginFileMetaInfo>
+                                      {
+                                          new PluginFileMetaInfo
                                           {
-                                              new Tuple<string, string>(
+                                              Filename =
                                                   filename,
-                                                  checksum)
-                                          };
+                                              Checksum =
+                                                  checksum
+                                          }
+                                      };
 
-            var guidCollection = await client.GetPluginsByFileInfoAsync(filenameAndChecksum);
+            var guidCollection = await client.GetPluginsByFileInfoAsync(pluginFileMetaInfos);
             var guid = guidCollection.SelectMany(x => x.Value).ToList();
 
             if (!guid.Any())
@@ -75,20 +80,14 @@
             return plugins.Plugins;
         }
 
-        private async Task<IDictionary<string, IEnumerable<RemotePlugin>>> GetMostLikelyPluginsForFilesAsync(
-            IEnumerable<Tuple<string, string>> filePathAndChecksum)
+        private async Task<IDictionary<PluginFileMetaInfo, IEnumerable<RemotePlugin>>> GetMostLikelyPluginsForFilesAsync(
+            IEnumerable<PluginFileMetaInfo> pluginFileMetaInfos)
         {
-            var fixedInput = new Collection<Tuple<string, string>>();
-            foreach (var tuple in filePathAndChecksum)
-            {
-                fixedInput.Add(new Tuple<string, string>(new FileInfo(tuple.Item1).Name, tuple.Item2));
-            }
-
-            var pluginGuids = await client.GetPluginsByFileInfoAsync(fixedInput);
+            var pluginGuids = await client.GetPluginsByFileInfoAsync(pluginFileMetaInfos.ToList());
             var allGuids = pluginGuids.SelectMany(x => x.Value).GroupBy(x => x).Select(x => x.Key);
             var plugins = await client.GetPluginsAsync(allGuids);
 
-            var dictionary = new Dictionary<string, IEnumerable<RemotePlugin>>();
+            var dictionary = new Dictionary<PluginFileMetaInfo, IEnumerable<RemotePlugin>>();
 
             foreach (var entry in pluginGuids)
             {

@@ -9,6 +9,8 @@
     using System.Security.Policy;
     using System.Threading.Tasks;
 
+    using Irradiated.Sc4Buddy.ApiClient.Model;
+
     using log4net;
 
     using NIHEI.Common.IO;
@@ -16,6 +18,8 @@
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Remote;
 
+    using Plugin = NIHEI.SC4Buddy.Model.Plugin;
+    using PluginFile = NIHEI.SC4Buddy.Model.PluginFile;
     using RemotePlugin = Irradiated.Sc4Buddy.ApiClient.Model.Plugin;
     using RemotePluginFile = Irradiated.Sc4Buddy.ApiClient.Model.PluginFile;
 
@@ -130,33 +134,36 @@
         {
             var fileDictionary = new Dictionary<string, RemotePlugin>();
 
-            var filenamesAndChecksums = new Collection<Tuple<string, string>>();
+            var pluginFileMetaInfos = new Collection<PluginFileMetaInfo>();
 
             foreach (
                 var tuple in
                     files.Select(file => new FileInfo(file))
                         .Select(
                             fileInfo =>
-                            new Tuple<string, string>(
-                                fileInfo.Name,
-                                Md5ChecksumUtility.CalculateChecksum(fileInfo).ToHex())))
+                            new PluginFileMetaInfo
+                            {
+                                Filename = fileInfo.Name,
+                                Checksum = Md5ChecksumUtility.CalculateChecksum(fileInfo).ToHex()
+                            }))
             {
-                filenamesAndChecksums.Add(tuple);
+                pluginFileMetaInfos.Add(tuple);
             }
 
-            var matches = await matcher.GetMostLikelyRemotePluginsForFilesAsync(filenamesAndChecksums);
+            var matches = await matcher.GetMostLikelyRemotePluginsForFilesAsync(pluginFileMetaInfos);
 
             foreach (var match in matches)
             {
                 foreach (var file in files)
                 {
                     var fileInfo = new FileInfo(file);
-                    var key = string.Format(
-                        "{0}+{1}",
-                        fileInfo.Name,
-                        Md5ChecksumUtility.CalculateChecksum(fileInfo).ToHex());
+                    var key = new PluginFileMetaInfo
+                              {
+                                  Filename = fileInfo.Name,
+                                  Checksum = Md5ChecksumUtility.CalculateChecksum(fileInfo).ToHex()
+                              };
 
-                    if (key != match.Key)
+                    if (!Equals(key, match.Key))
                     {
                         continue;
                     }
