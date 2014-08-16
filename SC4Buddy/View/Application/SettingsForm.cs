@@ -162,6 +162,9 @@
             LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableMusic, disableMusicCheckBox.Checked);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableSounds, disableSoundsCheckBox.Checked);
 
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.EnableCustomResolution, customResolutionCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.WindowMode, windowModeCheckBox.Checked);
+
             Close();
         }
 
@@ -219,6 +222,9 @@
             disableAudioCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableAudio);
             disableMusicCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableMusic);
             disableSoundsCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableSounds);
+
+            customResolutionCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableCustomResolution);
+            windowModeCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.WindowMode);
 
             UpdateResolutionComboBox();
 

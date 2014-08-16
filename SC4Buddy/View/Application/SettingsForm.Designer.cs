@@ -75,6 +75,9 @@ namespace NIHEI.SC4Buddy.View.Application
             this.storeLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.autoSaveIntervalTrackBar = new System.Windows.Forms.TrackBar();
             this.enableAutoSaveCheckBox = new System.Windows.Forms.CheckBox();
+            this.disableSoundsCheckBox = new System.Windows.Forms.CheckBox();
+            this.disableMusicCheckBox = new System.Windows.Forms.CheckBox();
+            this.disableAudioCheckBox = new System.Windows.Forms.CheckBox();
             this.languageComboBox = new System.Windows.Forms.ComboBox();
             this.ignoreMissingModelsCheckBox = new System.Windows.Forms.CheckBox();
             this.writeLogCheckBox = new System.Windows.Forms.CheckBox();
@@ -85,9 +88,6 @@ namespace NIHEI.SC4Buddy.View.Application
             this.disableExceptionHandlingCheckBox = new System.Windows.Forms.CheckBox();
             this.windowModeCheckBox = new System.Windows.Forms.CheckBox();
             this.customResolutionCheckBox = new System.Windows.Forms.CheckBox();
-            this.disableSoundsCheckBox = new System.Windows.Forms.CheckBox();
-            this.disableMusicCheckBox = new System.Windows.Forms.CheckBox();
-            this.disableAudioCheckBox = new System.Windows.Forms.CheckBox();
             this.allowCheckMissingDependenciesCheckBox = new System.Windows.Forms.CheckBox();
             this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
             this.RemoveNonPluginFilesAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
@@ -429,6 +429,25 @@ namespace NIHEI.SC4Buddy.View.Application
             this.enableAutoSaveCheckBox.UseVisualStyleBackColor = true;
             this.enableAutoSaveCheckBox.CheckedChanged += new System.EventHandler(this.EnableAutoSaveButtonCheckedChanged);
             // 
+            // disableSoundsCheckBox
+            // 
+            resources.ApplyResources(this.disableSoundsCheckBox, "disableSoundsCheckBox");
+            this.disableSoundsCheckBox.Name = "disableSoundsCheckBox";
+            this.disableSoundsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // disableMusicCheckBox
+            // 
+            resources.ApplyResources(this.disableMusicCheckBox, "disableMusicCheckBox");
+            this.disableMusicCheckBox.Name = "disableMusicCheckBox";
+            this.disableMusicCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // disableAudioCheckBox
+            // 
+            resources.ApplyResources(this.disableAudioCheckBox, "disableAudioCheckBox");
+            this.disableAudioCheckBox.Name = "disableAudioCheckBox";
+            this.disableAudioCheckBox.UseVisualStyleBackColor = true;
+            this.disableAudioCheckBox.CheckedChanged += new System.EventHandler(this.DisableAudioCheckBoxCheckedChanged);
+            // 
             // languageComboBox
             // 
             resources.ApplyResources(this.languageComboBox, "languageComboBox");
@@ -497,37 +516,14 @@ namespace NIHEI.SC4Buddy.View.Application
             // windowModeCheckBox
             // 
             resources.ApplyResources(this.windowModeCheckBox, "windowModeCheckBox");
-            this.windowModeCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherWindowMode;
-            this.windowModeCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherWindowMode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.windowModeCheckBox.Name = "windowModeCheckBox";
             this.windowModeCheckBox.UseVisualStyleBackColor = true;
             // 
             // customResolutionCheckBox
             // 
             resources.ApplyResources(this.customResolutionCheckBox, "customResolutionCheckBox");
-            this.customResolutionCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherCustomResolution;
-            this.customResolutionCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherCustomResolution", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.customResolutionCheckBox.Name = "customResolutionCheckBox";
             this.customResolutionCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // disableSoundsCheckBox
-            // 
-            resources.ApplyResources(this.disableSoundsCheckBox, "disableSoundsCheckBox");
-            this.disableSoundsCheckBox.Name = "disableSoundsCheckBox";
-            this.disableSoundsCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // disableMusicCheckBox
-            // 
-            resources.ApplyResources(this.disableMusicCheckBox, "disableMusicCheckBox");
-            this.disableMusicCheckBox.Name = "disableMusicCheckBox";
-            this.disableMusicCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // disableAudioCheckBox
-            // 
-            resources.ApplyResources(this.disableAudioCheckBox, "disableAudioCheckBox");
-            this.disableAudioCheckBox.Name = "disableAudioCheckBox";
-            this.disableAudioCheckBox.UseVisualStyleBackColor = true;
-            this.disableAudioCheckBox.CheckedChanged += new System.EventHandler(this.DisableAudioCheckBoxCheckedChanged);
             // 
             // allowCheckMissingDependenciesCheckBox
             // 

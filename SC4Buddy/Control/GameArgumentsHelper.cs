@@ -222,7 +222,7 @@
             {
                 string.Format(
                     "-customResolution:{0}", 
-                    OldSettings.Default.LauncherCustomResolution ? "enabled" : "disabled")
+                    LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableCustomResolution) ? "enabled" : "disabled")
             };
 
             if (!string.IsNullOrWhiteSpace(OldSettings.Default.LauncherResolution))
@@ -252,7 +252,7 @@
                 output.Add(GetStringForRenderMode(renderMode));
             }
 
-            output.Add(OldSettings.Default.LauncherWindowMode ? "-w" : "-f");
+            output.Add(LauncherSettings.Get<bool>(LauncherSettings.Keys.WindowMode) ? "-w" : "-f");
 
             return output;
         }

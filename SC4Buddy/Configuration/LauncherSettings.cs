@@ -57,6 +57,10 @@
             public const string DisableMusic = "DisableMusic";
 
             public const string DisableSounds = "DisableSounds";
+
+            public const string EnableCustomResolution = "EnableCustomResolution";
+
+            public const string WindowMode = "WindowMode";
         }
     }
 }

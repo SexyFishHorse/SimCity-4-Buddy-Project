@@ -25,18 +25,6 @@ namespace NIHEI.SC4Buddy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherCustomResolution {
-            get {
-                return ((bool)(this["LauncherCustomResolution"]));
-            }
-            set {
-                this["LauncherCustomResolution"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string LauncherRenderMode {
             get {
@@ -296,18 +284,6 @@ namespace NIHEI.SC4Buddy.Properties {
             }
             set {
                 this["InstallerAskForAdditionalInfo"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherWindowMode {
-            get {
-                return ((bool)(this["LauncherWindowMode"]));
-            }
-            set {
-                this["LauncherWindowMode"] = value;
             }
         }
     }
