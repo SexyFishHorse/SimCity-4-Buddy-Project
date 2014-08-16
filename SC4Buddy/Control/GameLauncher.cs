@@ -6,6 +6,7 @@
     using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using log4net;
+    using NIHEI.SC4Buddy.Configuration;
     using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
     using Timer = System.Threading.Timer;
 
@@ -37,7 +38,7 @@
             gameProcess.Exited += (sender, args) => Dispose();
             var handle = gameProcess.Handle;
 
-            if (!OldSettings.Default.EnableAutoSave)
+            if (!LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableAutoSave))
             {
                 return;
             }

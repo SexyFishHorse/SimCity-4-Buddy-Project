@@ -11,7 +11,7 @@
     using System.Windows.Forms;
 
     using log4net;
-
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
@@ -247,7 +247,7 @@
                                                WorkingDirectory = Settings.Get(Settings.Keys.GameLocation)
                                            };
 
-            var gameLauncher = new GameLauncher(gameProcessStartInfo, OldSettings.Default.AutoSaveWaitTime);
+            var gameLauncher = new GameLauncher(gameProcessStartInfo, LauncherSettings.Get<int>(LauncherSettings.Keys.AutoSaveWaitTime));
             var gameLauncherThread = new Thread(gameLauncher.Start) { Name = "SC4Buddy AutoSaver" };
 
             gameLauncherThread.Start();

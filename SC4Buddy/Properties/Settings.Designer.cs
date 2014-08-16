@@ -25,18 +25,6 @@ namespace NIHEI.SC4Buddy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("15")]
-        public int AutoSaveWaitTime {
-            get {
-                return ((int)(this["AutoSaveWaitTime"]));
-            }
-            set {
-                this["AutoSaveWaitTime"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool LauncherDisableSound {
             get {
@@ -224,18 +212,6 @@ namespace NIHEI.SC4Buddy.Properties {
             }
             set {
                 this["LauncherPauseMinimized"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool EnableAutoSave {
-            get {
-                return ((bool)(this["EnableAutoSave"]));
-            }
-            set {
-                this["EnableAutoSave"] = value;
             }
         }
         

@@ -162,6 +162,7 @@
     <Compile Include="Remote\IDependencyChecker.cs" />
     <Compile Include="Remote\IPluginMatcher.cs" />
     <Compile Include="Remote\PluginMatcher.cs" />
+    <Compile Include="Configuration\LauncherSettings.cs" />
     <Compile Include="View\Application\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>

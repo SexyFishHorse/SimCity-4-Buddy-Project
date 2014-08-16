@@ -10,7 +10,7 @@
     using System.Windows.Forms;
 
     using log4net;
-
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Localization;
@@ -152,6 +152,12 @@
 
             Settings.SetAndSave(Settings.Keys.GameLocation, gameLocationTextBox.Text);
 
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.EnableAutoSave, enableAutoSaveCheckBox.Checked);
+            if (enableAutoSaveCheckBox.Checked)
+            {
+                LauncherSettings.SetAndSave(LauncherSettings.Keys.AutoSaveWaitTime, autoSaveIntervalTrackBar.Value);
+            }
+
             Close();
         }
 
@@ -190,10 +196,7 @@
 
         private void SettingsFormLoad(object sender, EventArgs e)
         {
-            if (Settings.HasSetting(Settings.Keys.GameLocation))
-            {
-                gameLocationTextBox.Text = Settings.Get(Settings.Keys.GameLocation);
-            }
+            gameLocationTextBox.Text = Settings.Get(Settings.Keys.GameLocation);
 
             if (string.IsNullOrWhiteSpace(gameLocationTextBox.Text))
             {
@@ -206,8 +209,8 @@
                 ? Color.Gray
                 : Color.Black;
 
-            autoSaveIntervalTrackBar.Enabled = OldSettings.Default.EnableAutoSave;
-            UpdateAutoSaveLabel(OldSettings.Default.AutoSaveWaitTime);
+            autoSaveIntervalTrackBar.Enabled = LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableAutoSave);
+            UpdateAutoSaveLabel(LauncherSettings.Get<int>(LauncherSettings.Keys.AutoSaveWaitTime));
 
             UpdateResolutionComboBox();
 
@@ -438,7 +441,7 @@
 
         private void EnableAutoSaveButtonCheckedChanged(object sender, EventArgs e)
         {
-            autoSaveIntervalTrackBar.Enabled = enableAutoSaveButton.Checked;
+            autoSaveIntervalTrackBar.Enabled = enableAutoSaveCheckBox.Checked;
 
             AutoSaveIntervalTrackBarScroll(sender, e);
         }
