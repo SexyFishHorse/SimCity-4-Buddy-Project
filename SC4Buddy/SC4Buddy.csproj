@@ -173,7 +173,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="View\Elements\PluginListViewItem.cs" />
-    <Compile Include="View\Helpers\NonPluginFilesScannerUiHelper.cs" />
+    <Compile Include="View\Helpers\NonPluginFilesScannerUi.cs" />
     <Compile Include="View\Plugins\EnterPluginInformationForm.cs">
       <SubType>Form</SubType>
     </Compile>
