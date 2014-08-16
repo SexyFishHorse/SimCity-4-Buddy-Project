@@ -53,7 +53,7 @@
             var filesToDelete = GetFilesToDelete(userFolder);
             numFiles = filesToDelete.Count();
 
-            var foldersToDelete = GetFoldersToDelete(userFolder);
+            var foldersToDelete = GetEmptyFolders(userFolder);
             numFolders = foldersToDelete.Count();
 
             return numFiles > 0 || numFolders > 0;
@@ -68,7 +68,7 @@
                 FileSystem.DeleteFile(file, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
             }
 
-            var foldersToDelete = GetFoldersToDelete(userFolder);
+            var foldersToDelete = GetEmptyFolders(userFolder);
 
             foreach (var folder in foldersToDelete.Where(Directory.Exists))
             {
@@ -78,7 +78,7 @@
             return foldersToDelete.Count();
         }
 
-        private static IList<string> GetFoldersToDelete(UserFolder userFolder)
+        private static IList<string> GetEmptyFolders(UserFolder userFolder)
         {
             var folders = Directory.EnumerateDirectories(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories).ToList();
             var foldersToDelete =
