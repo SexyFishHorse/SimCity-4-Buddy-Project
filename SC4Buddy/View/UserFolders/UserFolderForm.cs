@@ -12,8 +12,6 @@
     using Irradiated.Sc4Buddy.ApiClient.Model;
 
     using log4net;
-
-    using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
@@ -338,32 +336,28 @@
 
         private void ScanForNonpluginFilesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            int numFiles;
-            int numFolders;
-
             var storageLocation = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "Irradiated Games",
                 "SimCity 4 Buddy",
                 "Configuration");
 
-            var scanner = new NonPluginFilesScanner(storageLocation);
-            var removalCandidateInfos = scanner.GetFilesAndFoldersToRemove(userFolder);
+            var nonPluginFilesScannerUi = new NonPluginFilesScannerUi(storageLocation) { UserFolder = userFolder };
 
-            if (!removalCandidateInfos.Any())
+            nonPluginFilesScannerUi.ScanForCandidates();
+
+            if (!nonPluginFilesScannerUi.RemovalCandidateInfos.Any())
             {
-                NonPluginFilesScannerUiHelper.ShowThereAreNoEntitiesToRemoveDialog(this);
+                nonPluginFilesScannerUi.ShowThereAreNoEntitiesToRemoveDialog(this);
                 return;
             }
 
-            if (!NonPluginFilesScannerUiHelper.ShowConfirmDialog(this, removalCandidateInfos))
+            if (!nonPluginFilesScannerUi.ShowConfirmDialog(this))
             {
                 return;
             }
 
-            numFolders = scanner.RemoveNonPluginFiles(userFolder);
-
-            NonPluginFilesScannerUiHelper.ShowRemovalSummary(this, numFiles, numFolders);
+            nonPluginFilesScannerUi.RemoveNonPluginFilesAndShowSummary(this);
         }
 
         private async void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
