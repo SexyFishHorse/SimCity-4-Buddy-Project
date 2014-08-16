@@ -120,7 +120,7 @@
     <Compile Include="Control\Plugins\FolderScannerController.cs" />
     <Compile Include="Control\Plugins\PluginCopier.cs" />
     <Compile Include="Control\Plugins\PluginGroupController.cs" />
-    <Compile Include="Control\Settings.cs" />
+    <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Control\SettingsController.cs" />
     <Compile Include="Control\UserFolders\FolderScanner.cs" />
     <Compile Include="Control\Plugins\PluginController.cs" />

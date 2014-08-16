@@ -21,7 +21,7 @@
     using NIHEI.SC4Buddy.View.Plugins;
     using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
     using Plugin = NIHEI.SC4Buddy.Model.Plugin;
-    using Settings = NIHEI.SC4Buddy.Control.Settings;
+    using Settings = NIHEI.SC4Buddy.Configuration.Settings;
 
     public partial class UserFolderForm : Form
     {

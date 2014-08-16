@@ -12,6 +12,7 @@
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
     using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
+    using Settings = NIHEI.SC4Buddy.Configuration.Settings;
 
     public class SettingsController : ISettingsController
     {

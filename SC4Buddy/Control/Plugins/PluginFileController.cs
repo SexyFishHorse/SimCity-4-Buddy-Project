@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
     using OldSettings = NIHEI.SC4Buddy.Properties.Settings;

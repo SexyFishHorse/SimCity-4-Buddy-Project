@@ -13,7 +13,7 @@
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
-    using Settings = NIHEI.SC4Buddy.Control.Settings;
+    using Settings = NIHEI.SC4Buddy.Configuration.Settings;
 
     public class UserFolderController
     {
