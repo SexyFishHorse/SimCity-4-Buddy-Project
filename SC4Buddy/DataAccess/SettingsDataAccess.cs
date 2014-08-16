@@ -11,9 +11,9 @@
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public SettingsDataAccess(string dataLocation)
+        public SettingsDataAccess(string storageLocation, string filename)
         {
-            DataLocation = dataLocation;
+            DataLocation = Path.Combine(storageLocation, "Configuration", filename);
 
             Settings = new Dictionary<string, object>();
         }

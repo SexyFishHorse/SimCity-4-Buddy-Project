@@ -6,7 +6,7 @@
 
     public class Settings
     {
-        private static readonly SettingsDataAccess DataAccess = new SettingsDataAccess(GetDefaultStorageLocation());
+        private static readonly SettingsDataAccess DataAccess = new SettingsDataAccess(GetDefaultStorageLocation(), "Settings.json");
 
         public static bool HasSetting(string key)
         {
