@@ -150,6 +150,8 @@
 
             settingsController.CheckMainFolder();
 
+            Settings.SetAndSave(Settings.Keys.GameLocation, gameLocationTextBox.Text);
+
             Close();
         }
 
@@ -188,6 +190,11 @@
 
         private void SettingsFormLoad(object sender, EventArgs e)
         {
+            if (Settings.HasSetting(Settings.Keys.GameLocation))
+            {
+                gameLocationTextBox.Text = Settings.Get(Settings.Keys.GameLocation);
+            }
+
             if (string.IsNullOrWhiteSpace(gameLocationTextBox.Text))
             {
                 gameLocationTextBox.Text = LocalizationStrings.SelectGameLocation;
@@ -404,7 +411,7 @@
 
         private void UpdateLanguageComboBox()
         {
-            if (!settingsController.ValidateGameLocationPath(OldSettings.Default.GameLocation))
+            if (!settingsController.ValidateGameLocationPath(Settings.Get(Settings.Keys.GameLocation)))
             {
                 return;
             }
@@ -453,7 +460,7 @@
         {
             OldSettings.Default.Reload();
 
-            if (settingsController.ValidateGameLocationPath(OldSettings.Default.GameLocation))
+            if (settingsController.ValidateGameLocationPath(Settings.Get(Settings.Keys.GameLocation)))
             {
                 return;
             }

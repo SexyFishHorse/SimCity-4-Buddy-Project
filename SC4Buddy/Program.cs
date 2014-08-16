@@ -40,7 +40,7 @@
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
 
-                if (string.IsNullOrWhiteSpace(OldSettings.Default.GameLocation) || !Directory.Exists(OldSettings.Default.GameLocation))
+                if (string.IsNullOrWhiteSpace(Settings.Get(Settings.Keys.GameLocation)) || !Directory.Exists(Settings.Get(Settings.Keys.GameLocation)))
                 {
                     var settingsForm = new SettingsForm(userFolderController) { StartPosition = FormStartPosition.CenterScreen };
 
@@ -53,7 +53,7 @@
                     SetDefaultUserFolder();
                 }
 
-                if (Directory.Exists(OldSettings.Default.GameLocation))
+                if (Directory.Exists(Settings.Get(Settings.Keys.GameLocation)))
                 {
                     new SettingsController(userFolderController).CheckMainFolder();
                     Application.Run(

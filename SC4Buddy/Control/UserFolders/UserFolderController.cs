@@ -13,6 +13,7 @@
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
+    using Settings = NIHEI.SC4Buddy.Control.Settings;
 
     public class UserFolderController
     {
@@ -161,12 +162,12 @@
 
         public bool IsNotGameFolder(string path)
         {
-            if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation))
+            if (string.IsNullOrWhiteSpace(Settings.Get(Settings.Keys.GameLocation)))
             {
                 throw new InvalidOperationException("Game location not set.");
             }
 
-            return !Settings.Default.GameLocation.Equals(path, StringComparison.OrdinalIgnoreCase);
+            return !Settings.Get(Settings.Keys.GameLocation).Equals(path, StringComparison.OrdinalIgnoreCase);
         }
 
         public void UninstallPlugin(Plugin selectedPlugin)
@@ -218,7 +219,7 @@
                                  Id = Guid.NewGuid(),
                                  Alias = "Main user folder",
                                  IsMainFolder = true,
-                                 FolderPath = Path.Combine(Settings.Default.GameLocation, UserFolder.PluginFolderName)
+                                 FolderPath = Path.Combine(Settings.Get(Settings.Keys.GameLocation), UserFolder.PluginFolderName)
                              };
                 Add(folder);
                 SaveChanges();

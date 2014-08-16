@@ -1,14 +1,11 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
-    using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
     using System.Reflection;
     using log4net;
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
 
     public class SettingsDataAccess
     {
@@ -65,9 +62,24 @@
 
         public void SetSetting(string key, object value)
         {
+            if (!Settings.Any())
+            {
+                LoadSettingsFromDisc();
+            }
+
             Settings[key] = value;
 
             StoreSettingsToDisc();
+        }
+
+        public bool HasSetting(string key)
+        {
+            if (!Settings.Any())
+            {
+                LoadSettingsFromDisc();
+            }
+
+            return Settings.ContainsKey(key);
         }
     }
 }

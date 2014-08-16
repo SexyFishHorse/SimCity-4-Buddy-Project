@@ -22,6 +22,7 @@
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.UserFolders;
     using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
+    using Settings = NIHEI.SC4Buddy.Control.Settings;
 
     public partial class Sc4Buddy : Form
     {
@@ -239,11 +240,11 @@
                                            {
                                                FileName =
                                                    Path.Combine(
-                                                       OldSettings.Default.GameLocation,
+                                                       Settings.Get(Settings.Keys.GameLocation),
                                                        "Apps",
                                                        "SimCity 4.exe"),
                                                Arguments = arguments,
-                                               WorkingDirectory = OldSettings.Default.GameLocation
+                                               WorkingDirectory = Settings.Get(Settings.Keys.GameLocation)
                                            };
 
             var gameLauncher = new GameLauncher(gameProcessStartInfo, OldSettings.Default.AutoSaveWaitTime);

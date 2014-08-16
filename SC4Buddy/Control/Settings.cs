@@ -1,9 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Control
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using NIHEI.SC4Buddy.DataAccess;
 
     public class Settings
@@ -12,32 +10,27 @@
 
         public static bool HasSetting(string key)
         {
-            if (!DataAccess.Settings.Any())
-            {
-                DataAccess.LoadSettingsFromDisc();
-            }
-
-            return DataAccess.Settings.ContainsKey(key);
+            return DataAccess.HasSetting(key);
         }
 
         public static string Get(string key)
         {
-            if (!HasSetting(key))
+            if (HasSetting(key))
             {
-                throw new KeyNotFoundException(string.Format("No settings for key {0}", key));
+                return (string)DataAccess.Settings[key];
             }
 
-            return (string)DataAccess.Settings[key];
+            return string.Empty;
         }
 
         public static T Get<T>(string key)
         {
-            if (!HasSetting(key))
+            if (HasSetting(key))
             {
-                throw new KeyNotFoundException(string.Format("No settings for key {0}", key));
+                return (T)DataAccess.Settings[key];
             }
 
-            return (T)DataAccess.Settings[key];
+            return default(T);
         }
 
         public static void SetAndSave(string key, object value)
@@ -55,6 +48,8 @@
 
         public class Keys
         {
+            public const string GameLocation = "GameLocation";
+
             public const string QuarantinedFiles = "QuarantinedFiles";
         }
     }

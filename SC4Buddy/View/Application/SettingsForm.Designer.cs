@@ -213,10 +213,8 @@ namespace NIHEI.SC4Buddy.View.Application
             // gameLocationTextBox
             // 
             resources.ApplyResources(this.gameLocationTextBox, "gameLocationTextBox");
-            this.gameLocationTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "GameLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.gameLocationTextBox.ForeColor = System.Drawing.Color.Gray;
             this.gameLocationTextBox.Name = "gameLocationTextBox";
-            this.gameLocationTextBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.GameLocation;
             this.gameLocationTextBox.TextChanged += new System.EventHandler(this.GameLocationTextBoxTextChanged);
             // 
             // label1

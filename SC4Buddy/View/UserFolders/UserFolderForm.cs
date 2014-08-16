@@ -8,22 +8,20 @@
     using System.Reflection;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-
     using Irradiated.Sc4Buddy.ApiClient.Model;
-
     using log4net;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.Helpers;
     using NIHEI.SC4Buddy.View.Plugins;
-
+    using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
     using Plugin = NIHEI.SC4Buddy.Model.Plugin;
+    using Settings = NIHEI.SC4Buddy.Control.Settings;
 
     public partial class UserFolderForm : Form
     {
@@ -64,7 +62,7 @@
                         userFolder.Alias = LocalizationStrings.GameUserFolderName;
                     }
 
-                    userFolder.FolderPath = Settings.Default.GameLocation;
+                    userFolder.FolderPath = Settings.Get(Settings.Keys.GameLocation);
                     userFolderController.Update(userFolder);
                 }
                 else
@@ -91,8 +89,8 @@
             }
             else
             {
-                updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Default.FetchInfoFromRemote;
-                checkForMissingDependenciesToolStripMenuItem.Visible = Settings.Default.AllowDependencyCheck;
+                updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = OldSettings.Default.FetchInfoFromRemote;
+                checkForMissingDependenciesToolStripMenuItem.Visible = OldSettings.Default.AllowDependencyCheck;
             }
         }
 
@@ -286,7 +284,7 @@
 
             RepopulateInstalledPluginsListView();
 
-            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.AllowDependencyCheck)
+            if (!NetworkInterface.GetIsNetworkAvailable() || !OldSettings.Default.AllowDependencyCheck)
             {
                 return;
             }
@@ -315,7 +313,7 @@
                 pluginMatcher).ShowDialog(this);
             RepopulateInstalledPluginsListView();
 
-            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Default.AllowDependencyCheck)
+            if (!NetworkInterface.GetIsNetworkAvailable() || !OldSettings.Default.AllowDependencyCheck)
             {
                 return;
             }
@@ -417,7 +415,7 @@
 
         private void UserFolderFormActivated(object sender, EventArgs e)
         {
-            updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Default.FetchInfoFromRemote;
+            updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = OldSettings.Default.FetchInfoFromRemote;
         }
 
         private async void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)

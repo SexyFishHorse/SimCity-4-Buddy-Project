@@ -25,18 +25,6 @@ namespace NIHEI.SC4Buddy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string GameLocation {
-            get {
-                return ((string)(this["GameLocation"]));
-            }
-            set {
-                this["GameLocation"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("15")]
         public int AutoSaveWaitTime {
             get {

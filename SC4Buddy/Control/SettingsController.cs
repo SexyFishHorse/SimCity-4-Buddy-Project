@@ -56,7 +56,7 @@
                 throw new InvalidOperationException("Main plugin folder has been deleted from the database.");
             }
 
-            folder.FolderPath = OldSettings.Default.GameLocation;
+            folder.FolderPath = Settings.Get(Settings.Keys.GameLocation);
             folder.Alias = LocalizationStrings.GameUserFolderName;
             userFolderController.Update(folder);
         }
@@ -106,7 +106,7 @@
 
         public IEnumerable<string> GetInstalledLanguages()
         {
-            var dirs = Directory.EnumerateDirectories(OldSettings.Default.GameLocation, "*", SearchOption.TopDirectoryOnly);
+            var dirs = Directory.EnumerateDirectories(Settings.Get(Settings.Keys.GameLocation), "*", SearchOption.TopDirectoryOnly);
 
             var languages =
                 dirs.Select(
