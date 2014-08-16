@@ -166,6 +166,7 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Elements\ListViewItemWithObjectValue.cs" />
+    <Compile Include="View\Elements\RemovalFileTypeCandidateListViewItem.cs" />
     <Compile Include="View\Elements\UserFolderListViewItem.cs" />
     <Compile Include="View\Elements\UserFolderToolStripMenuItem.cs">
       <SubType>Component</SubType>

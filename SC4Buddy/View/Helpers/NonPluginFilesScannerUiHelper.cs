@@ -30,10 +30,11 @@
                 MessageBoxIcon.Information);
         }
 
-
-        public static bool ShowConfirmDialog(InstallPluginsForm parentForm, IEnumerable<NonPluginFileTypeCandidateInfo> removalCandidateInfos)
+        public static bool ShowConfirmDialog(Form parentForm, IEnumerable<NonPluginFileTypeCandidateInfo> removalCandidateInfos)
         {
-            var dialog = new RemoveUnnecessaryFilesForm { CandidateInfos = removalCandidateInfos };
+            var dialog = new RemoveUnnecessaryFilesForm();
+            dialog.SetCandidateInfos(removalCandidateInfos);
+
             return dialog.ShowDialog(parentForm) == DialogResult.OK;
         }
 
