@@ -102,5 +102,24 @@
 
             return filesToDelete;
         }
+
+        private IEnumerable<NonPluginFileTypeCandidateInfo> GetCandiateFileTypeInfos(UserFolder userFolder)
+        {
+            var files = Directory.EnumerateFiles(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories).ToList();
+            var output = new Collection<NonPluginFileTypeCandidateInfo>();
+
+            foreach (var fileTypeInfo in FileTypes)
+            {
+                var numberOfFiles =
+                    files.Count(x => x.EndsWith(fileTypeInfo.Extension, StringComparison.OrdinalIgnoreCase));
+
+                if (numberOfFiles > 0)
+                {
+                    output.Add(new NonPluginFileTypeCandidateInfo { FileTypeInfo = fileTypeInfo, NumberOfEntities = numberOfFiles });
+                }
+            }
+
+            return output;
+        }
     }
 }
