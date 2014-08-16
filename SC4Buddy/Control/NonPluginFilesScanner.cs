@@ -1,19 +1,53 @@
 ﻿namespace NIHEI.SC4Buddy.Control
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
-
     using Microsoft.VisualBasic.FileIO;
 
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Installer.FileHandlers;
+    using Newtonsoft.Json.Linq;
     using NIHEI.SC4Buddy.Model;
-
     using SearchOption = System.IO.SearchOption;
 
     public class NonPluginFilesScanner
     {
+        public NonPluginFilesScanner(string storageLocation)
+        {
+            StorageLocation = storageLocation;
+
+            LoadFileTypesFromDisc();
+        }
+
+        public string StorageLocation { get; set; }
+
+        public IEnumerable<string> FileTypes { get; set; }
+
+        public void LoadFileTypesFromDisc()
+        {
+            var fileLocation = Path.Combine(StorageLocation, "NonPluginFileTypes.json");
+
+            var newFileTypes = new Collection<string>();
+
+            if (File.Exists(fileLocation))
+            {
+                using (var reader = new StreamReader(fileLocation))
+                {
+                    var json = reader.ReadToEnd();
+
+                    dynamic fileTypeJson = JArray.Parse(json);
+
+                    foreach (string fileType in fileTypeJson)
+                    {
+                        newFileTypes.Add(fileType);
+                    }
+                }
+            }
+
+            FileTypes = newFileTypes;
+        }
         public bool HasFilesAndFoldersToRemove(UserFolder userFolder, out int numFiles, out int numFolders)
         {
             var filesToDelete = GetFilesToDelete(userFolder);

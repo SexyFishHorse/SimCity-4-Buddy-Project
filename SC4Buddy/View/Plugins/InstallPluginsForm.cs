@@ -225,7 +225,14 @@
                                 int numFiles;
                                 int numFolders;
 
-                                var scanner = new NonPluginFilesScanner();
+                                var storageLocation =
+                                    Path.Combine(
+                                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                        "Irradiated Games",
+                                        "SimCity 4 Buddy",
+                                        "Configuration");
+
+                                var scanner = new NonPluginFilesScanner(storageLocation);
                                 if (!scanner.HasFilesAndFoldersToRemove(userFolder, out numFiles, out numFolders))
                                 {
                                     NonPluginFilesScannerUiHelper.ShowThereAreNoEntitiesToRemoveDialog(this);
