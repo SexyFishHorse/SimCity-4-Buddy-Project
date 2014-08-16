@@ -21,6 +21,7 @@
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.UserFolders;
+    using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
 
     public partial class Sc4Buddy : Form
     {
@@ -153,7 +154,7 @@
         private void UpdateBackground()
         {
             Bitmap image;
-            switch (Settings.Default.Wallpaper)
+            switch (OldSettings.Default.Wallpaper)
             {
                 case 13:
                     image = Resources.Wallpaper13;
@@ -238,14 +239,14 @@
                                            {
                                                FileName =
                                                    Path.Combine(
-                                                       Settings.Default.GameLocation,
+                                                       OldSettings.Default.GameLocation,
                                                        "Apps",
                                                        "SimCity 4.exe"),
                                                Arguments = arguments,
-                                               WorkingDirectory = Settings.Default.GameLocation
+                                               WorkingDirectory = OldSettings.Default.GameLocation
                                            };
 
-            var gameLauncher = new GameLauncher(gameProcessStartInfo, Settings.Default.AutoSaveWaitTime);
+            var gameLauncher = new GameLauncher(gameProcessStartInfo, OldSettings.Default.AutoSaveWaitTime);
             var gameLauncherThread = new Thread(gameLauncher.Start) { Name = "SC4Buddy AutoSaver" };
 
             gameLauncherThread.Start();

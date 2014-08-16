@@ -19,9 +19,9 @@
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Application;
+    using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
 
     public static class Program
     {
@@ -40,7 +40,7 @@
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
 
-                if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation) || !Directory.Exists(Settings.Default.GameLocation))
+                if (string.IsNullOrWhiteSpace(OldSettings.Default.GameLocation) || !Directory.Exists(OldSettings.Default.GameLocation))
                 {
                     var settingsForm = new SettingsForm(userFolderController) { StartPosition = FormStartPosition.CenterScreen };
 
@@ -53,7 +53,7 @@
                     SetDefaultUserFolder();
                 }
 
-                if (Directory.Exists(Settings.Default.GameLocation))
+                if (Directory.Exists(OldSettings.Default.GameLocation))
                 {
                     new SettingsController(userFolderController).CheckMainFolder();
                     Application.Run(

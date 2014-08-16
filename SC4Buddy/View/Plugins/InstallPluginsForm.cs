@@ -11,17 +11,15 @@
     using System.Windows.Forms;
 
     using log4net;
-
-    using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Installer;
     using NIHEI.SC4Buddy.Installer.InstallerEventArgs;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Helpers;
+    using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
 
     public partial class InstallPluginsForm : Form
     {
@@ -183,7 +181,7 @@
             {
                 Invoke(new Action(() =>
                     {
-                        if (NetworkInterface.GetIsNetworkAvailable() && Settings.Default.FetchInfoFromRemote)
+                        if (NetworkInterface.GetIsNetworkAvailable() && OldSettings.Default.FetchInfoFromRemote)
                         {
                             var matched = new Collection<Plugin>();
                             foreach (
@@ -204,7 +202,7 @@
                             return;
                         }
 
-                        if (Settings.Default.InstallerAskForAdditionalInfo
+                        if (OldSettings.Default.InstallerAskForAdditionalInfo
                             && ShowWouldYouLikeToEnterAdditionalDetailsDialog() != DialogResult.No)
                         {
                             foreach (var plugin in tempPluginInfo)
@@ -218,7 +216,7 @@
                             }
                         }
 
-                        if (Settings.Default.InstallerAskToRemoveNonPluginFiles)
+                        if (OldSettings.Default.InstallerAskToRemoveNonPluginFiles)
                         {
                             var storageLocation =
                                     Path.Combine(

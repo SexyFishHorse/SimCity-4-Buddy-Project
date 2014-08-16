@@ -11,7 +11,7 @@
     using log4net;
 
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Properties;
+    using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
 
     public class GameArgumentsHelper
     {
@@ -77,9 +77,9 @@
         {
             var output = new Collection<string>
             {
-                string.Format("-audio:{0}", Settings.Default.LauncherDisableAudio ? "off" : "on"), 
-                string.Format("-music:{0}", Settings.Default.LauncherDisableMusic ? "off" : "on"), 
-                string.Format("-sounds:{0}", Settings.Default.LauncherDisableSound ? "off" : "on")
+                string.Format("-audio:{0}", OldSettings.Default.LauncherDisableAudio ? "off" : "on"), 
+                string.Format("-music:{0}", OldSettings.Default.LauncherDisableMusic ? "off" : "on"), 
+                string.Format("-sounds:{0}", OldSettings.Default.LauncherDisableSound ? "off" : "on")
             };
 
             return output;
@@ -89,12 +89,12 @@
         {
             var output = new Collection<string>
             {
-                string.Format("-l:{0}", Settings.Default.LauncherLanguage), 
+                string.Format("-l:{0}", OldSettings.Default.LauncherLanguage), 
                 string.Format(
                     "-ignoreMissingModelDataBugs:{0}", 
-                    Settings.Default.LauncherIgnoreMissingModels ? "on" : "off"), 
-                string.Format("-ime:{0}", Settings.Default.LauncherDisableIME ? "disabled" : "enabled"), 
-                string.Format("-writeLog:{0}", Settings.Default.LauncherWriteLog ? "enabled" : "disabled")
+                    OldSettings.Default.LauncherIgnoreMissingModels ? "on" : "off"), 
+                string.Format("-ime:{0}", OldSettings.Default.LauncherDisableIME ? "disabled" : "enabled"), 
+                string.Format("-writeLog:{0}", OldSettings.Default.LauncherWriteLog ? "enabled" : "disabled")
             };
 
             return output;
@@ -104,22 +104,22 @@
         {
             var output = new Collection<string>
             {
-                string.Format("-intro:{0}", Settings.Default.LauncherSkipIntro ? "off" : "on"), 
+                string.Format("-intro:{0}", OldSettings.Default.LauncherSkipIntro ? "off" : "on"), 
                 string.Format(
                     "-exceptionHandling:{0}", 
-                    Settings.Default.LauncherDisableExceptionHandling ? "off" : "on"), 
-                string.Format("-backgroundLoader:{0}", Settings.Default.LauncherDisableBackgroundLoader ? "off" : "on")
+                    OldSettings.Default.LauncherDisableExceptionHandling ? "off" : "on"), 
+                string.Format("-backgroundLoader:{0}", OldSettings.Default.LauncherDisableBackgroundLoader ? "off" : "on")
             };
 
-            if (Settings.Default.LauncherCpuCount > 0)
+            if (OldSettings.Default.LauncherCpuCount > 0)
             {
-                output.Add(string.Format("-cpuCount:{0}", Settings.Default.LauncherCpuCount));
+                output.Add(string.Format("-cpuCount:{0}", OldSettings.Default.LauncherCpuCount));
             }
 
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCpuPriority))
+            if (!string.IsNullOrWhiteSpace(OldSettings.Default.LauncherCpuPriority))
             {
                 CpuPriority priority;
-                if (Enum.TryParse(Settings.Default.LauncherCpuPriority, true, out priority))
+                if (Enum.TryParse(OldSettings.Default.LauncherCpuPriority, true, out priority))
                 {
                     output.Add(GetStringForCpuPriority(priority));
                 }
@@ -128,11 +128,11 @@
                     Log.Warn(
                         string.Format(
                             "Unknown CPU priority: \"{0}\", skipping argument.",
-                            Settings.Default.LauncherCpuPriority));
+                            OldSettings.Default.LauncherCpuPriority));
                 }
             }
 
-            if (Settings.Default.LauncherPauseMinimized)
+            if (OldSettings.Default.LauncherPauseMinimized)
             {
                 output.Add("-gp");
             }
@@ -222,21 +222,21 @@
             {
                 string.Format(
                     "-customResolution:{0}", 
-                    Settings.Default.LauncherCustomResolution ? "enabled" : "disabled")
+                    OldSettings.Default.LauncherCustomResolution ? "enabled" : "disabled")
             };
 
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherResolution))
+            if (!string.IsNullOrWhiteSpace(OldSettings.Default.LauncherResolution))
             {
                 output.Add(
                     GetStringForResolution(
-                        Settings.Default.LauncherResolution,
-                        Settings.Default.Launcher32BitColourDepth));
+                        OldSettings.Default.LauncherResolution,
+                        OldSettings.Default.Launcher32BitColourDepth));
             }
 
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCursorColour))
+            if (!string.IsNullOrWhiteSpace(OldSettings.Default.LauncherCursorColour))
             {
                 CursorColorDepth cursorColorDepth;
-                if (Enum.TryParse(Settings.Default.LauncherCursorColour, true, out cursorColorDepth))
+                if (Enum.TryParse(OldSettings.Default.LauncherCursorColour, true, out cursorColorDepth))
                 {
                     output.Add(
                         string.Format(
@@ -247,12 +247,12 @@
             }
 
             RenderMode renderMode;
-            if (Enum.TryParse(Settings.Default.LauncherRenderMode, out renderMode))
+            if (Enum.TryParse(OldSettings.Default.LauncherRenderMode, out renderMode))
             {
                 output.Add(GetStringForRenderMode(renderMode));
             }
 
-            output.Add(Settings.Default.LauncherWindowMode ? "-w" : "-f");
+            output.Add(OldSettings.Default.LauncherWindowMode ? "-w" : "-f");
 
             return output;
         }
