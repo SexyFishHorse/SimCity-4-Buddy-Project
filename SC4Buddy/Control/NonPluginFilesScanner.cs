@@ -20,13 +20,13 @@
 
         public string StorageLocation { get; set; }
 
-        public IEnumerable<string> FileTypes { get; set; }
+        public IEnumerable<FileTypeInfo> FileTypes { get; set; }
 
         public void LoadFileTypesFromDisc()
         {
             var fileLocation = Path.Combine(StorageLocation, "NonPluginFileTypes.json");
 
-            var newFileTypes = new Collection<string>();
+            var newFileTypes = new Collection<FileTypeInfo>();
 
             if (File.Exists(fileLocation))
             {
@@ -36,9 +36,15 @@
 
                     dynamic fileTypeJson = JArray.Parse(json);
 
-                    foreach (string fileType in fileTypeJson)
+                    foreach (var fileType in fileTypeJson)
                     {
-                        newFileTypes.Add(fileType);
+                        newFileTypes.Add(
+                            new FileTypeInfo
+                            {
+                                Extension = fileType.Extension,
+                                DescriptiveName = fileType.DescriptiveName,
+                                Description = fileType.Description
+                            });
                     }
                 }
             }
@@ -91,7 +97,7 @@
 
             foreach (var fileType in FileTypes)
             {
-                filesToDelete.AddRange(files.Where(x => x.ToUpperInvariant().EndsWith(fileType.ToUpperInvariant())));
+                filesToDelete.AddRange(files.Where(x => x.ToUpperInvariant().EndsWith(fileType.Extension.ToUpperInvariant())));
             }
 
             return filesToDelete;
