@@ -5,6 +5,8 @@
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
+    using log4net;
     using Microsoft.VisualBasic.FileIO;
     using Newtonsoft.Json.Linq;
     using NIHEI.SC4Buddy.Model;
@@ -12,6 +14,8 @@
 
     public class NonPluginFilesScanner
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public NonPluginFilesScanner(string storageLocation)
         {
             StorageLocation = storageLocation;
@@ -85,23 +89,51 @@
             return output;
         }
 
-        public int RemoveNonPluginFiles(UserFolder userFolder)
+        public NonPluginFileRemovalSummary RemoveNonPluginFiles(UserFolder userFolder, IEnumerable<FileTypeInfo> fileTypesToRemove)
         {
-            var filesToDelete = GetCandidateFiles(userFolder);
+            var filesToDelete = GetFilesToDelete(userFolder, fileTypesToRemove);
+
+            var numFiles = 0;
+            var numFolders = 0;
+
+            var errors = new Dictionary<string, Exception>();
 
             foreach (var file in filesToDelete)
             {
-                FileSystem.DeleteFile(file, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                try
+                {
+                    FileSystem.DeleteFile(file, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                    numFiles++;
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(string.Format("Unable to delete file \"{0}\", Error: {1}", file, ex.Message));
+                    errors.Add(file, ex);
+                }
             }
 
             var foldersToDelete = GetEmptyFolders(userFolder);
 
             foreach (var folder in foldersToDelete.Where(Directory.Exists))
             {
-                FileSystem.DeleteDirectory(folder, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                try
+                {
+                    FileSystem.DeleteDirectory(folder, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                    numFolders++;
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(string.Format("Unable to delete the folder \"{0}\", Error: {1}", folder, ex.Message));
+                    errors.Add(folder, ex);
+                }
             }
 
-            return foldersToDelete.Count();
+            return new NonPluginFileRemovalSummary
+            {
+                NumFilesRemoved = numFiles,
+                NumFoldersRemoved = numFolders,
+                Errors = errors
+            };
         }
 
         private static IList<string> GetEmptyFolders(UserFolder userFolder)
@@ -112,12 +144,12 @@
             return foldersToDelete;
         }
 
-        private IEnumerable<string> GetCandidateFiles(UserFolder userFolder)
+        private IEnumerable<string> GetFilesToDelete(UserFolder userFolder, IEnumerable<FileTypeInfo> fileTypesToRemove)
         {
             var files = Directory.EnumerateFiles(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories).ToList();
             var filesToDelete = new List<string>();
 
-            foreach (var fileType in FileTypes)
+            foreach (var fileType in fileTypesToRemove)
             {
                 filesToDelete.AddRange(files.Where(x => x.ToUpperInvariant().EndsWith(fileType.Extension.ToUpperInvariant())));
             }
