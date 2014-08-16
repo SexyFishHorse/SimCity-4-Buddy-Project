@@ -127,6 +127,7 @@
     <Compile Include="DataAccess\Entities.cs" />
     <Compile Include="DataAccess\EntityFactory.cs" />
     <Compile Include="DataAccess\IEntities.cs" />
+    <Compile Include="DataAccess\SettingsDataAccess.cs" />
     <Compile Include="Entities\Remote\PluginReport.cs" />
     <Compile Include="Installer\FileHandlers\ArchiveHandler.cs" />
     <Compile Include="Installer\InstallerEventArgs\InstalledPluginEventArgs.cs" />
