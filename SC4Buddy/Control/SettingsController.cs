@@ -30,16 +30,6 @@
             this.userFolderController = userFolderController;
         }
 
-        public string DefaultQuarantinedFilesPath
-        {
-            get
-            {
-                var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-
-                return Path.Combine(localAppData, "Irradiated Games", "SimCity 4 Buddy", "QuarantinedFiles");
-            }
-        }
-
         public bool ValidateGameLocationPath(string path)
         {
             Log.Info(string.Format("Validating game path: {0}", path));

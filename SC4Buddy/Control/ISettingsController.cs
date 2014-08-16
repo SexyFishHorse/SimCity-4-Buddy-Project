@@ -5,8 +5,6 @@
 
     public interface ISettingsController
     {
-        string DefaultQuarantinedFilesPath { get; }
-
         bool ValidateGameLocationPath(string path);
 
         void CheckMainFolder();

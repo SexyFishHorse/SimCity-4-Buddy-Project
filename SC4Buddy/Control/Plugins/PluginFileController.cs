@@ -7,7 +7,7 @@
 
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Properties;
+    using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
 
     public class PluginFileController
     {
@@ -62,7 +62,7 @@
         {
             foreach (var file in files.Where(x => File.Exists(x.Path)))
             {
-                var newPath = Path.Combine(Settings.Default.QuarantinedFilesPath, Path.GetRandomFileName());
+                var newPath = Path.Combine(Settings.Get(Settings.Keys.QuarantinedFiles), Path.GetRandomFileName());
                 Directory.CreateDirectory(Path.GetDirectoryName(newPath));
                 File.Copy(file.Path, newPath);
                 File.Delete(file.Path);
