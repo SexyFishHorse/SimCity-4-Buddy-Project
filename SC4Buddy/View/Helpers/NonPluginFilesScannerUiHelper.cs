@@ -1,8 +1,11 @@
 ﻿namespace NIHEI.SC4Buddy.View.Helpers
 {
+    using System.Collections.Generic;
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.View.Plugins;
 
     public static class NonPluginFilesScannerUiHelper
     {
@@ -27,15 +30,11 @@
                 MessageBoxIcon.Information);
         }
 
-        public static bool ShowConfirmDialog(Form parentForm, int numFiles, int numFolders)
+
+        public static bool ShowConfirmDialog(InstallPluginsForm parentForm, IEnumerable<NonPluginFileTypeCandidateInfo> removalCandidateInfos)
         {
-            return MessageBox.Show(
-                parentForm,
-                string.Format(LocalizationStrings.ThisWillRemoveNumFilesAndAtLeastNumFolders, numFiles, numFolders),
-                LocalizationStrings.ConfirmDeletionOfNonPluginFiles,
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question,
-                MessageBoxDefaultButton.Button2) == DialogResult.Yes;
+            var dialog = new RemoveUnnecessaryFilesForm { CandidateInfos = removalCandidateInfos };
+            return dialog.ShowDialog(parentForm) == DialogResult.OK;
         }
 
         public static void ShowRemovalSummary(Form parentForm, int numFiles, int numFolders)

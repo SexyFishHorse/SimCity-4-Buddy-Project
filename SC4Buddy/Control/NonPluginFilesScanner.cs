@@ -1,5 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.Control
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
@@ -52,15 +53,36 @@
             FileTypes = newFileTypes;
         }
 
-        public bool HasFilesAndFoldersToRemove(UserFolder userFolder, out int numFiles, out int numFolders)
+        public ICollection<NonPluginFileTypeCandidateInfo> GetFilesAndFoldersToRemove(UserFolder userFolder)
         {
-            var filesToDelete = GetCandidateFiles(userFolder);
-            numFiles = filesToDelete.Count();
+            var fileTypeCandidateInfos = GetCandiateFileTypeInfos(userFolder);
 
-            var foldersToDelete = GetEmptyFolders(userFolder);
-            numFolders = foldersToDelete.Count();
+            var emptyFolders = GetEmptyFolders(userFolder);
 
-            return numFiles > 0 || numFolders > 0;
+            var output = new Collection<NonPluginFileTypeCandidateInfo>();
+
+            foreach (var fileTypeCandidateInfo in fileTypeCandidateInfos)
+            {
+                output.Add(fileTypeCandidateInfo);
+            }
+
+            if (emptyFolders.Any())
+            {
+                output.Add(
+                    new NonPluginFileTypeCandidateInfo
+                    {
+                        FileTypeInfo =
+                            new FileTypeInfo
+                            {
+                                Extension = string.Empty,
+                                Description = "Empty Folders",
+                                DescriptiveName = "Folders"
+                            },
+                        NumberOfEntities = emptyFolders.Count
+                    });
+            }
+
+            return output;
         }
 
         public int RemoveNonPluginFiles(UserFolder userFolder)

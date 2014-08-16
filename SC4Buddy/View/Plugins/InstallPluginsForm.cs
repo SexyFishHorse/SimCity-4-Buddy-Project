@@ -233,12 +233,14 @@
                                         "Configuration");
 
                                 var scanner = new NonPluginFilesScanner(storageLocation);
-                                if (!scanner.HasFilesAndFoldersToRemove(userFolder, out numFiles, out numFolders))
+                                var removalCandidateInfos = scanner.GetFilesAndFoldersToRemove(userFolder);
+
+                                if (!removalCandidateInfos.Any())
                                 {
                                     NonPluginFilesScannerUiHelper.ShowThereAreNoEntitiesToRemoveDialog(this);
                                 }
 
-                                if (NonPluginFilesScannerUiHelper.ShowConfirmDialog(this, numFiles, numFolders))
+                                if (NonPluginFilesScannerUiHelper.ShowConfirmDialog(this, removalCandidateInfos))
                                 {
                                     numFolders = scanner.RemoveNonPluginFiles(userFolder);
 
