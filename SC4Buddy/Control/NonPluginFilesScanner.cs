@@ -5,9 +5,6 @@
     using System.IO;
     using System.Linq;
     using Microsoft.VisualBasic.FileIO;
-
-    using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.Installer.FileHandlers;
     using Newtonsoft.Json.Linq;
     using NIHEI.SC4Buddy.Model;
     using SearchOption = System.IO.SearchOption;
@@ -48,9 +45,10 @@
 
             FileTypes = newFileTypes;
         }
+
         public bool HasFilesAndFoldersToRemove(UserFolder userFolder, out int numFiles, out int numFolders)
         {
-            var filesToDelete = GetFilesToDelete(userFolder);
+            var filesToDelete = GetCandidateFiles(userFolder);
             numFiles = filesToDelete.Count();
 
             var foldersToDelete = GetEmptyFolders(userFolder);
@@ -61,7 +59,7 @@
 
         public int RemoveNonPluginFiles(UserFolder userFolder)
         {
-            var filesToDelete = GetFilesToDelete(userFolder);
+            var filesToDelete = GetCandidateFiles(userFolder);
 
             foreach (var file in filesToDelete)
             {
@@ -86,14 +84,16 @@
             return foldersToDelete;
         }
 
-        private static IEnumerable<string> GetFilesToDelete(UserFolder userFolder)
+        private IEnumerable<string> GetCandidateFiles(UserFolder userFolder)
         {
-            var files = Directory.EnumerateFiles(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories);
-            var filesToDelete =
-                files.Where(
-                    x =>
-                    !BaseHandler.IsPluginFile(x) && !UserFolderController.IsBackgroundImage(x, userFolder)
-                    && !UserFolderController.IsDamnFile(userFolder, x)).ToList();
+            var files = Directory.EnumerateFiles(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories).ToList();
+            var filesToDelete = new List<string>();
+
+            foreach (var fileType in FileTypes)
+            {
+                filesToDelete.AddRange(files.Where(x => x.ToUpperInvariant().EndsWith(fileType.ToUpperInvariant())));
+            }
+
             return filesToDelete;
         }
     }
