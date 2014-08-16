@@ -26,42 +26,6 @@ namespace NIHEI.SC4Buddy.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherDisableSound {
-            get {
-                return ((bool)(this["LauncherDisableSound"]));
-            }
-            set {
-                this["LauncherDisableSound"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherDisableMusic {
-            get {
-                return ((bool)(this["LauncherDisableMusic"]));
-            }
-            set {
-                this["LauncherDisableMusic"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherDisableAudio {
-            get {
-                return ((bool)(this["LauncherDisableAudio"]));
-            }
-            set {
-                this["LauncherDisableAudio"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool LauncherCustomResolution {
             get {
                 return ((bool)(this["LauncherCustomResolution"]));

@@ -9,7 +9,7 @@
     using System.Text.RegularExpressions;
 
     using log4net;
-
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
     using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
 
@@ -77,9 +77,9 @@
         {
             var output = new Collection<string>
             {
-                string.Format("-audio:{0}", OldSettings.Default.LauncherDisableAudio ? "off" : "on"), 
-                string.Format("-music:{0}", OldSettings.Default.LauncherDisableMusic ? "off" : "on"), 
-                string.Format("-sounds:{0}", OldSettings.Default.LauncherDisableSound ? "off" : "on")
+                string.Format("-audio:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableAudio) ? "off" : "on"), 
+                string.Format("-music:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableMusic) ? "off" : "on"), 
+                string.Format("-sounds:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableSounds) ? "off" : "on")
             };
 
             return output;

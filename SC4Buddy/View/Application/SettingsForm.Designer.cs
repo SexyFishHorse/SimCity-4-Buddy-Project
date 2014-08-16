@@ -513,24 +513,18 @@ namespace NIHEI.SC4Buddy.View.Application
             // disableSoundsCheckBox
             // 
             resources.ApplyResources(this.disableSoundsCheckBox, "disableSoundsCheckBox");
-            this.disableSoundsCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherDisableSound;
-            this.disableSoundsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherDisableSound", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.disableSoundsCheckBox.Name = "disableSoundsCheckBox";
             this.disableSoundsCheckBox.UseVisualStyleBackColor = true;
             // 
             // disableMusicCheckBox
             // 
             resources.ApplyResources(this.disableMusicCheckBox, "disableMusicCheckBox");
-            this.disableMusicCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherDisableMusic;
-            this.disableMusicCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherDisableMusic", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.disableMusicCheckBox.Name = "disableMusicCheckBox";
             this.disableMusicCheckBox.UseVisualStyleBackColor = true;
             // 
             // disableAudioCheckBox
             // 
             resources.ApplyResources(this.disableAudioCheckBox, "disableAudioCheckBox");
-            this.disableAudioCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherDisableAudio;
-            this.disableAudioCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherDisableAudio", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.disableAudioCheckBox.Name = "disableAudioCheckBox";
             this.disableAudioCheckBox.UseVisualStyleBackColor = true;
             this.disableAudioCheckBox.CheckedChanged += new System.EventHandler(this.DisableAudioCheckBoxCheckedChanged);

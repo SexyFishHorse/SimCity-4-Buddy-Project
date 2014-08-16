@@ -158,6 +158,10 @@
                 LauncherSettings.SetAndSave(LauncherSettings.Keys.AutoSaveWaitTime, autoSaveIntervalTrackBar.Value);
             }
 
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableAudio, disableAudioCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableMusic, disableMusicCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableSounds, disableSoundsCheckBox.Checked);
+
             Close();
         }
 
@@ -211,6 +215,10 @@
 
             autoSaveIntervalTrackBar.Enabled = LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableAutoSave);
             UpdateAutoSaveLabel(LauncherSettings.Get<int>(LauncherSettings.Keys.AutoSaveWaitTime));
+
+            disableAudioCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableAudio);
+            disableMusicCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableMusic);
+            disableSoundsCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableSounds);
 
             UpdateResolutionComboBox();
 

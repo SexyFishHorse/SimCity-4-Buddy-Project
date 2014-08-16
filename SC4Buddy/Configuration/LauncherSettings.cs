@@ -51,6 +51,12 @@
             public const string EnableAutoSave = "EnableAutoSave";
 
             public const string AutoSaveWaitTime = "AutoSaveWaitTime";
+
+            public const string DisableAudio = "DisableAudio";
+
+            public const string DisableMusic = "DisableMusic";
+
+            public const string DisableSounds = "DisableSounds";
         }
     }
 }
