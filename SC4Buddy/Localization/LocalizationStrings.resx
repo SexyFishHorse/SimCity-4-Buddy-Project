@@ -622,4 +622,13 @@ Note that plugins not known to the central server was not checked.</value>
   <data name="ErrorDuringAutoGroupKnownPlugins" xml:space="preserve">
     <value>Error during auto group known plugins</value>
   </data>
+  <data name="NonPluginFilesScannerUiHelper_ShowRemovalSummary__1__error_s__occured__Check_the_log_for_further_details_" xml:space="preserve">
+    <value>{1} error(s) occured. Check the log for further details.</value>
+    <comment>{1} is a number between 1 and n</comment>
+  </data>
+  <data name="NErrorsOccuredCheckTheLogForFurtherDetails" xml:space="preserve">
+    <value>{0}
+{1} error(s) occured. Check the log for further details.</value>
+    <comment>{0} will be replaced with a message telling how many files and folders were removed. {1} will be replaced with a number between 1 and N.</comment>
+  </data>
 </root>

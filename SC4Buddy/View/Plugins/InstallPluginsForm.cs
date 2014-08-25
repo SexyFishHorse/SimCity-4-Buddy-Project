@@ -71,7 +71,7 @@
             pluginInstallerThread.PluginInstalled += OnPluginInstalled;
             pluginInstallerThread.PluginInstallFailed += OnPluginInstallFailed;
             pluginInstallerThread.InstallProgressChanged += OnInstallProgressChanged;
-            pluginInstallerThread.AllPluginsInstalled += OnAllPluginsInstalled;
+            pluginInstallerThread.AllPluginsInstalled += (sender, eventArgs) => OnAllPluginsInstalled(sender, eventArgs);
             pluginInstallerThread.ReadmeFilesFound += OnReadmeFilesFound;
             pluginInstallerThread.NotPartOneOfMultipartDetected += OnNotPartOneOfMultipartDetected;
 
@@ -220,22 +220,30 @@
 
                         if (Settings.Default.InstallerAskToRemoveNonPluginFiles)
                         {
-                            if (NonPluginFilesScannerUiHelper.ShowDoYouWantToScanForNonPluginFiles(this))
-                            {
-                                int numFiles;
-                                int numFolders;
+                            var storageLocation =
+                                    Path.Combine(
+                                        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                                        "Irradiated Games",
+                                        "SimCity 4 Buddy",
+                                        "Configuration");
 
-                                var scanner = new NonPluginFilesScanner();
-                                if (!scanner.HasFilesAndFoldersToRemove(userFolder, out numFiles, out numFolders))
+                            var nonPluginFilesScannerUi = new NonPluginFilesScannerUi(storageLocation)
+                            {
+                                UserFolder = userFolder
+                            };
+
+                            if (nonPluginFilesScannerUi.ShowDoYouWantToScanForNonPluginFiles(this))
+                            {
+                                nonPluginFilesScannerUi.ScanForCandidates();
+
+                                if (!nonPluginFilesScannerUi.RemovalCandidateInfos.Any())
                                 {
-                                    NonPluginFilesScannerUiHelper.ShowThereAreNoEntitiesToRemoveDialog(this);
+                                    nonPluginFilesScannerUi.ShowThereAreNoEntitiesToRemoveDialog(this);
                                 }
 
-                                if (NonPluginFilesScannerUiHelper.ShowConfirmDialog(this, numFiles, numFolders))
+                                if (nonPluginFilesScannerUi.ShowConfirmDialog(this))
                                 {
-                                    numFolders = scanner.RemoveNonPluginFiles(userFolder);
-
-                                    NonPluginFilesScannerUiHelper.ShowConfirmDialog(this, numFiles, numFolders);
+                                    nonPluginFilesScannerUi.RemoveNonPluginFilesAndShowSummary(this);
                                 }
                             }
                         }

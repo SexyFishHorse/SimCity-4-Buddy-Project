@@ -20,7 +20,6 @@
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Elements;
-
     using Plugin = NIHEI.SC4Buddy.Model.Plugin;
     using PluginFile = NIHEI.SC4Buddy.Model.PluginFile;
 
@@ -41,10 +40,10 @@
         private readonly UserFolder userFolder;
 
         public FolderScannerForm(
-            FolderScannerController folderScannerController, 
-            PluginController pluginController, 
-            PluginGroupController pluginGroupController, 
-            UserFolder userFolder, 
+            FolderScannerController folderScannerController,
+            PluginController pluginController,
+            PluginGroupController pluginGroupController,
+            UserFolder userFolder,
             IPluginMatcher pluginMatcher)
         {
             this.folderScannerController = folderScannerController;
@@ -105,7 +104,7 @@
         }
 
         private void FileScannerBackgroundWorkerOnProgressChanged(
-            object sender, 
+            object sender,
             ProgressChangedEventArgs progressChangedEventArgs)
         {
             statusProgressBar.Value = progressChangedEventArgs.ProgressPercentage;
@@ -118,16 +117,16 @@
                 Invoke(
                     new MethodInvoker(
                         () =>
-                            {
-                                MessageBox.Show(
-                                    this, 
-                                    LocalizationStrings.NoNewDeletedOrUpdatedFilesDetected, 
-                                    LocalizationStrings.NoFileChangesDetected, 
-                                    MessageBoxButtons.OK, 
-                                    MessageBoxIcon.Information, 
-                                    MessageBoxDefaultButton.Button1);
-                                Close();
-                            }));
+                        {
+                            MessageBox.Show(
+                                this,
+                                LocalizationStrings.NoNewDeletedOrUpdatedFilesDetected,
+                                LocalizationStrings.NoFileChangesDetected,
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information,
+                                MessageBoxDefaultButton.Button1);
+                            Close();
+                        }));
             }
         }
 
@@ -282,15 +281,8 @@
 
         private void ResizeColumns()
         {
-            foreach (ColumnHeader column in newFilesListView.Columns)
-            {
-                column.Width = -2;
-            }
-
-            foreach (ColumnHeader column in pluginFilesListView.Columns)
-            {
-                column.Width = -2;
-            }
+            newFilesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            pluginFilesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
         private void ScanButtonClick(object sender, EventArgs e)
@@ -328,11 +320,11 @@
 
             var plugin = new Plugin
             {
-                Name = nameTextBox.Text.Trim(), 
-                Author = authorTextBox.Text.Trim(), 
-                Link = link, 
-                PluginGroup = GetSelectedGroup(), 
-                Description = descriptionTextBox.Text.Trim(), 
+                Name = nameTextBox.Text.Trim(),
+                Author = authorTextBox.Text.Trim(),
+                Link = link,
+                PluginGroup = GetSelectedGroup(),
+                Description = descriptionTextBox.Text.Trim(),
                 UserFolder = userFolder
             };
 
@@ -346,10 +338,10 @@
                 pluginFilesListView.Items.Cast<ListViewItem>().Select(item => item.Text).Select(
                     path => new PluginFile
                     {
-                        Path = Path.Combine(userFolder.PluginFolderPath, path), 
+                        Path = Path.Combine(userFolder.PluginFolderPath, path),
                         Checksum =
                             Md5ChecksumUtility.CalculateChecksum(Path.Combine(userFolder.PluginFolderPath, path))
-                                .ToHex(), 
+                                .ToHex(),
                         Plugin = plugin
                     }))
             {
@@ -470,10 +462,10 @@
             {
                 Log.Warn("Api error during auto group known plugins", ex);
                 var result = MessageBox.Show(
-                    this, 
-                    string.Format(LocalizationStrings.AnErrorOccuredWhenTryingToAutoGroupPlugins, ex.Message), 
-                    LocalizationStrings.ErrorDuringAutoGroupingOfPlugins, 
-                    MessageBoxButtons.RetryCancel, 
+                    this,
+                    string.Format(LocalizationStrings.AnErrorOccuredWhenTryingToAutoGroupPlugins, ex.Message),
+                    LocalizationStrings.ErrorDuringAutoGroupingOfPlugins,
+                    MessageBoxButtons.RetryCancel,
                     MessageBoxIcon.Warning);
 
                 if (result == DialogResult.Retry)
@@ -502,10 +494,10 @@
             {
                 Log.Error("Auto group known plugins error", ex);
                 MessageBox.Show(
-                    this, 
-                    LocalizationStrings.ErrorOccuredDuringAutoGroupKnownPlugins + ex.Message, 
-                    LocalizationStrings.ErrorDuringAutoGroupKnownPlugins, 
-                    MessageBoxButtons.OK, 
+                    this,
+                    LocalizationStrings.ErrorOccuredDuringAutoGroupKnownPlugins + ex.Message,
+                    LocalizationStrings.ErrorDuringAutoGroupKnownPlugins,
+                    MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
             }
         }

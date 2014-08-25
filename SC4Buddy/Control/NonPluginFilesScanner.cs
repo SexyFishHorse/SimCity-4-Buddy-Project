@@ -1,50 +1,142 @@
 ﻿namespace NIHEI.SC4Buddy.Control
 {
+    using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
-
+    using System.Reflection;
+    using log4net;
     using Microsoft.VisualBasic.FileIO;
-
-    using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.Installer.FileHandlers;
+    using Newtonsoft.Json.Linq;
     using NIHEI.SC4Buddy.Model;
-
     using SearchOption = System.IO.SearchOption;
 
     public class NonPluginFilesScanner
     {
-        public bool HasFilesAndFoldersToRemove(UserFolder userFolder, out int numFiles, out int numFolders)
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        public NonPluginFilesScanner(string storageLocation)
         {
-            var filesToDelete = GetFilesToDelete(userFolder);
-            numFiles = filesToDelete.Count();
+            StorageLocation = storageLocation;
 
-            var foldersToDelete = GetFoldersToDelete(userFolder);
-            numFolders = foldersToDelete.Count();
-
-            return numFiles > 0 || numFolders > 0;
+            LoadFileTypesFromDisc();
         }
 
-        public int RemoveNonPluginFiles(UserFolder userFolder)
+        public string StorageLocation { get; set; }
+
+        public IEnumerable<FileTypeInfo> FileTypes { get; set; }
+
+        public void LoadFileTypesFromDisc()
         {
-            var filesToDelete = GetFilesToDelete(userFolder);
+            var fileLocation = Path.Combine(StorageLocation, "NonPluginFileTypes.json");
+
+            var newFileTypes = new Collection<FileTypeInfo>();
+
+            if (File.Exists(fileLocation))
+            {
+                using (var reader = new StreamReader(fileLocation))
+                {
+                    var json = reader.ReadToEnd();
+
+                    dynamic fileTypeJson = JArray.Parse(json);
+
+                    foreach (var fileType in fileTypeJson)
+                    {
+                        newFileTypes.Add(
+                            new FileTypeInfo
+                            {
+                                Extension = fileType.Extension,
+                                DescriptiveName = fileType.DescriptiveName,
+                                Description = fileType.Description
+                            });
+                    }
+                }
+            }
+
+            FileTypes = newFileTypes;
+        }
+
+        public ICollection<NonPluginFileTypeCandidateInfo> GetFilesAndFoldersToRemove(UserFolder userFolder)
+        {
+            var fileTypeCandidateInfos = GetCandiateFileTypeInfos(userFolder);
+
+            var emptyFolders = GetEmptyFolders(userFolder);
+
+            var output = new Collection<NonPluginFileTypeCandidateInfo>();
+
+            foreach (var fileTypeCandidateInfo in fileTypeCandidateInfos)
+            {
+                output.Add(fileTypeCandidateInfo);
+            }
+
+            if (emptyFolders.Any())
+            {
+                output.Add(
+                    new NonPluginFileTypeCandidateInfo
+                    {
+                        FileTypeInfo =
+                            new FileTypeInfo
+                            {
+                                Extension = string.Empty,
+                                Description = "Empty Folders",
+                                DescriptiveName = "Folders"
+                            },
+                        NumberOfEntities = emptyFolders.Count
+                    });
+            }
+
+            return output;
+        }
+
+        public NonPluginFileRemovalSummary RemoveNonPluginFiles(UserFolder userFolder, IEnumerable<FileTypeInfo> fileTypesToRemove)
+        {
+            var filesToDelete = GetFilesToDelete(userFolder, fileTypesToRemove);
+
+            var numFiles = 0;
+            var numFolders = 0;
+
+            var errors = new Dictionary<string, Exception>();
 
             foreach (var file in filesToDelete)
             {
-                FileSystem.DeleteFile(file, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                try
+                {
+                    FileSystem.DeleteFile(file, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                    numFiles++;
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(string.Format("Unable to delete file \"{0}\", Error: {1}", file, ex.Message));
+                    errors.Add(file, ex);
+                }
             }
 
-            var foldersToDelete = GetFoldersToDelete(userFolder);
+            var foldersToDelete = GetEmptyFolders(userFolder);
 
             foreach (var folder in foldersToDelete.Where(Directory.Exists))
             {
-                FileSystem.DeleteDirectory(folder, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                try
+                {
+                    FileSystem.DeleteDirectory(folder, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                    numFolders++;
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(string.Format("Unable to delete the folder \"{0}\", Error: {1}", folder, ex.Message));
+                    errors.Add(folder, ex);
+                }
             }
 
-            return foldersToDelete.Count();
+            return new NonPluginFileRemovalSummary
+            {
+                NumFilesRemoved = numFiles,
+                NumFoldersRemoved = numFolders,
+                Errors = errors
+            };
         }
 
-        private static IList<string> GetFoldersToDelete(UserFolder userFolder)
+        private static IList<string> GetEmptyFolders(UserFolder userFolder)
         {
             var folders = Directory.EnumerateDirectories(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories).ToList();
             var foldersToDelete =
@@ -52,15 +144,36 @@
             return foldersToDelete;
         }
 
-        private static IEnumerable<string> GetFilesToDelete(UserFolder userFolder)
+        private IEnumerable<string> GetFilesToDelete(UserFolder userFolder, IEnumerable<FileTypeInfo> fileTypesToRemove)
         {
-            var files = Directory.EnumerateFiles(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories);
-            var filesToDelete =
-                files.Where(
-                    x =>
-                    !BaseHandler.IsPluginFile(x) && !UserFolderController.IsBackgroundImage(x, userFolder)
-                    && !UserFolderController.IsDamnFile(userFolder, x)).ToList();
+            var files = Directory.EnumerateFiles(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories).ToList();
+            var filesToDelete = new List<string>();
+
+            foreach (var fileType in fileTypesToRemove)
+            {
+                filesToDelete.AddRange(files.Where(x => x.ToUpperInvariant().EndsWith(fileType.Extension.ToUpperInvariant())));
+            }
+
             return filesToDelete;
+        }
+
+        private IEnumerable<NonPluginFileTypeCandidateInfo> GetCandiateFileTypeInfos(UserFolder userFolder)
+        {
+            var files = Directory.EnumerateFiles(userFolder.PluginFolderPath, "*", SearchOption.AllDirectories).ToList();
+            var output = new Collection<NonPluginFileTypeCandidateInfo>();
+
+            foreach (var fileTypeInfo in FileTypes)
+            {
+                var numberOfFiles =
+                    files.Count(x => x.EndsWith(fileTypeInfo.Extension, StringComparison.OrdinalIgnoreCase));
+
+                if (numberOfFiles > 0)
+                {
+                    output.Add(new NonPluginFileTypeCandidateInfo { FileTypeInfo = fileTypeInfo, NumberOfEntities = numberOfFiles });
+                }
+            }
+
+            return output;
         }
     }
 }

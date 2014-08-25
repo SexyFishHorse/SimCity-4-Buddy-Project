@@ -106,9 +106,11 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control\GameArgumentsHelper.cs" />
@@ -144,7 +146,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LocalizationStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Model\FileTypeInfo.cs" />
     <Compile Include="Model\ModelBase.cs" />
+    <Compile Include="Model\NonPluginFileRemovalSummary.cs" />
+    <Compile Include="Model\NonPluginFileTypeCandidateInfo.cs" />
     <Compile Include="Model\Plugin.cs" />
     <Compile Include="Model\PluginFile.cs" />
     <Compile Include="Model\PluginGroup.cs" />
@@ -162,12 +167,13 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Elements\ListViewItemWithObjectValue.cs" />
+    <Compile Include="View\Elements\RemovalFileTypeCandidateListViewItem.cs" />
     <Compile Include="View\Elements\UserFolderListViewItem.cs" />
     <Compile Include="View\Elements\UserFolderToolStripMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="View\Elements\PluginListViewItem.cs" />
-    <Compile Include="View\Helpers\NonPluginFilesScannerUiHelper.cs" />
+    <Compile Include="View\Helpers\NonPluginFilesScannerUi.cs" />
     <Compile Include="View\Plugins\EnterPluginInformationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,6 +211,12 @@
       <DependentUpon>QuarantinedPluginFilesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Plugins\RemotePluginComparer.cs" />
+    <Compile Include="View\Plugins\RemoveUnnecessaryFilesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Plugins\RemoveUnnecessaryFilesForm.Designer.cs">
+      <DependentUpon>RemoveUnnecessaryFilesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Plugins\ReportPluginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,6 +280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\Plugins\QuarantinedPluginFilesForm.resx">
       <DependentUpon>QuarantinedPluginFilesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Plugins\RemoveUnnecessaryFilesForm.resx">
+      <DependentUpon>RemoveUnnecessaryFilesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Plugins\ReportPluginForm.resx">
       <DependentUpon>ReportPluginForm.cs</DependentUpon>
