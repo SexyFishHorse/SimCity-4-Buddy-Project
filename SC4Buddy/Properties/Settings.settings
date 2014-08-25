@@ -35,12 +35,6 @@
     <Setting Name="FetchInfoFromRemote" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="DeveloperUploadToRemote" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="UserEmail" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="AllowDependencyCheck" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
