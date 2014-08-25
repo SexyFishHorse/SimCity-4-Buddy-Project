@@ -28,8 +28,9 @@
         public static int GetInt(string key)
         {
             var stringValue = Get(key);
+            int value;
 
-            return int.Parse(stringValue);
+            return int.TryParse(stringValue, out value) ? value : 0;
         }
 
         public static T Get<T>(string key)
@@ -59,6 +60,8 @@
 
         public class Keys
         {
+            public const string Wallpaper = "Wallpaper";
+
             public const string GameLocation = "GameLocation";
 
             public const string QuarantinedFiles = "QuarantinedFiles";

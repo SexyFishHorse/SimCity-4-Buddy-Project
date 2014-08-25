@@ -155,7 +155,7 @@
         private void UpdateBackground()
         {
             Bitmap image;
-            switch (OldSettings.Default.Wallpaper)
+            switch (Settings.GetInt(Settings.Keys.Wallpaper))
             {
                 case 13:
                     image = Resources.Wallpaper13;

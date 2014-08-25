@@ -110,7 +110,7 @@
 
             if (backgroundImageListView.SelectedIndices.Count > 0)
             {
-                OldSettings.Default.Wallpaper = backgroundImageListView.SelectedIndices[0] + 1;
+                Settings.SetAndSave(Settings.Keys.Wallpaper, backgroundImageListView.SelectedIndices[0] + 1);
             }
 
             if (renderModeComboBox.SelectedIndex > 0)
