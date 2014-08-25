@@ -25,42 +25,6 @@ namespace NIHEI.SC4Buddy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LauncherRenderMode {
-            get {
-                return ((string)(this["LauncherRenderMode"]));
-            }
-            set {
-                this["LauncherRenderMode"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LauncherResolution {
-            get {
-                return ((string)(this["LauncherResolution"]));
-            }
-            set {
-                this["LauncherResolution"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool Launcher32BitColourDepth {
-            get {
-                return ((bool)(this["Launcher32BitColourDepth"]));
-            }
-            set {
-                this["Launcher32BitColourDepth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int LauncherCpuCount {
             get {
@@ -116,18 +80,6 @@ namespace NIHEI.SC4Buddy.Properties {
             }
             set {
                 this["LauncherIgnoreMissingModels"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LauncherCursorColour {
-            get {
-                return ((string)(this["LauncherCursorColour"]));
-            }
-            set {
-                this["LauncherCursorColour"] = value;
             }
         }
         

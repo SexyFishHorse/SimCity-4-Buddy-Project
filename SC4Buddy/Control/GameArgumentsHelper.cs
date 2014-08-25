@@ -225,18 +225,18 @@
                     LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableCustomResolution) ? "enabled" : "disabled")
             };
 
-            if (!string.IsNullOrWhiteSpace(OldSettings.Default.LauncherResolution))
+            if (!string.IsNullOrWhiteSpace(LauncherSettings.Get(LauncherSettings.Keys.Resolution)))
             {
                 output.Add(
                     GetStringForResolution(
-                        OldSettings.Default.LauncherResolution,
-                        OldSettings.Default.Launcher32BitColourDepth));
+                        LauncherSettings.Get(LauncherSettings.Keys.Resolution),
+                        LauncherSettings.Get<bool>(LauncherSettings.Keys.ColourDepth32Bit)));
             }
 
-            if (!string.IsNullOrWhiteSpace(OldSettings.Default.LauncherCursorColour))
+            if (!string.IsNullOrWhiteSpace(LauncherSettings.Get(LauncherSettings.Keys.CursorColourDepth)))
             {
                 CursorColorDepth cursorColorDepth;
-                if (Enum.TryParse(OldSettings.Default.LauncherCursorColour, true, out cursorColorDepth))
+                if (Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CursorColourDepth), true, out cursorColorDepth))
                 {
                     output.Add(
                         string.Format(
@@ -247,7 +247,7 @@
             }
 
             RenderMode renderMode;
-            if (Enum.TryParse(OldSettings.Default.LauncherRenderMode, out renderMode))
+            if (Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.RenderMode), out renderMode))
             {
                 output.Add(GetStringForRenderMode(renderMode));
             }

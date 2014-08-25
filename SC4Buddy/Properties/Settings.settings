@@ -2,15 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NIHEI.SC4Buddy.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="LauncherRenderMode" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="LauncherResolution" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="Launcher32BitColourDepth" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="LauncherCpuCount" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
@@ -25,9 +16,6 @@
     </Setting>
     <Setting Name="LauncherIgnoreMissingModels" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="LauncherCursorColour" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="LauncherWriteLog" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

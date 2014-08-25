@@ -116,25 +116,28 @@
             if (renderModeComboBox.SelectedIndex > 0)
             {
                 var renderMode = ((ComboBoxItem<GameArgumentsHelper.RenderMode>)renderModeComboBox.SelectedItem).Value;
-                OldSettings.Default.LauncherRenderMode = renderMode.ToString();
+                LauncherSettings.SetAndSave(LauncherSettings.Keys.RenderMode, renderMode.ToString());
             }
             else
             {
-                OldSettings.Default.LauncherRenderMode = string.Empty;
+                LauncherSettings.SetAndSave(LauncherSettings.Keys.RenderMode, string.Empty);
             }
 
             var regex = new Regex(@"\d+x\d+");
             var resolution = resolutionComboBox.Text.Trim();
-            OldSettings.Default.LauncherResolution = regex.IsMatch(resolution) ? resolution : string.Empty;
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.Resolution, regex.IsMatch(resolution) ? resolution : string.Empty);
 
-            OldSettings.Default.Launcher32BitColourDepth =
+            LauncherSettings.SetAndSave(
+                LauncherSettings.Keys.ColourDepth32Bit,
                 ((ComboBoxItem<GameArgumentsHelper.ColorDepth>)colourDepthComboBox.SelectedItem).Value
-                == GameArgumentsHelper.ColorDepth.Bits32;
+                == GameArgumentsHelper.ColorDepth.Bits32);
 
-            OldSettings.Default.LauncherCursorColour = cursorColourComboBox.SelectedIndex > 0
-                                                        ? ((ComboBoxItem<GameArgumentsHelper.CursorColorDepth>)
-                                                           cursorColourComboBox.SelectedItem).Value.ToString()
-                                                        : string.Empty;
+            LauncherSettings.SetAndSave(
+                LauncherSettings.Keys.CursorColourDepth,
+                cursorColourComboBox.SelectedIndex > 0
+                    ? ((ComboBoxItem<GameArgumentsHelper.CursorColorDepth>)cursorColourComboBox.SelectedItem).Value
+                          .ToString()
+                    : string.Empty);
 
             int numCpus;
             int.TryParse(
@@ -227,16 +230,13 @@
             windowModeCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.WindowMode);
 
             UpdateResolutionComboBox();
-
             UpdateRenderModeComboBox();
-
             UpdateColourDepthComboBox();
+            UpdateCursorColourComboBox();
 
             UpdateCpuCountComboBox();
 
             UpdateCpuPriorityComboBox();
-
-            UpdateCursorColourComboBox();
 
             UpdateLanguageComboBox();
 
@@ -247,7 +247,7 @@
 
         private void UpdateResolutionComboBox()
         {
-            resolutionComboBox.Text = OldSettings.Default.LauncherResolution;
+            resolutionComboBox.Text = LauncherSettings.Get(LauncherSettings.Keys.Resolution);
         }
 
         private void UpdateCursorColourComboBox()
@@ -275,7 +275,7 @@
                     LocalizationStrings.FullColors, GameArgumentsHelper.CursorColorDepth.FullColors));
 
             GameArgumentsHelper.CursorColorDepth selectedCursor;
-            Enum.TryParse(OldSettings.Default.LauncherCursorColour, true, out selectedCursor);
+            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CursorColourDepth), true, out selectedCursor);
 
             switch (selectedCursor)
             {
@@ -365,7 +365,7 @@
                 new ComboBoxItem<GameArgumentsHelper.ColorDepth>(
                     LocalizationStrings.Bits32, GameArgumentsHelper.ColorDepth.Bits32));
 
-            colourDepthComboBox.SelectedIndex = OldSettings.Default.Launcher32BitColourDepth ? 1 : 0;
+            colourDepthComboBox.SelectedIndex = LauncherSettings.Get<bool>(LauncherSettings.Keys.ColourDepth32Bit) ? 1 : 0;
             colourDepthComboBox.EndUpdate();
         }
 
@@ -385,7 +385,7 @@
                     LocalizationStrings.Software, GameArgumentsHelper.RenderMode.Software));
 
             GameArgumentsHelper.RenderMode selectedRenderMode;
-            Enum.TryParse(OldSettings.Default.LauncherRenderMode, true, out selectedRenderMode);
+            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.RenderMode), true, out selectedRenderMode);
             switch (selectedRenderMode)
             {
                 case GameArgumentsHelper.RenderMode.DirectX:
