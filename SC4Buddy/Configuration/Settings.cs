@@ -13,21 +13,32 @@
             return DataAccess.HasSetting(key);
         }
 
+        public static object GetRaw(string key)
+        {
+            return HasSetting(key) ? DataAccess.Settings[key] : null;
+        }
+
         public static string Get(string key)
         {
-            if (HasSetting(key))
-            {
-                return (string)DataAccess.Settings[key];
-            }
+            var value = GetRaw(key);
 
-            return string.Empty;
+            return value != null ? value.ToString() : string.Empty;
+        }
+
+        public static int GetInt(string key)
+        {
+            var stringValue = Get(key);
+
+            return int.Parse(stringValue);
         }
 
         public static T Get<T>(string key)
         {
-            if (HasSetting(key))
+            var value = GetRaw(key);
+
+            if (value != null)
             {
-                return (T)DataAccess.Settings[key];
+                return (T)value;
             }
 
             return default(T);

@@ -219,8 +219,9 @@
                 ? Color.Gray
                 : Color.Black;
 
+            enableAutoSaveCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableAutoSave);
             autoSaveIntervalTrackBar.Enabled = LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableAutoSave);
-            UpdateAutoSaveLabel(LauncherSettings.Get<int>(LauncherSettings.Keys.AutoSaveWaitTime));
+            UpdateAutoSaveLabel(LauncherSettings.GetInt(LauncherSettings.Keys.AutoSaveWaitTime));
 
             disableAudioCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableAudio);
             disableMusicCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableMusic);
