@@ -60,6 +60,18 @@
 
         public class Keys
         {
+            public const string DisableBackgroundLoader = "DisableBackgroundLoader";
+
+            public const string DisableExceptionHandling = "DisableExceptionHandling";
+
+            public const string PauseWhenMinimized = "PauseWhenMinimized";
+
+            public const string SkipIntro = "SkipIntro";
+
+            public const string CpuPriority = "CpuPriority";
+
+            public const string CpuCount = "CpuCount";
+
             public const string EnableAutoSave = "EnableAutoSave";
 
             public const string AutoSaveWaitTime = "AutoSaveWaitTime";

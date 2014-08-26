@@ -139,17 +139,19 @@
                           .ToString()
                     : string.Empty);
 
+            OldSettings.Default.Save();
+
             int numCpus;
             int.TryParse(
                 cpuCountComboBox.Text.Trim(), out numCpus);
-            OldSettings.Default.LauncherCpuCount = numCpus;
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.CpuCount, numCpus);
 
-            OldSettings.Default.LauncherCpuPriority = cpuPriorityComboBox.SelectedIndex > 0
+            var cpuPriority = cpuPriorityComboBox.SelectedIndex > 0
                                                        ? ((ComboBoxItem<GameArgumentsHelper.CpuPriority>)
                                                           cpuPriorityComboBox.SelectedItem).Value.ToString()
                                                        : string.Empty;
 
-            OldSettings.Default.Save();
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.CpuPriority, cpuPriority);
 
             settingsController.CheckMainFolder();
 
@@ -167,6 +169,11 @@
 
             LauncherSettings.SetAndSave(LauncherSettings.Keys.EnableCustomResolution, customResolutionCheckBox.Checked);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.WindowMode, windowModeCheckBox.Checked);
+
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.SkipIntro, skipIntroCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.PauseWhenMinimized, pauseMinimizedCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableExceptionHandling, disableExceptionHandlingCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableBackgroundLoader, disableBackgroundLoaderCheckBox.Checked);
 
             Close();
         }
@@ -236,8 +243,14 @@
             UpdateCursorColourComboBox();
 
             UpdateCpuCountComboBox();
-
             UpdateCpuPriorityComboBox();
+
+            skipIntroCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.SkipIntro);
+            pauseMinimizedCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.PauseWhenMinimized);
+            disableExceptionHandlingCheckBox.Checked =
+                LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableExceptionHandling);
+            disableBackgroundLoaderCheckBox.Checked =
+                LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableBackgroundLoader);
 
             UpdateLanguageComboBox();
 
@@ -321,7 +334,7 @@
                     LocalizationStrings.High, GameArgumentsHelper.CpuPriority.High));
 
             GameArgumentsHelper.CpuPriority selectedPriority;
-            Enum.TryParse(OldSettings.Default.LauncherCpuPriority, true, out selectedPriority);
+            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CpuPriority), true, out selectedPriority);
             switch (selectedPriority)
             {
                 case GameArgumentsHelper.CpuPriority.Low:
@@ -351,7 +364,7 @@
                 cpuCountComboBox.Items.Add(i);
             }
 
-            cpuCountComboBox.SelectedIndex = OldSettings.Default.LauncherCpuCount;
+            cpuCountComboBox.SelectedIndex = LauncherSettings.GetInt(LauncherSettings.Keys.CpuCount);
             cpuCountComboBox.EndUpdate();
         }
 

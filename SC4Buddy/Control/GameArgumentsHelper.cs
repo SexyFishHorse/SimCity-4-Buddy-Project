@@ -104,22 +104,22 @@
         {
             var output = new Collection<string>
             {
-                string.Format("-intro:{0}", OldSettings.Default.LauncherSkipIntro ? "off" : "on"), 
+                string.Format("-intro:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.SkipIntro) ? "off" : "on"), 
                 string.Format(
                     "-exceptionHandling:{0}", 
-                    OldSettings.Default.LauncherDisableExceptionHandling ? "off" : "on"), 
-                string.Format("-backgroundLoader:{0}", OldSettings.Default.LauncherDisableBackgroundLoader ? "off" : "on")
+                    LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableBackgroundLoader) ? "off" : "on"), 
+                string.Format("-backgroundLoader:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableBackgroundLoader) ? "off" : "on")
             };
 
-            if (OldSettings.Default.LauncherCpuCount > 0)
+            if (LauncherSettings.GetInt(LauncherSettings.Keys.CpuCount) > 0)
             {
-                output.Add(string.Format("-cpuCount:{0}", OldSettings.Default.LauncherCpuCount));
+                output.Add(string.Format("-cpuCount:{0}", LauncherSettings.Get(LauncherSettings.Keys.CpuCount)));
             }
 
-            if (!string.IsNullOrWhiteSpace(OldSettings.Default.LauncherCpuPriority))
+            if (!string.IsNullOrWhiteSpace(LauncherSettings.Get(LauncherSettings.Keys.CpuPriority)))
             {
                 CpuPriority priority;
-                if (Enum.TryParse(OldSettings.Default.LauncherCpuPriority, true, out priority))
+                if (Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CpuPriority), true, out priority))
                 {
                     output.Add(GetStringForCpuPriority(priority));
                 }
@@ -128,11 +128,11 @@
                     Log.Warn(
                         string.Format(
                             "Unknown CPU priority: \"{0}\", skipping argument.",
-                            OldSettings.Default.LauncherCpuPriority));
+                            LauncherSettings.Get(LauncherSettings.Keys.CpuPriority)));
                 }
             }
 
-            if (OldSettings.Default.LauncherPauseMinimized)
+            if (LauncherSettings.Get<bool>(LauncherSettings.Keys.PauseWhenMinimized))
             {
                 output.Add("-gp");
             }

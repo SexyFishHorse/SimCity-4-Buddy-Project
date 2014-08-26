@@ -25,54 +25,6 @@ namespace NIHEI.SC4Buddy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int LauncherCpuCount {
-            get {
-                return ((int)(this["LauncherCpuCount"]));
-            }
-            set {
-                this["LauncherCpuCount"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherDisableExceptionHandling {
-            get {
-                return ((bool)(this["LauncherDisableExceptionHandling"]));
-            }
-            set {
-                this["LauncherDisableExceptionHandling"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherSkipIntro {
-            get {
-                return ((bool)(this["LauncherSkipIntro"]));
-            }
-            set {
-                this["LauncherSkipIntro"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherDisableBackgroundLoader {
-            get {
-                return ((bool)(this["LauncherDisableBackgroundLoader"]));
-            }
-            set {
-                this["LauncherDisableBackgroundLoader"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool LauncherIgnoreMissingModels {
             get {
@@ -104,30 +56,6 @@ namespace NIHEI.SC4Buddy.Properties {
             }
             set {
                 this["LauncherDisableIME"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherPauseMinimized {
-            get {
-                return ((bool)(this["LauncherPauseMinimized"]));
-            }
-            set {
-                this["LauncherPauseMinimized"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LauncherCpuPriority {
-            get {
-                return ((string)(this["LauncherCpuPriority"]));
-            }
-            set {
-                this["LauncherCpuPriority"] = value;
             }
         }
         
