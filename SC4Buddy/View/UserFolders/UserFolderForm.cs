@@ -10,6 +10,8 @@
     using System.Windows.Forms;
     using Irradiated.Sc4Buddy.ApiClient.Model;
     using log4net;
+
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
@@ -19,9 +21,7 @@
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.Helpers;
     using NIHEI.SC4Buddy.View.Plugins;
-    using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
     using Plugin = NIHEI.SC4Buddy.Model.Plugin;
-    using Settings = NIHEI.SC4Buddy.Configuration.Settings;
 
     public partial class UserFolderForm : Form
     {
@@ -89,8 +89,8 @@
             }
             else
             {
-                updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = OldSettings.Default.FetchInfoFromRemote;
-                checkForMissingDependenciesToolStripMenuItem.Visible = OldSettings.Default.AllowDependencyCheck;
+                updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
+                checkForMissingDependenciesToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.CheckForMissingDependencies);
             }
         }
 
@@ -284,7 +284,7 @@
 
             RepopulateInstalledPluginsListView();
 
-            if (!NetworkInterface.GetIsNetworkAvailable() || !OldSettings.Default.AllowDependencyCheck)
+            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Get<bool>(Settings.Keys.CheckForMissingDependencies))
             {
                 return;
             }
@@ -313,7 +313,7 @@
                 pluginMatcher).ShowDialog(this);
             RepopulateInstalledPluginsListView();
 
-            if (!NetworkInterface.GetIsNetworkAvailable() || !OldSettings.Default.AllowDependencyCheck)
+            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Get<bool>(Settings.Keys.CheckForMissingDependencies))
             {
                 return;
             }
@@ -415,7 +415,7 @@
 
         private void UserFolderFormActivated(object sender, EventArgs e)
         {
-            updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = OldSettings.Default.FetchInfoFromRemote;
+            updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
         }
 
         private async void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)

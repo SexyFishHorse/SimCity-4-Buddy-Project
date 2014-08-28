@@ -174,6 +174,11 @@
             LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableIme, disableIMECheckBox.Checked);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.WriteLog, writeLogCheckBox.Checked);
 
+            Settings.SetAndSave(Settings.Keys.CheckForMissingDependencies, allowCheckMissingDependenciesCheckBox.Checked);
+            Settings.SetAndSave(Settings.Keys.AskForAdditionalInformationAfterInstallation, AskForAdditionalInfoAfterInstallCheckBox.Checked);
+            Settings.SetAndSave(Settings.Keys.FetchInformationFromRemoteServer, fetchInformationFromRemoteCheckbox.Checked);
+            Settings.SetAndSave(Settings.Keys.RemoveNonPluginFilesAfterInstallation, RemoveNonPluginFilesAfterInstallCheckBox.Checked);
+            Settings.SetAndSave(Settings.Keys.AutoRunExecutables, AutoRunInstallerExecutablesCheckBox.Checked);
             Close();
         }
 
@@ -260,6 +265,12 @@
             UpdateBackgroundsListView();
 
             quarantinedFilesLocationTextBox.Text = Settings.Get(Settings.Keys.QuarantinedFiles);
+
+            allowCheckMissingDependenciesCheckBox.Checked = Settings.Get<bool>(Settings.Keys.CheckForMissingDependencies);
+            AskForAdditionalInfoAfterInstallCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AskForAdditionalInformationAfterInstallation);
+            fetchInformationFromRemoteCheckbox.Checked = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
+            RemoveNonPluginFilesAfterInstallCheckBox.Checked = Settings.Get<bool>(Settings.Keys.RemoveNonPluginFilesAfterInstallation);
+            AutoRunInstallerExecutablesCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AutoRunExecutables);
         }
 
         private void UpdateResolutionComboBox()

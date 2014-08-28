@@ -8,11 +8,11 @@
     using System.Reflection;
     using log4net;
     using Microsoft.Win32;
+
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
-    using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
-    using Settings = NIHEI.SC4Buddy.Configuration.Settings;
 
     public class SettingsController : ISettingsController
     {

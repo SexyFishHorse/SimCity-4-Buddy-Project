@@ -86,13 +86,13 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.allowCheckMissingDependenciesCheckBox = new System.Windows.Forms.CheckBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
-            this.RemoveNonPluginFilesAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
-            this.AutoRunInstallerExecutablesCheckBox = new System.Windows.Forms.CheckBox();
             this.AskForAdditionalInfoAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.storeLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
+            this.RemoveNonPluginFilesAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
+            this.AutoRunInstallerExecutablesCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -493,9 +493,6 @@ namespace NIHEI.SC4Buddy.View.Application
             // allowCheckMissingDependenciesCheckBox
             // 
             resources.ApplyResources(this.allowCheckMissingDependenciesCheckBox, "allowCheckMissingDependenciesCheckBox");
-            this.allowCheckMissingDependenciesCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.AllowDependencyCheck;
-            this.allowCheckMissingDependenciesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.allowCheckMissingDependenciesCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "AllowDependencyCheck", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.allowCheckMissingDependenciesCheckBox.Name = "allowCheckMissingDependenciesCheckBox";
             this.allowCheckMissingDependenciesCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -509,38 +506,11 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // fetchInformationFromRemoteCheckbox
-            // 
-            resources.ApplyResources(this.fetchInformationFromRemoteCheckbox, "fetchInformationFromRemoteCheckbox");
-            this.fetchInformationFromRemoteCheckbox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.FetchInfoFromRemote;
-            this.fetchInformationFromRemoteCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fetchInformationFromRemoteCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "FetchInfoFromRemote", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.fetchInformationFromRemoteCheckbox.Name = "fetchInformationFromRemoteCheckbox";
-            this.fetchInformationFromRemoteCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // RemoveNonPluginFilesAfterInstallCheckBox
-            // 
-            resources.ApplyResources(this.RemoveNonPluginFilesAfterInstallCheckBox, "RemoveNonPluginFilesAfterInstallCheckBox");
-            this.RemoveNonPluginFilesAfterInstallCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.InstallerAskToRemoveNonPluginFiles;
-            this.RemoveNonPluginFilesAfterInstallCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.RemoveNonPluginFilesAfterInstallCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "InstallerAskToRemoveNonPluginFiles", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.RemoveNonPluginFilesAfterInstallCheckBox.Name = "RemoveNonPluginFilesAfterInstallCheckBox";
-            this.RemoveNonPluginFilesAfterInstallCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // AutoRunInstallerExecutablesCheckBox
-            // 
-            resources.ApplyResources(this.AutoRunInstallerExecutablesCheckBox, "AutoRunInstallerExecutablesCheckBox");
-            this.AutoRunInstallerExecutablesCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.InstallerAutoRunExecutables;
-            this.AutoRunInstallerExecutablesCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "InstallerAutoRunExecutables", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.AutoRunInstallerExecutablesCheckBox.Name = "AutoRunInstallerExecutablesCheckBox";
-            this.AutoRunInstallerExecutablesCheckBox.UseVisualStyleBackColor = true;
-            // 
             // AskForAdditionalInfoAfterInstallCheckBox
             // 
             resources.ApplyResources(this.AskForAdditionalInfoAfterInstallCheckBox, "AskForAdditionalInfoAfterInstallCheckBox");
-            this.AskForAdditionalInfoAfterInstallCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.InstallerAskForAdditionalInfo;
+            this.AskForAdditionalInfoAfterInstallCheckBox.Checked = true;
             this.AskForAdditionalInfoAfterInstallCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AskForAdditionalInfoAfterInstallCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "InstallerAskForAdditionalInfo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.AskForAdditionalInfoAfterInstallCheckBox.Name = "AskForAdditionalInfoAfterInstallCheckBox";
             this.AskForAdditionalInfoAfterInstallCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -552,6 +522,28 @@ namespace NIHEI.SC4Buddy.View.Application
             // storeLocationDialog
             // 
             resources.ApplyResources(this.storeLocationDialog, "storeLocationDialog");
+            // 
+            // fetchInformationFromRemoteCheckbox
+            // 
+            resources.ApplyResources(this.fetchInformationFromRemoteCheckbox, "fetchInformationFromRemoteCheckbox");
+            this.fetchInformationFromRemoteCheckbox.Checked = true;
+            this.fetchInformationFromRemoteCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.fetchInformationFromRemoteCheckbox.Name = "fetchInformationFromRemoteCheckbox";
+            this.fetchInformationFromRemoteCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // RemoveNonPluginFilesAfterInstallCheckBox
+            // 
+            resources.ApplyResources(this.RemoveNonPluginFilesAfterInstallCheckBox, "RemoveNonPluginFilesAfterInstallCheckBox");
+            this.RemoveNonPluginFilesAfterInstallCheckBox.Checked = true;
+            this.RemoveNonPluginFilesAfterInstallCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.RemoveNonPluginFilesAfterInstallCheckBox.Name = "RemoveNonPluginFilesAfterInstallCheckBox";
+            this.RemoveNonPluginFilesAfterInstallCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // AutoRunInstallerExecutablesCheckBox
+            // 
+            resources.ApplyResources(this.AutoRunInstallerExecutablesCheckBox, "AutoRunInstallerExecutablesCheckBox");
+            this.AutoRunInstallerExecutablesCheckBox.Name = "AutoRunInstallerExecutablesCheckBox";
+            this.AutoRunInstallerExecutablesCheckBox.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
