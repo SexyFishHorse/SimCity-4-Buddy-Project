@@ -153,8 +153,13 @@
                                        Id = dynamicPluginFile.Id,
                                        Checksum = dynamicPluginFile.Checksum,
                                        Path = dynamicPluginFile.Path,
-                                       Plugin = Plugins.First(x => x.Id == (Guid)dynamicPluginFile.PluginId)
+                                       Plugin = Plugins.FirstOrDefault(x => x.Id == (Guid)dynamicPluginFile.PluginId)
                                    };
+
+                    if (file.Plugin == null)
+                    {
+                        continue;
+                    }
 
                     if (dynamicPluginFile.QuarantinedFile != null)
                     {
@@ -191,13 +196,18 @@
                 foreach (var dynamicPlugin in dynamicPlugins)
                 {
                     var plugin = new Plugin
-                                     {
-                                         Id = dynamicPlugin.Id,
-                                         Author = dynamicPlugin.Author,
-                                         Description = dynamicPlugin.Description,
-                                         Name = dynamicPlugin.Name,
-                                         UserFolder = UserFolders.First(x => x.Id == (Guid)dynamicPlugin.UserFolderId)
-                                     };
+                    {
+                        Id = dynamicPlugin.Id,
+                        Author = dynamicPlugin.Author,
+                        Description = dynamicPlugin.Description,
+                        Name = dynamicPlugin.Name,
+                        UserFolder = UserFolders.FirstOrDefault(x => x.Id == (Guid)dynamicPlugin.UserFolderId)
+                    };
+
+                    if (plugin.UserFolder == null)
+                    {
+                        continue;
+                    }
 
                     if (dynamicPlugin.Link != null)
                     {
