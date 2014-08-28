@@ -12,14 +12,13 @@
 
     using log4net;
 
-    using NIHEI.SC4Buddy.Control;
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Installer;
     using NIHEI.SC4Buddy.Installer.InstallerEventArgs;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Helpers;
 
@@ -183,7 +182,7 @@
             {
                 Invoke(new Action(() =>
                     {
-                        if (NetworkInterface.GetIsNetworkAvailable() && Settings.Default.FetchInfoFromRemote)
+                        if (NetworkInterface.GetIsNetworkAvailable() && Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer))
                         {
                             var matched = new Collection<Plugin>();
                             foreach (
@@ -204,7 +203,7 @@
                             return;
                         }
 
-                        if (Settings.Default.InstallerAskForAdditionalInfo
+                        if (Settings.Get<bool>(Settings.Keys.AskForAdditionalInformationAfterInstallation)
                             && ShowWouldYouLikeToEnterAdditionalDetailsDialog() != DialogResult.No)
                         {
                             foreach (var plugin in tempPluginInfo)
@@ -218,7 +217,7 @@
                             }
                         }
 
-                        if (Settings.Default.InstallerAskToRemoveNonPluginFiles)
+                        if (Settings.Get<bool>(Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation))
                         {
                             var storageLocation =
                                     Path.Combine(

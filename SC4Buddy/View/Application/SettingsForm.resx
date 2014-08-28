@@ -195,6 +195,9 @@
   <data name="browseQuarantinedButton.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
+  <data name="browseQuarantinedButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="browseQuarantinedButton.Location" type="System.Drawing.Point, System.Drawing">
     <value>530, 18</value>
   </data>
@@ -245,6 +248,9 @@
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="label4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 24</value>
@@ -633,34 +639,34 @@
   <data name="&gt;&gt;autoSaveIntervalTrackBar.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="enableAutoSaveButton.AutoSize" type="System.Boolean, mscorlib">
+  <data name="enableAutoSaveCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="enableAutoSaveButton.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="enableAutoSaveCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="enableAutoSaveButton.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="enableAutoSaveCheckBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 19</value>
   </data>
-  <data name="enableAutoSaveButton.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="enableAutoSaveCheckBox.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 17</value>
   </data>
-  <data name="enableAutoSaveButton.TabIndex" type="System.Int32, mscorlib">
+  <data name="enableAutoSaveCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="enableAutoSaveButton.Text" xml:space="preserve">
+  <data name="enableAutoSaveCheckBox.Text" xml:space="preserve">
     <value>Enable autosave</value>
   </data>
-  <data name="&gt;&gt;enableAutoSaveButton.Name" xml:space="preserve">
-    <value>enableAutoSaveButton</value>
+  <data name="&gt;&gt;enableAutoSaveCheckBox.Name" xml:space="preserve">
+    <value>enableAutoSaveCheckBox</value>
   </data>
-  <data name="&gt;&gt;enableAutoSaveButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;enableAutoSaveCheckBox.Type" xml:space="preserve">
     <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;enableAutoSaveButton.Parent" xml:space="preserve">
+  <data name="&gt;&gt;enableAutoSaveCheckBox.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
-  <data name="&gt;&gt;enableAutoSaveButton.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;enableAutoSaveCheckBox.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">

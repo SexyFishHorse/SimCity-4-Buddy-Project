@@ -6,11 +6,10 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
-
     using log4net;
-
     using Microsoft.Win32;
 
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
@@ -30,16 +29,6 @@
         public SettingsController(UserFolderController userFolderController)
         {
             this.userFolderController = userFolderController;
-        }
-
-        public string DefaultQuarantinedFilesPath
-        {
-            get
-            {
-                var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-
-                return Path.Combine(localAppData, "Irradiated Games", "SimCity 4 Buddy", "QuarantinedFiles");
-            }
         }
 
         public bool ValidateGameLocationPath(string path)
@@ -68,7 +57,7 @@
                 throw new InvalidOperationException("Main plugin folder has been deleted from the database.");
             }
 
-            folder.FolderPath = Settings.Default.GameLocation;
+            folder.FolderPath = Settings.Get(Settings.Keys.GameLocation);
             folder.Alias = LocalizationStrings.GameUserFolderName;
             userFolderController.Update(folder);
         }
@@ -118,7 +107,7 @@
 
         public IEnumerable<string> GetInstalledLanguages()
         {
-            var dirs = Directory.EnumerateDirectories(Settings.Default.GameLocation, "*", SearchOption.TopDirectoryOnly);
+            var dirs = Directory.EnumerateDirectories(Settings.Get(Settings.Keys.GameLocation), "*", SearchOption.TopDirectoryOnly);
 
             var languages =
                 dirs.Select(

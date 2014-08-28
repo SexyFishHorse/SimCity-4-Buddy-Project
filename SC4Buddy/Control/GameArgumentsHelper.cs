@@ -9,9 +9,8 @@
     using System.Text.RegularExpressions;
 
     using log4net;
-
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Properties;
 
     public class GameArgumentsHelper
     {
@@ -77,9 +76,9 @@
         {
             var output = new Collection<string>
             {
-                string.Format("-audio:{0}", Settings.Default.LauncherDisableAudio ? "off" : "on"), 
-                string.Format("-music:{0}", Settings.Default.LauncherDisableMusic ? "off" : "on"), 
-                string.Format("-sounds:{0}", Settings.Default.LauncherDisableSound ? "off" : "on")
+                string.Format("-audio:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableAudio) ? "off" : "on"), 
+                string.Format("-music:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableMusic) ? "off" : "on"), 
+                string.Format("-sounds:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableSounds) ? "off" : "on")
             };
 
             return output;
@@ -89,12 +88,12 @@
         {
             var output = new Collection<string>
             {
-                string.Format("-l:{0}", Settings.Default.LauncherLanguage), 
+                string.Format("-l:{0}", LauncherSettings.Get(LauncherSettings.Keys.Language)), 
                 string.Format(
                     "-ignoreMissingModelDataBugs:{0}", 
-                    Settings.Default.LauncherIgnoreMissingModels ? "on" : "off"), 
-                string.Format("-ime:{0}", Settings.Default.LauncherDisableIME ? "disabled" : "enabled"), 
-                string.Format("-writeLog:{0}", Settings.Default.LauncherWriteLog ? "enabled" : "disabled")
+                    LauncherSettings.Get<bool>(LauncherSettings.Keys.IgnoreMissingModels) ? "on" : "off"), 
+                string.Format("-ime:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableIme) ? "disabled" : "enabled"), 
+                string.Format("-writeLog:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.WriteLog) ? "enabled" : "disabled")
             };
 
             return output;
@@ -104,22 +103,22 @@
         {
             var output = new Collection<string>
             {
-                string.Format("-intro:{0}", Settings.Default.LauncherSkipIntro ? "off" : "on"), 
+                string.Format("-intro:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.SkipIntro) ? "off" : "on"), 
                 string.Format(
                     "-exceptionHandling:{0}", 
-                    Settings.Default.LauncherDisableExceptionHandling ? "off" : "on"), 
-                string.Format("-backgroundLoader:{0}", Settings.Default.LauncherDisableBackgroundLoader ? "off" : "on")
+                    LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableBackgroundLoader) ? "off" : "on"), 
+                string.Format("-backgroundLoader:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableBackgroundLoader) ? "off" : "on")
             };
 
-            if (Settings.Default.LauncherCpuCount > 0)
+            if (LauncherSettings.GetInt(LauncherSettings.Keys.CpuCount) > 0)
             {
-                output.Add(string.Format("-cpuCount:{0}", Settings.Default.LauncherCpuCount));
+                output.Add(string.Format("-cpuCount:{0}", LauncherSettings.Get(LauncherSettings.Keys.CpuCount)));
             }
 
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCpuPriority))
+            if (!string.IsNullOrWhiteSpace(LauncherSettings.Get(LauncherSettings.Keys.CpuPriority)))
             {
                 CpuPriority priority;
-                if (Enum.TryParse(Settings.Default.LauncherCpuPriority, true, out priority))
+                if (Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CpuPriority), true, out priority))
                 {
                     output.Add(GetStringForCpuPriority(priority));
                 }
@@ -128,11 +127,11 @@
                     Log.Warn(
                         string.Format(
                             "Unknown CPU priority: \"{0}\", skipping argument.",
-                            Settings.Default.LauncherCpuPriority));
+                            LauncherSettings.Get(LauncherSettings.Keys.CpuPriority)));
                 }
             }
 
-            if (Settings.Default.LauncherPauseMinimized)
+            if (LauncherSettings.Get<bool>(LauncherSettings.Keys.PauseWhenMinimized))
             {
                 output.Add("-gp");
             }
@@ -222,21 +221,21 @@
             {
                 string.Format(
                     "-customResolution:{0}", 
-                    Settings.Default.LauncherCustomResolution ? "enabled" : "disabled")
+                    LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableCustomResolution) ? "enabled" : "disabled")
             };
 
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherResolution))
+            if (!string.IsNullOrWhiteSpace(LauncherSettings.Get(LauncherSettings.Keys.Resolution)))
             {
                 output.Add(
                     GetStringForResolution(
-                        Settings.Default.LauncherResolution,
-                        Settings.Default.Launcher32BitColourDepth));
+                        LauncherSettings.Get(LauncherSettings.Keys.Resolution),
+                        LauncherSettings.Get<bool>(LauncherSettings.Keys.ColourDepth32Bit)));
             }
 
-            if (!string.IsNullOrWhiteSpace(Settings.Default.LauncherCursorColour))
+            if (!string.IsNullOrWhiteSpace(LauncherSettings.Get(LauncherSettings.Keys.CursorColourDepth)))
             {
                 CursorColorDepth cursorColorDepth;
-                if (Enum.TryParse(Settings.Default.LauncherCursorColour, true, out cursorColorDepth))
+                if (Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CursorColourDepth), true, out cursorColorDepth))
                 {
                     output.Add(
                         string.Format(
@@ -247,12 +246,12 @@
             }
 
             RenderMode renderMode;
-            if (Enum.TryParse(Settings.Default.LauncherRenderMode, out renderMode))
+            if (Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.RenderMode), out renderMode))
             {
                 output.Add(GetStringForRenderMode(renderMode));
             }
 
-            output.Add(Settings.Default.LauncherWindowMode ? "-w" : "-f");
+            output.Add(LauncherSettings.Get<bool>(LauncherSettings.Keys.WindowMode) ? "-w" : "-f");
 
             return output;
         }

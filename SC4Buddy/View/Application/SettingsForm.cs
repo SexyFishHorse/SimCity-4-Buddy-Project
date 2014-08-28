@@ -3,13 +3,14 @@
     using System;
     using System.Drawing;
     using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
 
     using log4net;
-
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Localization;
@@ -35,10 +36,11 @@
                 scanButton.Image = Resources.IconZoom;
             }
 
-            if (string.IsNullOrWhiteSpace(Settings.Default.QuarantinedFilesPath))
+            if (!Settings.HasSetting(Settings.Keys.QuarantinedFiles))
             {
-                Settings.Default.QuarantinedFilesPath = settingsController.DefaultQuarantinedFilesPath;
-                Settings.Default.Save();
+                Settings.SetAndSave(
+                    Settings.Keys.QuarantinedFiles,
+                    Path.Combine(Settings.GetDefaultStorageLocation(), "QuarantinedFiles"));
             }
         }
 
@@ -88,8 +90,9 @@
                     LocalizationStrings.GameNotFound,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-                return;
             }
+
+            Settings.SetAndSave(Settings.Keys.GameLocation, gameLocationTextBox.Text);
 
             if (!ValidateResolution())
             {
@@ -106,45 +109,72 @@
 
             if (backgroundImageListView.SelectedIndices.Count > 0)
             {
-                Settings.Default.Wallpaper = backgroundImageListView.SelectedIndices[0] + 1;
+                Settings.SetAndSave(Settings.Keys.Wallpaper, backgroundImageListView.SelectedIndices[0] + 1);
             }
 
             if (renderModeComboBox.SelectedIndex > 0)
             {
                 var renderMode = ((ComboBoxItem<GameArgumentsHelper.RenderMode>)renderModeComboBox.SelectedItem).Value;
-                Settings.Default.LauncherRenderMode = renderMode.ToString();
+                LauncherSettings.SetAndSave(LauncherSettings.Keys.RenderMode, renderMode.ToString());
             }
             else
             {
-                Settings.Default.LauncherRenderMode = string.Empty;
+                LauncherSettings.SetAndSave(LauncherSettings.Keys.RenderMode, string.Empty);
             }
 
             var regex = new Regex(@"\d+x\d+");
             var resolution = resolutionComboBox.Text.Trim();
-            Settings.Default.LauncherResolution = regex.IsMatch(resolution) ? resolution : string.Empty;
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.Resolution, regex.IsMatch(resolution) ? resolution : string.Empty);
 
-            Settings.Default.Launcher32BitColourDepth =
+            LauncherSettings.SetAndSave(
+                LauncherSettings.Keys.ColourDepth32Bit,
                 ((ComboBoxItem<GameArgumentsHelper.ColorDepth>)colourDepthComboBox.SelectedItem).Value
-                == GameArgumentsHelper.ColorDepth.Bits32;
+                == GameArgumentsHelper.ColorDepth.Bits32);
 
-            Settings.Default.LauncherCursorColour = cursorColourComboBox.SelectedIndex > 0
-                                                        ? ((ComboBoxItem<GameArgumentsHelper.CursorColorDepth>)
-                                                           cursorColourComboBox.SelectedItem).Value.ToString()
-                                                        : string.Empty;
+            LauncherSettings.SetAndSave(
+                LauncherSettings.Keys.CursorColourDepth,
+                cursorColourComboBox.SelectedIndex > 0
+                    ? ((ComboBoxItem<GameArgumentsHelper.CursorColorDepth>)cursorColourComboBox.SelectedItem).Value
+                          .ToString()
+                    : string.Empty);
 
             int numCpus;
             int.TryParse(
                 cpuCountComboBox.Text.Trim(), out numCpus);
-            Settings.Default.LauncherCpuCount = numCpus;
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.CpuCount, numCpus);
 
-            Settings.Default.LauncherCpuPriority = cpuPriorityComboBox.SelectedIndex > 0
+            var cpuPriority = cpuPriorityComboBox.SelectedIndex > 0
                                                        ? ((ComboBoxItem<GameArgumentsHelper.CpuPriority>)
                                                           cpuPriorityComboBox.SelectedItem).Value.ToString()
                                                        : string.Empty;
 
-            Settings.Default.Save();
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.CpuPriority, cpuPriority);
 
             settingsController.CheckMainFolder();
+
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.AutoSaveWaitTime, autoSaveIntervalTrackBar.Value);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableAudio, disableAudioCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableMusic, disableMusicCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableSounds, disableSoundsCheckBox.Checked);
+
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.EnableCustomResolution, customResolutionCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.WindowMode, windowModeCheckBox.Checked);
+
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.SkipIntro, skipIntroCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.PauseWhenMinimized, pauseMinimizedCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableExceptionHandling, disableExceptionHandlingCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableBackgroundLoader, disableBackgroundLoaderCheckBox.Checked);
+
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.Language, languageComboBox.SelectedItem);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.IgnoreMissingModels, ignoreMissingModelsCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableIme, disableIMECheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.WriteLog, writeLogCheckBox.Checked);
+
+            Settings.SetAndSave(Settings.Keys.AllowCheckForMissingDependencies, allowCheckMissingDependenciesCheckBox.Checked);
+            Settings.SetAndSave(Settings.Keys.AskForAdditionalInformationAfterInstallation, AskForAdditionalInfoAfterInstallCheckBox.Checked);
+            Settings.SetAndSave(Settings.Keys.FetchInformationFromRemoteServer, fetchInformationFromRemoteCheckbox.Checked);
+            Settings.SetAndSave(Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation, RemoveNonPluginFilesAfterInstallCheckBox.Checked);
+            Settings.SetAndSave(Settings.Keys.AutoRunExecutablesDuringInstallation, AutoRunInstallerExecutablesCheckBox.Checked);
 
             Close();
         }
@@ -152,8 +182,6 @@
         private void CloseButtonClick(object sender, EventArgs e)
         {
             Log.Info("Closing settings form");
-
-            Settings.Default.Reload();
             Close();
         }
 
@@ -184,6 +212,8 @@
 
         private void SettingsFormLoad(object sender, EventArgs e)
         {
+            gameLocationTextBox.Text = Settings.Get(Settings.Keys.GameLocation);
+
             if (string.IsNullOrWhiteSpace(gameLocationTextBox.Text))
             {
                 gameLocationTextBox.Text = LocalizationStrings.SelectGameLocation;
@@ -195,29 +225,52 @@
                 ? Color.Gray
                 : Color.Black;
 
-            autoSaveIntervalTrackBar.Enabled = Settings.Default.EnableAutoSave;
-            UpdateAutoSaveLabel(Settings.Default.AutoSaveWaitTime);
+            enableAutoSaveCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableAutoSave);
+            autoSaveIntervalTrackBar.Enabled = LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableAutoSave);
+            UpdateAutoSaveLabel(LauncherSettings.GetInt(LauncherSettings.Keys.AutoSaveWaitTime));
+
+            disableAudioCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableAudio);
+            disableMusicCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableMusic);
+            disableSoundsCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableSounds);
+
+            customResolutionCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableCustomResolution);
+            windowModeCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.WindowMode);
 
             UpdateResolutionComboBox();
-
             UpdateRenderModeComboBox();
-
             UpdateColourDepthComboBox();
+            UpdateCursorColourComboBox();
 
             UpdateCpuCountComboBox();
-
             UpdateCpuPriorityComboBox();
 
-            UpdateCursorColourComboBox();
+            skipIntroCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.SkipIntro);
+            pauseMinimizedCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.PauseWhenMinimized);
+            disableExceptionHandlingCheckBox.Checked =
+                LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableExceptionHandling);
+            disableBackgroundLoaderCheckBox.Checked =
+                LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableBackgroundLoader);
 
             UpdateLanguageComboBox();
 
+            ignoreMissingModelsCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.IgnoreMissingModels);
+            disableIMECheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableIme);
+            writeLogCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.WriteLog);
+
             UpdateBackgroundsListView();
+
+            quarantinedFilesLocationTextBox.Text = Settings.Get(Settings.Keys.QuarantinedFiles);
+
+            allowCheckMissingDependenciesCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AllowCheckForMissingDependencies);
+            AskForAdditionalInfoAfterInstallCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AskForAdditionalInformationAfterInstallation);
+            fetchInformationFromRemoteCheckbox.Checked = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
+            RemoveNonPluginFilesAfterInstallCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation);
+            AutoRunInstallerExecutablesCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AutoRunExecutablesDuringInstallation);
         }
 
         private void UpdateResolutionComboBox()
         {
-            resolutionComboBox.Text = Settings.Default.LauncherResolution;
+            resolutionComboBox.Text = LauncherSettings.Get(LauncherSettings.Keys.Resolution);
         }
 
         private void UpdateCursorColourComboBox()
@@ -245,7 +298,7 @@
                     LocalizationStrings.FullColors, GameArgumentsHelper.CursorColorDepth.FullColors));
 
             GameArgumentsHelper.CursorColorDepth selectedCursor;
-            Enum.TryParse(Settings.Default.LauncherCursorColour, true, out selectedCursor);
+            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CursorColourDepth), true, out selectedCursor);
 
             switch (selectedCursor)
             {
@@ -290,7 +343,7 @@
                     LocalizationStrings.High, GameArgumentsHelper.CpuPriority.High));
 
             GameArgumentsHelper.CpuPriority selectedPriority;
-            Enum.TryParse(Settings.Default.LauncherCpuPriority, true, out selectedPriority);
+            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CpuPriority), true, out selectedPriority);
             switch (selectedPriority)
             {
                 case GameArgumentsHelper.CpuPriority.Low:
@@ -320,7 +373,7 @@
                 cpuCountComboBox.Items.Add(i);
             }
 
-            cpuCountComboBox.SelectedIndex = Settings.Default.LauncherCpuCount;
+            cpuCountComboBox.SelectedIndex = LauncherSettings.GetInt(LauncherSettings.Keys.CpuCount);
             cpuCountComboBox.EndUpdate();
         }
 
@@ -335,7 +388,7 @@
                 new ComboBoxItem<GameArgumentsHelper.ColorDepth>(
                     LocalizationStrings.Bits32, GameArgumentsHelper.ColorDepth.Bits32));
 
-            colourDepthComboBox.SelectedIndex = Settings.Default.Launcher32BitColourDepth ? 1 : 0;
+            colourDepthComboBox.SelectedIndex = LauncherSettings.Get<bool>(LauncherSettings.Keys.ColourDepth32Bit) ? 1 : 0;
             colourDepthComboBox.EndUpdate();
         }
 
@@ -355,7 +408,7 @@
                     LocalizationStrings.Software, GameArgumentsHelper.RenderMode.Software));
 
             GameArgumentsHelper.RenderMode selectedRenderMode;
-            Enum.TryParse(Settings.Default.LauncherRenderMode, true, out selectedRenderMode);
+            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.RenderMode), true, out selectedRenderMode);
             switch (selectedRenderMode)
             {
                 case GameArgumentsHelper.RenderMode.DirectX:
@@ -398,7 +451,7 @@
 
         private void UpdateLanguageComboBox()
         {
-            if (!settingsController.ValidateGameLocationPath(Settings.Default.GameLocation))
+            if (!settingsController.ValidateGameLocationPath(Settings.Get(Settings.Keys.GameLocation)))
             {
                 return;
             }
@@ -410,9 +463,9 @@
             languageComboBox.Items.Add(LocalizationStrings.Ignore);
             languageComboBox.Items.AddRange(languages.Cast<object>().ToArray());
 
-            languageComboBox.SelectedItem = string.IsNullOrWhiteSpace(Settings.Default.LauncherLanguage)
+            languageComboBox.SelectedItem = string.IsNullOrWhiteSpace(LauncherSettings.Get(LauncherSettings.Keys.Language))
                                                 ? LocalizationStrings.Ignore
-                                                : Settings.Default.LauncherLanguage;
+                                                : LauncherSettings.Get(LauncherSettings.Keys.Language);
 
             languageComboBox.EndUpdate();
         }
@@ -425,7 +478,7 @@
 
         private void EnableAutoSaveButtonCheckedChanged(object sender, EventArgs e)
         {
-            autoSaveIntervalTrackBar.Enabled = enableAutoSaveButton.Checked;
+            autoSaveIntervalTrackBar.Enabled = enableAutoSaveCheckBox.Checked;
 
             AutoSaveIntervalTrackBarScroll(sender, e);
         }
@@ -445,9 +498,7 @@
 
         private void SettingsFormFormClosing(object sender, FormClosingEventArgs e)
         {
-            Settings.Default.Reload();
-
-            if (settingsController.ValidateGameLocationPath(Settings.Default.GameLocation))
+            if (settingsController.ValidateGameLocationPath(Settings.Get(Settings.Keys.GameLocation)))
             {
                 return;
             }
@@ -483,21 +534,8 @@
             var result = storeLocationDialog.ShowDialog(this);
             if (result == DialogResult.OK)
             {
-                var path = storeLocationDialog.SelectedPath;
-                SetQuarantinedPath(path);
+                quarantinedFilesLocationTextBox.Text = storeLocationDialog.SelectedPath;
             }
-        }
-
-        private void QuarantinedFilesLocationTextBoxTextChanged(object sender, EventArgs e)
-        {
-            var path = quarantinedFilesLocationTextBox.Text.Trim();
-            SetQuarantinedPath(path);
-        }
-
-        private void SetQuarantinedPath(string path)
-        {
-            Settings.Default.QuarantinedFilesPath = path;
-            Log.Info(string.Format("Setting quarantined path to: {0}", path));
         }
     }
 }

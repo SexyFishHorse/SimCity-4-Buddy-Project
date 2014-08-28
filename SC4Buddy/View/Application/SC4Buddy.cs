@@ -11,7 +11,7 @@
     using System.Windows.Forms;
 
     using log4net;
-
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
@@ -153,7 +153,7 @@
         private void UpdateBackground()
         {
             Bitmap image;
-            switch (Settings.Default.Wallpaper)
+            switch (Settings.GetInt(Settings.Keys.Wallpaper))
             {
                 case 13:
                     image = Resources.Wallpaper13;
@@ -238,14 +238,14 @@
                                            {
                                                FileName =
                                                    Path.Combine(
-                                                       Settings.Default.GameLocation,
+                                                       Settings.Get(Settings.Keys.GameLocation),
                                                        "Apps",
                                                        "SimCity 4.exe"),
                                                Arguments = arguments,
-                                               WorkingDirectory = Settings.Default.GameLocation
+                                               WorkingDirectory = Settings.Get(Settings.Keys.GameLocation)
                                            };
 
-            var gameLauncher = new GameLauncher(gameProcessStartInfo, Settings.Default.AutoSaveWaitTime);
+            var gameLauncher = new GameLauncher(gameProcessStartInfo, LauncherSettings.Get<int>(LauncherSettings.Keys.AutoSaveWaitTime));
             var gameLauncherThread = new Thread(gameLauncher.Start) { Name = "SC4Buddy AutoSaver" };
 
             gameLauncherThread.Start();

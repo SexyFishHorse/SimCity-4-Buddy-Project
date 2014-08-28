@@ -12,14 +12,13 @@
 
     using log4net;
     using log4net.Config;
-
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Application;
 
@@ -40,7 +39,7 @@
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
 
-                if (string.IsNullOrWhiteSpace(Settings.Default.GameLocation) || !Directory.Exists(Settings.Default.GameLocation))
+                if (string.IsNullOrWhiteSpace(Settings.Get(Settings.Keys.GameLocation)) || !Directory.Exists(Settings.Get(Settings.Keys.GameLocation)))
                 {
                     var settingsForm = new SettingsForm(userFolderController) { StartPosition = FormStartPosition.CenterScreen };
 
@@ -53,7 +52,7 @@
                     SetDefaultUserFolder();
                 }
 
-                if (Directory.Exists(Settings.Default.GameLocation))
+                if (Directory.Exists(Settings.Get(Settings.Keys.GameLocation)))
                 {
                     new SettingsController(userFolderController).CheckMainFolder();
                     Application.Run(

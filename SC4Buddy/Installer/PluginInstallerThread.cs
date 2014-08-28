@@ -10,12 +10,12 @@
     using log4net;
 
     using NIHEI.Common.IO;
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Installer.FileHandlers;
     using NIHEI.SC4Buddy.Installer.InstallerEventArgs;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Plugins;
 
     using SharpCompress.Common;
@@ -231,7 +231,7 @@
             foreach (
                 var executable in
                     installer.Executables.Where(
-                        x => Settings.Default.InstallerAutoRunExecutables || Form.AskToRunExecutable(x)))
+                        x => Settings.Get<bool>(Settings.Keys.AutoRunExecutablesDuringInstallation) || Form.AskToRunExecutable(x)))
             {
                 using (var folderListener = new UserFolderListener(userFolder))
                 {

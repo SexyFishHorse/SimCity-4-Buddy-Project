@@ -52,7 +52,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.shortAutosaveIntervalsLabel = new System.Windows.Forms.Label();
             this.autoSaveIntervalLabel = new System.Windows.Forms.Label();
             this.autoSaveIntervalTrackBar = new System.Windows.Forms.TrackBar();
-            this.enableAutoSaveButton = new System.Windows.Forms.CheckBox();
+            this.enableAutoSaveCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.languageComboBox = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -86,13 +86,13 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.allowCheckMissingDependenciesCheckBox = new System.Windows.Forms.CheckBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
-            this.RemoveNonPluginFilesAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
-            this.AutoRunInstallerExecutablesCheckBox = new System.Windows.Forms.CheckBox();
             this.AskForAdditionalInfoAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.storeLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
+            this.RemoveNonPluginFilesAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
+            this.AutoRunInstallerExecutablesCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -163,10 +163,7 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             resources.ApplyResources(this.quarantinedFilesLocationTextBox, "quarantinedFilesLocationTextBox");
             this.quarantinedFilesLocationTextBox.BackColor = System.Drawing.SystemColors.Window;
-            this.quarantinedFilesLocationTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "QuarantinedFilesPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.quarantinedFilesLocationTextBox.Name = "quarantinedFilesLocationTextBox";
-            this.quarantinedFilesLocationTextBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.QuarantinedFilesPath;
-            this.quarantinedFilesLocationTextBox.TextChanged += new System.EventHandler(this.QuarantinedFilesLocationTextBoxTextChanged);
             // 
             // label4
             // 
@@ -216,10 +213,8 @@ namespace NIHEI.SC4Buddy.View.Application
             // gameLocationTextBox
             // 
             resources.ApplyResources(this.gameLocationTextBox, "gameLocationTextBox");
-            this.gameLocationTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "GameLocation", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.gameLocationTextBox.ForeColor = System.Drawing.Color.Gray;
             this.gameLocationTextBox.Name = "gameLocationTextBox";
-            this.gameLocationTextBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.GameLocation;
             this.gameLocationTextBox.TextChanged += new System.EventHandler(this.GameLocationTextBoxTextChanged);
             // 
             // label1
@@ -244,7 +239,7 @@ namespace NIHEI.SC4Buddy.View.Application
             this.groupBox5.Controls.Add(this.shortAutosaveIntervalsLabel);
             this.groupBox5.Controls.Add(this.autoSaveIntervalLabel);
             this.groupBox5.Controls.Add(this.autoSaveIntervalTrackBar);
-            this.groupBox5.Controls.Add(this.enableAutoSaveButton);
+            this.groupBox5.Controls.Add(this.enableAutoSaveCheckBox);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
@@ -263,21 +258,18 @@ namespace NIHEI.SC4Buddy.View.Application
             // 
             resources.ApplyResources(this.autoSaveIntervalTrackBar, "autoSaveIntervalTrackBar");
             this.autoSaveIntervalTrackBar.BackColor = System.Drawing.SystemColors.Window;
-            this.autoSaveIntervalTrackBar.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::NIHEI.SC4Buddy.Properties.Settings.Default, "AutoSaveWaitTime", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.autoSaveIntervalTrackBar.Maximum = 60;
             this.autoSaveIntervalTrackBar.Minimum = 5;
             this.autoSaveIntervalTrackBar.Name = "autoSaveIntervalTrackBar";
-            this.autoSaveIntervalTrackBar.Value = global::NIHEI.SC4Buddy.Properties.Settings.Default.AutoSaveWaitTime;
+            this.autoSaveIntervalTrackBar.Value = 15;
             this.autoSaveIntervalTrackBar.Scroll += new System.EventHandler(this.AutoSaveIntervalTrackBarScroll);
             // 
-            // enableAutoSaveButton
+            // enableAutoSaveCheckBox
             // 
-            resources.ApplyResources(this.enableAutoSaveButton, "enableAutoSaveButton");
-            this.enableAutoSaveButton.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.EnableAutoSave;
-            this.enableAutoSaveButton.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "EnableAutoSave", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.enableAutoSaveButton.Name = "enableAutoSaveButton";
-            this.enableAutoSaveButton.UseVisualStyleBackColor = true;
-            this.enableAutoSaveButton.CheckedChanged += new System.EventHandler(this.EnableAutoSaveButtonCheckedChanged);
+            resources.ApplyResources(this.enableAutoSaveCheckBox, "enableAutoSaveCheckBox");
+            this.enableAutoSaveCheckBox.Name = "enableAutoSaveCheckBox";
+            this.enableAutoSaveCheckBox.UseVisualStyleBackColor = true;
+            this.enableAutoSaveCheckBox.CheckedChanged += new System.EventHandler(this.EnableAutoSaveButtonCheckedChanged);
             // 
             // groupBox7
             // 
@@ -293,11 +285,9 @@ namespace NIHEI.SC4Buddy.View.Application
             // languageComboBox
             // 
             resources.ApplyResources(this.languageComboBox, "languageComboBox");
-            this.languageComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherLanguage", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.languageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.languageComboBox.FormattingEnabled = true;
             this.languageComboBox.Name = "languageComboBox";
-            this.languageComboBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherLanguage;
             // 
             // label8
             // 
@@ -307,24 +297,18 @@ namespace NIHEI.SC4Buddy.View.Application
             // ignoreMissingModelsCheckBox
             // 
             resources.ApplyResources(this.ignoreMissingModelsCheckBox, "ignoreMissingModelsCheckBox");
-            this.ignoreMissingModelsCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherIgnoreMissingModels;
-            this.ignoreMissingModelsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherIgnoreMissingModels", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.ignoreMissingModelsCheckBox.Name = "ignoreMissingModelsCheckBox";
             this.ignoreMissingModelsCheckBox.UseVisualStyleBackColor = true;
             // 
             // writeLogCheckBox
             // 
             resources.ApplyResources(this.writeLogCheckBox, "writeLogCheckBox");
-            this.writeLogCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherWriteLog;
-            this.writeLogCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherWriteLog", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.writeLogCheckBox.Name = "writeLogCheckBox";
             this.writeLogCheckBox.UseVisualStyleBackColor = true;
             // 
             // disableIMECheckBox
             // 
             resources.ApplyResources(this.disableIMECheckBox, "disableIMECheckBox");
-            this.disableIMECheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherDisableIME;
-            this.disableIMECheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherDisableIME", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.disableIMECheckBox.Name = "disableIMECheckBox";
             this.disableIMECheckBox.UseVisualStyleBackColor = true;
             // 
@@ -357,32 +341,24 @@ namespace NIHEI.SC4Buddy.View.Application
             // pauseMinimizedCheckBox
             // 
             resources.ApplyResources(this.pauseMinimizedCheckBox, "pauseMinimizedCheckBox");
-            this.pauseMinimizedCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherPauseMinimized;
-            this.pauseMinimizedCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherPauseMinimized", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.pauseMinimizedCheckBox.Name = "pauseMinimizedCheckBox";
             this.pauseMinimizedCheckBox.UseVisualStyleBackColor = true;
             // 
             // disableBackgroundLoaderCheckBox
             // 
             resources.ApplyResources(this.disableBackgroundLoaderCheckBox, "disableBackgroundLoaderCheckBox");
-            this.disableBackgroundLoaderCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherDisableBackgroundLoader;
-            this.disableBackgroundLoaderCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherDisableBackgroundLoader", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.disableBackgroundLoaderCheckBox.Name = "disableBackgroundLoaderCheckBox";
             this.disableBackgroundLoaderCheckBox.UseVisualStyleBackColor = true;
             // 
             // skipIntroCheckBox
             // 
             resources.ApplyResources(this.skipIntroCheckBox, "skipIntroCheckBox");
-            this.skipIntroCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherSkipIntro;
-            this.skipIntroCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherSkipIntro", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.skipIntroCheckBox.Name = "skipIntroCheckBox";
             this.skipIntroCheckBox.UseVisualStyleBackColor = true;
             // 
             // disableExceptionHandlingCheckBox
             // 
             resources.ApplyResources(this.disableExceptionHandlingCheckBox, "disableExceptionHandlingCheckBox");
-            this.disableExceptionHandlingCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherDisableExceptionHandling;
-            this.disableExceptionHandlingCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherDisableExceptionHandling", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.disableExceptionHandlingCheckBox.Name = "disableExceptionHandlingCheckBox";
             this.disableExceptionHandlingCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -417,8 +393,6 @@ namespace NIHEI.SC4Buddy.View.Application
             // windowModeCheckBox
             // 
             resources.ApplyResources(this.windowModeCheckBox, "windowModeCheckBox");
-            this.windowModeCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherWindowMode;
-            this.windowModeCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherWindowMode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.windowModeCheckBox.Name = "windowModeCheckBox";
             this.windowModeCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -478,8 +452,6 @@ namespace NIHEI.SC4Buddy.View.Application
             // customResolutionCheckBox
             // 
             resources.ApplyResources(this.customResolutionCheckBox, "customResolutionCheckBox");
-            this.customResolutionCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherCustomResolution;
-            this.customResolutionCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherCustomResolution", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.customResolutionCheckBox.Name = "customResolutionCheckBox";
             this.customResolutionCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -495,24 +467,18 @@ namespace NIHEI.SC4Buddy.View.Application
             // disableSoundsCheckBox
             // 
             resources.ApplyResources(this.disableSoundsCheckBox, "disableSoundsCheckBox");
-            this.disableSoundsCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherDisableSound;
-            this.disableSoundsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherDisableSound", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.disableSoundsCheckBox.Name = "disableSoundsCheckBox";
             this.disableSoundsCheckBox.UseVisualStyleBackColor = true;
             // 
             // disableMusicCheckBox
             // 
             resources.ApplyResources(this.disableMusicCheckBox, "disableMusicCheckBox");
-            this.disableMusicCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherDisableMusic;
-            this.disableMusicCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherDisableMusic", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.disableMusicCheckBox.Name = "disableMusicCheckBox";
             this.disableMusicCheckBox.UseVisualStyleBackColor = true;
             // 
             // disableAudioCheckBox
             // 
             resources.ApplyResources(this.disableAudioCheckBox, "disableAudioCheckBox");
-            this.disableAudioCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherDisableAudio;
-            this.disableAudioCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherDisableAudio", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.disableAudioCheckBox.Name = "disableAudioCheckBox";
             this.disableAudioCheckBox.UseVisualStyleBackColor = true;
             this.disableAudioCheckBox.CheckedChanged += new System.EventHandler(this.DisableAudioCheckBoxCheckedChanged);
@@ -527,9 +493,6 @@ namespace NIHEI.SC4Buddy.View.Application
             // allowCheckMissingDependenciesCheckBox
             // 
             resources.ApplyResources(this.allowCheckMissingDependenciesCheckBox, "allowCheckMissingDependenciesCheckBox");
-            this.allowCheckMissingDependenciesCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.AllowDependencyCheck;
-            this.allowCheckMissingDependenciesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.allowCheckMissingDependenciesCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "AllowDependencyCheck", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.allowCheckMissingDependenciesCheckBox.Name = "allowCheckMissingDependenciesCheckBox";
             this.allowCheckMissingDependenciesCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -543,38 +506,11 @@ namespace NIHEI.SC4Buddy.View.Application
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // fetchInformationFromRemoteCheckbox
-            // 
-            resources.ApplyResources(this.fetchInformationFromRemoteCheckbox, "fetchInformationFromRemoteCheckbox");
-            this.fetchInformationFromRemoteCheckbox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.FetchInfoFromRemote;
-            this.fetchInformationFromRemoteCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fetchInformationFromRemoteCheckbox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "FetchInfoFromRemote", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.fetchInformationFromRemoteCheckbox.Name = "fetchInformationFromRemoteCheckbox";
-            this.fetchInformationFromRemoteCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // RemoveNonPluginFilesAfterInstallCheckBox
-            // 
-            resources.ApplyResources(this.RemoveNonPluginFilesAfterInstallCheckBox, "RemoveNonPluginFilesAfterInstallCheckBox");
-            this.RemoveNonPluginFilesAfterInstallCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.InstallerAskToRemoveNonPluginFiles;
-            this.RemoveNonPluginFilesAfterInstallCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.RemoveNonPluginFilesAfterInstallCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "InstallerAskToRemoveNonPluginFiles", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.RemoveNonPluginFilesAfterInstallCheckBox.Name = "RemoveNonPluginFilesAfterInstallCheckBox";
-            this.RemoveNonPluginFilesAfterInstallCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // AutoRunInstallerExecutablesCheckBox
-            // 
-            resources.ApplyResources(this.AutoRunInstallerExecutablesCheckBox, "AutoRunInstallerExecutablesCheckBox");
-            this.AutoRunInstallerExecutablesCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.InstallerAutoRunExecutables;
-            this.AutoRunInstallerExecutablesCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "InstallerAutoRunExecutables", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.AutoRunInstallerExecutablesCheckBox.Name = "AutoRunInstallerExecutablesCheckBox";
-            this.AutoRunInstallerExecutablesCheckBox.UseVisualStyleBackColor = true;
-            // 
             // AskForAdditionalInfoAfterInstallCheckBox
             // 
             resources.ApplyResources(this.AskForAdditionalInfoAfterInstallCheckBox, "AskForAdditionalInfoAfterInstallCheckBox");
-            this.AskForAdditionalInfoAfterInstallCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.InstallerAskForAdditionalInfo;
+            this.AskForAdditionalInfoAfterInstallCheckBox.Checked = true;
             this.AskForAdditionalInfoAfterInstallCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AskForAdditionalInfoAfterInstallCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "InstallerAskForAdditionalInfo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.AskForAdditionalInfoAfterInstallCheckBox.Name = "AskForAdditionalInfoAfterInstallCheckBox";
             this.AskForAdditionalInfoAfterInstallCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -586,6 +522,28 @@ namespace NIHEI.SC4Buddy.View.Application
             // storeLocationDialog
             // 
             resources.ApplyResources(this.storeLocationDialog, "storeLocationDialog");
+            // 
+            // fetchInformationFromRemoteCheckbox
+            // 
+            resources.ApplyResources(this.fetchInformationFromRemoteCheckbox, "fetchInformationFromRemoteCheckbox");
+            this.fetchInformationFromRemoteCheckbox.Checked = true;
+            this.fetchInformationFromRemoteCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.fetchInformationFromRemoteCheckbox.Name = "fetchInformationFromRemoteCheckbox";
+            this.fetchInformationFromRemoteCheckbox.UseVisualStyleBackColor = true;
+            // 
+            // RemoveNonPluginFilesAfterInstallCheckBox
+            // 
+            resources.ApplyResources(this.RemoveNonPluginFilesAfterInstallCheckBox, "RemoveNonPluginFilesAfterInstallCheckBox");
+            this.RemoveNonPluginFilesAfterInstallCheckBox.Checked = true;
+            this.RemoveNonPluginFilesAfterInstallCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.RemoveNonPluginFilesAfterInstallCheckBox.Name = "RemoveNonPluginFilesAfterInstallCheckBox";
+            this.RemoveNonPluginFilesAfterInstallCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // AutoRunInstallerExecutablesCheckBox
+            // 
+            resources.ApplyResources(this.AutoRunInstallerExecutablesCheckBox, "AutoRunInstallerExecutablesCheckBox");
+            this.AutoRunInstallerExecutablesCheckBox.Name = "AutoRunInstallerExecutablesCheckBox";
+            this.AutoRunInstallerExecutablesCheckBox.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -687,7 +645,7 @@ namespace NIHEI.SC4Buddy.View.Application
         private System.Windows.Forms.Label shortAutosaveIntervalsLabel;
         private System.Windows.Forms.Label autoSaveIntervalLabel;
         private System.Windows.Forms.TrackBar autoSaveIntervalTrackBar;
-        private System.Windows.Forms.CheckBox enableAutoSaveButton;
+        private System.Windows.Forms.CheckBox enableAutoSaveCheckBox;
         private System.Windows.Forms.CheckBox fetchInformationFromRemoteCheckbox;
     }
 }
