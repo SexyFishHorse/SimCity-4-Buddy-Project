@@ -60,6 +60,14 @@
 
         public class Keys
         {
+            public const string WriteLog = "WriteLog";
+
+            public const string DisableIme = "DisableIme";
+
+            public const string IgnoreMissingModels = "IgnoreMissingModels";
+
+            public const string Language = "Language";
+
             public const string DisableBackgroundLoader = "DisableBackgroundLoader";
 
             public const string DisableExceptionHandling = "DisableExceptionHandling";

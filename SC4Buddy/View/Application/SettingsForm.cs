@@ -92,8 +92,9 @@
                     LocalizationStrings.GameNotFound,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-                return;
             }
+
+            Settings.SetAndSave(Settings.Keys.GameLocation, gameLocationTextBox.Text);
 
             if (!ValidateResolution())
             {
@@ -155,14 +156,7 @@
 
             settingsController.CheckMainFolder();
 
-            Settings.SetAndSave(Settings.Keys.GameLocation, gameLocationTextBox.Text);
-
-            LauncherSettings.SetAndSave(LauncherSettings.Keys.EnableAutoSave, enableAutoSaveCheckBox.Checked);
-            if (enableAutoSaveCheckBox.Checked)
-            {
-                LauncherSettings.SetAndSave(LauncherSettings.Keys.AutoSaveWaitTime, autoSaveIntervalTrackBar.Value);
-            }
-
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.AutoSaveWaitTime, autoSaveIntervalTrackBar.Value);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableAudio, disableAudioCheckBox.Checked);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableMusic, disableMusicCheckBox.Checked);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableSounds, disableSoundsCheckBox.Checked);
@@ -174,6 +168,11 @@
             LauncherSettings.SetAndSave(LauncherSettings.Keys.PauseWhenMinimized, pauseMinimizedCheckBox.Checked);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableExceptionHandling, disableExceptionHandlingCheckBox.Checked);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableBackgroundLoader, disableBackgroundLoaderCheckBox.Checked);
+
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.Language, languageComboBox.SelectedItem);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.IgnoreMissingModels, ignoreMissingModelsCheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableIme, disableIMECheckBox.Checked);
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.WriteLog, writeLogCheckBox.Checked);
 
             Close();
         }
@@ -253,6 +252,10 @@
                 LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableBackgroundLoader);
 
             UpdateLanguageComboBox();
+
+            ignoreMissingModelsCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.IgnoreMissingModels);
+            disableIMECheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableIme);
+            writeLogCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.WriteLog);
 
             UpdateBackgroundsListView();
 
@@ -454,9 +457,9 @@
             languageComboBox.Items.Add(LocalizationStrings.Ignore);
             languageComboBox.Items.AddRange(languages.Cast<object>().ToArray());
 
-            languageComboBox.SelectedItem = string.IsNullOrWhiteSpace(OldSettings.Default.LauncherLanguage)
+            languageComboBox.SelectedItem = string.IsNullOrWhiteSpace(LauncherSettings.Get(LauncherSettings.Keys.Language))
                                                 ? LocalizationStrings.Ignore
-                                                : OldSettings.Default.LauncherLanguage;
+                                                : LauncherSettings.Get(LauncherSettings.Keys.Language);
 
             languageComboBox.EndUpdate();
         }

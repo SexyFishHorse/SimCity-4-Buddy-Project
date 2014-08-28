@@ -89,12 +89,12 @@
         {
             var output = new Collection<string>
             {
-                string.Format("-l:{0}", OldSettings.Default.LauncherLanguage), 
+                string.Format("-l:{0}", LauncherSettings.Get(LauncherSettings.Keys.Language)), 
                 string.Format(
                     "-ignoreMissingModelDataBugs:{0}", 
-                    OldSettings.Default.LauncherIgnoreMissingModels ? "on" : "off"), 
-                string.Format("-ime:{0}", OldSettings.Default.LauncherDisableIME ? "disabled" : "enabled"), 
-                string.Format("-writeLog:{0}", OldSettings.Default.LauncherWriteLog ? "enabled" : "disabled")
+                    LauncherSettings.Get<bool>(LauncherSettings.Keys.IgnoreMissingModels) ? "on" : "off"), 
+                string.Format("-ime:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.DisableIme) ? "disabled" : "enabled"), 
+                string.Format("-writeLog:{0}", LauncherSettings.Get<bool>(LauncherSettings.Keys.WriteLog) ? "enabled" : "disabled")
             };
 
             return output;

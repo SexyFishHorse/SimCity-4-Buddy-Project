@@ -285,11 +285,9 @@ namespace NIHEI.SC4Buddy.View.Application
             // languageComboBox
             // 
             resources.ApplyResources(this.languageComboBox, "languageComboBox");
-            this.languageComboBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherLanguage", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.languageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.languageComboBox.FormattingEnabled = true;
             this.languageComboBox.Name = "languageComboBox";
-            this.languageComboBox.Text = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherLanguage;
             // 
             // label8
             // 
@@ -299,24 +297,18 @@ namespace NIHEI.SC4Buddy.View.Application
             // ignoreMissingModelsCheckBox
             // 
             resources.ApplyResources(this.ignoreMissingModelsCheckBox, "ignoreMissingModelsCheckBox");
-            this.ignoreMissingModelsCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherIgnoreMissingModels;
-            this.ignoreMissingModelsCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherIgnoreMissingModels", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.ignoreMissingModelsCheckBox.Name = "ignoreMissingModelsCheckBox";
             this.ignoreMissingModelsCheckBox.UseVisualStyleBackColor = true;
             // 
             // writeLogCheckBox
             // 
             resources.ApplyResources(this.writeLogCheckBox, "writeLogCheckBox");
-            this.writeLogCheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherWriteLog;
-            this.writeLogCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherWriteLog", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.writeLogCheckBox.Name = "writeLogCheckBox";
             this.writeLogCheckBox.UseVisualStyleBackColor = true;
             // 
             // disableIMECheckBox
             // 
             resources.ApplyResources(this.disableIMECheckBox, "disableIMECheckBox");
-            this.disableIMECheckBox.Checked = global::NIHEI.SC4Buddy.Properties.Settings.Default.LauncherDisableIME;
-            this.disableIMECheckBox.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::NIHEI.SC4Buddy.Properties.Settings.Default, "LauncherDisableIME", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.disableIMECheckBox.Name = "disableIMECheckBox";
             this.disableIMECheckBox.UseVisualStyleBackColor = true;
             // 

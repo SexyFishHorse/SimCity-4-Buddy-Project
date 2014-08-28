@@ -25,54 +25,6 @@ namespace NIHEI.SC4Buddy.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherIgnoreMissingModels {
-            get {
-                return ((bool)(this["LauncherIgnoreMissingModels"]));
-            }
-            set {
-                this["LauncherIgnoreMissingModels"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherWriteLog {
-            get {
-                return ((bool)(this["LauncherWriteLog"]));
-            }
-            set {
-                this["LauncherWriteLog"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool LauncherDisableIME {
-            get {
-                return ((bool)(this["LauncherDisableIME"]));
-            }
-            set {
-                this["LauncherDisableIME"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LauncherLanguage {
-            get {
-                return ((string)(this["LauncherLanguage"]));
-            }
-            set {
-                this["LauncherLanguage"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool FetchInfoFromRemote {
             get {
