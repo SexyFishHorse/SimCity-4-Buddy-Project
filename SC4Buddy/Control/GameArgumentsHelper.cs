@@ -11,7 +11,6 @@
     using log4net;
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
-    using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
 
     public class GameArgumentsHelper
     {

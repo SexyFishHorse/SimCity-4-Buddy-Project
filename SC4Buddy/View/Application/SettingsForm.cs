@@ -16,8 +16,6 @@
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.View.Elements;
-    using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
-    using Settings = NIHEI.SC4Buddy.Configuration.Settings;
 
     public partial class SettingsForm : Form
     {
@@ -140,8 +138,6 @@
                           .ToString()
                     : string.Empty);
 
-            OldSettings.Default.Save();
-
             int numCpus;
             int.TryParse(
                 cpuCountComboBox.Text.Trim(), out numCpus);
@@ -179,14 +175,13 @@
             Settings.SetAndSave(Settings.Keys.FetchInformationFromRemoteServer, fetchInformationFromRemoteCheckbox.Checked);
             Settings.SetAndSave(Settings.Keys.RemoveNonPluginFilesAfterInstallation, RemoveNonPluginFilesAfterInstallCheckBox.Checked);
             Settings.SetAndSave(Settings.Keys.AutoRunExecutables, AutoRunInstallerExecutablesCheckBox.Checked);
+
             Close();
         }
 
         private void CloseButtonClick(object sender, EventArgs e)
         {
             Log.Info("Closing settings form");
-
-            OldSettings.Default.Reload();
             Close();
         }
 
@@ -503,8 +498,6 @@
 
         private void SettingsFormFormClosing(object sender, FormClosingEventArgs e)
         {
-            OldSettings.Default.Reload();
-
             if (settingsController.ValidateGameLocationPath(Settings.Get(Settings.Keys.GameLocation)))
             {
                 return;

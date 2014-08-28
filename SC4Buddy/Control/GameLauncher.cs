@@ -7,7 +7,6 @@
     using System.Windows.Forms;
     using log4net;
     using NIHEI.SC4Buddy.Configuration;
-    using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
     using Timer = System.Threading.Timer;
 
     public class GameLauncher : IDisposable

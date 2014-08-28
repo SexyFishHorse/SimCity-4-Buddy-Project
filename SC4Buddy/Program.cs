@@ -21,7 +21,6 @@
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.View.Application;
-    using OldSettings = NIHEI.SC4Buddy.Properties.Settings;
 
     public static class Program
     {
