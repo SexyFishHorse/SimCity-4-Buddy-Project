@@ -217,7 +217,7 @@
                             }
                         }
 
-                        if (Settings.Get<bool>(Settings.Keys.RemoveNonPluginFilesAfterInstallation))
+                        if (Settings.Get<bool>(Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation))
                         {
                             var storageLocation =
                                     Path.Combine(

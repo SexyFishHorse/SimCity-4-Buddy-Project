@@ -60,15 +60,15 @@
 
         public static class Keys
         {
-            public const string AutoRunExecutables = "AutoRunExecutables";
+            public const string AutoRunExecutablesDuringInstallation = "AutoRunExecutablesDuringInstallation";
 
-            public const string RemoveNonPluginFilesAfterInstallation = "RemoveNonPluginFilesAfterInstallation";
+            public const string AskToRemoveNonPluginFilesAfterInstallation = "AskToRemoveNonPluginFilesAfterInstallation";
 
             public const string FetchInformationFromRemoteServer = "FetchInformationFromRemoteServer";
 
             public const string AskForAdditionalInformationAfterInstallation = "AskForAdditionalInformationAfterInstallation";
 
-            public const string CheckForMissingDependencies = "CheckForMissingDependencies";
+            public const string AllowCheckForMissingDependencies = "AllowCheckForMissingDependencies";
 
             public const string Wallpaper = "Wallpaper";
 

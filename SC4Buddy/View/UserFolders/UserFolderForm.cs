@@ -90,7 +90,7 @@
             else
             {
                 updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
-                checkForMissingDependenciesToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.CheckForMissingDependencies);
+                checkForMissingDependenciesToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.AllowCheckForMissingDependencies);
             }
         }
 
@@ -284,7 +284,7 @@
 
             RepopulateInstalledPluginsListView();
 
-            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Get<bool>(Settings.Keys.CheckForMissingDependencies))
+            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Get<bool>(Settings.Keys.AllowCheckForMissingDependencies))
             {
                 return;
             }
@@ -313,7 +313,7 @@
                 pluginMatcher).ShowDialog(this);
             RepopulateInstalledPluginsListView();
 
-            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Get<bool>(Settings.Keys.CheckForMissingDependencies))
+            if (!NetworkInterface.GetIsNetworkAvailable() || !Settings.Get<bool>(Settings.Keys.AllowCheckForMissingDependencies))
             {
                 return;
             }

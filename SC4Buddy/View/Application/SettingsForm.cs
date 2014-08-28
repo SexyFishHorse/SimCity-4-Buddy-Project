@@ -170,11 +170,11 @@
             LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableIme, disableIMECheckBox.Checked);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.WriteLog, writeLogCheckBox.Checked);
 
-            Settings.SetAndSave(Settings.Keys.CheckForMissingDependencies, allowCheckMissingDependenciesCheckBox.Checked);
+            Settings.SetAndSave(Settings.Keys.AllowCheckForMissingDependencies, allowCheckMissingDependenciesCheckBox.Checked);
             Settings.SetAndSave(Settings.Keys.AskForAdditionalInformationAfterInstallation, AskForAdditionalInfoAfterInstallCheckBox.Checked);
             Settings.SetAndSave(Settings.Keys.FetchInformationFromRemoteServer, fetchInformationFromRemoteCheckbox.Checked);
-            Settings.SetAndSave(Settings.Keys.RemoveNonPluginFilesAfterInstallation, RemoveNonPluginFilesAfterInstallCheckBox.Checked);
-            Settings.SetAndSave(Settings.Keys.AutoRunExecutables, AutoRunInstallerExecutablesCheckBox.Checked);
+            Settings.SetAndSave(Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation, RemoveNonPluginFilesAfterInstallCheckBox.Checked);
+            Settings.SetAndSave(Settings.Keys.AutoRunExecutablesDuringInstallation, AutoRunInstallerExecutablesCheckBox.Checked);
 
             Close();
         }
@@ -261,11 +261,11 @@
 
             quarantinedFilesLocationTextBox.Text = Settings.Get(Settings.Keys.QuarantinedFiles);
 
-            allowCheckMissingDependenciesCheckBox.Checked = Settings.Get<bool>(Settings.Keys.CheckForMissingDependencies);
+            allowCheckMissingDependenciesCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AllowCheckForMissingDependencies);
             AskForAdditionalInfoAfterInstallCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AskForAdditionalInformationAfterInstallation);
             fetchInformationFromRemoteCheckbox.Checked = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
-            RemoveNonPluginFilesAfterInstallCheckBox.Checked = Settings.Get<bool>(Settings.Keys.RemoveNonPluginFilesAfterInstallation);
-            AutoRunInstallerExecutablesCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AutoRunExecutables);
+            RemoveNonPluginFilesAfterInstallCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation);
+            AutoRunInstallerExecutablesCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AutoRunExecutablesDuringInstallation);
         }
 
         private void UpdateResolutionComboBox()
