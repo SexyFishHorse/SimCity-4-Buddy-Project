@@ -4,7 +4,7 @@
     using System.IO;
     using NIHEI.SC4Buddy.DataAccess;
 
-    public class LauncherSettings
+    public static class LauncherSettings
     {
         private static readonly SettingsDataAccess DataAccess = new SettingsDataAccess(GetDefaultStorageLocation(), "LauncherSettings.json");
 
@@ -58,7 +58,7 @@
             return storageLocation;
         }
 
-        public class Keys
+        public static class Keys
         {
             public const string WriteLog = "WriteLog";
 

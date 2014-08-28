@@ -4,7 +4,7 @@
     using System.IO;
     using NIHEI.SC4Buddy.DataAccess;
 
-    public class Settings
+    public static class Settings
     {
         private static readonly SettingsDataAccess DataAccess = new SettingsDataAccess(GetDefaultStorageLocation(), "Settings.json");
 
@@ -58,8 +58,10 @@
             return storageLocation;
         }
 
-        public class Keys
+        public static class Keys
         {
+            public const string CheckForMissingDependencies = "CheckForMissingDependencies";
+
             public const string Wallpaper = "Wallpaper";
 
             public const string GameLocation = "GameLocation";
