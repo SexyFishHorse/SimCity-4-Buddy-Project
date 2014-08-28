@@ -316,10 +316,6 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
-    <None Include="Properties\DataSources\DatabaseEntities.datasource" />
-    <None Include="Properties\DataSources\DatabaseEntities2.datasource" />
-    <None Include="Properties\DataSources\NIHEI.SC4Buddy.Entities.DatabaseEntities1.datasource" />
-    <None Include="Properties\DataSources\NIHEI.SC4Buddy.Entities.Remote.RemoteEntities1.datasource" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
