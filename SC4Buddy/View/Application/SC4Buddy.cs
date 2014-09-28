@@ -245,7 +245,7 @@
                                                WorkingDirectory = Settings.Get(Settings.Keys.GameLocation)
                                            };
 
-            var gameLauncher = new GameLauncher(gameProcessStartInfo, LauncherSettings.Get<int>(LauncherSettings.Keys.AutoSaveWaitTime));
+            var gameLauncher = new GameLauncher(gameProcessStartInfo, LauncherSettings.GetInt(LauncherSettings.Keys.AutoSaveWaitTime));
             var gameLauncherThread = new Thread(gameLauncher.Start) { Name = "SC4Buddy AutoSaver" };
 
             gameLauncherThread.Start();
