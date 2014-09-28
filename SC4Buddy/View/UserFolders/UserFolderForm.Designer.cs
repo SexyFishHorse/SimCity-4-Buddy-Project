@@ -61,6 +61,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.scanForNonpluginFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateInfoForAllPluginsFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForMissingDependenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openInFileExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -288,7 +289,8 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.scanForNonpluginFilesToolStripMenuItem,
             this.updateInfoForAllPluginsFromServerToolStripMenuItem,
-            this.checkForMissingDependenciesToolStripMenuItem});
+            this.checkForMissingDependenciesToolStripMenuItem,
+            this.openInFileExplorerToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             resources.ApplyResources(this.toolsToolStripMenuItem, "toolsToolStripMenuItem");
             // 
@@ -309,6 +311,11 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             this.checkForMissingDependenciesToolStripMenuItem.Name = "checkForMissingDependenciesToolStripMenuItem";
             resources.ApplyResources(this.checkForMissingDependenciesToolStripMenuItem, "checkForMissingDependenciesToolStripMenuItem");
             this.checkForMissingDependenciesToolStripMenuItem.Click += new System.EventHandler(this.CheckForMissingDependenciesToolStripMenuItemClick);
+            // 
+            // openInFileExplorerToolStripMenuItem
+            // 
+            this.openInFileExplorerToolStripMenuItem.Name = "openInFileExplorerToolStripMenuItem";
+            resources.ApplyResources(this.openInFileExplorerToolStripMenuItem, "openInFileExplorerToolStripMenuItem");
             // 
             // UserFolderForm
             // 
@@ -377,5 +384,6 @@ namespace NIHEI.SC4Buddy.View.UserFolders
         private System.Windows.Forms.SplitContainer pluginInfoSplitContainer;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.LinkLabel reportPluginLinkLabel;
+        private System.Windows.Forms.ToolStripMenuItem openInFileExplorerToolStripMenuItem;
     }
 }
