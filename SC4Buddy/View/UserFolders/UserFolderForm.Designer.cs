@@ -316,6 +316,7 @@ namespace NIHEI.SC4Buddy.View.UserFolders
             // 
             this.openInFileExplorerToolStripMenuItem.Name = "openInFileExplorerToolStripMenuItem";
             resources.ApplyResources(this.openInFileExplorerToolStripMenuItem, "openInFileExplorerToolStripMenuItem");
+            this.openInFileExplorerToolStripMenuItem.Click += new System.EventHandler(this.OpenInFileExplorerToolStripMenuItemClick);
             // 
             // UserFolderForm
             // 
