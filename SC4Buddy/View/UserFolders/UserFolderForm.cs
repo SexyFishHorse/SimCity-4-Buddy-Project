@@ -548,5 +548,22 @@
                     MessageBoxIcon.Information);
             }
         }
+
+        private void OpenInFileExplorerToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            if (Directory.Exists(userFolder.FolderPath))
+            {
+                Process.Start(userFolder.FolderPath);
+            }
+            else
+            {
+                MessageBox.Show(
+                    this,
+                    string.Format("The directory \"{0}\" doesn't appear to exist.", userFolder.FolderPath),
+                    "Directory not found",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+            }
+        }
     }
 }
