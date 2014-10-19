@@ -152,6 +152,7 @@
 
             settingsController.CheckMainFolder();
 
+            LauncherSettings.SetAndSave(LauncherSettings.Keys.EnableAutoSave, enableAutoSaveCheckBox.Checked);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.AutoSaveWaitTime, autoSaveIntervalTrackBar.Value);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableAudio, disableAudioCheckBox.Checked);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableMusic, disableMusicCheckBox.Checked);
