@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.View.Application
 {
     using System;
+    using System.Configuration;
     using System.Diagnostics;
     using System.Drawing;
     using System.IO;
@@ -266,7 +267,7 @@
 
         private void SupportToolStripMenuItemClick(object sender, EventArgs e)
         {
-            Process.Start("http://community.simtropolis.com/topic/58814-the-simcity-4-buddy-project/");
+            Process.Start(ConfigurationManager.AppSettings.Get("SupportWeblink"));
         }
 
         private void AboutToolStripMenuItemClick(object sender, EventArgs e)
@@ -276,7 +277,7 @@
 
         private void BugsAndFeedbackToolStripMenuItemClick(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/NIHEI-Systems/sc4buddy/issues");
+            Process.Start(ConfigurationManager.AppSettings.Get("BugReportWeblink"));
         }
 
         private void OpenLogFileToolStripMenuItemClick(object sender, EventArgs e)
