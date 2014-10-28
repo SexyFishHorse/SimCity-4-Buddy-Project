@@ -15,7 +15,7 @@
     using NIHEI.SC4Buddy.Remote;
     using Settings = NIHEI.SC4Buddy.Configuration.Settings;
 
-    public class UserFolderController
+    public class UserFolderController : IUserFolderController
     {
         private readonly IEntities entities;
 

@@ -14,12 +14,12 @@
 
         private readonly PluginFileController pluginFileController;
 
-        private readonly UserFolderController userFolderController;
+        private readonly IUserFolderController userFolderController;
 
         public PluginCopier(
             PluginController pluginController,
             PluginFileController pluginFileController,
-            UserFolderController userFolderController)
+            IUserFolderController userFolderController)
         {
             this.pluginController = pluginController;
             this.userFolderController = userFolderController;

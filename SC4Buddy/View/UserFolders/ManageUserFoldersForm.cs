@@ -18,7 +18,7 @@
 
         private readonly ResourceManager localizationManager;
 
-        private readonly UserFolderController controller;
+        private readonly IUserFolderController controller;
 
         public ManageUserFoldersForm()
         {

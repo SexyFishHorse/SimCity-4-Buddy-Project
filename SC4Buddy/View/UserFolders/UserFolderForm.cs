@@ -37,14 +37,14 @@
 
         private readonly UserFolder userFolder;
 
-        private readonly UserFolderController userFolderController;
+        private readonly IUserFolderController userFolderController;
 
         private Plugin selectedPlugin;
 
         public UserFolderForm(
             PluginController pluginController,
             PluginGroupController pluginGroupController,
-            UserFolderController userFolderController,
+            IUserFolderController userFolderController,
             UserFolder userFolder,
             IPluginMatcher pluginMatcher,
             IDependencyChecker dependencyChecker)

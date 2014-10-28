@@ -19,7 +19,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private readonly UserFolder currentUserFolder;
 
-        private readonly UserFolderController userFolderController;
+        private readonly IUserFolderController userFolderController;
 
         private readonly PluginController pluginController;
 
@@ -35,7 +35,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         public MoveOrCopyForm(
             UserFolder currentUserFolder,
-            UserFolderController userFolderController,
+            IUserFolderController userFolderController,
             PluginController pluginController,
             PluginFileController pluginFileController)
         {

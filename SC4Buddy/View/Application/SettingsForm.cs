@@ -23,7 +23,7 @@
 
         private readonly ISettingsController settingsController;
 
-        public SettingsForm(UserFolderController userFolderController)
+        public SettingsForm(IUserFolderController userFolderController)
         {
             InitializeComponent();
 
