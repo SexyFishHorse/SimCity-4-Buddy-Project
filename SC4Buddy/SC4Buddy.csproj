@@ -126,6 +126,8 @@
     <Compile Include="Control\Plugins\PluginController.cs" />
     <Compile Include="Control\Plugins\PluginFileController.cs" />
     <Compile Include="Control\UserFolders\IUserFolderController.cs" />
+    <Compile Include="Control\UserFolders\IUserFolderRepository.cs" />
+    <Compile Include="Control\UserFolders\UserFolderRepository.cs" />
     <Compile Include="DataAccess\Entities.cs" />
     <Compile Include="DataAccess\EntityFactory.cs" />
     <Compile Include="DataAccess\IEntities.cs" />
