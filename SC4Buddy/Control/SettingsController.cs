@@ -24,11 +24,11 @@
             @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
         };
 
-        private readonly IUserFolderController userFolderController;
+        private readonly IUserFolderRepository userFolderRepository;
 
-        public SettingsController(IUserFolderController userFolderController)
+        public SettingsController(IUserFolderRepository userFolderRepository)
         {
-            this.userFolderController = userFolderController;
+            this.userFolderRepository = userFolderRepository;
         }
 
         public bool ValidateGameLocationPath(string path)
@@ -51,7 +51,7 @@
         {
             Log.Info("Checking main folder");
 
-            var folder = userFolderController.GetMainUserFolder();
+            var folder = userFolderRepository.GetMainUserFolder();
             if (folder == null)
             {
                 throw new InvalidOperationException("Main plugin folder has been deleted from the database.");
@@ -59,7 +59,7 @@
 
             folder.FolderPath = Settings.Get(Settings.Keys.GameLocation);
             folder.Alias = LocalizationStrings.GameUserFolderName;
-            userFolderController.Update(folder);
+            userFolderRepository.Update(folder);
         }
 
         public string SearchForGameLocation()

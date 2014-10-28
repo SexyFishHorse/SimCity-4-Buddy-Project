@@ -37,6 +37,8 @@
 
         private readonly UserFolder userFolder;
 
+        private readonly IUserFolderRepository userFolderRepository;
+
         private readonly IUserFolderController userFolderController;
 
         private Plugin selectedPlugin;
@@ -47,11 +49,16 @@
             IUserFolderController userFolderController,
             UserFolder userFolder,
             IPluginMatcher pluginMatcher,
-            IDependencyChecker dependencyChecker)
+            IDependencyChecker dependencyChecker,
+            IUserFolderRepository userFolderRepository)
         {
             this.pluginGroupController = pluginGroupController;
             this.pluginController = pluginController;
             this.userFolderController = userFolderController;
+            this.userFolder = userFolder;
+            this.pluginMatcher = pluginMatcher;
+            this.dependencyChecker = dependencyChecker;
+            this.userFolderRepository = userFolderRepository;
 
             if (!Directory.Exists(userFolder.FolderPath))
             {
@@ -63,7 +70,7 @@
                     }
 
                     userFolder.FolderPath = Settings.Get(Settings.Keys.GameLocation);
-                    userFolderController.Update(userFolder);
+                    userFolderRepository.Update(userFolder);
                 }
                 else
                 {
@@ -72,9 +79,6 @@
                 }
             }
 
-            this.userFolder = userFolder;
-            this.pluginMatcher = pluginMatcher;
-            this.dependencyChecker = dependencyChecker;
             InitializeComponent();
         }
 
@@ -481,7 +485,8 @@
                 userFolder,
                 userFolderController,
                 pluginController,
-                new PluginFileController(EntityFactory.Instance.Entities))
+                new PluginFileController(EntityFactory.Instance.Entities),
+                userFolderRepository)
             {
                 Plugin = selectedPlugin
             };

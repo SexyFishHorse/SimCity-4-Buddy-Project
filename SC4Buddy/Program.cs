@@ -34,35 +34,35 @@
             Log.Info("Application starting");
             try
             {
-                var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
+                var userFolderRepository = new UserFolderRepository(EntityFactory.Instance.Entities);
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
 
                 if (string.IsNullOrWhiteSpace(Settings.Get(Settings.Keys.GameLocation)) || !Directory.Exists(Settings.Get(Settings.Keys.GameLocation)))
                 {
-                    var settingsForm = new SettingsForm(userFolderController) { StartPosition = FormStartPosition.CenterScreen };
+                    var settingsForm = new SettingsForm(userFolderRepository) { StartPosition = FormStartPosition.CenterScreen };
 
                     Application.Run(settingsForm);
                     SetDefaultUserFolder();
                 }
 
-                if (userFolderController.UserFolders.Any(x => x.IsMainFolder && x.FolderPath.Equals("?")))
+                if (userFolderRepository.UserFolders.Any(x => x.IsMainFolder && x.FolderPath.Equals("?")))
                 {
                     SetDefaultUserFolder();
                 }
 
                 if (Directory.Exists(Settings.Get(Settings.Keys.GameLocation)))
                 {
-                    new SettingsController(userFolderController).CheckMainFolder();
+                    new SettingsController(userFolderRepository).CheckMainFolder();
                     Application.Run(
                         new Sc4Buddy(
-                            userFolderController,
+                            userFolderRepository,
                             new PluginController(EntityFactory.Instance.Entities),
                             new PluginGroupController(EntityFactory.Instance.Entities),
                             new PluginMatcher(
                                 new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty)),
-                            new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFolderController.GetMainUserFolder())));
+                            new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFolderRepository.GetMainUserFolder())));
                 }
             }
             catch (Exception ex)
@@ -91,18 +91,18 @@
 
         private static void SetDefaultUserFolder()
         {
-            var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
+            var userFolderRepository = new UserFolderRepository(EntityFactory.Instance.Entities);
 
             var path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimCity 4");
 
-            if (!Directory.Exists(path) || userFolderController.UserFolders.Any(x => x.FolderPath.Equals(path)))
+            if (!Directory.Exists(path) || userFolderRepository.UserFolders.Any(x => x.FolderPath.Equals(path)))
             {
                 return;
             }
 
             Log.Info(string.Format("Setting default user folder to {0}", path));
-            userFolderController.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, FolderPath = path });
+            userFolderRepository.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, FolderPath = path });
         }
     }
 }

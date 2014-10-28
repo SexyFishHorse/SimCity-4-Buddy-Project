@@ -7,7 +7,6 @@
     using System.Windows.Forms;
 
     using NIHEI.SC4Buddy.Control.UserFolders;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.View.Elements;
@@ -16,15 +15,15 @@
     {
         public const int ErrorIconPadding = -18;
 
+        private readonly IUserFolderRepository userFolderRepository;
+
         private readonly ResourceManager localizationManager;
 
-        private readonly IUserFolderController controller;
-
-        public ManageUserFoldersForm()
+        public ManageUserFoldersForm(IUserFolderRepository userFolderRepository)
         {
+            this.userFolderRepository = userFolderRepository;
             InitializeComponent();
 
-            controller = new UserFolderController(EntityFactory.Instance.Entities);
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(ManageUserFoldersForm));
         }
 
@@ -37,7 +36,7 @@
 
         private void ReloadUserFoldersListView()
         {
-            var userFolders = controller.UserFolders.Where(x => !x.IsMainFolder);
+            var userFolders = userFolderRepository.UserFolders.Where(x => !x.IsMainFolder);
 
             UserFoldersListView.BeginUpdate();
             UserFoldersListView.Items.Clear();
@@ -131,7 +130,7 @@
                 return;
             }
 
-            controller.Delete(SelectedFolder);
+            userFolderRepository.Delete(SelectedFolder);
 
             ClearForm();
             ReloadUserFoldersListView();
@@ -161,8 +160,8 @@
                                 };
             var hasErrors = false;
 
-            var pathOk = !controller.ValidatePath(newFolder.FolderPath, Guid.NewGuid());
-            var notMainFolder = !controller.IsNotGameFolder(newFolder.FolderPath);
+            var pathOk = !userFolderRepository.ValidatePath(newFolder.FolderPath, Guid.NewGuid());
+            var notMainFolder = !userFolderRepository.IsNotGameFolder(newFolder.FolderPath);
 
             if (pathOk || notMainFolder)
             {
@@ -171,7 +170,7 @@
                 errorProvider.SetError(pathTextBox, LocalizationStrings.PathError);
             }
 
-            if (!controller.ValidateAlias(newFolder.Alias, Guid.Empty))
+            if (!userFolderRepository.ValidateAlias(newFolder.Alias, Guid.Empty))
             {
                 hasErrors = true;
                 errorProvider.SetIconPadding(aliasTextBox, ErrorIconPadding);
@@ -183,7 +182,7 @@
                 return;
             }
 
-            controller.Add(newFolder);
+            userFolderRepository.Add(newFolder);
             ClearForm();
             ReloadUserFoldersListView();
         }
@@ -199,14 +198,14 @@
 
             var hasErrors = false;
 
-            if (!controller.ValidatePath(pathTextBox.Text, SelectedFolder.Id))
+            if (!userFolderRepository.ValidatePath(pathTextBox.Text, SelectedFolder.Id))
             {
                 hasErrors = true;
                 errorProvider.SetIconPadding(pathTextBox, ErrorIconPadding);
                 errorProvider.SetError(pathTextBox, LocalizationStrings.PathError);
             }
 
-            if (!controller.ValidateAlias(aliasTextBox.Text, SelectedFolder.Id))
+            if (!userFolderRepository.ValidateAlias(aliasTextBox.Text, SelectedFolder.Id))
             {
                 hasErrors = true;
                 errorProvider.SetIconPadding(aliasTextBox, ErrorIconPadding);
@@ -222,7 +221,7 @@
             SelectedFolder.Alias = aliasTextBox.Text;
             SelectedFolder.IsStartupFolder = startupFolderCheckbox.Checked;
 
-            controller.Update(SelectedFolder);
+            userFolderRepository.Update(SelectedFolder);
             ClearForm();
             ReloadUserFoldersListView();
         }
@@ -239,7 +238,7 @@
 
         private void SaveButtonClick(object sender, EventArgs e)
         {
-            controller.SaveChanges();
+            userFolderRepository.SaveChanges();
         }
     }
 }

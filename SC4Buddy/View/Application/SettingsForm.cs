@@ -23,11 +23,11 @@
 
         private readonly ISettingsController settingsController;
 
-        public SettingsForm(IUserFolderController userFolderController)
+        public SettingsForm(IUserFolderRepository userFolderRepository)
         {
             InitializeComponent();
 
-            settingsController = new SettingsController(userFolderController);
+            settingsController = new SettingsController(userFolderRepository);
 
             var minOs = new Version(6, 2);
             if (Environment.OSVersion.Version < minOs)

@@ -1,13 +1,10 @@
-﻿using System.Windows.Forms;
-
-namespace NIHEI.SC4Buddy.View.Plugins
+﻿namespace NIHEI.SC4Buddy.View.Plugins
 {
     using System;
     using System.Linq;
     using System.Reflection;
-
+    using System.Windows.Forms;
     using log4net;
-
     using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Model;
@@ -19,6 +16,8 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private readonly UserFolder currentUserFolder;
 
+        private readonly IUserFolderRepository userFolderRepository;
+
         private readonly IUserFolderController userFolderController;
 
         private readonly PluginController pluginController;
@@ -27,24 +26,26 @@ namespace NIHEI.SC4Buddy.View.Plugins
 
         private UserFolder selectedUserFolder;
 
-        public event EventHandler PluginCopied;
-
-        public event EventHandler PluginMoved;
-
-        public event EventHandler ErrorDuringCopyOrMove;
-
         public MoveOrCopyForm(
             UserFolder currentUserFolder,
             IUserFolderController userFolderController,
             PluginController pluginController,
-            PluginFileController pluginFileController)
+            PluginFileController pluginFileController, 
+            IUserFolderRepository userFolderRepository)
         {
             this.currentUserFolder = currentUserFolder;
             this.userFolderController = userFolderController;
             this.pluginController = pluginController;
             this.pluginFileController = pluginFileController;
+            this.userFolderRepository = userFolderRepository;
             InitializeComponent();
         }
+
+        public event EventHandler PluginCopied;
+
+        public event EventHandler PluginMoved;
+
+        public event EventHandler ErrorDuringCopyOrMove;
 
         public Plugin Plugin { get; set; }
 
@@ -85,7 +86,7 @@ namespace NIHEI.SC4Buddy.View.Plugins
             userFolderListView.BeginUpdate();
             userFolderListView.Items.Clear();
 
-            var userFolders = userFolderController.UserFolders;
+            var userFolders = userFolderRepository.UserFolders;
 
             foreach (var userFolder in userFolders.Where(userFolder => !userFolder.Equals(currentUserFolder)))
             {
