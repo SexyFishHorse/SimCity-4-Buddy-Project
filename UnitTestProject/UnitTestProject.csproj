@@ -63,13 +63,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Control\UserFolders\UserFolderRepositoryTest.cs" />
     <Compile Include="Installer\FileHandlers\BaseHandlerTest.cs" />
     <Compile Include="Installer\FileHandlers\InstallHandlerTest.cs" />
     <Compile Include="Installer\FileHandlers\RarHandlerTest.cs" />
     <Compile Include="Installer\FileHandlers\DatHandlerTest.cs" />
     <Compile Include="Installer\FileHandlers\ExtracterTestBase.cs" />
     <Compile Include="Installer\FileHandlers\ZipHandlerTest.cs" />
-    <Compile Include="Control\UserFolders\PluginFolderControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
