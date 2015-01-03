@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.UserFolders.View
+﻿namespace NIHEI.SC4Buddy.Plugins.View
 {
     using System;
     using System.Diagnostics;
@@ -14,7 +14,6 @@
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
-    using NIHEI.SC4Buddy.Plugins.View;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
@@ -23,7 +22,7 @@
     using NIHEI.SC4Buddy.View.Plugins;
     using Plugin = NIHEI.SC4Buddy.Model.Plugin;
 
-    public partial class UserFolderForm : Form
+    public partial class PluginsForm : Form
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -41,7 +40,7 @@
 
         private Plugin selectedPlugin;
 
-        public UserFolderForm(
+        public PluginsForm(
             PluginController pluginController,
             PluginGroupController pluginGroupController,
             UserFolderController userFolderController,

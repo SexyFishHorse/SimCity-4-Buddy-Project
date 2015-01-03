@@ -15,6 +15,7 @@
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
+    using NIHEI.SC4Buddy.Plugins.View;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
@@ -201,7 +202,7 @@
 
         private void UserFolderMenuItemClick(object sender, EventArgs e)
         {
-            new UserFolderForm(
+            new PluginsForm(
                 pluginController,
                 pluginGroupController,
                 userFolderController,

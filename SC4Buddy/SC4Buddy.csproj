@@ -227,11 +227,11 @@
     <Compile Include="Plugins\View\ReportPluginForm.Designer.cs">
       <DependentUpon>ReportPluginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserFolders\View\UserFolderForm.cs">
+    <Compile Include="Plugins\View\PluginsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserFolders\View\UserFolderForm.Designer.cs">
-      <DependentUpon>UserFolderForm.cs</DependentUpon>
+    <Compile Include="Plugins\View\PluginsForm.Designer.cs">
+      <DependentUpon>PluginsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\View\ReadmeFilesForm.cs">
       <SubType>Form</SubType>
@@ -291,8 +291,8 @@
     <EmbeddedResource Include="Plugins\View\ReportPluginForm.resx">
       <DependentUpon>ReportPluginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserFolders\View\UserFolderForm.resx">
-      <DependentUpon>UserFolderForm.cs</DependentUpon>
+    <EmbeddedResource Include="Plugins\View\PluginsForm.resx">
+      <DependentUpon>PluginsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Plugins\View\ReadmeFilesForm.resx">
       <DependentUpon>ReadmeFilesForm.cs</DependentUpon>
