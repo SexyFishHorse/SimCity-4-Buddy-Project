@@ -1,9 +1,13 @@
 ﻿namespace NIHEI.SC4Buddy.UserFolders.View
 {
+    using System.Globalization;
+    using System.IO;
+    using System.Linq;
     using System.Windows.Forms;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Plugins.View;
+    using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.UserFolders.Control;
 
@@ -22,8 +26,8 @@
         private readonly IDependencyChecker dependencyChecker;
 
         public UserFolderForm(
-            UserFolder userFolder, 
-            PluginController pluginController, 
+            UserFolder userFolder,
+            PluginController pluginController,
             PluginGroupController pluginGroupController,
             UserFolderController userFolderController,
             IPluginMatcher pluginMatcher,
@@ -48,6 +52,18 @@
                 pluginMatcher,
                 dependencyChecker);
             dialog.ShowDialog(this);
+        }
+
+        private void UserFolderFormLoad(object sender, System.EventArgs e)
+        {
+            Text = userFolder.Alias;
+            numberOfPluginsLabel.Text = pluginController.Plugins.Count.ToString(CultureInfo.InvariantCulture);
+
+            var directoryInfo = new DirectoryInfo(userFolder.PluginFolderPath);
+            var files = directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories);
+            var size = files.Sum(fileInfo => fileInfo.Length);
+
+            sizeOfPluginsLabel.Text = ByteSize.ByteSize.FromBytes(size).ToString("#.##");
         }
     }
 }
