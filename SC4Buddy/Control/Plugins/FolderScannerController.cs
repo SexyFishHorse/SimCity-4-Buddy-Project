@@ -14,10 +14,9 @@
     using log4net;
 
     using NIHEI.Common.IO;
-    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Remote;
-
+    using NIHEI.SC4Buddy.UserFolders.Control;
     using Plugin = NIHEI.SC4Buddy.Model.Plugin;
     using PluginFile = NIHEI.SC4Buddy.Model.PluginFile;
     using RemotePlugin = Irradiated.Sc4Buddy.ApiClient.Model.Plugin;

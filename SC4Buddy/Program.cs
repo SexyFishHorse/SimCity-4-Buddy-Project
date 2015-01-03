@@ -15,11 +15,11 @@
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Remote;
+    using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.View.Application;
 
     public static class Program

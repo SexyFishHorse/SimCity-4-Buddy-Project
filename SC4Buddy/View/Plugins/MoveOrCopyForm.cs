@@ -9,8 +9,8 @@ namespace NIHEI.SC4Buddy.View.Plugins
     using log4net;
 
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class MoveOrCopyForm : Form

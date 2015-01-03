@@ -12,9 +12,9 @@
     using log4net;
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Control;
-    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
+    using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class SettingsForm : Form

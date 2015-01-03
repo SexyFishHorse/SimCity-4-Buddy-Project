@@ -15,13 +15,13 @@
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Control;
     using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
+    using NIHEI.SC4Buddy.UserFolders.Control;
+    using NIHEI.SC4Buddy.UserFolders.View;
     using NIHEI.SC4Buddy.View.Elements;
-    using NIHEI.SC4Buddy.View.UserFolders;
 
     public partial class Sc4Buddy : Form
     {

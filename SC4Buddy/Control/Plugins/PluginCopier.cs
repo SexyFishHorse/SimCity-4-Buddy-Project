@@ -4,9 +4,8 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-
-    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.UserFolders.Control;
 
     public class PluginCopier
     {

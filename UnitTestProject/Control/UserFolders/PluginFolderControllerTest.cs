@@ -8,7 +8,7 @@
 
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
-
+    using NIHEI.SC4Buddy.UserFolders.Control;
     using Should;
 
     using Xunit;

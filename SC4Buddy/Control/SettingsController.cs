@@ -10,9 +10,9 @@
     using Microsoft.Win32;
 
     using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Properties;
+    using NIHEI.SC4Buddy.UserFolders.Control;
 
     public class SettingsController : ISettingsController
     {
