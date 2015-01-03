@@ -130,19 +130,19 @@
     <Compile Include="DataAccess\IEntities.cs" />
     <Compile Include="Application\DataAccess\SettingsDataAccess.cs" />
     <Compile Include="Entities\Remote\PluginReport.cs" />
-    <Compile Include="Installer\FileHandlers\ArchiveHandler.cs" />
-    <Compile Include="Installer\InstallerEventArgs\InstalledPluginEventArgs.cs" />
-    <Compile Include="Installer\InstallerEventArgs\InstallPluginEventArgs.cs" />
-    <Compile Include="Installer\InstallerEventArgs\InstallPluginFailureEventArgs.cs" />
-    <Compile Include="Installer\InstallerEventArgs\InstallProgressEventArgs.cs" />
-    <Compile Include="Installer\PluginFileComparer.cs" />
-    <Compile Include="Installer\PluginInstaller.cs" />
-    <Compile Include="Installer\FileHandlers\BaseHandler.cs" />
-    <Compile Include="Installer\FileHandlers\DatHandler.cs" />
+    <Compile Include="Plugins\Installer\FileHandlers\ArchiveHandler.cs" />
+    <Compile Include="Plugins\Installer\InstallerEventArgs\InstalledPluginEventArgs.cs" />
+    <Compile Include="Plugins\Installer\InstallerEventArgs\InstallPluginEventArgs.cs" />
+    <Compile Include="Plugins\Installer\InstallerEventArgs\InstallPluginFailureEventArgs.cs" />
+    <Compile Include="Plugins\Installer\InstallerEventArgs\InstallProgressEventArgs.cs" />
+    <Compile Include="Plugins\Installer\PluginFileComparer.cs" />
+    <Compile Include="Plugins\Installer\PluginInstaller.cs" />
+    <Compile Include="Plugins\Installer\FileHandlers\BaseHandler.cs" />
+    <Compile Include="Plugins\Installer\FileHandlers\DatHandler.cs" />
     <Compile Include="UserFolders\Control\UserFolderController.cs" />
-    <Compile Include="Installer\UserFolderListener.cs" />
-    <Compile Include="Installer\PluginInstallerThread.cs" />
-    <Compile Include="Installer\InstallerEventArgs\ReadmeFilesEventArgs.cs" />
+    <Compile Include="Plugins\Installer\UserFolderListener.cs" />
+    <Compile Include="Plugins\Installer\PluginInstallerThread.cs" />
+    <Compile Include="Plugins\Installer\InstallerEventArgs\ReadmeFilesEventArgs.cs" />
     <Compile Include="Localization\LocalizationStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

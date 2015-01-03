@@ -4,9 +4,8 @@
     using System.IO;
     using System.Linq;
 
-    using NIHEI.SC4Buddy.Entities;
     using NIHEI.SC4Buddy.Model;
-
+    using NIHEI.SC4Buddy.Plugins.Installer.FileHandlers;
     using Should;
 
     using Xunit;
