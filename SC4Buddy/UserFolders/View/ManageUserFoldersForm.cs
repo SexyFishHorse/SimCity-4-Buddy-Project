@@ -27,6 +27,8 @@
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(ManageUserFoldersForm));
         }
 
+        public UserFolderMode? Mode { get; set; }
+
         private UserFolder SelectedFolder { get; set; }
 
         private void UserFoldersFormLoad(object sender, EventArgs e)
@@ -48,7 +50,7 @@
             UserFoldersListView.EndUpdate();
         }
 
-        private void PathClick(object sender, EventArgs e)
+        private void BrowseButtonClick(object sender, EventArgs e)
         {
             var result = pathBrowseDialog.ShowDialog(this);
 
@@ -56,8 +58,6 @@
             {
                 pathTextBox.Text = pathBrowseDialog.SelectedPath;
             }
-
-            CheckFormFields();
         }
 
         private void UserFoldersListViewSelectedIndexChanged(object sender, EventArgs e)
@@ -69,48 +69,25 @@
                 SelectedFolder = ((UserFolderListViewItem)UserFoldersListView.SelectedItems[0]).UserFolder;
 
                 pathTextBox.Text = SelectedFolder.FolderPath;
+                pathBrowseDialog.SelectedPath = SelectedFolder.FolderPath;
                 aliasTextBox.Text = SelectedFolder.Alias;
                 startupFolderCheckbox.Checked = !SelectedFolder.IsMainFolder && SelectedFolder.IsStartupFolder;
 
                 startupFolderCheckbox.Enabled = !SelectedFolder.IsMainFolder;
-                updateButton.Enabled = true;
+                EnableForm();
                 removeButton.Enabled = true;
-                clearButton.Enabled = true;
+                Mode = UserFolderMode.Update;
             }
             else
             {
+                EnableForm(false);
                 SelectedFolder = null;
 
                 pathTextBox.Text = string.Empty;
                 aliasTextBox.Text = string.Empty;
 
-                updateButton.Enabled = false;
                 removeButton.Enabled = false;
             }
-        }
-
-        private void PathTextBoxTextChanged(object sender, EventArgs e)
-        {
-            pathTextBox.ForeColor = pathTextBox.Text.Equals(localizationManager.GetString("pathTextBox.Text"))
-                                        ? Color.Gray
-                                        : Color.Black;
-            CheckFormFields();
-        }
-
-        private void CheckFormFields()
-        {
-            errorProvider.Clear();
-
-            addButton.Enabled =
-                pathTextBox.Text.Length > 0
-                && !pathTextBox.Text.Equals(localizationManager.GetString("pathTextBox.Text"))
-                && aliasTextBox.Text.Length > 0
-                && SelectedFolder == null;
-
-            clearButton.Enabled =
-                (pathTextBox.Text.Length > 0
-                && !pathTextBox.Text.Equals(localizationManager.GetString("pathTextBox.Text")))
-                || aliasTextBox.Text.Length > 0;
         }
 
         private void RemoveButtonClick(object sender, EventArgs e)
@@ -132,98 +109,45 @@
 
             controller.Delete(SelectedFolder);
 
-            ClearForm();
+            ResetForm();
             ReloadUserFoldersListView();
+        }
+
+        private void ResetForm()
+        {
+            ClearForm();
+            EnableForm(false);
+
+            addButton.Enabled = true;
+            removeButton.Enabled = false;
+        }
+
+        private void EnableForm(bool enabled = true)
+        {
+            pathTextBox.Enabled = enabled;
+            browseButton.Enabled = enabled;
+            aliasTextBox.Enabled = enabled;
+            startupFolderCheckbox.Enabled = enabled;
+            saveButton.Enabled = enabled;
+            cancelButton.Enabled = enabled;
         }
 
         private void ClearForm()
         {
             pathBrowseDialog.SelectedPath = string.Empty;
-            pathTextBox.Text = localizationManager.GetString("pathTextBox.Text");
+            pathTextBox.Text = string.Empty;
             aliasTextBox.Text = string.Empty;
 
             SelectedFolder = null;
-
-            addButton.Enabled = false;
-            removeButton.Enabled = false;
-            updateButton.Enabled = false;
-            clearButton.Enabled = false;
+            Mode = null;
         }
 
         private void AddButtonClick(object sender, EventArgs e)
         {
-            var newFolder = new UserFolder
-                                {
-                                    FolderPath = pathTextBox.Text,
-                                    Alias = aliasTextBox.Text,
-                                    IsStartupFolder = startupFolderCheckbox.Checked
-                                };
-            var hasErrors = false;
-
-            var pathOk = !controller.ValidatePath(newFolder.FolderPath, Guid.NewGuid());
-            var notMainFolder = !controller.IsNotGameFolder(newFolder.FolderPath);
-
-            if (pathOk || notMainFolder)
-            {
-                hasErrors = true;
-                errorProvider.SetIconPadding(pathTextBox, ErrorIconPadding);
-                errorProvider.SetError(pathTextBox, LocalizationStrings.PathError);
-            }
-
-            if (!controller.ValidateAlias(newFolder.Alias, Guid.Empty))
-            {
-                hasErrors = true;
-                errorProvider.SetIconPadding(aliasTextBox, ErrorIconPadding);
-                errorProvider.SetError(aliasTextBox, LocalizationStrings.AliasError);
-            }
-
-            if (hasErrors)
-            {
-                return;
-            }
-
-            controller.Add(newFolder);
             ClearForm();
-            ReloadUserFoldersListView();
-        }
+            EnableForm();
 
-        private void AliasTextBoxTextChanged(object sender, EventArgs e)
-        {
-            CheckFormFields();
-        }
-
-        private void UpdateButtonClick(object sender, EventArgs e)
-        {
-            errorProvider.Clear();
-
-            var hasErrors = false;
-
-            if (!controller.ValidatePath(pathTextBox.Text, SelectedFolder.Id))
-            {
-                hasErrors = true;
-                errorProvider.SetIconPadding(pathTextBox, ErrorIconPadding);
-                errorProvider.SetError(pathTextBox, LocalizationStrings.PathError);
-            }
-
-            if (!controller.ValidateAlias(aliasTextBox.Text, SelectedFolder.Id))
-            {
-                hasErrors = true;
-                errorProvider.SetIconPadding(aliasTextBox, ErrorIconPadding);
-                errorProvider.SetError(aliasTextBox, LocalizationStrings.AliasError);
-            }
-
-            if (hasErrors)
-            {
-                return;
-            }
-
-            SelectedFolder.FolderPath = pathTextBox.Text;
-            SelectedFolder.Alias = aliasTextBox.Text;
-            SelectedFolder.IsStartupFolder = startupFolderCheckbox.Checked;
-
-            controller.Update(SelectedFolder);
-            ClearForm();
-            ReloadUserFoldersListView();
+            Mode = UserFolderMode.Add;
         }
 
         private void CloseButtonClick(object sender, EventArgs e)
@@ -233,7 +157,112 @@
 
         private void SaveButtonClick(object sender, EventArgs e)
         {
+            errorProvider.Clear();
+
+            var hasErrors = false;
+
+            switch (Mode)
+            {
+                case UserFolderMode.Add:
+                    var newFolder = new UserFolder
+                    {
+                        FolderPath = pathTextBox.Text,
+                        Alias = aliasTextBox.Text,
+                        IsStartupFolder = startupFolderCheckbox.Checked
+                    };
+
+                    var pathOk = !controller.ValidatePath(newFolder.FolderPath, Guid.NewGuid());
+                    var notMainFolder = !controller.IsNotGameFolder(newFolder.FolderPath);
+
+                    if (pathOk || notMainFolder)
+                    {
+                        hasErrors = true;
+                        errorProvider.SetIconPadding(pathTextBox, ErrorIconPadding);
+                        errorProvider.SetError(pathTextBox, LocalizationStrings.PathError);
+                    }
+
+                    if (!controller.ValidateAlias(newFolder.Alias, Guid.Empty))
+                    {
+                        hasErrors = true;
+                        errorProvider.SetIconPadding(aliasTextBox, ErrorIconPadding);
+                        errorProvider.SetError(aliasTextBox, LocalizationStrings.AliasError);
+                    }
+
+                    if (hasErrors)
+                    {
+                        return;
+                    }
+
+                    controller.Add(newFolder);
+                    break;
+                case UserFolderMode.Update:
+
+                    if (!controller.ValidatePath(pathTextBox.Text, SelectedFolder.Id))
+                    {
+                        hasErrors = true;
+                        errorProvider.SetIconPadding(pathTextBox, ErrorIconPadding);
+                        errorProvider.SetError(pathTextBox, LocalizationStrings.PathError);
+                    }
+
+                    if (!controller.ValidateAlias(aliasTextBox.Text, SelectedFolder.Id))
+                    {
+                        hasErrors = true;
+                        errorProvider.SetIconPadding(aliasTextBox, ErrorIconPadding);
+                        errorProvider.SetError(aliasTextBox, LocalizationStrings.AliasError);
+                    }
+
+                    if (hasErrors)
+                    {
+                        return;
+                    }
+
+                    SelectedFolder.FolderPath = pathTextBox.Text;
+                    SelectedFolder.Alias = aliasTextBox.Text;
+                    SelectedFolder.IsStartupFolder = startupFolderCheckbox.Checked;
+
+                    controller.Update(SelectedFolder);
+                    break;
+            }
+
             controller.SaveChanges();
+            ResetForm();
+            ReloadUserFoldersListView();
+        }
+
+        private void CancelButtonClick(object sender, EventArgs e)
+        {
+            ResetForm();
+        }
+
+        private void PathTextBoxLeave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(pathTextBox.Text))
+            {
+                pathTextBox.Text = localizationManager.GetString("pathTextBox.Text");
+            }
+        }
+
+        private void PathTextBoxEnter(object sender, EventArgs e)
+        {
+            if (pathTextBox.Text.Trim() == localizationManager.GetString("pathTextBox.Text"))
+            {
+                pathTextBox.Text = string.Empty;
+            }
+        }
+
+        private void PathTextBoxTextChanged(object sender, EventArgs e)
+        {
+            if (!pathTextBox.Focused)
+            {
+                if (string.IsNullOrEmpty(pathTextBox.Text))
+                {
+                    pathTextBox.Text = localizationManager.GetString("pathTextBox.Text");
+                }
+            }
+
+            pathTextBox.ForeColor = pathTextBox.Text.Equals(localizationManager.GetString("pathTextBox.Text"))
+                                        ? Color.Gray
+                                        : Color.Black;
         }
     }
 }

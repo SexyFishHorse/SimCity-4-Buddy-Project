@@ -169,6 +169,7 @@
     <Compile Include="Application\View\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserFolders\View\UserFolderMode.cs" />
     <Compile Include="View\Elements\ListViewItemWithObjectValue.cs" />
     <Compile Include="View\Elements\RemovalFileTypeCandidateListViewItem.cs" />
     <Compile Include="View\Elements\UserFolderListViewItem.cs" />
