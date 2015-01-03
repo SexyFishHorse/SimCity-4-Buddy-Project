@@ -202,11 +202,12 @@
         private void UserFolderMenuItemClick(object sender, EventArgs e)
         {
             new UserFolderForm(
+                ((UserFolderToolStripMenuItem)sender).UserFolder,
                 pluginController,
                 pluginGroupController,
                 userFolderController,
-                ((UserFolderToolStripMenuItem)sender).UserFolder,
-                pluginMatcher, dependencyChecker).ShowDialog(this);
+                pluginMatcher,
+                dependencyChecker).Show(this);
         }
 
         private void PlayButtonClick(object sender, EventArgs e)

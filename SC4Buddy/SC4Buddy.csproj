@@ -87,6 +87,9 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ByteSize">
+      <HintPath>..\packages\ByteSize.0.3.0\lib\portable-net4+sl5+netcore45+wp8+MonoAndroid1+MonoTouch1\ByteSize.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
@@ -108,6 +111,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -169,6 +173,12 @@
     <Compile Include="Application\View\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserFolders\View\UserFolderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserFolders\View\UserFolderForm.Designer.cs">
+      <DependentUpon>UserFolderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserFolders\View\UserFolderMode.cs" />
     <Compile Include="View\Elements\ListViewItemWithObjectValue.cs" />
     <Compile Include="View\Elements\RemovalFileTypeCandidateListViewItem.cs" />
@@ -227,11 +237,11 @@
     <Compile Include="Plugins\View\ReportPluginForm.Designer.cs">
       <DependentUpon>ReportPluginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserFolders\View\UserFolderForm.cs">
+    <Compile Include="Plugins\View\PluginsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserFolders\View\UserFolderForm.Designer.cs">
-      <DependentUpon>UserFolderForm.cs</DependentUpon>
+    <Compile Include="Plugins\View\PluginsForm.Designer.cs">
+      <DependentUpon>PluginsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Plugins\View\ReadmeFilesForm.cs">
       <SubType>Form</SubType>
@@ -291,8 +301,8 @@
     <EmbeddedResource Include="Plugins\View\ReportPluginForm.resx">
       <DependentUpon>ReportPluginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserFolders\View\UserFolderForm.resx">
-      <DependentUpon>UserFolderForm.cs</DependentUpon>
+    <EmbeddedResource Include="Plugins\View\PluginsForm.resx">
+      <DependentUpon>PluginsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Plugins\View\ReadmeFilesForm.resx">
       <DependentUpon>ReadmeFilesForm.cs</DependentUpon>
@@ -314,6 +324,9 @@
     <EmbeddedResource Include="UserFolders\View\ManageUserFoldersForm.resx">
       <DependentUpon>ManageUserFoldersForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserFolders\View\UserFolderForm.resx">
+      <DependentUpon>UserFolderForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
