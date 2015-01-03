@@ -113,22 +113,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Control\GameArgumentsHelper.cs" />
-    <Compile Include="Control\GameLauncher.cs" />
-    <Compile Include="Control\ISettingsController.cs" />
+    <Compile Include="Application\Control\GameArgumentsHelper.cs" />
+    <Compile Include="Application\Control\GameLauncher.cs" />
+    <Compile Include="Application\Control\ISettingsController.cs" />
     <Compile Include="Control\NonPluginFilesScanner.cs" />
     <Compile Include="Control\Plugins\FolderScannerController.cs" />
     <Compile Include="Control\Plugins\PluginCopier.cs" />
     <Compile Include="Control\Plugins\PluginGroupController.cs" />
     <Compile Include="Configuration\Settings.cs" />
-    <Compile Include="Control\SettingsController.cs" />
+    <Compile Include="Application\Control\SettingsController.cs" />
     <Compile Include="UserFolders\Control\FolderScanner.cs" />
     <Compile Include="Control\Plugins\PluginController.cs" />
     <Compile Include="Control\Plugins\PluginFileController.cs" />
     <Compile Include="DataAccess\Entities.cs" />
     <Compile Include="DataAccess\EntityFactory.cs" />
     <Compile Include="DataAccess\IEntities.cs" />
-    <Compile Include="DataAccess\SettingsDataAccess.cs" />
+    <Compile Include="Application\DataAccess\SettingsDataAccess.cs" />
     <Compile Include="Entities\Remote\PluginReport.cs" />
     <Compile Include="Installer\FileHandlers\ArchiveHandler.cs" />
     <Compile Include="Installer\InstallerEventArgs\InstalledPluginEventArgs.cs" />
@@ -163,10 +163,10 @@
     <Compile Include="Remote\IPluginMatcher.cs" />
     <Compile Include="Remote\PluginMatcher.cs" />
     <Compile Include="Configuration\LauncherSettings.cs" />
-    <Compile Include="View\Application\AboutBox.cs">
+    <Compile Include="Application\View\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Application\AboutBox.Designer.cs">
+    <Compile Include="Application\View\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Elements\ListViewItemWithObjectValue.cs" />
@@ -238,10 +238,10 @@
     <Compile Include="View\Plugins\ReadmeFilesForm.Designer.cs">
       <DependentUpon>ReadmeFilesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Application\SC4Buddy.cs">
+    <Compile Include="Application\View\SC4Buddy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Application\SC4Buddy.Designer.cs">
+    <Compile Include="Application\View\SC4Buddy.Designer.cs">
       <DependentUpon>SC4Buddy.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -252,10 +252,10 @@
     <Compile Include="UserFolders\View\ManageUserFoldersForm.Designer.cs">
       <DependentUpon>ManageUserFoldersForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Application\SettingsForm.cs">
+    <Compile Include="Application\View\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Application\SettingsForm.Designer.cs">
+    <Compile Include="Application\View\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Localization\LocalizationStrings.resx">
@@ -263,7 +263,7 @@
       <LastGenOutput>LocalizationStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Application\AboutBox.resx">
+    <EmbeddedResource Include="Application\View\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Plugins\EnterPluginInformationForm.resx">
@@ -296,7 +296,7 @@
     <EmbeddedResource Include="View\Plugins\ReadmeFilesForm.resx">
       <DependentUpon>ReadmeFilesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Application\SC4Buddy.resx">
+    <EmbeddedResource Include="Application\View\SC4Buddy.resx">
       <DependentUpon>SC4Buddy.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -340,7 +340,7 @@
     <Content Include="Wallpapers\11.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="View\Application\SettingsForm.resx">
+    <EmbeddedResource Include="Application\View\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <Content Include="Wallpapers\1.jpg">
@@ -394,8 +394,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\NiheiCommon\NiheiCommon.csproj">
       <Project>{43f9af3f-d57d-421d-ba98-87fd499ca314}</Project>

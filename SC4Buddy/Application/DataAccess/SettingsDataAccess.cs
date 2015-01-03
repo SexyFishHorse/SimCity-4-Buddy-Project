@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.DataAccess
+﻿namespace NIHEI.SC4Buddy.Application.DataAccess
 {
     using System.Collections.Generic;
     using System.IO;
