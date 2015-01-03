@@ -15,7 +15,6 @@
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
-    using NIHEI.SC4Buddy.Plugins.View;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
@@ -202,12 +201,13 @@
 
         private void UserFolderMenuItemClick(object sender, EventArgs e)
         {
-            new PluginsForm(
+            new UserFolderForm(
+                ((UserFolderToolStripMenuItem)sender).UserFolder,
                 pluginController,
                 pluginGroupController,
                 userFolderController,
-                ((UserFolderToolStripMenuItem)sender).UserFolder,
-                pluginMatcher, dependencyChecker).ShowDialog(this);
+                pluginMatcher,
+                dependencyChecker).Show(this);
         }
 
         private void PlayButtonClick(object sender, EventArgs e)
