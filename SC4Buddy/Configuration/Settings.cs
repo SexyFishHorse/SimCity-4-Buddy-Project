@@ -2,7 +2,7 @@
 {
     using System;
     using System.IO;
-    using NIHEI.SC4Buddy.DataAccess;
+    using NIHEI.SC4Buddy.Application.DataAccess;
 
     public static class Settings
     {

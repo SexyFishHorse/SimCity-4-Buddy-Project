@@ -12,15 +12,15 @@
 
     using log4net;
     using log4net.Config;
+    using NIHEI.SC4Buddy.Application.Control;
+    using NIHEI.SC4Buddy.Application.View;
     using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.Control;
-    using NIHEI.SC4Buddy.Control.Plugins;
-    using NIHEI.SC4Buddy.Control.UserFolders;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Remote;
-    using NIHEI.SC4Buddy.View.Application;
+    using NIHEI.SC4Buddy.Resources;
+    using NIHEI.SC4Buddy.UserFolders.Control;
 
     public static class Program
     {
@@ -35,15 +35,15 @@
             try
             {
                 var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
+                System.Windows.Forms.Application.EnableVisualStyles();
+                System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+                System.Windows.Forms.Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
 
                 if (string.IsNullOrWhiteSpace(Settings.Get(Settings.Keys.GameLocation)) || !Directory.Exists(Settings.Get(Settings.Keys.GameLocation)))
                 {
                     var settingsForm = new SettingsForm(userFolderController) { StartPosition = FormStartPosition.CenterScreen };
 
-                    Application.Run(settingsForm);
+                    System.Windows.Forms.Application.Run(settingsForm);
                     SetDefaultUserFolder();
                 }
 
@@ -55,7 +55,7 @@
                 if (Directory.Exists(Settings.Get(Settings.Keys.GameLocation)))
                 {
                     new SettingsController(userFolderController).CheckMainFolder();
-                    Application.Run(
+                    System.Windows.Forms.Application.Run(
                         new Sc4Buddy(
                             userFolderController,
                             new PluginController(EntityFactory.Instance.Entities),

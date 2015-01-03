@@ -3,7 +3,7 @@
     using System;
     using System.IO;
     using System.Linq;
-
+    using NIHEI.SC4Buddy.Plugins.Installer.FileHandlers;
     using Should;
 
     using Xunit;

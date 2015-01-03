@@ -113,37 +113,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Control\GameArgumentsHelper.cs" />
-    <Compile Include="Control\GameLauncher.cs" />
-    <Compile Include="Control\ISettingsController.cs" />
-    <Compile Include="Control\NonPluginFilesScanner.cs" />
-    <Compile Include="Control\Plugins\FolderScannerController.cs" />
-    <Compile Include="Control\Plugins\PluginCopier.cs" />
-    <Compile Include="Control\Plugins\PluginGroupController.cs" />
+    <Compile Include="Application\Control\GameArgumentsHelper.cs" />
+    <Compile Include="Application\Control\GameLauncher.cs" />
+    <Compile Include="Application\Control\ISettingsController.cs" />
+    <Compile Include="Plugins\Control\NonPluginFilesScanner.cs" />
+    <Compile Include="Plugins\Control\FolderScannerController.cs" />
+    <Compile Include="Plugins\Control\PluginCopier.cs" />
+    <Compile Include="Plugins\Control\PluginGroupController.cs" />
     <Compile Include="Configuration\Settings.cs" />
-    <Compile Include="Control\SettingsController.cs" />
-    <Compile Include="Control\UserFolders\FolderScanner.cs" />
-    <Compile Include="Control\Plugins\PluginController.cs" />
-    <Compile Include="Control\Plugins\PluginFileController.cs" />
+    <Compile Include="Application\Control\SettingsController.cs" />
+    <Compile Include="UserFolders\Control\FolderScanner.cs" />
+    <Compile Include="Plugins\Control\PluginController.cs" />
+    <Compile Include="Plugins\Control\PluginFileController.cs" />
     <Compile Include="DataAccess\Entities.cs" />
     <Compile Include="DataAccess\EntityFactory.cs" />
     <Compile Include="DataAccess\IEntities.cs" />
-    <Compile Include="DataAccess\SettingsDataAccess.cs" />
+    <Compile Include="Application\DataAccess\SettingsDataAccess.cs" />
     <Compile Include="Entities\Remote\PluginReport.cs" />
-    <Compile Include="Installer\FileHandlers\ArchiveHandler.cs" />
-    <Compile Include="Installer\InstallerEventArgs\InstalledPluginEventArgs.cs" />
-    <Compile Include="Installer\InstallerEventArgs\InstallPluginEventArgs.cs" />
-    <Compile Include="Installer\InstallerEventArgs\InstallPluginFailureEventArgs.cs" />
-    <Compile Include="Installer\InstallerEventArgs\InstallProgressEventArgs.cs" />
-    <Compile Include="Installer\PluginFileComparer.cs" />
-    <Compile Include="Installer\PluginInstaller.cs" />
-    <Compile Include="Installer\FileHandlers\BaseHandler.cs" />
-    <Compile Include="Installer\FileHandlers\DatHandler.cs" />
-    <Compile Include="Control\UserFolders\UserFolderController.cs" />
-    <Compile Include="Installer\UserFolderListener.cs" />
-    <Compile Include="Installer\PluginInstallerThread.cs" />
-    <Compile Include="Installer\InstallerEventArgs\ReadmeFilesEventArgs.cs" />
-    <Compile Include="Localization\LocalizationStrings.Designer.cs">
+    <Compile Include="Plugins\Installer\FileHandlers\ArchiveHandler.cs" />
+    <Compile Include="Plugins\Installer\InstallerEventArgs\InstalledPluginEventArgs.cs" />
+    <Compile Include="Plugins\Installer\InstallerEventArgs\InstallPluginEventArgs.cs" />
+    <Compile Include="Plugins\Installer\InstallerEventArgs\InstallPluginFailureEventArgs.cs" />
+    <Compile Include="Plugins\Installer\InstallerEventArgs\InstallProgressEventArgs.cs" />
+    <Compile Include="Plugins\Installer\PluginFileComparer.cs" />
+    <Compile Include="Plugins\Installer\PluginInstaller.cs" />
+    <Compile Include="Plugins\Installer\FileHandlers\BaseHandler.cs" />
+    <Compile Include="Plugins\Installer\FileHandlers\DatHandler.cs" />
+    <Compile Include="UserFolders\Control\UserFolderController.cs" />
+    <Compile Include="Plugins\Installer\UserFolderListener.cs" />
+    <Compile Include="Plugins\Installer\PluginInstallerThread.cs" />
+    <Compile Include="Plugins\Installer\InstallerEventArgs\ReadmeFilesEventArgs.cs" />
+    <Compile Include="Resources\LocalizationStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>LocalizationStrings.resx</DependentUpon>
@@ -163,10 +163,10 @@
     <Compile Include="Remote\IPluginMatcher.cs" />
     <Compile Include="Remote\PluginMatcher.cs" />
     <Compile Include="Configuration\LauncherSettings.cs" />
-    <Compile Include="View\Application\AboutBox.cs">
+    <Compile Include="Application\View\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Application\AboutBox.Designer.cs">
+    <Compile Include="Application\View\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Elements\ListViewItemWithObjectValue.cs" />
@@ -177,126 +177,126 @@
     </Compile>
     <Compile Include="View\Elements\PluginListViewItem.cs" />
     <Compile Include="View\Helpers\NonPluginFilesScannerUi.cs" />
-    <Compile Include="View\Plugins\EnterPluginInformationForm.cs">
+    <Compile Include="Plugins\View\EnterPluginInformationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Plugins\EnterPluginInformationForm.Designer.cs">
+    <Compile Include="Plugins\View\EnterPluginInformationForm.Designer.cs">
       <DependentUpon>EnterPluginInformationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Plugins\FolderScannerForm.cs">
+    <Compile Include="Plugins\View\FolderScannerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Plugins\FolderScannerForm.Designer.cs">
+    <Compile Include="Plugins\View\FolderScannerForm.Designer.cs">
       <DependentUpon>FolderScannerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Plugins\InstallPluginsForm.cs">
+    <Compile Include="Plugins\View\InstallPluginsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Plugins\InstallPluginsForm.Designer.cs">
+    <Compile Include="Plugins\View\InstallPluginsForm.Designer.cs">
       <DependentUpon>InstallPluginsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Plugins\MissingDependenciesForm.cs">
+    <Compile Include="Plugins\View\MissingDependenciesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Plugins\MissingDependenciesForm.Designer.cs">
+    <Compile Include="Plugins\View\MissingDependenciesForm.Designer.cs">
       <DependentUpon>MissingDependenciesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Plugins\MoveOrCopyForm.cs">
+    <Compile Include="Plugins\View\MoveOrCopyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Plugins\MoveOrCopyForm.Designer.cs">
+    <Compile Include="Plugins\View\MoveOrCopyForm.Designer.cs">
       <DependentUpon>MoveOrCopyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Plugins\QuarantinedPluginFilesForm.cs">
+    <Compile Include="Plugins\View\QuarantinedPluginFilesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Plugins\QuarantinedPluginFilesForm.Designer.cs">
+    <Compile Include="Plugins\View\QuarantinedPluginFilesForm.Designer.cs">
       <DependentUpon>QuarantinedPluginFilesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Plugins\RemotePluginComparer.cs" />
-    <Compile Include="View\Plugins\RemoveUnnecessaryFilesForm.cs">
+    <Compile Include="Plugins\View\RemotePluginComparer.cs" />
+    <Compile Include="Plugins\View\RemoveUnnecessaryFilesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Plugins\RemoveUnnecessaryFilesForm.Designer.cs">
+    <Compile Include="Plugins\View\RemoveUnnecessaryFilesForm.Designer.cs">
       <DependentUpon>RemoveUnnecessaryFilesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Plugins\ReportPluginForm.cs">
+    <Compile Include="Plugins\View\ReportPluginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Plugins\ReportPluginForm.Designer.cs">
+    <Compile Include="Plugins\View\ReportPluginForm.Designer.cs">
       <DependentUpon>ReportPluginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserFolders\UserFolderForm.cs">
+    <Compile Include="UserFolders\View\UserFolderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\UserFolders\UserFolderForm.Designer.cs">
+    <Compile Include="UserFolders\View\UserFolderForm.Designer.cs">
       <DependentUpon>UserFolderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Plugins\ReadmeFilesForm.cs">
+    <Compile Include="Plugins\View\ReadmeFilesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Plugins\ReadmeFilesForm.Designer.cs">
+    <Compile Include="Plugins\View\ReadmeFilesForm.Designer.cs">
       <DependentUpon>ReadmeFilesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Application\SC4Buddy.cs">
+    <Compile Include="Application\View\SC4Buddy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Application\SC4Buddy.Designer.cs">
+    <Compile Include="Application\View\SC4Buddy.Designer.cs">
       <DependentUpon>SC4Buddy.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\UserFolders\ManageUserFoldersForm.cs">
+    <Compile Include="UserFolders\View\ManageUserFoldersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\UserFolders\ManageUserFoldersForm.Designer.cs">
+    <Compile Include="UserFolders\View\ManageUserFoldersForm.Designer.cs">
       <DependentUpon>ManageUserFoldersForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Application\SettingsForm.cs">
+    <Compile Include="Application\View\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Application\SettingsForm.Designer.cs">
+    <Compile Include="Application\View\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Localization\LocalizationStrings.resx">
+    <EmbeddedResource Include="Resources\LocalizationStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LocalizationStrings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Application\AboutBox.resx">
+    <EmbeddedResource Include="Application\View\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Plugins\EnterPluginInformationForm.resx">
+    <EmbeddedResource Include="Plugins\View\EnterPluginInformationForm.resx">
       <DependentUpon>EnterPluginInformationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Plugins\FolderScannerForm.resx">
+    <EmbeddedResource Include="Plugins\View\FolderScannerForm.resx">
       <DependentUpon>FolderScannerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Plugins\InstallPluginsForm.resx">
+    <EmbeddedResource Include="Plugins\View\InstallPluginsForm.resx">
       <DependentUpon>InstallPluginsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Plugins\MissingDependenciesForm.resx">
+    <EmbeddedResource Include="Plugins\View\MissingDependenciesForm.resx">
       <DependentUpon>MissingDependenciesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Plugins\MoveOrCopyForm.resx">
+    <EmbeddedResource Include="Plugins\View\MoveOrCopyForm.resx">
       <DependentUpon>MoveOrCopyForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Plugins\QuarantinedPluginFilesForm.resx">
+    <EmbeddedResource Include="Plugins\View\QuarantinedPluginFilesForm.resx">
       <DependentUpon>QuarantinedPluginFilesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Plugins\RemoveUnnecessaryFilesForm.resx">
+    <EmbeddedResource Include="Plugins\View\RemoveUnnecessaryFilesForm.resx">
       <DependentUpon>RemoveUnnecessaryFilesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Plugins\ReportPluginForm.resx">
+    <EmbeddedResource Include="Plugins\View\ReportPluginForm.resx">
       <DependentUpon>ReportPluginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\UserFolders\UserFolderForm.resx">
+    <EmbeddedResource Include="UserFolders\View\UserFolderForm.resx">
       <DependentUpon>UserFolderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Plugins\ReadmeFilesForm.resx">
+    <EmbeddedResource Include="Plugins\View\ReadmeFilesForm.resx">
       <DependentUpon>ReadmeFilesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Application\SC4Buddy.resx">
+    <EmbeddedResource Include="Application\View\SC4Buddy.resx">
       <DependentUpon>SC4Buddy.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -310,7 +310,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="View\UserFolders\ManageUserFoldersForm.resx">
+    <EmbeddedResource Include="UserFolders\View\ManageUserFoldersForm.resx">
       <DependentUpon>ManageUserFoldersForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -331,46 +331,46 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\zoom.png" />
-    <Content Include="Wallpapers\13.jpg">
+    <Content Include="Resources\Wallpapers\13.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Wallpapers\12.jpg">
+    <Content Include="Resources\Wallpapers\12.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Wallpapers\11.jpg">
+    <Content Include="Resources\Wallpapers\11.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="View\Application\SettingsForm.resx">
+    <EmbeddedResource Include="Application\View\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="Wallpapers\1.jpg">
+    <Content Include="Resources\Wallpapers\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Wallpapers\10.jpg">
+    <Content Include="Resources\Wallpapers\10.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Wallpapers\2.jpg">
+    <Content Include="Resources\Wallpapers\2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Wallpapers\3.jpg">
+    <Content Include="Resources\Wallpapers\3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Wallpapers\4.jpg">
+    <Content Include="Resources\Wallpapers\4.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Wallpapers\5.jpg">
+    <Content Include="Resources\Wallpapers\5.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Wallpapers\6.jpg">
+    <Content Include="Resources\Wallpapers\6.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Wallpapers\7.jpg">
+    <Content Include="Resources\Wallpapers\7.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Wallpapers\8.jpg">
+    <Content Include="Resources\Wallpapers\8.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Wallpapers\9.jpg">
+    <Content Include="Resources\Wallpapers\9.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
