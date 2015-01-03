@@ -34,21 +34,20 @@ namespace NIHEI.SC4Buddy.UserFolders.View
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.UserFoldersListView = new System.Windows.Forms.ListView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
             this.startupFolderCheckbox = new System.Windows.Forms.CheckBox();
             this.aliasTextBox = new System.Windows.Forms.TextBox();
             this.aliasLabel = new System.Windows.Forms.Label();
             this.browseButton = new System.Windows.Forms.Button();
             this.pathTextBox = new System.Windows.Forms.TextBox();
             this.pathLabel = new System.Windows.Forms.Label();
-            this.closeButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.clearButton = new System.Windows.Forms.Button();
-            this.updateButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.pathBrowseDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.saveButton = new System.Windows.Forms.Button();
+            this.closeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -84,6 +83,8 @@ namespace NIHEI.SC4Buddy.UserFolders.View
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.cancelButton);
+            this.groupBox1.Controls.Add(this.saveButton);
             this.groupBox1.Controls.Add(this.startupFolderCheckbox);
             this.groupBox1.Controls.Add(this.aliasTextBox);
             this.groupBox1.Controls.Add(this.aliasLabel);
@@ -92,6 +93,20 @@ namespace NIHEI.SC4Buddy.UserFolders.View
             this.groupBox1.Controls.Add(this.pathLabel);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // cancelButton
+            // 
+            resources.ApplyResources(this.cancelButton, "cancelButton");
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButtonClick);
+            // 
+            // saveButton
+            // 
+            resources.ApplyResources(this.saveButton, "saveButton");
+            this.saveButton.Name = "saveButton";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButtonClick);
             // 
             // startupFolderCheckbox
             // 
@@ -103,7 +118,6 @@ namespace NIHEI.SC4Buddy.UserFolders.View
             // 
             resources.ApplyResources(this.aliasTextBox, "aliasTextBox");
             this.aliasTextBox.Name = "aliasTextBox";
-            this.aliasTextBox.TextChanged += new System.EventHandler(this.AliasTextBoxTextChanged);
             // 
             // aliasLabel
             // 
@@ -115,7 +129,7 @@ namespace NIHEI.SC4Buddy.UserFolders.View
             resources.ApplyResources(this.browseButton, "browseButton");
             this.browseButton.Name = "browseButton";
             this.browseButton.UseVisualStyleBackColor = true;
-            this.browseButton.Click += new System.EventHandler(this.PathClick);
+            this.browseButton.Click += new System.EventHandler(this.BrowseButtonClick);
             // 
             // pathTextBox
             // 
@@ -123,46 +137,23 @@ namespace NIHEI.SC4Buddy.UserFolders.View
             this.pathTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.pathTextBox.ForeColor = System.Drawing.Color.Gray;
             this.pathTextBox.Name = "pathTextBox";
-            this.pathTextBox.ReadOnly = true;
-            this.pathTextBox.Click += new System.EventHandler(this.PathClick);
             this.pathTextBox.TextChanged += new System.EventHandler(this.PathTextBoxTextChanged);
+            this.pathTextBox.Enter += new System.EventHandler(this.PathTextBoxEnter);
+            this.pathTextBox.Leave += new System.EventHandler(this.PathTextBoxLeave);
             // 
             // pathLabel
             // 
             resources.ApplyResources(this.pathLabel, "pathLabel");
             this.pathLabel.Name = "pathLabel";
             // 
-            // closeButton
-            // 
-            resources.ApplyResources(this.closeButton, "closeButton");
-            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Name = "closeButton";
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.CloseButtonClick);
-            // 
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.clearButton);
             this.panel1.Controls.Add(this.splitContainer1);
-            this.panel1.Controls.Add(this.updateButton);
+            this.panel1.Controls.Add(this.closeButton);
             this.panel1.Controls.Add(this.removeButton);
             this.panel1.Controls.Add(this.addButton);
             this.panel1.Name = "panel1";
-            // 
-            // clearButton
-            // 
-            resources.ApplyResources(this.clearButton, "clearButton");
-            this.clearButton.Name = "clearButton";
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.ClearButtonClick);
-            // 
-            // updateButton
-            // 
-            resources.ApplyResources(this.updateButton, "updateButton");
-            this.updateButton.Name = "updateButton";
-            this.updateButton.UseVisualStyleBackColor = true;
-            this.updateButton.Click += new System.EventHandler(this.UpdateButtonClick);
             // 
             // removeButton
             // 
@@ -186,23 +177,20 @@ namespace NIHEI.SC4Buddy.UserFolders.View
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // saveButton
+            // closeButton
             // 
-            resources.ApplyResources(this.saveButton, "saveButton");
-            this.saveButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.saveButton.Name = "saveButton";
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.SaveButtonClick);
+            resources.ApplyResources(this.closeButton, "closeButton");
+            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.closeButton.Name = "closeButton";
+            this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.CloseButtonClick);
             // 
             // ManageUserFoldersForm
             // 
-            this.AcceptButton = this.saveButton;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeButton;
-            this.Controls.Add(this.saveButton);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.closeButton);
             this.Name = "ManageUserFoldersForm";
             this.Load += new System.EventHandler(this.UserFoldersFormLoad);
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -219,13 +207,11 @@ namespace NIHEI.SC4Buddy.UserFolders.View
 
         #endregion
 
-        private System.Windows.Forms.Button closeButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.ListView UserFoldersListView;
-        private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.TextBox aliasTextBox;
         private System.Windows.Forms.Label aliasLabel;
         private System.Windows.Forms.Button browseButton;
@@ -234,8 +220,9 @@ namespace NIHEI.SC4Buddy.UserFolders.View
         private System.Windows.Forms.FolderBrowserDialog pathBrowseDialog;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ErrorProvider errorProvider;
-        private System.Windows.Forms.Button clearButton;
-        private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.CheckBox startupFolderCheckbox;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.Button closeButton;
     }
 }
