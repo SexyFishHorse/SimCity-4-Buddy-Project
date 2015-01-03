@@ -7,7 +7,7 @@
     using System.Reflection;
     using System.Windows.Forms;
 
-    using NIHEI.SC4Buddy.Localization;
+    using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.View.Elements;
 
     using log4net;

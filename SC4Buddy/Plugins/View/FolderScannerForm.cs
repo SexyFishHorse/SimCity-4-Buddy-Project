@@ -12,10 +12,10 @@
     using Irradiated.Sc4Buddy.ApiClient.Model;
     using log4net;
     using NIHEI.Common.IO;
-    using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Remote;
+    using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.View.Elements;
     using Plugin = NIHEI.SC4Buddy.Model.Plugin;
     using PluginFile = NIHEI.SC4Buddy.Model.PluginFile;

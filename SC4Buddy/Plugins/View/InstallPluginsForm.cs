@@ -12,12 +12,12 @@
     using log4net;
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Plugins.Installer;
     using NIHEI.SC4Buddy.Plugins.Installer.InstallerEventArgs;
     using NIHEI.SC4Buddy.Remote;
+    using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.View.Helpers;
     using NIHEI.SC4Buddy.View.Plugins;
 

@@ -6,8 +6,8 @@
     using System.Resources;
     using System.Windows.Forms;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.View.Elements;
 

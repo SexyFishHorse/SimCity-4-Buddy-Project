@@ -4,9 +4,9 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Forms;
-    using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
+    using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.View.Plugins;
 
     public class NonPluginFilesScannerUi
