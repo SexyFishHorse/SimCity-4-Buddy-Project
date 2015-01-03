@@ -9,12 +9,12 @@
     using log4net;
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.Localization;
     using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Plugins.Installer.FileHandlers;
     using NIHEI.SC4Buddy.Plugins.Installer.InstallerEventArgs;
-    using NIHEI.SC4Buddy.View.Plugins;
+    using NIHEI.SC4Buddy.Plugins.View;
     using SharpCompress.Common;
 
     public class PluginInstallerThread

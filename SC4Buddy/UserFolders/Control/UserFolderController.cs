@@ -7,9 +7,9 @@
     using System.Threading.Tasks;
     using Microsoft.VisualBasic.FileIO;
     using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.Control.Plugins;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Remote;
 
     public class UserFolderController
