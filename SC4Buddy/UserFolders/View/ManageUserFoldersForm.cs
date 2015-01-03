@@ -226,11 +226,6 @@
             ReloadUserFoldersListView();
         }
 
-        private void ClearButtonClick(object sender, EventArgs e)
-        {
-            ClearForm();
-        }
-
         private void CloseButtonClick(object sender, EventArgs e)
         {
             Close();

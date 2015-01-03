@@ -42,7 +42,6 @@ namespace NIHEI.SC4Buddy.UserFolders.View
             this.pathLabel = new System.Windows.Forms.Label();
             this.closeButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.clearButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
@@ -143,19 +142,12 @@ namespace NIHEI.SC4Buddy.UserFolders.View
             // panel1
             // 
             resources.ApplyResources(this.panel1, "panel1");
-            this.panel1.Controls.Add(this.clearButton);
             this.panel1.Controls.Add(this.splitContainer1);
             this.panel1.Controls.Add(this.updateButton);
             this.panel1.Controls.Add(this.removeButton);
             this.panel1.Controls.Add(this.addButton);
             this.panel1.Name = "panel1";
             // 
-            // clearButton
-            // 
-            resources.ApplyResources(this.clearButton, "clearButton");
-            this.clearButton.Name = "clearButton";
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.ClearButtonClick);
             // 
             // updateButton
             // 
@@ -234,7 +226,6 @@ namespace NIHEI.SC4Buddy.UserFolders.View
         private System.Windows.Forms.FolderBrowserDialog pathBrowseDialog;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ErrorProvider errorProvider;
-        private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.CheckBox startupFolderCheckbox;
     }
