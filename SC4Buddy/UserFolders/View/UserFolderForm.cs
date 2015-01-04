@@ -19,7 +19,7 @@
 
         private readonly PluginGroupController pluginGroupController;
 
-        private readonly UserFolderController userFolderController;
+        private readonly IUserFolderController userFolderController;
 
         private readonly IPluginMatcher pluginMatcher;
 
@@ -29,7 +29,7 @@
             UserFolder userFolder,
             IPluginController pluginController,
             PluginGroupController pluginGroupController,
-            UserFolderController userFolderController,
+            IUserFolderController userFolderController,
             IPluginMatcher pluginMatcher,
             IDependencyChecker dependencyChecker)
         {
