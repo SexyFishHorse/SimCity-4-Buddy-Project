@@ -22,6 +22,7 @@
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
+    using NIHEI.SC4Buddy.UserFolders.DataAccess;
 
     public static class Program
     {
@@ -37,13 +38,14 @@
             {
                 var entities = EntityFactory.Instance.Entities;
                 var userFolderController = new UserFolderController(new PluginFileController(entities), new PluginController(entities), entities);
+                var userFoldersController = new UserFoldersController(new UserFoldersDataAccess(), userFolderController);
                 System.Windows.Forms.Application.EnableVisualStyles();
                 System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
                 System.Windows.Forms.Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
 
                 if (string.IsNullOrWhiteSpace(Settings.Get(Settings.Keys.GameLocation)) || !Directory.Exists(Settings.Get(Settings.Keys.GameLocation)))
                 {
-                    var settingsForm = new SettingsForm(userFolderController) { StartPosition = FormStartPosition.CenterScreen };
+                    var settingsForm = new SettingsForm(userFoldersController) { StartPosition = FormStartPosition.CenterScreen };
 
                     System.Windows.Forms.Application.Run(settingsForm);
                     SetDefaultUserFolder();
@@ -56,7 +58,7 @@
 
                 if (Directory.Exists(Settings.Get(Settings.Keys.GameLocation)))
                 {
-                    new SettingsController(userFolderController).CheckMainFolder();
+                    new SettingsController(userFoldersController).CheckMainFolder();
                     System.Windows.Forms.Application.Run(
                         new Sc4Buddy(
                             userFolderController,

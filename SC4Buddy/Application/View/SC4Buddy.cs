@@ -30,6 +30,7 @@
 
         private readonly ResourceManager localizationManager;
 
+        private readonly IUserFoldersController userFoldersController;
         private readonly UserFolderController userFolderController;
 
         private readonly IPluginController pluginController;
@@ -41,12 +42,14 @@
         private readonly IDependencyChecker dependencyChecker;
 
         public Sc4Buddy(
+            IUserFoldersController userFoldersController,
             UserFolderController userFolderController,
             IPluginController pluginController,
             PluginGroupController pluginGroupController,
             IPluginMatcher pluginMatcher,
             IDependencyChecker dependencyChecker)
         {
+            this.userFoldersController = userFoldersController;
             this.userFolderController = userFolderController;
             this.pluginGroupController = pluginGroupController;
             this.pluginMatcher = pluginMatcher;
@@ -262,7 +265,7 @@
 
         private void SettingsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new SettingsForm(userFolderController).ShowDialog(this);
+            new SettingsForm(userFoldersController).ShowDialog(this);
 
             UpdateBackground();
         }
