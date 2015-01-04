@@ -48,6 +48,7 @@
             UpdateIsStartupFolder(userFolder);
             UserFolders.Add(userFolder);
 
+            userFolderController.Update(userFolder);
             userFoldersDataAccess.SaveUserFolders(UserFolders);
         }
 
