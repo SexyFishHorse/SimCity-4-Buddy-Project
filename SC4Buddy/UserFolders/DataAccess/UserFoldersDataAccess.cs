@@ -12,7 +12,7 @@
     {
         public const string Filename = "UserFolders.json";
 
-        public IEnumerable<UserFolder> LoadUserFolders()
+        public ICollection<UserFolder> LoadUserFolders()
         {
             var path = Path.Combine(FileSystemLocationsUtil.LocalApplicationDataDirectory, Filename);
             var fileInfo = new FileInfo(path);

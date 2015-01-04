@@ -5,7 +5,7 @@ namespace NIHEI.SC4Buddy.UserFolders.DataAccess
 
     public interface IUserFoldersDataAccess
     {
-        IEnumerable<UserFolder> LoadUserFolders();
+        ICollection<UserFolder> LoadUserFolders();
 
         void SaveUserFolders(IEnumerable<UserFolder> userFolders);
     }

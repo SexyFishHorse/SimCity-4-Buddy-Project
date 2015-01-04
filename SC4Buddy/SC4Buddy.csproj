@@ -146,6 +146,7 @@
     <Compile Include="Plugins\Installer\PluginInstaller.cs" />
     <Compile Include="Plugins\Installer\FileHandlers\BaseHandler.cs" />
     <Compile Include="Plugins\Installer\FileHandlers\DatHandler.cs" />
+    <Compile Include="UserFolders\Control\IUserFoldersController.cs" />
     <Compile Include="UserFolders\Control\UserFolderController.cs" />
     <Compile Include="Plugins\Installer\UserFolderListener.cs" />
     <Compile Include="Plugins\Installer\PluginInstallerThread.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Application\View\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserFolders\Control\UserFoldersController.cs" />
     <Compile Include="UserFolders\DataAccess\IUserFolderDataAccess.cs" />
     <Compile Include="UserFolders\DataAccess\IUserFoldersDataAccess.cs" />
     <Compile Include="UserFolders\DataAccess\UserFolderDataAccess.cs" />
