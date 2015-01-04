@@ -1,44 +1,20 @@
 ﻿namespace NIHEI.SC4Buddy.UserFolders.Control
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.UserFolders.DataAccess;
 
     public class UserFolderController : IUserFolderController
     {
-        private readonly IEntities entities;
+        private readonly IUserFolderDataAccess userFolderDataAccess;
 
-        public UserFolderController(
-            IEntities entities)
+        public UserFolderController(IUserFolderDataAccess userFolderDataAccess)
         {
-            this.entities = entities;
-        }
-
-        public IEnumerable<UserFolder> UserFolders
-        {
-            get
-            {
-                return entities.UserFolders;
-            }
+            this.userFolderDataAccess = userFolderDataAccess;
         }
 
         public void Update(UserFolder userFolder)
         {
-            if (userFolder.IsStartupFolder)
-            {
-                foreach (var folder in UserFolders.Where(x => x.IsStartupFolder && x.Id != userFolder.Id))
-                {
-                    folder.IsStartupFolder = false;
-                }
-            }
-
-            entities.SaveChanges();
-        }
-
-        public void SaveChanges()
-        {
-            entities.SaveChanges();
+            userFolderDataAccess.SaveUserFolder(userFolder);
         }
     }
 }

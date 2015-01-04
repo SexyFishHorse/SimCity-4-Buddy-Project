@@ -20,7 +20,7 @@
 
         private readonly PluginGroupController pluginGroupController;
 
-        private readonly IUserFolderController userFolderController;
+        private readonly IUserFoldersController userFoldersController;
 
         private readonly IPluginMatcher pluginMatcher;
 
@@ -30,7 +30,7 @@
             UserFolder userFolder,
             IPluginController pluginController,
             PluginGroupController pluginGroupController,
-            IUserFolderController userFolderController,
+            IUserFoldersController userFoldersController,
             IPluginMatcher pluginMatcher,
             IDependencyChecker dependencyChecker,
             IPluginsController pluginsController)
@@ -38,7 +38,7 @@
             this.userFolder = userFolder;
             this.pluginController = pluginController;
             this.pluginGroupController = pluginGroupController;
-            this.userFolderController = userFolderController;
+            this.userFoldersController = userFoldersController;
             this.pluginMatcher = pluginMatcher;
             this.dependencyChecker = dependencyChecker;
             this.pluginsController = pluginsController;
@@ -50,7 +50,7 @@
             var dialog = new PluginsForm(
                 pluginController,
                 pluginGroupController,
-                userFolderController,
+                userFoldersController,
                 pluginsController,
                 userFolder,
                 pluginMatcher,

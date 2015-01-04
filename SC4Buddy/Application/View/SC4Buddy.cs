@@ -13,13 +13,13 @@
     using log4net;
     using NIHEI.SC4Buddy.Application.Control;
     using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
+    using NIHEI.SC4Buddy.UserFolders.DataAccess;
     using NIHEI.SC4Buddy.UserFolders.View;
     using NIHEI.SC4Buddy.View.Elements;
 
@@ -35,8 +35,6 @@
 
         private readonly IPluginsController pluginsController;
 
-        private readonly IEntities entities;
-
         private readonly PluginGroupController pluginGroupController;
 
         private readonly IPluginMatcher pluginMatcher;
@@ -49,14 +47,12 @@
             PluginGroupController pluginGroupController,
             IPluginMatcher pluginMatcher,
             IDependencyChecker dependencyChecker,
-            IPluginsController pluginsController,
-            IEntities entities)
+            IPluginsController pluginsController)
         {
             this.userFoldersController = userFoldersController;
             this.pluginGroupController = pluginGroupController;
             this.pluginMatcher = pluginMatcher;
             this.dependencyChecker = dependencyChecker;
-            this.entities = entities;
             this.pluginController = pluginController;
             this.pluginsController = pluginsController;
 
@@ -214,7 +210,7 @@
                 ((UserFolderToolStripMenuItem)sender).UserFolder,
                 pluginController,
                 pluginGroupController,
-                new UserFolderController(entities),
+                new UserFoldersController(new UserFoldersDataAccess(), new UserFolderController(new UserFolderDataAccess())),
                 pluginMatcher,
                 dependencyChecker,
                 pluginsController).Show(this);

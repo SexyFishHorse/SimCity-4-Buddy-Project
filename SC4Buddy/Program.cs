@@ -37,7 +37,7 @@
             try
             {
                 var entities = EntityFactory.Instance.Entities;
-                var userFolderController = new UserFolderController(entities);
+                var userFolderController = new UserFolderController(new UserFolderDataAccess());
                 var userFoldersController = new UserFoldersController(new UserFoldersDataAccess(), userFolderController);
                 var pluginsController = new PluginsController(new PluginFileController(entities), new PluginController(entities));
 
@@ -69,8 +69,7 @@
                             new PluginMatcher(
                                 new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty)),
                             new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFoldersController.GetMainUserFolder()),
-                            pluginsController,
-                            entities));
+                            pluginsController));
                 }
             }
             catch (Exception ex)
@@ -97,10 +96,9 @@
 
         private static void SetDefaultUserFolder()
         {
-            var entities = EntityFactory.Instance.Entities;
             var userFoldersController = new UserFoldersController(
                 new UserFoldersDataAccess(),
-                new UserFolderController(entities));
+                new UserFolderController(new UserFolderDataAccess()));
 
             var path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimCity 4");

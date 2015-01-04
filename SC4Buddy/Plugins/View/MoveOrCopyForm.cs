@@ -16,7 +16,7 @@
 
         private readonly UserFolder currentUserFolder;
 
-        private readonly IUserFolderController userFolderController;
+        private readonly IUserFoldersController userFoldersController;
 
         private readonly IPluginsController pluginsController;
 
@@ -28,13 +28,13 @@
 
         public MoveOrCopyForm(
             UserFolder currentUserFolder,
-            IUserFolderController userFolderController,
+            IUserFoldersController userFoldersController,
             IPluginController pluginController,
             IPluginFileController pluginFileController,
             IPluginsController pluginsController)
         {
             this.currentUserFolder = currentUserFolder;
-            this.userFolderController = userFolderController;
+            this.userFoldersController = userFoldersController;
             this.pluginController = pluginController;
             this.pluginFileController = pluginFileController;
             this.pluginsController = pluginsController;
@@ -87,7 +87,7 @@
             userFolderListView.BeginUpdate();
             userFolderListView.Items.Clear();
 
-            var userFolders = userFolderController.UserFolders;
+            var userFolders = userFoldersController.UserFolders;
 
             foreach (var userFolder in userFolders.Where(userFolder => !userFolder.Equals(currentUserFolder)))
             {

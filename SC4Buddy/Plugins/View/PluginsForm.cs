@@ -38,14 +38,14 @@
 
         private readonly UserFolder userFolder;
 
-        private readonly IUserFolderController userFolderController;
+        private readonly IUserFoldersController userFoldersController;
 
         private Plugin selectedPlugin;
 
         public PluginsForm(
             IPluginController pluginController,
             PluginGroupController pluginGroupController,
-            IUserFolderController userFolderController,
+            IUserFoldersController userFoldersController,
             IPluginsController pluginsController,
             UserFolder userFolder,
             IPluginMatcher pluginMatcher,
@@ -53,7 +53,7 @@
         {
             this.pluginGroupController = pluginGroupController;
             this.pluginController = pluginController;
-            this.userFolderController = userFolderController;
+            this.userFoldersController = userFoldersController;
             this.pluginsController = pluginsController;
 
             if (!Directory.Exists(userFolder.FolderPath))
@@ -66,7 +66,7 @@
                     }
 
                     userFolder.FolderPath = Settings.Get(Settings.Keys.GameLocation);
-                    userFolderController.Update(userFolder);
+                    userFoldersController.Update(userFolder);
                 }
                 else
                 {
@@ -384,7 +384,6 @@
             try
             {
                 var numUpdated = await pluginsController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
-                userFolderController.SaveChanges();
                 RepopulateInstalledPluginsListView();
 
                 MessageBox.Show(
@@ -482,7 +481,7 @@
         {
             var dialog = new MoveOrCopyForm(
                 userFolder,
-                userFolderController,
+                userFoldersController,
                 pluginController,
                 new PluginFileController(EntityFactory.Instance.Entities),
                 pluginsController)
