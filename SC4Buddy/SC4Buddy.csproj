@@ -177,7 +177,9 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="UserFolders\DataAccess\IUserFolderDataAccess.cs" />
+    <Compile Include="UserFolders\DataAccess\IUserFoldersDataAccess.cs" />
     <Compile Include="UserFolders\DataAccess\UserFolderDataAccess.cs" />
+    <Compile Include="UserFolders\DataAccess\UserFoldersDataAccess.cs" />
     <Compile Include="UserFolders\View\UserFolderForm.cs">
       <SubType>Form</SubType>
     </Compile>
