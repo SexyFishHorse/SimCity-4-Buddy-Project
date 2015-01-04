@@ -9,15 +9,15 @@
 
     public class PluginCopier
     {
-        private readonly PluginController pluginController;
+        private readonly IPluginController pluginController;
 
-        private readonly PluginFileController pluginFileController;
+        private readonly IPluginFileController pluginFileController;
 
         private readonly UserFolderController userFolderController;
 
         public PluginCopier(
-            PluginController pluginController,
-            PluginFileController pluginFileController,
+            IPluginController pluginController,
+            IPluginFileController pluginFileController,
             UserFolderController userFolderController)
         {
             this.pluginController = pluginController;

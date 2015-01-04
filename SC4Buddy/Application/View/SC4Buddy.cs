@@ -30,7 +30,7 @@
 
         private readonly UserFolderController userFolderController;
 
-        private readonly PluginController pluginController;
+        private readonly IPluginController pluginController;
 
         private readonly PluginGroupController pluginGroupController;
 
@@ -40,7 +40,7 @@
 
         public Sc4Buddy(
             UserFolderController userFolderController,
-            PluginController pluginController,
+            IPluginController pluginController,
             PluginGroupController pluginGroupController,
             IPluginMatcher pluginMatcher,
             IDependencyChecker dependencyChecker)

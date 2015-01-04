@@ -14,11 +14,11 @@
     {
         private readonly Plugin selectedPlugin;
 
-        private readonly PluginFileController pluginFileController;
+        private readonly IPluginFileController pluginFileController;
 
         public QuarantinedPluginFilesForm(
             Plugin selectedPlugin,
-            PluginFileController pluginFileController)
+            IPluginFileController pluginFileController)
         {
             this.selectedPlugin = selectedPlugin;
             this.pluginFileController = pluginFileController;

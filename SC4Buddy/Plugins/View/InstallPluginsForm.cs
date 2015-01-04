@@ -33,13 +33,13 @@
 
         private readonly IList<Plugin> tempPluginInfo;
 
-        private readonly PluginController pluginController;
+        private readonly IPluginController pluginController;
 
         private readonly EnterPluginInformationForm enterPluginInformationForm;
 
         private readonly IPluginMatcher pluginMatcher;
 
-        public InstallPluginsForm(PluginController pluginController, string[] files, UserFolder userFolder, IPluginMatcher pluginMatcher)
+        public InstallPluginsForm(IPluginController pluginController, string[] files, UserFolder userFolder, IPluginMatcher pluginMatcher)
         {
             this.userFolder = userFolder;
             this.pluginMatcher = pluginMatcher;

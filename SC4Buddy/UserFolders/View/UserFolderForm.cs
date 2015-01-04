@@ -15,7 +15,7 @@
     {
         private readonly UserFolder userFolder;
 
-        private readonly PluginController pluginController;
+        private readonly IPluginController pluginController;
 
         private readonly PluginGroupController pluginGroupController;
 
@@ -27,7 +27,7 @@
 
         public UserFolderForm(
             UserFolder userFolder,
-            PluginController pluginController,
+            IPluginController pluginController,
             PluginGroupController pluginGroupController,
             UserFolderController userFolderController,
             IPluginMatcher pluginMatcher,

@@ -16,10 +16,9 @@
     {
         private readonly IEntities entities;
 
-        private readonly PluginFileController pluginFileController;
+        private readonly IPluginFileController pluginFileController;
 
-        private readonly PluginController pluginController;
-
+        private readonly IPluginController pluginController;
         public UserFolderController(IEntities entities)
         {
             this.entities = entities;

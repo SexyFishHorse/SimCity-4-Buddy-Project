@@ -28,7 +28,7 @@
 
         private readonly IDependencyChecker dependencyChecker;
 
-        private readonly PluginController pluginController;
+        private readonly IPluginController pluginController;
 
         private readonly PluginGroupController pluginGroupController;
 
@@ -41,7 +41,7 @@
         private Plugin selectedPlugin;
 
         public PluginsForm(
-            PluginController pluginController,
+            IPluginController pluginController,
             PluginGroupController pluginGroupController,
             UserFolderController userFolderController,
             UserFolder userFolder,

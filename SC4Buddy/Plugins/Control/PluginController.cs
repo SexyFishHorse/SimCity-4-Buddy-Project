@@ -5,7 +5,7 @@
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
 
-    public class PluginController
+    public class PluginController : IPluginController
     {
         private readonly IEntities entities;
 

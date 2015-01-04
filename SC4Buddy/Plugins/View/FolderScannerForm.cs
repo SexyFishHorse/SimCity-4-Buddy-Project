@@ -28,7 +28,7 @@
 
         private readonly FolderScannerController folderScannerController;
 
-        private readonly PluginController pluginController;
+        private readonly IPluginController pluginController;
 
         private readonly PluginGroupController pluginGroupController;
 
@@ -38,7 +38,7 @@
 
         public FolderScannerForm(
             FolderScannerController folderScannerController,
-            PluginController pluginController,
+            IPluginController pluginController,
             PluginGroupController pluginGroupController,
             UserFolder userFolder,
             IPluginMatcher pluginMatcher)

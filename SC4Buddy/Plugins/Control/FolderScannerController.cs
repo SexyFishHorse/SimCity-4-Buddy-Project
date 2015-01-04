@@ -21,9 +21,9 @@
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly PluginFileController pluginFileController;
+        private readonly IPluginFileController pluginFileController;
 
-        public FolderScannerController(PluginFileController pluginFileController)
+        public FolderScannerController(IPluginFileController pluginFileController)
         {
             this.pluginFileController = pluginFileController;
         }
@@ -59,7 +59,7 @@
 
         public async Task<bool> AutoGroupKnownFiles(
             UserFolder userFolder,
-            PluginController pluginController,
+            IPluginController pluginController,
             IPluginMatcher pluginMatcher)
         {
             var fileDictionary = await GetRemotePluginFileMatches(pluginMatcher, NewFiles);

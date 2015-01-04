@@ -18,9 +18,9 @@
 
         private readonly UserFolderController userFolderController;
 
-        private readonly PluginController pluginController;
+        private readonly IPluginController pluginController;
 
-        private readonly PluginFileController pluginFileController;
+        private readonly IPluginFileController pluginFileController;
 
         private UserFolder selectedUserFolder;
 
@@ -33,8 +33,8 @@
         public MoveOrCopyForm(
             UserFolder currentUserFolder,
             UserFolderController userFolderController,
-            PluginController pluginController,
-            PluginFileController pluginFileController)
+            IPluginController pluginController,
+            IPluginFileController pluginFileController)
         {
             this.currentUserFolder = currentUserFolder;
             this.userFolderController = userFolderController;
