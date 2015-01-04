@@ -37,8 +37,10 @@
             try
             {
                 var entities = EntityFactory.Instance.Entities;
-                var userFolderController = new UserFolderController(new PluginFileController(entities), new PluginController(entities), entities);
+                var userFolderController = new UserFolderController(entities);
                 var userFoldersController = new UserFoldersController(new UserFoldersDataAccess(), userFolderController);
+                var pluginsController = new PluginsController(new PluginFileController(entities), new PluginController(entities));
+
                 System.Windows.Forms.Application.EnableVisualStyles();
                 System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
                 System.Windows.Forms.Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
@@ -67,7 +69,7 @@
                             new PluginMatcher(
                                 new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty)),
                             new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFoldersController.GetMainUserFolder()),
-                            new PluginFileController(entities),
+                            pluginsController,
                             entities));
                 }
             }
@@ -98,7 +100,7 @@
             var entities = EntityFactory.Instance.Entities;
             var userFoldersController = new UserFoldersController(
                 new UserFoldersDataAccess(),
-                new UserFolderController(new PluginFileController(entities), new PluginController(entities), entities));
+                new UserFolderController(entities));
 
             var path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimCity 4");

@@ -33,7 +33,7 @@
 
         private readonly IPluginController pluginController;
 
-        private readonly IPluginFileController pluginFileController;
+        private readonly IPluginsController pluginsController;
 
         private readonly IEntities entities;
 
@@ -49,16 +49,16 @@
             PluginGroupController pluginGroupController,
             IPluginMatcher pluginMatcher,
             IDependencyChecker dependencyChecker,
-            IPluginFileController pluginFileController,
+            IPluginsController pluginsController,
             IEntities entities)
         {
             this.userFoldersController = userFoldersController;
             this.pluginGroupController = pluginGroupController;
             this.pluginMatcher = pluginMatcher;
             this.dependencyChecker = dependencyChecker;
-            this.pluginFileController = pluginFileController;
             this.entities = entities;
             this.pluginController = pluginController;
+            this.pluginsController = pluginsController;
 
             InitializeComponent();
 
@@ -214,9 +214,10 @@
                 ((UserFolderToolStripMenuItem)sender).UserFolder,
                 pluginController,
                 pluginGroupController,
-                new UserFolderController(pluginFileController, pluginController, entities),
+                new UserFolderController(entities),
                 pluginMatcher,
-                dependencyChecker).Show(this);
+                dependencyChecker,
+                pluginsController).Show(this);
         }
 
         private void PlayButtonClick(object sender, EventArgs e)

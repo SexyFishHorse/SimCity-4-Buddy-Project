@@ -5,7 +5,6 @@
     using System.IO;
     using System.Linq;
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.UserFolders.Control;
 
     public class PluginCopier
     {
@@ -13,15 +12,15 @@
 
         private readonly IPluginFileController pluginFileController;
 
-        private readonly IUserFolderController userFolderController;
+        private readonly IPluginsController pluginsController;
 
         public PluginCopier(
             IPluginController pluginController,
             IPluginFileController pluginFileController,
-            IUserFolderController userFolderController)
+            IPluginsController pluginsController)
         {
             this.pluginController = pluginController;
-            this.userFolderController = userFolderController;
+            this.pluginsController = pluginsController;
             this.pluginFileController = pluginFileController;
         }
 
@@ -73,7 +72,7 @@
                 return;
             }
 
-            userFolderController.UninstallPlugin(plugin);
+            pluginsController.UninstallPlugin(plugin);
         }
 
         private PluginFile CopyFile(PluginFile pluginFile, UserFolder targetUserFolder)

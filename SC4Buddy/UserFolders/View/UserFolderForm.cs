@@ -7,7 +7,6 @@
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Plugins.View;
-    using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.UserFolders.Control;
 
@@ -16,6 +15,8 @@
         private readonly UserFolder userFolder;
 
         private readonly IPluginController pluginController;
+
+        private readonly IPluginsController pluginsController;
 
         private readonly PluginGroupController pluginGroupController;
 
@@ -31,7 +32,8 @@
             PluginGroupController pluginGroupController,
             IUserFolderController userFolderController,
             IPluginMatcher pluginMatcher,
-            IDependencyChecker dependencyChecker)
+            IDependencyChecker dependencyChecker,
+            IPluginsController pluginsController)
         {
             this.userFolder = userFolder;
             this.pluginController = pluginController;
@@ -39,6 +41,7 @@
             this.userFolderController = userFolderController;
             this.pluginMatcher = pluginMatcher;
             this.dependencyChecker = dependencyChecker;
+            this.pluginsController = pluginsController;
             InitializeComponent();
         }
 
@@ -48,6 +51,7 @@
                 pluginController,
                 pluginGroupController,
                 userFolderController,
+                pluginsController,
                 userFolder,
                 pluginMatcher,
                 dependencyChecker);

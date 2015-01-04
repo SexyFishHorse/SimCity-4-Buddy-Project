@@ -28,6 +28,8 @@
 
         private readonly IDependencyChecker dependencyChecker;
 
+        private readonly IPluginsController pluginsController;
+
         private readonly IPluginController pluginController;
 
         private readonly PluginGroupController pluginGroupController;
@@ -44,6 +46,7 @@
             IPluginController pluginController,
             PluginGroupController pluginGroupController,
             IUserFolderController userFolderController,
+            IPluginsController pluginsController,
             UserFolder userFolder,
             IPluginMatcher pluginMatcher,
             IDependencyChecker dependencyChecker)
@@ -51,6 +54,7 @@
             this.pluginGroupController = pluginGroupController;
             this.pluginController = pluginController;
             this.userFolderController = userFolderController;
+            this.pluginsController = pluginsController;
 
             if (!Directory.Exists(userFolder.FolderPath))
             {
@@ -200,7 +204,7 @@
                 return;
             }
 
-            userFolderController.UninstallPlugin(selectedPlugin);
+            pluginsController.UninstallPlugin(selectedPlugin);
             ClearPluginInformation();
             RepopulateInstalledPluginsListView();
         }
@@ -379,7 +383,7 @@
         {
             try
             {
-                var numUpdated = await userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
+                var numUpdated = await pluginsController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
                 userFolderController.SaveChanges();
                 RepopulateInstalledPluginsListView();
 
@@ -407,7 +411,7 @@
 
                 if (dialogResult == DialogResult.Retry)
                 {
-                    UpdateInfoForAllPluginsFromServer();
+                    UpdateInfoForAllPluginsFromServer().GetAwaiter().GetResult();
                 }
             }
         }
@@ -421,9 +425,9 @@
         {
             try
             {
-                await userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
+                await pluginsController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
 
-                var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolder);
+                var numRecognizedPlugins = pluginsController.NumberOfRecognizedPlugins(userFolder);
 
                 if (numRecognizedPlugins < 1)
                 {
@@ -480,7 +484,8 @@
                 userFolder,
                 userFolderController,
                 pluginController,
-                new PluginFileController(EntityFactory.Instance.Entities))
+                new PluginFileController(EntityFactory.Instance.Entities),
+                pluginsController)
             {
                 Plugin = selectedPlugin
             };
@@ -559,7 +564,7 @@
                 MessageBox.Show(
                     this,
                     string.Format("The directory \"{0}\" doesn't appear to exist.", userFolder.FolderPath),
-                    "Directory not found",
+                    @"Directory not found",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
             }

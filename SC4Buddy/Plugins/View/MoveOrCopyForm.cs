@@ -18,30 +18,35 @@
 
         private readonly IUserFolderController userFolderController;
 
+        private readonly IPluginsController pluginsController;
+
         private readonly IPluginController pluginController;
 
         private readonly IPluginFileController pluginFileController;
 
         private UserFolder selectedUserFolder;
 
-        public event EventHandler PluginCopied;
-
-        public event EventHandler PluginMoved;
-
-        public event EventHandler ErrorDuringCopyOrMove;
-
         public MoveOrCopyForm(
             UserFolder currentUserFolder,
             IUserFolderController userFolderController,
             IPluginController pluginController,
-            IPluginFileController pluginFileController)
+            IPluginFileController pluginFileController,
+            IPluginsController pluginsController)
         {
             this.currentUserFolder = currentUserFolder;
             this.userFolderController = userFolderController;
             this.pluginController = pluginController;
             this.pluginFileController = pluginFileController;
+            this.pluginsController = pluginsController;
+
             InitializeComponent();
         }
+
+        public event EventHandler PluginCopied;
+
+        public event EventHandler PluginMoved;
+
+        public event EventHandler ErrorDuringCopyOrMove;
 
         public Plugin Plugin { get; set; }
 
@@ -110,7 +115,7 @@
 
         private void CopyButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier(pluginController, pluginFileController, userFolderController);
+            var copier = new PluginCopier(pluginController, pluginFileController, pluginsController);
             try
             {
                 copier.CopyPlugin(Plugin, selectedUserFolder);
@@ -133,7 +138,7 @@
 
         private void MoveButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier(pluginController, pluginFileController, userFolderController);
+            var copier = new PluginCopier(pluginController, pluginFileController, pluginsController);
             try
             {
                 copier.CopyPlugin(Plugin, selectedUserFolder, true);
