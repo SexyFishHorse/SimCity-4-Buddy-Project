@@ -20,7 +20,6 @@
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
-    using NIHEI.SC4Buddy.UserFolders.DataAccess;
     using NIHEI.SC4Buddy.UserFolders.View;
     using NIHEI.SC4Buddy.View.Elements;
 
@@ -31,9 +30,12 @@
         private readonly ResourceManager localizationManager;
 
         private readonly IUserFoldersController userFoldersController;
-        private readonly UserFolderController userFolderController;
 
         private readonly IPluginController pluginController;
+
+        private readonly IPluginFileController pluginFileController;
+
+        private readonly IEntities entities;
 
         private readonly PluginGroupController pluginGroupController;
 
@@ -43,17 +45,19 @@
 
         public Sc4Buddy(
             IUserFoldersController userFoldersController,
-            UserFolderController userFolderController,
             IPluginController pluginController,
             PluginGroupController pluginGroupController,
             IPluginMatcher pluginMatcher,
-            IDependencyChecker dependencyChecker)
+            IDependencyChecker dependencyChecker,
+            IPluginFileController pluginFileController,
+            IEntities entities)
         {
             this.userFoldersController = userFoldersController;
-            this.userFolderController = userFolderController;
             this.pluginGroupController = pluginGroupController;
             this.pluginMatcher = pluginMatcher;
             this.dependencyChecker = dependencyChecker;
+            this.pluginFileController = pluginFileController;
+            this.entities = entities;
             this.pluginController = pluginController;
 
             InitializeComponent();
@@ -83,7 +87,7 @@
 
         private void ManageFoldersToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new ManageUserFoldersForm(EntityFactory.Instance.Entities).ShowDialog(this);
+            new ManageUserFoldersForm(userFoldersController).ShowDialog(this);
 
             RepopulateUserFolderRelatives();
         }
@@ -104,7 +108,7 @@
             var insertIndex = 0;
             var comboboxIndex = 0;
             var startupFolderIndex = -1;
-            foreach (var userFolder in userFolderController.UserFolders)
+            foreach (var userFolder in userFoldersController.UserFolders)
             {
                 if (!userFolder.IsMainFolder)
                 {
@@ -121,7 +125,7 @@
                 if (userFolder.Alias.Equals("?"))
                 {
                     userFolder.Alias = LocalizationStrings.GameUserFolderName;
-                    userFolderController.Update(userFolder);
+                    userFoldersController.Update(userFolder);
                 }
 
                 userFoldersToolStripMenuItem.DropDownItems.Insert(insertIndex, new UserFolderToolStripMenuItem(userFolder, UserFolderMenuItemClick));
@@ -210,7 +214,7 @@
                 ((UserFolderToolStripMenuItem)sender).UserFolder,
                 pluginController,
                 pluginGroupController,
-                userFolderController,
+                new UserFolderController(pluginFileController, pluginController, entities),
                 pluginMatcher,
                 dependencyChecker).Show(this);
         }

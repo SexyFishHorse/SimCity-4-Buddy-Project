@@ -51,7 +51,7 @@
                     SetDefaultUserFolder();
                 }
 
-                if (userFolderController.UserFolders.Any(x => x.IsMainFolder && x.FolderPath.Equals("?")))
+                if (userFoldersController.UserFolders.Any(x => x.IsMainFolder && x.FolderPath.Equals("?")))
                 {
                     SetDefaultUserFolder();
                 }
@@ -61,12 +61,14 @@
                     new SettingsController(userFoldersController).CheckMainFolder();
                     System.Windows.Forms.Application.Run(
                         new Sc4Buddy(
-                            userFolderController,
+                            userFoldersController,
                             new PluginController(entities),
                             new PluginGroupController(entities),
                             new PluginMatcher(
                                 new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty)),
-                            new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFolderController.GetMainUserFolder())));
+                            new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFoldersController.GetMainUserFolder()),
+                            new PluginFileController(entities),
+                            entities));
                 }
             }
             catch (Exception ex)
@@ -94,18 +96,20 @@
         private static void SetDefaultUserFolder()
         {
             var entities = EntityFactory.Instance.Entities;
-            var userFolderController = new UserFolderController(new PluginFileController(entities), new PluginController(entities), entities);
+            var userFoldersController = new UserFoldersController(
+                new UserFoldersDataAccess(),
+                new UserFolderController(new PluginFileController(entities), new PluginController(entities), entities));
 
             var path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimCity 4");
 
-            if (!Directory.Exists(path) || userFolderController.UserFolders.Any(x => x.FolderPath.Equals(path)))
+            if (!Directory.Exists(path) || userFoldersController.UserFolders.Any(x => x.FolderPath.Equals(path)))
             {
                 return;
             }
 
             Log.Info(string.Format("Setting default user folder to {0}", path));
-            userFolderController.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, FolderPath = path });
+            userFoldersController.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, FolderPath = path });
         }
     }
 }

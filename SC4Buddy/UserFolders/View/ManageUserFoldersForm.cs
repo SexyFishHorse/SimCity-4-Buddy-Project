@@ -5,9 +5,7 @@
     using System.Linq;
     using System.Resources;
     using System.Windows.Forms;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.View.Elements;
@@ -18,16 +16,14 @@
 
         private readonly ResourceManager localizationManager;
 
-        private readonly UserFolderController controller;
+        private readonly IUserFoldersController userFoldersController;
 
-        public ManageUserFoldersForm(IEntities entities)
+        public ManageUserFoldersForm(IUserFoldersController userFoldersController)
         {
+            this.userFoldersController = userFoldersController;
+
             InitializeComponent();
 
-            var pluginFileController = new PluginFileController(entities);
-            var pluginController = new PluginController(entities);
-
-            controller = new UserFolderController(pluginFileController, pluginController, entities);
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(ManageUserFoldersForm));
         }
 
@@ -42,7 +38,7 @@
 
         private void ReloadUserFoldersListView()
         {
-            var userFolders = controller.UserFolders.Where(x => !x.IsMainFolder);
+            var userFolders = userFoldersController.UserFolders.Where(x => !x.IsMainFolder);
 
             UserFoldersListView.BeginUpdate();
             UserFoldersListView.Items.Clear();
@@ -111,7 +107,7 @@
                 return;
             }
 
-            controller.Delete(SelectedFolder);
+            userFoldersController.Delete(SelectedFolder);
 
             ResetForm();
             ReloadUserFoldersListView();
@@ -175,8 +171,8 @@
                         IsStartupFolder = startupFolderCheckbox.Checked
                     };
 
-                    var pathOk = !controller.ValidatePath(newFolder.FolderPath, Guid.NewGuid());
-                    var notMainFolder = !controller.IsNotGameFolder(newFolder.FolderPath);
+                    var pathOk = !userFoldersController.ValidatePath(newFolder.FolderPath, Guid.NewGuid());
+                    var notMainFolder = !userFoldersController.IsNotGameFolder(newFolder.FolderPath);
 
                     if (pathOk || notMainFolder)
                     {
@@ -185,7 +181,7 @@
                         errorProvider.SetError(pathTextBox, LocalizationStrings.PathError);
                     }
 
-                    if (!controller.ValidateAlias(newFolder.Alias, Guid.Empty))
+                    if (!userFoldersController.ValidateAlias(newFolder.Alias, Guid.Empty))
                     {
                         hasErrors = true;
                         errorProvider.SetIconPadding(aliasTextBox, ErrorIconPadding);
@@ -197,18 +193,18 @@
                         return;
                     }
 
-                    controller.Add(newFolder);
+                    userFoldersController.Add(newFolder);
                     break;
                 case UserFolderMode.Update:
 
-                    if (!controller.ValidatePath(pathTextBox.Text, SelectedFolder.Id))
+                    if (!userFoldersController.ValidatePath(pathTextBox.Text, SelectedFolder.Id))
                     {
                         hasErrors = true;
                         errorProvider.SetIconPadding(pathTextBox, ErrorIconPadding);
                         errorProvider.SetError(pathTextBox, LocalizationStrings.PathError);
                     }
 
-                    if (!controller.ValidateAlias(aliasTextBox.Text, SelectedFolder.Id))
+                    if (!userFoldersController.ValidateAlias(aliasTextBox.Text, SelectedFolder.Id))
                     {
                         hasErrors = true;
                         errorProvider.SetIconPadding(aliasTextBox, ErrorIconPadding);
@@ -224,11 +220,10 @@
                     SelectedFolder.Alias = aliasTextBox.Text;
                     SelectedFolder.IsStartupFolder = startupFolderCheckbox.Checked;
 
-                    controller.Update(SelectedFolder);
+                    userFoldersController.Update(SelectedFolder);
                     break;
             }
 
-            controller.SaveChanges();
             ResetForm();
             ReloadUserFoldersListView();
         }
