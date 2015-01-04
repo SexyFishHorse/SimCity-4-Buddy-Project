@@ -34,7 +34,8 @@
             Log.Info("Application starting");
             try
             {
-                var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
+                var entities = EntityFactory.Instance.Entities;
+                var userFolderController = new UserFolderController(new PluginFileController(entities), new PluginController(entities), entities);
                 System.Windows.Forms.Application.EnableVisualStyles();
                 System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
                 System.Windows.Forms.Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
@@ -58,8 +59,8 @@
                     System.Windows.Forms.Application.Run(
                         new Sc4Buddy(
                             userFolderController,
-                            new PluginController(EntityFactory.Instance.Entities),
-                            new PluginGroupController(EntityFactory.Instance.Entities),
+                            new PluginController(entities),
+                            new PluginGroupController(entities),
                             new PluginMatcher(
                                 new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty)),
                             new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFolderController.GetMainUserFolder())));
@@ -91,7 +92,8 @@
 
         private static void SetDefaultUserFolder()
         {
-            var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
+            var entities = EntityFactory.Instance.Entities;
+            var userFolderController = new UserFolderController(new PluginFileController(entities), new PluginController(entities), entities);
 
             var path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimCity 4");

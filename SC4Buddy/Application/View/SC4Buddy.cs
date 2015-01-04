@@ -13,12 +13,14 @@
     using log4net;
     using NIHEI.SC4Buddy.Application.Control;
     using NIHEI.SC4Buddy.Configuration;
+    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
+    using NIHEI.SC4Buddy.UserFolders.DataAccess;
     using NIHEI.SC4Buddy.UserFolders.View;
     using NIHEI.SC4Buddy.View.Elements;
 
@@ -78,7 +80,7 @@
 
         private void ManageFoldersToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new ManageUserFoldersForm().ShowDialog(this);
+            new ManageUserFoldersForm(EntityFactory.Instance.Entities).ShowDialog(this);
 
             RepopulateUserFolderRelatives();
         }

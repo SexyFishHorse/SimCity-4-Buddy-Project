@@ -7,6 +7,7 @@
     using System.Windows.Forms;
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.View.Elements;
@@ -19,11 +20,14 @@
 
         private readonly UserFolderController controller;
 
-        public ManageUserFoldersForm()
+        public ManageUserFoldersForm(IEntities entities)
         {
             InitializeComponent();
 
-            controller = new UserFolderController(EntityFactory.Instance.Entities);
+            var pluginFileController = new PluginFileController(entities);
+            var pluginController = new PluginController(entities);
+
+            controller = new UserFolderController(pluginFileController, pluginController, entities);
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(ManageUserFoldersForm));
         }
 

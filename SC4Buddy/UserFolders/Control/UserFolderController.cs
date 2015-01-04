@@ -19,12 +19,15 @@
         private readonly IPluginFileController pluginFileController;
 
         private readonly IPluginController pluginController;
-        public UserFolderController(IEntities entities)
-        {
-            this.entities = entities;
 
-            pluginFileController = new PluginFileController(EntityFactory.Instance.Entities);
-            pluginController = new PluginController(EntityFactory.Instance.Entities);
+        public UserFolderController(
+            IPluginFileController pluginFileController,
+            IPluginController pluginController,
+            IEntities entities)
+        {
+            this.pluginFileController = pluginFileController;
+            this.pluginController = pluginController;
+            this.entities = entities;
         }
 
         public IEnumerable<UserFolder> UserFolders
