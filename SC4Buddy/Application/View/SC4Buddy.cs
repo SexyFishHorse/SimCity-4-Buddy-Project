@@ -302,7 +302,7 @@
                 MessageBox.Show(
                     this,
                     string.Format("No log file was found. Check the folder ({0}) manually.", path),
-                    "No logfile was found",
+                    @"No logfile was found",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
