@@ -120,6 +120,7 @@
     <Compile Include="Application\Control\GameArgumentsHelper.cs" />
     <Compile Include="Application\Control\GameLauncher.cs" />
     <Compile Include="Application\Control\ISettingsController.cs" />
+    <Compile Include="Application\Utilities\FileSystemLocationsUtil.cs" />
     <Compile Include="Plugins\Control\IPluginController.cs" />
     <Compile Include="Plugins\Control\IPluginFileController.cs" />
     <Compile Include="Plugins\Control\NonPluginFilesScanner.cs" />

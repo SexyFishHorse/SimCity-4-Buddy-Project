@@ -13,6 +13,7 @@
     using log4net;
     using log4net.Config;
     using NIHEI.SC4Buddy.Application.Control;
+    using NIHEI.SC4Buddy.Application.Utilities;
     using NIHEI.SC4Buddy.Application.View;
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.DataAccess;
@@ -82,11 +83,9 @@
                     return;
                 }
 
-                var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Irradiated Games", "SimCity 4 Buddy", "Logs");
-
                 var file = string.Format("log-{0}.txt", DateTime.Now.ToString("yyyy-MM-dd"));
 
-                Process.Start(Path.Combine(path, file));
+                Process.Start(Path.Combine(FileSystemLocationsUtil.LogFilesDirectory, file));
             }
         }
 
