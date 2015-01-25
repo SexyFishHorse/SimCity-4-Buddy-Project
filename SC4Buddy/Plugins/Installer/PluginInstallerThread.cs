@@ -21,11 +21,11 @@
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly PluginFileController pluginFileController;
+        private readonly IPluginFileController pluginFileController;
 
-        private readonly PluginController pluginController;
+        private readonly IPluginController pluginController;
 
-        public PluginInstallerThread(PluginController pluginController, PluginFileController pluginFileController)
+        public PluginInstallerThread(IPluginController pluginController, IPluginFileController pluginFileController)
         {
             this.pluginFileController = pluginFileController;
             this.pluginController = pluginController;

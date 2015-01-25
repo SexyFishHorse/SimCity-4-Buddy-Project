@@ -16,32 +16,37 @@
 
         private readonly UserFolder currentUserFolder;
 
-        private readonly UserFolderController userFolderController;
+        private readonly IUserFoldersController userFoldersController;
 
-        private readonly PluginController pluginController;
+        private readonly IPluginsController pluginsController;
 
-        private readonly PluginFileController pluginFileController;
+        private readonly IPluginController pluginController;
+
+        private readonly IPluginFileController pluginFileController;
 
         private UserFolder selectedUserFolder;
+
+        public MoveOrCopyForm(
+            UserFolder currentUserFolder,
+            IUserFoldersController userFoldersController,
+            IPluginController pluginController,
+            IPluginFileController pluginFileController,
+            IPluginsController pluginsController)
+        {
+            this.currentUserFolder = currentUserFolder;
+            this.userFoldersController = userFoldersController;
+            this.pluginController = pluginController;
+            this.pluginFileController = pluginFileController;
+            this.pluginsController = pluginsController;
+
+            InitializeComponent();
+        }
 
         public event EventHandler PluginCopied;
 
         public event EventHandler PluginMoved;
 
         public event EventHandler ErrorDuringCopyOrMove;
-
-        public MoveOrCopyForm(
-            UserFolder currentUserFolder,
-            UserFolderController userFolderController,
-            PluginController pluginController,
-            PluginFileController pluginFileController)
-        {
-            this.currentUserFolder = currentUserFolder;
-            this.userFolderController = userFolderController;
-            this.pluginController = pluginController;
-            this.pluginFileController = pluginFileController;
-            InitializeComponent();
-        }
 
         public Plugin Plugin { get; set; }
 
@@ -82,7 +87,7 @@
             userFolderListView.BeginUpdate();
             userFolderListView.Items.Clear();
 
-            var userFolders = userFolderController.UserFolders;
+            var userFolders = userFoldersController.UserFolders;
 
             foreach (var userFolder in userFolders.Where(userFolder => !userFolder.Equals(currentUserFolder)))
             {
@@ -110,7 +115,7 @@
 
         private void CopyButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier(pluginController, pluginFileController, userFolderController);
+            var copier = new PluginCopier(pluginController, pluginFileController, pluginsController);
             try
             {
                 copier.CopyPlugin(Plugin, selectedUserFolder);
@@ -133,7 +138,7 @@
 
         private void MoveButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier(pluginController, pluginFileController, userFolderController);
+            var copier = new PluginCopier(pluginController, pluginFileController, pluginsController);
             try
             {
                 copier.CopyPlugin(Plugin, selectedUserFolder, true);

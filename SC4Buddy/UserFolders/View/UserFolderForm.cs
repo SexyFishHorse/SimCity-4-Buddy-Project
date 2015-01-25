@@ -7,7 +7,6 @@
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Plugins.View;
-    using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.UserFolders.Control;
 
@@ -15,11 +14,13 @@
     {
         private readonly UserFolder userFolder;
 
-        private readonly PluginController pluginController;
+        private readonly IPluginController pluginController;
+
+        private readonly IPluginsController pluginsController;
 
         private readonly PluginGroupController pluginGroupController;
 
-        private readonly UserFolderController userFolderController;
+        private readonly IUserFoldersController userFoldersController;
 
         private readonly IPluginMatcher pluginMatcher;
 
@@ -27,18 +28,20 @@
 
         public UserFolderForm(
             UserFolder userFolder,
-            PluginController pluginController,
+            IPluginController pluginController,
             PluginGroupController pluginGroupController,
-            UserFolderController userFolderController,
+            IUserFoldersController userFoldersController,
             IPluginMatcher pluginMatcher,
-            IDependencyChecker dependencyChecker)
+            IDependencyChecker dependencyChecker,
+            IPluginsController pluginsController)
         {
             this.userFolder = userFolder;
             this.pluginController = pluginController;
             this.pluginGroupController = pluginGroupController;
-            this.userFolderController = userFolderController;
+            this.userFoldersController = userFoldersController;
             this.pluginMatcher = pluginMatcher;
             this.dependencyChecker = dependencyChecker;
+            this.pluginsController = pluginsController;
             InitializeComponent();
         }
 
@@ -47,7 +50,8 @@
             var dialog = new PluginsForm(
                 pluginController,
                 pluginGroupController,
-                userFolderController,
+                userFoldersController,
+                pluginsController,
                 userFolder,
                 pluginMatcher,
                 dependencyChecker);

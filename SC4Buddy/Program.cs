@@ -13,6 +13,7 @@
     using log4net;
     using log4net.Config;
     using NIHEI.SC4Buddy.Application.Control;
+    using NIHEI.SC4Buddy.Application.Utilities;
     using NIHEI.SC4Buddy.Application.View;
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.DataAccess;
@@ -21,6 +22,7 @@
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
+    using NIHEI.SC4Buddy.UserFolders.DataAccess;
 
     public static class Program
     {
@@ -34,35 +36,40 @@
             Log.Info("Application starting");
             try
             {
-                var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
+                var entities = EntityFactory.Instance.Entities;
+                var userFolderController = new UserFolderController(new UserFolderDataAccess());
+                var userFoldersController = new UserFoldersController(new UserFoldersDataAccess(), userFolderController);
+                var pluginsController = new PluginsController(new PluginFileController(entities), new PluginController(entities));
+
                 System.Windows.Forms.Application.EnableVisualStyles();
                 System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
                 System.Windows.Forms.Application.ApplicationExit += (sender, eventArgs) => Log.Info("Application exited");
 
                 if (string.IsNullOrWhiteSpace(Settings.Get(Settings.Keys.GameLocation)) || !Directory.Exists(Settings.Get(Settings.Keys.GameLocation)))
                 {
-                    var settingsForm = new SettingsForm(userFolderController) { StartPosition = FormStartPosition.CenterScreen };
+                    var settingsForm = new SettingsForm(userFoldersController) { StartPosition = FormStartPosition.CenterScreen };
 
                     System.Windows.Forms.Application.Run(settingsForm);
                     SetDefaultUserFolder();
                 }
 
-                if (userFolderController.UserFolders.Any(x => x.IsMainFolder && x.FolderPath.Equals("?")))
+                if (userFoldersController.UserFolders.Any(x => x.IsMainFolder && x.FolderPath.Equals("?")))
                 {
                     SetDefaultUserFolder();
                 }
 
                 if (Directory.Exists(Settings.Get(Settings.Keys.GameLocation)))
                 {
-                    new SettingsController(userFolderController).CheckMainFolder();
+                    new SettingsController(userFoldersController).CheckMainFolder();
                     System.Windows.Forms.Application.Run(
                         new Sc4Buddy(
-                            userFolderController,
-                            new PluginController(EntityFactory.Instance.Entities),
-                            new PluginGroupController(EntityFactory.Instance.Entities),
+                            userFoldersController,
+                            new PluginController(entities),
+                            new PluginGroupController(entities),
                             new PluginMatcher(
                                 new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty)),
-                            new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFolderController.GetMainUserFolder())));
+                            new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFoldersController.GetMainUserFolder()),
+                            pluginsController));
                 }
             }
             catch (Exception ex)
@@ -81,28 +88,28 @@
                     return;
                 }
 
-                var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Irradiated Games", "SimCity 4 Buddy", "Logs");
-
                 var file = string.Format("log-{0}.txt", DateTime.Now.ToString("yyyy-MM-dd"));
 
-                Process.Start(Path.Combine(path, file));
+                Process.Start(Path.Combine(FileSystemLocationsUtil.LogFilesDirectory, file));
             }
         }
 
         private static void SetDefaultUserFolder()
         {
-            var userFolderController = new UserFolderController(EntityFactory.Instance.Entities);
+            var userFoldersController = new UserFoldersController(
+                new UserFoldersDataAccess(),
+                new UserFolderController(new UserFolderDataAccess()));
 
             var path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimCity 4");
 
-            if (!Directory.Exists(path) || userFolderController.UserFolders.Any(x => x.FolderPath.Equals(path)))
+            if (!Directory.Exists(path) || userFoldersController.UserFolders.Any(x => x.FolderPath.Equals(path)))
             {
                 return;
             }
 
             Log.Info(string.Format("Setting default user folder to {0}", path));
-            userFolderController.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, FolderPath = path });
+            userFoldersController.Add(new UserFolder { Alias = LocalizationStrings.DefaultUserFolderName, FolderPath = path });
         }
     }
 }

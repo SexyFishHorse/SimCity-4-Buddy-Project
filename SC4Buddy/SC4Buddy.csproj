@@ -120,12 +120,17 @@
     <Compile Include="Application\Control\GameArgumentsHelper.cs" />
     <Compile Include="Application\Control\GameLauncher.cs" />
     <Compile Include="Application\Control\ISettingsController.cs" />
+    <Compile Include="Application\Utilities\FileSystemLocationsUtil.cs" />
+    <Compile Include="Plugins\Control\IPluginController.cs" />
+    <Compile Include="Plugins\Control\IPluginFileController.cs" />
+    <Compile Include="Plugins\Control\IPluginsController.cs" />
     <Compile Include="Plugins\Control\NonPluginFilesScanner.cs" />
     <Compile Include="Plugins\Control\FolderScannerController.cs" />
     <Compile Include="Plugins\Control\PluginCopier.cs" />
     <Compile Include="Plugins\Control\PluginGroupController.cs" />
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Application\Control\SettingsController.cs" />
+    <Compile Include="Plugins\Control\PluginsController.cs" />
     <Compile Include="UserFolders\Control\FolderScanner.cs" />
     <Compile Include="Plugins\Control\PluginController.cs" />
     <Compile Include="Plugins\Control\PluginFileController.cs" />
@@ -143,6 +148,8 @@
     <Compile Include="Plugins\Installer\PluginInstaller.cs" />
     <Compile Include="Plugins\Installer\FileHandlers\BaseHandler.cs" />
     <Compile Include="Plugins\Installer\FileHandlers\DatHandler.cs" />
+    <Compile Include="UserFolders\Control\IUserFolderController.cs" />
+    <Compile Include="UserFolders\Control\IUserFoldersController.cs" />
     <Compile Include="UserFolders\Control\UserFolderController.cs" />
     <Compile Include="Plugins\Installer\UserFolderListener.cs" />
     <Compile Include="Plugins\Installer\PluginInstallerThread.cs" />
@@ -173,6 +180,11 @@
     <Compile Include="Application\View\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserFolders\Control\UserFoldersController.cs" />
+    <Compile Include="UserFolders\DataAccess\IUserFolderDataAccess.cs" />
+    <Compile Include="UserFolders\DataAccess\IUserFoldersDataAccess.cs" />
+    <Compile Include="UserFolders\DataAccess\UserFolderDataAccess.cs" />
+    <Compile Include="UserFolders\DataAccess\UserFoldersDataAccess.cs" />
     <Compile Include="UserFolders\View\UserFolderForm.cs">
       <SubType>Form</SubType>
     </Compile>

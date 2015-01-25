@@ -19,6 +19,7 @@
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
+    using NIHEI.SC4Buddy.UserFolders.DataAccess;
     using NIHEI.SC4Buddy.UserFolders.View;
     using NIHEI.SC4Buddy.View.Elements;
 
@@ -28,9 +29,11 @@
 
         private readonly ResourceManager localizationManager;
 
-        private readonly UserFolderController userFolderController;
+        private readonly IUserFoldersController userFoldersController;
 
-        private readonly PluginController pluginController;
+        private readonly IPluginController pluginController;
+
+        private readonly IPluginsController pluginsController;
 
         private readonly PluginGroupController pluginGroupController;
 
@@ -39,17 +42,19 @@
         private readonly IDependencyChecker dependencyChecker;
 
         public Sc4Buddy(
-            UserFolderController userFolderController,
-            PluginController pluginController,
+            IUserFoldersController userFoldersController,
+            IPluginController pluginController,
             PluginGroupController pluginGroupController,
             IPluginMatcher pluginMatcher,
-            IDependencyChecker dependencyChecker)
+            IDependencyChecker dependencyChecker,
+            IPluginsController pluginsController)
         {
-            this.userFolderController = userFolderController;
+            this.userFoldersController = userFoldersController;
             this.pluginGroupController = pluginGroupController;
             this.pluginMatcher = pluginMatcher;
             this.dependencyChecker = dependencyChecker;
             this.pluginController = pluginController;
+            this.pluginsController = pluginsController;
 
             InitializeComponent();
 
@@ -78,7 +83,7 @@
 
         private void ManageFoldersToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new ManageUserFoldersForm().ShowDialog(this);
+            new ManageUserFoldersForm(userFoldersController).ShowDialog(this);
 
             RepopulateUserFolderRelatives();
         }
@@ -99,7 +104,7 @@
             var insertIndex = 0;
             var comboboxIndex = 0;
             var startupFolderIndex = -1;
-            foreach (var userFolder in userFolderController.UserFolders)
+            foreach (var userFolder in userFoldersController.UserFolders)
             {
                 if (!userFolder.IsMainFolder)
                 {
@@ -116,7 +121,7 @@
                 if (userFolder.Alias.Equals("?"))
                 {
                     userFolder.Alias = LocalizationStrings.GameUserFolderName;
-                    userFolderController.Update(userFolder);
+                    userFoldersController.Update(userFolder);
                 }
 
                 userFoldersToolStripMenuItem.DropDownItems.Insert(insertIndex, new UserFolderToolStripMenuItem(userFolder, UserFolderMenuItemClick));
@@ -205,9 +210,10 @@
                 ((UserFolderToolStripMenuItem)sender).UserFolder,
                 pluginController,
                 pluginGroupController,
-                userFolderController,
+                new UserFoldersController(new UserFoldersDataAccess(), new UserFolderController(new UserFolderDataAccess())),
                 pluginMatcher,
-                dependencyChecker).Show(this);
+                dependencyChecker,
+                pluginsController).Show(this);
         }
 
         private void PlayButtonClick(object sender, EventArgs e)
@@ -260,7 +266,7 @@
 
         private void SettingsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new SettingsForm(userFolderController).ShowDialog(this);
+            new SettingsForm(userFoldersController).ShowDialog(this);
 
             UpdateBackground();
         }
@@ -293,7 +299,7 @@
                 MessageBox.Show(
                     this,
                     string.Format("No log file was found. Check the folder ({0}) manually.", path),
-                    "No logfile was found",
+                    @"No logfile was found",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }

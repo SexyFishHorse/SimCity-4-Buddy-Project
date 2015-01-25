@@ -10,9 +10,9 @@
 
     public class FolderScanner
     {
-        private readonly PluginFileController pluginFileController;
+        private readonly IPluginFileController pluginFileController;
 
-        public FolderScanner(PluginFileController pluginFileController, UserFolder userFolder)
+        public FolderScanner(IPluginFileController pluginFileController, UserFolder userFolder)
         {
             this.pluginFileController = pluginFileController;
             UserFolder = userFolder;

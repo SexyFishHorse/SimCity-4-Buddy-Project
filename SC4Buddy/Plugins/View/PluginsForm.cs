@@ -28,7 +28,9 @@
 
         private readonly IDependencyChecker dependencyChecker;
 
-        private readonly PluginController pluginController;
+        private readonly IPluginsController pluginsController;
+
+        private readonly IPluginController pluginController;
 
         private readonly PluginGroupController pluginGroupController;
 
@@ -36,21 +38,23 @@
 
         private readonly UserFolder userFolder;
 
-        private readonly UserFolderController userFolderController;
+        private readonly IUserFoldersController userFoldersController;
 
         private Plugin selectedPlugin;
 
         public PluginsForm(
-            PluginController pluginController,
+            IPluginController pluginController,
             PluginGroupController pluginGroupController,
-            UserFolderController userFolderController,
+            IUserFoldersController userFoldersController,
+            IPluginsController pluginsController,
             UserFolder userFolder,
             IPluginMatcher pluginMatcher,
             IDependencyChecker dependencyChecker)
         {
             this.pluginGroupController = pluginGroupController;
             this.pluginController = pluginController;
-            this.userFolderController = userFolderController;
+            this.userFoldersController = userFoldersController;
+            this.pluginsController = pluginsController;
 
             if (!Directory.Exists(userFolder.FolderPath))
             {
@@ -62,7 +66,7 @@
                     }
 
                     userFolder.FolderPath = Settings.Get(Settings.Keys.GameLocation);
-                    userFolderController.Update(userFolder);
+                    userFoldersController.Update(userFolder);
                 }
                 else
                 {
@@ -200,7 +204,7 @@
                 return;
             }
 
-            userFolderController.UninstallPlugin(selectedPlugin);
+            pluginsController.UninstallPlugin(selectedPlugin);
             ClearPluginInformation();
             RepopulateInstalledPluginsListView();
         }
@@ -379,8 +383,7 @@
         {
             try
             {
-                var numUpdated = await userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
-                userFolderController.SaveChanges();
+                var numUpdated = await pluginsController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
                 RepopulateInstalledPluginsListView();
 
                 MessageBox.Show(
@@ -407,7 +410,7 @@
 
                 if (dialogResult == DialogResult.Retry)
                 {
-                    UpdateInfoForAllPluginsFromServer();
+                    UpdateInfoForAllPluginsFromServer().GetAwaiter().GetResult();
                 }
             }
         }
@@ -421,9 +424,9 @@
         {
             try
             {
-                await userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
+                await pluginsController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
 
-                var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolder);
+                var numRecognizedPlugins = pluginsController.NumberOfRecognizedPlugins(userFolder);
 
                 if (numRecognizedPlugins < 1)
                 {
@@ -478,9 +481,10 @@
         {
             var dialog = new MoveOrCopyForm(
                 userFolder,
-                userFolderController,
+                userFoldersController,
                 pluginController,
-                new PluginFileController(EntityFactory.Instance.Entities))
+                new PluginFileController(EntityFactory.Instance.Entities),
+                pluginsController)
             {
                 Plugin = selectedPlugin
             };
@@ -559,7 +563,7 @@
                 MessageBox.Show(
                     this,
                     string.Format("The directory \"{0}\" doesn't appear to exist.", userFolder.FolderPath),
-                    "Directory not found",
+                    @"Directory not found",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
             }
