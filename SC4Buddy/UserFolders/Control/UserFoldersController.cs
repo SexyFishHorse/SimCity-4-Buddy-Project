@@ -73,14 +73,6 @@
             userFoldersDataAccess.SaveUserFolders(UserFolders);
         }
 
-        /// <summary>
-        /// Validates that the specified path is not empty or a whitespace 
-        /// and that the path exist on the local machine.
-        /// It also checks if the path is already in use in 
-        /// </summary>
-        /// <param name="path">The path to validate.</param>
-        /// <param name="currentId">The id of the object to skip when checking for uniqueness.</param>
-        /// <returns>TRUE if the path complies with the above rules.</returns>
         public bool ValidatePath(string path, Guid currentId)
         {
             if (string.IsNullOrWhiteSpace(path))
@@ -119,13 +111,6 @@
             return !Settings.Get(Settings.Keys.GameLocation).Equals(path, StringComparison.OrdinalIgnoreCase);
         }
 
-        /// <summary>
-        /// Validates that the specified alias is not empty or a whitespace
-        /// and that the alias is not already in use.
-        /// </summary>
-        /// <param name="alias">The alias to validate.</param>
-        /// <param name="currentId">The id of the object to skip when checking for uniqueness.</param>
-        /// <returns>TRUE if the alias complies with the above rules.</returns>
         public bool ValidateAlias(string alias, Guid currentId)
         {
             if (string.IsNullOrWhiteSpace(alias))
