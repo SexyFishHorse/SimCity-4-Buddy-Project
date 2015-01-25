@@ -16,7 +16,7 @@
 
         private readonly UserFolder currentUserFolder;
 
-        private readonly UserFolderController userFolderController;
+        private readonly IUserFolderController userFolderController;
 
         private readonly PluginController pluginController;
 
@@ -32,7 +32,7 @@
 
         public MoveOrCopyForm(
             UserFolder currentUserFolder,
-            UserFolderController userFolderController,
+            IUserFolderController userFolderController,
             PluginController pluginController,
             PluginFileController pluginFileController)
         {

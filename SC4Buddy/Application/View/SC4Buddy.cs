@@ -28,7 +28,7 @@
 
         private readonly ResourceManager localizationManager;
 
-        private readonly UserFolderController userFolderController;
+        private readonly IUserFolderController userFolderController;
 
         private readonly PluginController pluginController;
 
@@ -39,7 +39,7 @@
         private readonly IDependencyChecker dependencyChecker;
 
         public Sc4Buddy(
-            UserFolderController userFolderController,
+            IUserFolderController userFolderController,
             PluginController pluginController,
             PluginGroupController pluginGroupController,
             IPluginMatcher pluginMatcher,

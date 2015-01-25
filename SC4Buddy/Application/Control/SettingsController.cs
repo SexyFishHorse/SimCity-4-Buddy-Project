@@ -23,9 +23,9 @@
             @"SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
         };
 
-        private readonly UserFolderController userFolderController;
+        private readonly IUserFolderController userFolderController;
 
-        public SettingsController(UserFolderController userFolderController)
+        public SettingsController(IUserFolderController userFolderController)
         {
             this.userFolderController = userFolderController;
         }
