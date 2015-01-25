@@ -119,11 +119,19 @@
   <ItemGroup>
     <Compile Include="Application\Control\GameArgumentsHelper.cs" />
     <Compile Include="Application\Control\GameLauncher.cs" />
-    <Compile Include="Application\Control\ISettingsController.cs" />
+    <Compile Include="Application\Control\ISettingsController.cs">
+      <DependentUpon>SettingsController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Application\Utilities\FileSystemLocationsUtil.cs" />
-    <Compile Include="Plugins\Control\IPluginController.cs" />
-    <Compile Include="Plugins\Control\IPluginFileController.cs" />
-    <Compile Include="Plugins\Control\IPluginsController.cs" />
+    <Compile Include="Plugins\Control\IPluginController.cs">
+      <DependentUpon>PluginController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Control\IPluginFileController.cs">
+      <DependentUpon>PluginFileController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Control\IPluginsController.cs">
+      <DependentUpon>PluginsController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\Control\NonPluginFilesScanner.cs" />
     <Compile Include="Plugins\Control\FolderScannerController.cs" />
     <Compile Include="Plugins\Control\PluginCopier.cs" />
@@ -136,7 +144,9 @@
     <Compile Include="Plugins\Control\PluginFileController.cs" />
     <Compile Include="DataAccess\Entities.cs" />
     <Compile Include="DataAccess\EntityFactory.cs" />
-    <Compile Include="DataAccess\IEntities.cs" />
+    <Compile Include="DataAccess\IEntities.cs">
+      <DependentUpon>Entities.cs</DependentUpon>
+    </Compile>
     <Compile Include="Application\DataAccess\SettingsDataAccess.cs" />
     <Compile Include="Entities\Remote\PluginReport.cs" />
     <Compile Include="Plugins\Installer\FileHandlers\ArchiveHandler.cs" />
@@ -148,8 +158,12 @@
     <Compile Include="Plugins\Installer\PluginInstaller.cs" />
     <Compile Include="Plugins\Installer\FileHandlers\BaseHandler.cs" />
     <Compile Include="Plugins\Installer\FileHandlers\DatHandler.cs" />
-    <Compile Include="UserFolders\Control\IUserFolderController.cs" />
-    <Compile Include="UserFolders\Control\IUserFoldersController.cs" />
+    <Compile Include="UserFolders\Control\IUserFolderController.cs">
+      <DependentUpon>UserFolderController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserFolders\Control\IUserFoldersController.cs">
+      <DependentUpon>UserFoldersController.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserFolders\Control\UserFolderController.cs" />
     <Compile Include="Plugins\Installer\UserFolderListener.cs" />
     <Compile Include="Plugins\Installer\PluginInstallerThread.cs" />
@@ -181,8 +195,12 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="UserFolders\Control\UserFoldersController.cs" />
-    <Compile Include="UserFolders\DataAccess\IUserFolderDataAccess.cs" />
-    <Compile Include="UserFolders\DataAccess\IUserFoldersDataAccess.cs" />
+    <Compile Include="UserFolders\DataAccess\IUserFolderDataAccess.cs">
+      <DependentUpon>UserFolderDataAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserFolders\DataAccess\IUserFoldersDataAccess.cs">
+      <DependentUpon>UserFoldersDataAccess.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserFolders\DataAccess\UserFolderDataAccess.cs" />
     <Compile Include="UserFolders\DataAccess\UserFoldersDataAccess.cs" />
     <Compile Include="UserFolders\View\UserFolderForm.cs">
