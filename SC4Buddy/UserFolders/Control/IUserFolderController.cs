@@ -5,5 +5,7 @@
     public interface IUserFolderController
     {
         void Update(UserFolder userFolder);
+
+        UserFolder LoadUserFolder(string path);
     }
 }

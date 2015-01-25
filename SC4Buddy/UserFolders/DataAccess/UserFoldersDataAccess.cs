@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Reflection;
+    using log4net;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using NIHEI.SC4Buddy.Application.Utilities;
@@ -12,8 +14,12 @@
     {
         public const string Filename = "UserFolders.json";
 
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public ICollection<UserFolder> LoadUserFolders()
         {
+            Log.Info("Loading all user folders.");
+
             var path = Path.Combine(FileSystemLocationsUtil.LocalApplicationDataDirectory, Filename);
             var fileInfo = new FileInfo(path);
 
@@ -49,6 +55,7 @@
 
         public void SaveUserFolders(IEnumerable<UserFolder> userFolders)
         {
+            Log.Info("Save all user folders.");
             var fileInfo = new FileInfo(Path.Combine(FileSystemLocationsUtil.LocalApplicationDataDirectory, Filename));
 
             if (fileInfo.DirectoryName == null)

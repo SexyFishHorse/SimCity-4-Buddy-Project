@@ -149,6 +149,11 @@
             return true;
         }
 
+        public UserFolder GetUserFolderDataByPath(string path)
+        {
+            return userFolderController.LoadUserFolder(path);
+        }
+
         private void UpdateIsStartupFolder(UserFolder userFolder)
         {
             if (userFolder.IsMainFolder)

@@ -2,7 +2,9 @@
 {
     using System;
     using System.Drawing;
+    using System.IO;
     using System.Linq;
+    using System.Net.Mail;
     using System.Resources;
     using System.Windows.Forms;
     using NIHEI.SC4Buddy.Model;
@@ -56,7 +58,37 @@
 
             if (result == DialogResult.OK)
             {
-                pathTextBox.Text = pathBrowseDialog.SelectedPath;
+                var path = pathBrowseDialog.SelectedPath;
+                pathTextBox.Text = path;
+
+                TryLoadUserFolderData(path);
+            }
+        }
+
+        private void TryLoadUserFolderData(string path)
+        {
+            if (path == null || path == localizationManager.GetString("pathTextBox.Text"))
+            {
+                return;
+            }
+
+            var userFolder = userFoldersController.GetUserFolderDataByPath(path);
+            if (userFolder != null)
+            {
+                if (string.IsNullOrWhiteSpace(aliasTextBox.Text))
+                {
+                    aliasTextBox.Text = userFolder.Alias;
+                }
+
+                userFolder.IsMainFolder = false;
+                startupFolderCheckbox.Checked = userFolder.IsStartupFolder;
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(aliasTextBox.Text))
+                {
+                    aliasTextBox.Text = new DirectoryInfo(path).Name;
+                }
             }
         }
 
@@ -148,6 +180,8 @@
             EnableForm();
 
             Mode = UserFolderMode.Add;
+
+            pathTextBox.Focus();
         }
 
         private void CloseButtonClick(object sender, EventArgs e)
@@ -262,6 +296,8 @@
             pathTextBox.ForeColor = pathTextBox.Text.Equals(localizationManager.GetString("pathTextBox.Text"))
                                         ? Color.Gray
                                         : Color.Black;
+
+            TryLoadUserFolderData(pathTextBox.Text);
         }
     }
 }

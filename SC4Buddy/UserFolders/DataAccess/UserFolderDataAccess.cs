@@ -1,16 +1,21 @@
 ﻿namespace NIHEI.SC4Buddy.UserFolders.DataAccess
 {
     using System.IO;
+    using System.Reflection;
+    using log4net;
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
     using NIHEI.SC4Buddy.Model;
 
     public class UserFolderDataAccess : IUserFolderDataAccess
     {
         public const string Filename = "UserFolder.json";
 
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         public UserFolder LoadUserFolder(string path)
         {
+            Log.Info(string.Format("Loading user folder from path \"{0}\".", path));
+
             var file = new FileInfo(Path.Combine(path, Filename));
 
             if (!file.Exists)
@@ -21,21 +26,14 @@
             using (var reader = new StreamReader(file.FullName))
             {
                 var json = reader.ReadToEnd();
-                dynamic userFolderJson = JArray.Parse(json);
-
-                return new UserFolder
-                {
-                    Id = userFolderJson.Id,
-                    FolderPath = file.DirectoryName,
-                    Alias = userFolderJson.Alias,
-                    IsMainFolder = userFolderJson.IsMainFolder,
-                    IsStartupFolder = userFolderJson.IsStartupFolder
-                };
+                return JsonConvert.DeserializeObject<UserFolder>(json);
             }
         }
 
         public void SaveUserFolder(UserFolder userFolder)
         {
+            Log.Info(string.Format("Saving user folder \"{0}\" (id: {1})", userFolder.Alias, userFolder.Id));
+
             var fileInfo = new FileInfo(Path.Combine(userFolder.FolderPath, Filename));
 
             if (fileInfo.DirectoryName == null)

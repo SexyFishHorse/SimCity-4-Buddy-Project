@@ -36,5 +36,7 @@
         /// <param name="currentId">The id of the object to skip when checking for uniqueness.</param>
         /// <returns>TRUE if the alias complies with the above rules.</returns>
         bool ValidateAlias(string alias, Guid currentId);
+
+        UserFolder GetUserFolderDataByPath(string path);
     }
 }
