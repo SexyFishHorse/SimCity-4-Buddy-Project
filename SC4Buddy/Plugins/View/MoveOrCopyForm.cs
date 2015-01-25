@@ -14,9 +14,9 @@
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly UserFolder currentUserFolder;
-
         private readonly IUserFolderController userFolderController;
+
+        private readonly IUserFolderRepository userFolderRepository;
 
         private readonly PluginController pluginController;
 
@@ -31,15 +31,15 @@
         public event EventHandler ErrorDuringCopyOrMove;
 
         public MoveOrCopyForm(
-            UserFolder currentUserFolder,
             IUserFolderController userFolderController,
             PluginController pluginController,
-            PluginFileController pluginFileController)
+            PluginFileController pluginFileController, 
+            IUserFolderRepository userFolderRepository)
         {
-            this.currentUserFolder = currentUserFolder;
             this.userFolderController = userFolderController;
             this.pluginController = pluginController;
             this.pluginFileController = pluginFileController;
+            this.userFolderRepository = userFolderRepository;
             InitializeComponent();
         }
 
@@ -82,9 +82,9 @@
             userFolderListView.BeginUpdate();
             userFolderListView.Items.Clear();
 
-            var userFolders = userFolderController.UserFolders;
+            var userFolders = userFolderRepository.UserFolders;
 
-            foreach (var userFolder in userFolders.Where(userFolder => !userFolder.Equals(currentUserFolder)))
+            foreach (var userFolder in userFolders.Where(userFolder => !userFolder.Equals(userFolderController.UserFolder)))
             {
                 userFolderListView.Items.Add(new ListViewItemWithObjectValue<UserFolder>(userFolder.Alias, userFolder));
             }

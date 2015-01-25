@@ -69,7 +69,7 @@
     <Compile Include="Installer\FileHandlers\DatHandlerTest.cs" />
     <Compile Include="Installer\FileHandlers\ExtracterTestBase.cs" />
     <Compile Include="Installer\FileHandlers\ZipHandlerTest.cs" />
-    <Compile Include="Control\UserFolders\PluginFolderControllerTest.cs" />
+    <Compile Include="Control\UserFolders\PluginFolderRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

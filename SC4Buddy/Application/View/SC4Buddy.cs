@@ -28,7 +28,7 @@
 
         private readonly ResourceManager localizationManager;
 
-        private readonly IUserFolderController userFolderController;
+        private readonly IUserFolderRepository userFolderRepository;
 
         private readonly PluginController pluginController;
 
@@ -39,13 +39,13 @@
         private readonly IDependencyChecker dependencyChecker;
 
         public Sc4Buddy(
-            IUserFolderController userFolderController,
+            IUserFolderRepository userFolderRepository,
             PluginController pluginController,
             PluginGroupController pluginGroupController,
             IPluginMatcher pluginMatcher,
             IDependencyChecker dependencyChecker)
         {
-            this.userFolderController = userFolderController;
+            this.userFolderRepository = userFolderRepository;
             this.pluginGroupController = pluginGroupController;
             this.pluginMatcher = pluginMatcher;
             this.dependencyChecker = dependencyChecker;
@@ -78,7 +78,7 @@
 
         private void ManageFoldersToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new ManageUserFoldersForm().ShowDialog(this);
+            new ManageUserFoldersForm(userFolderRepository).ShowDialog(this);
 
             RepopulateUserFolderRelatives();
         }
@@ -99,7 +99,7 @@
             var insertIndex = 0;
             var comboboxIndex = 0;
             var startupFolderIndex = -1;
-            foreach (var userFolder in userFolderController.UserFolders)
+            foreach (var userFolder in userFolderRepository.UserFolders)
             {
                 if (!userFolder.IsMainFolder)
                 {
@@ -116,7 +116,7 @@
                 if (userFolder.Alias.Equals("?"))
                 {
                     userFolder.Alias = LocalizationStrings.GameUserFolderName;
-                    userFolderController.Update(userFolder);
+                    userFolderRepository.Update(userFolder);
                 }
 
                 userFoldersToolStripMenuItem.DropDownItems.Insert(insertIndex, new UserFolderToolStripMenuItem(userFolder, UserFolderMenuItemClick));
@@ -202,12 +202,12 @@
         private void UserFolderMenuItemClick(object sender, EventArgs e)
         {
             new UserFolderForm(
-                ((UserFolderToolStripMenuItem)sender).UserFolder,
                 pluginController,
                 pluginGroupController,
-                userFolderController,
+                new UserFolderController(((UserFolderToolStripMenuItem)sender).UserFolder, userFolderRepository),
                 pluginMatcher,
-                dependencyChecker).Show(this);
+                dependencyChecker,
+                userFolderRepository).Show(this);
         }
 
         private void PlayButtonClick(object sender, EventArgs e)
@@ -260,7 +260,7 @@
 
         private void SettingsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new SettingsForm(userFolderController).ShowDialog(this);
+            new SettingsForm(userFolderRepository).ShowDialog(this);
 
             UpdateBackground();
         }

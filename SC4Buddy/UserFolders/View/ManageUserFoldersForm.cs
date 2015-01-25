@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Resources;
     using System.Windows.Forms;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
@@ -17,13 +16,13 @@
 
         private readonly ResourceManager localizationManager;
 
-        private readonly IUserFolderController controller;
+        private readonly IUserFolderRepository userFolderRepository;
 
-        public ManageUserFoldersForm()
+        public ManageUserFoldersForm(IUserFolderRepository userFolderRepository)
         {
             InitializeComponent();
 
-            controller = new UserFolderController(EntityFactory.Instance.Entities);
+            this.userFolderRepository = userFolderRepository;
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(ManageUserFoldersForm));
         }
 
@@ -38,7 +37,7 @@
 
         private void ReloadUserFoldersListView()
         {
-            var userFolders = controller.UserFolders.Where(x => !x.IsMainFolder);
+            var userFolders = userFolderRepository.UserFolders.Where(x => !x.IsMainFolder);
 
             UserFoldersListView.BeginUpdate();
             UserFoldersListView.Items.Clear();
@@ -107,7 +106,8 @@
                 return;
             }
 
-            controller.Delete(SelectedFolder);
+            userFolderRepository.Delete(SelectedFolder);
+            userFolderRepository.SaveChanges();
 
             ResetForm();
             ReloadUserFoldersListView();
@@ -171,8 +171,8 @@
                         IsStartupFolder = startupFolderCheckbox.Checked
                     };
 
-                    var pathOk = !controller.ValidatePath(newFolder.FolderPath, Guid.NewGuid());
-                    var notMainFolder = !controller.IsNotGameFolder(newFolder.FolderPath);
+                    var pathOk = !userFolderRepository.ValidatePath(newFolder.FolderPath, Guid.NewGuid());
+                    var notMainFolder = userFolderRepository.IsGameFolder(newFolder.FolderPath);
 
                     if (pathOk || notMainFolder)
                     {
@@ -181,7 +181,7 @@
                         errorProvider.SetError(pathTextBox, LocalizationStrings.PathError);
                     }
 
-                    if (!controller.ValidateAlias(newFolder.Alias, Guid.Empty))
+                    if (!userFolderRepository.ValidateAlias(newFolder.Alias, Guid.Empty))
                     {
                         hasErrors = true;
                         errorProvider.SetIconPadding(aliasTextBox, ErrorIconPadding);
@@ -193,18 +193,18 @@
                         return;
                     }
 
-                    controller.Add(newFolder);
+                    userFolderRepository.Add(newFolder);
                     break;
                 case UserFolderMode.Update:
 
-                    if (!controller.ValidatePath(pathTextBox.Text, SelectedFolder.Id))
+                    if (!userFolderRepository.ValidatePath(pathTextBox.Text, SelectedFolder.Id))
                     {
                         hasErrors = true;
                         errorProvider.SetIconPadding(pathTextBox, ErrorIconPadding);
                         errorProvider.SetError(pathTextBox, LocalizationStrings.PathError);
                     }
 
-                    if (!controller.ValidateAlias(aliasTextBox.Text, SelectedFolder.Id))
+                    if (!userFolderRepository.ValidateAlias(aliasTextBox.Text, SelectedFolder.Id))
                     {
                         hasErrors = true;
                         errorProvider.SetIconPadding(aliasTextBox, ErrorIconPadding);
@@ -220,11 +220,11 @@
                     SelectedFolder.Alias = aliasTextBox.Text;
                     SelectedFolder.IsStartupFolder = startupFolderCheckbox.Checked;
 
-                    controller.Update(SelectedFolder);
+                    userFolderRepository.Update(SelectedFolder);
                     break;
             }
 
-            controller.SaveChanges();
+            userFolderRepository.SaveChanges();
             ResetForm();
             ReloadUserFoldersListView();
         }
