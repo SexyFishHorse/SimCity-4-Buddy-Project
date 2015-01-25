@@ -173,6 +173,8 @@
     <Compile Include="Application\View\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserFolders\DataAccess\IUserFolderDataAccess.cs" />
+    <Compile Include="UserFolders\DataAccess\UserFolderDataAccess.cs" />
     <Compile Include="UserFolders\View\UserFolderForm.cs">
       <SubType>Form</SubType>
     </Compile>
