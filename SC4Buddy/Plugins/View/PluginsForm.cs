@@ -12,7 +12,6 @@
     using log4net;
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
@@ -34,23 +33,25 @@
 
         private readonly IPluginMatcher pluginMatcher;
 
-        private readonly UserFolder userFolder;
+        private readonly IUserFolderController userFolderController;
 
-        private readonly UserFolderController userFolderController;
+        private readonly IUserFolderRepository userFolderRepository;
 
         private Plugin selectedPlugin;
 
         public PluginsForm(
             PluginController pluginController,
             PluginGroupController pluginGroupController,
-            UserFolderController userFolderController,
-            UserFolder userFolder,
+            IUserFolderController userFolderController,
             IPluginMatcher pluginMatcher,
-            IDependencyChecker dependencyChecker)
+            IDependencyChecker dependencyChecker, 
+            IUserFolderRepository userFolderRepository)
         {
             this.pluginGroupController = pluginGroupController;
             this.pluginController = pluginController;
             this.userFolderController = userFolderController;
+
+            var userFolder = userFolderController.UserFolder;
 
             if (!Directory.Exists(userFolder.FolderPath))
             {
@@ -62,7 +63,7 @@
                     }
 
                     userFolder.FolderPath = Settings.Get(Settings.Keys.GameLocation);
-                    userFolderController.Update(userFolder);
+                    userFolderController.Save();
                 }
                 else
                 {
@@ -71,9 +72,9 @@
                 }
             }
 
-            this.userFolder = userFolder;
             this.pluginMatcher = pluginMatcher;
             this.dependencyChecker = dependencyChecker;
+            this.userFolderRepository = userFolderRepository;
             InitializeComponent();
         }
 
@@ -105,7 +106,7 @@
             }
 
             foreach (var plugin in
-                pluginController.Plugins.Where(x => x.UserFolderId == userFolder.Id))
+                pluginController.Plugins.Where(x => x.UserFolderId == userFolderController.UserFolder.Id))
             {
                 var listViewItem = new PluginListViewItem(
                     plugin,
@@ -279,7 +280,7 @@
                 return;
             }
 
-            new InstallPluginsForm(pluginController, files, userFolder, pluginMatcher).ShowDialog(this);
+            new InstallPluginsForm(pluginController, files, userFolderController.UserFolder, pluginMatcher).ShowDialog(this);
 
             RepopulateInstalledPluginsListView();
 
@@ -308,7 +309,7 @@
                 new FolderScannerController(new PluginFileController(EntityFactory.Instance.Entities)),
                 pluginController,
                 pluginGroupController,
-                userFolder,
+                userFolderController.UserFolder,
                 pluginMatcher).ShowDialog(this);
             RepopulateInstalledPluginsListView();
 
@@ -339,7 +340,7 @@
                 "SimCity 4 Buddy",
                 "Configuration");
 
-            var nonPluginFilesScannerUi = new NonPluginFilesScannerUi(storageLocation) { UserFolder = userFolder };
+            var nonPluginFilesScannerUi = new NonPluginFilesScannerUi(storageLocation) { UserFolder = userFolderController.UserFolder };
 
             nonPluginFilesScannerUi.ScanForCandidates();
 
@@ -380,7 +381,6 @@
             try
             {
                 var numUpdated = await userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
-                userFolderController.SaveChanges();
                 RepopulateInstalledPluginsListView();
 
                 MessageBox.Show(
@@ -423,7 +423,7 @@
             {
                 await userFolderController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
 
-                var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolder);
+                var numRecognizedPlugins = userFolderController.NumberOfRecognizedPlugins(userFolderController.UserFolder);
 
                 if (numRecognizedPlugins < 1)
                 {
@@ -437,7 +437,7 @@
                     return;
                 }
 
-                var missingDependencies = (await dependencyChecker.CheckDependenciesAsync(userFolder)).ToList();
+                var missingDependencies = (await dependencyChecker.CheckDependenciesAsync(userFolderController.UserFolder)).ToList();
 
                 if (missingDependencies.Any())
                 {
@@ -477,10 +477,10 @@
         private void MoveOrCopyButtonClick(object sender, EventArgs e)
         {
             var dialog = new MoveOrCopyForm(
-                userFolder,
                 userFolderController,
                 pluginController,
-                new PluginFileController(EntityFactory.Instance.Entities))
+                new PluginFileController(EntityFactory.Instance.Entities),
+                userFolderRepository)
             {
                 Plugin = selectedPlugin
             };
@@ -550,15 +550,15 @@
 
         private void OpenInFileExplorerToolStripMenuItemClick(object sender, EventArgs e)
         {
-            if (Directory.Exists(userFolder.FolderPath))
+            if (Directory.Exists(userFolderController.UserFolder.FolderPath))
             {
-                Process.Start(userFolder.FolderPath);
+                Process.Start(userFolderController.UserFolder.FolderPath);
             }
             else
             {
                 MessageBox.Show(
                     this,
-                    string.Format("The directory \"{0}\" doesn't appear to exist.", userFolder.FolderPath),
+                    string.Format("The directory \"{0}\" doesn't appear to exist.", userFolderController.UserFolder.FolderPath),
                     "Directory not found",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
