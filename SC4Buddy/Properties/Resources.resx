@@ -166,4 +166,7 @@
   <data name="Wallpaper9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Wallpapers\9.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ConfirmInstallationOfPlugins" xml:space="preserve">
+    <value>Confirm installation of plugins</value>
+  </data>
 </root>

@@ -13,6 +13,7 @@
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
+    using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
@@ -563,6 +564,46 @@
                     @"Directory not found",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
+            }
+        }
+
+        private void PluginsFormDragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
+        }
+
+        private void PluginsFormDragDrop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                return;
+            }
+
+            var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            Log.Info("User dropped the following files into the plugins form window.");
+            foreach (var file in files)
+            {
+                Log.Info(file);
+            }
+
+            if (MessageBox.Show(
+                this,
+                string.Format("Are you sure you want to install the selected {0} plugins in the user folder {1}?", files.Length, userFolder.Alias),
+                Resources.ConfirmInstallationOfPlugins,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Log.Info(string.Format("Installing in user folder {0}", userFolder.FolderPath));
+
+                var form = new InstallPluginsForm(pluginsController, files, userFolder, pluginMatcher);
+
+                form.ShowDialog(this);
+
+                RepopulateInstalledPluginsListView();
+            }
+            else
+            {
+                Log.Info("Drop installation was cancelled.");
             }
         }
     }

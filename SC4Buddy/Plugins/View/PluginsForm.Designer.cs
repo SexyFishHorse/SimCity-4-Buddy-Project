@@ -320,6 +320,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             // 
             // PluginsForm
             // 
+            this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeButton;
@@ -330,6 +331,8 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.Name = "PluginsForm";
             this.Activated += new System.EventHandler(this.UserFolderFormActivated);
             this.Load += new System.EventHandler(this.UserFolderFormLoad);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.PluginsFormDragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.PluginsFormDragEnter);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
