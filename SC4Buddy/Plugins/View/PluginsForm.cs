@@ -477,7 +477,8 @@
             var dialog = new MoveOrCopyForm(
                 userFolder,
                 userFoldersController,
-                pluginsController)
+                pluginsController,
+                pluginGroupController)
             {
                 Plugin = selectedPlugin
             };

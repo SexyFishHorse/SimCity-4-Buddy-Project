@@ -1,21 +1,29 @@
 ﻿namespace NIHEI.SC4Buddy.Plugins.Control
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using NIHEI.SC4Buddy.Model;
 
     public class PluginCopier
     {
         private readonly IPluginsController pluginsController;
 
-        public PluginCopier(IPluginsController pluginsController)
+        private readonly IPluginsController targetController;
+
+        public PluginCopier(IPluginsController pluginsController, IPluginsController targetController)
         {
             this.pluginsController = pluginsController;
+            this.targetController = targetController;
         }
 
-        public void CopyPlugin(Plugin plugin, UserFolder originUserFolder, UserFolder targetUserFolder, bool moveInsteadOfCopy = false)
+        public void MovePlugin(Plugin plugin, UserFolder originUserFolder, UserFolder targetUserFolder)
+        {
+            CopyPlugin(plugin, originUserFolder, targetUserFolder);
+
+            pluginsController.UninstallPlugin(plugin);
+        }
+
+        public void CopyPlugin(Plugin plugin, UserFolder originUserFolder, UserFolder targetUserFolder)
         {
             var newPlugin = new Plugin
             {
@@ -25,37 +33,12 @@
                 Author = plugin.Author
             };
 
-            var files = new List<PluginFile>(plugin.PluginFiles.Count);
-
-            files.AddRange(plugin.PluginFiles.Select(pluginFile => CopyFile(pluginFile, originUserFolder, targetUserFolder)));
-
-            var affectedPlugins = new HashSet<Plugin>();
-
-            foreach (var pluginFile in files)
+            foreach (var file in plugin.PluginFiles)
             {
-                if (plugin.PluginFiles.Any(x => x.Path.Equals(pluginFile.Path, StringComparison.OrdinalIgnoreCase)))
-                {
-                    var existingFile = plugin.PluginFiles.First(x => x.Path.Equals(pluginFile.Path, StringComparison.OrdinalIgnoreCase));
-
-                    affectedPlugins.Add(existingFile.Plugin);
-                }
-
-                newPlugin.PluginFiles.Add(pluginFile);
+                newPlugin.PluginFiles.Add(CopyFile(file, originUserFolder, targetUserFolder));
             }
 
-            foreach (var affectedPlugin in affectedPlugins.Where(affectedPlugin => !affectedPlugin.PluginFiles.Any()))
-            {
-                pluginsController.Remove(affectedPlugin);
-            }
-
-            pluginsController.Add(newPlugin);
-
-            if (!moveInsteadOfCopy)
-            {
-                return;
-            }
-
-            pluginsController.UninstallPlugin(plugin);
+            targetController.Add(newPlugin);
         }
 
         private static PluginFile CopyFile(PluginFile pluginFile, UserFolder originUserFolder, UserFolder targetUserFolder)
