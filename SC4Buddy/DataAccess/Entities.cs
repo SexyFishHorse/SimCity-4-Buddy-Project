@@ -18,8 +18,6 @@
 
     public class Entities : IEntities
     {
-        private const string PluginFilesFilename = "PluginFiles.json";
-
         private const string PluginGroupsFilename = "PluginGroups.json";
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -29,19 +27,9 @@
             StorageLocation = storageLocation;
         }
 
-        public ICollection<PluginFile> Files { get; private set; }
-
         public ICollection<PluginGroup> Groups { get; private set; }
 
         private string StorageLocation { get; set; }
-
-        private string PluginFilesLocation
-        {
-            get
-            {
-                return Path.Combine(StorageLocation, PluginFilesFilename);
-            }
-        }
 
         private string PluginGroupsLocation
         {
@@ -53,7 +41,6 @@
 
         public void SaveChanges()
         {
-            StoreDataInFile(Files, PluginFilesLocation);
             StoreDataInFile(Groups, PluginGroupsLocation);
         }
 
@@ -72,10 +59,8 @@
         public void LoadAllEntitiesFromDisc()
         {
             Groups = new Collection<PluginGroup>();
-            Files = new Collection<PluginFile>();
 
             LoadPluginGroups(PluginGroupsLocation);
-            LoadPluginFiles(PluginFilesLocation);
         }
 
         private static void StoreDataInFile(IEnumerable<ModelBase> data, string dataLocation)
@@ -98,52 +83,6 @@
             {
                 var json = JsonConvert.SerializeObject(data);
                 writer.Write(json);
-            }
-        }
-
-        private void LoadPluginFiles(string fileLocation)
-        {
-            if (!File.Exists(fileLocation))
-            {
-                return;
-            }
-
-            using (var reader = new StreamReader(fileLocation))
-            {
-                var json = reader.ReadToEnd();
-
-                dynamic dynamicPluginFiles = JArray.Parse(json);
-
-                foreach (var dynamicPluginFile in dynamicPluginFiles)
-                {
-                    var file = new PluginFile
-                                   {
-                                       Id = dynamicPluginFile.Id,
-                                       Checksum = dynamicPluginFile.Checksum,
-                                       Path = dynamicPluginFile.Path
-                                   };
-
-                    if (file.Plugin == null)
-                    {
-                        continue;
-                    }
-
-                    if (dynamicPluginFile.QuarantinedFile != null)
-                    {
-                        var quarantinedFile = new QuarantinedFile
-                                                  {
-                                                      Id = dynamicPluginFile.QuarantinedFile.Id,
-                                                      PluginFile = file,
-                                                      QuarantinedPath = dynamicPluginFile.QuarantinedFile.QuarantinedPath
-                                                  };
-                        file.QuarantinedFile = quarantinedFile;
-                    }
-
-                    file.Plugin.PluginFiles.Remove(file);
-                    file.Plugin.PluginFiles.Add(file);
-
-                    Files.Add(file);
-                }
             }
         }
 
