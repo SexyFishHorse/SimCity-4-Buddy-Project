@@ -12,8 +12,6 @@
 
     public partial class UserFolderForm : Form
     {
-        private readonly UserFolder userFolder;
-
         private readonly IPluginsController pluginsController;
 
         private readonly PluginGroupController pluginGroupController;
@@ -32,7 +30,7 @@
             IDependencyChecker dependencyChecker,
             IPluginsController pluginsController)
         {
-            this.userFolder = userFolder;
+            UserFolder = userFolder;
             this.pluginGroupController = pluginGroupController;
             this.userFoldersController = userFoldersController;
             this.pluginMatcher = pluginMatcher;
@@ -41,6 +39,8 @@
             InitializeComponent();
         }
 
+        public UserFolder UserFolder { get; set; }
+
         private void ManagePluginsButtonClick(object sender, System.EventArgs e)
         {
             Hide();
@@ -48,20 +48,18 @@
                 pluginGroupController,
                 userFoldersController,
                 pluginsController,
-                userFolder,
+                UserFolder,
                 pluginMatcher,
                 dependencyChecker);
-            dialog.ShowDialog(this);
-
-            Close();
+            dialog.Show(this);
         }
 
         private void UserFolderFormLoad(object sender, System.EventArgs e)
         {
-            Text = userFolder.Alias;
+            Text = UserFolder.Alias;
             numberOfPluginsLabel.Text = pluginsController.Plugins.Count.ToString(CultureInfo.InvariantCulture);
 
-            var directoryInfo = new DirectoryInfo(userFolder.PluginFolderPath);
+            var directoryInfo = new DirectoryInfo(UserFolder.PluginFolderPath);
             directoryInfo.Create();
             var files = directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories);
             var size = files.Sum(fileInfo => fileInfo.Length);
