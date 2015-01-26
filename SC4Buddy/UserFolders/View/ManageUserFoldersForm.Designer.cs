@@ -43,11 +43,11 @@ namespace NIHEI.SC4Buddy.UserFolders.View
             this.pathTextBox = new System.Windows.Forms.TextBox();
             this.pathLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.closeButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
             this.addButton = new System.Windows.Forms.Button();
             this.pathBrowseDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.closeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -155,6 +155,14 @@ namespace NIHEI.SC4Buddy.UserFolders.View
             this.panel1.Controls.Add(this.addButton);
             this.panel1.Name = "panel1";
             // 
+            // closeButton
+            // 
+            resources.ApplyResources(this.closeButton, "closeButton");
+            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.closeButton.Name = "closeButton";
+            this.closeButton.UseVisualStyleBackColor = true;
+            this.closeButton.Click += new System.EventHandler(this.CloseButtonClick);
+            // 
             // removeButton
             // 
             resources.ApplyResources(this.removeButton, "removeButton");
@@ -177,14 +185,6 @@ namespace NIHEI.SC4Buddy.UserFolders.View
             // 
             this.errorProvider.ContainerControl = this;
             // 
-            // closeButton
-            // 
-            resources.ApplyResources(this.closeButton, "closeButton");
-            this.closeButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.closeButton.Name = "closeButton";
-            this.closeButton.UseVisualStyleBackColor = true;
-            this.closeButton.Click += new System.EventHandler(this.CloseButtonClick);
-            // 
             // ManageUserFoldersForm
             // 
             resources.ApplyResources(this, "$this");
@@ -192,6 +192,7 @@ namespace NIHEI.SC4Buddy.UserFolders.View
             this.CancelButton = this.closeButton;
             this.Controls.Add(this.panel1);
             this.Name = "ManageUserFoldersForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ManageUserFoldersFormFormClosing);
             this.Load += new System.EventHandler(this.UserFoldersFormLoad);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

@@ -151,6 +151,11 @@
             RemoveEmptyPlugins();
         }
 
+        public void ReloadPlugins()
+        {
+            Plugins = pluginsDataAccess.LoadPlugins();
+        }
+
         public async Task<int> UpdateInfoForAllPluginsFromServer(IPluginMatcher pluginMatcher)
         {
             var count = 0;
