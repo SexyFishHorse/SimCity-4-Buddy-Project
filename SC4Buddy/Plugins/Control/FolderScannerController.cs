@@ -93,7 +93,6 @@
                     Description = remotePlugin.Description,
                     Link = new Url(remotePlugin.LinkToDownloadPage),
                     Author = remotePlugin.AuthorName,
-                    UserFolder = userFolder,
                     RemotePlugin = remotePlugin
                 };
 

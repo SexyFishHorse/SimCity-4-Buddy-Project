@@ -26,23 +26,12 @@
         [JsonProperty]
         public Url Link { get; set; }
 
-        public UserFolder UserFolder { get; set; }
-
         [JsonProperty]
         public RemotePlugin RemotePlugin { get; set; }
 
         public PluginGroup PluginGroup { get; set; }
 
         public ICollection<PluginFile> PluginFiles { get; set; }
-
-        [JsonProperty]
-        public Guid UserFolderId
-        {
-            get
-            {
-                return UserFolder != null ? UserFolder.Id : Guid.Empty;
-            }
-        }
 
         [JsonProperty]
         public Guid PluginGroupId

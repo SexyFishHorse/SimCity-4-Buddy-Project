@@ -104,8 +104,7 @@
                 installedPluginsListView.Groups.Add(pluginGroup.Id.ToString(), pluginGroup.Name);
             }
 
-            foreach (var plugin in
-                pluginController.Plugins.Where(x => x.UserFolderId == userFolder.Id))
+            foreach (var plugin in pluginsController.Plugins)
             {
                 var listViewItem = new PluginListViewItem(
                     plugin,

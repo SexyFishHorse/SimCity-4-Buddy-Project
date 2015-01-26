@@ -50,11 +50,9 @@
                 installedFilesListView.BeginUpdate();
 
                 installedFilesListView.Items.Clear();
-                foreach (var relativePath in value.PluginFiles
-                    .Where(x => x.QuarantinedFile == null)
-                    .Select(file => file.Path.Substring(plugin.UserFolder.PluginFolderPath.Length + 1)))
+                foreach (var pluginFile in value.PluginFiles.Where(x => x.QuarantinedFile == null))
                 {
-                    installedFilesListView.Items.Add(relativePath);
+                    installedFilesListView.Items.Add(pluginFile.Path);
                 }
 
                 installedFilesListView.Columns[0].Width = -2;

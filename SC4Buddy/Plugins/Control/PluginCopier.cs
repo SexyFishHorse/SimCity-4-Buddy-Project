@@ -20,20 +20,19 @@
             this.pluginFileController = pluginFileController;
         }
 
-        public void CopyPlugin(Plugin plugin, UserFolder targetUserFolder, bool moveInsteadOfCopy = false)
+        public void CopyPlugin(Plugin plugin, UserFolder originUserFolder, UserFolder targetUserFolder, bool moveInsteadOfCopy = false)
         {
             var newPlugin = new Plugin
                             {
                                 Name = plugin.Name,
                                 Link = plugin.Link,
                                 Description = plugin.Description,
-                                Author = plugin.Author,
-                                UserFolder = targetUserFolder
+                                Author = plugin.Author
                             };
 
             var files = new List<PluginFile>(plugin.PluginFiles.Count);
 
-            files.AddRange(plugin.PluginFiles.Select(pluginFile => CopyFile(pluginFile, targetUserFolder)));
+            files.AddRange(plugin.PluginFiles.Select(pluginFile => CopyFile(pluginFile, originUserFolder, targetUserFolder)));
 
             var affectedPlugins = new HashSet<Plugin>();
 
@@ -70,10 +69,10 @@
             pluginsController.UninstallPlugin(plugin);
         }
 
-        private PluginFile CopyFile(PluginFile pluginFile, UserFolder targetUserFolder)
+        private PluginFile CopyFile(PluginFile pluginFile, UserFolder originUserFolder, UserFolder targetUserFolder)
         {
             var currentPath = pluginFile.Path;
-            var relativeFilePath = currentPath.Remove(0, pluginFile.Plugin.UserFolder.PluginFolderPath.Length + 1);
+            var relativeFilePath = currentPath.Remove(0, originUserFolder.PluginFolderPath.Length + 1);
 
             var newFilePath = Path.Combine(targetUserFolder.PluginFolderPath, relativeFilePath);
             var newDirectoryPath = targetUserFolder.PluginFolderPath;

@@ -113,7 +113,7 @@
 
                     RaiseInstallProgressEvent(fileInfo, 75, LocalizationStrings.FilesMovedToUserFolder);
 
-                    var plugin = new Plugin { Name = new FileInfo(file).Name, UserFolder = UserFolder };
+                    var plugin = new Plugin { Name = new FileInfo(file).Name };
 
                     SavePluginInformation(plugin, installedFiles);
 

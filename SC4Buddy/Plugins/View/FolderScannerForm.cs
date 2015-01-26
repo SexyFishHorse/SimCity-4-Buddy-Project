@@ -321,8 +321,7 @@
                 Author = authorTextBox.Text.Trim(),
                 Link = link,
                 PluginGroup = GetSelectedGroup(),
-                Description = descriptionTextBox.Text.Trim(),
-                UserFolder = userFolder
+                Description = descriptionTextBox.Text.Trim()
             };
 
             var group = plugin.PluginGroup;

@@ -114,7 +114,7 @@
             var copier = new PluginCopier(pluginFileController, pluginsController);
             try
             {
-                copier.CopyPlugin(Plugin, selectedUserFolder);
+                copier.CopyPlugin(Plugin, currentUserFolder, selectedUserFolder);
                 OnPluginCopied();
             }
             catch (Exception ex)
@@ -137,7 +137,7 @@
             var copier = new PluginCopier(pluginFileController, pluginsController);
             try
             {
-                copier.CopyPlugin(Plugin, selectedUserFolder, true);
+                copier.CopyPlugin(Plugin, currentUserFolder, selectedUserFolder, true);
                 OnPluginMoved();
             }
             catch (Exception ex)
