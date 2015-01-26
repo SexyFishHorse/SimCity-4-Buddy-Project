@@ -31,8 +31,6 @@
 
         private readonly IUserFoldersController userFoldersController;
 
-        private readonly IPluginController pluginController;
-
         private readonly IPluginsController pluginsController;
 
         private readonly PluginGroupController pluginGroupController;
@@ -43,7 +41,6 @@
 
         public Sc4Buddy(
             IUserFoldersController userFoldersController,
-            IPluginController pluginController,
             PluginGroupController pluginGroupController,
             IPluginMatcher pluginMatcher,
             IDependencyChecker dependencyChecker,
@@ -53,7 +50,6 @@
             this.pluginGroupController = pluginGroupController;
             this.pluginMatcher = pluginMatcher;
             this.dependencyChecker = dependencyChecker;
-            this.pluginController = pluginController;
             this.pluginsController = pluginsController;
 
             InitializeComponent();
@@ -208,7 +204,6 @@
         {
             new UserFolderForm(
                 ((UserFolderToolStripMenuItem)sender).UserFolder,
-                pluginController,
                 pluginGroupController,
                 new UserFoldersController(new UserFoldersDataAccess(), new UserFolderController(new UserFolderDataAccess())),
                 pluginMatcher,

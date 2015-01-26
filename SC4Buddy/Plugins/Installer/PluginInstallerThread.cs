@@ -23,12 +23,12 @@
 
         private readonly IPluginFileController pluginFileController;
 
-        private readonly IPluginController pluginController;
+        private readonly IPluginsController pluginsController;
 
-        public PluginInstallerThread(IPluginController pluginController, IPluginFileController pluginFileController)
+        public PluginInstallerThread(IPluginFileController pluginFileController, IPluginsController pluginsController)
         {
             this.pluginFileController = pluginFileController;
-            this.pluginController = pluginController;
+            this.pluginsController = pluginsController;
         }
 
         public delegate void InstallPluginEventHandler(PluginInstallerThread sender, InstallPluginEventArgs args);
@@ -187,14 +187,12 @@
                 }
             }
 
-            var numDeleted = pluginController.RemoveEmptyPlugins();
+            var numDeleted = pluginsController.RemoveEmptyPlugins();
 
             if (numDeleted <= 0)
             {
-                pluginController.Add(plugin, false);
+                pluginsController.Add(plugin);
             }
-
-            pluginController.SaveChanges();
         }
 
         private IEnumerable<PluginFile> HandlePluginFiles(PluginInstaller installer)

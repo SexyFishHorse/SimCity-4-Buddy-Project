@@ -14,8 +14,6 @@
     {
         private readonly UserFolder userFolder;
 
-        private readonly IPluginController pluginController;
-
         private readonly IPluginsController pluginsController;
 
         private readonly PluginGroupController pluginGroupController;
@@ -28,7 +26,6 @@
 
         public UserFolderForm(
             UserFolder userFolder,
-            IPluginController pluginController,
             PluginGroupController pluginGroupController,
             IUserFoldersController userFoldersController,
             IPluginMatcher pluginMatcher,
@@ -36,7 +33,6 @@
             IPluginsController pluginsController)
         {
             this.userFolder = userFolder;
-            this.pluginController = pluginController;
             this.pluginGroupController = pluginGroupController;
             this.userFoldersController = userFoldersController;
             this.pluginMatcher = pluginMatcher;
@@ -48,7 +44,6 @@
         private void ManagePluginsButtonClick(object sender, System.EventArgs e)
         {
             var dialog = new PluginsForm(
-                pluginController,
                 pluginGroupController,
                 userFoldersController,
                 pluginsController,
@@ -61,7 +56,7 @@
         private void UserFolderFormLoad(object sender, System.EventArgs e)
         {
             Text = userFolder.Alias;
-            numberOfPluginsLabel.Text = pluginController.Plugins.Count.ToString(CultureInfo.InvariantCulture);
+            numberOfPluginsLabel.Text = pluginsController.Plugins.Count.ToString(CultureInfo.InvariantCulture);
 
             var directoryInfo = new DirectoryInfo(userFolder.PluginFolderPath);
             var files = directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories);

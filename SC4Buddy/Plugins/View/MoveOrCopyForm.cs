@@ -20,8 +20,6 @@
 
         private readonly IPluginsController pluginsController;
 
-        private readonly IPluginController pluginController;
-
         private readonly IPluginFileController pluginFileController;
 
         private UserFolder selectedUserFolder;
@@ -29,13 +27,11 @@
         public MoveOrCopyForm(
             UserFolder currentUserFolder,
             IUserFoldersController userFoldersController,
-            IPluginController pluginController,
             IPluginFileController pluginFileController,
             IPluginsController pluginsController)
         {
             this.currentUserFolder = currentUserFolder;
             this.userFoldersController = userFoldersController;
-            this.pluginController = pluginController;
             this.pluginFileController = pluginFileController;
             this.pluginsController = pluginsController;
 
@@ -115,7 +111,7 @@
 
         private void CopyButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier(pluginController, pluginFileController, pluginsController);
+            var copier = new PluginCopier(pluginFileController, pluginsController);
             try
             {
                 copier.CopyPlugin(Plugin, selectedUserFolder);
@@ -138,7 +134,7 @@
 
         private void MoveButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier(pluginController, pluginFileController, pluginsController);
+            var copier = new PluginCopier(pluginFileController, pluginsController);
             try
             {
                 copier.CopyPlugin(Plugin, selectedUserFolder, true);

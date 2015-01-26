@@ -8,18 +8,14 @@
 
     public class PluginCopier
     {
-        private readonly IPluginController pluginController;
-
         private readonly IPluginFileController pluginFileController;
 
         private readonly IPluginsController pluginsController;
 
         public PluginCopier(
-            IPluginController pluginController,
             IPluginFileController pluginFileController,
             IPluginsController pluginsController)
         {
-            this.pluginController = pluginController;
             this.pluginsController = pluginsController;
             this.pluginFileController = pluginFileController;
         }
@@ -61,11 +57,10 @@
 
             foreach (var affectedPlugin in affectedPlugins.Where(affectedPlugin => !affectedPlugin.PluginFiles.Any()))
             {
-                pluginController.Delete(affectedPlugin, save: false);
+                pluginsController.Remove(affectedPlugin);
             }
 
-            pluginController.Add(newPlugin, save: false);
-            pluginController.SaveChanges();
+            pluginsController.Add(newPlugin);
 
             if (!moveInsteadOfCopy)
             {

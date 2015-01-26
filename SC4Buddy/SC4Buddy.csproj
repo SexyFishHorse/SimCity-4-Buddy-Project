@@ -123,9 +123,6 @@
       <DependentUpon>SettingsController.cs</DependentUpon>
     </Compile>
     <Compile Include="Application\Utilities\FileSystemLocationsUtil.cs" />
-    <Compile Include="Plugins\Control\IPluginController.cs">
-      <DependentUpon>PluginController.cs</DependentUpon>
-    </Compile>
     <Compile Include="Plugins\Control\IPluginFileController.cs">
       <DependentUpon>PluginFileController.cs</DependentUpon>
     </Compile>
@@ -141,7 +138,6 @@
     <Compile Include="Plugins\Control\PluginsController.cs" />
     <Compile Include="Plugins\DataAccess\PluginsDataAccess.cs" />
     <Compile Include="UserFolders\Control\FolderScanner.cs" />
-    <Compile Include="Plugins\Control\PluginController.cs" />
     <Compile Include="Plugins\Control\PluginFileController.cs" />
     <Compile Include="DataAccess\Entities.cs" />
     <Compile Include="DataAccess\EntityFactory.cs" />

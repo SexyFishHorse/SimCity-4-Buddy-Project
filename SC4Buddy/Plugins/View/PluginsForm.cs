@@ -30,8 +30,6 @@
 
         private readonly IPluginsController pluginsController;
 
-        private readonly IPluginController pluginController;
-
         private readonly PluginGroupController pluginGroupController;
 
         private readonly IPluginMatcher pluginMatcher;
@@ -43,7 +41,6 @@
         private Plugin selectedPlugin;
 
         public PluginsForm(
-            IPluginController pluginController,
             PluginGroupController pluginGroupController,
             IUserFoldersController userFoldersController,
             IPluginsController pluginsController,
@@ -52,7 +49,6 @@
             IDependencyChecker dependencyChecker)
         {
             this.pluginGroupController = pluginGroupController;
-            this.pluginController = pluginController;
             this.userFoldersController = userFoldersController;
             this.pluginsController = pluginsController;
 
@@ -252,9 +248,10 @@
             {
                 Plugin = selectedPlugin
             };
+
             if (infoDialog.ShowDialog(this) == DialogResult.OK)
             {
-                pluginController.SaveChanges();
+                pluginsController.Update(selectedPlugin);
             }
 
             RepopulateInstalledPluginsListView();
@@ -283,7 +280,7 @@
                 return;
             }
 
-            new InstallPluginsForm(pluginController, files, userFolder, pluginMatcher).ShowDialog(this);
+            new InstallPluginsForm(pluginsController, files, userFolder, pluginMatcher).ShowDialog(this);
 
             RepopulateInstalledPluginsListView();
 
@@ -310,7 +307,7 @@
         {
             new FolderScannerForm(
                 new FolderScannerController(new PluginFileController(EntityFactory.Instance.Entities)),
-                pluginController,
+                pluginsController,
                 pluginGroupController,
                 userFolder,
                 pluginMatcher).ShowDialog(this);
@@ -482,7 +479,6 @@
             var dialog = new MoveOrCopyForm(
                 userFolder,
                 userFoldersController,
-                pluginController,
                 new PluginFileController(EntityFactory.Instance.Entities),
                 pluginsController)
             {

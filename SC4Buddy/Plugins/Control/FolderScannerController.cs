@@ -59,7 +59,7 @@
 
         public async Task<bool> AutoGroupKnownFiles(
             UserFolder userFolder,
-            IPluginController pluginController,
+            IPluginsController pluginController,
             IPluginMatcher pluginMatcher)
         {
             var fileDictionary = await GetRemotePluginFileMatches(pluginMatcher, NewFiles);
@@ -68,10 +68,8 @@
 
             foreach (var plugin in plugins)
             {
-                pluginController.Add(plugin, false);
+                pluginController.Add(plugin);
             }
-
-            pluginController.SaveChanges();
 
             return true;
         }

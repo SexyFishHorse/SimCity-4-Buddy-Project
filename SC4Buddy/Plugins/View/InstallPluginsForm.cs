@@ -33,13 +33,13 @@
 
         private readonly IList<Plugin> tempPluginInfo;
 
-        private readonly IPluginController pluginController;
+        private readonly IPluginsController pluginsController;
 
         private readonly EnterPluginInformationForm enterPluginInformationForm;
 
         private readonly IPluginMatcher pluginMatcher;
 
-        public InstallPluginsForm(IPluginController pluginController, string[] files, UserFolder userFolder, IPluginMatcher pluginMatcher)
+        public InstallPluginsForm(IPluginsController pluginsController, string[] files, UserFolder userFolder, IPluginMatcher pluginMatcher)
         {
             this.userFolder = userFolder;
             this.pluginMatcher = pluginMatcher;
@@ -52,19 +52,20 @@
             enterPluginInformationForm =
                 new EnterPluginInformationForm(new PluginGroupController(EntityFactory.Instance.Entities));
 
-            this.pluginController = pluginController;
+            this.pluginsController = pluginsController;
 
             OverallProgressBar.Maximum = files.Length;
             CurrentProgressBar.Maximum = 100;
 
             var pluginInstallerThread = new PluginInstallerThread(
-                pluginController,
-                new PluginFileController(EntityFactory.Instance.Entities))
-                                        {
-                                            Form = this,
-                                            FilesToInstall = files,
-                                            UserFolder = userFolder
-                                        };
+                new PluginFileController(
+                    EntityFactory.Instance.Entities),
+                    pluginsController)
+                {
+                    Form = this,
+                    FilesToInstall = files,
+                    UserFolder = userFolder
+                };
             pluginInstallerThread.InstallingPlugin += OnInstallingPlugin;
             pluginInstallerThread.PluginInstalled += OnPluginInstalled;
             pluginInstallerThread.PluginInstallFailed += OnPluginInstallFailed;
@@ -211,7 +212,7 @@
                                 var result = ShowEnterPluginInformationForm();
                                 if (result == DialogResult.OK)
                                 {
-                                    pluginController.SaveChanges();
+                                    pluginsController.Update(plugin);
                                 }
                             }
                         }
