@@ -250,7 +250,8 @@
 
             if (infoDialog.ShowDialog(this) == DialogResult.OK)
             {
-                pluginsController.Update(selectedPlugin);
+                var plugin = infoDialog.TempPlugin;
+                pluginsController.Update(plugin);
             }
 
             RepopulateInstalledPluginsListView();

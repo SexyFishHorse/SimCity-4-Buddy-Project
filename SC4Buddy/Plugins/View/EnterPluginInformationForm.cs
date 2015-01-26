@@ -60,6 +60,8 @@
             }
         }
 
+        public Plugin TempPlugin { get; set; }
+
         private void ClearForm()
         {
             nameTextBox.Text = string.Empty;
@@ -76,17 +78,19 @@
 
         private void OkButtonClick(object sender, EventArgs e)
         {
+            var newPlugin = new Plugin();
+
             var oldGroup = plugin.PluginGroup;
-            Plugin.Name = nameTextBox.Text.Trim();
-            Plugin.Author = authorTextBox.Text.Trim();
-            Plugin.Description = descriptionTextBox.Text.Trim();
+            newPlugin.Name = nameTextBox.Text.Trim();
+            newPlugin.Author = authorTextBox.Text.Trim();
+            newPlugin.Description = descriptionTextBox.Text.Trim();
 
             if (!string.IsNullOrWhiteSpace(linkTextBox.Text))
             {
-                Plugin.Link = new Url(linkTextBox.Text.Trim());
+                newPlugin.Link = new Url(linkTextBox.Text.Trim());
             }
 
-            Plugin.PluginGroup = GetOrCreateGroup();
+            newPlugin.PluginGroup = GetOrCreateGroup();
 
             if (oldGroup != null && !oldGroup.Equals(Plugin.PluginGroup))
             {
@@ -99,6 +103,8 @@
                 plugin.PluginGroup.Plugins.Add(plugin);
                 pluginGroupController.SaveChanges();
             }
+
+            TempPlugin = newPlugin;
 
             Close();
         }

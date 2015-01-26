@@ -210,7 +210,7 @@
                             {
                                 enterPluginInformationForm.Plugin = plugin;
                                 var result = ShowEnterPluginInformationForm();
-                                if (result == DialogResult.OK)
+                                if (result != null)
                                 {
                                     pluginsController.Update(plugin);
                                 }
@@ -252,9 +252,11 @@
             Invoke(new Action(() => closeButton.Enabled = true));
         }
 
-        private DialogResult ShowEnterPluginInformationForm()
+        private Plugin ShowEnterPluginInformationForm()
         {
-            return enterPluginInformationForm.ShowDialog(this);
+            return enterPluginInformationForm.ShowDialog(this) == DialogResult.OK
+                       ? enterPluginInformationForm.TempPlugin
+                       : null;
         }
 
         private DialogResult ShowWouldYouLikeToEnterAdditionalDetailsDialog()
