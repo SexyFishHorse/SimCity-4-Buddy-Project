@@ -77,6 +77,12 @@
             InitializeComponent();
         }
 
+        public void ReloadAndRepopulate()
+        {
+            pluginsController.ReloadPlugins();
+            RepopulateInstalledPluginsListView();
+        }
+
         private void UserFolderFormLoad(object sender, EventArgs e)
         {
             RepopulateInstalledPluginsListView();
@@ -212,11 +218,6 @@
             uninstallButton.Enabled = false;
             updateInfoButton.Enabled = false;
             splitContainer1.Panel2Collapsed = true;
-        }
-
-        private void CloseButtonClick(object sender, EventArgs e)
-        {
-            Close();
         }
 
         private void LinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -605,6 +606,17 @@
             {
                 Log.Info("Drop installation was cancelled.");
             }
+        }
+
+        private void CloseButtonClick(object sender, EventArgs e)
+        {
+            Hide();
+        }
+
+        private void PluginsFormFormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
         }
     }
 }

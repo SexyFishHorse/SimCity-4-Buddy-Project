@@ -182,7 +182,7 @@
         private void CloseButtonClick(object sender, EventArgs e)
         {
             Log.Info("Closing settings form");
-            Close();
+            Hide();
         }
 
         private void ScanButtonClick(object sender, EventArgs e)

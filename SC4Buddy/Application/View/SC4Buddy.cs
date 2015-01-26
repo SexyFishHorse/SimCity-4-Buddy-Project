@@ -244,6 +244,8 @@
                 userFolderForms.Add(form);
             }
 
+            form.UpdateData();
+
             form.Show();
             form.Focus();
         }

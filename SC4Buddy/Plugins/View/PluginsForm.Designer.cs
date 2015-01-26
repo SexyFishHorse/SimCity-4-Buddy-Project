@@ -330,6 +330,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "PluginsForm";
             this.Activated += new System.EventHandler(this.UserFolderFormActivated);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PluginsFormFormClosing);
             this.Load += new System.EventHandler(this.UserFolderFormLoad);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.PluginsFormDragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.PluginsFormDragEnter);

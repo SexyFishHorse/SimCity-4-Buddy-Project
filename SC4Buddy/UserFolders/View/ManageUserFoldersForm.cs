@@ -4,7 +4,6 @@
     using System.Drawing;
     using System.IO;
     using System.Linq;
-    using System.Net.Mail;
     using System.Resources;
     using System.Windows.Forms;
     using NIHEI.SC4Buddy.Model;
@@ -186,7 +185,7 @@
 
         private void CloseButtonClick(object sender, EventArgs e)
         {
-            Close();
+            Hide();
         }
 
         private void SaveButtonClick(object sender, EventArgs e)
@@ -294,7 +293,7 @@
                 }
             }
 
-            pathTextBox.ForeColor = pathTextBox.Text.Equals(localizationManager.GetString("pathTextBox.Text"))
+            pathTextBox.ForeColor = text.Equals(localizationManager.GetString("pathTextBox.Text"))
                                         ? Color.Gray
                                         : Color.Black;
 
@@ -302,6 +301,12 @@
             {
                 TryLoadUserFolderData(pathTextBox.Text);
             }
+        }
+
+        private void ManageUserFoldersFormFormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
         }
     }
 }

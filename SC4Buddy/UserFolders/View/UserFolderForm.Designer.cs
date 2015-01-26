@@ -158,6 +158,7 @@
             this.Name = "UserFolderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User Folder Management";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserFolderFormFormClosing);
             this.Load += new System.EventHandler(this.UserFolderFormLoad);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);

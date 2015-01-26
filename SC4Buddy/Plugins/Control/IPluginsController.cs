@@ -28,5 +28,7 @@
         void UnquarantineFiles(IEnumerable<PluginFile> files);
 
         void RemoveFilesFromPlugins(ICollection<string> deletedFilePaths);
+
+        void ReloadPlugins();
     }
 }
