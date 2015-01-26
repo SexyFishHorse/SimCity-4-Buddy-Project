@@ -1,10 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Model
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Linq;
-
     using Newtonsoft.Json;
 
     [JsonObject(MemberSerialization.OptIn)]
@@ -40,15 +37,6 @@
         public bool IsStartupFolder { get; set; }
 
         public ICollection<Plugin> Plugins { get; set; }
-
-        [JsonProperty]
-        public IEnumerable<Guid> PluginIds
-        {
-            get
-            {
-                return Plugins.Select(x => x.Id);
-            }
-        }
 
         public string PluginFolderPath
         {
