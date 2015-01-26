@@ -1,6 +1,5 @@
 ﻿namespace NIHEI.SC4Buddy.Plugins.DataAccess
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
@@ -8,6 +7,7 @@
     using System.Reflection;
     using System.Security.Policy;
     using log4net;
+    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
@@ -49,33 +49,40 @@
                 return plugins;
             }
 
-            using (var reader = new StreamReader(fileInfo.OpenRead()))
+            try
             {
-                var json = reader.ReadToEnd();
-                dynamic pluginsJson = JArray.Parse(json);
-
-                foreach (var pluginJson in pluginsJson)
+                using (var reader = new StreamReader(fileInfo.OpenRead()))
                 {
-                    var groupName = pluginJson.Group.ToString();
-                    var plugin = new Plugin
-                    {
-                        Id = pluginJson.Id,
-                        Author = pluginJson.Author,
-                        Description = pluginJson.Description,
-                        Name = pluginJson.Name,
-                        PluginGroup = pluginGroupController.Groups.FirstOrDefault(x => x.Name == groupName)
-                    };
+                    var json = reader.ReadToEnd();
+                    dynamic pluginsJson = JArray.Parse(json);
 
-                    if (pluginJson.Link != null)
+                    foreach (var pluginJson in pluginsJson)
                     {
-                        plugin.Link = new Url(pluginJson.Url);
+                        var groupName = pluginJson.Group.ToString();
+                        var plugin = new Plugin
+                        {
+                            Id = pluginJson.Id,
+                            Author = pluginJson.Author,
+                            Description = pluginJson.Description,
+                            Name = pluginJson.Name,
+                            PluginGroup = pluginGroupController.Groups.FirstOrDefault(x => x.Name == groupName)
+                        };
+
+                        if (pluginJson.Link != null)
+                        {
+                            plugin.Link = new Url(pluginJson.Url);
+                        }
+
+                        plugins.Add(plugin);
                     }
-
-                    plugins.Add(plugin);
                 }
-
-                return plugins;
             }
+            catch (JsonReaderException exception)
+            {
+                Log.Error(string.Format("Error reading json from {0}", fileInfo.FullName), exception);
+            }
+
+            return plugins;
         }
 
         public void SavePlugins(IEnumerable<Plugin> plugins, UserFolder userFolder)
