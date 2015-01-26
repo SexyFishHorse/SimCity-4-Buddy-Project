@@ -84,6 +84,8 @@
             newPlugin.Name = nameTextBox.Text.Trim();
             newPlugin.Author = authorTextBox.Text.Trim();
             newPlugin.Description = descriptionTextBox.Text.Trim();
+            newPlugin.PluginFiles = Plugin.PluginFiles;
+            newPlugin.RemotePlugin = Plugin.RemotePlugin;
 
             if (!string.IsNullOrWhiteSpace(linkTextBox.Text))
             {
