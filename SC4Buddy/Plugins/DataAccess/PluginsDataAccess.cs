@@ -15,7 +15,7 @@
 
     public class PluginsDataAccess
     {
-        public const string Filename = "plugins.json";
+        public const string Filename = "Plugins.json";
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
