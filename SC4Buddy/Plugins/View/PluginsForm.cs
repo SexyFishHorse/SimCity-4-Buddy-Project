@@ -11,7 +11,6 @@
     using Irradiated.Sc4Buddy.ApiClient.Model;
     using log4net;
     using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Remote;
@@ -30,8 +29,6 @@
 
         private readonly IPluginsController pluginsController;
 
-        private readonly IPluginController pluginController;
-
         private readonly PluginGroupController pluginGroupController;
 
         private readonly IPluginMatcher pluginMatcher;
@@ -43,7 +40,6 @@
         private Plugin selectedPlugin;
 
         public PluginsForm(
-            IPluginController pluginController,
             PluginGroupController pluginGroupController,
             IUserFoldersController userFoldersController,
             IPluginsController pluginsController,
@@ -52,7 +48,6 @@
             IDependencyChecker dependencyChecker)
         {
             this.pluginGroupController = pluginGroupController;
-            this.pluginController = pluginController;
             this.userFoldersController = userFoldersController;
             this.pluginsController = pluginsController;
 
@@ -108,12 +103,10 @@
                 installedPluginsListView.Groups.Add(pluginGroup.Id.ToString(), pluginGroup.Name);
             }
 
-            foreach (var plugin in
-                pluginController.Plugins.Where(x => x.UserFolderId == userFolder.Id))
+            foreach (var plugin in pluginsController.Plugins)
             {
-                var listViewItem = new PluginListViewItem(
-                    plugin,
-                    installedPluginsListView.Groups[plugin.PluginGroupId.ToString()]);
+                var groupId = plugin.PluginGroup == null ? string.Empty : plugin.PluginGroup.Id.ToString();
+                var listViewItem = new PluginListViewItem(plugin, installedPluginsListView.Groups[groupId]);
 
                 installedPluginsListView.Items.Add(listViewItem);
             }
@@ -252,9 +245,11 @@
             {
                 Plugin = selectedPlugin
             };
+
             if (infoDialog.ShowDialog(this) == DialogResult.OK)
             {
-                pluginController.SaveChanges();
+                var plugin = infoDialog.TempPlugin;
+                pluginsController.Update(plugin);
             }
 
             RepopulateInstalledPluginsListView();
@@ -283,7 +278,7 @@
                 return;
             }
 
-            new InstallPluginsForm(pluginController, files, userFolder, pluginMatcher).ShowDialog(this);
+            new InstallPluginsForm(pluginsController, files, userFolder, pluginMatcher).ShowDialog(this);
 
             RepopulateInstalledPluginsListView();
 
@@ -309,8 +304,8 @@
         private void ScanForNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
             new FolderScannerForm(
-                new FolderScannerController(new PluginFileController(EntityFactory.Instance.Entities)),
-                pluginController,
+                new FolderScannerController(),
+                pluginsController,
                 pluginGroupController,
                 userFolder,
                 pluginMatcher).ShowDialog(this);
@@ -482,9 +477,8 @@
             var dialog = new MoveOrCopyForm(
                 userFolder,
                 userFoldersController,
-                pluginController,
-                new PluginFileController(EntityFactory.Instance.Entities),
-                pluginsController)
+                pluginsController,
+                pluginGroupController)
             {
                 Plugin = selectedPlugin
             };
@@ -528,10 +522,13 @@
 
         private void DisableFilesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new QuarantinedPluginFilesForm(
-                selectedPlugin,
-                new PluginFileController(EntityFactory.Instance.Entities));
-            var result = dialog.ShowDialog(this);
+            var dialog = new QuarantinedPluginFilesForm(selectedPlugin);
+
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                pluginsController.QuarantineFiles(dialog.QuarantinedFiles);
+                pluginsController.UnquarantineFiles(dialog.UnquarantinedFiles);
+            }
         }
 
         private void ReportPluginLinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

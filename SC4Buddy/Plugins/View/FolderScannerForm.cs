@@ -28,7 +28,7 @@
 
         private readonly FolderScannerController folderScannerController;
 
-        private readonly IPluginController pluginController;
+        private readonly IPluginsController pluginsController;
 
         private readonly PluginGroupController pluginGroupController;
 
@@ -38,14 +38,14 @@
 
         public FolderScannerForm(
             FolderScannerController folderScannerController,
-            IPluginController pluginController,
+            IPluginsController pluginsController,
             PluginGroupController pluginGroupController,
             UserFolder userFolder,
             IPluginMatcher pluginMatcher)
         {
             this.folderScannerController = folderScannerController;
 
-            this.pluginController = pluginController;
+            this.pluginsController = pluginsController;
 
             this.pluginGroupController = pluginGroupController;
 
@@ -321,8 +321,7 @@
                 Author = authorTextBox.Text.Trim(),
                 Link = link,
                 PluginGroup = GetSelectedGroup(),
-                Description = descriptionTextBox.Text.Trim(),
-                UserFolder = userFolder
+                Description = descriptionTextBox.Text.Trim()
             };
 
             var group = plugin.PluginGroup;
@@ -338,14 +337,13 @@
                         Path = Path.Combine(userFolder.PluginFolderPath, path),
                         Checksum =
                             Md5ChecksumUtility.CalculateChecksum(Path.Combine(userFolder.PluginFolderPath, path))
-                                .ToHex(),
-                        Plugin = plugin
+                                .ToHex()
                     }))
             {
                 plugin.PluginFiles.Add(pluginFile);
             }
 
-            pluginController.Add(plugin);
+            pluginsController.Add(plugin);
 
             ClearInfoAndSelectedFilesForms();
 
@@ -452,7 +450,7 @@
                         .TryingToAutoGroupPluginsThisMayTakeAFewMinutesIfYouHaveALargePluginFolderOrASlowInternetConnection;
                 statusLabel.Visible = true;
                 autoGroupKnownPlugins.Enabled = false;
-                await folderScannerController.AutoGroupKnownFiles(userFolder, pluginController, pluginMatcher);
+                await folderScannerController.AutoGroupKnownFiles(userFolder, pluginsController, pluginMatcher);
                 RepopulateNewFilesListView();
             }
             catch (Sc4BuddyClientException ex)
@@ -467,7 +465,7 @@
 
                 if (result == DialogResult.Retry)
                 {
-                    AutoGroupKnownPlugins();
+                    AutoGroupKnownPlugins().GetAwaiter().GetResult();
                 }
             }
             finally

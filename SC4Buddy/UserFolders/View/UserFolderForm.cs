@@ -12,10 +12,6 @@
 
     public partial class UserFolderForm : Form
     {
-        private readonly UserFolder userFolder;
-
-        private readonly IPluginController pluginController;
-
         private readonly IPluginsController pluginsController;
 
         private readonly PluginGroupController pluginGroupController;
@@ -28,15 +24,13 @@
 
         public UserFolderForm(
             UserFolder userFolder,
-            IPluginController pluginController,
             PluginGroupController pluginGroupController,
             IUserFoldersController userFoldersController,
             IPluginMatcher pluginMatcher,
             IDependencyChecker dependencyChecker,
             IPluginsController pluginsController)
         {
-            this.userFolder = userFolder;
-            this.pluginController = pluginController;
+            UserFolder = userFolder;
             this.pluginGroupController = pluginGroupController;
             this.userFoldersController = userFoldersController;
             this.pluginMatcher = pluginMatcher;
@@ -45,25 +39,28 @@
             InitializeComponent();
         }
 
+        public UserFolder UserFolder { get; set; }
+
         private void ManagePluginsButtonClick(object sender, System.EventArgs e)
         {
+            Hide();
             var dialog = new PluginsForm(
-                pluginController,
                 pluginGroupController,
                 userFoldersController,
                 pluginsController,
-                userFolder,
+                UserFolder,
                 pluginMatcher,
                 dependencyChecker);
-            dialog.ShowDialog(this);
+            dialog.Show(this);
         }
 
         private void UserFolderFormLoad(object sender, System.EventArgs e)
         {
-            Text = userFolder.Alias;
-            numberOfPluginsLabel.Text = pluginController.Plugins.Count.ToString(CultureInfo.InvariantCulture);
+            Text = UserFolder.Alias;
+            numberOfPluginsLabel.Text = pluginsController.Plugins.Count.ToString(CultureInfo.InvariantCulture);
 
-            var directoryInfo = new DirectoryInfo(userFolder.PluginFolderPath);
+            var directoryInfo = new DirectoryInfo(UserFolder.PluginFolderPath);
+            directoryInfo.Create();
             var files = directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories);
             var size = files.Sum(fileInfo => fileInfo.Length);
 

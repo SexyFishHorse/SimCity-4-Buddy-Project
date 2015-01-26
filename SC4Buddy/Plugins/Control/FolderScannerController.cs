@@ -21,13 +21,6 @@
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly IPluginFileController pluginFileController;
-
-        public FolderScannerController(IPluginFileController pluginFileController)
-        {
-            this.pluginFileController = pluginFileController;
-        }
-
         public event EventHandler NewFilesFound;
 
         public List<string> NewFiles { get; private set; }
@@ -36,7 +29,7 @@
         {
             try
             {
-                var folderScanner = new FolderScanner(pluginFileController, userFolder);
+                var folderScanner = new FolderScanner(userFolder);
 
                 if (!folderScanner.ScanFolderForNewFiles())
                 {
@@ -59,25 +52,22 @@
 
         public async Task<bool> AutoGroupKnownFiles(
             UserFolder userFolder,
-            IPluginController pluginController,
+            IPluginsController pluginController,
             IPluginMatcher pluginMatcher)
         {
             var fileDictionary = await GetRemotePluginFileMatches(pluginMatcher, NewFiles);
 
-            var plugins = GroupFilesIntoPlugins(userFolder, fileDictionary, NewFiles);
+            var plugins = GroupFilesIntoPlugins(fileDictionary, NewFiles);
 
             foreach (var plugin in plugins)
             {
-                pluginController.Add(plugin, false);
+                pluginController.Add(plugin);
             }
-
-            pluginController.SaveChanges();
 
             return true;
         }
 
         private IEnumerable<Plugin> GroupFilesIntoPlugins(
-            UserFolder userFolder,
             Dictionary<string, Irradiated.Sc4Buddy.ApiClient.Model.Plugin> fileDictionary,
             ICollection<string> allNewFiles)
         {
@@ -95,7 +85,6 @@
                     Description = remotePlugin.Description,
                     Link = new Url(remotePlugin.LinkToDownloadPage),
                     Author = remotePlugin.AuthorName,
-                    UserFolder = userFolder,
                     RemotePlugin = remotePlugin
                 };
 
@@ -107,8 +96,7 @@
                     {
                         Id = Guid.NewGuid(),
                         Checksum = Md5ChecksumUtility.CalculateChecksum(filePath).ToHex(),
-                        Path = filePath,
-                        Plugin = plugin
+                        Path = filePath
                     };
 
                     files.Add(pluginFile);

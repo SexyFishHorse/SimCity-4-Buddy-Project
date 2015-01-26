@@ -1,9 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Model
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Linq;
     using System.Security.Policy;
 
     using Newtonsoft.Json;
@@ -26,45 +24,41 @@
         [JsonProperty]
         public Url Link { get; set; }
 
-        public UserFolder UserFolder { get; set; }
-
         [JsonProperty]
         public RemotePlugin RemotePlugin { get; set; }
 
         public PluginGroup PluginGroup { get; set; }
 
+        [JsonProperty]
         public ICollection<PluginFile> PluginFiles { get; set; }
 
         [JsonProperty]
-        public Guid UserFolderId
+        public string Group
         {
             get
             {
-                return UserFolder != null ? UserFolder.Id : Guid.Empty;
-            }
-        }
-
-        [JsonProperty]
-        public Guid PluginGroupId
-        {
-            get
-            {
-                return PluginGroup != null ? PluginGroup.Id : Guid.Empty;
-            }
-        }
-
-        [JsonProperty]
-        public IEnumerable<Guid> PluginFileIds
-        {
-            get
-            {
-                return PluginFiles.Select(x => x.Id);
+                return PluginGroup != null ? PluginGroup.Name : null;
             }
         }
 
         public Plugin()
         {
             PluginFiles = new Collection<PluginFile>();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Plugin))
+            {
+                return false;
+            }
+
+            return obj.GetHashCode() == GetHashCode();
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
         }
 
         private sealed class NameEqualityComparer : IEqualityComparer<Plugin>

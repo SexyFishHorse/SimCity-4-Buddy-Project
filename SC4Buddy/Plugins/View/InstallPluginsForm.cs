@@ -33,13 +33,13 @@
 
         private readonly IList<Plugin> tempPluginInfo;
 
-        private readonly IPluginController pluginController;
+        private readonly IPluginsController pluginsController;
 
         private readonly EnterPluginInformationForm enterPluginInformationForm;
 
         private readonly IPluginMatcher pluginMatcher;
 
-        public InstallPluginsForm(IPluginController pluginController, string[] files, UserFolder userFolder, IPluginMatcher pluginMatcher)
+        public InstallPluginsForm(IPluginsController pluginsController, string[] files, UserFolder userFolder, IPluginMatcher pluginMatcher)
         {
             this.userFolder = userFolder;
             this.pluginMatcher = pluginMatcher;
@@ -52,19 +52,17 @@
             enterPluginInformationForm =
                 new EnterPluginInformationForm(new PluginGroupController(EntityFactory.Instance.Entities));
 
-            this.pluginController = pluginController;
+            this.pluginsController = pluginsController;
 
             OverallProgressBar.Maximum = files.Length;
             CurrentProgressBar.Maximum = 100;
 
-            var pluginInstallerThread = new PluginInstallerThread(
-                pluginController,
-                new PluginFileController(EntityFactory.Instance.Entities))
-                                        {
-                                            Form = this,
-                                            FilesToInstall = files,
-                                            UserFolder = userFolder
-                                        };
+            var pluginInstallerThread = new PluginInstallerThread(pluginsController)
+            {
+                Form = this,
+                FilesToInstall = files,
+                UserFolder = userFolder
+            };
             pluginInstallerThread.InstallingPlugin += OnInstallingPlugin;
             pluginInstallerThread.PluginInstalled += OnPluginInstalled;
             pluginInstallerThread.PluginInstallFailed += OnPluginInstallFailed;
@@ -209,9 +207,9 @@
                             {
                                 enterPluginInformationForm.Plugin = plugin;
                                 var result = ShowEnterPluginInformationForm();
-                                if (result == DialogResult.OK)
+                                if (result != null)
                                 {
-                                    pluginController.SaveChanges();
+                                    pluginsController.Update(plugin);
                                 }
                             }
                         }
@@ -251,9 +249,11 @@
             Invoke(new Action(() => closeButton.Enabled = true));
         }
 
-        private DialogResult ShowEnterPluginInformationForm()
+        private Plugin ShowEnterPluginInformationForm()
         {
-            return enterPluginInformationForm.ShowDialog(this);
+            return enterPluginInformationForm.ShowDialog(this) == DialogResult.OK
+                       ? enterPluginInformationForm.TempPlugin
+                       : null;
         }
 
         private DialogResult ShowWouldYouLikeToEnterAdditionalDetailsDialog()

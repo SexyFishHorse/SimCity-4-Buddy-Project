@@ -8,28 +8,24 @@
     using System.Windows.Forms;
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.Control;
 
     public partial class QuarantinedPluginFilesForm : Form
     {
         private readonly Plugin selectedPlugin;
 
-        private readonly IPluginFileController pluginFileController;
-
-        public QuarantinedPluginFilesForm(
-            Plugin selectedPlugin,
-            IPluginFileController pluginFileController)
+        public QuarantinedPluginFilesForm(Plugin selectedPlugin)
         {
             this.selectedPlugin = selectedPlugin;
-            this.pluginFileController = pluginFileController;
 
             InitializeComponent();
         }
 
+        public IEnumerable<PluginFile> UnquarantinedFiles { get; set; }
+
+        public IEnumerable<PluginFile> QuarantinedFiles { get; set; }
+
         private void CancelButtonClick(object sender, EventArgs e)
         {
-            pluginFileController.RevertChanges(selectedPlugin.PluginFiles.Cast<ModelBase>().ToList());
-
             Close();
         }
 
@@ -110,9 +106,9 @@
         {
             var quarantined = disabledFilesListView.Items.Cast<ListViewItemWithObjectValue<PluginFile>>();
             var unquarantined = activeFilesListView.Items.Cast<ListViewItemWithObjectValue<PluginFile>>();
-            pluginFileController.QuarantineFiles(quarantined.Select(x => x.Value));
-            pluginFileController.UnquarantineFiles(unquarantined.Select(x => x.Value));
-            pluginFileController.SaveChanges();
+
+            QuarantinedFiles = quarantined.Select(x => x.Value);
+            UnquarantinedFiles = unquarantined.Select(x => x.Value);
 
             Close();
         }

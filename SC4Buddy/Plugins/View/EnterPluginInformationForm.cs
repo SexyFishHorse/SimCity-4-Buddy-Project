@@ -50,17 +50,17 @@
                 installedFilesListView.BeginUpdate();
 
                 installedFilesListView.Items.Clear();
-                foreach (var relativePath in value.PluginFiles
-                    .Where(x => x.QuarantinedFile == null)
-                    .Select(file => file.Path.Substring(plugin.UserFolder.PluginFolderPath.Length + 1)))
+                foreach (var pluginFile in value.PluginFiles.Where(x => x.QuarantinedFile == null))
                 {
-                    installedFilesListView.Items.Add(relativePath);
+                    installedFilesListView.Items.Add(pluginFile.Path);
                 }
 
                 installedFilesListView.Columns[0].Width = -2;
                 installedFilesListView.EndUpdate();
             }
         }
+
+        public Plugin TempPlugin { get; set; }
 
         private void ClearForm()
         {
@@ -78,29 +78,35 @@
 
         private void OkButtonClick(object sender, EventArgs e)
         {
-            var oldGroup = plugin.PluginGroup;
-            Plugin.Name = nameTextBox.Text.Trim();
-            Plugin.Author = authorTextBox.Text.Trim();
-            Plugin.Description = descriptionTextBox.Text.Trim();
+            var newPlugin = new Plugin { Id = Plugin.Id };
+
+            var oldGroup = Plugin.PluginGroup;
+            newPlugin.Name = nameTextBox.Text.Trim();
+            newPlugin.Author = authorTextBox.Text.Trim();
+            newPlugin.Description = descriptionTextBox.Text.Trim();
+            newPlugin.PluginFiles = Plugin.PluginFiles;
+            newPlugin.RemotePlugin = Plugin.RemotePlugin;
 
             if (!string.IsNullOrWhiteSpace(linkTextBox.Text))
             {
-                Plugin.Link = new Url(linkTextBox.Text.Trim());
+                newPlugin.Link = new Url(linkTextBox.Text.Trim());
             }
 
-            Plugin.PluginGroup = GetOrCreateGroup();
+            newPlugin.PluginGroup = GetOrCreateGroup();
 
             if (oldGroup != null && !oldGroup.Equals(Plugin.PluginGroup))
             {
-                oldGroup.Plugins.Remove(plugin);
+                oldGroup.Plugins.Remove(Plugin);
                 pluginGroupController.SaveChanges();
             }
 
-            if (plugin.PluginGroup != null)
+            if (newPlugin.PluginGroup != null)
             {
-                plugin.PluginGroup.Plugins.Add(plugin);
+                newPlugin.PluginGroup.Plugins.Add(Plugin);
                 pluginGroupController.SaveChanges();
             }
+
+            TempPlugin = newPlugin;
 
             Close();
         }

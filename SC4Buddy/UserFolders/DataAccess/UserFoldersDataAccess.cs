@@ -9,12 +9,20 @@
     using Newtonsoft.Json.Linq;
     using NIHEI.SC4Buddy.Application.Utilities;
     using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.Utils;
 
     public class UserFoldersDataAccess : IUserFoldersDataAccess
     {
         public const string Filename = "UserFolders.json";
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        private readonly IJsonFileWriter writer;
+
+        public UserFoldersDataAccess(IJsonFileWriter writer)
+        {
+            this.writer = writer;
+        }
 
         public ICollection<UserFolder> LoadUserFolders()
         {
@@ -58,18 +66,7 @@
             Log.Info("Save all user folders.");
             var fileInfo = new FileInfo(Path.Combine(FileSystemLocationsUtil.LocalApplicationDataDirectory, Filename));
 
-            if (fileInfo.DirectoryName == null)
-            {
-                throw new DirectoryNotFoundException(string.Format("The location string {0} does not contain a directory name.", fileInfo.FullName));
-            }
-
-            Directory.CreateDirectory(fileInfo.DirectoryName);
-
-            using (var writer = new StreamWriter(fileInfo.FullName))
-            {
-                var json = JsonConvert.SerializeObject(userFolders);
-                writer.Write(json);
-            }
+            writer.WriteToFile(fileInfo, userFolders);
         }
     }
 }

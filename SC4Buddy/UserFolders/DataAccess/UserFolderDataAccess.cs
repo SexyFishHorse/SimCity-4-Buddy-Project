@@ -5,12 +5,20 @@
     using log4net;
     using Newtonsoft.Json;
     using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.Utils;
 
     public class UserFolderDataAccess : IUserFolderDataAccess
     {
         public const string Filename = "UserFolder.json";
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        private readonly IJsonFileWriter writer;
+
+        public UserFolderDataAccess(IJsonFileWriter writer)
+        {
+            this.writer = writer;
+        }
 
         public UserFolder LoadUserFolder(string path)
         {
@@ -36,18 +44,7 @@
 
             var fileInfo = new FileInfo(Path.Combine(userFolder.FolderPath, Filename));
 
-            if (fileInfo.DirectoryName == null)
-            {
-                throw new DirectoryNotFoundException(string.Format("The location string {0} does not contain a directory name.", fileInfo.FullName));
-            }
-
-            Directory.CreateDirectory(fileInfo.DirectoryName);
-
-            using (var writer = new StreamWriter(fileInfo.FullName))
-            {
-                var json = JsonConvert.SerializeObject(userFolder);
-                writer.Write(json);
-            }
+            writer.WriteToFile(fileInfo, userFolder);
         }
     }
 }

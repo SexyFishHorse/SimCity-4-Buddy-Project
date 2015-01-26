@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Application.View
 {
     using System;
+    using System.Collections.ObjectModel;
     using System.Configuration;
     using System.Diagnostics;
     using System.Drawing;
@@ -15,12 +16,14 @@
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
+    using NIHEI.SC4Buddy.Plugins.DataAccess;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.UserFolders.DataAccess;
     using NIHEI.SC4Buddy.UserFolders.View;
+    using NIHEI.SC4Buddy.Utils;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class Sc4Buddy : Form
@@ -31,34 +34,41 @@
 
         private readonly IUserFoldersController userFoldersController;
 
-        private readonly IPluginController pluginController;
-
-        private readonly IPluginsController pluginsController;
-
         private readonly PluginGroupController pluginGroupController;
 
         private readonly IPluginMatcher pluginMatcher;
 
         private readonly IDependencyChecker dependencyChecker;
 
+        private readonly Collection<UserFolderForm> userFolderForms;
+
+        private ManageUserFoldersForm manageUserFoldersForm;
+
+        private AboutBox aboutBox;
+
+        private SettingsForm settingsForm;
+
         public Sc4Buddy(
             IUserFoldersController userFoldersController,
-            IPluginController pluginController,
             PluginGroupController pluginGroupController,
             IPluginMatcher pluginMatcher,
-            IDependencyChecker dependencyChecker,
-            IPluginsController pluginsController)
+            IDependencyChecker dependencyChecker)
         {
             this.userFoldersController = userFoldersController;
             this.pluginGroupController = pluginGroupController;
             this.pluginMatcher = pluginMatcher;
             this.dependencyChecker = dependencyChecker;
-            this.pluginController = pluginController;
-            this.pluginsController = pluginsController;
 
             InitializeComponent();
 
+            userFolderForms = new Collection<UserFolderForm>();
+
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(Sc4Buddy));
+        }
+
+        private static UserFolder GetSelectedUserFolder(object sender)
+        {
+            return ((UserFolderToolStripMenuItem)sender).UserFolder;
         }
 
         private void UserFolderComboBoxCheckSelectedValue(object sender, EventArgs e)
@@ -83,7 +93,12 @@
 
         private void ManageFoldersToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new ManageUserFoldersForm(userFoldersController).ShowDialog(this);
+            if (manageUserFoldersForm == null)
+            {
+                manageUserFoldersForm  = new ManageUserFoldersForm(userFoldersController);
+            }
+
+            manageUserFoldersForm.Show(this);
 
             RepopulateUserFolderRelatives();
         }
@@ -206,14 +221,28 @@
 
         private void UserFolderMenuItemClick(object sender, EventArgs e)
         {
-            new UserFolderForm(
-                ((UserFolderToolStripMenuItem)sender).UserFolder,
-                pluginController,
-                pluginGroupController,
-                new UserFoldersController(new UserFoldersDataAccess(), new UserFolderController(new UserFolderDataAccess())),
-                pluginMatcher,
-                dependencyChecker,
-                pluginsController).Show(this);
+            var userFolder = GetSelectedUserFolder(sender);
+
+            var form = userFolderForms.FirstOrDefault(x => x.UserFolder.Id == userFolder.Id);
+
+            if (form == null)
+            {
+                form = new UserFolderForm(
+                    userFolder,
+                    pluginGroupController,
+                    new UserFoldersController(
+                        new UserFoldersDataAccess(new JsonFileWriter()),
+                        new UserFolderController(new UserFolderDataAccess(new JsonFileWriter()))),
+                    pluginMatcher,
+                    dependencyChecker,
+                    new PluginsController(
+                        new PluginsDataAccess(userFolder, new JsonFileWriter(), pluginGroupController),
+                        userFolder));
+                userFolderForms.Add(form);
+            }
+
+            form.Show();
+            form.Focus();
         }
 
         private void PlayButtonClick(object sender, EventArgs e)
@@ -266,7 +295,12 @@
 
         private void SettingsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new SettingsForm(userFoldersController).ShowDialog(this);
+            if (settingsForm == null)
+            {
+                settingsForm = new SettingsForm(userFoldersController);
+            }
+
+            settingsForm.ShowDialog(this);
 
             UpdateBackground();
         }
@@ -278,7 +312,12 @@
 
         private void AboutToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new AboutBox().ShowDialog(this);
+            if (aboutBox == null)
+            {
+                aboutBox = new AboutBox();
+            }
+
+            aboutBox.ShowDialog(this);
         }
 
         private void BugsAndFeedbackToolStripMenuItemClick(object sender, EventArgs e)

@@ -7,12 +7,6 @@
 
     public interface IEntities : IDisposable
     {
-        ICollection<Plugin> Plugins { get; }
-
-        ICollection<PluginFile> Files { get; }
-
-        ICollection<UserFolder> UserFolders { get; }
-
         ICollection<PluginGroup> Groups { get; }
 
         void SaveChanges();

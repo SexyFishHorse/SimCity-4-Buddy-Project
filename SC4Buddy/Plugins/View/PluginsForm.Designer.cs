@@ -318,7 +318,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             resources.ApplyResources(this.openInFileExplorerToolStripMenuItem, "openInFileExplorerToolStripMenuItem");
             this.openInFileExplorerToolStripMenuItem.Click += new System.EventHandler(this.OpenInFileExplorerToolStripMenuItemClick);
             // 
-            // UserFolderForm
+            // PluginsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -327,7 +327,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "UserFolderForm";
+            this.Name = "PluginsForm";
             this.Activated += new System.EventHandler(this.UserFolderFormActivated);
             this.Load += new System.EventHandler(this.UserFolderFormLoad);
             this.splitContainer1.Panel1.ResumeLayout(false);

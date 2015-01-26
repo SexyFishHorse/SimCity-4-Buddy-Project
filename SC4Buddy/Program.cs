@@ -23,6 +23,7 @@
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.UserFolders.DataAccess;
+    using NIHEI.SC4Buddy.Utils;
 
     public static class Program
     {
@@ -37,9 +38,8 @@
             try
             {
                 var entities = EntityFactory.Instance.Entities;
-                var userFolderController = new UserFolderController(new UserFolderDataAccess());
-                var userFoldersController = new UserFoldersController(new UserFoldersDataAccess(), userFolderController);
-                var pluginsController = new PluginsController(new PluginFileController(entities), new PluginController(entities));
+                var userFolderController = new UserFolderController(new UserFolderDataAccess(new JsonFileWriter()));
+                var userFoldersController = new UserFoldersController(new UserFoldersDataAccess(new JsonFileWriter()), userFolderController);
 
                 System.Windows.Forms.Application.EnableVisualStyles();
                 System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
@@ -64,12 +64,10 @@
                     System.Windows.Forms.Application.Run(
                         new Sc4Buddy(
                             userFoldersController,
-                            new PluginController(entities),
                             new PluginGroupController(entities),
                             new PluginMatcher(
                                 new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty)),
-                            new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFoldersController.GetMainUserFolder()),
-                            pluginsController));
+                            new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFoldersController.GetMainUserFolder())));
                 }
             }
             catch (Exception ex)
@@ -97,8 +95,8 @@
         private static void SetDefaultUserFolder()
         {
             var userFoldersController = new UserFoldersController(
-                new UserFoldersDataAccess(),
-                new UserFolderController(new UserFolderDataAccess()));
+                new UserFoldersDataAccess(new JsonFileWriter()),
+                new UserFolderController(new UserFolderDataAccess(new JsonFileWriter())));
 
             var path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimCity 4");

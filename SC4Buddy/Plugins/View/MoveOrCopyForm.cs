@@ -7,7 +7,9 @@
     using log4net;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
+    using NIHEI.SC4Buddy.Plugins.DataAccess;
     using NIHEI.SC4Buddy.UserFolders.Control;
+    using NIHEI.SC4Buddy.Utils;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class MoveOrCopyForm : Form
@@ -20,24 +22,20 @@
 
         private readonly IPluginsController pluginsController;
 
-        private readonly IPluginController pluginController;
-
-        private readonly IPluginFileController pluginFileController;
+        private readonly PluginGroupController pluginGroupController;
 
         private UserFolder selectedUserFolder;
 
         public MoveOrCopyForm(
             UserFolder currentUserFolder,
             IUserFoldersController userFoldersController,
-            IPluginController pluginController,
-            IPluginFileController pluginFileController,
-            IPluginsController pluginsController)
+            IPluginsController pluginsController,
+            PluginGroupController pluginGroupController)
         {
             this.currentUserFolder = currentUserFolder;
             this.userFoldersController = userFoldersController;
-            this.pluginController = pluginController;
-            this.pluginFileController = pluginFileController;
             this.pluginsController = pluginsController;
+            this.pluginGroupController = pluginGroupController;
 
             InitializeComponent();
         }
@@ -115,10 +113,14 @@
 
         private void CopyButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier(pluginController, pluginFileController, pluginsController);
+            var copier = new PluginCopier(
+                pluginsController,
+                new PluginsController(
+                    new PluginsDataAccess(selectedUserFolder, new JsonFileWriter(), pluginGroupController),
+                    selectedUserFolder));
             try
             {
-                copier.CopyPlugin(Plugin, selectedUserFolder);
+                copier.CopyPlugin(Plugin, currentUserFolder, selectedUserFolder);
                 OnPluginCopied();
             }
             catch (Exception ex)
@@ -138,10 +140,14 @@
 
         private void MoveButtonClick(object sender, EventArgs e)
         {
-            var copier = new PluginCopier(pluginController, pluginFileController, pluginsController);
+            var copier = new PluginCopier(
+                pluginsController,
+                new PluginsController(
+                    new PluginsDataAccess(selectedUserFolder, new JsonFileWriter(), pluginGroupController),
+                    selectedUserFolder));
             try
             {
-                copier.CopyPlugin(Plugin, selectedUserFolder, true);
+                copier.MovePlugin(Plugin, currentUserFolder, selectedUserFolder);
                 OnPluginMoved();
             }
             catch (Exception ex)
