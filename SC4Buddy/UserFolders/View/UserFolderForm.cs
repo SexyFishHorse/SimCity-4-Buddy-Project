@@ -43,6 +43,7 @@
 
         private void ManagePluginsButtonClick(object sender, System.EventArgs e)
         {
+            Hide();
             var dialog = new PluginsForm(
                 pluginGroupController,
                 userFoldersController,
@@ -51,6 +52,8 @@
                 pluginMatcher,
                 dependencyChecker);
             dialog.ShowDialog(this);
+
+            Close();
         }
 
         private void UserFolderFormLoad(object sender, System.EventArgs e)
