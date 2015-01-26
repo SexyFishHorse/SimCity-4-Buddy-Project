@@ -7,8 +7,6 @@
 
     public interface IEntities : IDisposable
     {
-        ICollection<Plugin> Plugins { get; }
-
         ICollection<PluginFile> Files { get; }
 
         ICollection<PluginGroup> Groups { get; }

@@ -1,12 +1,10 @@
 ﻿namespace NIHEI.SC4Buddy.DataAccess
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Security.Policy;
 
     using log4net;
 
@@ -20,8 +18,6 @@
 
     public class Entities : IEntities
     {
-        private const string PluginsFilename = "Plugins.json";
-
         private const string PluginFilesFilename = "PluginFiles.json";
 
         private const string PluginGroupsFilename = "PluginGroups.json";
@@ -33,21 +29,11 @@
             StorageLocation = storageLocation;
         }
 
-        public ICollection<Plugin> Plugins { get; private set; }
-
         public ICollection<PluginFile> Files { get; private set; }
 
         public ICollection<PluginGroup> Groups { get; private set; }
 
         private string StorageLocation { get; set; }
-
-        private string PluginsLocation
-        {
-            get
-            {
-                return Path.Combine(StorageLocation, PluginsFilename);
-            }
-        }
 
         private string PluginFilesLocation
         {
@@ -67,7 +53,6 @@
 
         public void SaveChanges()
         {
-            StoreDataInFile(Plugins, PluginsLocation);
             StoreDataInFile(Files, PluginFilesLocation);
             StoreDataInFile(Groups, PluginGroupsLocation);
         }
@@ -87,11 +72,9 @@
         public void LoadAllEntitiesFromDisc()
         {
             Groups = new Collection<PluginGroup>();
-            Plugins = new Collection<Plugin>();
             Files = new Collection<PluginFile>();
 
             LoadPluginGroups(PluginGroupsLocation);
-            LoadPlugins(PluginsLocation);
             LoadPluginFiles(PluginFilesLocation);
         }
 
@@ -137,8 +120,7 @@
                                    {
                                        Id = dynamicPluginFile.Id,
                                        Checksum = dynamicPluginFile.Checksum,
-                                       Path = dynamicPluginFile.Path,
-                                       Plugin = Plugins.FirstOrDefault(x => x.Id == (Guid)dynamicPluginFile.PluginId)
+                                       Path = dynamicPluginFile.Path
                                    };
 
                     if (file.Plugin == null)
@@ -161,74 +143,6 @@
                     file.Plugin.PluginFiles.Add(file);
 
                     Files.Add(file);
-                }
-            }
-        }
-
-        private void LoadPlugins(string fileLocation)
-        {
-            if (!File.Exists(fileLocation))
-            {
-                return;
-            }
-
-            using (var reader = new StreamReader(fileLocation))
-            {
-                var json = reader.ReadToEnd();
-
-                dynamic dynamicPlugins = JArray.Parse(json);
-
-                foreach (var dynamicPlugin in dynamicPlugins)
-                {
-                    var plugin = new Plugin
-                    {
-                        Id = dynamicPlugin.Id,
-                        Author = dynamicPlugin.Author,
-                        Description = dynamicPlugin.Description,
-                        Name = dynamicPlugin.Name,
-                        UserFolder = UserFolders.FirstOrDefault(x => x.Id == (Guid)dynamicPlugin.UserFolderId)
-                    };
-
-                    if (plugin.UserFolder == null)
-                    {
-                        continue;
-                    }
-
-                    if (dynamicPlugin.Link != null)
-                    {
-                        string link = dynamicPlugin.Link.Value;
-                        plugin.Link = new Url(link);
-                    }
-
-                    if (dynamicPlugin.PluginGroupId != Guid.Empty)
-                    {
-                        plugin.PluginGroup = Groups.First(x => x.Id == (Guid)dynamicPlugin.PluginGroupId);
-                    }
-
-                    if (dynamicPlugin.RemotePluginId > 0)
-                    {
-                        plugin.RemotePlugin = new RemotePlugin { Id = dynamicPlugin.RemotePluginId };
-                    }
-
-                    var files = new Collection<PluginFile>();
-
-                    foreach (var pluginFileId in dynamicPlugin.PluginFileIds)
-                    {
-                        files.Add(new PluginFile { Id = pluginFileId });
-                    }
-
-                    plugin.PluginFiles = files;
-
-                    UserFolders.First(x => x.Id == plugin.UserFolderId).Plugins.Remove(plugin);
-                    UserFolders.First(x => x.Id == plugin.UserFolderId).Plugins.Add(plugin);
-
-                    Plugins.Add(plugin);
-
-                    if (plugin.PluginGroupId != Guid.Empty)
-                    {
-                        Groups.First(x => x.Id == plugin.PluginGroupId).Plugins.Remove(plugin);
-                        Groups.First(x => x.Id == plugin.PluginGroupId).Plugins.Add(plugin);
-                    }
                 }
             }
         }
