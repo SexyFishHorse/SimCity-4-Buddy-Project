@@ -31,7 +31,7 @@
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>11</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -124,6 +124,12 @@
       <DependentUpon>SettingsController.cs</DependentUpon>
     </Compile>
     <Compile Include="Application\Utilities\FileSystemLocationsUtil.cs" />
+    <Compile Include="Application\View\ChangelogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Application\View\ChangelogForm.Designer.cs">
+      <DependentUpon>ChangelogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Plugins\Control\IPluginsController.cs">
       <DependentUpon>PluginsController.cs</DependentUpon>
     </Compile>
@@ -301,6 +307,9 @@
     <Compile Include="Application\View\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Application\View\ChangelogForm.resx">
+      <DependentUpon>ChangelogForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\LocalizationStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LocalizationStrings.Designer.cs</LastGenOutput>
