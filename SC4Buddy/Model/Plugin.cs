@@ -67,6 +67,21 @@
             PluginFiles = new Collection<PluginFile>();
         }
 
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Plugin))
+            {
+                return false;
+            }
+
+            return obj.GetHashCode() == GetHashCode();
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
+
         private sealed class NameEqualityComparer : IEqualityComparer<Plugin>
         {
             public bool Equals(Plugin x, Plugin y)
