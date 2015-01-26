@@ -19,6 +19,7 @@
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
+    using NIHEI.SC4Buddy.Plugins.DataAccess;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
@@ -39,7 +40,6 @@
                 var entities = EntityFactory.Instance.Entities;
                 var userFolderController = new UserFolderController(new UserFolderDataAccess());
                 var userFoldersController = new UserFoldersController(new UserFoldersDataAccess(), userFolderController);
-                var pluginsController = new PluginsController(new PluginFileController(entities), new PluginController(entities));
 
                 System.Windows.Forms.Application.EnableVisualStyles();
                 System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
@@ -64,12 +64,10 @@
                     System.Windows.Forms.Application.Run(
                         new Sc4Buddy(
                             userFoldersController,
-                            new PluginController(entities),
                             new PluginGroupController(entities),
                             new PluginMatcher(
                                 new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty)),
-                            new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFoldersController.GetMainUserFolder()),
-                            pluginsController));
+                            new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFoldersController.GetMainUserFolder())));
                 }
             }
             catch (Exception ex)
