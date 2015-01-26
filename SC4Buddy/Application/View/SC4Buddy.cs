@@ -23,6 +23,7 @@
     using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.UserFolders.DataAccess;
     using NIHEI.SC4Buddy.UserFolders.View;
+    using NIHEI.SC4Buddy.Utils;
     using NIHEI.SC4Buddy.View.Elements;
 
     public partial class Sc4Buddy : Form
@@ -209,10 +210,10 @@
             new UserFolderForm(
                 userFolder,
                 pluginGroupController,
-                new UserFoldersController(new UserFoldersDataAccess(), new UserFolderController(new UserFolderDataAccess())),
+                new UserFoldersController(new UserFoldersDataAccess(new JsonFileWriter()), new UserFolderController(new UserFolderDataAccess(new JsonFileWriter()))),
                 pluginMatcher,
                 dependencyChecker,
-                new PluginsController(new PluginFileController(EntityFactory.Instance.Entities), new PluginsDataAccess(userFolder), userFolder)).Show(this);
+                new PluginsController(new PluginFileController(EntityFactory.Instance.Entities), new PluginsDataAccess(userFolder, new JsonFileWriter()), userFolder)).Show(this);
         }
 
         private void PlayButtonClick(object sender, EventArgs e)

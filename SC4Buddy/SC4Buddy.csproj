@@ -207,6 +207,8 @@
       <DependentUpon>UserFolderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UserFolders\View\UserFolderMode.cs" />
+    <Compile Include="Utils\IJsonFileWriter.cs" />
+    <Compile Include="Utils\JsonFileWriter.cs" />
     <Compile Include="View\Elements\ListViewItemWithObjectValue.cs" />
     <Compile Include="View\Elements\RemovalFileTypeCandidateListViewItem.cs" />
     <Compile Include="View\Elements\UserFolderListViewItem.cs" />

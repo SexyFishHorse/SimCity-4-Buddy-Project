@@ -6,9 +6,9 @@
     using System.Reflection;
     using System.Security.Policy;
     using log4net;
-    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.Utils;
 
     public class PluginsDataAccess
     {
@@ -16,9 +16,12 @@
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public PluginsDataAccess(UserFolder userFolder)
+        private readonly IJsonFileWriter writer;
+
+        public PluginsDataAccess(UserFolder userFolder, IJsonFileWriter writer)
         {
             UserFolder = userFolder;
+            this.writer = writer;
         }
 
         public UserFolder UserFolder { get; set; }
@@ -77,11 +80,7 @@
 
             Directory.CreateDirectory(fileInfo.DirectoryName);
 
-            using (var writer = new StreamWriter(fileInfo.OpenWrite()))
-            {
-                var json = JsonConvert.SerializeObject(plugins);
-                writer.Write(json);
-            }
+            writer.WriteToFile(fileInfo, plugins);
         }
     }
 }

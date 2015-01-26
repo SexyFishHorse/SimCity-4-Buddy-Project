@@ -19,11 +19,11 @@
     using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
-    using NIHEI.SC4Buddy.Plugins.DataAccess;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.UserFolders.DataAccess;
+    using NIHEI.SC4Buddy.Utils;
 
     public static class Program
     {
@@ -38,8 +38,8 @@
             try
             {
                 var entities = EntityFactory.Instance.Entities;
-                var userFolderController = new UserFolderController(new UserFolderDataAccess());
-                var userFoldersController = new UserFoldersController(new UserFoldersDataAccess(), userFolderController);
+                var userFolderController = new UserFolderController(new UserFolderDataAccess(new JsonFileWriter()));
+                var userFoldersController = new UserFoldersController(new UserFoldersDataAccess(new JsonFileWriter()), userFolderController);
 
                 System.Windows.Forms.Application.EnableVisualStyles();
                 System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
@@ -95,8 +95,8 @@
         private static void SetDefaultUserFolder()
         {
             var userFoldersController = new UserFoldersController(
-                new UserFoldersDataAccess(),
-                new UserFolderController(new UserFolderDataAccess()));
+                new UserFoldersDataAccess(new JsonFileWriter()),
+                new UserFolderController(new UserFolderDataAccess(new JsonFileWriter())));
 
             var path = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SimCity 4");
