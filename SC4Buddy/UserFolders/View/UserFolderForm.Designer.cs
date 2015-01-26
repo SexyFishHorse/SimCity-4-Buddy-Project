@@ -156,7 +156,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UserFolderForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User Folder Management";
             this.Load += new System.EventHandler(this.UserFolderFormLoad);
             this.tableLayoutPanel1.ResumeLayout(false);
