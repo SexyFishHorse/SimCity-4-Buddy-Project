@@ -285,9 +285,10 @@
 
         private void PathTextBoxTextChanged(object sender, EventArgs e)
         {
+            var text = pathTextBox.Text.Trim();
             if (!pathTextBox.Focused)
             {
-                if (string.IsNullOrEmpty(pathTextBox.Text))
+                if (string.IsNullOrEmpty(text))
                 {
                     pathTextBox.Text = localizationManager.GetString("pathTextBox.Text");
                 }
@@ -297,7 +298,10 @@
                                         ? Color.Gray
                                         : Color.Black;
 
-            TryLoadUserFolderData(pathTextBox.Text);
+            if (!string.IsNullOrEmpty(text))
+            {
+                TryLoadUserFolderData(pathTextBox.Text);
+            }
         }
     }
 }
