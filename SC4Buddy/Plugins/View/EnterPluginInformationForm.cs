@@ -78,9 +78,9 @@
 
         private void OkButtonClick(object sender, EventArgs e)
         {
-            var newPlugin = new Plugin { Id = plugin.Id };
+            var newPlugin = new Plugin { Id = Plugin.Id };
 
-            var oldGroup = plugin.PluginGroup;
+            var oldGroup = Plugin.PluginGroup;
             newPlugin.Name = nameTextBox.Text.Trim();
             newPlugin.Author = authorTextBox.Text.Trim();
             newPlugin.Description = descriptionTextBox.Text.Trim();
@@ -94,13 +94,13 @@
 
             if (oldGroup != null && !oldGroup.Equals(Plugin.PluginGroup))
             {
-                oldGroup.Plugins.Remove(plugin);
+                oldGroup.Plugins.Remove(Plugin);
                 pluginGroupController.SaveChanges();
             }
 
-            if (plugin.PluginGroup != null)
+            if (newPlugin.PluginGroup != null)
             {
-                plugin.PluginGroup.Plugins.Add(plugin);
+                newPlugin.PluginGroup.Plugins.Add(Plugin);
                 pluginGroupController.SaveChanges();
             }
 

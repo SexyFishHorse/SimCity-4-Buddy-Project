@@ -106,9 +106,8 @@
 
             foreach (var plugin in pluginsController.Plugins)
             {
-                var listViewItem = new PluginListViewItem(
-                    plugin,
-                    installedPluginsListView.Groups[plugin.PluginGroupId.ToString()]);
+                var groupId = plugin.PluginGroup == null ? string.Empty : plugin.PluginGroup.Id.ToString();
+                var listViewItem = new PluginListViewItem(plugin, installedPluginsListView.Groups[groupId]);
 
                 installedPluginsListView.Items.Add(listViewItem);
             }

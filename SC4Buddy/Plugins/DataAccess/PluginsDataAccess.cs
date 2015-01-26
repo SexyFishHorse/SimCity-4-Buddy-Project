@@ -1,13 +1,16 @@
 ﻿namespace NIHEI.SC4Buddy.Plugins.DataAccess
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
     using System.Security.Policy;
     using log4net;
     using Newtonsoft.Json.Linq;
     using NIHEI.SC4Buddy.Model;
+    using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Utils;
 
     public class PluginsDataAccess
@@ -18,10 +21,16 @@
 
         private readonly IJsonFileWriter writer;
 
-        public PluginsDataAccess(UserFolder userFolder, IJsonFileWriter writer)
+        private readonly PluginGroupController pluginGroupController;
+
+        public PluginsDataAccess(
+            UserFolder userFolder,
+            IJsonFileWriter writer,
+            PluginGroupController pluginGroupController)
         {
             UserFolder = userFolder;
             this.writer = writer;
+            this.pluginGroupController = pluginGroupController;
         }
 
         public UserFolder UserFolder { get; set; }
@@ -47,12 +56,14 @@
 
                 foreach (var pluginJson in pluginsJson)
                 {
+                    var groupName = pluginJson.Group.ToString();
                     var plugin = new Plugin
                     {
-                        Author = pluginJson.Author,
                         Id = pluginJson.Id,
+                        Author = pluginJson.Author,
                         Description = pluginJson.Description,
-                        Name = pluginJson.Name
+                        Name = pluginJson.Name,
+                        PluginGroup = pluginGroupController.Groups.FirstOrDefault(x => x.Name == groupName)
                     };
 
                     if (pluginJson.Link != null)

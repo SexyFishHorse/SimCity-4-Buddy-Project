@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Linq;
     using System.Security.Policy;
 
     using Newtonsoft.Json;
@@ -30,19 +29,11 @@
 
         public PluginGroup PluginGroup { get; set; }
 
+        [JsonProperty]
         public ICollection<PluginFile> PluginFiles { get; set; }
 
         [JsonProperty]
-        public Guid PluginGroupId
-        {
-            get
-            {
-                return PluginGroup != null ? PluginGroup.Id : Guid.Empty;
-            }
-        }
-
-        [JsonProperty]
-        public string PluginGroupName
+        public string Group
         {
             get
             {

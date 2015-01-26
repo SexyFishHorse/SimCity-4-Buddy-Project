@@ -210,10 +210,15 @@
             new UserFolderForm(
                 userFolder,
                 pluginGroupController,
-                new UserFoldersController(new UserFoldersDataAccess(new JsonFileWriter()), new UserFolderController(new UserFolderDataAccess(new JsonFileWriter()))),
+                new UserFoldersController(
+                    new UserFoldersDataAccess(new JsonFileWriter()),
+                    new UserFolderController(new UserFolderDataAccess(new JsonFileWriter()))),
                 pluginMatcher,
                 dependencyChecker,
-                new PluginsController(new PluginFileController(EntityFactory.Instance.Entities), new PluginsDataAccess(userFolder, new JsonFileWriter()), userFolder)).Show(this);
+                new PluginsController(
+                    new PluginFileController(EntityFactory.Instance.Entities),
+                    new PluginsDataAccess(userFolder, new JsonFileWriter(), pluginGroupController),
+                    userFolder)).Show(this);
         }
 
         private void PlayButtonClick(object sender, EventArgs e)
