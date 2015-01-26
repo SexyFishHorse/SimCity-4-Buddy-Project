@@ -337,8 +337,7 @@
                         Path = Path.Combine(userFolder.PluginFolderPath, path),
                         Checksum =
                             Md5ChecksumUtility.CalculateChecksum(Path.Combine(userFolder.PluginFolderPath, path))
-                                .ToHex(),
-                        Plugin = plugin
+                                .ToHex()
                     }))
             {
                 plugin.PluginFiles.Add(pluginFile);

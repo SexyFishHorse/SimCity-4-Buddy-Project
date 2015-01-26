@@ -96,8 +96,7 @@
                     {
                         Id = Guid.NewGuid(),
                         Checksum = Md5ChecksumUtility.CalculateChecksum(filePath).ToHex(),
-                        Path = filePath,
-                        Plugin = plugin
+                        Path = filePath
                     };
 
                     files.Add(pluginFile);

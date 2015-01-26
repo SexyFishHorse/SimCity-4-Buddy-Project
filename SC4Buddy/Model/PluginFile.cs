@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace NIHEI.SC4Buddy.Model
+﻿namespace NIHEI.SC4Buddy.Model
 {
+    using System.Collections.Generic;
     using Newtonsoft.Json;
 
     [JsonObject(MemberSerialization.OptIn)]
@@ -14,19 +12,8 @@ namespace NIHEI.SC4Buddy.Model
         [JsonProperty]
         public string Checksum { get; set; }
 
-        public Plugin Plugin { get; set; }
-
         [JsonProperty]
         public QuarantinedFile QuarantinedFile { get; set; }
-
-        [JsonProperty]
-        public Guid PluginId
-        {
-            get
-            {
-                return Plugin != null ? Plugin.Id : Guid.Empty;
-            }
-        }
 
         private sealed class PathEqualityComparer : IEqualityComparer<PluginFile>
         {
