@@ -466,7 +466,7 @@
 
                 if (result == DialogResult.Retry)
                 {
-                    AutoGroupKnownPlugins();
+                    AutoGroupKnownPlugins().GetAwaiter().GetResult();
                 }
             }
             finally
