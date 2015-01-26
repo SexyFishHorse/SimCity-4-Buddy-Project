@@ -26,8 +26,6 @@
 
         private const string PluginGroupsFilename = "PluginGroups.json";
 
-        private const string UserFoldersFilename = "UserFolders.json";
-
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public Entities(string storageLocation)
@@ -38,8 +36,6 @@
         public ICollection<Plugin> Plugins { get; private set; }
 
         public ICollection<PluginFile> Files { get; private set; }
-
-        public ICollection<UserFolder> UserFolders { get; private set; }
 
         public ICollection<PluginGroup> Groups { get; private set; }
 
@@ -69,19 +65,10 @@
             }
         }
 
-        private string UserFoldersLocation
-        {
-            get
-            {
-                return Path.Combine(StorageLocation, UserFoldersFilename);
-            }
-        }
-
         public void SaveChanges()
         {
             StoreDataInFile(Plugins, PluginsLocation);
             StoreDataInFile(Files, PluginFilesLocation);
-            StoreDataInFile(UserFolders, UserFoldersLocation);
             StoreDataInFile(Groups, PluginGroupsLocation);
         }
 
@@ -99,12 +86,10 @@
 
         public void LoadAllEntitiesFromDisc()
         {
-            UserFolders = new Collection<UserFolder>();
             Groups = new Collection<PluginGroup>();
             Plugins = new Collection<Plugin>();
             Files = new Collection<PluginFile>();
 
-            LoadUserFolders(UserFoldersLocation);
             LoadPluginGroups(PluginGroupsLocation);
             LoadPlugins(PluginsLocation);
             LoadPluginFiles(PluginFilesLocation);
@@ -273,44 +258,6 @@
 
                     pluginGroup.Plugins = groupPlugins;
                     Groups.Add(pluginGroup);
-                }
-            }
-        }
-
-        private void LoadUserFolders(string fileLocation)
-        {
-            if (!File.Exists(fileLocation))
-            {
-                return;
-            }
-
-            using (var reader = new StreamReader(fileLocation))
-            {
-                var json = reader.ReadToEnd();
-
-                dynamic dynamicUserFolders = JArray.Parse(json);
-
-                foreach (var dynamicUserFolder in dynamicUserFolders)
-                {
-                    var userFolder = new UserFolder
-                                         {
-                                             Id = dynamicUserFolder.Id,
-                                             Alias = dynamicUserFolder.Alias,
-                                             FolderPath = dynamicUserFolder.FolderPath,
-                                             IsMainFolder = dynamicUserFolder.IsMainFolder,
-                                             IsStartupFolder = dynamicUserFolder.IsStartupFolder
-                                         };
-
-                    var pluginIds = new Collection<Plugin>();
-
-                    foreach (var pluginId in dynamicUserFolder.PluginIds)
-                    {
-                        pluginIds.Add(new Plugin { Id = pluginId });
-                    }
-
-                    userFolder.Plugins = pluginIds;
-
-                    UserFolders.Add(userFolder);
                 }
             }
         }

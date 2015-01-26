@@ -11,8 +11,6 @@
 
         ICollection<PluginFile> Files { get; }
 
-        ICollection<UserFolder> UserFolders { get; }
-
         ICollection<PluginGroup> Groups { get; }
 
         void SaveChanges();
