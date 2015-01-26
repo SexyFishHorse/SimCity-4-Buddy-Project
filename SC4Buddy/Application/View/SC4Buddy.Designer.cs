@@ -201,6 +201,7 @@ namespace NIHEI.SC4Buddy.Application.View
             // 
             // Sc4Buddy
             // 
+            this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.backgroundPanel);
@@ -209,6 +210,8 @@ namespace NIHEI.SC4Buddy.Application.View
             this.MaximizeBox = false;
             this.Name = "Sc4Buddy";
             this.Load += new System.EventHandler(this.Sc4BuddyLoad);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Sc4BuddyDragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Sc4BuddyDragEnter);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.backgroundPanel.ResumeLayout(false);

@@ -17,6 +17,7 @@
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Plugins.DataAccess;
+    using NIHEI.SC4Buddy.Plugins.View;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
@@ -47,6 +48,8 @@
         private AboutBox aboutBox;
 
         private SettingsForm settingsForm;
+
+        private SelectUserFolderForm selectUserFolderForm;
 
         public Sc4Buddy(
             IUserFoldersController userFoldersController,
@@ -95,7 +98,7 @@
         {
             if (manageUserFoldersForm == null)
             {
-                manageUserFoldersForm  = new ManageUserFoldersForm(userFoldersController);
+                manageUserFoldersForm = new ManageUserFoldersForm(userFoldersController);
             }
 
             manageUserFoldersForm.Show(this);
@@ -344,6 +347,50 @@
             }
 
             Process.Start(filePath);
+        }
+
+        private void Sc4BuddyDragDrop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                return;
+            }
+
+            var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            Log.Info("User dropped the following files into the main window.");
+            foreach (var file in files)
+            {
+                Log.Info(file);
+            }
+
+            if (selectUserFolderForm == null)
+            {
+                selectUserFolderForm = new SelectUserFolderForm(userFoldersController);
+            }
+
+            if (selectUserFolderForm.ShowDialog(this) != DialogResult.OK)
+            {
+                Log.Info("Drag and drop installation cancelled.");
+                return;
+            }
+
+            var userFolder = selectUserFolderForm.UserFolder;
+            Log.Info(string.Format("Installing in user folder {0}", userFolder.FolderPath));
+
+            var form = new InstallPluginsForm(
+                new PluginsController(
+                    new PluginsDataAccess(userFolder, new JsonFileWriter(), pluginGroupController),
+                    userFolder),
+                files,
+                userFolder,
+                pluginMatcher);
+
+            form.ShowDialog(this);
+        }
+
+        private void Sc4BuddyDragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
         }
     }
 }
