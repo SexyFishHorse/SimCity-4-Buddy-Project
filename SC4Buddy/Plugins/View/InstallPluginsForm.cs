@@ -57,15 +57,12 @@
             OverallProgressBar.Maximum = files.Length;
             CurrentProgressBar.Maximum = 100;
 
-            var pluginInstallerThread = new PluginInstallerThread(
-                new PluginFileController(
-                    EntityFactory.Instance.Entities),
-                    pluginsController)
-                {
-                    Form = this,
-                    FilesToInstall = files,
-                    UserFolder = userFolder
-                };
+            var pluginInstallerThread = new PluginInstallerThread(pluginsController)
+            {
+                Form = this,
+                FilesToInstall = files,
+                UserFolder = userFolder
+            };
             pluginInstallerThread.InstallingPlugin += OnInstallingPlugin;
             pluginInstallerThread.PluginInstalled += OnPluginInstalled;
             pluginInstallerThread.PluginInstallFailed += OnPluginInstallFailed;

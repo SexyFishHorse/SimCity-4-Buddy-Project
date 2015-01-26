@@ -13,7 +13,6 @@
     using log4net;
     using NIHEI.SC4Buddy.Application.Control;
     using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Plugins.DataAccess;
@@ -216,7 +215,6 @@
                 pluginMatcher,
                 dependencyChecker,
                 new PluginsController(
-                    new PluginFileController(EntityFactory.Instance.Entities),
                     new PluginsDataAccess(userFolder, new JsonFileWriter(), pluginGroupController),
                     userFolder)).Show(this);
         }

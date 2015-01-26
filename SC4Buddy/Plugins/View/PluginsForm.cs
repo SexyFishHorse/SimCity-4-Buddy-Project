@@ -11,7 +11,6 @@
     using Irradiated.Sc4Buddy.ApiClient.Model;
     using log4net;
     using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.DataAccess;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Remote;
@@ -305,7 +304,7 @@
         private void ScanForNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
             new FolderScannerForm(
-                new FolderScannerController(new PluginFileController(EntityFactory.Instance.Entities)),
+                new FolderScannerController(),
                 pluginsController,
                 pluginGroupController,
                 userFolder,
@@ -478,7 +477,6 @@
             var dialog = new MoveOrCopyForm(
                 userFolder,
                 userFoldersController,
-                new PluginFileController(EntityFactory.Instance.Entities),
                 pluginsController)
             {
                 Plugin = selectedPlugin
@@ -523,10 +521,13 @@
 
         private void DisableFilesButtonClick(object sender, EventArgs e)
         {
-            var dialog = new QuarantinedPluginFilesForm(
-                selectedPlugin,
-                new PluginFileController(EntityFactory.Instance.Entities));
-            var result = dialog.ShowDialog(this);
+            var dialog = new QuarantinedPluginFilesForm(selectedPlugin);
+
+            if (dialog.ShowDialog(this) == DialogResult.OK)
+            {
+                pluginsController.QuarantineFiles(dialog.QuarantinedFiles);
+                pluginsController.UnquarantineFiles(dialog.UnquarantinedFiles);
+            }
         }
 
         private void ReportPluginLinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

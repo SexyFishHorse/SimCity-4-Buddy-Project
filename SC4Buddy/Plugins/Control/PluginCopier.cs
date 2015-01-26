@@ -8,27 +8,22 @@
 
     public class PluginCopier
     {
-        private readonly IPluginFileController pluginFileController;
-
         private readonly IPluginsController pluginsController;
 
-        public PluginCopier(
-            IPluginFileController pluginFileController,
-            IPluginsController pluginsController)
+        public PluginCopier(IPluginsController pluginsController)
         {
             this.pluginsController = pluginsController;
-            this.pluginFileController = pluginFileController;
         }
 
         public void CopyPlugin(Plugin plugin, UserFolder originUserFolder, UserFolder targetUserFolder, bool moveInsteadOfCopy = false)
         {
             var newPlugin = new Plugin
-                            {
-                                Name = plugin.Name,
-                                Link = plugin.Link,
-                                Description = plugin.Description,
-                                Author = plugin.Author
-                            };
+            {
+                Name = plugin.Name,
+                Link = plugin.Link,
+                Description = plugin.Description,
+                Author = plugin.Author
+            };
 
             var files = new List<PluginFile>(plugin.PluginFiles.Count);
 
@@ -38,17 +33,11 @@
 
             foreach (var pluginFile in files)
             {
-                if (
-                    pluginFileController.Files.Any(
-                        x => x.Path.Equals(pluginFile.Path, StringComparison.OrdinalIgnoreCase)))
+                if (plugin.PluginFiles.Any(x => x.Path.Equals(pluginFile.Path, StringComparison.OrdinalIgnoreCase)))
                 {
-                    var existingFile =
-                        pluginFileController.Files.First(
-                            x => x.Path.Equals(pluginFile.Path, StringComparison.OrdinalIgnoreCase));
+                    var existingFile = plugin.PluginFiles.First(x => x.Path.Equals(pluginFile.Path, StringComparison.OrdinalIgnoreCase));
 
                     affectedPlugins.Add(existingFile.Plugin);
-
-                    pluginFileController.Delete(existingFile, save: false);
                 }
 
                 newPlugin.PluginFiles.Add(pluginFile);
@@ -69,7 +58,7 @@
             pluginsController.UninstallPlugin(plugin);
         }
 
-        private PluginFile CopyFile(PluginFile pluginFile, UserFolder originUserFolder, UserFolder targetUserFolder)
+        private static PluginFile CopyFile(PluginFile pluginFile, UserFolder originUserFolder, UserFolder targetUserFolder)
         {
             var currentPath = pluginFile.Path;
             var relativeFilePath = currentPath.Remove(0, originUserFolder.PluginFolderPath.Length + 1);

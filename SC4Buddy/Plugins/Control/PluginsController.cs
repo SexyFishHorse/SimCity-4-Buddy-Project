@@ -6,23 +6,22 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.VisualBasic.FileIO;
+    using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.DataAccess;
     using NIHEI.SC4Buddy.Remote;
 
     public class PluginsController : IPluginsController
     {
-        private readonly IPluginFileController pluginFileController;
-
         private readonly PluginsDataAccess pluginsDataAccess;
 
-        public PluginsController(IPluginFileController pluginFileController, PluginsDataAccess pluginsDataAccess, UserFolder userFolder)
+        public PluginsController(PluginsDataAccess pluginsDataAccess, UserFolder userFolder)
         {
-            this.pluginFileController = pluginFileController;
             this.pluginsDataAccess = pluginsDataAccess;
             UserFolder = userFolder;
 
             Plugins = pluginsDataAccess.LoadPlugins();
+            UserFolder.Plugins = Plugins;
         }
 
         public ICollection<Plugin> Plugins { get; set; }
@@ -98,11 +97,55 @@
                 {
                     FileSystem.DeleteFile(file.Path, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
                 }
-
-                pluginFileController.Delete(file);
             }
 
             Remove(plugin);
+        }
+
+        public void QuarantineFiles(IEnumerable<PluginFile> files)
+        {
+            foreach (var file in files.Where(x => File.Exists(x.Path)))
+            {
+                var newPath = Path.Combine(Settings.Get(Settings.Keys.QuarantinedFiles), Path.GetRandomFileName());
+                Directory.CreateDirectory(Path.GetDirectoryName(newPath));
+                File.Copy(file.Path, newPath);
+                File.Delete(file.Path);
+
+                file.QuarantinedFile = new QuarantinedFile { PluginFile = file, QuarantinedPath = newPath };
+            }
+        }
+
+        public void UnquarantineFiles(IEnumerable<PluginFile> files)
+        {
+            foreach (var file in files.Where(x => x.QuarantinedFile != null && File.Exists(x.QuarantinedFile.QuarantinedPath)))
+            {
+                if (file.QuarantinedFile != null)
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(file.Path));
+                    File.Copy(file.QuarantinedFile.QuarantinedPath, file.Path);
+                    File.Delete(file.QuarantinedFile.QuarantinedPath);
+                }
+
+                file.QuarantinedFile = null;
+            }
+        }
+
+        public void RemoveFilesFromPlugins(ICollection<string> deletedFilePaths)
+        {
+            foreach (var deletedFilePath in deletedFilePaths)
+            {
+                foreach (var plugin in Plugins)
+                {
+                    var file = plugin.PluginFiles.FirstOrDefault(x => x.Path == deletedFilePath);
+
+                    if (file != null)
+                    {
+                        plugin.PluginFiles.Remove(file);
+                    }
+                }
+            }
+
+            RemoveEmptyPlugins();
         }
 
         public async Task<int> UpdateInfoForAllPluginsFromServer(IPluginMatcher pluginMatcher)

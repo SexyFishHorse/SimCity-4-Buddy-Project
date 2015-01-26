@@ -22,5 +22,11 @@
         int NumberOfRecognizedPlugins(UserFolder userFolder);
 
         int RemoveEmptyPlugins();
+
+        void QuarantineFiles(IEnumerable<PluginFile> files);
+
+        void UnquarantineFiles(IEnumerable<PluginFile> files);
+
+        void RemoveFilesFromPlugins(ICollection<string> deletedFilePaths);
     }
 }

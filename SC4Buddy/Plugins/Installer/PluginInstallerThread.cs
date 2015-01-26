@@ -21,13 +21,10 @@
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly IPluginFileController pluginFileController;
-
         private readonly IPluginsController pluginsController;
 
-        public PluginInstallerThread(IPluginFileController pluginFileController, IPluginsController pluginsController)
+        public PluginInstallerThread(IPluginsController pluginsController)
         {
-            this.pluginFileController = pluginFileController;
             this.pluginsController = pluginsController;
         }
 
@@ -113,9 +110,9 @@
 
                     RaiseInstallProgressEvent(fileInfo, 75, LocalizationStrings.FilesMovedToUserFolder);
 
-                    var plugin = new Plugin { Name = new FileInfo(file).Name };
+                    var plugin = new Plugin { Name = new FileInfo(file).Name, PluginFiles = installedFiles };
 
-                    SavePluginInformation(plugin, installedFiles);
+                    pluginsController.Add(plugin);
 
                     RaisePluginInstalledEvent(fileInfo, plugin);
 
@@ -169,30 +166,6 @@
         protected virtual void RaiseReadmeFilesFoundEvent(FileInfo fileInfo, IEnumerable<FileInfo> readmeFiles)
         {
             ReadmeFilesFound.Invoke(this, new ReadmeFilesEventArgs(fileInfo, readmeFiles));
-        }
-
-        private void SavePluginInformation(Plugin plugin, IEnumerable<PluginFile> installedFiles)
-        {
-            foreach (var installedFile in installedFiles.Distinct(new PluginFileComparer()))
-            {
-                installedFile.Plugin = plugin;
-                plugin.PluginFiles.Add(installedFile);
-
-                var existingPlugin =
-                    pluginFileController.Files.FirstOrDefault(
-                        x => x.Path.Equals(installedFile.Path, StringComparison.OrdinalIgnoreCase));
-                if (existingPlugin != null)
-                {
-                    pluginFileController.Delete(existingPlugin, false);
-                }
-            }
-
-            var numDeleted = pluginsController.RemoveEmptyPlugins();
-
-            if (numDeleted <= 0)
-            {
-                pluginsController.Add(plugin);
-            }
         }
 
         private IEnumerable<PluginFile> HandlePluginFiles(PluginInstaller installer)
@@ -253,13 +226,13 @@
         private IEnumerable<PluginFile> HandleListenerFileChanges(UserFolderListener folderListener)
         {
             var installedFiles = new List<PluginFile>();
-            pluginFileController.DeleteFilesByPath(folderListener.DeletedFiles);
+            pluginsController.RemoveFilesFromPlugins(folderListener.DeletedFiles);
 
             installedFiles.AddRange(
                 folderListener.CreatedFiles.Where(File.Exists).Select(
                     file => new PluginFile { Path = file, Checksum = Md5ChecksumUtility.CalculateChecksum(file).ToHex() }));
 
-            pluginFileController.DeleteFilesByPath(folderListener.ChangedFiles);
+            pluginsController.RemoveFilesFromPlugins(folderListener.ChangedFiles);
 
             installedFiles.AddRange(
                 folderListener.ChangedFiles.Where(File.Exists).Select(
@@ -273,7 +246,7 @@
                 newPaths.Add(file.Value);
             }
 
-            pluginFileController.DeleteFilesByPath(oldPaths);
+            pluginsController.RemoveFilesFromPlugins(oldPaths);
 
             installedFiles.AddRange(
                 newPaths.Where(File.Exists).Select(

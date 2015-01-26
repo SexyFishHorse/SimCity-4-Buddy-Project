@@ -21,13 +21,6 @@
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly IPluginFileController pluginFileController;
-
-        public FolderScannerController(IPluginFileController pluginFileController)
-        {
-            this.pluginFileController = pluginFileController;
-        }
-
         public event EventHandler NewFilesFound;
 
         public List<string> NewFiles { get; private set; }
@@ -36,7 +29,7 @@
         {
             try
             {
-                var folderScanner = new FolderScanner(pluginFileController, userFolder);
+                var folderScanner = new FolderScanner(userFolder);
 
                 if (!folderScanner.ScanFolderForNewFiles())
                 {
@@ -64,7 +57,7 @@
         {
             var fileDictionary = await GetRemotePluginFileMatches(pluginMatcher, NewFiles);
 
-            var plugins = GroupFilesIntoPlugins(userFolder, fileDictionary, NewFiles);
+            var plugins = GroupFilesIntoPlugins(fileDictionary, NewFiles);
 
             foreach (var plugin in plugins)
             {
@@ -75,7 +68,6 @@
         }
 
         private IEnumerable<Plugin> GroupFilesIntoPlugins(
-            UserFolder userFolder,
             Dictionary<string, Irradiated.Sc4Buddy.ApiClient.Model.Plugin> fileDictionary,
             ICollection<string> allNewFiles)
         {
