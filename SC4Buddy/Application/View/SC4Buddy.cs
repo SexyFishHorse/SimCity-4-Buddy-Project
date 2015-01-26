@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Application.View
 {
     using System;
+    using System.Collections.ObjectModel;
     using System.Configuration;
     using System.Diagnostics;
     using System.Drawing;
@@ -11,6 +12,7 @@
     using System.Threading;
     using System.Windows.Forms;
     using log4net;
+    using Microsoft.VisualBasic;
     using NIHEI.SC4Buddy.Application.Control;
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
@@ -39,6 +41,8 @@
 
         private readonly IDependencyChecker dependencyChecker;
 
+        private readonly Collection<UserFolderForm> userFolderForms;
+
         public Sc4Buddy(
             IUserFoldersController userFoldersController,
             PluginGroupController pluginGroupController,
@@ -51,6 +55,8 @@
             this.dependencyChecker = dependencyChecker;
 
             InitializeComponent();
+
+            userFolderForms = new Collection<UserFolderForm>();
 
             localizationManager = new System.ComponentModel.ComponentResourceManager(typeof(Sc4Buddy));
         }
@@ -82,7 +88,7 @@
 
         private void ManageFoldersToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new ManageUserFoldersForm(userFoldersController).ShowDialog(this);
+            new ManageUserFoldersForm(userFoldersController).Show(this);
 
             RepopulateUserFolderRelatives();
         }
@@ -206,17 +212,27 @@
         private void UserFolderMenuItemClick(object sender, EventArgs e)
         {
             var userFolder = GetSelectedUserFolder(sender);
-            new UserFolderForm(
-                userFolder,
-                pluginGroupController,
-                new UserFoldersController(
-                    new UserFoldersDataAccess(new JsonFileWriter()),
-                    new UserFolderController(new UserFolderDataAccess(new JsonFileWriter()))),
-                pluginMatcher,
-                dependencyChecker,
-                new PluginsController(
-                    new PluginsDataAccess(userFolder, new JsonFileWriter(), pluginGroupController),
-                    userFolder)).Show(this);
+
+            var form = userFolderForms.FirstOrDefault(x => x.UserFolder.Id == userFolder.Id);
+
+            if (form == null)
+            {
+                form = new UserFolderForm(
+                    userFolder,
+                    pluginGroupController,
+                    new UserFoldersController(
+                        new UserFoldersDataAccess(new JsonFileWriter()),
+                        new UserFolderController(new UserFolderDataAccess(new JsonFileWriter()))),
+                    pluginMatcher,
+                    dependencyChecker,
+                    new PluginsController(
+                        new PluginsDataAccess(userFolder, new JsonFileWriter(), pluginGroupController),
+                        userFolder));
+                userFolderForms.Add(form);
+            }
+
+            form.Show();
+            form.Focus();
         }
 
         private void PlayButtonClick(object sender, EventArgs e)
