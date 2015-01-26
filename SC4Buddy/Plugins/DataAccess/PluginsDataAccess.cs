@@ -73,6 +73,18 @@
                             plugin.Link = new Url(pluginJson.Url);
                         }
 
+                        foreach (var fileJson in pluginJson.PluginFiles)
+                        {
+                            var file = new PluginFile
+                            {
+                                Checksum = fileJson.Checksum,
+                                Path = fileJson.Path,
+                                Id = fileJson.Id,
+                                QuarantinedFile = fileJson.QuarantinedFile
+                            };
+                            plugin.PluginFiles.Add(file);
+                        }
+
                         plugins.Add(plugin);
                     }
                 }
