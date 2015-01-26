@@ -12,7 +12,6 @@
     using System.Threading;
     using System.Windows.Forms;
     using log4net;
-    using Microsoft.VisualBasic;
     using NIHEI.SC4Buddy.Application.Control;
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
@@ -42,6 +41,12 @@
         private readonly IDependencyChecker dependencyChecker;
 
         private readonly Collection<UserFolderForm> userFolderForms;
+
+        private ManageUserFoldersForm manageUserFoldersForm;
+
+        private AboutBox aboutBox;
+
+        private SettingsForm settingsForm;
 
         public Sc4Buddy(
             IUserFoldersController userFoldersController,
@@ -88,7 +93,12 @@
 
         private void ManageFoldersToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new ManageUserFoldersForm(userFoldersController).Show(this);
+            if (manageUserFoldersForm == null)
+            {
+                manageUserFoldersForm  = new ManageUserFoldersForm(userFoldersController);
+            }
+
+            manageUserFoldersForm.Show(this);
 
             RepopulateUserFolderRelatives();
         }
@@ -285,7 +295,12 @@
 
         private void SettingsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new SettingsForm(userFoldersController).ShowDialog(this);
+            if (settingsForm == null)
+            {
+                settingsForm = new SettingsForm(userFoldersController);
+            }
+
+            settingsForm.ShowDialog(this);
 
             UpdateBackground();
         }
@@ -297,7 +312,12 @@
 
         private void AboutToolStripMenuItemClick(object sender, EventArgs e)
         {
-            new AboutBox().ShowDialog(this);
+            if (aboutBox == null)
+            {
+                aboutBox = new AboutBox();
+            }
+
+            aboutBox.ShowDialog(this);
         }
 
         private void BugsAndFeedbackToolStripMenuItemClick(object sender, EventArgs e)
