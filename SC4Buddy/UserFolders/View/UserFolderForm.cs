@@ -59,6 +59,7 @@
             numberOfPluginsLabel.Text = pluginsController.Plugins.Count.ToString(CultureInfo.InvariantCulture);
 
             var directoryInfo = new DirectoryInfo(userFolder.PluginFolderPath);
+            directoryInfo.Create();
             var files = directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories);
             var size = files.Sum(fileInfo => fileInfo.Length);
 
