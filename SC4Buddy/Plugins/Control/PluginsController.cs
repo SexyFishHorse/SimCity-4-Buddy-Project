@@ -10,6 +10,7 @@
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.DataAccess;
     using NIHEI.SC4Buddy.Remote;
+    using SearchOption = System.IO.SearchOption;
 
     public class PluginsController : IPluginsController
     {
@@ -91,11 +92,13 @@
         {
             var files = new PluginFile[plugin.PluginFiles.Count];
             plugin.PluginFiles.CopyTo(files, 0);
-            foreach (var file in files)
+            foreach (var fileInfo in files.Select(file => new FileInfo(file.Path)))
             {
-                if (File.Exists(file.Path))
+                if (fileInfo.Exists)
                 {
-                    FileSystem.DeleteFile(file.Path, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                    FileSystem.DeleteFile(fileInfo.FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+
+                    DeleteDirectoryIfEmpty(fileInfo.Directory);
                 }
             }
 
@@ -179,6 +182,25 @@
             }
 
             return counter;
+        }
+
+        private void DeleteDirectoryIfEmpty(DirectoryInfo directory)
+        {
+            while (true)
+            {
+                if (!directory.EnumerateFileSystemInfos("*", SearchOption.AllDirectories).Any())
+                {
+                    directory.Delete();
+
+                    if (directory.Parent != null)
+                    {
+                        directory = directory.Parent;
+                        continue;
+                    }
+                }
+
+                break;
+            }
         }
     }
 }
