@@ -205,7 +205,7 @@
     <value>0, 0</value>
   </data>
   <data name="descriptionTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>359, 189</value>
+    <value>357, 189</value>
   </data>
   <data name="descriptionTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -229,7 +229,7 @@
     <value>6, 143</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>361, 191</value>
+    <value>359, 191</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -307,7 +307,7 @@
     <value>77, 45</value>
   </data>
   <data name="authorTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 20</value>
+    <value>288, 20</value>
   </data>
   <data name="authorTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -385,7 +385,7 @@
     <value>77, 19</value>
   </data>
   <data name="nameTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 20</value>
+    <value>288, 20</value>
   </data>
   <data name="nameTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -409,7 +409,7 @@
     <value>77, 97</value>
   </data>
   <data name="groupComboBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 21</value>
+    <value>288, 21</value>
   </data>
   <data name="groupComboBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -433,7 +433,7 @@
     <value>77, 71</value>
   </data>
   <data name="linkTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 20</value>
+    <value>288, 20</value>
   </data>
   <data name="linkTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -481,7 +481,7 @@
     <value>3, 6</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 340</value>
+    <value>371, 340</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>

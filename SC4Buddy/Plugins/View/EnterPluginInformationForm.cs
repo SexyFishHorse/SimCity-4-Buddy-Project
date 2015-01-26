@@ -78,7 +78,7 @@
 
         private void OkButtonClick(object sender, EventArgs e)
         {
-            var newPlugin = new Plugin();
+            var newPlugin = new Plugin { Id = plugin.Id };
 
             var oldGroup = plugin.PluginGroup;
             newPlugin.Name = nameTextBox.Text.Trim();
