@@ -51,6 +51,8 @@
 
         private SelectUserFolderForm selectUserFolderForm;
 
+        private ChangelogForm changelogForm;
+
         public Sc4Buddy(
             IUserFoldersController userFoldersController,
             PluginGroupController pluginGroupController,
@@ -393,6 +395,16 @@
         private void Sc4BuddyDragEnter(object sender, DragEventArgs e)
         {
             e.Effect = e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None;
+        }
+
+        private void ChangelogMenuItemClick(object sender, EventArgs e)
+        {
+            if (changelogForm == null)
+            {
+                changelogForm = new ChangelogForm();
+            }
+
+            changelogForm.ShowDialog(this);
         }
     }
 }

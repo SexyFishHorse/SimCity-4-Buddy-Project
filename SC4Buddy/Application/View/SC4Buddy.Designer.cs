@@ -50,6 +50,7 @@ namespace NIHEI.SC4Buddy.Application.View
             this.panel2 = new System.Windows.Forms.Panel();
             this.userFolderComboBox = new System.Windows.Forms.ComboBox();
             this.playButton = new System.Windows.Forms.Button();
+            this.changelogMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.backgroundPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -117,6 +118,7 @@ namespace NIHEI.SC4Buddy.Application.View
             this.supportToolStripMenuItem,
             this.bugsAndFeedbackToolStripMenuItem,
             this.openLogFileToolStripMenuItem,
+            this.changelogMenuItem,
             this.toolStripSeparator3,
             this.aboutToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
@@ -199,6 +201,12 @@ namespace NIHEI.SC4Buddy.Application.View
             this.playButton.UseVisualStyleBackColor = true;
             this.playButton.Click += new System.EventHandler(this.PlayButtonClick);
             // 
+            // changelogMenuItem
+            // 
+            this.changelogMenuItem.Name = "changelogMenuItem";
+            resources.ApplyResources(this.changelogMenuItem, "changelogMenuItem");
+            this.changelogMenuItem.Click += new System.EventHandler(this.ChangelogMenuItemClick);
+            // 
             // Sc4Buddy
             // 
             this.AllowDrop = true;
@@ -245,6 +253,7 @@ namespace NIHEI.SC4Buddy.Application.View
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem openLogFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changelogMenuItem;
     }
 }
 
