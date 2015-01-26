@@ -1,6 +1,5 @@
 ﻿namespace NIHEI.SC4Buddy.Model
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -43,11 +42,11 @@
         }
 
         [JsonProperty]
-        public IEnumerable<Guid> PluginFileIds
+        public string PluginGroupName
         {
             get
             {
-                return PluginFiles.Select(x => x.Id);
+                return PluginGroup != null ? PluginGroup.Name : null;
             }
         }
 
