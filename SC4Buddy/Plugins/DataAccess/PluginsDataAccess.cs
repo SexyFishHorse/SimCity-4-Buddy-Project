@@ -91,13 +91,6 @@
 
             var fileInfo = new FileInfo(Path.Combine(userFolder.PluginFolderPath, Filename));
 
-            if (fileInfo.DirectoryName == null)
-            {
-                throw new DirectoryNotFoundException(string.Format("The location string {0} does not contain a directory name.", fileInfo.FullName));
-            }
-
-            Directory.CreateDirectory(fileInfo.DirectoryName);
-
             writer.WriteToFile(fileInfo, plugins);
         }
     }

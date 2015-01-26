@@ -7,7 +7,14 @@
     {
         public void WriteToFile(FileInfo fileInfo, object objectToWrite, bool indented = true)
         {
-            using (var fileStream = fileInfo.OpenWrite())
+            if (fileInfo.DirectoryName == null)
+            {
+                throw new DirectoryNotFoundException(string.Format("The path {0} does not contain a directory.", fileInfo.FullName));
+            }
+
+            Directory.CreateDirectory(fileInfo.DirectoryName);
+
+            using (var fileStream = fileInfo.Create())
             using (var streamWriter = new StreamWriter(fileStream))
             using (var jsonWriter = new JsonTextWriter(streamWriter))
             {
