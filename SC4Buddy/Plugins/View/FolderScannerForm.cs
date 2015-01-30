@@ -289,18 +289,10 @@
 
         private void ScanButtonClick(object sender, EventArgs e)
         {
-            try
-            {
-                fileScannerBackgroundWorker.RunWorkerAsync();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Error during folder scanner", ex);
-
-                // TODO: reload entities
-            }
+            fileScannerBackgroundWorker.RunWorkerAsync();
 
             SetFormEnabled(false);
+            statusProgressBar.Style = ProgressBarStyle.Marquee;
             statusProgressBar.Visible = true;
             statusLabel.Text = LocalizationStrings.ScandingFolderThisMayTakeAFewMinutesIfYouHaveAVeryLargePluginFolder;
             statusLabel.Visible = true;
