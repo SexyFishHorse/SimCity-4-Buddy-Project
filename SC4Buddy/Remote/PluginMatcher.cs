@@ -2,26 +2,32 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
+    using System.Reflection;
     using Asser.Sc4Buddy.Server.Api.V1.Client;
     using Asser.Sc4Buddy.Server.Api.V1.Models;
+    using log4net;
     using MoreLinq;
     using NIHEI.SC4Buddy.Model;
     using Plugin = Asser.Sc4Buddy.Server.Api.V1.Models.Plugin;
 
     public class PluginMatcher : IPluginMatcher
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly IEnumerable<Plugin> plugins;
 
         private readonly IEnumerable<File> files;
 
         public PluginMatcher(IBuddyServerClient client)
         {
+            Log.Info("Fetching all plugins and files from the server.");
             plugins = client.GetAllPlugins();
             files = client.GetAllFiles();
         }
 
-        public Plugin GetMostLikelyPluginForFiles(IEnumerable<PluginFile> fileInfos)
+        public Plugin GetMostLikelyPluginForGroupOfFiles(IEnumerable<PluginFile> fileInfos)
         {
             var matchedPlugins = new Dictionary<Guid, int>();
 
@@ -50,7 +56,37 @@
                 }
             }
 
-            return matchedPlugins.Any() ? plugins.FirstOrDefault(x => x.Id == matchedPlugins.MaxBy(y => y.Value).Key) : null;
+            return matchedPlugins.Any() ? plugins.First(x => x.Id == matchedPlugins.MaxBy(y => y.Value).Key) : null;
+        }
+
+        public IDictionary<PluginFile, Plugin> GetMostLikelyPluginForEachFile(ICollection<PluginFile> inputFiles, BackgroundWorker backgroundWorker)
+        {
+            var output = new Dictionary<PluginFile, Plugin>();
+            var numFiles = inputFiles.Count();
+            var filesProcessed = 0.0;
+
+            foreach (var inputFile in inputFiles)
+            {
+                if (backgroundWorker.CancellationPending)
+                {
+                    return output;
+                }
+
+                var matchedFile = files.FirstOrDefault(x => x.Filename == inputFile.Filename && x.Checksum == inputFile.Checksum);
+                if (matchedFile != null)
+                {
+                    var plugin = plugins.First(x => x.Id == matchedFile.Plugin);
+                    output.Add(inputFile, plugin);
+                }
+
+                filesProcessed++;
+
+                backgroundWorker.ReportProgress(
+                    (int)Math.Floor(filesProcessed / numFiles * 95),
+                    string.Format("Checked {0} out of {1} files", filesProcessed, numFiles));
+            }
+
+            return output;
         }
     }
 }

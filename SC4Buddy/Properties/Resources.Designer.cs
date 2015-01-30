@@ -70,6 +70,36 @@ namespace NIHEI.SC4Buddy.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attempting to group files automatically..
+        /// </summary>
+        internal static string FolderScannerForm_AutoGroupBackgroundWorkerDoWork_Attempting_to_group_files_automatically_ {
+            get {
+                return ResourceManager.GetString("FolderScannerForm_AutoGroupBackgroundWorkerDoWork_Attempting_to_group_files_autom" +
+                        "atically_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found {0} plugin(s)..
+        /// </summary>
+        internal static string FolderScannerForm_AutoGroupBackgroundWorkerRunWorkerCompleted_Found__0__plugin_s__ {
+            get {
+                return ResourceManager.GetString("FolderScannerForm_AutoGroupBackgroundWorkerRunWorkerCompleted_Found__0__plugin_s_" +
+                        "_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result of auto grouping.
+        /// </summary>
+        internal static string FolderScannerForm_AutoGroupBackgroundWorkerRunWorkerCompleted_Result_of_auto_grouping {
+            get {
+                return ResourceManager.GetString("FolderScannerForm_AutoGroupBackgroundWorkerRunWorkerCompleted_Result_of_auto_grou" +
+                        "ping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon icon {

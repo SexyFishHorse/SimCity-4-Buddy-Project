@@ -169,4 +169,13 @@
   <data name="ConfirmInstallationOfPlugins" xml:space="preserve">
     <value>Confirm installation of plugins</value>
   </data>
+  <data name="FolderScannerForm_AutoGroupBackgroundWorkerDoWork_Attempting_to_group_files_automatically_" xml:space="preserve">
+    <value>Attempting to group files automatically.</value>
+  </data>
+  <data name="FolderScannerForm_AutoGroupBackgroundWorkerRunWorkerCompleted_Result_of_auto_grouping" xml:space="preserve">
+    <value>Result of auto grouping</value>
+  </data>
+  <data name="FolderScannerForm_AutoGroupBackgroundWorkerRunWorkerCompleted_Found__0__plugin_s__" xml:space="preserve">
+    <value>Found {0} plugin(s).</value>
+  </data>
 </root>

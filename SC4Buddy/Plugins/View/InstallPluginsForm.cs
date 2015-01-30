@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
     using System.Reflection;
@@ -180,16 +181,26 @@
                     {
                         if (ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.FetchInformationFromRemoteServer))
                         {
+                            var pluginsToRemove = new Collection<Plugin>();
                             foreach (var plugin in tempPluginInfo)
                             {
-                                var matchedPlugin = pluginMatcher.GetMostLikelyPluginForFiles(plugin.PluginFiles);
+                                var matchedPlugin = pluginMatcher.GetMostLikelyPluginForGroupOfFiles(plugin.PluginFiles);
 
                                 if (matchedPlugin != null)
                                 {
                                     plugin.RemotePlugin = matchedPlugin;
+                                    plugin.Name = matchedPlugin.Name;
+                                    plugin.Author = matchedPlugin.Author;
+                                    plugin.Link = matchedPlugin.Link;
+                                    plugin.Description = matchedPlugin.Description;
                                     pluginsController.Update(plugin);
-                                    tempPluginInfo.Remove(plugin);
+                                    pluginsToRemove.Add(plugin);
                                 }
+                            }
+
+                            foreach (var plugin in pluginsToRemove)
+                            {
+                                tempPluginInfo.Remove(plugin);
                             }
                         }
 

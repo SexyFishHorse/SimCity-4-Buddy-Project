@@ -132,7 +132,6 @@
                 }
 
                 uninstallButton.Enabled = true;
-                updateInfoButton.Enabled = selectedPlugin.RemotePlugin == null;
 
                 ////reportPluginLinkLabel.Visible = selectedPlugin.RemotePlugin != null;
                 reportPluginLinkLabel.Visible = false;

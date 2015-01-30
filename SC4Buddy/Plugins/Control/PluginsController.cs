@@ -24,8 +24,7 @@
             UserFolder = userFolder;
             this.pluginMatcher = pluginMatcher;
 
-            Plugins = pluginsDataAccess.LoadPlugins();
-            UserFolder.Plugins = Plugins;
+            ReloadPlugins();
         }
 
         public ICollection<Plugin> Plugins { get; set; }
@@ -157,6 +156,7 @@
         public void ReloadPlugins()
         {
             Plugins = pluginsDataAccess.LoadPlugins();
+            UserFolder.Plugins = Plugins;
         }
 
         public int UpdateInfoForAllPluginsFromServer()
@@ -167,7 +167,7 @@
 
             foreach (var plugin in Plugins.Where(x => x.RemotePlugin == null))
             {
-                var matchedPlugin = pluginMatcher.GetMostLikelyPluginForFiles(plugin.PluginFiles);
+                var matchedPlugin = pluginMatcher.GetMostLikelyPluginForGroupOfFiles(plugin.PluginFiles);
 
                 if (matchedPlugin == null)
                 {
