@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Security.Policy;
 
     using Newtonsoft.Json;
 
@@ -25,7 +24,7 @@
         public string Description { get; set; }
 
         [JsonProperty]
-        public Url Link { get; set; }
+        public string Link { get; set; }
 
         [JsonProperty]
         public ICollection<PluginFile> PluginFiles { get; set; }

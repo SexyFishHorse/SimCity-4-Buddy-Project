@@ -124,7 +124,7 @@
                 descriptionRichTextBox.Text = selectedPlugin.Description;
                 if (selectedPlugin.Link != null)
                 {
-                    linkLabel.Text = selectedPlugin.Link.Value;
+                    linkLabel.Text = selectedPlugin.Link;
                 }
                 else
                 {
@@ -214,7 +214,7 @@
         {
             try
             {
-                var link = selectedPlugin.Link.Value;
+                var link = selectedPlugin.Link;
                 Log.Info(string.Format("Launching browser: {0}", link));
 
                 Process.Start(link);

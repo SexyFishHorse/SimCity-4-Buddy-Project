@@ -6,7 +6,6 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Security.Policy;
     using System.Threading.Tasks;
     using System.Windows.Forms;
     using log4net;
@@ -307,18 +306,11 @@
                 return;
             }
 
-            var linkString = linkTextBox.Text.Trim();
-            Url link = null;
-            if (!string.IsNullOrWhiteSpace(linkString))
-            {
-                link = new Url(linkString);
-            }
-
             var plugin = new Plugin
             {
                 Name = nameTextBox.Text.Trim(),
                 Author = authorTextBox.Text.Trim(),
-                Link = link,
+                Link = linkTextBox.Text.Trim(),
                 PluginGroup = GetSelectedGroup(),
                 Description = descriptionTextBox.Text.Trim()
             };

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using System.Security.Policy;
     using System.Windows.Forms;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
@@ -39,7 +38,7 @@
 
                 if (plugin.Link != null)
                 {
-                    linkTextBox.Text = plugin.Link.Value;
+                    linkTextBox.Text = plugin.Link;
                 }
 
                 if (plugin.PluginGroup != null)
@@ -89,7 +88,7 @@
 
             if (!string.IsNullOrWhiteSpace(linkTextBox.Text))
             {
-                newPlugin.Link = new Url(linkTextBox.Text.Trim());
+                newPlugin.Link = linkTextBox.Text.Trim();
             }
 
             newPlugin.PluginGroup = GetOrCreateGroup();
