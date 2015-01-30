@@ -56,6 +56,7 @@
             fileScannerBackgroundWorker.ProgressChanged += FileScannerBackgroundWorkerOnProgressChanged;
             fileScannerBackgroundWorker.RunWorkerCompleted += delegate
                 {
+                    SetFormEnabled(true);
                     statusProgressBar.Visible = false;
                     statusLabel.Visible = false;
                     scanButton.Enabled = true;
@@ -64,6 +65,12 @@
             folderScannerController.NewFilesFound += FolderScannerControllerOnNewFilesFound;
         }
 
+        private void SetFormEnabled(bool enabled)
+        {
+            splitContainer1.Enabled = enabled;
+            scanButton.Enabled = enabled;
+            autoGroupKnownPluginsButton.Enabled = enabled;
+        }
         private void FolderScannerControllerOnNewFilesFound(object sender, EventArgs eventArgs)
         {
             Invoke(new MethodInvoker(RepopulateNewFilesListView));
@@ -293,10 +300,10 @@
                 // TODO: reload entities
             }
 
+            SetFormEnabled(false);
             statusProgressBar.Visible = true;
             statusLabel.Text = LocalizationStrings.ScandingFolderThisMayTakeAFewMinutesIfYouHaveAVeryLargePluginFolder;
             statusLabel.Visible = true;
-            scanButton.Enabled = false;
         }
 
         private void SaveButtonClick(object sender, EventArgs e)
