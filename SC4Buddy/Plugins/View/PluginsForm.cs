@@ -13,6 +13,7 @@
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
+    using NIHEI.SC4Buddy.Remote.Utils;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.View.Elements;
@@ -84,16 +85,8 @@
         {
             RepopulateInstalledPluginsListView();
 
-            if (!NetworkInterface.GetIsNetworkAvailable())
-            {
-                updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = false;
-                checkForMissingDependenciesToolStripMenuItem.Visible = false;
-            }
-            else
-            {
-                updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
-                checkForMissingDependenciesToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.AllowCheckForMissingDependencies);
-            }
+            updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.FetchInformationFromRemoteServer);
+            checkForMissingDependenciesToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.AllowCheckForMissingDependencies);
         }
 
         private void RepopulateInstalledPluginsListView()
