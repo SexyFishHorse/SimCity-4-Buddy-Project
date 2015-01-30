@@ -99,6 +99,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Sc4BuddyApiClient">
       <HintPath>..\Library\Sc4BuddyApiClient\Sc4BuddyApiClient.dll</HintPath>
     </Reference>
@@ -141,6 +144,9 @@
     <Compile Include="Application\Control\SettingsController.cs" />
     <Compile Include="Plugins\Control\PluginsController.cs" />
     <Compile Include="Plugins\DataAccess\PluginsDataAccess.cs" />
+    <Compile Include="Remote\Models\BuddyServerException.cs" />
+    <Compile Include="Remote\Utils\ApiConnect.cs" />
+    <Compile Include="Remote\Utils\ApiConnectCodes.cs" />
     <Compile Include="UserFolders\Control\FolderScanner.cs" />
     <Compile Include="DataAccess\Entities.cs" />
     <Compile Include="DataAccess\EntityFactory.cs" />
