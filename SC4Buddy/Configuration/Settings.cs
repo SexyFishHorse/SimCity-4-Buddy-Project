@@ -25,6 +25,13 @@
             return value != null ? value.ToString() : string.Empty;
         }
 
+        public static string Get(string key, string defaultValue)
+        {
+            var value = GetRaw(key);
+
+            return value != null ? value.ToString() : defaultValue;
+        }
+
         public static int GetInt(string key)
         {
             var stringValue = Get(key);
@@ -45,11 +52,16 @@
             return default(T);
         }
 
-        public static string Get(string key, string defaultValue)
+        public static T Get<T>(string key, T defaultValue)
         {
             var value = GetRaw(key);
 
-            return value != null ? value.ToString() : defaultValue;
+            if (value != null)
+            {
+                return (T)value;
+            }
+
+            return defaultValue;
         }
 
         public static void SetAndSave(string key, object value)
@@ -67,6 +79,8 @@
 
         public static class Keys
         {
+            public const string DetectPlugins = "DetectPlugins";
+
             public const string AutoRunExecutablesDuringInstallation = "AutoRunExecutablesDuringInstallation";
 
             public const string AskToRemoveNonPluginFilesAfterInstallation = "AskToRemoveNonPluginFilesAfterInstallation";

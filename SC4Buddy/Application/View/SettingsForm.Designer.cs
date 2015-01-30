@@ -95,6 +95,7 @@ namespace NIHEI.SC4Buddy.Application.View
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.storeLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.detectPluginsCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -487,6 +488,7 @@ namespace NIHEI.SC4Buddy.Application.View
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.detectPluginsCheckBox);
             this.tabPage4.Controls.Add(this.apiBaseUrlTextBox);
             this.tabPage4.Controls.Add(this.label9);
             this.tabPage4.Controls.Add(this.allowCheckMissingDependenciesCheckBox);
@@ -558,6 +560,12 @@ namespace NIHEI.SC4Buddy.Application.View
             // storeLocationDialog
             // 
             resources.ApplyResources(this.storeLocationDialog, "storeLocationDialog");
+            // 
+            // detectPluginsCheckBox
+            // 
+            resources.ApplyResources(this.detectPluginsCheckBox, "detectPluginsCheckBox");
+            this.detectPluginsCheckBox.Name = "detectPluginsCheckBox";
+            this.detectPluginsCheckBox.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -663,5 +671,6 @@ namespace NIHEI.SC4Buddy.Application.View
         private System.Windows.Forms.CheckBox fetchInformationFromRemoteCheckbox;
         private System.Windows.Forms.TextBox apiBaseUrlTextBox;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox detectPluginsCheckBox;
     }
 }

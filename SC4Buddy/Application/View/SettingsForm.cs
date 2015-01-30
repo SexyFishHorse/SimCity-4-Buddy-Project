@@ -173,10 +173,12 @@
 
             Settings.SetAndSave(Settings.Keys.AllowCheckForMissingDependencies, allowCheckMissingDependenciesCheckBox.Checked);
             Settings.SetAndSave(Settings.Keys.AskForAdditionalInformationAfterInstallation, AskForAdditionalInfoAfterInstallCheckBox.Checked);
-            Settings.SetAndSave(Settings.Keys.FetchInformationFromRemoteServer, fetchInformationFromRemoteCheckbox.Checked);
             Settings.SetAndSave(Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation, RemoveNonPluginFilesAfterInstallCheckBox.Checked);
             Settings.SetAndSave(Settings.Keys.AutoRunExecutablesDuringInstallation, AutoRunInstallerExecutablesCheckBox.Checked);
+
             Settings.SetAndSave(Settings.Keys.ApiBaseUrl, apiBaseUrlTextBox.Text.Trim());
+            Settings.SetAndSave(Settings.Keys.FetchInformationFromRemoteServer, fetchInformationFromRemoteCheckbox.Checked);
+            Settings.SetAndSave(Settings.Keys.DetectPlugins, detectPluginsCheckBox.Checked);
 
             Close();
         }
@@ -265,10 +267,12 @@
 
             allowCheckMissingDependenciesCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AllowCheckForMissingDependencies);
             AskForAdditionalInfoAfterInstallCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AskForAdditionalInformationAfterInstallation);
-            fetchInformationFromRemoteCheckbox.Checked = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
             RemoveNonPluginFilesAfterInstallCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation);
             AutoRunInstallerExecutablesCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AutoRunExecutablesDuringInstallation);
+
             apiBaseUrlTextBox.Text = Settings.Get(Settings.Keys.ApiBaseUrl, ConfigurationManager.AppSettings["ApiBaseUrl"]);
+            detectPluginsCheckBox.Checked = Settings.Get(Settings.Keys.DetectPlugins, true);
+            fetchInformationFromRemoteCheckbox.Checked = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
         }
 
         private void UpdateResolutionComboBox()
