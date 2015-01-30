@@ -308,8 +308,8 @@ namespace NIHEI.SC4Buddy.Plugins.View
             // 
             // checkForMissingDependenciesToolStripMenuItem
             // 
-            this.checkForMissingDependenciesToolStripMenuItem.Name = "checkForMissingDependenciesToolStripMenuItem";
             resources.ApplyResources(this.checkForMissingDependenciesToolStripMenuItem, "checkForMissingDependenciesToolStripMenuItem");
+            this.checkForMissingDependenciesToolStripMenuItem.Name = "checkForMissingDependenciesToolStripMenuItem";
             this.checkForMissingDependenciesToolStripMenuItem.Click += new System.EventHandler(this.CheckForMissingDependenciesToolStripMenuItemClick);
             // 
             // openInFileExplorerToolStripMenuItem
