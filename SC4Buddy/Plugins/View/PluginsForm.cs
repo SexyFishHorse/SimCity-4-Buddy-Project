@@ -6,9 +6,7 @@
     using System.Linq;
     using System.Net.NetworkInformation;
     using System.Reflection;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
-    using Irradiated.Sc4Buddy.ApiClient.Model;
     using log4net;
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
@@ -377,38 +375,16 @@
 
         private void UpdateInfoForAllPluginsFromServer()
         {
-            try
-            {
-                var numUpdated = pluginsController.UpdateInfoForAllPluginsFromServer();
-                RepopulateInstalledPluginsListView();
+            var numUpdated = pluginsController.UpdateInfoForAllPluginsFromServer();
+            RepopulateInstalledPluginsListView();
 
-                MessageBox.Show(
-                    this,
-                    string.Format(LocalizationStrings.InformationForNumPluginsWereUpdated, numUpdated),
-                    LocalizationStrings.PluginInformationUpdated,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1);
-            }
-            catch (Sc4BuddyClientException ex)
-            {
-                Log.Warn(ex);
-                var message =
-                    string.Format(
-                        LocalizationStrings.UnableToUpdatePluginsFromServerTheFollowingErrorWasReturned,
-                        ex.Message);
-                var dialogResult = MessageBox.Show(
-                    this,
-                    message,
-                    LocalizationStrings.ErrorWhileTryingToUpdatePlugins,
-                    MessageBoxButtons.RetryCancel,
-                    MessageBoxIcon.Warning);
-
-                if (dialogResult == DialogResult.Retry)
-                {
-                    UpdateInfoForAllPluginsFromServer();
-                }
-            }
+            MessageBox.Show(
+                this,
+                string.Format(LocalizationStrings.InformationForNumPluginsWereUpdated, numUpdated),
+                LocalizationStrings.PluginInformationUpdated,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
         }
 
         private void UserFolderFormActivated(object sender, EventArgs e)
