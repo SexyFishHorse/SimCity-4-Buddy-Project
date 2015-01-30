@@ -1,14 +1,12 @@
 ﻿namespace NIHEI.SC4Buddy
 {
     using System;
-    using System.Configuration;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Windows.Forms;
     using Asser.Sc4Buddy.Server.Api.V1.Client;
-    using Irradiated.Sc4Buddy.ApiClient;
 
     using log4net;
     using log4net.Config;
@@ -62,12 +60,15 @@
                 if (Directory.Exists(Settings.Get(Settings.Keys.GameLocation)))
                 {
                     new SettingsController(userFoldersController).CheckMainFolder();
+                    var buddyServerClient = new BuddyServerClient(
+                        new RestClient(Settings.Get(Settings.Keys.ApiBaseUrl)));
+
                     System.Windows.Forms.Application.Run(
                         new Sc4Buddy(
                             userFoldersController,
                             new PluginGroupController(entities),
-                            new PluginMatcher(new BuddyServerClient(new RestClient(Settings.Get(Settings.Keys.ApiBaseUrl)))),
-                            new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFoldersController.GetMainUserFolder())));
+                            new PluginMatcher(buddyServerClient),
+                            new DependencyChecker(buddyServerClient, userFoldersController.GetMainUserFolder())));
                 }
             }
             catch (Exception ex)

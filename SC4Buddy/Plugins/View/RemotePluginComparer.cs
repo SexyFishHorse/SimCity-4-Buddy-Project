@@ -1,18 +1,16 @@
 ﻿namespace NIHEI.SC4Buddy.Plugins.View
 {
     using System.Collections.Generic;
+    using Asser.Sc4Buddy.Server.Api.V1.Models;
 
-    using RemotePlugin = Irradiated.Sc4Buddy.ApiClient.Model.Plugin;
-    using RemotePluginFile = Irradiated.Sc4Buddy.ApiClient.Model.PluginFile;
-
-    public class RemotePluginComparer : IEqualityComparer<RemotePlugin>
+    public class RemotePluginComparer : IEqualityComparer<Plugin>
     {
-        public bool Equals(RemotePlugin x, RemotePlugin y)
+        public bool Equals(Plugin x, Plugin y)
         {
             return x.Id == y.Id;
         }
 
-        public int GetHashCode(RemotePlugin obj)
+        public int GetHashCode(Plugin obj)
         {
             return obj.GetHashCode();
         }
