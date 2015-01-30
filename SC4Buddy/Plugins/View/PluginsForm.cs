@@ -419,59 +419,59 @@
 
         private async void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            try
-            {
-                await pluginsController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
+            ////try
+            ////{
+            ////    await pluginsController.UpdateInfoForAllPluginsFromServer();
 
-                var numRecognizedPlugins = pluginsController.NumberOfRecognizedPlugins(userFolder);
+            ////    var numRecognizedPlugins = pluginsController.NumberOfRecognizedPlugins(userFolder);
 
-                if (numRecognizedPlugins < 1)
-                {
-                    MessageBox.Show(
-                        this,
-                        LocalizationStrings.NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked,
-                        LocalizationStrings.NoRecognizablePluginsFound,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Exclamation,
-                        MessageBoxDefaultButton.Button1);
-                    return;
-                }
+            ////    if (numRecognizedPlugins < 1)
+            ////    {
+            ////        MessageBox.Show(
+            ////            this,
+            ////            LocalizationStrings.NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked,
+            ////            LocalizationStrings.NoRecognizablePluginsFound,
+            ////            MessageBoxButtons.OK,
+            ////            MessageBoxIcon.Exclamation,
+            ////            MessageBoxDefaultButton.Button1);
+            ////        return;
+            ////    }
 
-                var missingDependencies = (await dependencyChecker.CheckDependenciesAsync(userFolder)).ToList();
+            ////    var missingDependencies = (await dependencyChecker.CheckDependenciesAsync(userFolder)).ToList();
 
-                if (missingDependencies.Any())
-                {
-                    var dialog = new MissingDependenciesForm
-                    {
-                        MissingDependencies = missingDependencies
-                    };
-                    dialog.ShowDialog(this);
-                }
-                else
-                {
-                    var message = string.Format(
-                        LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
-                        numRecognizedPlugins);
+            ////    if (missingDependencies.Any())
+            ////    {
+            ////        var dialog = new MissingDependenciesForm
+            ////        {
+            ////            MissingDependencies = missingDependencies
+            ////        };
+            ////        dialog.ShowDialog(this);
+            ////    }
+            ////    else
+            ////    {
+            ////        var message = string.Format(
+            ////            LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
+            ////            numRecognizedPlugins);
 
-                    MessageBox.Show(
-                        this,
-                        message,
-                        LocalizationStrings.NoDependenciesMissing,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information,
-                        MessageBoxDefaultButton.Button1);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Dependency check error", ex);
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.ErrorOccuredDuringDependencyCheck + ex.Message,
-                    LocalizationStrings.ErrorDuringDependencyCheck,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-            }
+            ////        MessageBox.Show(
+            ////            this,
+            ////            message,
+            ////            LocalizationStrings.NoDependenciesMissing,
+            ////            MessageBoxButtons.OK,
+            ////            MessageBoxIcon.Information,
+            ////            MessageBoxDefaultButton.Button1);
+            ////    }
+            ////}
+            ////catch (Exception ex)
+            ////{
+            ////    Log.Error("Dependency check error", ex);
+            ////    MessageBox.Show(
+            ////        this,
+            ////        LocalizationStrings.ErrorOccuredDuringDependencyCheck + ex.Message,
+            ////        LocalizationStrings.ErrorDuringDependencyCheck,
+            ////        MessageBoxButtons.OK,
+            ////        MessageBoxIcon.Warning);
+            ////}
         }
 
         private void MoveOrCopyButtonClick(object sender, EventArgs e)
@@ -535,20 +535,20 @@
 
         private void ReportPluginLinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var dialog = new ReportPluginForm
-            {
-                Plugin = selectedPlugin.RemotePlugin
-            };
+            ////var dialog = new ReportPluginForm
+            ////{
+            ////    Plugin = selectedPlugin.RemotePlugin
+            ////};
 
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.ThePluginHasBeenReportedAnAdministratorWillHaveToApproveItFirst,
-                    LocalizationStrings.PluginSuccessfullyReported,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-            }
+            ////if (dialog.ShowDialog() == DialogResult.OK)
+            ////{
+            ////    MessageBox.Show(
+            ////        this,
+            ////        LocalizationStrings.ThePluginHasBeenReportedAnAdministratorWillHaveToApproveItFirst,
+            ////        LocalizationStrings.PluginSuccessfullyReported,
+            ////        MessageBoxButtons.OK,
+            ////        MessageBoxIcon.Information);
+            ////}
         }
 
         private void OpenInFileExplorerToolStripMenuItemClick(object sender, EventArgs e)
