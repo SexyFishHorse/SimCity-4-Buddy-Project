@@ -54,5 +54,10 @@
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Plugin> GetAllPlugins()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
