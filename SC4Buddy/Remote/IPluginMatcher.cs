@@ -6,6 +6,6 @@
 
     public interface IPluginMatcher
     {
-        Plugin GetMostLikelyPluginForFiles(IEnumerable<PluginFile> fileInfos);
+        Plugin GetMostLikelyPluginForGroupOfFiles(IEnumerable<PluginFile> fileInfos);
     }
 }

@@ -167,7 +167,7 @@
 
             foreach (var plugin in Plugins.Where(x => x.RemotePlugin == null))
             {
-                var matchedPlugin = pluginMatcher.GetMostLikelyPluginForFiles(plugin.PluginFiles);
+                var matchedPlugin = pluginMatcher.GetMostLikelyPluginForGroupOfFiles(plugin.PluginFiles);
 
                 if (matchedPlugin == null)
                 {

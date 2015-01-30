@@ -21,7 +21,7 @@
             files = client.GetAllFiles();
         }
 
-        public Plugin GetMostLikelyPluginForFiles(IEnumerable<PluginFile> fileInfos)
+        public Plugin GetMostLikelyPluginForGroupOfFiles(IEnumerable<PluginFile> fileInfos)
         {
             var matchedPlugins = new Dictionary<Guid, int>();
 
