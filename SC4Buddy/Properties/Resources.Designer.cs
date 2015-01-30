@@ -70,6 +70,16 @@ namespace NIHEI.SC4Buddy.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attempting to group files automatically..
+        /// </summary>
+        internal static string FolderScannerForm_AutoGroupBackgroundWorkerDoWork_Attempting_to_group_files_automatically_ {
+            get {
+                return ResourceManager.GetString("FolderScannerForm_AutoGroupBackgroundWorkerDoWork_Attempting_to_group_files_autom" +
+                        "atically_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon icon {

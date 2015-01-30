@@ -2,9 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
     using log4net;
+    using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.UserFolders.Control;
@@ -42,12 +45,62 @@
             }
         }
 
-        public bool AutoGroupKnownFiles(
-            UserFolder userFolder,
-            IPluginsController pluginController,
-            IPluginMatcher pluginMatcher)
+        public int AutoGroupKnownFiles(UserFolder userFolder, IPluginsController pluginController, IPluginMatcher pluginMatcher, BackgroundWorker backgroundWorker)
         {
-            throw new NotImplementedException();
+            var files = new Collection<PluginFile>();
+            var numFiles = NewFiles.Count;
+            var filesProcessed = 0.0;
+
+            Log.Info("Converting new files to plugin objects");
+            foreach (var file in NewFiles)
+            {
+                files.Add(new PluginFile { Path = file, Checksum = Md5ChecksumUtility.CalculateChecksum(file).ToHex() });
+            }
+
+            Log.Info("Matching files");
+            var filesAndPlugins = pluginMatcher.GetMostLikelyPluginForEachFile(files, backgroundWorker);
+
+            var plugins = new Collection<Plugin>();
+
+            Log.Info("Merging results.");
+            foreach (var fileAndPlugin in filesAndPlugins)
+            {
+                if (backgroundWorker.CancellationPending)
+                {
+                    return 0;
+                }
+
+                var plugin = new Plugin { Id = fileAndPlugin.Value.Id };
+                if (!plugins.Contains(plugin))
+                {
+                    plugin.Name = fileAndPlugin.Value.Name;
+                    plugin.Author = fileAndPlugin.Value.Author;
+                    plugin.Link = fileAndPlugin.Value.Link;
+                    plugin.Description = fileAndPlugin.Value.Description;
+                    plugin.PluginFiles.Add(fileAndPlugin.Key);
+                    plugins.Add(plugin);
+                }
+                else
+                {
+                    plugins.First(x => x.Id == fileAndPlugin.Value.Id).PluginFiles.Add(fileAndPlugin.Key);
+                }
+
+                NewFiles.Remove(fileAndPlugin.Key.Path);
+                filesProcessed++;
+
+                backgroundWorker.ReportProgress(
+                    ((int)Math.Floor(filesProcessed / numFiles) * 5) + 95,
+                    string.Format("Updated {0} of {1} files.", filesProcessed, numFiles));
+            }
+
+            Log.Info("Saving found plugins.");
+            foreach (var plugin in plugins)
+            {
+                pluginController.Add(plugin);
+            }
+
+            Log.Info("Done with auto grouping plugins.");
+            return plugins.Count;
         }
     }
 }

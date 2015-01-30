@@ -6,12 +6,12 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
     using log4net;
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
+    using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.View.Elements;
@@ -71,6 +71,7 @@
             scanButton.Enabled = enabled;
             autoGroupKnownPluginsButton.Enabled = enabled;
         }
+
         private void FolderScannerControllerOnNewFilesFound(object sender, EventArgs eventArgs)
         {
             Invoke(new MethodInvoker(RepopulateNewFilesListView));
@@ -102,7 +103,6 @@
             }
 
             addAllButton.Enabled = true;
-            autoGroupKnownPlugins.Enabled = true;
         }
 
         private void FileScannerBackgroundWorkerOnProgressChanged(
@@ -430,61 +430,16 @@
             ValidatePluginInfo(false);
         }
 
-        private async Task<bool> AutoGroupKnownPlugins()
+        private void AutoGroupKnownPluginsClick(object sender, EventArgs e)
         {
-            ////try
-            ////{
-            ////    statusProgressBar.Visible = true;
-            ////    statusLabel.Text =
-            ////        LocalizationStrings
-            ////            .TryingToAutoGroupPluginsThisMayTakeAFewMinutesIfYouHaveALargePluginFolderOrASlowInternetConnection;
-            ////    statusLabel.Visible = true;
-            ////    autoGroupKnownPlugins.Enabled = false;
-            ////    await folderScannerController.AutoGroupKnownFiles(userFolder, pluginsController, pluginMatcher);
-            ////    RepopulateNewFilesListView();
-            ////}
-            ////catch (Sc4BuddyClientException ex)
-            ////{
-            ////    Log.Warn("Api error during auto group known plugins", ex);
-            ////    var result = MessageBox.Show(
-            ////        this,
-            ////        string.Format(LocalizationStrings.AnErrorOccuredWhenTryingToAutoGroupPlugins, ex.Message),
-            ////        LocalizationStrings.ErrorDuringAutoGroupingOfPlugins,
-            ////        MessageBoxButtons.RetryCancel,
-            ////        MessageBoxIcon.Warning);
+            SetFormEnabled(false);
+            statusProgressBar.Visible = true;
+            statusProgressBar.Value = 0;
+            statusLabel.Visible = true;
+            statusLabel.Text =
+                Resources.FolderScannerForm_AutoGroupBackgroundWorkerDoWork_Attempting_to_group_files_automatically_;
 
-            ////    if (result == DialogResult.Retry)
-            ////    {
-            ////        AutoGroupKnownPlugins().GetAwaiter().GetResult();
-            ////    }
-            ////}
-            ////finally
-            ////{
-            ////    statusProgressBar.Visible = false;
-            ////    statusLabel.Text = string.Empty;
-            ////    statusLabel.Visible = true;
-            ////    autoGroupKnownPlugins.Enabled = true;
-            ////}
-
-            return true;
-        }
-
-        private async void AutoGroupKnownPluginsClick(object sender, EventArgs e)
-        {
-            try
-            {
-                await AutoGroupKnownPlugins();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Auto group known plugins error", ex);
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.ErrorOccuredDuringAutoGroupKnownPlugins + ex.Message,
-                    LocalizationStrings.ErrorDuringAutoGroupKnownPlugins,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-            }
+            autoGroupBackgroundWorker.RunWorkerAsync();
         }
 
         private void CloseButtonClick(object sender, EventArgs e)
@@ -496,6 +451,63 @@
             catch (Exception ex)
             {
                 Log.Warn("Exception during folder scanner form close", ex);
+            }
+        }
+
+        private void AutoGroupBackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+            Log.Info("Starting background worker.");
+            var numPluginsFound = folderScannerController.AutoGroupKnownFiles(
+                userFolder,
+                pluginsController,
+                pluginMatcher,
+                sender as BackgroundWorker);
+
+            e.Result = numPluginsFound;
+        }
+
+        private void AutoGroupBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs args)
+        {
+            statusProgressBar.Style = ProgressBarStyle.Continuous;
+            statusProgressBar.Value = args.ProgressPercentage;
+            statusLabel.Text = args.UserState.ToString();
+        }
+
+        private void AutoGroupBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs args)
+        {
+            SetFormEnabled(true);
+            Log.Info("Background worker completed.");
+            statusProgressBar.Visible = false;
+            statusLabel.Visible = false;
+            statusProgressBar.Value = 0;
+            statusLabel.Text = string.Empty;
+            RepopulateNewFilesListView();
+
+            if (!args.Cancelled && args.Error == null)
+            {
+                var result = (int)args.Result;
+
+                MessageBox.Show(
+                    this,
+                    string.Format("Found {0} plugin(s).", result),
+                    "Result of auto grouping",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+        }
+
+        private void FolderScannerFormFormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (autoGroupBackgroundWorker.IsBusy)
+            {
+                Log.Info("Cancelling auto group as form was closed.");
+                autoGroupBackgroundWorker.CancelAsync();
+            }
+
+            if (fileScannerBackgroundWorker.IsBusy)
+            {
+                Log.Info("Cancelling folder scanner as form was closed.");
+                fileScannerBackgroundWorker.CancelAsync();
             }
         }
     }
