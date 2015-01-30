@@ -52,12 +52,45 @@
 
         public Plugin GetPlugin(Guid pluginId)
         {
-            throw new NotImplementedException();
+            var request = new RestRequest("plugins/{pluginId}", Method.GET) { RequestFormat = DataFormat.Json };
+            request.AddUrlSegment("pluginId", pluginId.ToString());
+
+            var response = client.Get<Plugin>(request);
+
+            return response.Data;
         }
 
         public IEnumerable<Plugin> GetAllPlugins()
         {
-            throw new NotImplementedException();
+            var page = 1;
+            do
+            {
+                var request = new RestRequest("plugins", Method.GET) { RequestFormat = DataFormat.Json };
+                request.AddQueryParameter("page", page + string.Empty);
+                request.AddQueryParameter("perPage", MaxFilesPerPage + string.Empty);
+
+                var response = client.Get<List<Plugin>>(request);
+
+                if (response.StatusCode.IsSuccess())
+                {
+                    foreach (var plugin in response.Data)
+                    {
+                        yield return plugin;
+                    }
+
+                    if (response.Data.Count < MaxFilesPerPage)
+                    {
+                        yield break;
+                    }
+
+                    page++;
+                }
+                else
+                {
+                    yield break;
+                }
+            }
+            while (true);
         }
     }
 }
