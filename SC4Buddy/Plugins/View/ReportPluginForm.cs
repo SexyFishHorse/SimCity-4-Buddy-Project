@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.View.Plugins
+﻿namespace NIHEI.SC4Buddy.Plugins.View
 {
     using System;
     using System.Windows.Forms;

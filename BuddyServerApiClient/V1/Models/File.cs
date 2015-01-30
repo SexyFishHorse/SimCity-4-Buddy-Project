@@ -1,4 +1,4 @@
-﻿namespace Asser.Sc4Buddy.Server.Api.Client.V1.Models
+﻿namespace Asser.Sc4Buddy.Server.Api.V1.Models
 {
     using System;
 

@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Asser.Sc4Buddy.Server.Api.Client.V1.Models;
+    using Asser.Sc4Buddy.Server.Api.V1.Models;
 
     public interface IBuddyServerClient
     {

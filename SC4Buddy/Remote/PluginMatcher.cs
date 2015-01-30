@@ -3,11 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Asser.Sc4Buddy.Server.Api.Client.V1.Models;
     using Asser.Sc4Buddy.Server.Api.V1.Client;
+    using Asser.Sc4Buddy.Server.Api.V1.Models;
     using MoreLinq;
     using NIHEI.SC4Buddy.Model;
-    using Plugin = Asser.Sc4Buddy.Server.Api.Client.V1.Models.Plugin;
+    using Plugin = Asser.Sc4Buddy.Server.Api.V1.Models.Plugin;
 
     public class PluginMatcher : IPluginMatcher
     {

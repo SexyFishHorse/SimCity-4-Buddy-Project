@@ -50,7 +50,7 @@
 
         public PluginGroup PluginGroup { get; set; }
 
-        public Asser.Sc4Buddy.Server.Api.Client.V1.Models.Plugin RemotePlugin { get; set; }
+        public Asser.Sc4Buddy.Server.Api.V1.Models.Plugin RemotePlugin { get; set; }
 
         public override bool Equals(object obj)
         {

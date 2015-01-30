@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using NIHEI.SC4Buddy.Model;
-    using Plugin = Asser.Sc4Buddy.Server.Api.Client.V1.Models.Plugin;
+    using Plugin = Asser.Sc4Buddy.Server.Api.V1.Models.Plugin;
 
     public interface IPluginMatcher
     {

@@ -8,7 +8,6 @@
     using Irradiated.Sc4Buddy.ApiClient.Model;
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Resources;
-    using NIHEI.SC4Buddy.View.Plugins;
 
     public partial class MissingDependenciesForm : Form
     {

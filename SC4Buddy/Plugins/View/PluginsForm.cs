@@ -19,7 +19,6 @@
     using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.Helpers;
-    using NIHEI.SC4Buddy.View.Plugins;
     using Plugin = NIHEI.SC4Buddy.Model.Plugin;
 
     public partial class PluginsForm : Form
