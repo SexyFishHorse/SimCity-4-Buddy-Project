@@ -489,8 +489,8 @@
 
                 MessageBox.Show(
                     this,
-                    string.Format("Found {0} plugin(s).", result),
-                    "Result of auto grouping",
+                    string.Format(Resources.FolderScannerForm_AutoGroupBackgroundWorkerRunWorkerCompleted_Found__0__plugin_s__, result),
+                    Resources.FolderScannerForm_AutoGroupBackgroundWorkerRunWorkerCompleted_Result_of_auto_grouping,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
             }
