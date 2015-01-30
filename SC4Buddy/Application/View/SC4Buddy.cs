@@ -11,6 +11,7 @@
     using System.Resources;
     using System.Threading;
     using System.Windows.Forms;
+    using Asser.Sc4Buddy.Server.Api.V1.Client;
     using log4net;
     using NIHEI.SC4Buddy.Application.Control;
     using NIHEI.SC4Buddy.Configuration;
@@ -20,6 +21,7 @@
     using NIHEI.SC4Buddy.Plugins.View;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
+    using NIHEI.SC4Buddy.Remote.Utils;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.UserFolders.DataAccess;
@@ -242,7 +244,8 @@
                     dependencyChecker,
                     new PluginsController(
                         new PluginsDataAccess(userFolder, new JsonFileWriter(), pluginGroupController),
-                        userFolder));
+                        userFolder,
+                        new PluginMatcher(new BuddyServerClient(ApiConnect.GetClient()))));
                 userFolderForms.Add(form);
             }
 
@@ -384,7 +387,8 @@
             var form = new InstallPluginsForm(
                 new PluginsController(
                     new PluginsDataAccess(userFolder, new JsonFileWriter(), pluginGroupController),
-                    userFolder),
+                    userFolder,
+                    new PluginMatcher(new BuddyServerClient(ApiConnect.GetClient()))),
                 files,
                 userFolder,
                 pluginMatcher);

@@ -4,10 +4,13 @@
     using System.Linq;
     using System.Reflection;
     using System.Windows.Forms;
+    using Asser.Sc4Buddy.Server.Api.V1.Client;
     using log4net;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Plugins.DataAccess;
+    using NIHEI.SC4Buddy.Remote;
+    using NIHEI.SC4Buddy.Remote.Utils;
     using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.Utils;
     using NIHEI.SC4Buddy.View.Elements;
@@ -117,7 +120,8 @@
                 pluginsController,
                 new PluginsController(
                     new PluginsDataAccess(selectedUserFolder, new JsonFileWriter(), pluginGroupController),
-                    selectedUserFolder));
+                    selectedUserFolder,
+                    new PluginMatcher(new BuddyServerClient(ApiConnect.GetClient()))));
             try
             {
                 copier.CopyPlugin(Plugin, currentUserFolder, selectedUserFolder);
@@ -144,7 +148,8 @@
                 pluginsController,
                 new PluginsController(
                     new PluginsDataAccess(selectedUserFolder, new JsonFileWriter(), pluginGroupController),
-                    selectedUserFolder));
+                    selectedUserFolder,
+                    new PluginMatcher(new BuddyServerClient(ApiConnect.GetClient()))));
             try
             {
                 copier.MovePlugin(Plugin, currentUserFolder, selectedUserFolder);
