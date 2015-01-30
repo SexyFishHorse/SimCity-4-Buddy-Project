@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Application.View
 {
     using System;
+    using System.Configuration;
     using System.Drawing;
     using System.Globalization;
     using System.IO;
@@ -175,6 +176,7 @@
             Settings.SetAndSave(Settings.Keys.FetchInformationFromRemoteServer, fetchInformationFromRemoteCheckbox.Checked);
             Settings.SetAndSave(Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation, RemoveNonPluginFilesAfterInstallCheckBox.Checked);
             Settings.SetAndSave(Settings.Keys.AutoRunExecutablesDuringInstallation, AutoRunInstallerExecutablesCheckBox.Checked);
+            Settings.SetAndSave(Settings.Keys.ApiBaseUrl, apiBaseUrlTextBox.Text.Trim());
 
             Close();
         }
@@ -266,6 +268,7 @@
             fetchInformationFromRemoteCheckbox.Checked = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
             RemoveNonPluginFilesAfterInstallCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation);
             AutoRunInstallerExecutablesCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AutoRunExecutablesDuringInstallation);
+            apiBaseUrlTextBox.Text = Settings.Get(Settings.Keys.ApiBaseUrl, ConfigurationManager.AppSettings["ApiBaseUrl"]);
         }
 
         private void UpdateResolutionComboBox()

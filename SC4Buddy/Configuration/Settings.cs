@@ -45,6 +45,13 @@
             return default(T);
         }
 
+        public static string Get(string key, string defaultValue)
+        {
+            var value = GetRaw(key);
+
+            return value != null ? value.ToString() : defaultValue;
+        }
+
         public static void SetAndSave(string key, object value)
         {
             DataAccess.SetSetting(key, value);
@@ -75,6 +82,8 @@
             public const string GameLocation = "GameLocation";
 
             public const string QuarantinedFiles = "QuarantinedFiles";
+
+            public const string ApiBaseUrl = "ApiBaseUrl";
         }
     }
 }

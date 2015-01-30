@@ -86,13 +86,15 @@ namespace NIHEI.SC4Buddy.Application.View
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.allowCheckMissingDependenciesCheckBox = new System.Windows.Forms.CheckBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
+            this.RemoveNonPluginFilesAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
+            this.AutoRunInstallerExecutablesCheckBox = new System.Windows.Forms.CheckBox();
             this.AskForAdditionalInfoAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.storeLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
-            this.RemoveNonPluginFilesAfterInstallCheckBox = new System.Windows.Forms.CheckBox();
-            this.AutoRunInstallerExecutablesCheckBox = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.apiBaseUrlTextBox = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -485,6 +487,8 @@ namespace NIHEI.SC4Buddy.Application.View
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.apiBaseUrlTextBox);
+            this.tabPage4.Controls.Add(this.label9);
             this.tabPage4.Controls.Add(this.allowCheckMissingDependenciesCheckBox);
             resources.ApplyResources(this.tabPage4, "tabPage4");
             this.tabPage4.Name = "tabPage4";
@@ -505,23 +509,6 @@ namespace NIHEI.SC4Buddy.Application.View
             resources.ApplyResources(this.tabPage5, "tabPage5");
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // AskForAdditionalInfoAfterInstallCheckBox
-            // 
-            resources.ApplyResources(this.AskForAdditionalInfoAfterInstallCheckBox, "AskForAdditionalInfoAfterInstallCheckBox");
-            this.AskForAdditionalInfoAfterInstallCheckBox.Checked = true;
-            this.AskForAdditionalInfoAfterInstallCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AskForAdditionalInfoAfterInstallCheckBox.Name = "AskForAdditionalInfoAfterInstallCheckBox";
-            this.AskForAdditionalInfoAfterInstallCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // gameLocationDialog
-            // 
-            resources.ApplyResources(this.gameLocationDialog, "gameLocationDialog");
-            this.gameLocationDialog.ShowNewFolderButton = false;
-            // 
-            // storeLocationDialog
-            // 
-            resources.ApplyResources(this.storeLocationDialog, "storeLocationDialog");
             // 
             // fetchInformationFromRemoteCheckbox
             // 
@@ -544,6 +531,33 @@ namespace NIHEI.SC4Buddy.Application.View
             resources.ApplyResources(this.AutoRunInstallerExecutablesCheckBox, "AutoRunInstallerExecutablesCheckBox");
             this.AutoRunInstallerExecutablesCheckBox.Name = "AutoRunInstallerExecutablesCheckBox";
             this.AutoRunInstallerExecutablesCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // AskForAdditionalInfoAfterInstallCheckBox
+            // 
+            resources.ApplyResources(this.AskForAdditionalInfoAfterInstallCheckBox, "AskForAdditionalInfoAfterInstallCheckBox");
+            this.AskForAdditionalInfoAfterInstallCheckBox.Checked = true;
+            this.AskForAdditionalInfoAfterInstallCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AskForAdditionalInfoAfterInstallCheckBox.Name = "AskForAdditionalInfoAfterInstallCheckBox";
+            this.AskForAdditionalInfoAfterInstallCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // gameLocationDialog
+            // 
+            resources.ApplyResources(this.gameLocationDialog, "gameLocationDialog");
+            this.gameLocationDialog.ShowNewFolderButton = false;
+            // 
+            // storeLocationDialog
+            // 
+            resources.ApplyResources(this.storeLocationDialog, "storeLocationDialog");
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
+            // apiBaseUrlTextBox
+            // 
+            resources.ApplyResources(this.apiBaseUrlTextBox, "apiBaseUrlTextBox");
+            this.apiBaseUrlTextBox.Name = "apiBaseUrlTextBox";
             // 
             // SettingsForm
             // 
@@ -647,5 +661,7 @@ namespace NIHEI.SC4Buddy.Application.View
         private System.Windows.Forms.TrackBar autoSaveIntervalTrackBar;
         private System.Windows.Forms.CheckBox enableAutoSaveCheckBox;
         private System.Windows.Forms.CheckBox fetchInformationFromRemoteCheckbox;
+        private System.Windows.Forms.TextBox apiBaseUrlTextBox;
+        private System.Windows.Forms.Label label9;
     }
 }
