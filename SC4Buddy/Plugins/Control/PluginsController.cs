@@ -24,8 +24,7 @@
             UserFolder = userFolder;
             this.pluginMatcher = pluginMatcher;
 
-            Plugins = pluginsDataAccess.LoadPlugins();
-            UserFolder.Plugins = Plugins;
+            ReloadPlugins();
         }
 
         public ICollection<Plugin> Plugins { get; set; }
@@ -157,6 +156,7 @@
         public void ReloadPlugins()
         {
             Plugins = pluginsDataAccess.LoadPlugins();
+            UserFolder.Plugins = Plugins;
         }
 
         public int UpdateInfoForAllPluginsFromServer()
