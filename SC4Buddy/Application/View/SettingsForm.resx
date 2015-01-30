@@ -399,20 +399,23 @@
   <data name="allowCheckMissingDependenciesCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="allowCheckMissingDependenciesCheckBox.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="allowCheckMissingDependenciesCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="allowCheckMissingDependenciesCheckBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 32</value>
+    <value>3, 32</value>
   </data>
   <data name="allowCheckMissingDependenciesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>265, 17</value>
+    <value>351, 17</value>
   </data>
   <data name="allowCheckMissingDependenciesCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="allowCheckMissingDependenciesCheckBox.Text" xml:space="preserve">
-    <value>Check for missing dependencies for known plugins</value>
+    <value>Check for missing dependencies for known plugins (disabled for now)</value>
   </data>
   <data name="&gt;&gt;allowCheckMissingDependenciesCheckBox.Name" xml:space="preserve">
     <value>allowCheckMissingDependenciesCheckBox</value>

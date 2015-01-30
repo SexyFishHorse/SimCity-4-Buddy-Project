@@ -84,6 +84,8 @@ namespace NIHEI.SC4Buddy.Application.View
             this.disableMusicCheckBox = new System.Windows.Forms.CheckBox();
             this.disableAudioCheckBox = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.apiBaseUrlTextBox = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.allowCheckMissingDependenciesCheckBox = new System.Windows.Forms.CheckBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
@@ -93,8 +95,6 @@ namespace NIHEI.SC4Buddy.Application.View
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.storeLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.label9 = new System.Windows.Forms.Label();
-            this.apiBaseUrlTextBox = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -494,6 +494,16 @@ namespace NIHEI.SC4Buddy.Application.View
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // apiBaseUrlTextBox
+            // 
+            resources.ApplyResources(this.apiBaseUrlTextBox, "apiBaseUrlTextBox");
+            this.apiBaseUrlTextBox.Name = "apiBaseUrlTextBox";
+            // 
+            // label9
+            // 
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
+            // 
             // allowCheckMissingDependenciesCheckBox
             // 
             resources.ApplyResources(this.allowCheckMissingDependenciesCheckBox, "allowCheckMissingDependenciesCheckBox");
@@ -548,16 +558,6 @@ namespace NIHEI.SC4Buddy.Application.View
             // storeLocationDialog
             // 
             resources.ApplyResources(this.storeLocationDialog, "storeLocationDialog");
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
-            // 
-            // apiBaseUrlTextBox
-            // 
-            resources.ApplyResources(this.apiBaseUrlTextBox, "apiBaseUrlTextBox");
-            this.apiBaseUrlTextBox.Name = "apiBaseUrlTextBox";
             // 
             // SettingsForm
             // 
