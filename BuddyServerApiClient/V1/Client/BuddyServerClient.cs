@@ -50,7 +50,7 @@
             while (true);
         }
 
-        public Plugin GetPlugin(Guid first)
+        public Plugin GetPlugin(Guid pluginId)
         {
             throw new NotImplementedException();
         }

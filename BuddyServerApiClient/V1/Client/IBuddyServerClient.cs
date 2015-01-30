@@ -8,7 +8,7 @@
     {
         IEnumerable<File> GetAllFiles();
 
-        Plugin GetPlugin(Guid first);
+        Plugin GetPlugin(Guid pluginId);
 
         IEnumerable<Plugin> GetAllPlugins();
     }
