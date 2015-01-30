@@ -56,10 +56,6 @@
     <Compile Include="V1\Models\Error.cs" />
     <Compile Include="V1\Models\File.cs" />
     <Compile Include="V1\Models\Plugin.cs" />
-    <Compile Include="V1\Models\Requests\BaseRequest.cs" />
-    <Compile Include="V1\Models\Requests\GetAllPluginsRequest.cs" />
-    <Compile Include="V1\Models\Responses\BuddyApiResponse.cs" />
-    <Compile Include="V1\Models\Requests\GetRequest.cs" />
     <Compile Include="V1\Models\Status.cs" />
   </ItemGroup>
   <ItemGroup />
