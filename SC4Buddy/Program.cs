@@ -7,7 +7,7 @@
     using System.Linq;
     using System.Reflection;
     using System.Windows.Forms;
-
+    using Asser.Sc4Buddy.Server.Api.V1.Client;
     using Irradiated.Sc4Buddy.ApiClient;
 
     using log4net;
@@ -24,6 +24,7 @@
     using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.UserFolders.DataAccess;
     using NIHEI.SC4Buddy.Utils;
+    using RestSharp;
 
     public static class Program
     {
@@ -65,8 +66,7 @@
                         new Sc4Buddy(
                             userFoldersController,
                             new PluginGroupController(entities),
-                            new PluginMatcher(
-                                new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty)),
+                            new PluginMatcher(new BuddyServerClient(new RestClient(Settings.Get(Settings.Keys.ApiBaseUrl)))),
                             new DependencyChecker(new Sc4BuddyApiClient(ConfigurationManager.AppSettings["ApiBaseUrl"], string.Empty), userFoldersController.GetMainUserFolder())));
                 }
             }

@@ -358,11 +358,11 @@
             nonPluginFilesScannerUi.RemoveNonPluginFilesAndShowSummary(this);
         }
 
-        private async void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
+        private void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
         {
             try
             {
-                await UpdateInfoForAllPluginsFromServer();
+                UpdateInfoForAllPluginsFromServer();
             }
             catch (Exception ex)
             {
@@ -376,11 +376,11 @@
             }
         }
 
-        private async Task UpdateInfoForAllPluginsFromServer()
+        private void UpdateInfoForAllPluginsFromServer()
         {
             try
             {
-                var numUpdated = await pluginsController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
+                var numUpdated = pluginsController.UpdateInfoForAllPluginsFromServer();
                 RepopulateInstalledPluginsListView();
 
                 MessageBox.Show(
@@ -407,7 +407,7 @@
 
                 if (dialogResult == DialogResult.Retry)
                 {
-                    UpdateInfoForAllPluginsFromServer().GetAwaiter().GetResult();
+                    UpdateInfoForAllPluginsFromServer();
                 }
             }
         }
