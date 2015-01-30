@@ -5,14 +5,8 @@
     using NIHEI.SC4Buddy.Remote.Models;
     using RestSharp;
 
-    public class ApiConnect
+    public static class ApiConnect
     {
-        private readonly string baseUrl;
-
-        public ApiConnect(string baseUrl)
-        {
-            this.baseUrl = baseUrl;
-        }
 
         public static void ThrowErrorOnConnectionOrDisabledFeature(string feature)
         {
@@ -32,9 +26,24 @@
             }
         }
 
-        public IRestClient GetClient()
+        public static bool HasConnectionAndIsFeatureEnabled(string feature)
         {
-            return new RestClient(baseUrl);
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(Settings.Get(Settings.Keys.ApiBaseUrl)))
+            {
+                return false;
+            }
+
+            return Settings.Get<bool>(feature);
+        }
+
+        public static IRestClient GetClient()
+        {
+            return new RestClient(Settings.Get(Settings.Keys.ApiBaseUrl));
         }
     }
 }
