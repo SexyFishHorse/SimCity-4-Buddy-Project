@@ -65,6 +65,7 @@
                             Description = pluginJson.Description,
                             Name = pluginJson.Name,
                             Link = pluginJson.Link,
+                            RemotePlugin = pluginJson.RemotePlugin,
                             PluginGroup = pluginGroupController.Groups.FirstOrDefault(x => x.Name == groupName)
                         };
 

@@ -175,8 +175,16 @@
                 }
 
                 plugin.RemotePlugin = matchedPlugin;
+                plugin.Name = matchedPlugin.Name;
+                plugin.Author = matchedPlugin.Author;
+                plugin.Link = matchedPlugin.Link;
+                plugin.Description = matchedPlugin.Description;
+
                 numUpdated++;
             }
+
+            pluginsDataAccess.SavePlugins(Plugins, UserFolder);
+            ReloadPlugins();
 
             return numUpdated;
         }

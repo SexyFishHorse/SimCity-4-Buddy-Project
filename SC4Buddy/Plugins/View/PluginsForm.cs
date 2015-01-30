@@ -353,6 +353,7 @@
             try
             {
                 UpdateInfoForAllPluginsFromServer();
+                RepopulateInstalledPluginsListView();
             }
             catch (Exception ex)
             {

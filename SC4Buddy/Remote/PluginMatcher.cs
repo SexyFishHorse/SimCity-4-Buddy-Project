@@ -27,24 +27,30 @@
 
             foreach (var fileInfo in fileInfos)
             {
-                var matchedPlugin = files.FirstOrDefault(x => x.Filename == fileInfo.Filename && x.Checksum == fileInfo.Checksum);
+                var fileInfoClosure = fileInfo;
+                var matchedPlugin = Guid.Empty;
+                foreach (var file in files.Where(x => x.Filename == fileInfoClosure.Filename && x.Checksum == fileInfoClosure.Checksum))
+                {
+                    matchedPlugin = file.Plugin;
+                    break;
+                }
 
-                if (matchedPlugin == null)
+                if (matchedPlugin == Guid.Empty)
                 {
                     continue;
                 }
 
-                if (matchedPlugins.ContainsKey(matchedPlugin.Id))
+                if (matchedPlugins.ContainsKey(matchedPlugin))
                 {
-                    matchedPlugins[matchedPlugin.Id] = matchedPlugins[matchedPlugin.Id]++;
+                    matchedPlugins[matchedPlugin] = matchedPlugins[matchedPlugin]++;
                 }
                 else
                 {
-                    matchedPlugins.Add(matchedPlugin.Id, 1);
+                    matchedPlugins.Add(matchedPlugin, 1);
                 }
             }
 
-            return plugins.FirstOrDefault(x => x.Id == matchedPlugins.MaxBy(y => y.Value).Key);
+            return matchedPlugins.Any() ? plugins.FirstOrDefault(x => x.Id == matchedPlugins.MaxBy(y => y.Value).Key) : null;
         }
     }
 }
