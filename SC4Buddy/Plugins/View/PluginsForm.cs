@@ -233,7 +233,7 @@
 
         private void UpdateInfoButtonClick(object sender, EventArgs e)
         {
-            var infoDialog = new EnterPluginInformationForm(pluginGroupController)
+            var infoDialog = new EnterPluginInformationForm(pluginGroupController, userFolder)
             {
                 Plugin = selectedPlugin
             };

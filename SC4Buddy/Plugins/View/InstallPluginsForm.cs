@@ -49,7 +49,7 @@
             tempPluginInfo = new List<Plugin>();
 
             enterPluginInformationForm =
-                new EnterPluginInformationForm(new PluginGroupController(EntityFactory.Instance.Entities));
+                new EnterPluginInformationForm(new PluginGroupController(EntityFactory.Instance.Entities), userFolder);
 
             this.pluginsController = pluginsController;
 

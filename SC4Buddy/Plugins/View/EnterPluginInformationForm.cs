@@ -11,13 +11,16 @@
     {
         private readonly PluginGroupController pluginGroupController;
 
+        private readonly UserFolder userFolder;
+
         private Plugin plugin;
 
-        public EnterPluginInformationForm(PluginGroupController pluginGroupController)
+        public EnterPluginInformationForm(PluginGroupController pluginGroupController, UserFolder userFolder)
         {
             InitializeComponent();
 
             this.pluginGroupController = pluginGroupController;
+            this.userFolder = userFolder;
         }
 
         public Plugin Plugin
@@ -51,7 +54,7 @@
                 installedFilesListView.Items.Clear();
                 foreach (var pluginFile in value.PluginFiles.Where(x => x.QuarantinedFile == null))
                 {
-                    installedFilesListView.Items.Add(pluginFile.Path);
+                    installedFilesListView.Items.Add(pluginFile.Path.Substring(userFolder.PluginFolderPath.Length + 1));
                 }
 
                 installedFilesListView.Columns[0].Width = -2;
