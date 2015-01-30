@@ -2,10 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
-    using System.Net.NetworkInformation;
     using System.Reflection;
     using System.Threading;
     using System.Windows.Forms;
@@ -17,6 +15,7 @@
     using NIHEI.SC4Buddy.Plugins.Installer;
     using NIHEI.SC4Buddy.Plugins.Installer.InstallerEventArgs;
     using NIHEI.SC4Buddy.Remote;
+    using NIHEI.SC4Buddy.Remote.Utils;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.View.Helpers;
     using NIHEI.SC4Buddy.View.Plugins;
@@ -67,7 +66,7 @@
             pluginInstallerThread.PluginInstalled += OnPluginInstalled;
             pluginInstallerThread.PluginInstallFailed += OnPluginInstallFailed;
             pluginInstallerThread.InstallProgressChanged += OnInstallProgressChanged;
-            pluginInstallerThread.AllPluginsInstalled += (sender, eventArgs) => OnAllPluginsInstalled(sender, eventArgs);
+            pluginInstallerThread.AllPluginsInstalled += (sender, eventArgs) => OnAllPluginsInstalled();
             pluginInstallerThread.ReadmeFilesFound += OnReadmeFilesFound;
             pluginInstallerThread.NotPartOneOfMultipartDetected += OnNotPartOneOfMultipartDetected;
 
@@ -159,7 +158,7 @@
             Invoke(new Action(() => new ReadmeFilesForm(args.ReadmeFiles).ShowDialog(this)));
         }
 
-        private void OnAllPluginsInstalled(object sender, EventArgs eventArgs)
+        private void OnAllPluginsInstalled()
         {
             WriteLine(string.Empty);
             WriteLine(LocalizationStrings.InstallationCompleted);
@@ -179,19 +178,18 @@
             {
                 Invoke(new Action(() =>
                     {
-                        if (NetworkInterface.GetIsNetworkAvailable() && Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer))
+                        if (ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.FetchInformationFromRemoteServer))
                         {
-                            var matched = new Collection<Plugin>();
-                            foreach (
-                                var plugin in
-                                    tempPluginInfo.Where(plugin => pluginMatcher.MatchAndUpdateAsync(plugin).Result))
+                            foreach (var plugin in tempPluginInfo)
                             {
-                                matched.Add(plugin);
-                            }
+                                var matchedPlugin = pluginMatcher.GetMostLikelyPluginForFiles(plugin.PluginFiles);
 
-                            foreach (var match in matched)
-                            {
-                                tempPluginInfo.Remove(match);
+                                if (matchedPlugin != null)
+                                {
+                                    plugin.RemotePlugin = matchedPlugin;
+                                    pluginsController.Update(plugin);
+                                    tempPluginInfo.Remove(plugin);
+                                }
                             }
                         }
 
