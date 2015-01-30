@@ -4,22 +4,25 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Threading.Tasks;
     using Microsoft.VisualBasic.FileIO;
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.DataAccess;
     using NIHEI.SC4Buddy.Remote;
+    using NIHEI.SC4Buddy.Remote.Utils;
     using SearchOption = System.IO.SearchOption;
 
     public class PluginsController : IPluginsController
     {
         private readonly PluginsDataAccess pluginsDataAccess;
 
-        public PluginsController(PluginsDataAccess pluginsDataAccess, UserFolder userFolder)
+        private readonly IPluginMatcher pluginMatcher;
+
+        public PluginsController(PluginsDataAccess pluginsDataAccess, UserFolder userFolder, IPluginMatcher pluginMatcher)
         {
             this.pluginsDataAccess = pluginsDataAccess;
             UserFolder = userFolder;
+            this.pluginMatcher = pluginMatcher;
 
             Plugins = pluginsDataAccess.LoadPlugins();
             UserFolder.Plugins = Plugins;
@@ -156,18 +159,34 @@
             Plugins = pluginsDataAccess.LoadPlugins();
         }
 
-        public async Task<int> UpdateInfoForAllPluginsFromServer(IPluginMatcher pluginMatcher)
+        public int UpdateInfoForAllPluginsFromServer()
         {
-            var count = 0;
-            foreach (var plugin in Plugins)
+            ApiConnect.ThrowErrorOnConnectionOrDisabledFeature(Settings.Keys.DetectPlugins);
+
+            var numUpdated = 0;
+
+            foreach (var plugin in Plugins.Where(x => x.RemotePlugin == null))
             {
-                if (await pluginMatcher.MatchAndUpdateAsync(plugin))
+                var matchedPlugin = pluginMatcher.GetMostLikelyPluginForFiles(plugin.PluginFiles);
+
+                if (matchedPlugin == null)
                 {
-                    count++;
+                    continue;
                 }
+
+                plugin.RemotePlugin = matchedPlugin;
+                plugin.Name = matchedPlugin.Name;
+                plugin.Author = matchedPlugin.Author;
+                plugin.Link = matchedPlugin.Link;
+                plugin.Description = matchedPlugin.Description;
+
+                numUpdated++;
             }
 
-            return count;
+            pluginsDataAccess.SavePlugins(Plugins, UserFolder);
+            ReloadPlugins();
+
+            return numUpdated;
         }
 
         public int NumberOfRecognizedPlugins(UserFolder userFolder)

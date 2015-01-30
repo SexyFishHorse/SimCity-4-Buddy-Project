@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using System.Security.Policy;
     using System.Windows.Forms;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
@@ -12,13 +11,16 @@
     {
         private readonly PluginGroupController pluginGroupController;
 
+        private readonly UserFolder userFolder;
+
         private Plugin plugin;
 
-        public EnterPluginInformationForm(PluginGroupController pluginGroupController)
+        public EnterPluginInformationForm(PluginGroupController pluginGroupController, UserFolder userFolder)
         {
             InitializeComponent();
 
             this.pluginGroupController = pluginGroupController;
+            this.userFolder = userFolder;
         }
 
         public Plugin Plugin
@@ -39,7 +41,7 @@
 
                 if (plugin.Link != null)
                 {
-                    linkTextBox.Text = plugin.Link.Value;
+                    linkTextBox.Text = plugin.Link;
                 }
 
                 if (plugin.PluginGroup != null)
@@ -52,7 +54,7 @@
                 installedFilesListView.Items.Clear();
                 foreach (var pluginFile in value.PluginFiles.Where(x => x.QuarantinedFile == null))
                 {
-                    installedFilesListView.Items.Add(pluginFile.Path);
+                    installedFilesListView.Items.Add(pluginFile.Path.Substring(userFolder.PluginFolderPath.Length + 1));
                 }
 
                 installedFilesListView.Columns[0].Width = -2;
@@ -89,7 +91,7 @@
 
             if (!string.IsNullOrWhiteSpace(linkTextBox.Text))
             {
-                newPlugin.Link = new Url(linkTextBox.Text.Trim());
+                newPlugin.Link = linkTextBox.Text.Trim();
             }
 
             newPlugin.PluginGroup = GetOrCreateGroup();

@@ -1,12 +1,9 @@
-﻿namespace NIHEI.SC4Buddy.View.Plugins
+﻿namespace NIHEI.SC4Buddy.Plugins.View
 {
     using System;
     using System.Windows.Forms;
-
+    using Asser.Sc4Buddy.Server.Api.V1.Models;
     using NIHEI.SC4Buddy.Entities.Remote;
-
-    using RemotePlugin = Irradiated.Sc4Buddy.ApiClient.Model.Plugin;
-    using RemotePluginFile = Irradiated.Sc4Buddy.ApiClient.Model.PluginFile;
 
     public partial class ReportPluginForm : Form
     {
@@ -16,7 +13,7 @@
             InitializeComponent();
         }
 
-        public RemotePlugin Plugin { get; set; }
+        public Plugin Plugin { get; set; }
 
         private void CancelButtonClick(object sender, EventArgs e)
         {

@@ -25,6 +25,13 @@
             return value != null ? value.ToString() : string.Empty;
         }
 
+        public static string Get(string key, string defaultValue)
+        {
+            var value = GetRaw(key);
+
+            return value != null ? value.ToString() : defaultValue;
+        }
+
         public static int GetInt(string key)
         {
             var stringValue = Get(key);
@@ -45,6 +52,18 @@
             return default(T);
         }
 
+        public static T Get<T>(string key, T defaultValue)
+        {
+            var value = GetRaw(key);
+
+            if (value != null)
+            {
+                return (T)value;
+            }
+
+            return defaultValue;
+        }
+
         public static void SetAndSave(string key, object value)
         {
             DataAccess.SetSetting(key, value);
@@ -60,6 +79,8 @@
 
         public static class Keys
         {
+            public const string DetectPlugins = "DetectPlugins";
+
             public const string AutoRunExecutablesDuringInstallation = "AutoRunExecutablesDuringInstallation";
 
             public const string AskToRemoveNonPluginFilesAfterInstallation = "AskToRemoveNonPluginFilesAfterInstallation";
@@ -75,6 +96,8 @@
             public const string GameLocation = "GameLocation";
 
             public const string QuarantinedFiles = "QuarantinedFiles";
+
+            public const string ApiBaseUrl = "ApiBaseUrl";
         }
     }
 }

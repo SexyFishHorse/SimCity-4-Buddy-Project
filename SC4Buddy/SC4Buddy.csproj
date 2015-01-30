@@ -95,12 +95,15 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="MoreLinq">
+      <HintPath>..\packages\morelinq.1.1.0\lib\net35\MoreLinq.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Sc4BuddyApiClient">
-      <HintPath>..\Library\Sc4BuddyApiClient\Sc4BuddyApiClient.dll</HintPath>
+    <Reference Include="RestSharp">
+      <HintPath>..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="SharpCompress, Version=0.10.3.0, Culture=neutral, PublicKeyToken=beaf6f427e128133, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -141,6 +144,9 @@
     <Compile Include="Application\Control\SettingsController.cs" />
     <Compile Include="Plugins\Control\PluginsController.cs" />
     <Compile Include="Plugins\DataAccess\PluginsDataAccess.cs" />
+    <Compile Include="Remote\Models\BuddyServerException.cs" />
+    <Compile Include="Remote\Utils\ApiConnect.cs" />
+    <Compile Include="Remote\Utils\ApiConnectCodes.cs" />
     <Compile Include="UserFolders\Control\FolderScanner.cs" />
     <Compile Include="DataAccess\Entities.cs" />
     <Compile Include="DataAccess\EntityFactory.cs" />
@@ -454,6 +460,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\BuddyServerApiClient\BuddyServerApiClient.csproj">
+      <Project>{D708A5BD-DB4C-4B5A-A703-FCBFBB8ABE4F}</Project>
+      <Name>BuddyServerApiClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NiheiCommon\NiheiCommon.csproj">
       <Project>{43f9af3f-d57d-421d-ba98-87fd499ca314}</Project>
       <Name>NiheiCommon</Name>

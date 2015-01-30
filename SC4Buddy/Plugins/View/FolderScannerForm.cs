@@ -6,10 +6,8 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Security.Policy;
     using System.Threading.Tasks;
     using System.Windows.Forms;
-    using Irradiated.Sc4Buddy.ApiClient.Model;
     using log4net;
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Model;
@@ -308,18 +306,11 @@
                 return;
             }
 
-            var linkString = linkTextBox.Text.Trim();
-            Url link = null;
-            if (!string.IsNullOrWhiteSpace(linkString))
-            {
-                link = new Url(linkString);
-            }
-
             var plugin = new Plugin
             {
                 Name = nameTextBox.Text.Trim(),
                 Author = authorTextBox.Text.Trim(),
-                Link = link,
+                Link = linkTextBox.Text.Trim(),
                 PluginGroup = GetSelectedGroup(),
                 Description = descriptionTextBox.Text.Trim()
             };
@@ -442,39 +433,39 @@
 
         private async Task<bool> AutoGroupKnownPlugins()
         {
-            try
-            {
-                statusProgressBar.Visible = true;
-                statusLabel.Text =
-                    LocalizationStrings
-                        .TryingToAutoGroupPluginsThisMayTakeAFewMinutesIfYouHaveALargePluginFolderOrASlowInternetConnection;
-                statusLabel.Visible = true;
-                autoGroupKnownPlugins.Enabled = false;
-                await folderScannerController.AutoGroupKnownFiles(userFolder, pluginsController, pluginMatcher);
-                RepopulateNewFilesListView();
-            }
-            catch (Sc4BuddyClientException ex)
-            {
-                Log.Warn("Api error during auto group known plugins", ex);
-                var result = MessageBox.Show(
-                    this,
-                    string.Format(LocalizationStrings.AnErrorOccuredWhenTryingToAutoGroupPlugins, ex.Message),
-                    LocalizationStrings.ErrorDuringAutoGroupingOfPlugins,
-                    MessageBoxButtons.RetryCancel,
-                    MessageBoxIcon.Warning);
+            ////try
+            ////{
+            ////    statusProgressBar.Visible = true;
+            ////    statusLabel.Text =
+            ////        LocalizationStrings
+            ////            .TryingToAutoGroupPluginsThisMayTakeAFewMinutesIfYouHaveALargePluginFolderOrASlowInternetConnection;
+            ////    statusLabel.Visible = true;
+            ////    autoGroupKnownPlugins.Enabled = false;
+            ////    await folderScannerController.AutoGroupKnownFiles(userFolder, pluginsController, pluginMatcher);
+            ////    RepopulateNewFilesListView();
+            ////}
+            ////catch (Sc4BuddyClientException ex)
+            ////{
+            ////    Log.Warn("Api error during auto group known plugins", ex);
+            ////    var result = MessageBox.Show(
+            ////        this,
+            ////        string.Format(LocalizationStrings.AnErrorOccuredWhenTryingToAutoGroupPlugins, ex.Message),
+            ////        LocalizationStrings.ErrorDuringAutoGroupingOfPlugins,
+            ////        MessageBoxButtons.RetryCancel,
+            ////        MessageBoxIcon.Warning);
 
-                if (result == DialogResult.Retry)
-                {
-                    AutoGroupKnownPlugins().GetAwaiter().GetResult();
-                }
-            }
-            finally
-            {
-                statusProgressBar.Visible = false;
-                statusLabel.Text = string.Empty;
-                statusLabel.Visible = true;
-                autoGroupKnownPlugins.Enabled = true;
-            }
+            ////    if (result == DialogResult.Retry)
+            ////    {
+            ////        AutoGroupKnownPlugins().GetAwaiter().GetResult();
+            ////    }
+            ////}
+            ////finally
+            ////{
+            ////    statusProgressBar.Visible = false;
+            ////    statusLabel.Text = string.Empty;
+            ////    statusLabel.Visible = true;
+            ////    autoGroupKnownPlugins.Enabled = true;
+            ////}
 
             return true;
         }

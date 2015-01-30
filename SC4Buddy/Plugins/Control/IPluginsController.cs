@@ -1,9 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Plugins.Control
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Remote;
 
     public interface IPluginsController
     {
@@ -17,7 +15,7 @@
 
         void UninstallPlugin(Plugin plugin);
 
-        Task<int> UpdateInfoForAllPluginsFromServer(IPluginMatcher pluginMatcher);
+        int UpdateInfoForAllPluginsFromServer();
 
         int NumberOfRecognizedPlugins(UserFolder userFolder);
 

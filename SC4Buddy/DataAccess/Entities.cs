@@ -13,9 +13,6 @@
 
     using NIHEI.SC4Buddy.Model;
 
-    using RemotePlugin = Irradiated.Sc4Buddy.ApiClient.Model.Plugin;
-    using RemotePluginFile = Irradiated.Sc4Buddy.ApiClient.Model.PluginFile;
-
     public class Entities : IEntities
     {
         private const string PluginGroupsFilename = "PluginGroups.json";

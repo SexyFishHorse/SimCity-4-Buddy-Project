@@ -6,20 +6,18 @@
     using System.Linq;
     using System.Net.NetworkInformation;
     using System.Reflection;
-    using System.Threading.Tasks;
     using System.Windows.Forms;
-    using Irradiated.Sc4Buddy.ApiClient.Model;
     using log4net;
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
+    using NIHEI.SC4Buddy.Remote.Utils;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
     using NIHEI.SC4Buddy.View.Elements;
     using NIHEI.SC4Buddy.View.Helpers;
-    using NIHEI.SC4Buddy.View.Plugins;
     using Plugin = NIHEI.SC4Buddy.Model.Plugin;
 
     public partial class PluginsForm : Form
@@ -87,16 +85,8 @@
         {
             RepopulateInstalledPluginsListView();
 
-            if (!NetworkInterface.GetIsNetworkAvailable())
-            {
-                updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = false;
-                checkForMissingDependenciesToolStripMenuItem.Visible = false;
-            }
-            else
-            {
-                updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
-                checkForMissingDependenciesToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.AllowCheckForMissingDependencies);
-            }
+            updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.FetchInformationFromRemoteServer);
+            checkForMissingDependenciesToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.AllowCheckForMissingDependencies);
         }
 
         private void RepopulateInstalledPluginsListView()
@@ -134,7 +124,7 @@
                 descriptionRichTextBox.Text = selectedPlugin.Description;
                 if (selectedPlugin.Link != null)
                 {
-                    linkLabel.Text = selectedPlugin.Link.Value;
+                    linkLabel.Text = selectedPlugin.Link;
                 }
                 else
                 {
@@ -224,7 +214,7 @@
         {
             try
             {
-                var link = selectedPlugin.Link.Value;
+                var link = selectedPlugin.Link;
                 Log.Info(string.Format("Launching browser: {0}", link));
 
                 Process.Start(link);
@@ -243,7 +233,7 @@
 
         private void UpdateInfoButtonClick(object sender, EventArgs e)
         {
-            var infoDialog = new EnterPluginInformationForm(pluginGroupController)
+            var infoDialog = new EnterPluginInformationForm(pluginGroupController, userFolder)
             {
                 Plugin = selectedPlugin
             };
@@ -358,11 +348,12 @@
             nonPluginFilesScannerUi.RemoveNonPluginFilesAndShowSummary(this);
         }
 
-        private async void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
+        private void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
         {
             try
             {
-                await UpdateInfoForAllPluginsFromServer();
+                UpdateInfoForAllPluginsFromServer();
+                RepopulateInstalledPluginsListView();
             }
             catch (Exception ex)
             {
@@ -376,40 +367,18 @@
             }
         }
 
-        private async Task UpdateInfoForAllPluginsFromServer()
+        private void UpdateInfoForAllPluginsFromServer()
         {
-            try
-            {
-                var numUpdated = await pluginsController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
-                RepopulateInstalledPluginsListView();
+            var numUpdated = pluginsController.UpdateInfoForAllPluginsFromServer();
+            RepopulateInstalledPluginsListView();
 
-                MessageBox.Show(
-                    this,
-                    string.Format(LocalizationStrings.InformationForNumPluginsWereUpdated, numUpdated),
-                    LocalizationStrings.PluginInformationUpdated,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button1);
-            }
-            catch (Sc4BuddyClientException ex)
-            {
-                Log.Warn(ex);
-                var message =
-                    string.Format(
-                        LocalizationStrings.UnableToUpdatePluginsFromServerTheFollowingErrorWasReturned,
-                        ex.Message);
-                var dialogResult = MessageBox.Show(
-                    this,
-                    message,
-                    LocalizationStrings.ErrorWhileTryingToUpdatePlugins,
-                    MessageBoxButtons.RetryCancel,
-                    MessageBoxIcon.Warning);
-
-                if (dialogResult == DialogResult.Retry)
-                {
-                    UpdateInfoForAllPluginsFromServer().GetAwaiter().GetResult();
-                }
-            }
+            MessageBox.Show(
+                this,
+                string.Format(LocalizationStrings.InformationForNumPluginsWereUpdated, numUpdated),
+                LocalizationStrings.PluginInformationUpdated,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
         }
 
         private void UserFolderFormActivated(object sender, EventArgs e)
@@ -419,59 +388,59 @@
 
         private async void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            try
-            {
-                await pluginsController.UpdateInfoForAllPluginsFromServer(pluginMatcher);
+            ////try
+            ////{
+            ////    await pluginsController.UpdateInfoForAllPluginsFromServer();
 
-                var numRecognizedPlugins = pluginsController.NumberOfRecognizedPlugins(userFolder);
+            ////    var numRecognizedPlugins = pluginsController.NumberOfRecognizedPlugins(userFolder);
 
-                if (numRecognizedPlugins < 1)
-                {
-                    MessageBox.Show(
-                        this,
-                        LocalizationStrings.NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked,
-                        LocalizationStrings.NoRecognizablePluginsFound,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Exclamation,
-                        MessageBoxDefaultButton.Button1);
-                    return;
-                }
+            ////    if (numRecognizedPlugins < 1)
+            ////    {
+            ////        MessageBox.Show(
+            ////            this,
+            ////            LocalizationStrings.NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked,
+            ////            LocalizationStrings.NoRecognizablePluginsFound,
+            ////            MessageBoxButtons.OK,
+            ////            MessageBoxIcon.Exclamation,
+            ////            MessageBoxDefaultButton.Button1);
+            ////        return;
+            ////    }
 
-                var missingDependencies = (await dependencyChecker.CheckDependenciesAsync(userFolder)).ToList();
+            ////    var missingDependencies = (await dependencyChecker.CheckDependenciesAsync(userFolder)).ToList();
 
-                if (missingDependencies.Any())
-                {
-                    var dialog = new MissingDependenciesForm
-                    {
-                        MissingDependencies = missingDependencies
-                    };
-                    dialog.ShowDialog(this);
-                }
-                else
-                {
-                    var message = string.Format(
-                        LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
-                        numRecognizedPlugins);
+            ////    if (missingDependencies.Any())
+            ////    {
+            ////        var dialog = new MissingDependenciesForm
+            ////        {
+            ////            MissingDependencies = missingDependencies
+            ////        };
+            ////        dialog.ShowDialog(this);
+            ////    }
+            ////    else
+            ////    {
+            ////        var message = string.Format(
+            ////            LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
+            ////            numRecognizedPlugins);
 
-                    MessageBox.Show(
-                        this,
-                        message,
-                        LocalizationStrings.NoDependenciesMissing,
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information,
-                        MessageBoxDefaultButton.Button1);
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Dependency check error", ex);
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.ErrorOccuredDuringDependencyCheck + ex.Message,
-                    LocalizationStrings.ErrorDuringDependencyCheck,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-            }
+            ////        MessageBox.Show(
+            ////            this,
+            ////            message,
+            ////            LocalizationStrings.NoDependenciesMissing,
+            ////            MessageBoxButtons.OK,
+            ////            MessageBoxIcon.Information,
+            ////            MessageBoxDefaultButton.Button1);
+            ////    }
+            ////}
+            ////catch (Exception ex)
+            ////{
+            ////    Log.Error("Dependency check error", ex);
+            ////    MessageBox.Show(
+            ////        this,
+            ////        LocalizationStrings.ErrorOccuredDuringDependencyCheck + ex.Message,
+            ////        LocalizationStrings.ErrorDuringDependencyCheck,
+            ////        MessageBoxButtons.OK,
+            ////        MessageBoxIcon.Warning);
+            ////}
         }
 
         private void MoveOrCopyButtonClick(object sender, EventArgs e)
@@ -535,20 +504,20 @@
 
         private void ReportPluginLinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var dialog = new ReportPluginForm
-            {
-                Plugin = selectedPlugin.RemotePlugin
-            };
+            ////var dialog = new ReportPluginForm
+            ////{
+            ////    Plugin = selectedPlugin.RemotePlugin
+            ////};
 
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.ThePluginHasBeenReportedAnAdministratorWillHaveToApproveItFirst,
-                    LocalizationStrings.PluginSuccessfullyReported,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-            }
+            ////if (dialog.ShowDialog() == DialogResult.OK)
+            ////{
+            ////    MessageBox.Show(
+            ////        this,
+            ////        LocalizationStrings.ThePluginHasBeenReportedAnAdministratorWillHaveToApproveItFirst,
+            ////        LocalizationStrings.PluginSuccessfullyReported,
+            ////        MessageBoxButtons.OK,
+            ////        MessageBoxIcon.Information);
+            ////}
         }
 
         private void OpenInFileExplorerToolStripMenuItemClick(object sender, EventArgs e)

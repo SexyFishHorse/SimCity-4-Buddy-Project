@@ -1,17 +1,19 @@
 ﻿namespace NIHEI.SC4Buddy.Model
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Security.Policy;
 
     using Newtonsoft.Json;
-
-    using RemotePlugin = Irradiated.Sc4Buddy.ApiClient.Model.Plugin;
-    using RemotePluginFile = Irradiated.Sc4Buddy.ApiClient.Model.PluginFile;
 
     [JsonObject(MemberSerialization.OptIn)]
     public class Plugin : ModelBase
     {
+        public Plugin()
+        {
+            PluginFiles = new Collection<PluginFile>();
+        }
+
         [JsonProperty]
         public string Name { get; set; }
 
@@ -22,12 +24,7 @@
         public string Description { get; set; }
 
         [JsonProperty]
-        public Url Link { get; set; }
-
-        [JsonProperty]
-        public RemotePlugin RemotePlugin { get; set; }
-
-        public PluginGroup PluginGroup { get; set; }
+        public string Link { get; set; }
 
         [JsonProperty]
         public ICollection<PluginFile> PluginFiles { get; set; }
@@ -41,10 +38,18 @@
             }
         }
 
-        public Plugin()
+        [JsonProperty]
+        public Guid RemotePluginId
         {
-            PluginFiles = new Collection<PluginFile>();
+            get
+            {
+                return RemotePlugin == null ? Guid.Empty : RemotePlugin.Id;
+            }
         }
+
+        public PluginGroup PluginGroup { get; set; }
+
+        public Asser.Sc4Buddy.Server.Api.V1.Models.Plugin RemotePlugin { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -59,45 +64,6 @@
         public override int GetHashCode()
         {
             return Id.GetHashCode();
-        }
-
-        private sealed class NameEqualityComparer : IEqualityComparer<Plugin>
-        {
-            public bool Equals(Plugin x, Plugin y)
-            {
-                if (ReferenceEquals(x, y))
-                {
-                    return true;
-                }
-                if (ReferenceEquals(x, null))
-                {
-                    return false;
-                }
-                if (ReferenceEquals(y, null))
-                {
-                    return false;
-                }
-                if (x.GetType() != y.GetType())
-                {
-                    return false;
-                }
-                return string.Equals(x.Name, y.Name);
-            }
-
-            public int GetHashCode(Plugin obj)
-            {
-                return (obj.Name != null ? obj.Name.GetHashCode() : 0);
-            }
-        }
-
-        private static readonly IEqualityComparer<Plugin> NameComparerInstance = new NameEqualityComparer();
-
-        public static IEqualityComparer<Plugin> NameComparer
-        {
-            get
-            {
-                return NameComparerInstance;
-            }
         }
     }
 }

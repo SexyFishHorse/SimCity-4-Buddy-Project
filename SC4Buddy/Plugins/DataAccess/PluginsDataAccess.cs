@@ -5,7 +5,6 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Security.Policy;
     using log4net;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -65,13 +64,10 @@
                             Author = pluginJson.Author,
                             Description = pluginJson.Description,
                             Name = pluginJson.Name,
+                            Link = pluginJson.Link,
+                            RemotePlugin = pluginJson.RemotePlugin,
                             PluginGroup = pluginGroupController.Groups.FirstOrDefault(x => x.Name == groupName)
                         };
-
-                        if (pluginJson.Link != null)
-                        {
-                            plugin.Link = new Url(pluginJson.Url);
-                        }
 
                         foreach (var fileJson in pluginJson.PluginFiles)
                         {

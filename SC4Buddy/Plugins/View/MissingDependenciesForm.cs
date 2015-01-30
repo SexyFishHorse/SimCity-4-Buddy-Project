@@ -5,10 +5,9 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Windows.Forms;
-    using Irradiated.Sc4Buddy.ApiClient.Model;
+    using Asser.Sc4Buddy.Server.Api.V1.Models;
     using NIHEI.Common.UI.Elements;
     using NIHEI.SC4Buddy.Resources;
-    using NIHEI.SC4Buddy.View.Plugins;
 
     public partial class MissingDependenciesForm : Form
     {
@@ -49,8 +48,8 @@
             foreach (var remotePlugin in dependencies)
             {
                 var item = new ListViewItemWithObjectValue<Plugin>(remotePlugin.Name, remotePlugin);
-                item.SubItems.Add(remotePlugin.AuthorName);
-                item.SubItems.Add(remotePlugin.LinkToDownloadPage);
+                item.SubItems.Add(remotePlugin.Author);
+                item.SubItems.Add(remotePlugin.Link);
                 item.SubItems.Add(visitedDependencies.Contains(remotePlugin) ? LocalizationStrings.Visited : string.Empty);
                 dependencyListView.Items.Add(item);
             }
@@ -84,7 +83,7 @@
 
         private void GoToDownloadButtonClick(object sender, EventArgs e)
         {
-            Process.Start(selectedItem.LinkToDownloadPage);
+            Process.Start(selectedItem.Link);
             if (!visitedDependencies.Contains(selectedItem))
             {
                 visitedDependencies.Add(selectedItem);

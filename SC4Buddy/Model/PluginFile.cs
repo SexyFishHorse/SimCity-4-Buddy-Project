@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Model
 {
     using System.Collections.Generic;
+    using System.IO;
     using Newtonsoft.Json;
 
     [JsonObject(MemberSerialization.OptIn)]
@@ -51,6 +52,14 @@
             get
             {
                 return PathComparerInstance;
+            }
+        }
+
+        public string Filename
+        {
+            get
+            {
+                return new FileInfo(Path).Name;
             }
         }
     }

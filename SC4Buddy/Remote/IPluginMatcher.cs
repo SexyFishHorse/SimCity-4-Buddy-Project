@@ -1,21 +1,11 @@
 ﻿namespace NIHEI.SC4Buddy.Remote
 {
     using System.Collections.Generic;
-    using System.Threading.Tasks;
-
-    using Irradiated.Sc4Buddy.ApiClient.Model;
-
-    using Plugin = NIHEI.SC4Buddy.Model.Plugin;
-    using RemotePlugin = Irradiated.Sc4Buddy.ApiClient.Model.Plugin;
-    using RemotePluginFile = Irradiated.Sc4Buddy.ApiClient.Model.PluginFile;
+    using NIHEI.SC4Buddy.Model;
+    using Plugin = Asser.Sc4Buddy.Server.Api.V1.Models.Plugin;
 
     public interface IPluginMatcher
     {
-        Task<bool> MatchAndUpdateAsync(Plugin plugin);
-
-        Task<IDictionary<PluginFileMetaInfo, IEnumerable<RemotePlugin>>> GetMostLikelyRemotePluginsForFilesAsync(
-            IEnumerable<PluginFileMetaInfo> filePathAndChecksum);
-
-        Task<IEnumerable<RemotePlugin>> GetMostLikelyRemotePluginForFileAsync(string filepath, string checksum);
+        Plugin GetMostLikelyPluginForFiles(IEnumerable<PluginFile> fileInfos);
     }
 }
