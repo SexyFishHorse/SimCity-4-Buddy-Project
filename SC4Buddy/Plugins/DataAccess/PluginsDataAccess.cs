@@ -65,9 +65,16 @@
                             Description = pluginJson.Description,
                             Name = pluginJson.Name,
                             Link = pluginJson.Link,
-                            RemotePlugin = new Asser.Sc4Buddy.Server.Api.V1.Models.Plugin { Id = pluginJson.RemotePlugin },
                             PluginGroup = pluginGroupController.Groups.FirstOrDefault(x => x.Name == groupName)
                         };
+
+                        if (!string.IsNullOrWhiteSpace(pluginJson.RemotePlugin))
+                        {
+                            plugin.RemotePlugin = new Asser.Sc4Buddy.Server.Api.V1.Models.Plugin
+                            {
+                                Id = pluginJson.RemotePlugin
+                            };
+                        }
 
                         foreach (var fileJson in pluginJson.PluginFiles)
                         {
