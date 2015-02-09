@@ -68,7 +68,7 @@
                             PluginGroup = pluginGroupController.Groups.FirstOrDefault(x => x.Name == groupName)
                         };
 
-                        if (!string.IsNullOrWhiteSpace(pluginJson.RemotePlugin))
+                        if (pluginJson.RemotePlugin != null  && !string.IsNullOrWhiteSpace(pluginJson.RemotePlugin))
                         {
                             plugin.RemotePlugin = new Asser.Sc4Buddy.Server.Api.V1.Models.Plugin
                             {

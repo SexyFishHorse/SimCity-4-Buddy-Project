@@ -61,7 +61,7 @@
                 {
                     new SettingsController(userFoldersController).CheckMainFolder();
                     var buddyServerClient = new BuddyServerClient(
-                        new RestClient(Settings.Get(Settings.Keys.ApiBaseUrl)));
+                        new RestClient(Settings.Get(Settings.Keys.ApiBaseUrl, "http://api.sc4buddy.sexyfishhorse.com")));
 
                     System.Windows.Forms.Application.Run(
                         new Sc4Buddy(
