@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
@@ -34,6 +35,8 @@
 
         private readonly UserFolder userFolder;
 
+        private List<string> newFilesFound;
+
         public FolderScannerForm(
             FolderScannerController folderScannerController,
             IPluginsController pluginsController,
@@ -65,6 +68,32 @@
             folderScannerController.NewFilesFound += FolderScannerControllerOnNewFilesFound;
         }
 
+        private static void PopulateTreeView(TreeView treeView, IEnumerable<string> paths, char pathSeparator)
+        {
+            TreeNode lastNode = null;
+            foreach (var path in paths)
+            {
+                var subPathAgg = string.Empty;
+                foreach (var subPath in path.Split(pathSeparator))
+                {
+                    subPathAgg += subPath + pathSeparator;
+                    var nodes = treeView.Nodes.Find(subPathAgg, true);
+                    if (nodes.Length == 0)
+                    {
+                        lastNode = lastNode == null
+                                       ? treeView.Nodes.Add(subPathAgg, subPath)
+                                       : lastNode.Nodes.Add(subPathAgg, subPath);
+                    }
+                    else
+                    {
+                        lastNode = nodes[0];
+                    }
+                }
+
+                lastNode = null;
+            }
+        }
+
         private void SetFormEnabled(bool enabled)
         {
             splitContainer1.Enabled = enabled;
@@ -74,28 +103,33 @@
 
         private void FolderScannerControllerOnNewFilesFound(object sender, EventArgs eventArgs)
         {
-            Invoke(new MethodInvoker(RepopulateNewFilesListView));
+            var newFiles = folderScannerController.NewFiles;
+            var filenames = newFiles.Select(x => x.Remove(0, userFolder.PluginFolderPath.Length + 1)).ToList();
+
+            newFilesFound = filenames;
+
+            Invoke(new MethodInvoker(RepopulateNewFilesView));
         }
 
-        private void RepopulateNewFilesListView()
+        private void RepopulateNewFilesView()
         {
             newFilesListView.BeginUpdate();
             newFilesListView.Items.Clear();
 
-            foreach (var file in folderScannerController.NewFiles)
+            foreach (var file in newFilesFound)
             {
-                if (fileScannerBackgroundWorker.CancellationPending)
-                {
-                    return;
-                }
-
-                var filename = file.Remove(0, userFolder.PluginFolderPath.Length + 1);
-                newFilesListView.Items.Add(filename);
+                newFilesListView.Items.Add(file);
             }
 
             ResizeColumns();
 
             newFilesListView.EndUpdate();
+
+            newFilesTreeView.BeginUpdate();
+
+            PopulateTreeView(newFilesTreeView, newFilesFound, Path.DirectorySeparatorChar);
+
+            newFilesTreeView.EndUpdate();
 
             if (!folderScannerController.NewFiles.Any())
             {
