@@ -173,10 +173,7 @@
 
             if (pluginFilesListView.Items.Count == 0 && nameTextBox.Text.Length < 1)
             {
-                var path = items[0].Text;
-                var fileInfo = new FileInfo(path);
-
-                nameTextBox.Text = fileInfo.Name;
+                nameTextBox.Text = Path.GetFileNameWithoutExtension(items[0].Text);
             }
 
             MoveItemsToPluginFilesListView(items);
