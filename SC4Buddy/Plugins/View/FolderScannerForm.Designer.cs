@@ -36,6 +36,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.pluginFilesListView = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.newFilesTreeView = new System.Windows.Forms.TreeView();
             this.addButton = new System.Windows.Forms.Button();
             this.addAllButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -131,6 +132,16 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "New files";
+            // 
+            // newFilesTreeView
+            // 
+            this.newFilesTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.newFilesTreeView.Location = new System.Drawing.Point(6, 22);
+            this.newFilesTreeView.Name = "newFilesTreeView";
+            this.newFilesTreeView.Size = new System.Drawing.Size(199, 209);
+            this.newFilesTreeView.TabIndex = 4;
             // 
             // addButton
             // 
@@ -505,5 +516,6 @@ namespace NIHEI.SC4Buddy.Plugins.View
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.Button autoGroupKnownPluginsButton;
         private System.ComponentModel.BackgroundWorker autoGroupBackgroundWorker;
+        private System.Windows.Forms.TreeView newFilesTreeView;
     }
 }
