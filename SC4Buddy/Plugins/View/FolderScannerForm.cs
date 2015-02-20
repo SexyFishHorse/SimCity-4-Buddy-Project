@@ -70,6 +70,9 @@
 
         private static void PopulateTreeView(TreeView treeView, IEnumerable<string> paths, char pathSeparator)
         {
+            treeView.BeginUpdate();
+            treeView.Nodes.Clear();
+
             TreeNode lastNode = null;
             foreach (var path in paths)
             {
@@ -92,6 +95,8 @@
 
                 lastNode = null;
             }
+
+            treeView.EndUpdate();
         }
 
         private void SetFormEnabled(bool enabled)
@@ -126,11 +131,9 @@
 
             newFilesListView.EndUpdate();
 
-            newFilesTreeView.BeginUpdate();
 
             PopulateTreeView(newFilesTreeView, newFilesFound, Path.DirectorySeparatorChar);
 
-            newFilesTreeView.EndUpdate();
 
             if (!folderScannerController.NewFiles.Any())
             {
