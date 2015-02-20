@@ -103,6 +103,7 @@
 
         private void FolderScannerControllerOnNewFilesFound(object sender, EventArgs eventArgs)
         {
+            Log.Debug("New files found");
             var newFiles = folderScannerController.NewFiles;
             var filenames = newFiles.Select(x => x.Remove(0, userFolder.PluginFolderPath.Length + 1)).ToList();
 
@@ -320,6 +321,7 @@
 
         private void ScanButtonClick(object sender, EventArgs e)
         {
+            Log.Debug("Scanning folder");
             fileScannerBackgroundWorker.RunWorkerAsync();
 
             SetFormEnabled(false);
@@ -331,6 +333,7 @@
 
         private void SaveButtonClick(object sender, EventArgs e)
         {
+            Log.Debug("Saving plugin");
             if (!ValidatePluginInfo())
             {
                 return;
@@ -376,6 +379,7 @@
 
         private void ClearInfoAndSelectedFilesForms()
         {
+            Log.Debug("Clearing form and selected files");
             nameTextBox.Text = string.Empty;
             authorTextBox.Text = string.Empty;
             linkTextBox.Text = string.Empty;
@@ -391,6 +395,7 @@
 
         private bool ValidatePluginInfo(bool showErrors = true)
         {
+            Log.Debug("Validate plugin info");
             var errors = false;
             if (string.IsNullOrWhiteSpace(nameTextBox.Text))
             {
@@ -446,6 +451,7 @@
 
         private void FolderScannerFormLoad(object sender, EventArgs e)
         {
+            Log.Debug("Folder loaded");
             groupComboBox.BeginUpdate();
 
             foreach (var pluginGroup in pluginGroupController.Groups)
@@ -458,11 +464,13 @@
 
         private void NameTextBoxTextChanged(object sender, EventArgs e)
         {
+            Log.Debug("Name text box value changed");
             ValidatePluginInfo(false);
         }
 
         private void AutoGroupKnownPluginsClick(object sender, EventArgs e)
         {
+            Log.Debug("Auto grouping known plugins");
             SetFormEnabled(false);
             statusProgressBar.Visible = true;
             statusProgressBar.Value = 0;
@@ -475,6 +483,7 @@
 
         private void CloseButtonClick(object sender, EventArgs e)
         {
+            Log.Debug("Close form");
             try
             {
                 fileScannerBackgroundWorker.CancelAsync();
@@ -487,7 +496,7 @@
 
         private void AutoGroupBackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
         {
-            Log.Info("Starting background worker.");
+            Log.Debug("Starting auto group background worker.");
             var numPluginsFound = folderScannerController.AutoGroupKnownFiles(
                 userFolder,
                 pluginsController,
@@ -499,6 +508,7 @@
 
         private void AutoGroupBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs args)
         {
+            Log.Debug("Auto group background worker progress changed");
             statusProgressBar.Style = ProgressBarStyle.Continuous;
             statusProgressBar.Value = args.ProgressPercentage;
             statusLabel.Text = args.UserState.ToString();
@@ -506,8 +516,8 @@
 
         private void AutoGroupBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs args)
         {
+            Log.Debug("Background worker completed.");
             SetFormEnabled(true);
-            Log.Info("Background worker completed.");
             statusProgressBar.Visible = false;
             statusLabel.Visible = false;
             statusProgressBar.Value = 0;
@@ -529,6 +539,7 @@
 
         private void FolderScannerFormFormClosing(object sender, FormClosingEventArgs e)
         {
+            Log.Debug("Closing form");
             if (autoGroupBackgroundWorker.IsBusy)
             {
                 Log.Info("Cancelling auto group as form was closed.");
