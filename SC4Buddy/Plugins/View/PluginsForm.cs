@@ -137,6 +137,7 @@
                 reportPluginLinkLabel.Visible = false;
                 moveOrCopyButton.Enabled = true;
                 disableFilesButton.Enabled = true;
+                updateInfoButton.Enabled = true;
 
                 // TODO: Show reports
                 ////if (selectedPlugin.RemotePlugin != null

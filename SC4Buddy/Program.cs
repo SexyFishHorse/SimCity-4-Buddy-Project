@@ -34,6 +34,14 @@
             XmlConfigurator.Configure();
 
             Log.Info("Application starting");
+
+            var exceptionHandling = true;
+            if (args != null)
+            {
+                exceptionHandling = args.All(arg => arg != "-exceptionHandling:off");
+                Log.Warn("Exception handling disabled by command line argument.");
+            }
+
             try
             {
                 var entities = EntityFactory.Instance.Entities;
@@ -74,6 +82,11 @@
             catch (Exception ex)
             {
                 Log.Error("Uncaught error", ex);
+
+                if (!exceptionHandling)
+                {
+                    throw;
+                }
 
                 var showLog = MessageBox.Show(
                     string.Format(LocalizationStrings.UncaughtExceptionWouldYouLikeToOpenTheLog, ex.Message),

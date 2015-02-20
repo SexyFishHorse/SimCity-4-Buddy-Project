@@ -23,8 +23,8 @@
         public PluginMatcher(IBuddyServerClient client)
         {
             Log.Info("Fetching all plugins and files from the server.");
-            plugins = client.GetAllPlugins();
-            files = client.GetAllFiles();
+            plugins = client.GetAllPlugins().ToList();
+            files = client.GetAllFiles().ToList();
         }
 
         public Plugin GetMostLikelyPluginForGroupOfFiles(IEnumerable<PluginFile> fileInfos)

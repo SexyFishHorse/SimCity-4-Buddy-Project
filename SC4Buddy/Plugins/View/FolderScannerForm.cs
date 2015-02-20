@@ -1,7 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Plugins.View
 {
     using System;
-    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
@@ -34,6 +34,10 @@
 
         private readonly UserFolder userFolder;
 
+        private readonly List<string> selectedFiles;
+
+        private List<string> foundFiles;
+
         public FolderScannerForm(
             FolderScannerController folderScannerController,
             IPluginsController pluginsController,
@@ -42,13 +46,13 @@
             IPluginMatcher pluginMatcher)
         {
             this.folderScannerController = folderScannerController;
-
             this.pluginsController = pluginsController;
-
             this.pluginGroupController = pluginGroupController;
 
             this.userFolder = userFolder;
             this.pluginMatcher = pluginMatcher;
+
+            selectedFiles = new List<string>();
 
             InitializeComponent();
 
@@ -65,6 +69,37 @@
             folderScannerController.NewFilesFound += FolderScannerControllerOnNewFilesFound;
         }
 
+        private static void PopulateTreeView(TreeView treeView, IEnumerable<string> paths, char pathSeparator)
+        {
+            treeView.BeginUpdate();
+            treeView.Nodes.Clear();
+
+            TreeNode lastNode = null;
+            foreach (var path in paths)
+            {
+                var subPathAgg = string.Empty;
+                foreach (var subPath in path.Split(pathSeparator))
+                {
+                    subPathAgg += subPath + pathSeparator;
+                    var nodes = treeView.Nodes.Find(subPathAgg, true);
+                    if (nodes.Length == 0)
+                    {
+                        lastNode = lastNode == null
+                                       ? treeView.Nodes.Add(subPathAgg, subPath)
+                                       : lastNode.Nodes.Add(subPathAgg, subPath);
+                    }
+                    else
+                    {
+                        lastNode = nodes[0];
+                    }
+                }
+
+                lastNode = null;
+            }
+
+            treeView.EndUpdate();
+        }
+
         private void SetFormEnabled(bool enabled)
         {
             splitContainer1.Enabled = enabled;
@@ -74,35 +109,26 @@
 
         private void FolderScannerControllerOnNewFilesFound(object sender, EventArgs eventArgs)
         {
-            Invoke(new MethodInvoker(RepopulateNewFilesListView));
+            Log.Debug("New files found");
+            var newFiles = folderScannerController.NewFiles;
+            var filenames = newFiles.Select(x => x.Remove(0, userFolder.PluginFolderPath.Length + 1)).ToList();
+
+            foundFiles = filenames;
+
+            Invoke(new MethodInvoker(RepopulateViews));
         }
 
-        private void RepopulateNewFilesListView()
+        private void RepopulateViews()
         {
-            newFilesListView.BeginUpdate();
-            newFilesListView.Items.Clear();
+            Log.Info("Repopulating views");
+            PopulateTreeView(newFilesTreeView, foundFiles, Path.DirectorySeparatorChar);
+            PopulateTreeView(selectedFilesTreeView, selectedFiles, Path.DirectorySeparatorChar);
 
-            foreach (var file in folderScannerController.NewFiles)
-            {
-                if (fileScannerBackgroundWorker.CancellationPending)
-                {
-                    return;
-                }
+            addAllButton.Enabled = foundFiles.Any();
+            removeAllButton.Enabled = selectedFiles.Any();
 
-                var filename = file.Remove(0, userFolder.PluginFolderPath.Length + 1);
-                newFilesListView.Items.Add(filename);
-            }
-
-            ResizeColumns();
-
-            newFilesListView.EndUpdate();
-
-            if (!folderScannerController.NewFiles.Any())
-            {
-                return;
-            }
-
-            addAllButton.Enabled = true;
+            newFilesTreeView.SelectedNode = null;
+            selectedFilesTreeView.SelectedNode = null;
         }
 
         private void FileScannerBackgroundWorkerOnProgressChanged(
@@ -132,9 +158,28 @@
             }
         }
 
-        private void NewFilesListViewSelectedIndexChanged(object sender, EventArgs e)
+        private IEnumerable<string> FilesFromNode(TreeNodeCollection nodes)
         {
-            if (newFilesListView.SelectedItems.Count > 0)
+            foreach (var node in nodes.Cast<TreeNode>())
+            {
+                if (node.Nodes.Count > 0)
+                {
+                    foreach (var path in FilesFromNode(node.Nodes))
+                    {
+                        yield return path;
+                    }
+                }
+                else
+                {
+                    yield return node.FullPath;
+                }
+            }
+        }
+
+        private void NewFilesTreeViewAfterSelect(object sender, TreeViewEventArgs e)
+        {
+            Log.Debug("Selected file in new files view");
+            if (newFilesTreeView.SelectedNode != null)
             {
                 addButton.Enabled = true;
                 addAllButton.Enabled = true;
@@ -146,149 +191,72 @@
             }
         }
 
-        private void PluginFilesListViewSelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (pluginFilesListView.SelectedItems.Count > 0)
-            {
-                removeButton.Enabled = true;
-                removeAllButton.Enabled = true;
-            }
-            else
-            {
-                removeButton.Enabled = false;
-                addAllButton.Enabled = false;
-            }
-
-            ValidatePluginInfo(false);
-        }
-
         private void AddButtonClick(object sender, EventArgs e)
         {
-            var items = newFilesListView.SelectedItems;
+            Log.Debug("Add selected files");
+            string nodeName;
+            var files = GetSelectedPaths(newFilesTreeView, out nodeName);
 
-            if (items.Count <= 0)
+            foreach (var file in files)
             {
-                return;
+                selectedFiles.Add(file);
+                foundFiles.Remove(file);
             }
 
-            if (pluginFilesListView.Items.Count == 0 && nameTextBox.Text.Length < 1)
-            {
-                var path = items[0].Text;
-                var fileInfo = new FileInfo(path);
+            newFilesTreeView.SelectedNode = null;
+            RepopulateViews();
 
-                nameTextBox.Text = fileInfo.Name;
-            }
-
-            MoveItemsToPluginFilesListView(items);
-
-            removeAllButton.Enabled = true;
-
-            NewFilesListViewSelectedIndexChanged(sender, e);
+            nameTextBox.Text = nodeName;
+            addButton.Enabled = false;
         }
 
         private void AddAllButtonClick(object sender, EventArgs e)
         {
-            var items = newFilesListView.Items;
-
-            if (items.Count <= 0)
+            Log.Debug("Add all found files");
+            foreach (var foundFile in foundFiles)
             {
-                return;
+                selectedFiles.Add(foundFile);
             }
 
-            if (pluginFilesListView.Items.Count == 0 && nameTextBox.Text.Length < 1)
-            {
-                var path = items[0].Text;
-                var fileInfo = new FileInfo(path);
+            foundFiles.Clear();
 
-                nameTextBox.Text = fileInfo.Name;
-            }
-
-            MoveItemsToPluginFilesListView(items);
-
-            removeAllButton.Enabled = true;
+            RepopulateViews();
             addButton.Enabled = false;
-            addAllButton.Enabled = false;
-        }
-
-        private void MoveItemsToPluginFilesListView(IEnumerable items)
-        {
-            pluginFilesListView.BeginUpdate();
-            newFilesListView.BeginUpdate();
-
-            foreach (ListViewItem item in items)
-            {
-                newFilesListView.Items.Remove(item);
-                pluginFilesListView.Items.Add(item);
-            }
-
-            ResizeColumns();
-
-            newFilesListView.EndUpdate();
-            pluginFilesListView.EndUpdate();
         }
 
         private void RemoveButtonClick(object sender, EventArgs e)
         {
-            var items = pluginFilesListView.SelectedItems;
+            Log.Debug("Removing selected files");
+            var files = GetSelectedPaths(selectedFilesTreeView);
 
-            if (items.Count > 0)
+            foreach (var file in files)
             {
-                pluginFilesListView.BeginUpdate();
-                newFilesListView.BeginUpdate();
-
-                foreach (ListViewItem item in items)
-                {
-                    pluginFilesListView.Items.Remove(item);
-                    newFilesListView.Items.Add(item);
-                }
-
-                ResizeColumns();
-
-                newFilesListView.EndUpdate();
-                pluginFilesListView.EndUpdate();
-
-                addAllButton.Enabled = true;
-
-                PluginFilesListViewSelectedIndexChanged(sender, e);
+                selectedFiles.Remove(file);
+                foundFiles.Add(file);
             }
+
+            RepopulateViews();
+
+            removeButton.Enabled = false;
         }
 
         private void RemoveAllButtonClick(object sender, EventArgs e)
         {
-            var items = pluginFilesListView.Items;
-
-            if (items.Count <= 0)
+            Log.Debug("Remove all files");
+            foreach (var file in selectedFiles)
             {
-                return;
+                foundFiles.Add(file);
             }
 
-            pluginFilesListView.BeginUpdate();
-            newFilesListView.BeginUpdate();
+            selectedFiles.Clear();
 
-            foreach (ListViewItem item in items)
-            {
-                pluginFilesListView.Items.Remove(item);
-                newFilesListView.Items.Add(item);
-            }
-
-            ResizeColumns();
-
-            newFilesListView.EndUpdate();
-            pluginFilesListView.EndUpdate();
-
-            addAllButton.Enabled = true;
+            RepopulateViews();
             removeButton.Enabled = false;
-            removeAllButton.Enabled = false;
-        }
-
-        private void ResizeColumns()
-        {
-            newFilesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            pluginFilesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
         private void ScanButtonClick(object sender, EventArgs e)
         {
+            Log.Debug("Scanning folder");
             fileScannerBackgroundWorker.RunWorkerAsync();
 
             SetFormEnabled(false);
@@ -300,6 +268,7 @@
 
         private void SaveButtonClick(object sender, EventArgs e)
         {
+            Log.Debug("Saving plugin");
             if (!ValidatePluginInfo())
             {
                 return;
@@ -320,46 +289,43 @@
                 group.Plugins.Add(plugin);
             }
 
-            foreach (var pluginFile in
-                pluginFilesListView.Items.Cast<ListViewItem>().Select(item => item.Text).Select(
-                    path => new PluginFile
-                    {
-                        Path = Path.Combine(userFolder.PluginFolderPath, path),
-                        Checksum =
-                            Md5ChecksumUtility.CalculateChecksum(Path.Combine(userFolder.PluginFolderPath, path))
-                                .ToHex()
-                    }))
+            foreach (var path in GetSelectedPaths(selectedFilesTreeView))
             {
+                var pluginFile = new PluginFile
+                {
+                    Path = Path.Combine(userFolder.PluginFolderPath, path),
+                    Checksum = Md5ChecksumUtility.CalculateChecksum(Path.Combine(userFolder.PluginFolderPath, path)).ToHex(),
+                };
+
                 plugin.PluginFiles.Add(pluginFile);
             }
 
             pluginsController.Add(plugin);
 
             ClearInfoAndSelectedFilesForms();
-
-            if (newFilesListView.Items.Count > 0)
-            {
-                addAllButton.Enabled = true;
-            }
         }
 
         private void ClearInfoAndSelectedFilesForms()
         {
+            Log.Debug("Clearing form and selected files");
             nameTextBox.Text = string.Empty;
             authorTextBox.Text = string.Empty;
             linkTextBox.Text = string.Empty;
             descriptionTextBox.Text = string.Empty;
             groupComboBox.Text = string.Empty;
             saveButton.Enabled = false;
-            pluginFilesListView.Items.Clear();
 
             errorProvider1.Clear();
             removeButton.Enabled = false;
             removeAllButton.Enabled = false;
+            selectedFiles.Clear();
+
+            RepopulateViews();
         }
 
         private bool ValidatePluginInfo(bool showErrors = true)
         {
+            Log.Debug("Validate plugin info");
             var errors = false;
             if (string.IsNullOrWhiteSpace(nameTextBox.Text))
             {
@@ -372,12 +338,12 @@
                 errors = true;
             }
 
-            if (pluginFilesListView.Items.Count < 1)
+            if (selectedFiles.Any())
             {
                 if (showErrors)
                 {
-                    errorProvider1.SetIconPadding(pluginFilesListView, ErrorIconPadding);
-                    errorProvider1.SetError(pluginFilesListView, "You must select at least one file.");
+                    errorProvider1.SetIconPadding(selectedFilesTreeView, ErrorIconPadding);
+                    errorProvider1.SetError(selectedFilesTreeView, "You must select at least one file.");
                 }
 
                 errors = true;
@@ -415,6 +381,7 @@
 
         private void FolderScannerFormLoad(object sender, EventArgs e)
         {
+            Log.Debug("Folder loaded");
             groupComboBox.BeginUpdate();
 
             foreach (var pluginGroup in pluginGroupController.Groups)
@@ -427,11 +394,13 @@
 
         private void NameTextBoxTextChanged(object sender, EventArgs e)
         {
+            Log.Debug("Name text box value changed");
             ValidatePluginInfo(false);
         }
 
         private void AutoGroupKnownPluginsClick(object sender, EventArgs e)
         {
+            Log.Debug("Auto grouping known plugins");
             SetFormEnabled(false);
             statusProgressBar.Visible = true;
             statusProgressBar.Value = 0;
@@ -444,6 +413,7 @@
 
         private void CloseButtonClick(object sender, EventArgs e)
         {
+            Log.Debug("Close form");
             try
             {
                 fileScannerBackgroundWorker.CancelAsync();
@@ -456,7 +426,7 @@
 
         private void AutoGroupBackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
         {
-            Log.Info("Starting background worker.");
+            Log.Debug("Starting auto group background worker.");
             var numPluginsFound = folderScannerController.AutoGroupKnownFiles(
                 userFolder,
                 pluginsController,
@@ -468,6 +438,7 @@
 
         private void AutoGroupBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs args)
         {
+            Log.Debug("Auto group background worker progress changed");
             statusProgressBar.Style = ProgressBarStyle.Continuous;
             statusProgressBar.Value = args.ProgressPercentage;
             statusLabel.Text = args.UserState.ToString();
@@ -475,13 +446,13 @@
 
         private void AutoGroupBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs args)
         {
+            Log.Debug("Background worker completed.");
             SetFormEnabled(true);
-            Log.Info("Background worker completed.");
             statusProgressBar.Visible = false;
             statusLabel.Visible = false;
             statusProgressBar.Value = 0;
             statusLabel.Text = string.Empty;
-            RepopulateNewFilesListView();
+            RepopulateViews();
 
             if (!args.Cancelled && args.Error == null)
             {
@@ -498,6 +469,7 @@
 
         private void FolderScannerFormFormClosing(object sender, FormClosingEventArgs e)
         {
+            Log.Debug("Closing form");
             if (autoGroupBackgroundWorker.IsBusy)
             {
                 Log.Info("Cancelling auto group as form was closed.");
@@ -509,6 +481,37 @@
                 Log.Info("Cancelling folder scanner as form was closed.");
                 fileScannerBackgroundWorker.CancelAsync();
             }
+        }
+
+        private void SelectedFilesTreeViewAfterSelect(object sender, TreeViewEventArgs e)
+        {
+            Log.Debug("Selected files selection changed");
+            removeButton.Enabled = selectedFilesTreeView.SelectedNode != null;
+        }
+
+        private IEnumerable<string> GetSelectedPaths(TreeView treeView)
+        {
+            string name;
+            return GetSelectedPaths(treeView, out name);
+        }
+
+        private IEnumerable<string> GetSelectedPaths(TreeView treeView, out string nodeName)
+        {
+            var selectedNode = treeView.SelectedNode;
+            nodeName = selectedNode.Text;
+
+            var files = new List<string>();
+
+            if (selectedNode.Nodes.Count > 0)
+            {
+                files.AddRange(FilesFromNode(selectedNode.Nodes));
+            }
+            else
+            {
+                files.Add(selectedNode.FullPath);
+            }
+
+            return files;
         }
     }
 }
