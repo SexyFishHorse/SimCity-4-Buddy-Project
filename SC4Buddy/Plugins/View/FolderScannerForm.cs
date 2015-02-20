@@ -121,28 +121,15 @@
 
         private void RepopulateViews()
         {
-            newFilesListView.BeginUpdate();
-            newFilesListView.Items.Clear();
+            Log.Info("Repopulating views");
+            PopulateTreeView(newFilesTreeView, foundFiles, Path.DirectorySeparatorChar);
+            PopulateTreeView(selectedFilesTreeView, selectedFiles, Path.DirectorySeparatorChar);
 
-            foreach (var file in newFilesFound)
-            {
-                newFilesListView.Items.Add(file);
-            }
+            addAllButton.Enabled = foundFiles.Any();
+            removeAllButton.Enabled = selectedFiles.Any();
 
-            ResizeColumns();
-
-            newFilesListView.EndUpdate();
-
-
-            PopulateTreeView(newFilesTreeView, newFilesFound, Path.DirectorySeparatorChar);
-
-
-            if (!folderScannerController.NewFiles.Any())
-            {
-                return;
-            }
-
-            addAllButton.Enabled = true;
+            newFilesTreeView.SelectedNode = null;
+            selectedFilesTreeView.SelectedNode = null;
         }
 
         private void FileScannerBackgroundWorkerOnProgressChanged(
