@@ -35,7 +35,9 @@
 
         private readonly UserFolder userFolder;
 
-        private List<string> newFilesFound;
+        private readonly List<string> selectedFiles;
+
+        private List<string> foundFiles;
 
         public FolderScannerForm(
             FolderScannerController folderScannerController,
@@ -45,13 +47,13 @@
             IPluginMatcher pluginMatcher)
         {
             this.folderScannerController = folderScannerController;
-
             this.pluginsController = pluginsController;
-
             this.pluginGroupController = pluginGroupController;
 
             this.userFolder = userFolder;
             this.pluginMatcher = pluginMatcher;
+
+            selectedFiles = new List<string>();
 
             InitializeComponent();
 
@@ -112,12 +114,12 @@
             var newFiles = folderScannerController.NewFiles;
             var filenames = newFiles.Select(x => x.Remove(0, userFolder.PluginFolderPath.Length + 1)).ToList();
 
-            newFilesFound = filenames;
+            foundFiles = filenames;
 
-            Invoke(new MethodInvoker(RepopulateNewFilesView));
+            Invoke(new MethodInvoker(RepopulateViews));
         }
 
-        private void RepopulateNewFilesView()
+        private void RepopulateViews()
         {
             newFilesListView.BeginUpdate();
             newFilesListView.Items.Clear();
@@ -394,6 +396,7 @@
             errorProvider1.Clear();
             removeButton.Enabled = false;
             removeAllButton.Enabled = false;
+            RepopulateViews();
         }
 
         private bool ValidatePluginInfo(bool showErrors = true)
@@ -525,7 +528,7 @@
             statusLabel.Visible = false;
             statusProgressBar.Value = 0;
             statusLabel.Text = string.Empty;
-            RepopulateNewFilesListView();
+            RepopulateViews();
 
             if (!args.Cancelled && args.Error == null)
             {
