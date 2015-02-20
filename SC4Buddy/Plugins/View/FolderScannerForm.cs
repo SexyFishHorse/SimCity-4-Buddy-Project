@@ -1,7 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.Plugins.View
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.IO;
@@ -159,9 +158,28 @@
             }
         }
 
-        private void NewFilesListViewSelectedIndexChanged(object sender, EventArgs e)
+        private IEnumerable<string> FilesFromNode(TreeNodeCollection nodes)
         {
-            if (newFilesListView.SelectedItems.Count > 0)
+            foreach (var node in nodes.Cast<TreeNode>())
+            {
+                if (node.Nodes.Count > 0)
+                {
+                    foreach (var path in FilesFromNode(node.Nodes))
+                    {
+                        yield return path;
+                    }
+                }
+                else
+                {
+                    yield return node.FullPath;
+                }
+            }
+        }
+
+        private void NewFilesTreeViewAfterSelect(object sender, TreeViewEventArgs e)
+        {
+            Log.Debug("Selected file in new files view");
+            if (newFilesTreeView.SelectedNode != null)
             {
                 addButton.Enabled = true;
                 addAllButton.Enabled = true;
@@ -173,142 +191,67 @@
             }
         }
 
-        private void PluginFilesListViewSelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (pluginFilesListView.SelectedItems.Count > 0)
-            {
-                removeButton.Enabled = true;
-                removeAllButton.Enabled = true;
-            }
-            else
-            {
-                removeButton.Enabled = false;
-                addAllButton.Enabled = false;
-            }
-
-            ValidatePluginInfo(false);
-        }
-
         private void AddButtonClick(object sender, EventArgs e)
         {
-            var items = newFilesListView.SelectedItems;
+            Log.Debug("Add selected files");
+            string nodeName;
+            var files = GetSelectedPaths(newFilesTreeView, out nodeName);
 
-            if (items.Count <= 0)
+            foreach (var file in files)
             {
-                return;
+                selectedFiles.Add(file);
+                foundFiles.Remove(file);
             }
 
-            if (pluginFilesListView.Items.Count == 0 && nameTextBox.Text.Length < 1)
-            {
-                nameTextBox.Text = Path.GetFileNameWithoutExtension(items[0].Text);
-            }
+            newFilesTreeView.SelectedNode = null;
+            RepopulateViews();
 
-            MoveItemsToPluginFilesListView(items);
-
-            removeAllButton.Enabled = true;
-
-            NewFilesListViewSelectedIndexChanged(sender, e);
+            nameTextBox.Text = nodeName;
+            addButton.Enabled = false;
         }
 
         private void AddAllButtonClick(object sender, EventArgs e)
         {
-            var items = newFilesListView.Items;
-
-            if (items.Count <= 0)
+            Log.Debug("Add all found files");
+            foreach (var foundFile in foundFiles)
             {
-                return;
+                selectedFiles.Add(foundFile);
             }
 
-            if (pluginFilesListView.Items.Count == 0 && nameTextBox.Text.Length < 1)
-            {
-                var path = items[0].Text;
-                var fileInfo = new FileInfo(path);
+            foundFiles.Clear();
 
-                nameTextBox.Text = fileInfo.Name;
-            }
-
-            MoveItemsToPluginFilesListView(items);
-
-            removeAllButton.Enabled = true;
+            RepopulateViews();
             addButton.Enabled = false;
-            addAllButton.Enabled = false;
-        }
-
-        private void MoveItemsToPluginFilesListView(IEnumerable items)
-        {
-            pluginFilesListView.BeginUpdate();
-            newFilesListView.BeginUpdate();
-
-            foreach (ListViewItem item in items)
-            {
-                newFilesListView.Items.Remove(item);
-                pluginFilesListView.Items.Add(item);
-            }
-
-            ResizeColumns();
-
-            newFilesListView.EndUpdate();
-            pluginFilesListView.EndUpdate();
         }
 
         private void RemoveButtonClick(object sender, EventArgs e)
         {
-            var items = pluginFilesListView.SelectedItems;
+            Log.Debug("Removing selected files");
+            var files = GetSelectedPaths(selectedFilesTreeView);
 
-            if (items.Count > 0)
+            foreach (var file in files)
             {
-                pluginFilesListView.BeginUpdate();
-                newFilesListView.BeginUpdate();
-
-                foreach (ListViewItem item in items)
-                {
-                    pluginFilesListView.Items.Remove(item);
-                    newFilesListView.Items.Add(item);
-                }
-
-                ResizeColumns();
-
-                newFilesListView.EndUpdate();
-                pluginFilesListView.EndUpdate();
-
-                addAllButton.Enabled = true;
-
-                PluginFilesListViewSelectedIndexChanged(sender, e);
+                selectedFiles.Remove(file);
+                foundFiles.Add(file);
             }
+
+            RepopulateViews();
+
+            removeButton.Enabled = false;
         }
 
         private void RemoveAllButtonClick(object sender, EventArgs e)
         {
-            var items = pluginFilesListView.Items;
-
-            if (items.Count <= 0)
+            Log.Debug("Remove all files");
+            foreach (var file in selectedFiles)
             {
-                return;
+                foundFiles.Add(file);
             }
 
-            pluginFilesListView.BeginUpdate();
-            newFilesListView.BeginUpdate();
+            selectedFiles.Clear();
 
-            foreach (ListViewItem item in items)
-            {
-                pluginFilesListView.Items.Remove(item);
-                newFilesListView.Items.Add(item);
-            }
-
-            ResizeColumns();
-
-            newFilesListView.EndUpdate();
-            pluginFilesListView.EndUpdate();
-
-            addAllButton.Enabled = true;
+            RepopulateViews();
             removeButton.Enabled = false;
-            removeAllButton.Enabled = false;
-        }
-
-        private void ResizeColumns()
-        {
-            newFilesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            pluginFilesListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
         }
 
         private void ScanButtonClick(object sender, EventArgs e)
@@ -346,27 +289,20 @@
                 group.Plugins.Add(plugin);
             }
 
-            foreach (var pluginFile in
-                pluginFilesListView.Items.Cast<ListViewItem>().Select(item => item.Text).Select(
-                    path => new PluginFile
-                    {
-                        Path = Path.Combine(userFolder.PluginFolderPath, path),
-                        Checksum =
-                            Md5ChecksumUtility.CalculateChecksum(Path.Combine(userFolder.PluginFolderPath, path))
-                                .ToHex()
-                    }))
+            foreach (var path in GetSelectedPaths(selectedFilesTreeView))
             {
+                var pluginFile = new PluginFile
+                {
+                    Path = Path.Combine(userFolder.PluginFolderPath, path),
+                    Checksum = Md5ChecksumUtility.CalculateChecksum(Path.Combine(userFolder.PluginFolderPath, path)).ToHex(),
+                };
+
                 plugin.PluginFiles.Add(pluginFile);
             }
 
             pluginsController.Add(plugin);
 
             ClearInfoAndSelectedFilesForms();
-
-            if (newFilesListView.Items.Count > 0)
-            {
-                addAllButton.Enabled = true;
-            }
         }
 
         private void ClearInfoAndSelectedFilesForms()
@@ -378,11 +314,12 @@
             descriptionTextBox.Text = string.Empty;
             groupComboBox.Text = string.Empty;
             saveButton.Enabled = false;
-            pluginFilesListView.Items.Clear();
 
             errorProvider1.Clear();
             removeButton.Enabled = false;
             removeAllButton.Enabled = false;
+            selectedFiles.Clear();
+
             RepopulateViews();
         }
 
@@ -401,12 +338,12 @@
                 errors = true;
             }
 
-            if (pluginFilesListView.Items.Count < 1)
+            if (selectedFiles.Any())
             {
                 if (showErrors)
                 {
-                    errorProvider1.SetIconPadding(pluginFilesListView, ErrorIconPadding);
-                    errorProvider1.SetError(pluginFilesListView, "You must select at least one file.");
+                    errorProvider1.SetIconPadding(selectedFilesTreeView, ErrorIconPadding);
+                    errorProvider1.SetError(selectedFilesTreeView, "You must select at least one file.");
                 }
 
                 errors = true;
@@ -544,6 +481,37 @@
                 Log.Info("Cancelling folder scanner as form was closed.");
                 fileScannerBackgroundWorker.CancelAsync();
             }
+        }
+
+        private void SelectedFilesTreeViewAfterSelect(object sender, TreeViewEventArgs e)
+        {
+            Log.Debug("Selected files selection changed");
+            removeButton.Enabled = selectedFilesTreeView.SelectedNode != null;
+        }
+
+        private IEnumerable<string> GetSelectedPaths(TreeView treeView)
+        {
+            string name;
+            return GetSelectedPaths(treeView, out name);
+        }
+
+        private IEnumerable<string> GetSelectedPaths(TreeView treeView, out string nodeName)
+        {
+            var selectedNode = treeView.SelectedNode;
+            nodeName = selectedNode.Text;
+
+            var files = new List<string>();
+
+            if (selectedNode.Nodes.Count > 0)
+            {
+                files.AddRange(FilesFromNode(selectedNode.Nodes));
+            }
+            else
+            {
+                files.Add(selectedNode.FullPath);
+            }
+
+            return files;
         }
     }
 }
