@@ -90,35 +90,39 @@
             }
         }
 
-        private static void PopulateTreeView(TreeView treeView, IEnumerable<string> paths, char pathSeparator)
+        public static void PopulateTreeViewWithPaths(TreeView treeView, IEnumerable<string> paths)
         {
             treeView.BeginUpdate();
-            treeView.Nodes.Clear();
 
-            TreeNode lastNode = null;
-            foreach (var path in paths)
-            {
-                var subPathAgg = string.Empty;
-                foreach (var subPath in path.Split(pathSeparator))
-                {
-                    subPathAgg += subPath + pathSeparator;
-                    var nodes = treeView.Nodes.Find(subPathAgg, true);
-                    if (nodes.Length == 0)
-                    {
-                        lastNode = lastNode == null
-                                       ? treeView.Nodes.Add(subPathAgg, subPath)
-                                       : lastNode.Nodes.Add(subPathAgg, subPath);
-                    }
-                    else
-                    {
-                        lastNode = nodes[0];
-                    }
-                }
-
-                lastNode = null;
-            }
+            PopulateTreeViewCollectionWithPaths(treeView.Nodes, paths);
 
             treeView.EndUpdate();
+        }
+
+        private static void PopulateTreeViewCollectionWithPaths(TreeNodeCollection nodeCollection, IEnumerable<string> paths)
+        {
+            nodeCollection.Clear();
+
+            foreach (var path in paths)
+            {
+                var nodes = path.Split(Path.DirectorySeparatorChar);
+                var hasChildren = nodes.Length > 1;
+
+                var node = nodes[0];
+
+                var existingNodes = nodeCollection.Find(node, false);
+
+                if (existingNodes.Length == 0)
+                {
+                    var nodeToAdd = new TreeNode(node) { ImageKey = hasChildren ? "Folder" : "Leaf", Name = node };
+                    if (hasChildren)
+                    {
+                        nodeToAdd.Nodes.Add("Loading", "Loading...");
+                    }
+
+                    nodeCollection.Add(nodeToAdd);
+                }
+            }
         }
 
         private void SetFormEnabled(bool enabled)
@@ -142,8 +146,8 @@
         private void RepopulateViews()
         {
             Log.Info("Repopulating views");
-            PopulateTreeView(newFilesTreeView, foundFiles, Path.DirectorySeparatorChar);
-            PopulateTreeView(selectedFilesTreeView, selectedFiles, Path.DirectorySeparatorChar);
+            PopulateTreeViewWithPaths(newFilesTreeView, foundFiles);
+            PopulateTreeViewWithPaths(selectedFilesTreeView, selectedFiles);
 
             addAllButton.Enabled = foundFiles.Any();
             removeAllButton.Enabled = selectedFiles.Any();
@@ -533,6 +537,20 @@
             }
 
             return files;
+        }
+
+        private void TreeViewBeforeExpand(object sender, TreeViewCancelEventArgs e)
+        {
+            Log.Debug(string.Format("Expanding node \"{0}\"", e.Node.Name));
+            var treeView = (TreeView)sender;
+
+            var triggerNode = treeView.Nodes.Find(e.Node.Name, true).First();
+            triggerNode.Nodes.Clear();
+
+            var nodesToAdd = foundFiles.Where(x => x.StartsWith(e.Node.FullPath));
+            var trimmedNodes = nodesToAdd.Select(node => node.Replace(e.Node.FullPath + Path.DirectorySeparatorChar, string.Empty)).ToList();
+
+            PopulateTreeViewCollectionWithPaths(triggerNode.Nodes, trimmedNodes);
         }
     }
 }

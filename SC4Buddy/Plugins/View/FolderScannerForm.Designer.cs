@@ -101,6 +101,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.newFilesTreeView.Name = "newFilesTreeView";
             this.newFilesTreeView.Size = new System.Drawing.Size(199, 332);
             this.newFilesTreeView.TabIndex = 4;
+            this.newFilesTreeView.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewBeforeExpand);
             this.newFilesTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.NewFilesTreeViewAfterSelect);
             // 
             // addButton
@@ -181,6 +182,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.selectedFilesTreeView.Name = "selectedFilesTreeView";
             this.selectedFilesTreeView.Size = new System.Drawing.Size(196, 332);
             this.selectedFilesTreeView.TabIndex = 6;
+            this.selectedFilesTreeView.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.TreeViewBeforeExpand);
             this.selectedFilesTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.SelectedFilesTreeViewAfterSelect);
             // 
             // removeAllButton
