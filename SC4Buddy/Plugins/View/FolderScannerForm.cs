@@ -497,12 +497,30 @@
             Log.Debug("Closing form");
             if (autoGroupBackgroundWorker.IsBusy)
             {
+                if (MessageBox.Show(
+                    Resources.FolderScannerForm_FolderScannerFormFormClosing_Do_you_want_to_cancel_the_auto_grouping_of_plugins_,
+                    LocalizationStrings.ConfirmCancellation,
+                    MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
                 Log.Info("Cancelling auto group as form was closed.");
                 autoGroupBackgroundWorker.CancelAsync();
             }
 
             if (fileScannerBackgroundWorker.IsBusy)
             {
+                if (MessageBox.Show(
+                    Resources.FolderScannerForm_FolderScannerFormFormClosing_Do_you_want_to_cancel_the_scanning_for_new_files_,
+                    LocalizationStrings.ConfirmCancellation,
+                    MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    e.Cancel = true;
+                    return;
+                }
+
                 Log.Info("Cancelling folder scanner as form was closed.");
                 fileScannerBackgroundWorker.CancelAsync();
             }

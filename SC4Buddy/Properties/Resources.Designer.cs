@@ -100,6 +100,26 @@ namespace NIHEI.SC4Buddy.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to cancel the auto grouping of plugins?.
+        /// </summary>
+        internal static string FolderScannerForm_FolderScannerFormFormClosing_Do_you_want_to_cancel_the_auto_grouping_of_plugins_ {
+            get {
+                return ResourceManager.GetString("FolderScannerForm_FolderScannerFormFormClosing_Do_you_want_to_cancel_the_auto_gro" +
+                        "uping_of_plugins_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to cancel the scanning for new files?.
+        /// </summary>
+        internal static string FolderScannerForm_FolderScannerFormFormClosing_Do_you_want_to_cancel_the_scanning_for_new_files_ {
+            get {
+                return ResourceManager.GetString("FolderScannerForm_FolderScannerFormFormClosing_Do_you_want_to_cancel_the_scanning" +
+                        "_for_new_files_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon icon {

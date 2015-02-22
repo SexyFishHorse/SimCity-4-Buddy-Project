@@ -187,4 +187,10 @@
   <data name="TreeView_Leaf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TreeViewIcons\TreeView_Leaf.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="FolderScannerForm_FolderScannerFormFormClosing_Do_you_want_to_cancel_the_auto_grouping_of_plugins_" xml:space="preserve">
+    <value>Do you want to cancel the auto grouping of plugins?</value>
+  </data>
+  <data name="FolderScannerForm_FolderScannerFormFormClosing_Do_you_want_to_cancel_the_scanning_for_new_files_" xml:space="preserve">
+    <value>Do you want to cancel the scanning for new files?</value>
+  </data>
 </root>
