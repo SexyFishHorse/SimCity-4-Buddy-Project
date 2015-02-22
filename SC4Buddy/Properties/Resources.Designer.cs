@@ -132,6 +132,36 @@ namespace NIHEI.SC4Buddy.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap TreeView_Folder {
+            get {
+                object obj = ResourceManager.GetObject("TreeView_Folder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TreeView_FolderOpen {
+            get {
+                object obj = ResourceManager.GetObject("TreeView_FolderOpen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TreeView_Leaf {
+            get {
+                object obj = ResourceManager.GetObject("TreeView_Leaf", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Wallpaper1 {
             get {
                 object obj = ResourceManager.GetObject("Wallpaper1", resourceCulture);
