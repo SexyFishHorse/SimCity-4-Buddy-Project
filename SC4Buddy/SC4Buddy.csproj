@@ -387,14 +387,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\error.png" />
-    <Content Include="Resources\icon.ico">
+    <EmbeddedResource Include="Resources\error.png" />
+    <EmbeddedResource Include="Resources\icon.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\logo.png">
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\zoom.png" />
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\TreeViewIcons\TreeView_Folder.gif" />
+    <EmbeddedResource Include="Resources\TreeViewIcons\TreeView_FolderOpen.gif" />
+    <EmbeddedResource Include="Resources\TreeViewIcons\TreeView_Leaf.gif" />
+    <EmbeddedResource Include="Resources\zoom.png" />
     <Content Include="Resources\Wallpapers\13.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

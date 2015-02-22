@@ -24,6 +24,8 @@
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
+        private static ImageList imageList;
+
         private readonly FolderScannerController folderScannerController;
 
         private readonly IPluginsController pluginsController;
@@ -67,6 +69,25 @@
                 };
 
             folderScannerController.NewFilesFound += FolderScannerControllerOnNewFilesFound;
+
+            newFilesTreeView.ImageList = ImageList;
+            selectedFilesTreeView.ImageList = ImageList;
+        }
+
+        public static ImageList ImageList
+        {
+            get
+            {
+                if (imageList == null)
+                {
+                    imageList = new ImageList();
+                    imageList.Images.Add("Folder", Resources.TreeView_Folder);
+                    imageList.Images.Add("FolderOpen", Resources.TreeView_FolderOpen);
+                    imageList.Images.Add("Leaf", Resources.TreeView_Leaf);
+                }
+
+                return imageList;
+            }
         }
 
         private static void PopulateTreeView(TreeView treeView, IEnumerable<string> paths, char pathSeparator)
