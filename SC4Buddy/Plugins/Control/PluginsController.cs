@@ -163,7 +163,7 @@
         {
             ApiConnect.ThrowErrorOnConnectionOrDisabledFeature(Settings.Keys.DetectPlugins);
 
-            var numUpdated = 0;
+            var numIdentified = 0;
 
             foreach (var plugin in Plugins.Where(x => x.RemotePlugin == null))
             {
@@ -180,13 +180,13 @@
                 plugin.Link = matchedPlugin.Link;
                 plugin.Description = matchedPlugin.Description;
 
-                numUpdated++;
+                numIdentified++;
             }
 
             pluginsDataAccess.SavePlugins(Plugins, UserFolder);
             ReloadPlugins();
 
-            return numUpdated;
+            return numIdentified;
         }
 
         public int NumberOfRecognizedPlugins(UserFolder userFolder)
