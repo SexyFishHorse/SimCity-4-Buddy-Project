@@ -12,7 +12,6 @@
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
-    using NIHEI.SC4Buddy.Plugins.Services;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Remote.Utils;
@@ -25,8 +24,6 @@
     public partial class PluginsForm : Form
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
-        private readonly IDependencyChecker dependencyChecker;
 
         private readonly IPluginsController pluginsController;
 
@@ -45,8 +42,7 @@
             IUserFoldersController userFoldersController,
             IPluginsController pluginsController,
             UserFolder userFolder,
-            IPluginMatcher pluginMatcher,
-            IDependencyChecker dependencyChecker)
+            IPluginMatcher pluginMatcher)
         {
             this.pluginGroupController = pluginGroupController;
             this.userFoldersController = userFoldersController;
@@ -73,7 +69,6 @@
 
             this.userFolder = userFolder;
             this.pluginMatcher = pluginMatcher;
-            this.dependencyChecker = dependencyChecker;
             InitializeComponent();
         }
 

@@ -76,8 +76,7 @@
                         new Sc4Buddy(
                             userFoldersController,
                             new PluginGroupController(entities),
-                            new PluginMatcher(buddyServerClient),
-                            new DependencyChecker(buddyServerClient, userFoldersController.GetMainUserFolder())));
+                            new PluginMatcher(buddyServerClient)));
                 }
             }
             catch (Exception ex)

@@ -18,6 +18,7 @@
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Plugins.DataAccess;
+    using NIHEI.SC4Buddy.Plugins.Services;
     using NIHEI.SC4Buddy.Plugins.View;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
@@ -41,8 +42,6 @@
 
         private readonly IPluginMatcher pluginMatcher;
 
-        private readonly IDependencyChecker dependencyChecker;
-
         private readonly Collection<UserFolderForm> userFolderForms;
 
         private ManageUserFoldersForm manageUserFoldersForm;
@@ -58,13 +57,11 @@
         public Sc4Buddy(
             IUserFoldersController userFoldersController,
             PluginGroupController pluginGroupController,
-            IPluginMatcher pluginMatcher,
-            IDependencyChecker dependencyChecker)
+            IPluginMatcher pluginMatcher)
         {
             this.userFoldersController = userFoldersController;
             this.pluginGroupController = pluginGroupController;
             this.pluginMatcher = pluginMatcher;
-            this.dependencyChecker = dependencyChecker;
 
             InitializeComponent();
 
@@ -242,7 +239,6 @@
                         new UserFoldersDataAccess(new JsonFileWriter()),
                         new UserFolderController(new UserFolderDataAccess(new JsonFileWriter()))),
                     pluginMatcher,
-                    dependencyChecker,
                     new PluginsController(
                         new PluginsDataAccess(userFolder, new JsonFileWriter(), pluginGroupController),
                         userFolder,
