@@ -85,7 +85,7 @@
         {
             RepopulateInstalledPluginsListView();
 
-            updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.FetchInformationFromRemoteServer);
+            identifyNewPluginsToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.FetchInformationFromRemoteServer);
             checkForMissingDependenciesToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.AllowCheckForMissingDependencies);
         }
 
@@ -348,11 +348,11 @@
             nonPluginFilesScannerUi.RemoveNonPluginFilesAndShowSummary(this);
         }
 
-        private void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
+        private void IdentifyNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
             try
             {
-                UpdateInfoForAllPluginsFromServer();
+                IdentifyNewPlugins();
                 RepopulateInstalledPluginsListView();
             }
             catch (Exception ex)
@@ -367,14 +367,14 @@
             }
         }
 
-        private void UpdateInfoForAllPluginsFromServer()
+        private void IdentifyNewPlugins()
         {
-            var numUpdated = pluginsController.UpdateInfoForAllPluginsFromServer();
+            var numIdentified = pluginsController.IdentifyNewPlugins();
             RepopulateInstalledPluginsListView();
 
             MessageBox.Show(
                 this,
-                string.Format(LocalizationStrings.InformationForNumPluginsWereUpdated, numUpdated),
+                string.Format(LocalizationStrings.InformationForNumPluginsWereIdentified, numIdentified),
                 LocalizationStrings.PluginInformationUpdated,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information,
@@ -383,14 +383,14 @@
 
         private void UserFolderFormActivated(object sender, EventArgs e)
         {
-            updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
+            identifyNewPluginsToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
         }
 
         private async void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
             ////try
             ////{
-            ////    await pluginsController.UpdateInfoForAllPluginsFromServer();
+            ////    await pluginsController.IdentifyNewPlugins();
 
             ////    var numRecognizedPlugins = pluginsController.NumberOfRecognizedPlugins(userFolder);
 

@@ -159,7 +159,7 @@
             UserFolder.Plugins = Plugins;
         }
 
-        public int UpdateInfoForAllPluginsFromServer()
+        public int IdentifyNewPlugins()
         {
             ApiConnect.ThrowErrorOnConnectionOrDisabledFeature(Settings.Keys.DetectPlugins);
 

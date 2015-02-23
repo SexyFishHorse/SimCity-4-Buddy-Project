@@ -59,7 +59,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.scanForNewPluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scanForNonpluginFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateInfoForAllPluginsFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.identifyNewPluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForMissingDependenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInFileExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -288,7 +288,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.scanForNonpluginFilesToolStripMenuItem,
-            this.updateInfoForAllPluginsFromServerToolStripMenuItem,
+            this.identifyNewPluginsToolStripMenuItem,
             this.checkForMissingDependenciesToolStripMenuItem,
             this.openInFileExplorerToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
@@ -300,11 +300,11 @@ namespace NIHEI.SC4Buddy.Plugins.View
             resources.ApplyResources(this.scanForNonpluginFilesToolStripMenuItem, "scanForNonpluginFilesToolStripMenuItem");
             this.scanForNonpluginFilesToolStripMenuItem.Click += new System.EventHandler(this.ScanForNonpluginFilesToolStripMenuItemClick);
             // 
-            // updateInfoForAllPluginsFromServerToolStripMenuItem
+            // identifyNewPluginsToolStripMenuItem
             // 
-            this.updateInfoForAllPluginsFromServerToolStripMenuItem.Name = "updateInfoForAllPluginsFromServerToolStripMenuItem";
-            resources.ApplyResources(this.updateInfoForAllPluginsFromServerToolStripMenuItem, "updateInfoForAllPluginsFromServerToolStripMenuItem");
-            this.updateInfoForAllPluginsFromServerToolStripMenuItem.Click += new System.EventHandler(this.UpdateInfoForAllPluginsFromServerToolStripMenuItemClick);
+            this.identifyNewPluginsToolStripMenuItem.Name = "identifyNewPluginsToolStripMenuItem";
+            resources.ApplyResources(this.identifyNewPluginsToolStripMenuItem, "identifyNewPluginsToolStripMenuItem");
+            this.identifyNewPluginsToolStripMenuItem.Click += new System.EventHandler(this.IdentifyNewPluginsToolStripMenuItemClick);
             // 
             // checkForMissingDependenciesToolStripMenuItem
             // 
@@ -379,7 +379,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
         private System.Windows.Forms.ToolStripMenuItem scanForNewPluginsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scanForNonpluginFilesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem updateInfoForAllPluginsFromServerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem identifyNewPluginsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkForMissingDependenciesToolStripMenuItem;
         private System.Windows.Forms.Button moveOrCopyButton;
         private System.Windows.Forms.Button disableFilesButton;

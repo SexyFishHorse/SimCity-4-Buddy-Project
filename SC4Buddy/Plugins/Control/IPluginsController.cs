@@ -15,7 +15,7 @@
 
         void UninstallPlugin(Plugin plugin);
 
-        int UpdateInfoForAllPluginsFromServer();
+        int IdentifyNewPlugins();
 
         int NumberOfRecognizedPlugins(UserFolder userFolder);
 

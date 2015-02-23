@@ -269,8 +269,8 @@ Should also notify the user that some files may have been installed so the user 
   <data name="PluginInformationUpdated" xml:space="preserve">
     <value>Plugin information updated</value>
   </data>
-  <data name="InformationForNumPluginsWereUpdated" xml:space="preserve">
-    <value>Information for {0} plugins were updated.</value>
+  <data name="InformationForNumPluginsWereIdentified" xml:space="preserve">
+    <value>Information for {0} plugins were identified.</value>
     <comment>{0} will be replaced by a number (minimum value 1)</comment>
   </data>
   <data name="LoggedInAs" xml:space="preserve">
