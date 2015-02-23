@@ -12,6 +12,7 @@
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
+    using NIHEI.SC4Buddy.Plugins.Services;
     using NIHEI.SC4Buddy.Properties;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Remote.Utils;
