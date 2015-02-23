@@ -133,39 +133,10 @@
 
                 uninstallButton.Enabled = true;
 
-                ////reportPluginLinkLabel.Visible = selectedPlugin.RemotePlugin != null;
-                reportPluginLinkLabel.Visible = false;
                 moveOrCopyButton.Enabled = true;
                 disableFilesButton.Enabled = true;
                 updateInfoButton.Enabled = true;
 
-                // TODO: Show reports
-                ////if (selectedPlugin.RemotePlugin != null
-                ////    && selectedPlugin.RemotePlugin.Reports != null
-                ////    && selectedPlugin.RemotePlugin.Reports.Any(x => x.Approved))
-                ////{
-                ////    var output = new StringBuilder();
-
-                ////    foreach (var report in selectedPlugin.RemotePlugin.Reports
-                ////        .Where(x => x.Approved)
-                ////        .OrderByDescending(x => x.Date))
-                ////    {
-                ////        var message = string.Format(
-                ////            "[{0}] - {1}",
-                ////            report.Date.ToString(CultureInfo.CurrentUICulture.DateTimeFormat),
-                ////            report.Body);
-
-                ////        output.AppendLine(message);
-                ////        output.AppendLine();
-                ////    }
-
-                ////    errorTextBox.Text = output.ToString();
-                ////    pluginInfoSplitContainer.Panel2Collapsed = false;
-                ////}
-                ////else
-                ////{
-                ////    pluginInfoSplitContainer.Panel2Collapsed = true;
-                ////}
                 pluginInfoSplitContainer.Panel2Collapsed = true;
             }
             else
@@ -500,24 +471,6 @@
                 pluginsController.QuarantineFiles(dialog.QuarantinedFiles);
                 pluginsController.UnquarantineFiles(dialog.UnquarantinedFiles);
             }
-        }
-
-        private void ReportPluginLinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            ////var dialog = new ReportPluginForm
-            ////{
-            ////    Plugin = selectedPlugin.RemotePlugin
-            ////};
-
-            ////if (dialog.ShowDialog() == DialogResult.OK)
-            ////{
-            ////    MessageBox.Show(
-            ////        this,
-            ////        LocalizationStrings.ThePluginHasBeenReportedAnAdministratorWillHaveToApproveItFirst,
-            ////        LocalizationStrings.PluginSuccessfullyReported,
-            ////        MessageBoxButtons.OK,
-            ////        MessageBoxIcon.Information);
-            ////}
         }
 
         private void OpenInFileExplorerToolStripMenuItemClick(object sender, EventArgs e)

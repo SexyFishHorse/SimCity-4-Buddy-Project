@@ -34,7 +34,6 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.installedPluginsListView = new System.Windows.Forms.ListView();
             this.pluginColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.reportPluginLinkLabel = new System.Windows.Forms.LinkLabel();
             this.pluginInfoSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
             this.nameLabel = new System.Windows.Forms.Label();
@@ -110,7 +109,6 @@ namespace NIHEI.SC4Buddy.Plugins.View
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Controls.Add(this.reportPluginLinkLabel);
             this.groupBox1.Controls.Add(this.pluginInfoSplitContainer);
             this.groupBox1.Controls.Add(this.disableFilesButton);
             this.groupBox1.Controls.Add(this.moveOrCopyButton);
@@ -118,13 +116,6 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.groupBox1.Controls.Add(this.uninstallButton);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
-            // 
-            // reportPluginLinkLabel
-            // 
-            resources.ApplyResources(this.reportPluginLinkLabel, "reportPluginLinkLabel");
-            this.reportPluginLinkLabel.Name = "reportPluginLinkLabel";
-            this.reportPluginLinkLabel.TabStop = true;
-            this.reportPluginLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ReportPluginLinkLabelLinkClicked);
             // 
             // pluginInfoSplitContainer
             // 
@@ -339,7 +330,6 @@ namespace NIHEI.SC4Buddy.Plugins.View
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.pluginInfoSplitContainer.Panel1.ResumeLayout(false);
             this.pluginInfoSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pluginInfoSplitContainer)).EndInit();
@@ -388,7 +378,6 @@ namespace NIHEI.SC4Buddy.Plugins.View
         private System.Windows.Forms.TextBox errorTextBox;
         private System.Windows.Forms.SplitContainer pluginInfoSplitContainer;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.LinkLabel reportPluginLinkLabel;
         private System.Windows.Forms.ToolStripMenuItem openInFileExplorerToolStripMenuItem;
     }
 }

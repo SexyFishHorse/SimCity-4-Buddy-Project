@@ -275,12 +275,6 @@
     <Compile Include="Plugins\View\RemoveUnnecessaryFilesForm.Designer.cs">
       <DependentUpon>RemoveUnnecessaryFilesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Plugins\View\ReportPluginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Plugins\View\ReportPluginForm.Designer.cs">
-      <DependentUpon>ReportPluginForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Plugins\View\PluginsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -344,9 +338,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Plugins\View\RemoveUnnecessaryFilesForm.resx">
       <DependentUpon>RemoveUnnecessaryFilesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Plugins\View\ReportPluginForm.resx">
-      <DependentUpon>ReportPluginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Plugins\View\PluginsForm.resx">
       <DependentUpon>PluginsForm.cs</DependentUpon>
