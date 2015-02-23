@@ -191,7 +191,9 @@
     <Compile Include="Model\ValidationResult.cs" />
     <Compile Include="Remote\DependencyChecker.cs" />
     <Compile Include="Remote\IDependencyChecker.cs" />
-    <Compile Include="Remote\IPluginMatcher.cs" />
+    <Compile Include="Remote\IPluginMatcher.cs">
+      <DependentUpon>PluginMatcher.cs</DependentUpon>
+    </Compile>
     <Compile Include="Remote\PluginMatcher.cs" />
     <Compile Include="Configuration\LauncherSettings.cs" />
     <Compile Include="Application\View\AboutBox.cs">
@@ -222,7 +224,9 @@
       <DependentUpon>UserFolderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UserFolders\View\UserFolderMode.cs" />
-    <Compile Include="Utils\IJsonFileWriter.cs" />
+    <Compile Include="Utils\IJsonFileWriter.cs">
+      <DependentUpon>JsonFileWriter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\JsonFileWriter.cs" />
     <Compile Include="View\Elements\ListViewItemWithObjectValue.cs" />
     <Compile Include="View\Elements\RemovalFileTypeCandidateListViewItem.cs" />
