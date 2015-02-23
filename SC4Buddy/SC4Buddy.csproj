@@ -189,7 +189,6 @@
     <Compile Include="Model\QuarantinedFile.cs" />
     <Compile Include="Model\UserFolder.cs" />
     <Compile Include="Model\ValidationResult.cs" />
-    <Compile Include="Remote\DependencyChecker.cs" />
     <Compile Include="Remote\IDependencyChecker.cs" />
     <Compile Include="Remote\IPluginMatcher.cs">
       <DependentUpon>PluginMatcher.cs</DependentUpon>
