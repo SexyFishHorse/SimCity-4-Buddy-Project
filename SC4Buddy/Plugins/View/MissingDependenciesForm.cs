@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
     using System.Windows.Forms;
     using Asser.Sc4Buddy.Server.Api.V1.Models;
     using NIHEI.Common.UI.Elements;
@@ -40,12 +39,10 @@
 
         private void UpdateListView()
         {
-            var dependencies = ClearDuplicatesFromDependencies(MissingDependencies);
-
             dependencyListView.BeginUpdate();
             dependencyListView.Items.Clear();
 
-            foreach (var remotePlugin in dependencies)
+            foreach (var remotePlugin in MissingDependencies)
             {
                 var item = new ListViewItemWithObjectValue<Plugin>(remotePlugin.Name, remotePlugin);
                 item.SubItems.Add(remotePlugin.Author);
@@ -56,11 +53,6 @@
 
             dependencyListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             dependencyListView.EndUpdate();
-        }
-
-        private IEnumerable<Plugin> ClearDuplicatesFromDependencies(IEnumerable<Plugin> remotePlugins)
-        {
-            return remotePlugins.Distinct(new RemotePluginComparer());
         }
 
         private void DependencyListViewSelectedIndexChanged(object sender, EventArgs e)
