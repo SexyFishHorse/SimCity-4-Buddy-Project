@@ -150,6 +150,35 @@ namespace NIHEI.SC4Buddy.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update complete.
+        /// </summary>
+        internal static string PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Update_complete {
+            get {
+                return ResourceManager.GetString("PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Update_complete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updated information for {0} plugins..
+        /// </summary>
+        internal static string PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Updated_information_for__0__plugins_ {
+            get {
+                return ResourceManager.GetString("PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Updated_information_for_" +
+                        "_0__plugins_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating info for known plugins from the server..
+        /// </summary>
+        internal static string PluginsForm_UpdateInfoForKnownPluginsToolStripMenuItemClick_Updating_info_for_known_plugins_from_the_server_ {
+            get {
+                return ResourceManager.GetString("PluginsForm_UpdateInfoForKnownPluginsToolStripMenuItemClick_Updating_info_for_kno" +
+                        "wn_plugins_from_the_server_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap TreeView_Folder {

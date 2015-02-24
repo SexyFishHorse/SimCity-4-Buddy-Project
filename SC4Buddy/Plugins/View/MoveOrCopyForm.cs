@@ -116,12 +116,14 @@
 
         private void CopyButtonClick(object sender, EventArgs e)
         {
+            var client = new BuddyServerClient(ApiConnect.GetClient());
             var copier = new PluginCopier(
                 pluginsController,
                 new PluginsController(
                     new PluginsDataAccess(selectedUserFolder, new JsonFileWriter(), pluginGroupController),
                     selectedUserFolder,
-                    new PluginMatcher(new BuddyServerClient(ApiConnect.GetClient()))));
+                    new PluginMatcher(client),
+                    client));
             try
             {
                 copier.CopyPlugin(Plugin, currentUserFolder, selectedUserFolder);
@@ -144,12 +146,14 @@
 
         private void MoveButtonClick(object sender, EventArgs e)
         {
+            var client = new BuddyServerClient(ApiConnect.GetClient());
             var copier = new PluginCopier(
                 pluginsController,
                 new PluginsController(
                     new PluginsDataAccess(selectedUserFolder, new JsonFileWriter(), pluginGroupController),
                     selectedUserFolder,
-                    new PluginMatcher(new BuddyServerClient(ApiConnect.GetClient()))));
+                    new PluginMatcher(client),
+                    client));
             try
             {
                 copier.MovePlugin(Plugin, currentUserFolder, selectedUserFolder);

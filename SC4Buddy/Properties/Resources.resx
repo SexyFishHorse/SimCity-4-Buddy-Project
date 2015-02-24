@@ -193,4 +193,13 @@
   <data name="FolderScannerForm_FolderScannerFormFormClosing_Do_you_want_to_cancel_the_scanning_for_new_files_" xml:space="preserve">
     <value>Do you want to cancel the scanning for new files?</value>
   </data>
+  <data name="PluginsForm_UpdateInfoForKnownPluginsToolStripMenuItemClick_Updating_info_for_known_plugins_from_the_server_" xml:space="preserve">
+    <value>Updating info for known plugins from the server.</value>
+  </data>
+  <data name="PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Update_complete" xml:space="preserve">
+    <value>Update complete</value>
+  </data>
+  <data name="PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Updated_information_for__0__plugins_" xml:space="preserve">
+    <value>Updated information for {0} plugins.</value>
+  </data>
 </root>
