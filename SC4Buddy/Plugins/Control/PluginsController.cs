@@ -168,7 +168,7 @@
             UserFolder.Plugins = Plugins;
         }
 
-        public int IdentifyNewPlugins()
+        public int IdentifyNewPlugins(BackgroundWorker backgroundWorker)
         {
             ApiConnect.ThrowErrorOnConnectionOrDisabledFeature(Settings.Keys.DetectPlugins);
 

@@ -150,6 +150,14 @@ namespace NIHEI.SC4Buddy.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Identified {0} new plugins..
+        /// </summary>
+        internal static string PluginsForm_IdentifyPluginsBackgroundWorkerRunWorkerCompleted_Identified__0__new_plugins_ {
+            get {
+                return ResourceManager.GetString("PluginsForm_IdentifyPluginsBackgroundWorkerRunWorkerCompleted_Identified__0__new_" +
+                        "plugins_", resourceCulture);
+            }
+        }
         
         /// <summary>
         ///   Looks up a localized string similar to Confirm cancellation.
@@ -157,6 +165,16 @@ namespace NIHEI.SC4Buddy.Properties {
         internal static string PluginsForm_PluginsFormFormClosing_Confirm_cancellation {
             get {
                 return ResourceManager.GetString("PluginsForm_PluginsFormFormClosing_Confirm_cancellation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The application is still identifying new plugins. Close anyway?.
+        /// </summary>
+        internal static string PluginsForm_PluginsFormFormClosing_The_application_is_still_identifying_new_plugins__Close_anyway_ {
+            get {
+                return ResourceManager.GetString("PluginsForm_PluginsFormFormClosing_The_application_is_still_identifying_new_plugi" +
+                        "ns__Close_anyway_", resourceCulture);
             }
         }
         

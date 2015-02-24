@@ -322,35 +322,8 @@
 
         private void IdentifyNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            try
-            {
-                IdentifyNewPlugins();
-                RepopulateInstalledPluginsListView();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Fetch information for plugins error", ex);
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.ErrorOccuredDuringFetchOfInformationForPlugins + ex.Message,
-                    LocalizationStrings.ErrorDuringFetchInformationForPlugins,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-            }
-        }
-
-        private void IdentifyNewPlugins()
-        {
-            var numIdentified = pluginsController.IdentifyNewPlugins();
-            RepopulateInstalledPluginsListView();
-
-            MessageBox.Show(
-                this,
-                string.Format(LocalizationStrings.InformationForNumPluginsWereIdentified, numIdentified),
-                LocalizationStrings.PluginInformationUpdated,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1);
+            Log.Debug("Clicked identify new plugins");
+            identifyPluginsBackgroundWorker.RunWorkerAsync();
         }
 
         private void UserFolderFormActivated(object sender, EventArgs e)
@@ -555,6 +528,22 @@
                 }
             }
 
+            if (identifyPluginsBackgroundWorker.IsBusy)
+            {
+                if (MessageBox.Show(
+                    this,
+                    Resources.PluginsForm_PluginsFormFormClosing_The_application_is_still_identifying_new_plugins__Close_anyway_,
+                    Resources.PluginsForm_PluginsFormFormClosing_Confirm_cancellation,
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    updateInfoBackgroundWorker.CancelAsync();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
             Hide();
         }
 
@@ -592,10 +581,44 @@
             toolStripProgressBar.Value = 0;
             toolStripStatusLabel.Visible = false;
             toolStripStatusLabel.Text = string.Empty;
+            RepopulateInstalledPluginsListView();
 
             MessageBox.Show(
                 this,
                 string.Format(Resources.PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Updated_information_for__0__plugins_, e.Result),
+                Resources.PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Update_complete,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
+        private void IdentifyPluginsBackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+            Log.Debug("Starting identify plugins background worker.");
+            var numIdentified = pluginsController.IdentifyNewPlugins(sender as BackgroundWorker);
+
+            e.Result = numIdentified;
+        }
+
+        private void IdentifyPluginsBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Log.Debug("Update info progress changed.");
+            toolStripProgressBar.Style = ProgressBarStyle.Continuous;
+            toolStripProgressBar.Value = e.ProgressPercentage;
+            toolStripStatusLabel.Text = e.UserState.ToString();
+        }
+
+        private void IdentifyPluginsBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Log.Debug("Update info background worker completed");
+            toolStripProgressBar.Visible = false;
+            toolStripProgressBar.Value = 0;
+            toolStripStatusLabel.Visible = false;
+            toolStripStatusLabel.Text = string.Empty;
+            RepopulateInstalledPluginsListView();
+
+            MessageBox.Show(
+                this,
+                string.Format(Resources.PluginsForm_IdentifyPluginsBackgroundWorkerRunWorkerCompleted_Identified__0__new_plugins_, e.Result),
                 Resources.PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Update_complete,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);

@@ -66,6 +66,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.updateInfoBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.identifyPluginsBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -302,7 +303,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             // 
             this.identifyNewPluginsToolStripMenuItem.Name = "identifyNewPluginsToolStripMenuItem";
             resources.ApplyResources(this.identifyNewPluginsToolStripMenuItem, "identifyNewPluginsToolStripMenuItem");
-            this.identifyNewPluginsToolStripMenuItem.Click += new System.EventHandler(this.IdentifyNewPluginsToolStripMenuItemClick);
+            this.identifyNewPluginsToolStripMenuItem.Click += new System.EventHandler((sender, e) => this.IdentifyNewPluginsToolStripMenuItemClick(sender, e));
             // 
             // updateInfoForKnownPluginsToolStripMenuItem
             // 
@@ -348,6 +349,14 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.updateInfoBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.UpdateInfoBackgroundWorkerDoWork);
             this.updateInfoBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.UpdateInfoBackgroundWorkerProgressChanged);
             this.updateInfoBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.UpdateInfoBackgroundWorkerRunWorkerCompleted);
+            // 
+            // identifyPluginsBackgroundWorker
+            // 
+            this.identifyPluginsBackgroundWorker.WorkerReportsProgress = true;
+            this.identifyPluginsBackgroundWorker.WorkerSupportsCancellation = true;
+            this.identifyPluginsBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.IdentifyPluginsBackgroundWorkerDoWork);
+            this.identifyPluginsBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.IdentifyPluginsBackgroundWorkerProgressChanged);
+            this.identifyPluginsBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.IdentifyPluginsBackgroundWorkerRunWorkerCompleted);
             // 
             // PluginsForm
             // 
@@ -427,5 +436,6 @@ namespace NIHEI.SC4Buddy.Plugins.View
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.ComponentModel.BackgroundWorker updateInfoBackgroundWorker;
+        private System.ComponentModel.BackgroundWorker identifyPluginsBackgroundWorker;
     }
 }

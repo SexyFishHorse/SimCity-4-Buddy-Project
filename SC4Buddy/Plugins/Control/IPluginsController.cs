@@ -16,7 +16,7 @@
 
         void UninstallPlugin(Plugin plugin);
 
-        int IdentifyNewPlugins();
+        int IdentifyNewPlugins(BackgroundWorker backgroundWorker);
 
         int NumberOfRecognizedPlugins(UserFolder userFolder);
 

@@ -202,6 +202,12 @@
   <data name="PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Updated_information_for__0__plugins_" xml:space="preserve">
     <value>Updated information for {0} plugins.</value>
   </data>
+  <data name="PluginsForm_IdentifyPluginsBackgroundWorkerRunWorkerCompleted_Identified__0__new_plugins_" xml:space="preserve">
+    <value>Identified {0} new plugins.</value>
+  </data>
+  <data name="PluginsForm_PluginsFormFormClosing_The_application_is_still_updating_info_for_known_plugins__Close_anyway_" xml:space="preserve">
+    <value>The application is still updating info for known plugins. Close anyway?</value>
+  </data>
   <data name="PluginsForm_PluginsFormFormClosing_Confirm_cancellation" xml:space="preserve">
     <value>Confirm cancellation</value>
   </data>
