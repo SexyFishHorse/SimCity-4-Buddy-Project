@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Plugins.View
 {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
@@ -538,7 +539,66 @@
         private void PluginsFormFormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
+            if (updateInfoBackgroundWorker.IsBusy)
+            {
+                if (MessageBox.Show(
+                    this,
+                    Resources.PluginsForm_PluginsFormFormClosing_The_application_is_still_updating_info_for_known_plugins__Close_anyway_,
+                    Resources.PluginsForm_PluginsFormFormClosing_Confirm_cancellation,
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    updateInfoBackgroundWorker.CancelAsync();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
             Hide();
+        }
+
+        private void UpdateInfoForKnownPluginsToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            Log.Debug("Clicked update info for known plugins");
+            toolStripProgressBar.Visible = true;
+            toolStripProgressBar.Value = 0;
+            toolStripStatusLabel.Visible = true;
+            toolStripStatusLabel.Text = Resources.PluginsForm_UpdateInfoForKnownPluginsToolStripMenuItemClick_Updating_info_for_known_plugins_from_the_server_;
+
+            updateInfoBackgroundWorker.RunWorkerAsync();
+        }
+
+        private void UpdateInfoBackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+            Log.Debug("Starting update info background worker.");
+            var numUpdated = pluginsController.UpdateKnownPlugins(sender as BackgroundWorker);
+
+            e.Result = numUpdated;
+        }
+
+        private void UpdateInfoBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Log.Debug("Update info progress changed.");
+            toolStripProgressBar.Style = ProgressBarStyle.Continuous;
+            toolStripProgressBar.Value = e.ProgressPercentage;
+            toolStripStatusLabel.Text = e.UserState.ToString();
+        }
+
+        private void UpdateInfoBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Log.Debug("Update info background worker completed");
+            toolStripProgressBar.Visible = false;
+            toolStripProgressBar.Value = 0;
+            toolStripStatusLabel.Visible = false;
+            toolStripStatusLabel.Text = string.Empty;
+
+            MessageBox.Show(
+                this,
+                string.Format(Resources.PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Updated_information_for__0__plugins_, e.Result),
+                Resources.PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Update_complete,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
     }
 }
