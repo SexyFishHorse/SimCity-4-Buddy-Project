@@ -313,7 +313,7 @@
     <value>0, 0</value>
   </data>
   <data name="descriptionRichTextBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>682, 165</value>
+    <value>682, 152</value>
   </data>
   <data name="descriptionRichTextBox.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -337,7 +337,7 @@
     <value>3, 51</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>684, 167</value>
+    <value>684, 154</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -388,7 +388,7 @@
     <value>0, 0</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>690, 221</value>
+    <value>690, 208</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -508,7 +508,7 @@
     <value>1</value>
   </data>
   <data name="pluginInfoSplitContainer.Size" type="System.Drawing.Size, System.Drawing">
-    <value>690, 221</value>
+    <value>690, 208</value>
   </data>
   <data name="pluginInfoSplitContainer.SplitterDistance" type="System.Int32, mscorlib">
     <value>161</value>
@@ -535,7 +535,7 @@
     <value>False</value>
   </data>
   <data name="disableFilesButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 246</value>
+    <value>269, 233</value>
   </data>
   <data name="disableFilesButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>117, 23</value>
@@ -565,7 +565,7 @@
     <value>False</value>
   </data>
   <data name="moveOrCopyButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 245</value>
+    <value>168, 232</value>
   </data>
   <data name="moveOrCopyButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>95, 23</value>
@@ -595,7 +595,7 @@
     <value>False</value>
   </data>
   <data name="updateInfoButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 246</value>
+    <value>87, 233</value>
   </data>
   <data name="updateInfoButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -625,7 +625,7 @@
     <value>False</value>
   </data>
   <data name="uninstallButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 246</value>
+    <value>6, 233</value>
   </data>
   <data name="uninstallButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -652,7 +652,7 @@
     <value>3, 3</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>696, 275</value>
+    <value>696, 262</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2547,6 +2547,9 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAA
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

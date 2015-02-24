@@ -150,6 +150,45 @@ namespace NIHEI.SC4Buddy.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking for missing dependencies.
+        /// </summary>
+        internal static string PluginsForm_CheckForMissingDependenciesToolStripMenuItemClick_Checking_for_missing_dependencies {
+            get {
+                return ResourceManager.GetString("PluginsForm_CheckForMissingDependenciesToolStripMenuItemClick_Checking_for_missin" +
+                        "g_dependencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No missing dependencies.
+        /// </summary>
+        internal static string PluginsForm_DependencyCheckerBackgroundWorkerRunWorkerCompleted_No_missing_dependencies {
+            get {
+                return ResourceManager.GetString("PluginsForm_DependencyCheckerBackgroundWorkerRunWorkerCompleted_No_missing_depend" +
+                        "encies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No missing dependencies were detected..
+        /// </summary>
+        internal static string PluginsForm_DependencyCheckerBackgroundWorkerRunWorkerCompleted_No_missing_dependencies_were_detected_ {
+            get {
+                return ResourceManager.GetString("PluginsForm_DependencyCheckerBackgroundWorkerRunWorkerCompleted_No_missing_depend" +
+                        "encies_were_detected_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identifying new plugins.
+        /// </summary>
+        internal static string PluginsForm_IdentifyNewPluginsToolStripMenuItemClick_Identifying_new_plugins {
+            get {
+                return ResourceManager.GetString("PluginsForm_IdentifyNewPluginsToolStripMenuItemClick_Identifying_new_plugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Identified {0} new plugins..
         /// </summary>
         internal static string PluginsForm_IdentifyPluginsBackgroundWorkerRunWorkerCompleted_Identified__0__new_plugins_ {

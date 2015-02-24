@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Plugins.View
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
@@ -320,6 +321,10 @@
         {
             Log.Debug("Clicked identify new plugins");
             identifyPluginsBackgroundWorker.RunWorkerAsync();
+            toolStripProgressBar.Visible = true;
+            toolStripProgressBar.Value = 0;
+            toolStripStatusLabel.Visible = true;
+            toolStripStatusLabel.Text = Resources.PluginsForm_IdentifyNewPluginsToolStripMenuItemClick_Identifying_new_plugins;
         }
 
         private void UserFolderFormActivated(object sender, EventArgs e)
@@ -331,6 +336,10 @@
         {
             Log.Debug("Clicked check for missing dependencies.");
             dependencyCheckerBackgroundWorker.RunWorkerAsync();
+            toolStripProgressBar.Visible = true;
+            toolStripProgressBar.Value = 0;
+            toolStripStatusLabel.Visible = true;
+            toolStripStatusLabel.Text = Resources.PluginsForm_CheckForMissingDependenciesToolStripMenuItemClick_Checking_for_missing_dependencies;
         }
 
         private void MoveOrCopyButtonClick(object sender, EventArgs e)
@@ -609,7 +618,22 @@
             toolStripStatusLabel.Visible = false;
             toolStripStatusLabel.Text = string.Empty;
 
-            // TODO: Show missing dependencies (plugins)
+            var missingDependencies = ((IEnumerable<Asser.Sc4Buddy.Server.Api.V1.Models.Plugin>)e.Result).ToList();
+
+            if (missingDependencies.Any())
+            {
+                var dialog = new MissingDependenciesForm { MissingDependencies = missingDependencies };
+                dialog.ShowDialog(this);
+            }
+            else
+            {
+                MessageBox.Show(
+                    this,
+                    Resources.PluginsForm_DependencyCheckerBackgroundWorkerRunWorkerCompleted_No_missing_dependencies_were_detected_,
+                    Resources.PluginsForm_DependencyCheckerBackgroundWorkerRunWorkerCompleted_No_missing_dependencies,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
         }
     }
 }
