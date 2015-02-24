@@ -82,9 +82,6 @@
         private void UserFolderFormLoad(object sender, EventArgs e)
         {
             RepopulateInstalledPluginsListView();
-
-            identifyNewPluginsToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.FetchInformationFromRemoteServer);
-            checkForMissingDependenciesToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.AllowCheckForMissingDependencies);
         }
 
         private void RepopulateInstalledPluginsListView()
