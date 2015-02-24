@@ -28,6 +28,11 @@
 
                 var response = client.Get<List<File>>(request);
 
+                if (response.ErrorException != null)
+                {
+                    throw response.ErrorException;
+                }
+
                 if (response.StatusCode.IsSuccess())
                 {
                     foreach (var file in response.Data)
@@ -57,6 +62,11 @@
 
             var response = client.Get<Plugin>(request);
 
+            if (response.ErrorException != null)
+            {
+                throw response.ErrorException;
+            }
+
             return response.Data;
         }
 
@@ -70,6 +80,11 @@
                 request.AddQueryParameter("perPage", MaxFilesPerPage + string.Empty);
 
                 var response = client.Get<List<Plugin>>(request);
+
+                if (response.ErrorException != null)
+                {
+                    throw response.ErrorException;
+                }
 
                 if (response.StatusCode.IsSuccess())
                 {

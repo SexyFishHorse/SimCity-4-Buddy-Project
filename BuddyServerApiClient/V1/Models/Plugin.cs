@@ -15,6 +15,8 @@
 
         public string Description { get; set; }
 
-        public IEnumerable<File> Files { get; set; }
+        public List<File> Files { get; set; }
+
+        public List<Guid> Dependencies { get; set; }
     }
 }
