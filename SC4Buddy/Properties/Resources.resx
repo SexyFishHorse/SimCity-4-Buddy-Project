@@ -214,4 +214,19 @@
   <data name="PluginsForm_PluginsFormFormClosing_The_application_is_still_identifying_new_plugins__Close_anyway_" xml:space="preserve">
     <value>The application is still identifying new plugins. Close anyway?</value>
   </data>
+  <data name="PluginsForm_PluginsFormFormClosing_The_application_is_still_checking_for_missing_dependencies__Close_anyway_" xml:space="preserve">
+    <value>The application is still checking for missing dependencies. Close anyway?</value>
+  </data>
+  <data name="PluginsForm_DependencyCheckerBackgroundWorkerRunWorkerCompleted_No_missing_dependencies_were_detected_" xml:space="preserve">
+    <value>No missing dependencies were detected.</value>
+  </data>
+  <data name="PluginsForm_DependencyCheckerBackgroundWorkerRunWorkerCompleted_No_missing_dependencies" xml:space="preserve">
+    <value>No missing dependencies</value>
+  </data>
+  <data name="PluginsForm_CheckForMissingDependenciesToolStripMenuItemClick_Checking_for_missing_dependencies" xml:space="preserve">
+    <value>Checking for missing dependencies</value>
+  </data>
+  <data name="PluginsForm_IdentifyNewPluginsToolStripMenuItemClick_Identifying_new_plugins" xml:space="preserve">
+    <value>Identifying new plugins</value>
+  </data>
 </root>

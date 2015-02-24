@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Plugins.View
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
@@ -12,8 +13,8 @@
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
+    using NIHEI.SC4Buddy.Plugins.Services;
     using NIHEI.SC4Buddy.Properties;
-    using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Remote.Utils;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
@@ -24,8 +25,6 @@
     public partial class PluginsForm : Form
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-
-        private readonly IDependencyChecker dependencyChecker;
 
         private readonly IPluginsController pluginsController;
 
@@ -44,8 +43,7 @@
             IUserFoldersController userFoldersController,
             IPluginsController pluginsController,
             UserFolder userFolder,
-            IPluginMatcher pluginMatcher,
-            IDependencyChecker dependencyChecker)
+            IPluginMatcher pluginMatcher)
         {
             this.pluginGroupController = pluginGroupController;
             this.userFoldersController = userFoldersController;
@@ -72,7 +70,6 @@
 
             this.userFolder = userFolder;
             this.pluginMatcher = pluginMatcher;
-            this.dependencyChecker = dependencyChecker;
             InitializeComponent();
         }
 
@@ -324,6 +321,10 @@
         {
             Log.Debug("Clicked identify new plugins");
             identifyPluginsBackgroundWorker.RunWorkerAsync();
+            toolStripProgressBar.Visible = true;
+            toolStripProgressBar.Value = 0;
+            toolStripStatusLabel.Visible = true;
+            toolStripStatusLabel.Text = Resources.PluginsForm_IdentifyNewPluginsToolStripMenuItemClick_Identifying_new_plugins;
         }
 
         private void UserFolderFormActivated(object sender, EventArgs e)
@@ -331,61 +332,14 @@
             identifyNewPluginsToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
         }
 
-        private async void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
+        private void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            ////try
-            ////{
-            ////    await pluginsController.IdentifyNewPlugins();
-
-            ////    var numRecognizedPlugins = pluginsController.NumberOfRecognizedPlugins(userFolder);
-
-            ////    if (numRecognizedPlugins < 1)
-            ////    {
-            ////        MessageBox.Show(
-            ////            this,
-            ////            LocalizationStrings.NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked,
-            ////            LocalizationStrings.NoRecognizablePluginsFound,
-            ////            MessageBoxButtons.OK,
-            ////            MessageBoxIcon.Exclamation,
-            ////            MessageBoxDefaultButton.Button1);
-            ////        return;
-            ////    }
-
-            ////    var missingDependencies = (await dependencyChecker.CheckDependenciesAsync(userFolder)).ToList();
-
-            ////    if (missingDependencies.Any())
-            ////    {
-            ////        var dialog = new MissingDependenciesForm
-            ////        {
-            ////            MissingDependencies = missingDependencies
-            ////        };
-            ////        dialog.ShowDialog(this);
-            ////    }
-            ////    else
-            ////    {
-            ////        var message = string.Format(
-            ////            LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
-            ////            numRecognizedPlugins);
-
-            ////        MessageBox.Show(
-            ////            this,
-            ////            message,
-            ////            LocalizationStrings.NoDependenciesMissing,
-            ////            MessageBoxButtons.OK,
-            ////            MessageBoxIcon.Information,
-            ////            MessageBoxDefaultButton.Button1);
-            ////    }
-            ////}
-            ////catch (Exception ex)
-            ////{
-            ////    Log.Error("Dependency check error", ex);
-            ////    MessageBox.Show(
-            ////        this,
-            ////        LocalizationStrings.ErrorOccuredDuringDependencyCheck + ex.Message,
-            ////        LocalizationStrings.ErrorDuringDependencyCheck,
-            ////        MessageBoxButtons.OK,
-            ////        MessageBoxIcon.Warning);
-            ////}
+            Log.Debug("Clicked check for missing dependencies.");
+            dependencyCheckerBackgroundWorker.RunWorkerAsync();
+            toolStripProgressBar.Visible = true;
+            toolStripProgressBar.Value = 0;
+            toolStripStatusLabel.Visible = true;
+            toolStripStatusLabel.Text = Resources.PluginsForm_CheckForMissingDependenciesToolStripMenuItemClick_Checking_for_missing_dependencies;
         }
 
         private void MoveOrCopyButtonClick(object sender, EventArgs e)
@@ -536,7 +490,23 @@
                     Resources.PluginsForm_PluginsFormFormClosing_Confirm_cancellation,
                     MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    updateInfoBackgroundWorker.CancelAsync();
+                    identifyPluginsBackgroundWorker.CancelAsync();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            if (dependencyCheckerBackgroundWorker.IsBusy)
+            {
+                if (MessageBox.Show(
+                    this,
+                    Resources.PluginsForm_PluginsFormFormClosing_The_application_is_still_checking_for_missing_dependencies__Close_anyway_,
+                    Resources.PluginsForm_PluginsFormFormClosing_Confirm_cancellation,
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    dependencyCheckerBackgroundWorker.CancelAsync();
                 }
                 else
                 {
@@ -601,7 +571,7 @@
 
         private void IdentifyPluginsBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Log.Debug("Update info progress changed.");
+            Log.Debug("Identify new plugins progress changed.");
             toolStripProgressBar.Style = ProgressBarStyle.Continuous;
             toolStripProgressBar.Value = e.ProgressPercentage;
             toolStripStatusLabel.Text = e.UserState.ToString();
@@ -609,7 +579,7 @@
 
         private void IdentifyPluginsBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Log.Debug("Update info background worker completed");
+            Log.Debug("Identify new plugins background worker completed");
             toolStripProgressBar.Visible = false;
             toolStripProgressBar.Value = 0;
             toolStripStatusLabel.Visible = false;
@@ -622,6 +592,48 @@
                 Resources.PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Update_complete,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+        }
+
+        private void DependencyCheckerBackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+            Log.Debug("Starting dependency checker background worker.");
+            var missingDependencies = pluginsController.CheckDependencies(userFolder, sender as BackgroundWorker);
+
+            e.Result = missingDependencies;
+        }
+
+        private void DependencyCheckerBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Log.Debug("Check dependencies progress changed.");
+            toolStripProgressBar.Style = ProgressBarStyle.Continuous;
+            toolStripProgressBar.Value = e.ProgressPercentage;
+            toolStripStatusLabel.Text = e.UserState.ToString();
+        }
+
+        private void DependencyCheckerBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Log.Debug("Check dependencies background worker completed");
+            toolStripProgressBar.Visible = false;
+            toolStripProgressBar.Value = 0;
+            toolStripStatusLabel.Visible = false;
+            toolStripStatusLabel.Text = string.Empty;
+
+            var missingDependencies = ((IEnumerable<Asser.Sc4Buddy.Server.Api.V1.Models.Plugin>)e.Result).ToList();
+
+            if (missingDependencies.Any())
+            {
+                var dialog = new MissingDependenciesForm { MissingDependencies = missingDependencies };
+                dialog.ShowDialog(this);
+            }
+            else
+            {
+                MessageBox.Show(
+                    this,
+                    Resources.PluginsForm_DependencyCheckerBackgroundWorkerRunWorkerCompleted_No_missing_dependencies_were_detected_,
+                    Resources.PluginsForm_DependencyCheckerBackgroundWorkerRunWorkerCompleted_No_missing_dependencies,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
         }
     }
 }

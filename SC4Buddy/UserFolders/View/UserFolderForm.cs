@@ -6,8 +6,8 @@
     using System.Windows.Forms;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
+    using NIHEI.SC4Buddy.Plugins.Services;
     using NIHEI.SC4Buddy.Plugins.View;
-    using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.UserFolders.Control;
 
     public partial class UserFolderForm : Form
@@ -20,8 +20,6 @@
 
         private readonly IPluginMatcher pluginMatcher;
 
-        private readonly IDependencyChecker dependencyChecker;
-
         private PluginsForm pluginsForm;
 
         public UserFolderForm(
@@ -29,14 +27,12 @@
             PluginGroupController pluginGroupController,
             IUserFoldersController userFoldersController,
             IPluginMatcher pluginMatcher,
-            IDependencyChecker dependencyChecker,
             IPluginsController pluginsController)
         {
             UserFolder = userFolder;
             this.pluginGroupController = pluginGroupController;
             this.userFoldersController = userFoldersController;
             this.pluginMatcher = pluginMatcher;
-            this.dependencyChecker = dependencyChecker;
             this.pluginsController = pluginsController;
             InitializeComponent();
         }
@@ -67,8 +63,7 @@
                     userFoldersController,
                     pluginsController,
                     UserFolder,
-                    pluginMatcher,
-                    dependencyChecker);
+                    pluginMatcher);
             }
 
             pluginsForm.ReloadAndRepopulate();

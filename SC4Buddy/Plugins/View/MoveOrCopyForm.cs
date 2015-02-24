@@ -9,6 +9,7 @@
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Plugins.DataAccess;
+    using NIHEI.SC4Buddy.Plugins.Services;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Remote.Utils;
     using NIHEI.SC4Buddy.UserFolders.Control;
@@ -117,13 +118,15 @@
         private void CopyButtonClick(object sender, EventArgs e)
         {
             var client = new BuddyServerClient(ApiConnect.GetClient());
+            var dependencyChecker = new DependencyChecker(client, userFoldersController.GetMainUserFolder());
             var copier = new PluginCopier(
                 pluginsController,
                 new PluginsController(
                     new PluginsDataAccess(selectedUserFolder, new JsonFileWriter(), pluginGroupController),
                     selectedUserFolder,
                     new PluginMatcher(client),
-                    client));
+                    client,
+                    dependencyChecker));
             try
             {
                 copier.CopyPlugin(Plugin, currentUserFolder, selectedUserFolder);
@@ -147,13 +150,15 @@
         private void MoveButtonClick(object sender, EventArgs e)
         {
             var client = new BuddyServerClient(ApiConnect.GetClient());
+            var dependencyChecker = new DependencyChecker(client, userFoldersController.GetMainUserFolder());
             var copier = new PluginCopier(
                 pluginsController,
                 new PluginsController(
                     new PluginsDataAccess(selectedUserFolder, new JsonFileWriter(), pluginGroupController),
                     selectedUserFolder,
                     new PluginMatcher(client),
-                    client));
+                    client,
+                    dependencyChecker));
             try
             {
                 copier.MovePlugin(Plugin, currentUserFolder, selectedUserFolder);

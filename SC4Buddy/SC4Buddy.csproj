@@ -144,6 +144,7 @@
     <Compile Include="Application\Control\SettingsController.cs" />
     <Compile Include="Plugins\Control\PluginsController.cs" />
     <Compile Include="Plugins\DataAccess\PluginsDataAccess.cs" />
+    <Compile Include="Plugins\Services\DependencyChecker.cs" />
     <Compile Include="Remote\Models\BuddyServerException.cs" />
     <Compile Include="Remote\Utils\ApiConnect.cs" />
     <Compile Include="Remote\Utils\ApiConnectCodes.cs" />
@@ -154,7 +155,6 @@
       <DependentUpon>Entities.cs</DependentUpon>
     </Compile>
     <Compile Include="Application\DataAccess\SettingsDataAccess.cs" />
-    <Compile Include="Entities\Remote\PluginReport.cs" />
     <Compile Include="Plugins\Installer\FileHandlers\ArchiveHandler.cs" />
     <Compile Include="Plugins\Installer\InstallerEventArgs\InstalledPluginEventArgs.cs" />
     <Compile Include="Plugins\Installer\InstallerEventArgs\InstallPluginEventArgs.cs" />
@@ -189,10 +189,13 @@
     <Compile Include="Model\QuarantinedFile.cs" />
     <Compile Include="Model\UserFolder.cs" />
     <Compile Include="Model\ValidationResult.cs" />
-    <Compile Include="Remote\DependencyChecker.cs" />
-    <Compile Include="Remote\IDependencyChecker.cs" />
-    <Compile Include="Remote\IPluginMatcher.cs" />
-    <Compile Include="Remote\PluginMatcher.cs" />
+    <Compile Include="Plugins\Services\IDependencyChecker.cs">
+      <DependentUpon>DependencyChecker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Services\IPluginMatcher.cs">
+      <DependentUpon>PluginMatcher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Plugins\Services\PluginMatcher.cs" />
     <Compile Include="Configuration\LauncherSettings.cs" />
     <Compile Include="Application\View\AboutBox.cs">
       <SubType>Form</SubType>
@@ -222,7 +225,9 @@
       <DependentUpon>UserFolderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UserFolders\View\UserFolderMode.cs" />
-    <Compile Include="Utils\IJsonFileWriter.cs" />
+    <Compile Include="Utils\IJsonFileWriter.cs">
+      <DependentUpon>JsonFileWriter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\JsonFileWriter.cs" />
     <Compile Include="View\Elements\ListViewItemWithObjectValue.cs" />
     <Compile Include="View\Elements\RemovalFileTypeCandidateListViewItem.cs" />

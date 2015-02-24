@@ -84,6 +84,7 @@ namespace NIHEI.SC4Buddy.Application.View
             this.disableMusicCheckBox = new System.Windows.Forms.CheckBox();
             this.disableAudioCheckBox = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
             this.detectPluginsCheckBox = new System.Windows.Forms.CheckBox();
             this.apiBaseUrlTextBox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -95,7 +96,6 @@ namespace NIHEI.SC4Buddy.Application.View
             this.gameLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.storeLocationDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.fetchInformationFromRemoteCheckbox = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -497,9 +497,19 @@ namespace NIHEI.SC4Buddy.Application.View
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // fetchInformationFromRemoteCheckbox
+            // 
+            resources.ApplyResources(this.fetchInformationFromRemoteCheckbox, "fetchInformationFromRemoteCheckbox");
+            this.fetchInformationFromRemoteCheckbox.Checked = true;
+            this.fetchInformationFromRemoteCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.fetchInformationFromRemoteCheckbox.Name = "fetchInformationFromRemoteCheckbox";
+            this.fetchInformationFromRemoteCheckbox.UseVisualStyleBackColor = true;
+            // 
             // detectPluginsCheckBox
             // 
             resources.ApplyResources(this.detectPluginsCheckBox, "detectPluginsCheckBox");
+            this.detectPluginsCheckBox.Checked = true;
+            this.detectPluginsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.detectPluginsCheckBox.Name = "detectPluginsCheckBox";
             this.detectPluginsCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -516,6 +526,8 @@ namespace NIHEI.SC4Buddy.Application.View
             // allowCheckMissingDependenciesCheckBox
             // 
             resources.ApplyResources(this.allowCheckMissingDependenciesCheckBox, "allowCheckMissingDependenciesCheckBox");
+            this.allowCheckMissingDependenciesCheckBox.Checked = true;
+            this.allowCheckMissingDependenciesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.allowCheckMissingDependenciesCheckBox.Name = "allowCheckMissingDependenciesCheckBox";
             this.allowCheckMissingDependenciesCheckBox.UseVisualStyleBackColor = true;
             // 
@@ -558,14 +570,6 @@ namespace NIHEI.SC4Buddy.Application.View
             // storeLocationDialog
             // 
             resources.ApplyResources(this.storeLocationDialog, "storeLocationDialog");
-            // 
-            // fetchInformationFromRemoteCheckbox
-            // 
-            resources.ApplyResources(this.fetchInformationFromRemoteCheckbox, "fetchInformationFromRemoteCheckbox");
-            this.fetchInformationFromRemoteCheckbox.Checked = true;
-            this.fetchInformationFromRemoteCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.fetchInformationFromRemoteCheckbox.Name = "fetchInformationFromRemoteCheckbox";
-            this.fetchInformationFromRemoteCheckbox.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 

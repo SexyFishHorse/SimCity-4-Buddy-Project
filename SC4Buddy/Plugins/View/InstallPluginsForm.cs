@@ -15,7 +15,7 @@
     using NIHEI.SC4Buddy.Plugins.Control;
     using NIHEI.SC4Buddy.Plugins.Installer;
     using NIHEI.SC4Buddy.Plugins.Installer.InstallerEventArgs;
-    using NIHEI.SC4Buddy.Remote;
+    using NIHEI.SC4Buddy.Plugins.Services;
     using NIHEI.SC4Buddy.Remote.Utils;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.View.Helpers;

@@ -388,13 +388,13 @@
     <value>6, 32</value>
   </data>
   <data name="detectPluginsCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>371, 17</value>
+    <value>368, 17</value>
   </data>
   <data name="detectPluginsCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="detectPluginsCheckBox.Text" xml:space="preserve">
-    <value>Attempt to detect plugins and update name and description automatically.</value>
+    <value>Attempt to detect plugins and update name and description automatically</value>
   </data>
   <data name="&gt;&gt;detectPluginsCheckBox.Name" xml:space="preserve">
     <value>detectPluginsCheckBox</value>
@@ -459,9 +459,6 @@
   <data name="allowCheckMissingDependenciesCheckBox.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="allowCheckMissingDependenciesCheckBox.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="allowCheckMissingDependenciesCheckBox.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -469,13 +466,13 @@
     <value>6, 78</value>
   </data>
   <data name="allowCheckMissingDependenciesCheckBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>351, 17</value>
+    <value>265, 17</value>
   </data>
   <data name="allowCheckMissingDependenciesCheckBox.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="allowCheckMissingDependenciesCheckBox.Text" xml:space="preserve">
-    <value>Check for missing dependencies for known plugins (disabled for now)</value>
+    <value>Check for missing dependencies for known plugins</value>
   </data>
   <data name="&gt;&gt;allowCheckMissingDependenciesCheckBox.Name" xml:space="preserve">
     <value>allowCheckMissingDependenciesCheckBox</value>
