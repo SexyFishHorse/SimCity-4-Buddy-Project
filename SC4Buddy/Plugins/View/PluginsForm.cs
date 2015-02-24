@@ -327,61 +327,10 @@
             identifyNewPluginsToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
         }
 
-        private async void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
+        private void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
-            ////try
-            ////{
-            ////    await pluginsController.IdentifyNewPlugins();
-
-            ////    var numRecognizedPlugins = pluginsController.NumberOfRecognizedPlugins(userFolder);
-
-            ////    if (numRecognizedPlugins < 1)
-            ////    {
-            ////        MessageBox.Show(
-            ////            this,
-            ////            LocalizationStrings.NoneOfYourPluginsAreRecognizedOnTheCentralServerAndCanThereforeNotBeChecked,
-            ////            LocalizationStrings.NoRecognizablePluginsFound,
-            ////            MessageBoxButtons.OK,
-            ////            MessageBoxIcon.Exclamation,
-            ////            MessageBoxDefaultButton.Button1);
-            ////        return;
-            ////    }
-
-            ////    var missingDependencies = (await dependencyChecker.CheckDependenciesAsync(userFolder)).ToList();
-
-            ////    if (missingDependencies.Any())
-            ////    {
-            ////        var dialog = new MissingDependenciesForm
-            ////        {
-            ////            MissingDependencies = missingDependencies
-            ////        };
-            ////        dialog.ShowDialog(this);
-            ////    }
-            ////    else
-            ////    {
-            ////        var message = string.Format(
-            ////            LocalizationStrings.NumPluginsCheckedForMissingPluginsAndNoneWereMissing,
-            ////            numRecognizedPlugins);
-
-            ////        MessageBox.Show(
-            ////            this,
-            ////            message,
-            ////            LocalizationStrings.NoDependenciesMissing,
-            ////            MessageBoxButtons.OK,
-            ////            MessageBoxIcon.Information,
-            ////            MessageBoxDefaultButton.Button1);
-            ////    }
-            ////}
-            ////catch (Exception ex)
-            ////{
-            ////    Log.Error("Dependency check error", ex);
-            ////    MessageBox.Show(
-            ////        this,
-            ////        LocalizationStrings.ErrorOccuredDuringDependencyCheck + ex.Message,
-            ////        LocalizationStrings.ErrorDuringDependencyCheck,
-            ////        MessageBoxButtons.OK,
-            ////        MessageBoxIcon.Warning);
-            ////}
+            Log.Debug("Clicked check for missing dependencies.");
+            dependencyCheckerBackgroundWorker.RunWorkerAsync();
         }
 
         private void MoveOrCopyButtonClick(object sender, EventArgs e)
@@ -540,6 +489,22 @@
                 }
             }
 
+            if (dependencyCheckerBackgroundWorker.IsBusy)
+            {
+                if (MessageBox.Show(
+                    this,
+                    Resources.PluginsForm_PluginsFormFormClosing_The_application_is_still_checking_for_missing_dependencies__Close_anyway_,
+                    Resources.PluginsForm_PluginsFormFormClosing_Confirm_cancellation,
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    dependencyCheckerBackgroundWorker.CancelAsync();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
             Hide();
         }
 
@@ -618,6 +583,33 @@
                 Resources.PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Update_complete,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+        }
+
+        private void DependencyCheckerBackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+            Log.Debug("Starting dependency checker background worker.");
+            var missingDependencies = pluginsController.CheckDependencies(userFolder, sender as BackgroundWorker);
+
+            e.Result = missingDependencies;
+        }
+
+        private void DependencyCheckerBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Log.Debug("Check dependencies progress changed.");
+            toolStripProgressBar.Style = ProgressBarStyle.Continuous;
+            toolStripProgressBar.Value = e.ProgressPercentage;
+            toolStripStatusLabel.Text = e.UserState.ToString();
+        }
+
+        private void DependencyCheckerBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Log.Debug("Check dependencies background worker completed");
+            toolStripProgressBar.Visible = false;
+            toolStripProgressBar.Value = 0;
+            toolStripStatusLabel.Visible = false;
+            toolStripStatusLabel.Text = string.Empty;
+
+            // TODO: Show missing dependencies (plugins)
         }
     }
 }

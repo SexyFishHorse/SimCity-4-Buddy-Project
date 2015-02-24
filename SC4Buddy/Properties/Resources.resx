@@ -214,4 +214,7 @@
   <data name="PluginsForm_PluginsFormFormClosing_The_application_is_still_identifying_new_plugins__Close_anyway_" xml:space="preserve">
     <value>The application is still identifying new plugins. Close anyway?</value>
   </data>
+  <data name="PluginsForm_PluginsFormFormClosing_The_application_is_still_checking_for_missing_dependencies__Close_anyway_" xml:space="preserve">
+    <value>The application is still checking for missing dependencies. Close anyway?</value>
+  </data>
 </root>

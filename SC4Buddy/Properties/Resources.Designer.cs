@@ -169,6 +169,16 @@ namespace NIHEI.SC4Buddy.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The application is still checking for missing dependencies. Close anyway?.
+        /// </summary>
+        internal static string PluginsForm_PluginsFormFormClosing_The_application_is_still_checking_for_missing_dependencies__Close_anyway_ {
+            get {
+                return ResourceManager.GetString("PluginsForm_PluginsFormFormClosing_The_application_is_still_checking_for_missing_" +
+                        "dependencies__Close_anyway_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The application is still identifying new plugins. Close anyway?.
         /// </summary>
         internal static string PluginsForm_PluginsFormFormClosing_The_application_is_still_identifying_new_plugins__Close_anyway_ {
