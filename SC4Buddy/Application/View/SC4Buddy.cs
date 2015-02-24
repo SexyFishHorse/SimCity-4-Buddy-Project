@@ -234,6 +234,7 @@
 
             if (form == null)
             {
+                var client = new BuddyServerClient(ApiConnect.GetClient());
                 form = new UserFolderForm(
                     userFolder,
                     pluginGroupController,
@@ -245,7 +246,8 @@
                     new PluginsController(
                         new PluginsDataAccess(userFolder, new JsonFileWriter(), pluginGroupController),
                         userFolder,
-                        new PluginMatcher(new BuddyServerClient(ApiConnect.GetClient()))));
+                        new PluginMatcher(client),
+                        client));
                 userFolderForms.Add(form);
             }
 
@@ -384,11 +386,13 @@
             var userFolder = selectUserFolderForm.UserFolder;
             Log.Info(string.Format("Installing in user folder {0}", userFolder.FolderPath));
 
+            var client = new BuddyServerClient(ApiConnect.GetClient());
             var form = new InstallPluginsForm(
                 new PluginsController(
                     new PluginsDataAccess(userFolder, new JsonFileWriter(), pluginGroupController),
                     userFolder,
-                    new PluginMatcher(new BuddyServerClient(ApiConnect.GetClient()))),
+                    new PluginMatcher(client),
+                    client),
                 files,
                 userFolder,
                 pluginMatcher);

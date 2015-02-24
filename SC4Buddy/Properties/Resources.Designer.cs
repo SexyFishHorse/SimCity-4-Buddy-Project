@@ -100,6 +100,26 @@ namespace NIHEI.SC4Buddy.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to cancel the auto grouping of plugins?.
+        /// </summary>
+        internal static string FolderScannerForm_FolderScannerFormFormClosing_Do_you_want_to_cancel_the_auto_grouping_of_plugins_ {
+            get {
+                return ResourceManager.GetString("FolderScannerForm_FolderScannerFormFormClosing_Do_you_want_to_cancel_the_auto_gro" +
+                        "uping_of_plugins_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to cancel the scanning for new files?.
+        /// </summary>
+        internal static string FolderScannerForm_FolderScannerFormFormClosing_Do_you_want_to_cancel_the_scanning_for_new_files_ {
+            get {
+                return ResourceManager.GetString("FolderScannerForm_FolderScannerFormFormClosing_Do_you_want_to_cancel_the_scanning" +
+                        "_for_new_files_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon icon {
@@ -126,6 +146,74 @@ namespace NIHEI.SC4Buddy.Properties {
             get {
                 object obj = ResourceManager.GetObject("IconZoom", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Identified {0} new plugins..
+        /// </summary>
+        internal static string PluginsForm_IdentifyPluginsBackgroundWorkerRunWorkerCompleted_Identified__0__new_plugins_ {
+            get {
+                return ResourceManager.GetString("PluginsForm_IdentifyPluginsBackgroundWorkerRunWorkerCompleted_Identified__0__new_" +
+                        "plugins_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm cancellation.
+        /// </summary>
+        internal static string PluginsForm_PluginsFormFormClosing_Confirm_cancellation {
+            get {
+                return ResourceManager.GetString("PluginsForm_PluginsFormFormClosing_Confirm_cancellation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The application is still identifying new plugins. Close anyway?.
+        /// </summary>
+        internal static string PluginsForm_PluginsFormFormClosing_The_application_is_still_identifying_new_plugins__Close_anyway_ {
+            get {
+                return ResourceManager.GetString("PluginsForm_PluginsFormFormClosing_The_application_is_still_identifying_new_plugi" +
+                        "ns__Close_anyway_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The application is still updating info for known plugins. Close anyway?.
+        /// </summary>
+        internal static string PluginsForm_PluginsFormFormClosing_The_application_is_still_updating_info_for_known_plugins__Close_anyway_ {
+            get {
+                return ResourceManager.GetString("PluginsForm_PluginsFormFormClosing_The_application_is_still_updating_info_for_kno" +
+                        "wn_plugins__Close_anyway_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update complete.
+        /// </summary>
+        internal static string PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Update_complete {
+            get {
+                return ResourceManager.GetString("PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Update_complete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updated information for {0} plugins..
+        /// </summary>
+        internal static string PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Updated_information_for__0__plugins_ {
+            get {
+                return ResourceManager.GetString("PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Updated_information_for_" +
+                        "_0__plugins_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating info for known plugins from the server..
+        /// </summary>
+        internal static string PluginsForm_UpdateInfoForKnownPluginsToolStripMenuItemClick_Updating_info_for_known_plugins_from_the_server_ {
+            get {
+                return ResourceManager.GetString("PluginsForm_UpdateInfoForKnownPluginsToolStripMenuItemClick_Updating_info_for_kno" +
+                        "wn_plugins_from_the_server_", resourceCulture);
             }
         }
         

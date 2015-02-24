@@ -2,8 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
+    using Asser.Sc4Buddy.Server.Api.V1.Client;
+    using log4net;
     using Microsoft.VisualBasic.FileIO;
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
@@ -14,15 +18,20 @@
 
     public class PluginsController : IPluginsController
     {
+        private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
         private readonly PluginsDataAccess pluginsDataAccess;
 
         private readonly IPluginMatcher pluginMatcher;
 
-        public PluginsController(PluginsDataAccess pluginsDataAccess, UserFolder userFolder, IPluginMatcher pluginMatcher)
+        private readonly IBuddyServerClient client;
+
+        public PluginsController(PluginsDataAccess pluginsDataAccess, UserFolder userFolder, IPluginMatcher pluginMatcher, IBuddyServerClient client)
         {
             this.pluginsDataAccess = pluginsDataAccess;
             UserFolder = userFolder;
             this.pluginMatcher = pluginMatcher;
+            this.client = client;
 
             ReloadPlugins();
         }
@@ -159,11 +168,11 @@
             UserFolder.Plugins = Plugins;
         }
 
-        public int UpdateInfoForAllPluginsFromServer()
+        public int IdentifyNewPlugins(BackgroundWorker backgroundWorker)
         {
             ApiConnect.ThrowErrorOnConnectionOrDisabledFeature(Settings.Keys.DetectPlugins);
 
-            var numUpdated = 0;
+            var numIdentified = 0;
 
             foreach (var plugin in Plugins.Where(x => x.RemotePlugin == null))
             {
@@ -180,11 +189,60 @@
                 plugin.Link = matchedPlugin.Link;
                 plugin.Description = matchedPlugin.Description;
 
-                numUpdated++;
+                numIdentified++;
             }
 
             pluginsDataAccess.SavePlugins(Plugins, UserFolder);
             ReloadPlugins();
+
+            return numIdentified;
+        }
+
+        public int UpdateKnownPlugins(BackgroundWorker backgroundWorker)
+        {
+            Log.Info("Update known plugins from the server");
+            ApiConnect.ThrowErrorOnConnectionOrDisabledFeature(Settings.Keys.FetchInformationFromRemoteServer);
+            Log.Debug("Feature enabled");
+
+            var numUpdated = 0;
+            var knownPlugins = Plugins.Where(x => x.RemotePlugin != null).ToList();
+            var numProcessed = 0.0;
+            foreach (var plugin in knownPlugins)
+            {
+                var remotePlugin = client.GetPlugin(plugin.RemotePluginId);
+
+                if (remotePlugin == null)
+                {
+                    Log.Warn(
+                        string.Format(
+                            "The plugin \"{0}\" does not exist or has been removed from the server.",
+                            plugin.RemotePluginId));
+                }
+                else
+                {
+                    Log.Debug(
+                        string.Format(
+                            "The plugin \"{0}\" ({1}) was updated as the remote plugin \"{2}\" ({3}).",
+                            plugin.Name,
+                            plugin.Id,
+                            remotePlugin.Name,
+                            remotePlugin.Id));
+                    plugin.Name = remotePlugin.Name;
+                    plugin.Link = remotePlugin.Link;
+                    plugin.Author = remotePlugin.Author;
+                    plugin.Description = remotePlugin.Description;
+
+                    numUpdated++;
+                }
+
+                numProcessed++;
+
+                backgroundWorker.ReportProgress(
+                    (int)Math.Round((numProcessed / knownPlugins.Count) * 100),
+                    string.Format("Processed {0} of {1} known plugins.", numProcessed, knownPlugins.Count));
+            }
+
+            Log.Info(string.Format("Updated {0} plugins.", numUpdated));
 
             return numUpdated;
         }

@@ -34,7 +34,6 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.installedPluginsListView = new System.Windows.Forms.ListView();
             this.pluginColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.reportPluginLinkLabel = new System.Windows.Forms.LinkLabel();
             this.pluginInfoSplitContainer = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
             this.nameLabel = new System.Windows.Forms.Label();
@@ -59,9 +58,15 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.scanForNewPluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scanForNonpluginFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateInfoForAllPluginsFromServerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.identifyNewPluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateInfoForKnownPluginsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForMissingDependenciesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openInFileExplorerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.updateInfoBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.identifyPluginsBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -75,6 +80,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.panel1.SuspendLayout();
             this.errorPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -110,7 +116,6 @@ namespace NIHEI.SC4Buddy.Plugins.View
             // groupBox1
             // 
             resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Controls.Add(this.reportPluginLinkLabel);
             this.groupBox1.Controls.Add(this.pluginInfoSplitContainer);
             this.groupBox1.Controls.Add(this.disableFilesButton);
             this.groupBox1.Controls.Add(this.moveOrCopyButton);
@@ -118,13 +123,6 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.groupBox1.Controls.Add(this.uninstallButton);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
-            // 
-            // reportPluginLinkLabel
-            // 
-            resources.ApplyResources(this.reportPluginLinkLabel, "reportPluginLinkLabel");
-            this.reportPluginLinkLabel.Name = "reportPluginLinkLabel";
-            this.reportPluginLinkLabel.TabStop = true;
-            this.reportPluginLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.ReportPluginLinkLabelLinkClicked);
             // 
             // pluginInfoSplitContainer
             // 
@@ -288,7 +286,8 @@ namespace NIHEI.SC4Buddy.Plugins.View
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.scanForNonpluginFilesToolStripMenuItem,
-            this.updateInfoForAllPluginsFromServerToolStripMenuItem,
+            this.identifyNewPluginsToolStripMenuItem,
+            this.updateInfoForKnownPluginsToolStripMenuItem,
             this.checkForMissingDependenciesToolStripMenuItem,
             this.openInFileExplorerToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
@@ -300,11 +299,17 @@ namespace NIHEI.SC4Buddy.Plugins.View
             resources.ApplyResources(this.scanForNonpluginFilesToolStripMenuItem, "scanForNonpluginFilesToolStripMenuItem");
             this.scanForNonpluginFilesToolStripMenuItem.Click += new System.EventHandler(this.ScanForNonpluginFilesToolStripMenuItemClick);
             // 
-            // updateInfoForAllPluginsFromServerToolStripMenuItem
+            // identifyNewPluginsToolStripMenuItem
             // 
-            this.updateInfoForAllPluginsFromServerToolStripMenuItem.Name = "updateInfoForAllPluginsFromServerToolStripMenuItem";
-            resources.ApplyResources(this.updateInfoForAllPluginsFromServerToolStripMenuItem, "updateInfoForAllPluginsFromServerToolStripMenuItem");
-            this.updateInfoForAllPluginsFromServerToolStripMenuItem.Click += new System.EventHandler(this.UpdateInfoForAllPluginsFromServerToolStripMenuItemClick);
+            this.identifyNewPluginsToolStripMenuItem.Name = "identifyNewPluginsToolStripMenuItem";
+            resources.ApplyResources(this.identifyNewPluginsToolStripMenuItem, "identifyNewPluginsToolStripMenuItem");
+            this.identifyNewPluginsToolStripMenuItem.Click += new System.EventHandler((sender, e) => this.IdentifyNewPluginsToolStripMenuItemClick(sender, e));
+            // 
+            // updateInfoForKnownPluginsToolStripMenuItem
+            // 
+            this.updateInfoForKnownPluginsToolStripMenuItem.Name = "updateInfoForKnownPluginsToolStripMenuItem";
+            resources.ApplyResources(this.updateInfoForKnownPluginsToolStripMenuItem, "updateInfoForKnownPluginsToolStripMenuItem");
+            this.updateInfoForKnownPluginsToolStripMenuItem.Click += new System.EventHandler(this.UpdateInfoForKnownPluginsToolStripMenuItemClick);
             // 
             // checkForMissingDependenciesToolStripMenuItem
             // 
@@ -318,12 +323,48 @@ namespace NIHEI.SC4Buddy.Plugins.View
             resources.ApplyResources(this.openInFileExplorerToolStripMenuItem, "openInFileExplorerToolStripMenuItem");
             this.openInFileExplorerToolStripMenuItem.Click += new System.EventHandler(this.OpenInFileExplorerToolStripMenuItemClick);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripProgressBar,
+            this.toolStripStatusLabel});
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
+            this.statusStrip1.Name = "statusStrip1";
+            // 
+            // toolStripProgressBar
+            // 
+            this.toolStripProgressBar.Name = "toolStripProgressBar";
+            resources.ApplyResources(this.toolStripProgressBar, "toolStripProgressBar");
+            this.toolStripProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            // 
+            // toolStripStatusLabel
+            // 
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            resources.ApplyResources(this.toolStripStatusLabel, "toolStripStatusLabel");
+            // 
+            // updateInfoBackgroundWorker
+            // 
+            this.updateInfoBackgroundWorker.WorkerReportsProgress = true;
+            this.updateInfoBackgroundWorker.WorkerSupportsCancellation = true;
+            this.updateInfoBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.UpdateInfoBackgroundWorkerDoWork);
+            this.updateInfoBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.UpdateInfoBackgroundWorkerProgressChanged);
+            this.updateInfoBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.UpdateInfoBackgroundWorkerRunWorkerCompleted);
+            // 
+            // identifyPluginsBackgroundWorker
+            // 
+            this.identifyPluginsBackgroundWorker.WorkerReportsProgress = true;
+            this.identifyPluginsBackgroundWorker.WorkerSupportsCancellation = true;
+            this.identifyPluginsBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.IdentifyPluginsBackgroundWorkerDoWork);
+            this.identifyPluginsBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.IdentifyPluginsBackgroundWorkerProgressChanged);
+            this.identifyPluginsBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.IdentifyPluginsBackgroundWorkerRunWorkerCompleted);
+            // 
             // PluginsForm
             // 
             this.AllowDrop = true;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.closeButton;
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.closeButton);
             this.Controls.Add(this.menuStrip1);
@@ -339,7 +380,6 @@ namespace NIHEI.SC4Buddy.Plugins.View
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.pluginInfoSplitContainer.Panel1.ResumeLayout(false);
             this.pluginInfoSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pluginInfoSplitContainer)).EndInit();
@@ -351,6 +391,8 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.errorPanel.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,7 +421,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
         private System.Windows.Forms.ToolStripMenuItem scanForNewPluginsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem scanForNonpluginFilesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem updateInfoForAllPluginsFromServerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem identifyNewPluginsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkForMissingDependenciesToolStripMenuItem;
         private System.Windows.Forms.Button moveOrCopyButton;
         private System.Windows.Forms.Button disableFilesButton;
@@ -388,7 +430,12 @@ namespace NIHEI.SC4Buddy.Plugins.View
         private System.Windows.Forms.TextBox errorTextBox;
         private System.Windows.Forms.SplitContainer pluginInfoSplitContainer;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.LinkLabel reportPluginLinkLabel;
         private System.Windows.Forms.ToolStripMenuItem openInFileExplorerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateInfoForKnownPluginsToolStripMenuItem;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+        private System.ComponentModel.BackgroundWorker updateInfoBackgroundWorker;
+        private System.ComponentModel.BackgroundWorker identifyPluginsBackgroundWorker;
     }
 }

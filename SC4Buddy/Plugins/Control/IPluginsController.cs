@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Plugins.Control
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using NIHEI.SC4Buddy.Model;
 
     public interface IPluginsController
@@ -15,7 +16,7 @@
 
         void UninstallPlugin(Plugin plugin);
 
-        int UpdateInfoForAllPluginsFromServer();
+        int IdentifyNewPlugins(BackgroundWorker backgroundWorker);
 
         int NumberOfRecognizedPlugins(UserFolder userFolder);
 
@@ -28,5 +29,7 @@
         void RemoveFilesFromPlugins(ICollection<string> deletedFilePaths);
 
         void ReloadPlugins();
+
+        int UpdateKnownPlugins(BackgroundWorker backgroundWorker);
     }
 }

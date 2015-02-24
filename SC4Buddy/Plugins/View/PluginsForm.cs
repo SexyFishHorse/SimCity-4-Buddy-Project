@@ -1,6 +1,7 @@
 ﻿namespace NIHEI.SC4Buddy.Plugins.View
 {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
@@ -85,7 +86,7 @@
         {
             RepopulateInstalledPluginsListView();
 
-            updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.FetchInformationFromRemoteServer);
+            identifyNewPluginsToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.FetchInformationFromRemoteServer);
             checkForMissingDependenciesToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.AllowCheckForMissingDependencies);
         }
 
@@ -133,39 +134,10 @@
 
                 uninstallButton.Enabled = true;
 
-                ////reportPluginLinkLabel.Visible = selectedPlugin.RemotePlugin != null;
-                reportPluginLinkLabel.Visible = false;
                 moveOrCopyButton.Enabled = true;
                 disableFilesButton.Enabled = true;
                 updateInfoButton.Enabled = true;
 
-                // TODO: Show reports
-                ////if (selectedPlugin.RemotePlugin != null
-                ////    && selectedPlugin.RemotePlugin.Reports != null
-                ////    && selectedPlugin.RemotePlugin.Reports.Any(x => x.Approved))
-                ////{
-                ////    var output = new StringBuilder();
-
-                ////    foreach (var report in selectedPlugin.RemotePlugin.Reports
-                ////        .Where(x => x.Approved)
-                ////        .OrderByDescending(x => x.Date))
-                ////    {
-                ////        var message = string.Format(
-                ////            "[{0}] - {1}",
-                ////            report.Date.ToString(CultureInfo.CurrentUICulture.DateTimeFormat),
-                ////            report.Body);
-
-                ////        output.AppendLine(message);
-                ////        output.AppendLine();
-                ////    }
-
-                ////    errorTextBox.Text = output.ToString();
-                ////    pluginInfoSplitContainer.Panel2Collapsed = false;
-                ////}
-                ////else
-                ////{
-                ////    pluginInfoSplitContainer.Panel2Collapsed = true;
-                ////}
                 pluginInfoSplitContainer.Panel2Collapsed = true;
             }
             else
@@ -348,49 +320,22 @@
             nonPluginFilesScannerUi.RemoveNonPluginFilesAndShowSummary(this);
         }
 
-        private void UpdateInfoForAllPluginsFromServerToolStripMenuItemClick(object sender, EventArgs e)
+        private void IdentifyNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
-            try
-            {
-                UpdateInfoForAllPluginsFromServer();
-                RepopulateInstalledPluginsListView();
-            }
-            catch (Exception ex)
-            {
-                Log.Error("Fetch information for plugins error", ex);
-                MessageBox.Show(
-                    this,
-                    LocalizationStrings.ErrorOccuredDuringFetchOfInformationForPlugins + ex.Message,
-                    LocalizationStrings.ErrorDuringFetchInformationForPlugins,
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-            }
-        }
-
-        private void UpdateInfoForAllPluginsFromServer()
-        {
-            var numUpdated = pluginsController.UpdateInfoForAllPluginsFromServer();
-            RepopulateInstalledPluginsListView();
-
-            MessageBox.Show(
-                this,
-                string.Format(LocalizationStrings.InformationForNumPluginsWereUpdated, numUpdated),
-                LocalizationStrings.PluginInformationUpdated,
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1);
+            Log.Debug("Clicked identify new plugins");
+            identifyPluginsBackgroundWorker.RunWorkerAsync();
         }
 
         private void UserFolderFormActivated(object sender, EventArgs e)
         {
-            updateInfoForAllPluginsFromServerToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
+            identifyNewPluginsToolStripMenuItem.Visible = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
         }
 
         private async void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
             ////try
             ////{
-            ////    await pluginsController.UpdateInfoForAllPluginsFromServer();
+            ////    await pluginsController.IdentifyNewPlugins();
 
             ////    var numRecognizedPlugins = pluginsController.NumberOfRecognizedPlugins(userFolder);
 
@@ -502,24 +447,6 @@
             }
         }
 
-        private void ReportPluginLinkLabelLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            ////var dialog = new ReportPluginForm
-            ////{
-            ////    Plugin = selectedPlugin.RemotePlugin
-            ////};
-
-            ////if (dialog.ShowDialog() == DialogResult.OK)
-            ////{
-            ////    MessageBox.Show(
-            ////        this,
-            ////        LocalizationStrings.ThePluginHasBeenReportedAnAdministratorWillHaveToApproveItFirst,
-            ////        LocalizationStrings.PluginSuccessfullyReported,
-            ////        MessageBoxButtons.OK,
-            ////        MessageBoxIcon.Information);
-            ////}
-        }
-
         private void OpenInFileExplorerToolStripMenuItemClick(object sender, EventArgs e)
         {
             if (Directory.Exists(userFolder.FolderPath))
@@ -585,7 +512,116 @@
         private void PluginsFormFormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
+            if (updateInfoBackgroundWorker.IsBusy)
+            {
+                if (MessageBox.Show(
+                    this,
+                    Resources.PluginsForm_PluginsFormFormClosing_The_application_is_still_updating_info_for_known_plugins__Close_anyway_,
+                    Resources.PluginsForm_PluginsFormFormClosing_Confirm_cancellation,
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    updateInfoBackgroundWorker.CancelAsync();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            if (identifyPluginsBackgroundWorker.IsBusy)
+            {
+                if (MessageBox.Show(
+                    this,
+                    Resources.PluginsForm_PluginsFormFormClosing_The_application_is_still_identifying_new_plugins__Close_anyway_,
+                    Resources.PluginsForm_PluginsFormFormClosing_Confirm_cancellation,
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    updateInfoBackgroundWorker.CancelAsync();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
             Hide();
+        }
+
+        private void UpdateInfoForKnownPluginsToolStripMenuItemClick(object sender, EventArgs e)
+        {
+            Log.Debug("Clicked update info for known plugins");
+            toolStripProgressBar.Visible = true;
+            toolStripProgressBar.Value = 0;
+            toolStripStatusLabel.Visible = true;
+            toolStripStatusLabel.Text = Resources.PluginsForm_UpdateInfoForKnownPluginsToolStripMenuItemClick_Updating_info_for_known_plugins_from_the_server_;
+
+            updateInfoBackgroundWorker.RunWorkerAsync();
+        }
+
+        private void UpdateInfoBackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+            Log.Debug("Starting update info background worker.");
+            var numUpdated = pluginsController.UpdateKnownPlugins(sender as BackgroundWorker);
+
+            e.Result = numUpdated;
+        }
+
+        private void UpdateInfoBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Log.Debug("Update info progress changed.");
+            toolStripProgressBar.Style = ProgressBarStyle.Continuous;
+            toolStripProgressBar.Value = e.ProgressPercentage;
+            toolStripStatusLabel.Text = e.UserState.ToString();
+        }
+
+        private void UpdateInfoBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Log.Debug("Update info background worker completed");
+            toolStripProgressBar.Visible = false;
+            toolStripProgressBar.Value = 0;
+            toolStripStatusLabel.Visible = false;
+            toolStripStatusLabel.Text = string.Empty;
+            RepopulateInstalledPluginsListView();
+
+            MessageBox.Show(
+                this,
+                string.Format(Resources.PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Updated_information_for__0__plugins_, e.Result),
+                Resources.PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Update_complete,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
+        private void IdentifyPluginsBackgroundWorkerDoWork(object sender, DoWorkEventArgs e)
+        {
+            Log.Debug("Starting identify plugins background worker.");
+            var numIdentified = pluginsController.IdentifyNewPlugins(sender as BackgroundWorker);
+
+            e.Result = numIdentified;
+        }
+
+        private void IdentifyPluginsBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Log.Debug("Update info progress changed.");
+            toolStripProgressBar.Style = ProgressBarStyle.Continuous;
+            toolStripProgressBar.Value = e.ProgressPercentage;
+            toolStripStatusLabel.Text = e.UserState.ToString();
+        }
+
+        private void IdentifyPluginsBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Log.Debug("Update info background worker completed");
+            toolStripProgressBar.Visible = false;
+            toolStripProgressBar.Value = 0;
+            toolStripStatusLabel.Visible = false;
+            toolStripStatusLabel.Text = string.Empty;
+            RepopulateInstalledPluginsListView();
+
+            MessageBox.Show(
+                this,
+                string.Format(Resources.PluginsForm_IdentifyPluginsBackgroundWorkerRunWorkerCompleted_Identified__0__new_plugins_, e.Result),
+                Resources.PluginsForm_UpdateInfoBackgroundWorkerRunWorkerCompleted_Update_complete,
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
         }
     }
 }
