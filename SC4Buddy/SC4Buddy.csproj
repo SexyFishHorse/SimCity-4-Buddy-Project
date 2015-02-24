@@ -155,7 +155,6 @@
       <DependentUpon>Entities.cs</DependentUpon>
     </Compile>
     <Compile Include="Application\DataAccess\SettingsDataAccess.cs" />
-    <Compile Include="Entities\Remote\PluginReport.cs" />
     <Compile Include="Plugins\Installer\FileHandlers\ArchiveHandler.cs" />
     <Compile Include="Plugins\Installer\InstallerEventArgs\InstalledPluginEventArgs.cs" />
     <Compile Include="Plugins\Installer\InstallerEventArgs\InstallPluginEventArgs.cs" />
