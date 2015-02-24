@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
     using Asser.Sc4Buddy.Server.Api.V1.Client;
@@ -22,12 +23,12 @@
             this.mainUserFolder = mainUserFolder;
         }
 
-        public IEnumerable<Asser.Sc4Buddy.Server.Api.V1.Models.Plugin> CheckDependencies(UserFolder userFolder)
+        public IEnumerable<Asser.Sc4Buddy.Server.Api.V1.Models.Plugin> CheckDependencies(UserFolder userFolder, BackgroundWorker backgroundWorker)
         {
             Log.Debug("Fetching all plugins from the server.");
             var allServerPlugins = buddyServerClient.GetAllPlugins().ToList();
+            backgroundWorker.ReportProgress(20, "Fetched plugin information from the server");
 
-            // Get all dependencies
             Log.Debug("Loading all dependencies.");
             var dependencies = new HashSet<Guid>();
             foreach (var dependency in userFolder.Plugins
@@ -39,24 +40,30 @@
                 dependencies.Add(dependency);
             }
 
-            Log.Debug(string.Format("{0} dependencies found in total.", dependencies.Count));
+            backgroundWorker.ReportProgress(40, "Loaded all dependencies. Checking the main user folder");
 
+            Log.Debug(string.Format("{0} dependencies found in total.", dependencies.Count));
             Log.Debug(string.Format("Looping through {0} plugins in the main user folder.", mainUserFolder.Plugins.Count(x => x.RemotePlugin != null)));
-            // Remove installed dependencies from the main user folder
             foreach (var plugin in mainUserFolder.Plugins.Where(x => x.RemotePlugin != null))
             {
                 dependencies.Remove(plugin.RemotePluginId);
                 Log.Debug(string.Format("Removed {0} ({1}) as a dependency", plugin.Name, plugin.RemotePluginId));
             }
 
-            Log.Debug(string.Format("{0} dependencies remaining. Looping through {1} plugins in the user folder.", dependencies.Count, userFolder.Plugins.Count(x => x.RemotePlugin != null)));
-            // Remove installed dependencies in the user folder
+            backgroundWorker.ReportProgress(60, "Checking the user folder");
+
+            Log.Debug(
+                string.Format(
+                    "{0} dependencies remaining. Looping through {1} plugins in the user folder.",
+                    dependencies.Count,
+                    userFolder.Plugins.Count(x => x.RemotePlugin != null)));
             foreach (var plugin in userFolder.Plugins.Where(x => x.RemotePlugin != null))
             {
                 dependencies.Remove(plugin.RemotePluginId);
                 Log.Debug(string.Format("Removed {0} ({1}) as a dependency", plugin.Name, plugin.RemotePluginId));
             }
 
+            backgroundWorker.ReportProgress(80, "Loading data for missing dependencies");
             Log.Debug(string.Format("{0} dependencies remaining. Loading plugin data for said plugins.", dependencies.Count));
             return dependencies.Select(dependency => allServerPlugins.First(plugin => plugin.Id == dependency));
         }

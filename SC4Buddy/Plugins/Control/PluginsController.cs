@@ -261,7 +261,7 @@
             Log.Info("Checking for missing dependencies");
             ApiConnect.ThrowErrorOnConnectionOrDisabledFeature(Settings.Keys.AllowCheckForMissingDependencies);
 
-            return dependencyChecker.CheckDependencies(userFolder);
+            return dependencyChecker.CheckDependencies(userFolder, backgroundWorker);
         }
 
         public int NumberOfRecognizedPlugins(UserFolder userFolder)
