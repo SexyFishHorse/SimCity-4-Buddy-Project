@@ -144,6 +144,7 @@
     <Compile Include="Application\Control\SettingsController.cs" />
     <Compile Include="Plugins\Control\PluginsController.cs" />
     <Compile Include="Plugins\DataAccess\PluginsDataAccess.cs" />
+    <Compile Include="Plugins\Services\DependencyChecker.cs" />
     <Compile Include="Remote\Models\BuddyServerException.cs" />
     <Compile Include="Remote\Utils\ApiConnect.cs" />
     <Compile Include="Remote\Utils\ApiConnectCodes.cs" />
@@ -189,7 +190,9 @@
     <Compile Include="Model\QuarantinedFile.cs" />
     <Compile Include="Model\UserFolder.cs" />
     <Compile Include="Model\ValidationResult.cs" />
-    <Compile Include="Plugins\Services\IDependencyChecker.cs" />
+    <Compile Include="Plugins\Services\IDependencyChecker.cs">
+      <DependentUpon>DependencyChecker.cs</DependentUpon>
+    </Compile>
     <Compile Include="Remote\IPluginMatcher.cs">
       <DependentUpon>PluginMatcher.cs</DependentUpon>
     </Compile>
