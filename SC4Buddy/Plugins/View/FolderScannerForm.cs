@@ -11,8 +11,8 @@
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.Control;
+    using NIHEI.SC4Buddy.Plugins.Services;
     using NIHEI.SC4Buddy.Properties;
-    using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.View.Elements;
     using Plugin = NIHEI.SC4Buddy.Model.Plugin;

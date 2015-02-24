@@ -193,10 +193,10 @@
     <Compile Include="Plugins\Services\IDependencyChecker.cs">
       <DependentUpon>DependencyChecker.cs</DependentUpon>
     </Compile>
-    <Compile Include="Remote\IPluginMatcher.cs">
+    <Compile Include="Plugins\Services\IPluginMatcher.cs">
       <DependentUpon>PluginMatcher.cs</DependentUpon>
     </Compile>
-    <Compile Include="Remote\PluginMatcher.cs" />
+    <Compile Include="Plugins\Services\PluginMatcher.cs" />
     <Compile Include="Configuration\LauncherSettings.cs" />
     <Compile Include="Application\View\AboutBox.cs">
       <SubType>Form</SubType>

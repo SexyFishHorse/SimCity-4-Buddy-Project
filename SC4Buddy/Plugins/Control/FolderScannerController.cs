@@ -9,7 +9,7 @@
     using log4net;
     using NIHEI.Common.IO;
     using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Remote;
+    using NIHEI.SC4Buddy.Plugins.Services;
     using NIHEI.SC4Buddy.UserFolders.Control;
 
     public class FolderScannerController
