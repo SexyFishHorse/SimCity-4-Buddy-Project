@@ -82,9 +82,6 @@
         private void UserFolderFormLoad(object sender, EventArgs e)
         {
             RepopulateInstalledPluginsListView();
-
-            identifyNewPluginsToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.FetchInformationFromRemoteServer);
-            checkForMissingDependenciesToolStripMenuItem.Visible = ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.AllowCheckForMissingDependencies);
         }
 
         private void RepopulateInstalledPluginsListView()
@@ -551,7 +548,7 @@
             toolStripProgressBar.Value = 0;
             toolStripStatusLabel.Visible = false;
             toolStripStatusLabel.Text = string.Empty;
-            RepopulateInstalledPluginsListView();
+            ReloadAndRepopulate();
 
             MessageBox.Show(
                 this,
@@ -584,7 +581,7 @@
             toolStripProgressBar.Value = 0;
             toolStripStatusLabel.Visible = false;
             toolStripStatusLabel.Text = string.Empty;
-            RepopulateInstalledPluginsListView();
+            ReloadAndRepopulate();
 
             MessageBox.Show(
                 this,
