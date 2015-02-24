@@ -532,7 +532,7 @@
                     Resources.PluginsForm_PluginsFormFormClosing_Confirm_cancellation,
                     MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    updateInfoBackgroundWorker.CancelAsync();
+                    identifyPluginsBackgroundWorker.CancelAsync();
                 }
                 else
                 {
@@ -597,7 +597,7 @@
 
         private void IdentifyPluginsBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Log.Debug("Update info progress changed.");
+            Log.Debug("Identify new plugins progress changed.");
             toolStripProgressBar.Style = ProgressBarStyle.Continuous;
             toolStripProgressBar.Value = e.ProgressPercentage;
             toolStripStatusLabel.Text = e.UserState.ToString();
@@ -605,7 +605,7 @@
 
         private void IdentifyPluginsBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Log.Debug("Update info background worker completed");
+            Log.Debug("Identify new plugins background worker completed");
             toolStripProgressBar.Visible = false;
             toolStripProgressBar.Value = 0;
             toolStripStatusLabel.Visible = false;
