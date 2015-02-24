@@ -551,7 +551,7 @@
             toolStripProgressBar.Value = 0;
             toolStripStatusLabel.Visible = false;
             toolStripStatusLabel.Text = string.Empty;
-            RepopulateInstalledPluginsListView();
+            ReloadAndRepopulate();
 
             MessageBox.Show(
                 this,
@@ -584,7 +584,7 @@
             toolStripProgressBar.Value = 0;
             toolStripStatusLabel.Visible = false;
             toolStripStatusLabel.Text = string.Empty;
-            RepopulateInstalledPluginsListView();
+            ReloadAndRepopulate();
 
             MessageBox.Show(
                 this,
