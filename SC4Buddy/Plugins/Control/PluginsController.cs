@@ -12,6 +12,7 @@
     using NIHEI.SC4Buddy.Configuration;
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.DataAccess;
+    using NIHEI.SC4Buddy.Plugins.Services;
     using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Remote.Utils;
     using SearchOption = System.IO.SearchOption;
@@ -22,16 +23,24 @@
 
         private readonly PluginsDataAccess pluginsDataAccess;
 
+        private readonly IDependencyChecker dependencyChecker;
+
         private readonly IPluginMatcher pluginMatcher;
 
         private readonly IBuddyServerClient client;
 
-        public PluginsController(PluginsDataAccess pluginsDataAccess, UserFolder userFolder, IPluginMatcher pluginMatcher, IBuddyServerClient client)
+        public PluginsController(
+            PluginsDataAccess pluginsDataAccess,
+            UserFolder userFolder,
+            IPluginMatcher pluginMatcher,
+            IBuddyServerClient client,
+            IDependencyChecker dependencyChecker)
         {
             this.pluginsDataAccess = pluginsDataAccess;
             UserFolder = userFolder;
             this.pluginMatcher = pluginMatcher;
             this.client = client;
+            this.dependencyChecker = dependencyChecker;
 
             ReloadPlugins();
         }
@@ -245,6 +254,14 @@
             Log.Info(string.Format("Updated {0} plugins.", numUpdated));
 
             return numUpdated;
+        }
+
+        public IEnumerable<Asser.Sc4Buddy.Server.Api.V1.Models.Plugin> CheckDependencies(UserFolder userFolder, BackgroundWorker backgroundWorker)
+        {
+            Log.Info("Checking for missing dependencies");
+            ApiConnect.ThrowErrorOnConnectionOrDisabledFeature(Settings.Keys.AllowCheckForMissingDependencies);
+
+            return dependencyChecker.CheckDependencies(userFolder);
         }
 
         public int NumberOfRecognizedPlugins(UserFolder userFolder)

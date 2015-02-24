@@ -31,5 +31,7 @@
         void ReloadPlugins();
 
         int UpdateKnownPlugins(BackgroundWorker backgroundWorker);
+
+        IEnumerable<Asser.Sc4Buddy.Server.Api.V1.Models.Plugin> CheckDependencies(UserFolder userFolder, BackgroundWorker backgroundWorker);
     }
 }
