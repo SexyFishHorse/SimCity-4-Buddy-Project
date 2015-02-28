@@ -6,6 +6,9 @@
 
     public interface IDependencyChecker
     {
-        IEnumerable<Asser.Sc4Buddy.Server.Api.V1.Models.Plugin> CheckDependencies(UserFolder userFolder, BackgroundWorker backgroundWorker);
+        IEnumerable<Asser.Sc4Buddy.Server.Api.V1.Models.Plugin> CheckDependencies(
+            UserFolder userFolder,
+            ICollection<Plugin> mainUserFolderPlugins,
+            BackgroundWorker backgroundWorker);
     }
 }

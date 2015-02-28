@@ -15,15 +15,12 @@
 
         private readonly BuddyServerClient buddyServerClient;
 
-        private readonly UserFolder mainUserFolder;
-
-        public DependencyChecker(BuddyServerClient buddyServerClient, UserFolder mainUserFolder)
+        public DependencyChecker(BuddyServerClient buddyServerClient)
         {
             this.buddyServerClient = buddyServerClient;
-            this.mainUserFolder = mainUserFolder;
         }
 
-        public IEnumerable<Asser.Sc4Buddy.Server.Api.V1.Models.Plugin> CheckDependencies(UserFolder userFolder, BackgroundWorker backgroundWorker)
+        public IEnumerable<Asser.Sc4Buddy.Server.Api.V1.Models.Plugin> CheckDependencies(UserFolder userFolder, ICollection<Plugin> mainUserFolderPlugins, BackgroundWorker backgroundWorker)
         {
             Log.Debug("Fetching all plugins from the server.");
             var allServerPlugins = buddyServerClient.GetAllPlugins().ToList();
@@ -43,8 +40,8 @@
             backgroundWorker.ReportProgress(40, "Loaded all dependencies. Checking the main user folder");
 
             Log.Debug(string.Format("{0} dependencies found in total.", dependencies.Count));
-            Log.Debug(string.Format("Looping through {0} plugins in the main user folder.", mainUserFolder.Plugins.Count(x => x.RemotePlugin != null)));
-            foreach (var plugin in mainUserFolder.Plugins.Where(x => x.RemotePlugin != null))
+            Log.Debug(string.Format("Looping through {0} plugins in the main user folder.", mainUserFolderPlugins.Count(x => x.RemotePlugin != null)));
+            foreach (var plugin in mainUserFolderPlugins.Where(x => x.RemotePlugin != null))
             {
                 dependencies.Remove(plugin.RemotePluginId);
                 Log.Debug(string.Format("Removed {0} ({1}) as a dependency", plugin.Name, plugin.RemotePluginId));

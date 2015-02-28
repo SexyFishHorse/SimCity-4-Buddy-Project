@@ -13,7 +13,6 @@
     using NIHEI.SC4Buddy.Model;
     using NIHEI.SC4Buddy.Plugins.DataAccess;
     using NIHEI.SC4Buddy.Plugins.Services;
-    using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Remote.Utils;
     using SearchOption = System.IO.SearchOption;
 
@@ -23,6 +22,8 @@
 
         private readonly PluginsDataAccess pluginsDataAccess;
 
+        private readonly PluginsDataAccess mainPluginsDataAccess;
+
         private readonly IDependencyChecker dependencyChecker;
 
         private readonly IPluginMatcher pluginMatcher;
@@ -31,12 +32,14 @@
 
         public PluginsController(
             PluginsDataAccess pluginsDataAccess,
+            PluginsDataAccess mainPluginsDataAccess,
             UserFolder userFolder,
             IPluginMatcher pluginMatcher,
             IBuddyServerClient client,
             IDependencyChecker dependencyChecker)
         {
             this.pluginsDataAccess = pluginsDataAccess;
+            this.mainPluginsDataAccess = mainPluginsDataAccess;
             UserFolder = userFolder;
             this.pluginMatcher = pluginMatcher;
             this.client = client;
@@ -261,7 +264,14 @@
             Log.Info("Checking for missing dependencies");
             ApiConnect.ThrowErrorOnConnectionOrDisabledFeature(Settings.Keys.AllowCheckForMissingDependencies);
 
-            return dependencyChecker.CheckDependencies(userFolder, backgroundWorker);
+            var mainUserFolderPlugins = GetMainFolderPlugins().ToList();
+
+            return dependencyChecker.CheckDependencies(userFolder, mainUserFolderPlugins, backgroundWorker);
+        }
+
+        public IEnumerable<Plugin> GetMainFolderPlugins()
+        {
+            return mainPluginsDataAccess.LoadPlugins();
         }
 
         public int NumberOfRecognizedPlugins(UserFolder userFolder)

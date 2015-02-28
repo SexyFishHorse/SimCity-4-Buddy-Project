@@ -21,7 +21,6 @@
     using NIHEI.SC4Buddy.Plugins.Services;
     using NIHEI.SC4Buddy.Plugins.View;
     using NIHEI.SC4Buddy.Properties;
-    using NIHEI.SC4Buddy.Remote;
     using NIHEI.SC4Buddy.Remote.Utils;
     using NIHEI.SC4Buddy.Resources;
     using NIHEI.SC4Buddy.UserFolders.Control;
@@ -231,7 +230,7 @@
             if (form == null)
             {
                 var client = new BuddyServerClient(ApiConnect.GetClient());
-                var dependencyChecker = new DependencyChecker(client, userFoldersController.GetMainUserFolder());
+                var dependencyChecker = new DependencyChecker(client);
                 form = new UserFolderForm(
                     userFolder,
                     pluginGroupController,
@@ -239,10 +238,11 @@
                     pluginMatcher,
                     new PluginsController(
                         new PluginsDataAccess(userFolder, new JsonFileWriter(), pluginGroupController),
+                        new PluginsDataAccess(userFoldersController.GetMainUserFolder(), new JsonFileWriter(), pluginGroupController),
                         userFolder,
                         new PluginMatcher(client),
                         client,
-                dependencyChecker));
+                        dependencyChecker));
                 userFolderForms.Add(form);
             }
 
@@ -382,10 +382,11 @@
             Log.Info(string.Format("Installing in user folder {0}", userFolder.FolderPath));
 
             var client = new BuddyServerClient(ApiConnect.GetClient());
-            var dependencyChecker = new DependencyChecker(client, userFoldersController.GetMainUserFolder());
+            var dependencyChecker = new DependencyChecker(client);
             var form = new InstallPluginsForm(
                 new PluginsController(
                     new PluginsDataAccess(userFolder, new JsonFileWriter(), pluginGroupController),
+                    new PluginsDataAccess(userFoldersController.GetMainUserFolder(), new JsonFileWriter(), pluginGroupController),
                     userFolder,
                     new PluginMatcher(client),
                     client,
