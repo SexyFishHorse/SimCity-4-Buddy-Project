@@ -348,7 +348,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.updateInfoBackgroundWorker.WorkerReportsProgress = true;
             this.updateInfoBackgroundWorker.WorkerSupportsCancellation = true;
             this.updateInfoBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.UpdateInfoBackgroundWorkerDoWork);
-            this.updateInfoBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.UpdateInfoBackgroundWorkerProgressChanged);
+            this.updateInfoBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorkerProgressChanged);
             this.updateInfoBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.UpdateInfoBackgroundWorkerRunWorkerCompleted);
             // 
             // identifyPluginsBackgroundWorker
@@ -356,7 +356,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.identifyPluginsBackgroundWorker.WorkerReportsProgress = true;
             this.identifyPluginsBackgroundWorker.WorkerSupportsCancellation = true;
             this.identifyPluginsBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.IdentifyPluginsBackgroundWorkerDoWork);
-            this.identifyPluginsBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.IdentifyPluginsBackgroundWorkerProgressChanged);
+            this.identifyPluginsBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorkerProgressChanged);
             this.identifyPluginsBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.IdentifyPluginsBackgroundWorkerRunWorkerCompleted);
             // 
             // dependencyCheckerBackgroundWorker
@@ -364,7 +364,7 @@ namespace NIHEI.SC4Buddy.Plugins.View
             this.dependencyCheckerBackgroundWorker.WorkerReportsProgress = true;
             this.dependencyCheckerBackgroundWorker.WorkerSupportsCancellation = true;
             this.dependencyCheckerBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.DependencyCheckerBackgroundWorkerDoWork);
-            this.dependencyCheckerBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.DependencyCheckerBackgroundWorkerProgressChanged);
+            this.dependencyCheckerBackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorkerProgressChanged);
             this.dependencyCheckerBackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.DependencyCheckerBackgroundWorkerRunWorkerCompleted);
             // 
             // PluginsForm

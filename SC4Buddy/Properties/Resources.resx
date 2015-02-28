@@ -229,4 +229,10 @@
   <data name="PluginsForm_IdentifyNewPluginsToolStripMenuItemClick_Identifying_new_plugins" xml:space="preserve">
     <value>Identifying new plugins</value>
   </data>
+  <data name="This_feature_is_disabled_go_to_the_settings_if_you_want_to_enable_it" xml:space="preserve">
+    <value>This feature is disabled. Go to the settings if you want to enable it.</value>
+  </data>
+  <data name="Feature_disabled" xml:space="preserve">
+    <value>Feature disabled</value>
+  </data>
 </root>

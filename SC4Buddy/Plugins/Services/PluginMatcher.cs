@@ -16,11 +16,20 @@
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly IEnumerable<Plugin> plugins;
+        private readonly IBuddyServerClient client;
 
-        private readonly IEnumerable<File> files;
+        private IEnumerable<Plugin> plugins;
+
+        private IEnumerable<File> files;
 
         public PluginMatcher(IBuddyServerClient client)
+        {
+            this.client = client;
+
+            ReloadData();
+        }
+
+        public void ReloadData()
         {
             Log.Info("Fetching all plugins and files from the server.");
             plugins = client.GetAllPlugins().ToList();

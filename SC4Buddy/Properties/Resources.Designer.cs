@@ -70,6 +70,15 @@ namespace NIHEI.SC4Buddy.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Feature disabled.
+        /// </summary>
+        internal static string Feature_disabled {
+            get {
+                return ResourceManager.GetString("Feature_disabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Attempting to group files automatically..
         /// </summary>
         internal static string FolderScannerForm_AutoGroupBackgroundWorkerDoWork_Attempting_to_group_files_automatically_ {
@@ -263,6 +272,15 @@ namespace NIHEI.SC4Buddy.Properties {
             get {
                 return ResourceManager.GetString("PluginsForm_UpdateInfoForKnownPluginsToolStripMenuItemClick_Updating_info_for_kno" +
                         "wn_plugins_from_the_server_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This feature is disabled. Go to the settings if you want to enable it..
+        /// </summary>
+        internal static string This_feature_is_disabled_go_to_the_settings_if_you_want_to_enable_it {
+            get {
+                return ResourceManager.GetString("This_feature_is_disabled_go_to_the_settings_if_you_want_to_enable_it", resourceCulture);
             }
         }
         

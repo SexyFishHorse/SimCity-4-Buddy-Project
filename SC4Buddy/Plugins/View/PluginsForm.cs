@@ -316,6 +316,17 @@
 
         private void IdentifyNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
+            if (!ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.DetectPlugins))
+            {
+                MessageBox.Show(
+                    this,
+                    Resources.This_feature_is_disabled_go_to_the_settings_if_you_want_to_enable_it,
+                    Resources.Feature_disabled,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
             Log.Debug("Clicked identify new plugins");
             identifyPluginsBackgroundWorker.RunWorkerAsync();
             toolStripProgressBar.Visible = true;
@@ -331,6 +342,17 @@
 
         private void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
+            if (!ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.AllowCheckForMissingDependencies))
+            {
+                MessageBox.Show(
+                    this,
+                    Resources.This_feature_is_disabled_go_to_the_settings_if_you_want_to_enable_it,
+                    Resources.Feature_disabled,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
             Log.Debug("Clicked check for missing dependencies.");
             dependencyCheckerBackgroundWorker.RunWorkerAsync();
             toolStripProgressBar.Visible = true;
@@ -516,6 +538,17 @@
 
         private void UpdateInfoForKnownPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
+            if (!ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.FetchInformationFromRemoteServer))
+            {
+                MessageBox.Show(
+                    this,
+                    Resources.This_feature_is_disabled_go_to_the_settings_if_you_want_to_enable_it,
+                    Resources.Feature_disabled,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
             Log.Debug("Clicked update info for known plugins");
             toolStripProgressBar.Visible = true;
             toolStripProgressBar.Value = 0;
@@ -533,9 +566,8 @@
             e.Result = numUpdated;
         }
 
-        private void UpdateInfoBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void BackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Log.Debug("Update info progress changed.");
             toolStripProgressBar.Style = ProgressBarStyle.Continuous;
             toolStripProgressBar.Value = e.ProgressPercentage;
             toolStripStatusLabel.Text = e.UserState.ToString();
@@ -566,14 +598,6 @@
             e.Result = numIdentified;
         }
 
-        private void IdentifyPluginsBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            Log.Debug("Identify new plugins progress changed.");
-            toolStripProgressBar.Style = ProgressBarStyle.Continuous;
-            toolStripProgressBar.Value = e.ProgressPercentage;
-            toolStripStatusLabel.Text = e.UserState.ToString();
-        }
-
         private void IdentifyPluginsBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Log.Debug("Identify new plugins background worker completed");
@@ -597,14 +621,6 @@
             var missingDependencies = pluginsController.CheckDependencies(userFolder, sender as BackgroundWorker);
 
             e.Result = missingDependencies;
-        }
-
-        private void DependencyCheckerBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            Log.Debug("Check dependencies progress changed.");
-            toolStripProgressBar.Style = ProgressBarStyle.Continuous;
-            toolStripProgressBar.Value = e.ProgressPercentage;
-            toolStripStatusLabel.Text = e.UserState.ToString();
         }
 
         private void DependencyCheckerBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
