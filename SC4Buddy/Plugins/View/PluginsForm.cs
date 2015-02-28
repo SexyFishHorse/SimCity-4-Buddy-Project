@@ -316,6 +316,17 @@
 
         private void IdentifyNewPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
+            if (!ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.DetectPlugins))
+            {
+                MessageBox.Show(
+                    this,
+                    Resources.This_feature_is_disabled_go_to_the_settings_if_you_want_to_enable_it,
+                    Resources.Feature_disabled,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
             Log.Debug("Clicked identify new plugins");
             identifyPluginsBackgroundWorker.RunWorkerAsync();
             toolStripProgressBar.Visible = true;
@@ -331,6 +342,17 @@
 
         private void CheckForMissingDependenciesToolStripMenuItemClick(object sender, EventArgs e)
         {
+            if (!ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.AllowCheckForMissingDependencies))
+            {
+                MessageBox.Show(
+                    this,
+                    Resources.This_feature_is_disabled_go_to_the_settings_if_you_want_to_enable_it,
+                    Resources.Feature_disabled,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
             Log.Debug("Clicked check for missing dependencies.");
             dependencyCheckerBackgroundWorker.RunWorkerAsync();
             toolStripProgressBar.Visible = true;
@@ -516,6 +538,17 @@
 
         private void UpdateInfoForKnownPluginsToolStripMenuItemClick(object sender, EventArgs e)
         {
+            if (!ApiConnect.HasConnectionAndIsFeatureEnabled(Settings.Keys.FetchInformationFromRemoteServer))
+            {
+                MessageBox.Show(
+                    this,
+                    Resources.This_feature_is_disabled_go_to_the_settings_if_you_want_to_enable_it,
+                    Resources.Feature_disabled,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
             Log.Debug("Clicked update info for known plugins");
             toolStripProgressBar.Visible = true;
             toolStripProgressBar.Value = 0;
