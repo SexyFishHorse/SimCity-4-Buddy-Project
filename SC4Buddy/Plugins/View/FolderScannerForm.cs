@@ -463,7 +463,6 @@
 
         private void AutoGroupBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs args)
         {
-            Log.Debug("Auto group background worker progress changed");
             statusProgressBar.Style = ProgressBarStyle.Continuous;
             statusProgressBar.Value = args.ProgressPercentage;
             statusLabel.Text = args.UserState.ToString();
