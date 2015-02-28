@@ -1,5 +1,6 @@
 ﻿namespace NIHEI.SC4Buddy.Plugins.DataAccess
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
@@ -68,7 +69,7 @@
                             PluginGroup = pluginGroupController.Groups.FirstOrDefault(x => x.Name == groupName)
                         };
 
-                        if (pluginJson.RemotePluginId != null && !string.IsNullOrWhiteSpace(pluginJson.RemotePluginId.ToString()))
+                        if (pluginJson.RemotePluginId != null && pluginJson.RemotePluginId != Guid.Empty.ToString() && !string.IsNullOrWhiteSpace(pluginJson.RemotePluginId.ToString()))
                         {
                             plugin.RemotePlugin = new Asser.Sc4Buddy.Server.Api.V1.Models.Plugin
                             {
