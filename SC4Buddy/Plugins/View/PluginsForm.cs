@@ -566,9 +566,8 @@
             e.Result = numUpdated;
         }
 
-        private void UpdateInfoBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void BackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Log.Debug("Update info progress changed.");
             toolStripProgressBar.Style = ProgressBarStyle.Continuous;
             toolStripProgressBar.Value = e.ProgressPercentage;
             toolStripStatusLabel.Text = e.UserState.ToString();
@@ -599,14 +598,6 @@
             e.Result = numIdentified;
         }
 
-        private void IdentifyPluginsBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            Log.Debug("Identify new plugins progress changed.");
-            toolStripProgressBar.Style = ProgressBarStyle.Continuous;
-            toolStripProgressBar.Value = e.ProgressPercentage;
-            toolStripStatusLabel.Text = e.UserState.ToString();
-        }
-
         private void IdentifyPluginsBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Log.Debug("Identify new plugins background worker completed");
@@ -630,14 +621,6 @@
             var missingDependencies = pluginsController.CheckDependencies(userFolder, sender as BackgroundWorker);
 
             e.Result = missingDependencies;
-        }
-
-        private void DependencyCheckerBackgroundWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            Log.Debug("Check dependencies progress changed.");
-            toolStripProgressBar.Style = ProgressBarStyle.Continuous;
-            toolStripProgressBar.Value = e.ProgressPercentage;
-            toolStripStatusLabel.Text = e.UserState.ToString();
         }
 
         private void DependencyCheckerBackgroundWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
