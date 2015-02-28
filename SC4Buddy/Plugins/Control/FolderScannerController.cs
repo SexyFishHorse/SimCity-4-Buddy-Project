@@ -57,6 +57,9 @@
                 files.Add(new PluginFile { Path = file, Checksum = Md5ChecksumUtility.CalculateChecksum(file).ToHex() });
             }
 
+            Log.Info("Reloading plugin data from the server");
+            pluginMatcher.ReloadData();
+
             Log.Info("Matching files");
             var filesAndPlugins = pluginMatcher.GetMostLikelyPluginForEachFile(files, backgroundWorker);
 
@@ -98,6 +101,8 @@
             {
                 pluginController.Add(plugin);
             }
+
+            pluginController.ReloadPlugins();
 
             Log.Info("Done with auto grouping plugins.");
             return plugins.Count;

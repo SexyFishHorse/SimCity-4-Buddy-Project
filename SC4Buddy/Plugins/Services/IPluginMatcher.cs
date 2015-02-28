@@ -10,5 +10,7 @@
         Plugin GetMostLikelyPluginForGroupOfFiles(IEnumerable<PluginFile> fileInfos);
 
         IDictionary<PluginFile, Plugin> GetMostLikelyPluginForEachFile(ICollection<PluginFile> files, BackgroundWorker backgroundWorker);
+
+        void ReloadData();
     }
 }
