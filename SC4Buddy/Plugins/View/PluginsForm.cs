@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.View
+﻿namespace Nihei.SC4Buddy.Plugins.View
 {
     using System;
     using System.Collections.Generic;
@@ -10,17 +10,17 @@
     using System.Reflection;
     using System.Windows.Forms;
     using log4net;
-    using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.Control;
-    using NIHEI.SC4Buddy.Plugins.Services;
-    using NIHEI.SC4Buddy.Properties;
-    using NIHEI.SC4Buddy.Remote.Utils;
-    using NIHEI.SC4Buddy.Resources;
-    using NIHEI.SC4Buddy.UserFolders.Control;
-    using NIHEI.SC4Buddy.View.Elements;
-    using NIHEI.SC4Buddy.View.Helpers;
-    using Plugin = NIHEI.SC4Buddy.Model.Plugin;
+    using Nihei.SC4Buddy.Configuration;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Plugins.Control;
+    using Nihei.SC4Buddy.Plugins.Services;
+    using Nihei.SC4Buddy.Properties;
+    using Nihei.SC4Buddy.Remote.Utils;
+    using Nihei.SC4Buddy.Resources;
+    using Nihei.SC4Buddy.UserFolders.Control;
+    using Nihei.SC4Buddy.View.Elements;
+    using Nihei.SC4Buddy.View.Helpers;
+    using Plugin = Nihei.SC4Buddy.Model.Plugin;
 
     public partial class PluginsForm : Form
     {

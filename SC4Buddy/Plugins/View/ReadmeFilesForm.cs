@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.View.Plugins
+﻿namespace Nihei.SC4Buddy.Plugins.View
 {
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -6,11 +6,9 @@
     using System.IO;
     using System.Reflection;
     using System.Windows.Forms;
-
-    using NIHEI.SC4Buddy.Resources;
-    using NIHEI.SC4Buddy.View.Elements;
-
     using log4net;
+    using Nihei.SC4Buddy.Resources;
+    using Nihei.SC4Buddy.View.Elements;
 
     public partial class ReadmeFilesForm : Form
     {

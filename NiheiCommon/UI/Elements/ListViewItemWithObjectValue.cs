@@ -1,4 +1,4 @@
-﻿namespace NIHEI.Common.UI.Elements
+﻿namespace Nihei.Common.UI.Elements
 {
     using System.Collections.Generic;
     using System.Windows.Forms;

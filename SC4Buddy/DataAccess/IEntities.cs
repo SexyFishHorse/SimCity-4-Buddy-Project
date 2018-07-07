@@ -1,9 +1,8 @@
-﻿namespace NIHEI.SC4Buddy.DataAccess
+﻿namespace Nihei.SC4Buddy.DataAccess
 {
     using System;
     using System.Collections.Generic;
-
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Model;
 
     public interface IEntities : IDisposable
     {

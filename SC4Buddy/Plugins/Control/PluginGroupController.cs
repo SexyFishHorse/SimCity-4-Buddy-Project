@@ -1,8 +1,8 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.Control
+﻿namespace Nihei.SC4Buddy.Plugins.Control
 {
     using System.Collections.Generic;
-    using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.SC4Buddy.DataAccess;
+    using Nihei.SC4Buddy.Model;
 
     public class PluginGroupController
     {

@@ -1,17 +1,14 @@
-﻿namespace NIHEI.SC4Buddy.DataAccess
+﻿namespace Nihei.SC4Buddy.DataAccess
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
     using System.Reflection;
-
     using log4net;
-
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
-
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Model;
 
     public class Entities : IEntities
     {

@@ -6,7 +6,7 @@
     <ProjectGuid>{A2D89F0D-4519-441F-8F6D-5BB32490664B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NIHEI.SC4Buddy</RootNamespace>
+    <RootNamespace>Nihei.SC4Buddy</RootNamespace>
     <AssemblyName>UnitTestProject</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

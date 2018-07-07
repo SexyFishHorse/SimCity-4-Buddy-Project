@@ -1,6 +1,6 @@
-﻿namespace NIHEI.SC4Buddy.UserFolders.Control
+﻿namespace Nihei.SC4Buddy.UserFolders.Control
 {
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Model;
 
     public interface IUserFolderController
     {

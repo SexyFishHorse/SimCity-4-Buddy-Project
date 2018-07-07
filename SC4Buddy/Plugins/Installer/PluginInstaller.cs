@@ -1,11 +1,11 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.Installer
+﻿namespace Nihei.SC4Buddy.Plugins.Installer
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.Installer.FileHandlers;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Plugins.Installer.FileHandlers;
 
     public class PluginInstaller
     {

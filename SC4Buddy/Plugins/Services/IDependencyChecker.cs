@@ -1,8 +1,8 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.Services
+﻿namespace Nihei.SC4Buddy.Plugins.Services
 {
     using System.Collections.Generic;
     using System.ComponentModel;
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Model;
 
     public interface IDependencyChecker
     {

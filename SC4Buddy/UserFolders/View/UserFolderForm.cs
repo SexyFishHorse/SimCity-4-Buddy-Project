@@ -1,14 +1,14 @@
-﻿namespace NIHEI.SC4Buddy.UserFolders.View
+﻿namespace Nihei.SC4Buddy.UserFolders.View
 {
     using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.Control;
-    using NIHEI.SC4Buddy.Plugins.Services;
-    using NIHEI.SC4Buddy.Plugins.View;
-    using NIHEI.SC4Buddy.UserFolders.Control;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Plugins.Control;
+    using Nihei.SC4Buddy.Plugins.Services;
+    using Nihei.SC4Buddy.Plugins.View;
+    using Nihei.SC4Buddy.UserFolders.Control;
 
     public partial class UserFolderForm : Form
     {

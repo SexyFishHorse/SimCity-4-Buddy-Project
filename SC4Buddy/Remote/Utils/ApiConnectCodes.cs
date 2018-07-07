@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Remote.Utils
+﻿namespace Nihei.SC4Buddy.Remote.Utils
 {
     public enum ApiConnectCodes
     {

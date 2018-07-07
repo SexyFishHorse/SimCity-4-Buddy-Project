@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Application.Control
+﻿namespace Nihei.SC4Buddy.Application.Control
 {
     using System.Collections.Generic;
     using System.Drawing;

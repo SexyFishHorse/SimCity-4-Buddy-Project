@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace NIHEI.SC4Buddy.Model
+﻿namespace Nihei.SC4Buddy.Model
 {
+    using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-
     using Newtonsoft.Json;
 
     [JsonObject(MemberSerialization.OptIn)]

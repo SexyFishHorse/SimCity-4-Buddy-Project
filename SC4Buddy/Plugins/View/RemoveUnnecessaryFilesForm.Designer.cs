@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.View.Plugins
+﻿namespace Nihei.SC4Buddy.Plugins.View
 {
     partial class RemoveUnnecessaryFilesForm
     {

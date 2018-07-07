@@ -1,7 +1,7 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.Installer.InstallerEventArgs
+﻿namespace Nihei.SC4Buddy.Plugins.Installer.InstallerEventArgs
 {
     using System.IO;
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Model;
 
     public class InstalledPluginEventArgs : InstallPluginEventArgs
     {

@@ -1,8 +1,8 @@
-﻿namespace NIHEI.SC4Buddy.Configuration
+﻿namespace Nihei.SC4Buddy.Configuration
 {
     using System;
     using System.IO;
-    using NIHEI.SC4Buddy.Application.DataAccess;
+    using Nihei.SC4Buddy.Application.DataAccess;
 
     public static class Settings
     {

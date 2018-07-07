@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.Services
+﻿namespace Nihei.SC4Buddy.Plugins.Services
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@
     using Asser.Sc4Buddy.Server.Api.V1.Models;
     using log4net;
     using MoreLinq;
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Model;
     using Plugin = Asser.Sc4Buddy.Server.Api.V1.Models.Plugin;
 
     public class PluginMatcher : IPluginMatcher

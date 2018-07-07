@@ -1,10 +1,10 @@
-﻿namespace NIHEI.SC4Buddy.UserFolders.Control
+﻿namespace Nihei.SC4Buddy.UserFolders.Control
 {
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.Installer.FileHandlers;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Plugins.Installer.FileHandlers;
 
     public class FolderScanner
     {

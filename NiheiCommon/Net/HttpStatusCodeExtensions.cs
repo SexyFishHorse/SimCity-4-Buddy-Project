@@ -1,4 +1,4 @@
-﻿namespace NIHEI.Common.Net
+﻿namespace Nihei.Common.Net
 {
     using System.Net;
 

@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.Control
+﻿namespace Nihei.SC4Buddy.Plugins.Control
 {
     using System;
     using System.Collections.Generic;
@@ -9,11 +9,11 @@
     using Asser.Sc4Buddy.Server.Api.V1.Client;
     using log4net;
     using Microsoft.VisualBasic.FileIO;
-    using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.DataAccess;
-    using NIHEI.SC4Buddy.Plugins.Services;
-    using NIHEI.SC4Buddy.Remote.Utils;
+    using Nihei.SC4Buddy.Configuration;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Plugins.DataAccess;
+    using Nihei.SC4Buddy.Plugins.Services;
+    using Nihei.SC4Buddy.Remote.Utils;
     using SearchOption = System.IO.SearchOption;
 
     public class PluginsController : IPluginsController

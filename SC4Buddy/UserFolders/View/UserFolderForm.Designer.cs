@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.UserFolders.View
+﻿namespace Nihei.SC4Buddy.UserFolders.View
 {
     partial class UserFolderForm
     {

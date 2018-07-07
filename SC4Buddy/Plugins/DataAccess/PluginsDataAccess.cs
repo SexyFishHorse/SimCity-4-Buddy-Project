@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.DataAccess
+﻿namespace Nihei.SC4Buddy.Plugins.DataAccess
 {
     using System;
     using System.Collections.Generic;
@@ -9,9 +9,9 @@
     using log4net;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.Control;
-    using NIHEI.SC4Buddy.Utils;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Plugins.Control;
+    using Nihei.SC4Buddy.Utils;
 
     public class PluginsDataAccess
     {

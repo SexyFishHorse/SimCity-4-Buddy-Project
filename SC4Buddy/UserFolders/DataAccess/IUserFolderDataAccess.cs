@@ -1,6 +1,6 @@
-﻿namespace NIHEI.SC4Buddy.UserFolders.DataAccess
+﻿namespace Nihei.SC4Buddy.UserFolders.DataAccess
 {
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Model;
 
     public interface IUserFolderDataAccess
     {

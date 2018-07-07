@@ -1,11 +1,11 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.Installer.FileHandlers
+﻿namespace Nihei.SC4Buddy.Plugins.Installer.FileHandlers
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using NIHEI.Common.IO;
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.Common.IO;
+    using Nihei.SC4Buddy.Model;
 
     public abstract class BaseHandler
     {

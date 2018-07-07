@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.Installer.FileHandlers
+﻿namespace Nihei.SC4Buddy.Plugins.Installer.FileHandlers
 {
     using System.Collections.Generic;
     using System.IO;

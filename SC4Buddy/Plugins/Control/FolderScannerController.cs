@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.Control
+﻿namespace Nihei.SC4Buddy.Plugins.Control
 {
     using System;
     using System.Collections.Generic;
@@ -7,10 +7,10 @@
     using System.Linq;
     using System.Reflection;
     using log4net;
-    using NIHEI.Common.IO;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.Services;
-    using NIHEI.SC4Buddy.UserFolders.Control;
+    using Nihei.Common.IO;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Plugins.Services;
+    using Nihei.SC4Buddy.UserFolders.Control;
 
     public class FolderScannerController
     {

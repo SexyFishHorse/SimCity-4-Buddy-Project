@@ -1,8 +1,8 @@
-﻿namespace NIHEI.SC4Buddy.Remote.Utils
+﻿namespace Nihei.SC4Buddy.Remote.Utils
 {
     using System.Net.NetworkInformation;
-    using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.Remote.Models;
+    using Nihei.SC4Buddy.Configuration;
+    using Nihei.SC4Buddy.Remote.Models;
     using RestSharp;
 
     public static class ApiConnect

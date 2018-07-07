@@ -1,11 +1,11 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.View
+﻿namespace Nihei.SC4Buddy.Plugins.View
 {
     using System;
     using System.Linq;
     using System.Windows.Forms;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.Control;
-    using NIHEI.SC4Buddy.View.Elements;
+    using Nihei.Common.UI.Elements;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Plugins.Control;
 
     public partial class EnterPluginInformationForm : Form
     {

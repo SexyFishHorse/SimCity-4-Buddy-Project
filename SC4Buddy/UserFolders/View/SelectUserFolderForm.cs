@@ -1,9 +1,9 @@
-﻿namespace NIHEI.SC4Buddy.UserFolders.View
+﻿namespace Nihei.SC4Buddy.UserFolders.View
 {
     using System.Windows.Forms;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.UserFolders.Control;
-    using NIHEI.SC4Buddy.View.Elements;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.UserFolders.Control;
+    using Nihei.SC4Buddy.View.Elements;
 
     public partial class SelectUserFolderForm : Form
     {

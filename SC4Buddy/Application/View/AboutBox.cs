@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Application.View
+﻿namespace Nihei.SC4Buddy.Application.View
 {
     using System.Deployment.Application;
     using System.Reflection;

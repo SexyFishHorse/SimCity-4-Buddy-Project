@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Utils
+﻿namespace Nihei.SC4Buddy.Utils
 {
     using System.IO;
 

@@ -1,11 +1,11 @@
-﻿namespace NIHEI.SC4Buddy.UserFolders.DataAccess
+﻿namespace Nihei.SC4Buddy.UserFolders.DataAccess
 {
     using System.IO;
     using System.Reflection;
     using log4net;
     using Newtonsoft.Json;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Utils;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Utils;
 
     public class UserFolderDataAccess : IUserFolderDataAccess
     {

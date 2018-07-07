@@ -1,9 +1,8 @@
-﻿namespace NIHEI.SC4Buddy.View.Elements
+﻿namespace Nihei.SC4Buddy.View.Elements
 {
     using System;
     using System.Windows.Forms;
-
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Model;
 
     public class UserFolderToolStripMenuItem : ToolStripMenuItem
     {

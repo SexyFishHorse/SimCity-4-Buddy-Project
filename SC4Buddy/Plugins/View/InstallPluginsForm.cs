@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.View
+﻿namespace Nihei.SC4Buddy.Plugins.View
 {
     using System;
     using System.Collections.Generic;
@@ -9,17 +9,16 @@
     using System.Threading;
     using System.Windows.Forms;
     using log4net;
-    using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.DataAccess;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.Control;
-    using NIHEI.SC4Buddy.Plugins.Installer;
-    using NIHEI.SC4Buddy.Plugins.Installer.InstallerEventArgs;
-    using NIHEI.SC4Buddy.Plugins.Services;
-    using NIHEI.SC4Buddy.Remote.Utils;
-    using NIHEI.SC4Buddy.Resources;
-    using NIHEI.SC4Buddy.View.Helpers;
-    using NIHEI.SC4Buddy.View.Plugins;
+    using Nihei.SC4Buddy.Configuration;
+    using Nihei.SC4Buddy.DataAccess;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Plugins.Control;
+    using Nihei.SC4Buddy.Plugins.Installer;
+    using Nihei.SC4Buddy.Plugins.Installer.InstallerEventArgs;
+    using Nihei.SC4Buddy.Plugins.Services;
+    using Nihei.SC4Buddy.Remote.Utils;
+    using Nihei.SC4Buddy.Resources;
+    using Nihei.SC4Buddy.View.Helpers;
 
     public partial class InstallPluginsForm : Form
     {

@@ -1,9 +1,7 @@
-﻿namespace NIHEI.Common.IO
+﻿namespace Nihei.Common.IO
 {
     using System.IO;
-
     using Microsoft.VisualBasic.FileIO;
-
     using SearchOption = System.IO.SearchOption;
 
     public static class FileUtility

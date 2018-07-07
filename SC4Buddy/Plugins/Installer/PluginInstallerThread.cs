@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.Installer
+﻿namespace Nihei.SC4Buddy.Plugins.Installer
 {
     using System;
     using System.Collections.Generic;
@@ -7,14 +7,14 @@
     using System.Linq;
     using System.Reflection;
     using log4net;
-    using NIHEI.Common.IO;
-    using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.Control;
-    using NIHEI.SC4Buddy.Plugins.Installer.FileHandlers;
-    using NIHEI.SC4Buddy.Plugins.Installer.InstallerEventArgs;
-    using NIHEI.SC4Buddy.Plugins.View;
-    using NIHEI.SC4Buddy.Resources;
+    using Nihei.Common.IO;
+    using Nihei.SC4Buddy.Configuration;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Plugins.Control;
+    using Nihei.SC4Buddy.Plugins.Installer.FileHandlers;
+    using Nihei.SC4Buddy.Plugins.Installer.InstallerEventArgs;
+    using Nihei.SC4Buddy.Plugins.View;
+    using Nihei.SC4Buddy.Resources;
     using SharpCompress.Common;
 
     public class PluginInstallerThread

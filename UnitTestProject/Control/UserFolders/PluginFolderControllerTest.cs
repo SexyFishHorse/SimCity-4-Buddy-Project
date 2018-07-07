@@ -1,13 +1,12 @@
-﻿namespace NIHEI.SC4Buddy.Control.UserFolders
+﻿namespace Nihei.SC4Buddy.Control.UserFolders
 {
     using System;
     using System.Collections.ObjectModel;
     using Moq;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.UserFolders.Control;
-    using NIHEI.SC4Buddy.UserFolders.DataAccess;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.UserFolders.Control;
+    using Nihei.SC4Buddy.UserFolders.DataAccess;
     using Should;
-
     using Xunit;
 
     public class UserFoldersControllerTest

@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.ArchiveExtractors
+﻿namespace Nihei.SC4Buddy.Installer.FileHandlers
 {
     using System.IO;
 

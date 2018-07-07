@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.View
+﻿namespace Nihei.SC4Buddy.Plugins.View
 {
     using System;
     using System.Linq;
@@ -6,14 +6,14 @@
     using System.Windows.Forms;
     using Asser.Sc4Buddy.Server.Api.V1.Client;
     using log4net;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.Control;
-    using NIHEI.SC4Buddy.Plugins.DataAccess;
-    using NIHEI.SC4Buddy.Plugins.Services;
-    using NIHEI.SC4Buddy.Remote.Utils;
-    using NIHEI.SC4Buddy.UserFolders.Control;
-    using NIHEI.SC4Buddy.Utils;
-    using NIHEI.SC4Buddy.View.Elements;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Plugins.Control;
+    using Nihei.SC4Buddy.Plugins.DataAccess;
+    using Nihei.SC4Buddy.Plugins.Services;
+    using Nihei.SC4Buddy.Remote.Utils;
+    using Nihei.SC4Buddy.UserFolders.Control;
+    using Nihei.SC4Buddy.Utils;
+    using Nihei.SC4Buddy.View.Elements;
 
     public partial class MoveOrCopyForm : Form
     {

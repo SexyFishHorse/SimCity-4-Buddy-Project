@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.Installer.InstallerEventArgs
+﻿namespace Nihei.SC4Buddy.Plugins.Installer.InstallerEventArgs
 {
     using System.Collections.Generic;
     using System.IO;

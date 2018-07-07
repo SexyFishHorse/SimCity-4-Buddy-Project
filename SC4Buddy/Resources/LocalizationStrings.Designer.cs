@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NIHEI.SC4Buddy.Resources {
+namespace Nihei.SC4Buddy.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace NIHEI.SC4Buddy.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NIHEI.SC4Buddy.Resources.LocalizationStrings", typeof(LocalizationStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Nihei.SC4Buddy.Resources.LocalizationStrings", typeof(LocalizationStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -1,7 +1,7 @@
-﻿namespace NIHEI.SC4Buddy.Remote.Models
+﻿namespace Nihei.SC4Buddy.Remote.Models
 {
     using System;
-    using NIHEI.SC4Buddy.Remote.Utils;
+    using Nihei.SC4Buddy.Remote.Utils;
 
     public class BuddyServerException : Exception
     {

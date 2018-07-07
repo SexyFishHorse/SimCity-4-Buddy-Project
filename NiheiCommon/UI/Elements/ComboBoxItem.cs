@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.View.Elements
+﻿namespace Nihei.Common.UI.Elements
 {
     public class ComboBoxItem<T>
     {

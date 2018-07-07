@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.View
+﻿namespace Nihei.SC4Buddy.Plugins.View
 {
     using System.Collections.Generic;
     using Asser.Sc4Buddy.Server.Api.V1.Models;

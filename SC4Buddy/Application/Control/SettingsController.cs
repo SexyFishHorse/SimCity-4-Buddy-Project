@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Application.Control
+﻿namespace Nihei.SC4Buddy.Application.Control
 {
     using System;
     using System.Collections.Generic;
@@ -8,10 +8,10 @@
     using System.Reflection;
     using log4net;
     using Microsoft.Win32;
-    using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.Properties;
-    using NIHEI.SC4Buddy.Resources;
-    using NIHEI.SC4Buddy.UserFolders.Control;
+    using Nihei.SC4Buddy.Configuration;
+    using Nihei.SC4Buddy.Properties;
+    using Nihei.SC4Buddy.Resources;
+    using Nihei.SC4Buddy.UserFolders.Control;
 
     public class SettingsController : ISettingsController
     {

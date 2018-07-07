@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.Services
+﻿namespace Nihei.SC4Buddy.Plugins.Services
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@
     using System.Reflection;
     using Asser.Sc4Buddy.Server.Api.V1.Client;
     using log4net;
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Model;
 
     public class DependencyChecker : IDependencyChecker
     {

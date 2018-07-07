@@ -1,9 +1,9 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.Installer
+﻿namespace Nihei.SC4Buddy.Plugins.Installer
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Model;
 
     public class UserFolderListener : IDisposable
     {

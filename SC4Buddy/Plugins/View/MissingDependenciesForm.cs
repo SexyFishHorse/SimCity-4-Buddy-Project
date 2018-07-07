@@ -1,12 +1,12 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.View
+﻿namespace Nihei.SC4Buddy.Plugins.View
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Windows.Forms;
     using Asser.Sc4Buddy.Server.Api.V1.Models;
-    using NIHEI.Common.UI.Elements;
-    using NIHEI.SC4Buddy.Resources;
+    using Nihei.Common.UI.Elements;
+    using Nihei.SC4Buddy.Resources;
 
     public partial class MissingDependenciesForm : Form
     {

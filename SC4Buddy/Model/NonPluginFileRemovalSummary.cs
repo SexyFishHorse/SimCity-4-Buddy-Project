@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Model
+﻿namespace Nihei.SC4Buddy.Model
 {
     using System;
     using System.Collections.Generic;

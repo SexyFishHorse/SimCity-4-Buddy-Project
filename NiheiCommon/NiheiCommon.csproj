@@ -7,7 +7,7 @@
     <ProjectGuid>{43F9AF3F-D57D-421D-BA98-87FD499CA314}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NIHEI.Common</RootNamespace>
+    <RootNamespace>Nihei.Common</RootNamespace>
     <AssemblyName>NiheiCommon</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

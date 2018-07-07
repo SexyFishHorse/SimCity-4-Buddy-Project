@@ -1,13 +1,11 @@
-﻿namespace NIHEI.SC4Buddy.Installer.FileHandlers
+﻿namespace Nihei.SC4Buddy.Installer.FileHandlers
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
-
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.Plugins.Installer.FileHandlers;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Plugins.Installer.FileHandlers;
     using Should;
-
     using Xunit;
 
     public class BaseHandlerTest

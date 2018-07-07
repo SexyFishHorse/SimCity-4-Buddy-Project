@@ -1,4 +1,4 @@
-﻿namespace NIHEI.Common
+﻿namespace Nihei.Common
 {
     public class ToStringDecorator<T>
     {

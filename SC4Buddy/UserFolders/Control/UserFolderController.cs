@@ -1,8 +1,8 @@
-﻿namespace NIHEI.SC4Buddy.UserFolders.Control
+﻿namespace Nihei.SC4Buddy.UserFolders.Control
 {
     using System.IO;
-    using NIHEI.SC4Buddy.Model;
-    using NIHEI.SC4Buddy.UserFolders.DataAccess;
+    using Nihei.SC4Buddy.Model;
+    using Nihei.SC4Buddy.UserFolders.DataAccess;
 
     public class UserFolderController : IUserFolderController
     {

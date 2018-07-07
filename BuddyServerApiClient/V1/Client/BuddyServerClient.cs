@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Asser.Sc4Buddy.Server.Api.V1.Models;
-    using NIHEI.Common.Net;
+    using Nihei.Common.Net;
     using RestSharp;
 
     public class BuddyServerClient : IBuddyServerClient

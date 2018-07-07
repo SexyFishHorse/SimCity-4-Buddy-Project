@@ -1,4 +1,4 @@
-﻿namespace NIHEI.Common.TypeUtility
+﻿namespace Nihei.Common.TypeUtility
 {
     using System;
     using System.Text;

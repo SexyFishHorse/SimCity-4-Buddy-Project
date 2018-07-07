@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Application.View
+﻿namespace Nihei.SC4Buddy.Application.View
 {
     using System;
     using System.Configuration;
@@ -10,12 +10,12 @@
     using System.Text.RegularExpressions;
     using System.Windows.Forms;
     using log4net;
-    using NIHEI.SC4Buddy.Application.Control;
-    using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.Properties;
-    using NIHEI.SC4Buddy.Resources;
-    using NIHEI.SC4Buddy.UserFolders.Control;
-    using NIHEI.SC4Buddy.View.Elements;
+    using Nihei.Common.UI.Elements;
+    using Nihei.SC4Buddy.Application.Control;
+    using Nihei.SC4Buddy.Configuration;
+    using Nihei.SC4Buddy.Properties;
+    using Nihei.SC4Buddy.Resources;
+    using Nihei.SC4Buddy.UserFolders.Control;
 
     public partial class SettingsForm : Form
     {

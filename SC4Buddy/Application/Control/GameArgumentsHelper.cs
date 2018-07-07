@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Application.Control
+﻿namespace Nihei.SC4Buddy.Application.Control
 {
     using System;
     using System.Collections.Generic;
@@ -8,8 +8,8 @@
     using System.Text;
     using System.Text.RegularExpressions;
     using log4net;
-    using NIHEI.SC4Buddy.Configuration;
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.SC4Buddy.Configuration;
+    using Nihei.SC4Buddy.Model;
 
     public class GameArgumentsHelper
     {

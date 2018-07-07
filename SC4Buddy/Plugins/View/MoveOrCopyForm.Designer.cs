@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.View
+﻿namespace Nihei.SC4Buddy.Plugins.View
 {
     partial class MoveOrCopyForm
     {

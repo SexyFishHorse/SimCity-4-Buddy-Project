@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Plugins.View
+﻿namespace Nihei.SC4Buddy.Plugins.View
 {
     using System;
     using System.Collections;
@@ -6,8 +6,8 @@
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
-    using NIHEI.Common.UI.Elements;
-    using NIHEI.SC4Buddy.Model;
+    using Nihei.Common.UI.Elements;
+    using Nihei.SC4Buddy.Model;
 
     public partial class QuarantinedPluginFilesForm : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace NIHEI.SC4Buddy.Application.Control
+﻿namespace Nihei.SC4Buddy.Application.Control
 {
     using System;
     using System.Diagnostics;
@@ -6,7 +6,7 @@
     using System.Runtime.InteropServices;
     using System.Windows.Forms;
     using log4net;
-    using NIHEI.SC4Buddy.Configuration;
+    using Nihei.SC4Buddy.Configuration;
     using Timer = System.Threading.Timer;
 
     public class GameLauncher : IDisposable

@@ -1,4 +1,4 @@
-﻿namespace NIHEI.Common.IO
+﻿namespace Nihei.Common.IO
 {
     using System.IO;
     using System.Security.Cryptography;

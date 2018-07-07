@@ -7,7 +7,7 @@
     <ProjectGuid>{CA16821A-BC90-4653-A0F6-B35DF6CE8F70}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NIHEI.SC4Buddy</RootNamespace>
+    <RootNamespace>Nihei.SC4Buddy</RootNamespace>
     <AssemblyName>SC4Buddy</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -63,7 +63,7 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>NIHEI.SC4Buddy.Program</StartupObject>
+    <StartupObject>Nihei.SC4Buddy.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>78CE61E3097A66B3CA078435277EBEFC02523562</ManifestCertificateThumbprint>
