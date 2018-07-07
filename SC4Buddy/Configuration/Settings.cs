@@ -8,15 +8,9 @@
     {
         private static readonly SettingsDataAccess DataAccess = new SettingsDataAccess(GetDefaultStorageLocation(), "Settings.json");
 
-        public static bool HasSetting(string key)
-        {
-            return DataAccess.HasSetting(key);
-        }
+        public static bool HasSetting(string key) => DataAccess.HasSetting(key);
 
-        public static object GetRaw(string key)
-        {
-            return HasSetting(key) ? DataAccess.Settings[key] : null;
-        }
+        private static object GetRaw(string key) => HasSetting(key) ? DataAccess.Settings[key] : null;
 
         public static string Get(string key)
         {
@@ -35,9 +29,8 @@
         public static int GetInt(string key)
         {
             var stringValue = Get(key);
-            int value;
 
-            return int.TryParse(stringValue, out value) ? value : 0;
+            return int.TryParse(stringValue, out var value) ? value : 0;
         }
 
         public static T Get<T>(string key)
@@ -64,10 +57,7 @@
             return defaultValue;
         }
 
-        public static void SetAndSave(string key, object value)
-        {
-            DataAccess.SetSetting(key, value);
-        }
+        public static void SetAndSave(string key, object value) => DataAccess.SetSetting(key, value);
 
         public static string GetDefaultStorageLocation()
         {

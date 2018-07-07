@@ -124,11 +124,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Models\ColorDepth.cs" />
+    <Compile Include="Application\Models\CpuPriority.cs" />
+    <Compile Include="Application\Models\CursorColorDepth.cs" />
     <Compile Include="Application\Control\GameArgumentsHelper.cs" />
     <Compile Include="Application\Control\GameLauncher.cs" />
     <Compile Include="Application\Control\ISettingsController.cs">
       <DependentUpon>SettingsController.cs</DependentUpon>
     </Compile>
+    <Compile Include="Application\Models\RenderMode.cs" />
     <Compile Include="Application\Utilities\FileSystemLocationsUtil.cs" />
     <Compile Include="Application\View\ChangelogForm.cs">
       <SubType>Form</SubType>

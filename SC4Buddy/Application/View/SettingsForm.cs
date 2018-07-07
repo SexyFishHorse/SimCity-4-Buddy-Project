@@ -12,14 +12,18 @@
     using log4net;
     using Nihei.Common.UI.Elements;
     using Nihei.SC4Buddy.Application.Control;
+    using Nihei.SC4Buddy.Application.Models;
     using Nihei.SC4Buddy.Configuration;
     using Nihei.SC4Buddy.Properties;
     using Nihei.SC4Buddy.Resources;
     using Nihei.SC4Buddy.UserFolders.Control;
+    using ColorDepth = Nihei.SC4Buddy.Application.Models.ColorDepth;
 
     public partial class SettingsForm : Form
     {
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+        private static readonly Version MinOsVersion = new Version(6, 2);
 
         private readonly ISettingsController settingsController;
 
@@ -29,8 +33,7 @@
 
             settingsController = new SettingsController(userFoldersController);
 
-            var minOs = new Version(6, 2);
-            if (Environment.OSVersion.Version < minOs)
+            if (Environment.OSVersion.Version < MinOsVersion)
             {
                 scanButton.Text = string.Empty;
                 scanButton.Image = Resources.IconZoom;
@@ -151,7 +154,7 @@
 
             if (renderModeComboBox.SelectedIndex > 0)
             {
-                var renderMode = ((ComboBoxItem<GameArgumentsHelper.RenderMode>)renderModeComboBox.SelectedItem).Value;
+                var renderMode = ((ComboBoxItem<RenderMode>)renderModeComboBox.SelectedItem).Value;
                 LauncherSettings.SetAndSave(LauncherSettings.Keys.RenderMode, renderMode.ToString());
             }
             else
@@ -165,12 +168,12 @@
                 LauncherSettings.Keys.Resolution,
                 regex.IsMatch(resolution) ? resolution : string.Empty);
 
-            var colorDepth = ((ComboBoxItem<GameArgumentsHelper.ColorDepth>)colourDepthComboBox.SelectedItem).Value;
+            var colorDepth = ((ComboBoxItem<ColorDepth>)colourDepthComboBox.SelectedItem).Value;
             LauncherSettings.SetAndSave(
                 LauncherSettings.Keys.ColourDepth32Bit,
-                colorDepth == GameArgumentsHelper.ColorDepth.Bits32);
+                colorDepth == ColorDepth.Bits32);
 
-            var cursorColour = ((ComboBoxItem<GameArgumentsHelper.CursorColorDepth>)cursorColourComboBox.SelectedItem)
+            var cursorColour = ((ComboBoxItem<CursorColorDepth>)cursorColourComboBox.SelectedItem)
                                .Value.ToString();
             LauncherSettings.SetAndSave(
                 LauncherSettings.Keys.CursorColourDepth,
@@ -180,7 +183,7 @@
             LauncherSettings.SetAndSave(LauncherSettings.Keys.CpuCount, numCpus);
 
             var cpuPriority = cpuPriorityComboBox.SelectedIndex > 0
-                                  ? ((ComboBoxItem<GameArgumentsHelper.CpuPriority>)
+                                  ? ((ComboBoxItem<CpuPriority>)
                                         cpuPriorityComboBox.SelectedItem).Value.ToString()
                                   : string.Empty;
 
@@ -383,13 +386,13 @@
             colourDepthComboBox.BeginUpdate();
             colourDepthComboBox.Items.Clear();
             colourDepthComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.ColorDepth>(
+                new ComboBoxItem<ColorDepth>(
                     LocalizationStrings.Bits16,
-                    GameArgumentsHelper.ColorDepth.Bits16));
+                    ColorDepth.Bits16));
             colourDepthComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.ColorDepth>(
+                new ComboBoxItem<ColorDepth>(
                     LocalizationStrings.Bits32,
-                    GameArgumentsHelper.ColorDepth.Bits32));
+                    ColorDepth.Bits32));
 
             colourDepthComboBox.SelectedIndex =
                 LauncherSettings.Get<bool>(LauncherSettings.Keys.ColourDepth32Bit) ? 1 : 0;
@@ -416,28 +419,28 @@
             cpuPriorityComboBox.Items.Clear();
             cpuPriorityComboBox.Items.Add(LocalizationStrings.Ignore);
             cpuPriorityComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.CpuPriority>(
+                new ComboBoxItem<CpuPriority>(
                     LocalizationStrings.Low,
-                    GameArgumentsHelper.CpuPriority.Low));
+                    CpuPriority.Low));
             cpuPriorityComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.CpuPriority>(
+                new ComboBoxItem<CpuPriority>(
                     LocalizationStrings.Medium,
-                    GameArgumentsHelper.CpuPriority.Medium));
+                    CpuPriority.Medium));
             cpuPriorityComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.CpuPriority>(
+                new ComboBoxItem<CpuPriority>(
                     LocalizationStrings.High,
-                    GameArgumentsHelper.CpuPriority.High));
+                    CpuPriority.High));
 
-            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CpuPriority), true, out GameArgumentsHelper.CpuPriority selectedPriority);
+            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CpuPriority), true, out CpuPriority selectedPriority);
             switch (selectedPriority)
             {
-                case GameArgumentsHelper.CpuPriority.Low:
+                case CpuPriority.Low:
                     cpuPriorityComboBox.SelectedIndex = 1;
                     break;
-                case GameArgumentsHelper.CpuPriority.Medium:
+                case CpuPriority.Medium:
                     cpuPriorityComboBox.SelectedIndex = 2;
                     break;
-                case GameArgumentsHelper.CpuPriority.High:
+                case CpuPriority.High:
                     cpuPriorityComboBox.SelectedIndex = 3;
                     break;
                 default:
@@ -454,51 +457,50 @@
             cursorColourComboBox.Items.Clear();
             cursorColourComboBox.Items.Add(LocalizationStrings.Ignore);
             cursorColourComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.CursorColorDepth>(
+                new ComboBoxItem<CursorColorDepth>(
                     LocalizationStrings.Disabled,
-                    GameArgumentsHelper.CursorColorDepth.Disabled));
+                    CursorColorDepth.Disabled));
             cursorColourComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.CursorColorDepth>(
+                new ComboBoxItem<CursorColorDepth>(
                     LocalizationStrings.SystemCursors,
-                    GameArgumentsHelper.CursorColorDepth.SystemCursors));
+                    CursorColorDepth.SystemCursors));
             cursorColourComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.CursorColorDepth>(
+                new ComboBoxItem<CursorColorDepth>(
                     LocalizationStrings.BlackAndWhite,
-                    GameArgumentsHelper.CursorColorDepth.BlackAndWhite));
+                    CursorColorDepth.BlackAndWhite));
             cursorColourComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.CursorColorDepth>(
+                new ComboBoxItem<CursorColorDepth>(
                     LocalizationStrings.Colors16,
-                    GameArgumentsHelper.CursorColorDepth.Colors16));
+                    CursorColorDepth.Colors16));
             cursorColourComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.CursorColorDepth>(
+                new ComboBoxItem<CursorColorDepth>(
                     LocalizationStrings.Colors256,
-                    GameArgumentsHelper.CursorColorDepth.Colors256));
+                    CursorColorDepth.Colors256));
             cursorColourComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.CursorColorDepth>(
+                new ComboBoxItem<CursorColorDepth>(
                     LocalizationStrings.FullColors,
-                    GameArgumentsHelper.CursorColorDepth.FullColors));
+                    CursorColorDepth.FullColors));
 
-            GameArgumentsHelper.CursorColorDepth selectedCursor;
-            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CursorColourDepth), true, out selectedCursor);
+            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CursorColourDepth), true, out CursorColorDepth selectedCursor);
 
             switch (selectedCursor)
             {
-                case GameArgumentsHelper.CursorColorDepth.Disabled:
+                case CursorColorDepth.Disabled:
                     cursorColourComboBox.SelectedIndex = 1;
                     break;
-                case GameArgumentsHelper.CursorColorDepth.SystemCursors:
+                case CursorColorDepth.SystemCursors:
                     cursorColourComboBox.SelectedIndex = 2;
                     break;
-                case GameArgumentsHelper.CursorColorDepth.BlackAndWhite:
+                case CursorColorDepth.BlackAndWhite:
                     cursorColourComboBox.SelectedIndex = 3;
                     break;
-                case GameArgumentsHelper.CursorColorDepth.Colors16:
+                case CursorColorDepth.Colors16:
                     cursorColourComboBox.SelectedIndex = 4;
                     break;
-                case GameArgumentsHelper.CursorColorDepth.Colors256:
+                case CursorColorDepth.Colors256:
                     cursorColourComboBox.SelectedIndex = 5;
                     break;
-                case GameArgumentsHelper.CursorColorDepth.FullColors:
+                case CursorColorDepth.FullColors:
                     cursorColourComboBox.SelectedIndex = 6;
                     break;
                 default:
@@ -537,31 +539,31 @@
             renderModeComboBox.Items.Clear();
             renderModeComboBox.Items.Add(LocalizationStrings.Ignore);
             renderModeComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.RenderMode>(
+                new ComboBoxItem<RenderMode>(
                     LocalizationStrings.DirectX,
-                    GameArgumentsHelper.RenderMode.DirectX));
+                    RenderMode.DirectX));
             renderModeComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.RenderMode>(
+                new ComboBoxItem<RenderMode>(
                     LocalizationStrings.OpenGL,
-                    GameArgumentsHelper.RenderMode.OpenGl));
+                    RenderMode.OpenGl));
             renderModeComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.RenderMode>(
+                new ComboBoxItem<RenderMode>(
                     LocalizationStrings.Software,
-                    GameArgumentsHelper.RenderMode.Software));
+                    RenderMode.Software));
 
-            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.RenderMode), true, out GameArgumentsHelper.RenderMode selectedRenderMode);
+            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.RenderMode), true, out RenderMode selectedRenderMode);
 
             switch (selectedRenderMode)
             {
-                case GameArgumentsHelper.RenderMode.DirectX:
+                case RenderMode.DirectX:
                     renderModeComboBox.SelectedIndex = 1;
 
                     break;
-                case GameArgumentsHelper.RenderMode.OpenGl:
+                case RenderMode.OpenGl:
                     renderModeComboBox.SelectedIndex = 2;
 
                     break;
-                case GameArgumentsHelper.RenderMode.Software:
+                case RenderMode.Software:
                     renderModeComboBox.SelectedIndex = 3;
 
                     break;
