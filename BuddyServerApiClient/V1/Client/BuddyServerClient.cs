@@ -2,13 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Net;
     using Asser.Sc4Buddy.Server.Api.V1.Models;
-    using Nihei.Common.Net;
     using RestSharp;
 
     public class BuddyServerClient : IBuddyServerClient
     {
-        public const int MaxFilesPerPage = 100;
+        private const int MaxFilesPerPage = 100;
 
         private readonly IRestClient client;
 
@@ -17,43 +17,9 @@
             this.client = client;
         }
 
-        public IEnumerable<File> GetAllFiles()
-        {
-            var page = 1;
-            do
-            {
-                var request = new RestRequest("files", Method.GET) { RequestFormat = DataFormat.Json };
-                request.AddQueryParameter("page", page + string.Empty);
-                request.AddQueryParameter("perPage", MaxFilesPerPage + string.Empty);
+        public IEnumerable<File> GetAllFiles() => GetAllItems<File>("files");
 
-                var response = client.Get<List<File>>(request);
-
-                if (response.ErrorException != null)
-                {
-                    throw response.ErrorException;
-                }
-
-                if (response.StatusCode.IsSuccess())
-                {
-                    foreach (var file in response.Data)
-                    {
-                        yield return file;
-                    }
-
-                    if (response.Data.Count < MaxFilesPerPage)
-                    {
-                        yield break;
-                    }
-
-                    page++;
-                }
-                else
-                {
-                    yield break;
-                }
-            }
-            while (true);
-        }
+        public IEnumerable<Plugin> GetAllPlugins() => GetAllItems<Plugin>("plugins");
 
         public Plugin GetPlugin(Guid pluginId)
         {
@@ -61,8 +27,7 @@
             request.AddUrlSegment("pluginId", pluginId.ToString());
 
             var response = client.Get<Plugin>(request);
-
-            if (response.ErrorException != null)
+            if (response.IsSuccessful == false && response.ErrorException != null)
             {
                 throw response.ErrorException;
             }
@@ -70,40 +35,42 @@
             return response.Data;
         }
 
-        public IEnumerable<Plugin> GetAllPlugins()
+        private IEnumerable<T> GetAllItems<T>(string method)
         {
             var page = 1;
             do
             {
-                var request = new RestRequest("plugins", Method.GET) { RequestFormat = DataFormat.Json };
+                var request = new RestRequest(method, Method.GET) { RequestFormat = DataFormat.Json };
                 request.AddQueryParameter("page", page + string.Empty);
                 request.AddQueryParameter("perPage", MaxFilesPerPage + string.Empty);
 
-                var response = client.Get<List<Plugin>>(request);
+                var response = client.Get<List<T>>(request);
 
-                if (response.ErrorException != null)
+                if (response.IsSuccessful == false)
                 {
-                    throw response.ErrorException;
+                    if (response.ErrorException != null)
+                    {
+                        if (response.ErrorException is WebException webEx
+                            && webEx.Status == WebExceptionStatus.NameResolutionFailure)
+                        {
+                            yield break;
+                        }
+
+                        throw response.ErrorException;
+                    }
                 }
 
-                if (response.StatusCode.IsSuccess())
+                foreach (var item in response.Data)
                 {
-                    foreach (var plugin in response.Data)
-                    {
-                        yield return plugin;
-                    }
-
-                    if (response.Data.Count < MaxFilesPerPage)
-                    {
-                        yield break;
-                    }
-
-                    page++;
+                    yield return item;
                 }
-                else
+
+                if (response.Data.Count < MaxFilesPerPage)
                 {
                     yield break;
                 }
+
+                page++;
             }
             while (true);
         }
