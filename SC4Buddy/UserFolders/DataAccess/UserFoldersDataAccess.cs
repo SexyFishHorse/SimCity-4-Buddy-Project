@@ -5,7 +5,6 @@
     using System.IO;
     using System.Reflection;
     using log4net;
-    using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using Nihei.SC4Buddy.Application.Utilities;
     using Nihei.SC4Buddy.Model;

@@ -3,6 +3,7 @@
     using System;
     using System.IO;
     using System.Linq;
+    using FluentAssertions;
     using Nihei.SC4Buddy.Model;
     using Nihei.SC4Buddy.Plugins.Installer.FileHandlers;
     using Should;
@@ -111,7 +112,9 @@
         {
             var instance = new ArchiveHandler { FileInfo = new FileInfo(archivePath), TempFolder = tempFolder };
 
-            Assert.DoesNotThrow(() => instance.ExtractFilesToTemp());
+            Action act = () => instance.ExtractFilesToTemp();
+
+            act.Should().NotThrow();
 
             var exception = Assert.Throws<ArgumentNullException>(() => instance.MoveToPluginFolder(null));
             exception.ParamName.ShouldEqual("userFolder");
@@ -137,7 +140,10 @@
             var instance = new ArchiveHandler { FileInfo = new FileInfo(archivePath), TempFolder = tempFolder };
             var userFolder = new UserFolder { Alias = "Main plugin folder", FolderPath = outputFolder };
 
-            Assert.DoesNotThrow(() => instance.ExtractFilesToTemp());
+            Action act = () => instance.ExtractFilesToTemp();
+
+            act.Should().NotThrow();
+
             var installedFiles = instance.MoveToPluginFolder(userFolder).ToList();
 
             installedFiles.ShouldContain(

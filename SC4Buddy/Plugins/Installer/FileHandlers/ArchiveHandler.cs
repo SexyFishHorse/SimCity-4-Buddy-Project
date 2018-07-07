@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using System.IO;
-    using SharpCompress.Archive;
-    using SharpCompress.Archive.Rar;
+    using SharpCompress.Archives;
+    using SharpCompress.Archives.Rar;
     using SharpCompress.Common;
 
     public class ArchiveHandler : BaseHandler
@@ -37,7 +37,7 @@
 
                 foreach (var entry in archive.Entries)
                 {
-                    var tempPath = Path.Combine(TempFolder, entry.FilePath);
+                    var tempPath = Path.Combine(TempFolder, entry.Key);
 
                     if (entry.IsDirectory)
                     {

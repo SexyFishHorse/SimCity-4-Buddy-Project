@@ -4,6 +4,7 @@
     using System.IO;
     using System.Linq;
     using System.Windows.Forms;
+    using ByteSizeLib;
     using Nihei.SC4Buddy.Model;
     using Nihei.SC4Buddy.Plugins.Control;
     using Nihei.SC4Buddy.Plugins.Services;
@@ -49,7 +50,7 @@
             var files = directoryInfo.EnumerateFiles("*", SearchOption.AllDirectories);
             var size = files.Sum(fileInfo => fileInfo.Length);
 
-            sizeOfPluginsLabel.Text = ByteSize.ByteSize.FromBytes(size).ToString("#.##");
+            sizeOfPluginsLabel.Text = ByteSize.FromBytes(size).ToString("#.##");
         }
 
         private void ManagePluginsButtonClick(object sender, System.EventArgs e)
