@@ -6,12 +6,10 @@
     using FluentAssertions;
     using Nihei.SC4Buddy.Model;
     using Nihei.SC4Buddy.Plugins.Installer.FileHandlers;
-    using Should;
     using Xunit;
 
     public class DatHandlerTest
     {
-        //private const string PathToTestMaterial = @"D:\users\asbjorn\SkyDrive\Code\Projects\SC4Buddy\TEST"; 
         private const string PathToTestMaterial = @"C:\users\asbjorn\git\sc4buddy\TEST";
 
         private readonly string archivePath = Path.Combine(PathToTestMaterial, @"dat\file.dat");
@@ -29,7 +27,7 @@
             var exception =
                 Assert.Throws<ArgumentException>(() => instance.FileInfo = new FileInfo(
                     Path.Combine(PathToTestMaterial, @"zip\archive.zip")));
-            exception.Message.ShouldStartWith("FileInfo must point to a .dat file.");
+            exception.Message.Should().StartWith("FileInfo must point to a .dat file.");
         }
 
         [Fact(DisplayName = "ExtractFilesToTemp(), No FileInfo, Throws InvalidOperationException")]
@@ -50,8 +48,8 @@
 
             var infos = instance.ExtractFilesToTemp().ToList();
 
-            infos.Count.ShouldEqual(1);
-            infos[0].Name.ShouldEqual("file.dat");
+            infos.Count.Should().Be(1);
+            infos[0].Name.Should().Be("file.dat");
         }
 
         [Fact(DisplayName = "MoveFilesToUserFolder(), Temp file not present & UserFolder is null, "
@@ -61,8 +59,8 @@
             var instance = new DatHandler();
 
             var exception = Assert.Throws<ArgumentNullException>(() => instance.MoveToPluginFolder(null));
-            exception.ParamName.ShouldEqual("userFolder");
-            exception.Message.ShouldStartWith("UserFolder may not be null.");
+            exception.ParamName.Should().Be("userFolder");
+            exception.Message.Should().StartWith("UserFolder may not be null.");
         }
 
         [Fact(DisplayName = "MoveFilesToUserFolder(), Temp file not present & UserFolder is valid, "
@@ -78,7 +76,7 @@
             };
 
             var exception = Assert.Throws<InvalidOperationException>(() => instance.MoveToPluginFolder(userFolder));
-            exception.Message.ShouldEqual("The archive has not been extracted to the temp folder.");
+            exception.Message.Should().Be("The archive has not been extracted to the temp folder.");
         }
 
         [Fact(DisplayName = "MoveFilesToUserFolder(), Temp file present, UserFolder is null, "
@@ -92,8 +90,8 @@
             act.Should().NotThrow();
 
             var exception = Assert.Throws<ArgumentNullException>(() => instance.MoveToPluginFolder(null));
-            exception.ParamName.ShouldEqual("userFolder");
-            exception.Message.ShouldStartWith("UserFolder may not be null.");
+            exception.ParamName.Should().Be("userFolder");
+            exception.Message.Should().StartWith("UserFolder may not be null.");
         }
 
         [Fact(DisplayName = "MoveFilesToUserFolder(), Temp file not present & UserFolder is valid, "
@@ -121,11 +119,9 @@
 
             var installedFiles = instance.MoveToPluginFolder(userFolder).ToList();
 
-            installedFiles.ShouldContain(
-                new PluginFile { Path = outputFile1, Checksum = "ce54d1157f2cea1d77bb0e3aef45b37c" },
-                new BaseHandlerTest.PluginFileTestComparer());
+            installedFiles.Should().Contain(new PluginFile { Path = outputFile1, Checksum = "ce54d1157f2cea1d77bb0e3aef45b37c" });
 
-            File.Exists(outputFile1).ShouldBeTrue("File 1 not in plugin folder.");
+            File.Exists(outputFile1).Should().BeTrue("File 1 not in plugin folder.");
         }
     }
 }

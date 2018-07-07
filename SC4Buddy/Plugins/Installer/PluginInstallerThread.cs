@@ -99,7 +99,7 @@
 
                     if (!installedFiles.Any())
                     {
-                        var validExtensions = string.Format("({0})", string.Join(", ", BaseHandler.PluginFileExtensions));
+                        var validExtensions = $"({string.Join(", ", BaseHandler.PluginFileExtensions)})";
                         var errorMessage =
                             string.Format(
                                 LocalizationStrings.ThePluginDigNotContainAnyValidFilesToInstall,
@@ -135,37 +135,37 @@
 
         protected virtual void RaiseNotPartOneOfMultipartDetectedEvent(FileInfo fileInfo)
         {
-            NotPartOneOfMultipartDetected.Invoke(this, new InstallPluginEventArgs(fileInfo));
+            NotPartOneOfMultipartDetected?.Invoke(this, new InstallPluginEventArgs(fileInfo));
         }
 
         protected virtual void RaiseInstallProgressEvent(FileInfo fileInfo, int progress, string message)
         {
-            InstallProgressChanged.Invoke(this, new InstallProgressEventArgs(fileInfo, progress, message));
+            InstallProgressChanged?.Invoke(this, new InstallProgressEventArgs(fileInfo, progress, message));
         }
 
         protected virtual void RaisePluginInstalledEvent(FileInfo fileInfo, Plugin plugin)
         {
-            PluginInstalled.Invoke(this, new InstalledPluginEventArgs(fileInfo, plugin));
+            PluginInstalled?.Invoke(this, new InstalledPluginEventArgs(fileInfo, plugin));
         }
 
         protected virtual void RaiseAllPluginsInstalledEvent()
         {
-            AllPluginsInstalled.Invoke(this, EventArgs.Empty);
+            AllPluginsInstalled?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void RaisePluginInstallFailedEvent(FileInfo fileInfo, string errorMessage)
         {
-            PluginInstallFailed.Invoke(this, new InstallPluginFailureEventArgs(fileInfo, errorMessage));
+            PluginInstallFailed?.Invoke(this, new InstallPluginFailureEventArgs(fileInfo, errorMessage));
         }
 
         protected virtual void RaiseInstallPluginEvent(FileInfo fileInfo)
         {
-            InstallingPlugin.Invoke(this, new InstallPluginEventArgs(fileInfo));
+            InstallingPlugin?.Invoke(this, new InstallPluginEventArgs(fileInfo));
         }
 
         protected virtual void RaiseReadmeFilesFoundEvent(FileInfo fileInfo, IEnumerable<FileInfo> readmeFiles)
         {
-            ReadmeFilesFound.Invoke(this, new ReadmeFilesEventArgs(fileInfo, readmeFiles));
+            ReadmeFilesFound?.Invoke(this, new ReadmeFilesEventArgs(fileInfo, readmeFiles));
         }
 
         private IEnumerable<PluginFile> HandlePluginFiles(PluginInstaller installer)

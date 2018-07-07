@@ -15,9 +15,9 @@
 
         private static readonly ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        private readonly ProcessStartInfo gameProcessStartInfo;
-
         private readonly int autoSaveWaitTime;
+
+        private readonly ProcessStartInfo gameProcessStartInfo;
 
         private Process gameProcess;
 
@@ -29,11 +29,24 @@
             this.autoSaveWaitTime = autoSaveWaitTime;
         }
 
+        public void Dispose()
+        {
+            timer.Dispose();
+        }
+
         public void Start()
         {
-            Log.Info(
-                string.Format("Starting game with the following arguments: {0}", gameProcessStartInfo.Arguments));
+            Log.Info($"Starting game with the following arguments: {gameProcessStartInfo.Arguments}");
+
             gameProcess = Process.Start(gameProcessStartInfo);
+
+            if (gameProcess == null)
+            {
+                Log.Error("Unable to launch game.");
+
+                return;
+            }
+
             gameProcess.Exited += (sender, args) => Dispose();
             var handle = gameProcess.Handle;
 
@@ -42,14 +55,13 @@
                 return;
             }
 
-            Log.Info(string.Format("Autosave is enabled. Attempting to save the game every {0} minutes.", autoSaveWaitTime));
+            Log.Info($"Autosave is enabled. Attempting to save the game every {autoSaveWaitTime} minutes.");
 
-            timer = new Timer(SendSaveCommand, handle, autoSaveWaitTime * MillisecondsPrMinute, autoSaveWaitTime * MillisecondsPrMinute);
-        }
-
-        public void Dispose()
-        {
-            timer.Dispose();
+            timer = new Timer(
+                SendSaveCommand,
+                handle,
+                autoSaveWaitTime * MillisecondsPrMinute,
+                autoSaveWaitTime * MillisecondsPrMinute);
         }
 
         [DllImport("User32.dll")]

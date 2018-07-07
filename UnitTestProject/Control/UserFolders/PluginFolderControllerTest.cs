@@ -2,11 +2,11 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using FluentAssertions;
     using Moq;
     using Nihei.SC4Buddy.Model;
     using Nihei.SC4Buddy.UserFolders.Control;
     using Nihei.SC4Buddy.UserFolders.DataAccess;
-    using Should;
     using Xunit;
 
     public class UserFoldersControllerTest
@@ -24,7 +24,7 @@
 
             var result = instance.ValidatePath(value, Guid.Empty);
 
-            result.ShouldBeFalse();
+            result.Should().BeFalse();
         }
 
         [Fact(DisplayName = "ValidatePath(), Empty string & with current id, Return False")]
@@ -41,7 +41,7 @@
 
             var result = instance.ValidatePath(path, currentId);
 
-            result.ShouldBeFalse();
+            result.Should().BeFalse();
         }
 
         [Fact(DisplayName = "ValidatePath(), Null as string & no current id, Return False")]
@@ -55,7 +55,7 @@
 
             var result = instance.ValidatePath(null, Guid.Empty);
 
-            result.ShouldBeFalse();
+            result.Should().BeFalse();
         }
 
         [Fact(DisplayName = "ValidatePath(), Null as string & with current id, Return False")]
@@ -70,7 +70,7 @@
             var currentId = Guid.NewGuid();
             var result = instance.ValidatePath(null, currentId);
 
-            result.ShouldBeFalse();
+            result.Should().BeFalse();
         }
 
         [Fact(DisplayName = "ValidatePath(), Whitespace as string & no current id, Return False")]
@@ -86,7 +86,7 @@
 
             var result = instance.ValidatePath(Path, Guid.Empty);
 
-            result.ShouldBeFalse();
+            result.Should().BeFalse();
         }
 
         [Fact(DisplayName = "ValidatePath(), Whitespace as string & with current id, Return False")]
@@ -103,7 +103,7 @@
 
             var result = instance.ValidatePath(Path, currentId);
 
-            result.ShouldBeFalse();
+            result.Should().BeFalse();
         }
 
         [Fact]
@@ -119,7 +119,7 @@
 
             var result = instance.ValidatePath(Path, Guid.Empty);
 
-            result.ShouldBeFalse();
+            result.Should().BeFalse();
         }
 
         [Fact]
@@ -136,7 +136,7 @@
 
             var result = instance.ValidatePath(Path, id);
 
-            result.ShouldBeFalse();
+            result.Should().BeFalse();
         }
 
         [Fact]
@@ -153,7 +153,7 @@
 
             var result = instance.ValidatePath(Path, Guid.Empty);
 
-            result.ShouldBeTrue();
+            result.Should().BeTrue();
             userFoldersDataAccess.VerifyAll();
         }
 
@@ -167,18 +167,18 @@
                 .Returns(
                     new Collection<UserFolder>
                     {
-                        new UserFolder { Id = id, Alias = "example", FolderPath = @"C:\example" }
+                        new UserFolder(id) { Alias = "example", FolderPath = @"C:\example" }
                     });
             var userFolderController = new Mock<IUserFolderController>();
             var instance = new UserFoldersController(
                 userFoldersDataAccess.Object,
-                userFolderController.Object); 
-            
+                userFolderController.Object);
+
             const string Path = @"C:\Windows";
 
             var result = instance.ValidatePath(Path, id);
 
-            result.ShouldBeTrue();
+            result.Should().BeTrue();
             userFoldersDataAccess.VerifyAll();
         }
 
@@ -197,7 +197,7 @@
 
             var result = instance.ValidatePath(Path, id);
 
-            result.ShouldBeFalse();
+            result.Should().BeFalse();
             userFoldersDataAccess.VerifyAll();
         }
 
@@ -211,7 +211,7 @@
                     .Returns(
                         new Collection<UserFolder>
                         {
-                            new UserFolder { Id = id, Alias = "bar", FolderPath = @"C:\Windows" }
+                            new UserFolder(id) { Alias = "bar", FolderPath = @"C:\Windows" }
                         });
             var userFolderController = new Mock<IUserFolderController>();
             var instance = new UserFoldersController(
@@ -222,7 +222,7 @@
 
             var result = instance.ValidatePath(Path, id);
 
-            result.ShouldBeTrue();
+            result.Should().BeTrue();
             userFoldersDataAccess.VerifyAll();
         }
     }

@@ -6,7 +6,6 @@
     using FluentAssertions;
     using Nihei.SC4Buddy.Model;
     using Nihei.SC4Buddy.Plugins.Installer.FileHandlers;
-    using Should;
     using Xunit;
 
     public class RarHandlerTest
@@ -37,7 +36,7 @@
             var exception =
                 Assert.Throws<ArgumentException>(
                     () => instance.FileInfo = new FileInfo(Path.Combine(PathToTestMaterial, "zip/archive.zip")));
-            exception.Message.ShouldStartWith("FileInfo must point to a .rar file.");
+            exception.Message.Should().StartWith("FileInfo must point to a .rar file.");
         }
 
         #region ExtractFilesToTemp
@@ -48,7 +47,7 @@
             var instance = new ArchiveHandler();
 
             var exception = Assert.Throws<InvalidOperationException>(() => instance.ExtractFilesToTemp());
-            exception.Message.ShouldEqual("FileInfo is not set.");
+            exception.Message.Should().Be("FileInfo is not set.");
         }
 
         [Fact(DisplayName = "ExtractFilesToTemp(), Valid rarfile, Files moved to temp folder")]
@@ -64,15 +63,15 @@
 
             var installPath = Path.Combine(Path.GetTempPath(), "archive");
 
-            Directory.Exists(installPath).ShouldBeTrue("Install directory does not exist.");
+            Directory.Exists(installPath).Should().BeTrue("Install directory does not exist.");
 
             var entries = Directory.GetFileSystemEntries(installPath);
-            entries.Length.ShouldEqual(
+            entries.Length.Should().Be(
                 ExpectedNumberOfFiles,
                 "archive should only contain two file which should both be copied over.");
 
-            entries.ShouldContain(Path.Combine(Path.GetTempPath(), "archive", "PEG_Mem-Park-Kit_106.dat"));
-            entries.ShouldContain(Path.Combine(Path.GetTempPath(), "archive", "readme.txt"));
+            entries.Should().Contain(Path.Combine(Path.GetTempPath(), "archive", "PEG_Mem-Park-Kit_106.dat"));
+            entries.Should().Contain(Path.Combine(Path.GetTempPath(), "archive", "readme.txt"));
         }
 
         #endregion
@@ -86,8 +85,8 @@
             var instance = new ArchiveHandler();
 
             var exception = Assert.Throws<ArgumentNullException>(() => instance.MoveToPluginFolder(null));
-            exception.ParamName.ShouldEqual("userFolder");
-            exception.Message.ShouldStartWith("UserFolder may not be null.");
+            exception.ParamName.Should().Be("userFolder");
+            exception.Message.Should().StartWith("UserFolder may not be null.");
         }
 
         [Fact(DisplayName = "MoveFilesToUserFolder(), Temp file not present & UserFolder is valid, "
@@ -103,7 +102,7 @@
                                    };
 
             var exception = Assert.Throws<InvalidOperationException>(() => instance.MoveToPluginFolder(userFolder));
-            exception.Message.ShouldEqual("The archive has not been extracted to the temp folder.");
+            exception.Message.Should().Be("The archive has not been extracted to the temp folder.");
         }
 
         [Fact(DisplayName = "MoveFilesToUserFolder(), Temp file present, UserFolder is null, "
@@ -117,8 +116,8 @@
             act.Should().NotThrow();
 
             var exception = Assert.Throws<ArgumentNullException>(() => instance.MoveToPluginFolder(null));
-            exception.ParamName.ShouldEqual("userFolder");
-            exception.Message.ShouldStartWith("UserFolder may not be null.");
+            exception.ParamName.Should().Be("userFolder");
+            exception.Message.Should().StartWith("UserFolder may not be null.");
         }
 
         [Fact(DisplayName = "MoveFilesToUserFolder(), Temp file not present & UserFolder is valid, "
@@ -146,15 +145,13 @@
 
             var installedFiles = instance.MoveToPluginFolder(userFolder).ToList();
 
-            installedFiles.ShouldContain(
-                new PluginFile { Path = outputFile1, Checksum = "7c1e41fd4219c43db85ca75bbba9d1ad" },
-                new BaseHandlerTest.PluginFileTestComparer());
-            installedFiles.ShouldContain(
-                new PluginFile { Path = outputFile2, Checksum = "95f09d6e18bc1775b487eaf11909776c" },
-                new BaseHandlerTest.PluginFileTestComparer());
+            installedFiles.Should().Contain(
+                new PluginFile { Path = outputFile1, Checksum = "7c1e41fd4219c43db85ca75bbba9d1ad" });
+            installedFiles.Should().Contain(
+                new PluginFile { Path = outputFile2, Checksum = "95f09d6e18bc1775b487eaf11909776c" });
 
-            File.Exists(outputFile1).ShouldBeTrue("File 1 not in plugin folder.");
-            File.Exists(outputFile2).ShouldBeTrue("File 2 not in plugin folder.");
+            File.Exists(outputFile1).Should().BeTrue("File 1 not in plugin folder.");
+            File.Exists(outputFile2).Should().BeTrue("File 2 not in plugin folder.");
         }
 
         #endregion

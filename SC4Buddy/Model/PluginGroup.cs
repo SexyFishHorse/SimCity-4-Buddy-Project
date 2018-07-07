@@ -9,10 +9,14 @@
     [JsonObject(MemberSerialization.OptIn)]
     public class PluginGroup : ModelBase
     {
+        public PluginGroup(Guid? id = null) : base(id)
+        {
+        }
+
+        public static IEqualityComparer<PluginGroup> NameComparer { get; } = new NameEqualityComparer();
+
         [JsonProperty]
         public string Name { get; set; }
-
-        public ICollection<Plugin> Plugins { get; set; }
 
         [JsonProperty]
         public IEnumerable<Guid> PluginIds
@@ -23,10 +27,7 @@
             }
         }
 
-        public PluginGroup()
-        {
-            Plugins = new Collection<Plugin>();
-        }
+        public ICollection<Plugin> Plugins { get; set; } = new Collection<Plugin>();
 
         private sealed class NameEqualityComparer : IEqualityComparer<PluginGroup>
         {
@@ -36,34 +37,28 @@
                 {
                     return true;
                 }
+
                 if (ReferenceEquals(x, null))
                 {
                     return false;
                 }
+
                 if (ReferenceEquals(y, null))
                 {
                     return false;
                 }
+
                 if (x.GetType() != y.GetType())
                 {
                     return false;
                 }
+
                 return string.Equals(x.Name, y.Name);
             }
 
             public int GetHashCode(PluginGroup obj)
             {
-                return (obj.Name != null ? obj.Name.GetHashCode() : 0);
-            }
-        }
-
-        private static readonly IEqualityComparer<PluginGroup> NameComparerInstance = new NameEqualityComparer();
-
-        public static IEqualityComparer<PluginGroup> NameComparer
-        {
-            get
-            {
-                return NameComparerInstance;
+                return obj.Name != null ? obj.Name.GetHashCode() : 0;
             }
         }
     }

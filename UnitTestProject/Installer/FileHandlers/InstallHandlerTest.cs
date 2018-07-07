@@ -3,8 +3,8 @@
     using System;
     using System.IO;
     using System.Linq;
+    using FluentAssertions;
     using Nihei.SC4Buddy.Plugins.Installer.FileHandlers;
-    using Should;
     using Xunit;
 
     public class InstallHandlerTest
@@ -26,14 +26,14 @@
 
             var infos = instance.ExtractFilesToTemp().ToList();
 
-            infos.Count.ShouldEqual(7);
-            infos.Any(x => x.Name.Equals("Floating_hotel", StringComparison.OrdinalIgnoreCase)).ShouldBeTrue();
-            infos.Any(x => x.Name.Equals("Floating_hotel.jpg", StringComparison.OrdinalIgnoreCase)).ShouldBeTrue();
-            infos.Any(x => x.Name.Equals("Floating_hotel-0x5ad0e817_0x1112e585_0x30000.SC4Model", StringComparison.OrdinalIgnoreCase)).ShouldBeTrue();
-            infos.Any(x => x.Name.Equals("Floating_hotel-0x6534284a-0x304a15b2-0x513da7c8.SC4Desc", StringComparison.OrdinalIgnoreCase)).ShouldBeTrue();
-            infos.Any(x => x.Name.Equals("Floating_hotel-dummy-0x5ad0e817_0x511378c7_0x30000.SC4Model", StringComparison.OrdinalIgnoreCase)).ShouldBeTrue();
-            infos.Any(x => x.Name.Equals("Floating_hotel-dummy-0x6534284a-0x304a15b2-0x513da8f0.SC4Desc", StringComparison.OrdinalIgnoreCase)).ShouldBeTrue();
-            infos.Any(x => x.Name.Equals("LM1x1_somy-Floating_hotel----------_b13dada1.SC4Lot", StringComparison.OrdinalIgnoreCase)).ShouldBeTrue();
+            infos.Count.Should().Be(7);
+            infos.Any(x => x.Name.Equals("Floating_hotel", StringComparison.OrdinalIgnoreCase)).Should().BeTrue();
+            infos.Any(x => x.Name.Equals("Floating_hotel.jpg", StringComparison.OrdinalIgnoreCase)).Should().BeTrue();
+            infos.Any(x => x.Name.Equals("Floating_hotel-0x5ad0e817_0x1112e585_0x30000.SC4Model", StringComparison.OrdinalIgnoreCase)).Should().BeTrue();
+            infos.Any(x => x.Name.Equals("Floating_hotel-0x6534284a-0x304a15b2-0x513da7c8.SC4Desc", StringComparison.OrdinalIgnoreCase)).Should().BeTrue();
+            infos.Any(x => x.Name.Equals("Floating_hotel-dummy-0x5ad0e817_0x511378c7_0x30000.SC4Model", StringComparison.OrdinalIgnoreCase)).Should().BeTrue();
+            infos.Any(x => x.Name.Equals("Floating_hotel-dummy-0x6534284a-0x304a15b2-0x513da8f0.SC4Desc", StringComparison.OrdinalIgnoreCase)).Should().BeTrue();
+            infos.Any(x => x.Name.Equals("LM1x1_somy-Floating_hotel----------_b13dada1.SC4Lot", StringComparison.OrdinalIgnoreCase)).Should().BeTrue();
         }
     }
 }

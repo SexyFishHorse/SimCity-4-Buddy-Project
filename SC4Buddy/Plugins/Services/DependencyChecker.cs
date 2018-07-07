@@ -28,8 +28,10 @@
 
             Log.Debug("Loading all dependencies.");
             var dependencies = new HashSet<Guid>();
-            foreach (var dependency in userFolder.Plugins
-                .Where(x => x.RemotePlugin != null)
+
+            var userFolderPlugins = userFolder.Plugins.Where(x => x.RemotePlugin != null).ToList();
+
+            foreach (var dependency in userFolderPlugins
                 .Select(plugin => allServerPlugins.FirstOrDefault(x => x.Id == plugin.RemotePluginId))
                 .Where(remotePlugin => remotePlugin != null)
                 .SelectMany(remotePlugin => remotePlugin.Dependencies))
@@ -39,29 +41,32 @@
 
             backgroundWorker.ReportProgress(40, "Loaded all dependencies. Checking the main user folder");
 
-            Log.Debug(string.Format("{0} dependencies found in total.", dependencies.Count));
-            Log.Debug(string.Format("Looping through {0} plugins in the main user folder.", mainUserFolderPlugins.Count(x => x.RemotePlugin != null)));
-            foreach (var plugin in mainUserFolderPlugins.Where(x => x.RemotePlugin != null))
+            var mainFolderPlugins = mainUserFolderPlugins.Where(x => x.RemotePlugin != null).ToList();
+
+            Log.Debug($"{dependencies.Count} dependencies found in total.");
+            Log.Debug($"Looping through {mainFolderPlugins.Count} plugins in the main user folder.");
+
+            foreach (var plugin in mainFolderPlugins.Where(x => x.RemotePluginId.HasValue))
             {
-                dependencies.Remove(plugin.RemotePluginId);
-                Log.Debug(string.Format("Removed {0} ({1}) as a dependency", plugin.Name, plugin.RemotePluginId));
+                // ReSharper disable once PossibleInvalidOperationException Validated in foreach statement
+                dependencies.Remove(plugin.RemotePluginId.Value);
+                Log.Debug($"Removed {plugin.Name} ({plugin.RemotePluginId}) as a dependency");
             }
 
             backgroundWorker.ReportProgress(60, "Checking the user folder");
 
-            Log.Debug(
-                string.Format(
-                    "{0} dependencies remaining. Looping through {1} plugins in the user folder.",
-                    dependencies.Count,
-                    userFolder.Plugins.Count(x => x.RemotePlugin != null)));
-            foreach (var plugin in userFolder.Plugins.Where(x => x.RemotePlugin != null))
+            Log.Debug($"{dependencies.Count} dependencies remaining. Looping through {userFolderPlugins.Count} plugins in the user folder.");
+
+            foreach (var plugin in userFolderPlugins)
             {
-                dependencies.Remove(plugin.RemotePluginId);
-                Log.Debug(string.Format("Removed {0} ({1}) as a dependency", plugin.Name, plugin.RemotePluginId));
+                // ReSharper disable once PossibleInvalidOperationException validated when userFolderPlugins was created
+                dependencies.Remove(plugin.RemotePluginId.Value);
+                Log.Debug($"Removed {plugin.Name} ({plugin.RemotePluginId}) as a dependency");
             }
 
             backgroundWorker.ReportProgress(80, "Loading data for missing dependencies");
-            Log.Debug(string.Format("{0} dependencies remaining. Loading plugin data for said plugins.", dependencies.Count));
+            Log.Debug($"{dependencies.Count} dependencies remaining. Loading plugin data for said plugins.");
+
             return dependencies.Select(dependency => allServerPlugins.First(plugin => plugin.Id == dependency));
         }
     }

@@ -6,18 +6,13 @@
     [JsonObject(MemberSerialization.OptIn)]
     public abstract class ModelBase
     {
+        protected ModelBase(Guid? id = null)
+        {
+            Id = id ?? Guid.NewGuid();
+        }
+
         [JsonProperty]
-        public Guid Id { get; set; }
-
-        protected ModelBase()
-        {
-            Id = Guid.NewGuid();
-        }
-
-        protected bool Equals(ModelBase other)
-        {
-            return Id.Equals(other.Id);
-        }
+        public Guid Id { get; }
 
         public override bool Equals(object obj)
         {
@@ -25,17 +20,23 @@
             {
                 return false;
             }
+
             if (ReferenceEquals(this, obj))
             {
                 return true;
             }
-            var other = obj as ModelBase;
-            return other != null && Equals(other);
+
+            return obj is ModelBase other && Equals(other);
         }
 
         public override int GetHashCode()
         {
             return Id.GetHashCode();
+        }
+
+        protected bool Equals(ModelBase other)
+        {
+            return Id.Equals(other.Id);
         }
     }
 }

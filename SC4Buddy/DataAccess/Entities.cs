@@ -1,5 +1,6 @@
 ﻿namespace Nihei.SC4Buddy.DataAccess
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
@@ -23,15 +24,9 @@
 
         public ICollection<PluginGroup> Groups { get; private set; }
 
-        private string StorageLocation { get; set; }
+        private string StorageLocation { get; }
 
-        private string PluginGroupsLocation
-        {
-            get
-            {
-                return Path.Combine(StorageLocation, PluginGroupsFilename);
-            }
-        }
+        private string PluginGroupsLocation => Path.Combine(StorageLocation, PluginGroupsFilename);
 
         public void SaveChanges()
         {
@@ -61,14 +56,16 @@
         {
             if (!data.Any())
             {
-                Log.Info(string.Format("Empty collection for {0}, skipping storage.", dataLocation));
+                Log.Info($"Empty collection for {dataLocation}, skipping storage.");
+
                 return;
             }
 
             var fileInfo = new FileInfo(dataLocation);
             if (fileInfo.DirectoryName == null)
             {
-                throw new DirectoryNotFoundException(string.Format("The location string {0} does not contain a directory name.", dataLocation));
+                throw new DirectoryNotFoundException(
+                    $"The location string {dataLocation} does not contain a directory name.");
             }
 
             Directory.CreateDirectory(fileInfo.DirectoryName);
@@ -95,12 +92,12 @@
 
                 foreach (var dynamicGroup in dynamicGroups)
                 {
-                    var pluginGroup = new PluginGroup { Id = dynamicGroup.Id, Name = dynamicGroup.Name };
+                    var pluginGroup = new PluginGroup((Guid)dynamicGroup.Id) { Name = dynamicGroup.Name };
                     var groupPlugins = new Collection<Plugin>();
 
                     foreach (var pluginId in dynamicGroup.PluginIds)
                     {
-                        groupPlugins.Add(new Plugin { Id = pluginId });
+                        groupPlugins.Add(new Plugin((Guid)pluginId));
                     }
 
                     pluginGroup.Plugins = groupPlugins;

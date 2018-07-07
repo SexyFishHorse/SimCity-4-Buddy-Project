@@ -7,7 +7,6 @@
 
     public static class ApiConnect
     {
-
         public static void ThrowErrorOnConnectionOrDisabledFeature(string feature)
         {
             if (!NetworkInterface.GetIsNetworkAvailable())

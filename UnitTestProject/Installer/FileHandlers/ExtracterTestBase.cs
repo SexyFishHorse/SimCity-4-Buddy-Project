@@ -6,7 +6,6 @@
     {
         private const int ExpectedNumberOfFiles = 2;
 
-        //private const string PathToTestMaterial = @"D:\users\asbjorn\SkyDrive\Code\Projects\SC4Buddy\TEST";
         private const string PathToTestMaterial = @"C:\users\asbjorn\gitsc4buddy\TEST";
 
         private readonly string archivePath = Path.Combine(PathToTestMaterial, @"zip\archive.zip");

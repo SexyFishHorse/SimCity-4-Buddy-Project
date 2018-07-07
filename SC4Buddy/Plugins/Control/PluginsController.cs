@@ -70,8 +70,11 @@
 
             var validFilenames = new[]
                                      {
-                                         "Background3D0.png", "Background3D1.png", "Background3D2.png",
-                                         "Background3D3.png", "Background3D4.png"
+                                         "Background3D0.png",
+                                         "Background3D1.png",
+                                         "Background3D2.png",
+                                         "Background3D3.png",
+                                         "Background3D4.png"
                                      };
 
             return validFilenames.Any(entity.EndsWith);
@@ -115,14 +118,11 @@
         {
             var files = new PluginFile[plugin.PluginFiles.Count];
             plugin.PluginFiles.CopyTo(files, 0);
-            foreach (var fileInfo in files.Select(file => new FileInfo(file.Path)))
+            foreach (var fileInfo in files.Select(file => new FileInfo(file.Path)).Where(x => x.Exists))
             {
-                if (fileInfo.Exists)
-                {
-                    FileSystem.DeleteFile(fileInfo.FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                FileSystem.DeleteFile(fileInfo.FullName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
 
-                    DeleteDirectoryIfEmpty(fileInfo.Directory);
-                }
+                DeleteDirectoryIfEmpty(fileInfo.Directory);
             }
 
             Remove(plugin);
@@ -219,26 +219,19 @@
             var numUpdated = 0;
             var knownPlugins = Plugins.Where(x => x.RemotePlugin != null).ToList();
             var numProcessed = 0.0;
-            foreach (var plugin in knownPlugins)
+            foreach (var plugin in knownPlugins.Where(x => x.RemotePluginId.HasValue))
             {
-                var remotePlugin = client.GetPlugin(plugin.RemotePluginId);
+                // ReSharper disable once PossibleInvalidOperationException Checked in foreach loop
+                var remotePlugin = client.GetPlugin(plugin.RemotePluginId.Value);
 
                 if (remotePlugin == null)
                 {
-                    Log.Warn(
-                        string.Format(
-                            "The plugin \"{0}\" does not exist or has been removed from the server.",
-                            plugin.RemotePluginId));
+                    Log.Warn($"The plugin \"{plugin.RemotePluginId}\" does not exist or has been removed from the server.");
                 }
                 else
                 {
-                    Log.Debug(
-                        string.Format(
-                            "The plugin \"{0}\" ({1}) was updated as the remote plugin \"{2}\" ({3}).",
-                            plugin.Name,
-                            plugin.Id,
-                            remotePlugin.Name,
-                            remotePlugin.Id));
+                    Log.Debug($"The plugin \"{plugin.Name}\" ({plugin.Id}) was updated as the remote plugin \"{remotePlugin.Name}\" ({remotePlugin.Id}).");
+
                     plugin.Name = remotePlugin.Name;
                     plugin.Link = remotePlugin.Link;
                     plugin.Author = remotePlugin.Author;
@@ -251,10 +244,10 @@
 
                 backgroundWorker.ReportProgress(
                     (int)Math.Round((numProcessed / knownPlugins.Count) * 100),
-                    string.Format("Processed {0} of {1} known plugins.", numProcessed, knownPlugins.Count));
+                    $"Processed {numProcessed} of {knownPlugins.Count} known plugins.");
             }
 
-            Log.Info(string.Format("Updated {0} plugins.", numUpdated));
+            Log.Info($"Updated {numUpdated} plugins.");
 
             return numUpdated;
         }

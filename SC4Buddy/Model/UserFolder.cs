@@ -1,7 +1,9 @@
 ﻿namespace Nihei.SC4Buddy.Model
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.IO;
     using Newtonsoft.Json;
 
     [JsonObject(MemberSerialization.OptIn)]
@@ -9,26 +11,18 @@
     {
         public const string PluginFolderName = "Plugins";
 
-        private static readonly IEqualityComparer<UserFolder> AliasComparerInstance = new AliasEqualityComparer();
-
-        public UserFolder()
+        public UserFolder(Guid? id = null)
+            : base(id)
         {
-            Plugins = new Collection<Plugin>();
         }
 
-        public static IEqualityComparer<UserFolder> AliasComparer
-        {
-            get
-            {
-                return AliasComparerInstance;
-            }
-        }
-
-        [JsonProperty]
-        public string FolderPath { get; set; }
+        public static IEqualityComparer<UserFolder> AliasComparer { get; } = new AliasEqualityComparer();
 
         [JsonProperty]
         public string Alias { get; set; }
+
+        [JsonProperty]
+        public string FolderPath { get; set; }
 
         [JsonProperty]
         public bool IsMainFolder { get; set; }
@@ -36,15 +30,9 @@
         [JsonProperty]
         public bool IsStartupFolder { get; set; }
 
-        public ICollection<Plugin> Plugins { get; set; }
+        public string PluginFolderPath => Path.Combine(FolderPath, PluginFolderName);
 
-        public string PluginFolderPath
-        {
-            get
-            {
-                return System.IO.Path.Combine(FolderPath, PluginFolderName);
-            }
-        }
+        public ICollection<Plugin> Plugins { get; set; } = new Collection<Plugin>();
 
         private sealed class AliasEqualityComparer : IEqualityComparer<UserFolder>
         {

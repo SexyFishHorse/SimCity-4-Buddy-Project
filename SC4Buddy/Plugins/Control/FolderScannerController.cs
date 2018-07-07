@@ -33,13 +33,13 @@
 
                 NewFiles = folderScanner.NewFiles.ToList();
 
-                NewFilesFound(this, EventArgs.Empty);
+                NewFilesFound?.Invoke(this, EventArgs.Empty);
 
                 return true;
             }
             catch (Exception ex)
             {
-                Log.Error(string.Format("Error during folder scan: {0}", ex));
+                Log.Error($"Error during folder scan: {ex}");
 
                 return false;
             }
@@ -73,7 +73,7 @@
                     return 0;
                 }
 
-                var plugin = new Plugin { Id = fileAndPlugin.Value.Id };
+                var plugin = new Plugin(fileAndPlugin.Value.Id);
                 if (!plugins.Contains(plugin))
                 {
                     plugin.Name = fileAndPlugin.Value.Name;

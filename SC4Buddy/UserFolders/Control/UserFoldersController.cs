@@ -28,17 +28,20 @@
         {
             var folder = UserFolders.FirstOrDefault(x => x.IsMainFolder);
 
-            if (folder == null)
+            if (folder != null)
             {
-                folder = new UserFolder
-                {
-                    Id = Guid.NewGuid(),
-                    Alias = "Main user folder",
-                    IsMainFolder = true,
-                    FolderPath = Path.Combine(Settings.Get(Settings.Keys.GameLocation), UserFolder.PluginFolderName)
-                };
-                Add(folder);
+                return folder;
             }
+
+            folder = new UserFolder(Guid.NewGuid())
+                         {
+                             Alias = "Main user folder",
+                             IsMainFolder = true,
+                             FolderPath = Path.Combine(
+                                 Settings.Get(Settings.Keys.GameLocation),
+                                 UserFolder.PluginFolderName)
+                         };
+            Add(folder);
 
             return folder;
         }

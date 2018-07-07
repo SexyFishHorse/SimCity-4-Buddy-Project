@@ -1,5 +1,6 @@
 ﻿namespace Nihei.SC4Buddy.UserFolders.DataAccess
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IO;
@@ -44,9 +45,8 @@
 
                 foreach (var userFolderJson in userFoldersJson)
                 {
-                    var userFolder = new UserFolder
+                    var userFolder = new UserFolder((Guid)userFolderJson.Id)
                     {
-                        Id = userFolderJson.Id,
                         Alias = userFolderJson.Alias,
                         FolderPath = userFolderJson.FolderPath,
                         IsMainFolder = userFolderJson.IsMainFolder,

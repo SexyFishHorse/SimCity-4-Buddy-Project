@@ -44,6 +44,13 @@
             }
         }
 
+        private void AutoSaveIntervalTrackBarScroll(object sender, EventArgs e)
+        {
+            var interval = autoSaveIntervalTrackBar.Value;
+
+            UpdateAutoSaveLabel(interval);
+        }
+
         private void BrowseButtonClick(object sender, EventArgs e)
         {
             var result = gameLocationDialog.ShowDialog(this);
@@ -57,11 +64,39 @@
 
             if (settingsController.ValidateGameLocationPath(path))
             {
-                Log.Info(string.Format("Browsed to valid game location: {0}", path));
+                Log.Info($"Browsed to valid game location: {path}");
                 gameLocationTextBox.Text = path;
             }
 
             UpdateLanguageComboBox();
+        }
+
+        private void BrowseQuarantinedButtonClick(object sender, EventArgs e)
+        {
+            var result = storeLocationDialog.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                quarantinedFilesLocationTextBox.Text = storeLocationDialog.SelectedPath;
+            }
+        }
+
+        private void CloseButtonClick(object sender, EventArgs e)
+        {
+            Log.Info("Closing settings form");
+            Hide();
+        }
+
+        private void DisableAudioCheckBoxCheckedChanged(object sender, EventArgs e)
+        {
+            disableMusicCheckBox.Enabled = !disableAudioCheckBox.Checked;
+            disableSoundsCheckBox.Enabled = !disableAudioCheckBox.Checked;
+        }
+
+        private void EnableAutoSaveButtonCheckedChanged(object sender, EventArgs e)
+        {
+            autoSaveIntervalTrackBar.Enabled = enableAutoSaveCheckBox.Checked;
+
+            AutoSaveIntervalTrackBarScroll(sender, e);
         }
 
         private void GameLocationTextBoxTextChanged(object sender, EventArgs e)
@@ -72,9 +107,10 @@
             }
 
             gameLocationTextBox.ForeColor = gameLocationTextBox.Text.Equals(
-                LocalizationStrings.SelectGameLocation, StringComparison.OrdinalIgnoreCase)
-                ? Color.Gray
-                : Color.Black;
+                                                LocalizationStrings.SelectGameLocation,
+                                                StringComparison.OrdinalIgnoreCase)
+                                                ? Color.Gray
+                                                : Color.Black;
 
             UpdateLanguageComboBox();
         }
@@ -96,7 +132,7 @@
 
             if (!ValidateResolution())
             {
-                Log.Info(string.Format("Invalid resolution: \"{0}\"", resolutionComboBox.Text.Trim()));
+                Log.Info($"Invalid resolution: \"{resolutionComboBox.Text.Trim()}\"");
                 MessageBox.Show(
                     this,
                     LocalizationStrings.ResolutionMustBeInTheFormatNumberXNumber,
@@ -104,6 +140,7 @@
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button1);
+
                 return;
             }
 
@@ -124,29 +161,28 @@
 
             var regex = new Regex(@"\d+x\d+");
             var resolution = resolutionComboBox.Text.Trim();
-            LauncherSettings.SetAndSave(LauncherSettings.Keys.Resolution, regex.IsMatch(resolution) ? resolution : string.Empty);
+            LauncherSettings.SetAndSave(
+                LauncherSettings.Keys.Resolution,
+                regex.IsMatch(resolution) ? resolution : string.Empty);
 
+            var colorDepth = ((ComboBoxItem<GameArgumentsHelper.ColorDepth>)colourDepthComboBox.SelectedItem).Value;
             LauncherSettings.SetAndSave(
                 LauncherSettings.Keys.ColourDepth32Bit,
-                ((ComboBoxItem<GameArgumentsHelper.ColorDepth>)colourDepthComboBox.SelectedItem).Value
-                == GameArgumentsHelper.ColorDepth.Bits32);
+                colorDepth == GameArgumentsHelper.ColorDepth.Bits32);
 
+            var cursorColour = ((ComboBoxItem<GameArgumentsHelper.CursorColorDepth>)cursorColourComboBox.SelectedItem)
+                               .Value.ToString();
             LauncherSettings.SetAndSave(
                 LauncherSettings.Keys.CursorColourDepth,
-                cursorColourComboBox.SelectedIndex > 0
-                    ? ((ComboBoxItem<GameArgumentsHelper.CursorColorDepth>)cursorColourComboBox.SelectedItem).Value
-                          .ToString()
-                    : string.Empty);
+                cursorColourComboBox.SelectedIndex > 0 ? cursorColour : string.Empty);
 
-            int numCpus;
-            int.TryParse(
-                cpuCountComboBox.Text.Trim(), out numCpus);
+            var numCpus = Convert.ToInt32(cpuCountComboBox.Text.Trim());
             LauncherSettings.SetAndSave(LauncherSettings.Keys.CpuCount, numCpus);
 
             var cpuPriority = cpuPriorityComboBox.SelectedIndex > 0
-                                                       ? ((ComboBoxItem<GameArgumentsHelper.CpuPriority>)
-                                                          cpuPriorityComboBox.SelectedItem).Value.ToString()
-                                                       : string.Empty;
+                                  ? ((ComboBoxItem<GameArgumentsHelper.CpuPriority>)
+                                        cpuPriorityComboBox.SelectedItem).Value.ToString()
+                                  : string.Empty;
 
             LauncherSettings.SetAndSave(LauncherSettings.Keys.CpuPriority, cpuPriority);
 
@@ -163,30 +199,38 @@
 
             LauncherSettings.SetAndSave(LauncherSettings.Keys.SkipIntro, skipIntroCheckBox.Checked);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.PauseWhenMinimized, pauseMinimizedCheckBox.Checked);
-            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableExceptionHandling, disableExceptionHandlingCheckBox.Checked);
-            LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableBackgroundLoader, disableBackgroundLoaderCheckBox.Checked);
+            LauncherSettings.SetAndSave(
+                LauncherSettings.Keys.DisableExceptionHandling,
+                disableExceptionHandlingCheckBox.Checked);
+            LauncherSettings.SetAndSave(
+                LauncherSettings.Keys.DisableBackgroundLoader,
+                disableBackgroundLoaderCheckBox.Checked);
 
             LauncherSettings.SetAndSave(LauncherSettings.Keys.Language, languageComboBox.SelectedItem);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.IgnoreMissingModels, ignoreMissingModelsCheckBox.Checked);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.DisableIme, disableIMECheckBox.Checked);
             LauncherSettings.SetAndSave(LauncherSettings.Keys.WriteLog, writeLogCheckBox.Checked);
 
-            Settings.SetAndSave(Settings.Keys.AllowCheckForMissingDependencies, allowCheckMissingDependenciesCheckBox.Checked);
-            Settings.SetAndSave(Settings.Keys.AskForAdditionalInformationAfterInstallation, AskForAdditionalInfoAfterInstallCheckBox.Checked);
-            Settings.SetAndSave(Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation, RemoveNonPluginFilesAfterInstallCheckBox.Checked);
-            Settings.SetAndSave(Settings.Keys.AutoRunExecutablesDuringInstallation, AutoRunInstallerExecutablesCheckBox.Checked);
+            Settings.SetAndSave(
+                Settings.Keys.AllowCheckForMissingDependencies,
+                allowCheckMissingDependenciesCheckBox.Checked);
+            Settings.SetAndSave(
+                Settings.Keys.AskForAdditionalInformationAfterInstallation,
+                AskForAdditionalInfoAfterInstallCheckBox.Checked);
+            Settings.SetAndSave(
+                Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation,
+                RemoveNonPluginFilesAfterInstallCheckBox.Checked);
+            Settings.SetAndSave(
+                Settings.Keys.AutoRunExecutablesDuringInstallation,
+                AutoRunInstallerExecutablesCheckBox.Checked);
 
             Settings.SetAndSave(Settings.Keys.ApiBaseUrl, apiBaseUrlTextBox.Text.Trim());
-            Settings.SetAndSave(Settings.Keys.FetchInformationFromRemoteServer, fetchInformationFromRemoteCheckbox.Checked);
+            Settings.SetAndSave(
+                Settings.Keys.FetchInformationFromRemoteServer,
+                fetchInformationFromRemoteCheckbox.Checked);
             Settings.SetAndSave(Settings.Keys.DetectPlugins, detectPluginsCheckBox.Checked);
 
             Close();
-        }
-
-        private void CloseButtonClick(object sender, EventArgs e)
-        {
-            Log.Info("Closing settings form");
-            Hide();
         }
 
         private void ScanButtonClick(object sender, EventArgs e)
@@ -214,6 +258,30 @@
             }
         }
 
+        private void SettingsFormFormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (settingsController.ValidateGameLocationPath(Settings.Get(Settings.Keys.GameLocation)))
+            {
+                return;
+            }
+
+            var result = MessageBox.Show(
+                this,
+                LocalizationStrings.YouMustSettheGameLocationBeforeYouCanUseThisApplication,
+                LocalizationStrings.GameFolderNotSet,
+                MessageBoxButtons.RetryCancel,
+                MessageBoxIcon.Exclamation,
+                MessageBoxDefaultButton.Button1);
+
+            if (result != DialogResult.Retry)
+            {
+                return;
+            }
+
+            Log.Info("Abort form close");
+            e.Cancel = true;
+        }
+
         private void SettingsFormLoad(object sender, EventArgs e)
         {
             gameLocationTextBox.Text = Settings.Get(Settings.Keys.GameLocation);
@@ -225,9 +293,10 @@
             }
 
             gameLocationTextBox.ForeColor = gameLocationTextBox.Text.Equals(
-                LocalizationStrings.SelectGameLocation, StringComparison.OrdinalIgnoreCase)
-                ? Color.Gray
-                : Color.Black;
+                                                LocalizationStrings.SelectGameLocation,
+                                                StringComparison.OrdinalIgnoreCase)
+                                                ? Color.Gray
+                                                : Color.Black;
 
             enableAutoSaveCheckBox.Checked = LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableAutoSave);
             autoSaveIntervalTrackBar.Enabled = LauncherSettings.Get<bool>(LauncherSettings.Keys.EnableAutoSave);
@@ -265,19 +334,118 @@
 
             quarantinedFilesLocationTextBox.Text = Settings.Get(Settings.Keys.QuarantinedFiles);
 
-            allowCheckMissingDependenciesCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AllowCheckForMissingDependencies);
-            AskForAdditionalInfoAfterInstallCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AskForAdditionalInformationAfterInstallation);
-            RemoveNonPluginFilesAfterInstallCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation);
-            AutoRunInstallerExecutablesCheckBox.Checked = Settings.Get<bool>(Settings.Keys.AutoRunExecutablesDuringInstallation);
+            allowCheckMissingDependenciesCheckBox.Checked =
+                Settings.Get<bool>(Settings.Keys.AllowCheckForMissingDependencies);
+            AskForAdditionalInfoAfterInstallCheckBox.Checked =
+                Settings.Get<bool>(Settings.Keys.AskForAdditionalInformationAfterInstallation);
+            RemoveNonPluginFilesAfterInstallCheckBox.Checked =
+                Settings.Get<bool>(Settings.Keys.AskToRemoveNonPluginFilesAfterInstallation);
+            AutoRunInstallerExecutablesCheckBox.Checked =
+                Settings.Get<bool>(Settings.Keys.AutoRunExecutablesDuringInstallation);
 
-            apiBaseUrlTextBox.Text = Settings.Get(Settings.Keys.ApiBaseUrl, ConfigurationManager.AppSettings["ApiBaseUrl"]);
+            apiBaseUrlTextBox.Text = Settings.Get(
+                Settings.Keys.ApiBaseUrl,
+                ConfigurationManager.AppSettings["ApiBaseUrl"]);
             detectPluginsCheckBox.Checked = Settings.Get(Settings.Keys.DetectPlugins, true);
-            fetchInformationFromRemoteCheckbox.Checked = Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
+            fetchInformationFromRemoteCheckbox.Checked =
+                Settings.Get<bool>(Settings.Keys.FetchInformationFromRemoteServer);
         }
 
-        private void UpdateResolutionComboBox()
+        private void UpdateAutoSaveLabel(int interval)
         {
-            resolutionComboBox.Text = LauncherSettings.Get(LauncherSettings.Keys.Resolution);
+            autoSaveIntervalLabel.Text = string.Format(LocalizationStrings.NumMinutes, interval);
+            shortAutosaveIntervalsLabel.Visible = interval < 10;
+        }
+
+        private void UpdateBackgroundsListView()
+        {
+            var wallpapers = settingsController.GetWallpapers();
+
+            backgroundImageListView.BeginUpdate();
+            var imageList = new ImageList { ImageSize = new Size(65, 65) };
+            backgroundImageListView.LargeImageList = imageList;
+
+            for (var index = 0; index < wallpapers.Count; index++)
+            {
+                var wallpaper = wallpapers[index];
+                var item = new ListViewItem((index + 1).ToString(CultureInfo.InvariantCulture));
+                imageList.Images.Add(wallpaper);
+                item.ImageIndex = index;
+
+                backgroundImageListView.Items.Add(item);
+            }
+
+            backgroundImageListView.EndUpdate();
+        }
+
+        private void UpdateColourDepthComboBox()
+        {
+            colourDepthComboBox.BeginUpdate();
+            colourDepthComboBox.Items.Clear();
+            colourDepthComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.ColorDepth>(
+                    LocalizationStrings.Bits16,
+                    GameArgumentsHelper.ColorDepth.Bits16));
+            colourDepthComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.ColorDepth>(
+                    LocalizationStrings.Bits32,
+                    GameArgumentsHelper.ColorDepth.Bits32));
+
+            colourDepthComboBox.SelectedIndex =
+                LauncherSettings.Get<bool>(LauncherSettings.Keys.ColourDepth32Bit) ? 1 : 0;
+            colourDepthComboBox.EndUpdate();
+        }
+
+        private void UpdateCpuCountComboBox()
+        {
+            cpuCountComboBox.BeginUpdate();
+            cpuCountComboBox.Items.Clear();
+            cpuCountComboBox.Items.Add(LocalizationStrings.Ignore);
+            for (var i = 1; i <= Environment.ProcessorCount; i++)
+            {
+                cpuCountComboBox.Items.Add(i);
+            }
+
+            cpuCountComboBox.SelectedIndex = LauncherSettings.GetInt(LauncherSettings.Keys.CpuCount);
+            cpuCountComboBox.EndUpdate();
+        }
+
+        private void UpdateCpuPriorityComboBox()
+        {
+            cpuPriorityComboBox.BeginUpdate();
+            cpuPriorityComboBox.Items.Clear();
+            cpuPriorityComboBox.Items.Add(LocalizationStrings.Ignore);
+            cpuPriorityComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.CpuPriority>(
+                    LocalizationStrings.Low,
+                    GameArgumentsHelper.CpuPriority.Low));
+            cpuPriorityComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.CpuPriority>(
+                    LocalizationStrings.Medium,
+                    GameArgumentsHelper.CpuPriority.Medium));
+            cpuPriorityComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.CpuPriority>(
+                    LocalizationStrings.High,
+                    GameArgumentsHelper.CpuPriority.High));
+
+            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CpuPriority), true, out GameArgumentsHelper.CpuPriority selectedPriority);
+            switch (selectedPriority)
+            {
+                case GameArgumentsHelper.CpuPriority.Low:
+                    cpuPriorityComboBox.SelectedIndex = 1;
+                    break;
+                case GameArgumentsHelper.CpuPriority.Medium:
+                    cpuPriorityComboBox.SelectedIndex = 2;
+                    break;
+                case GameArgumentsHelper.CpuPriority.High:
+                    cpuPriorityComboBox.SelectedIndex = 3;
+                    break;
+                default:
+                    cpuPriorityComboBox.SelectedIndex = 0;
+                    break;
+            }
+
+            cpuPriorityComboBox.EndUpdate();
         }
 
         private void UpdateCursorColourComboBox()
@@ -287,22 +455,28 @@
             cursorColourComboBox.Items.Add(LocalizationStrings.Ignore);
             cursorColourComboBox.Items.Add(
                 new ComboBoxItem<GameArgumentsHelper.CursorColorDepth>(
-                    LocalizationStrings.Disabled, GameArgumentsHelper.CursorColorDepth.Disabled));
+                    LocalizationStrings.Disabled,
+                    GameArgumentsHelper.CursorColorDepth.Disabled));
             cursorColourComboBox.Items.Add(
                 new ComboBoxItem<GameArgumentsHelper.CursorColorDepth>(
-                    LocalizationStrings.SystemCursors, GameArgumentsHelper.CursorColorDepth.SystemCursors));
+                    LocalizationStrings.SystemCursors,
+                    GameArgumentsHelper.CursorColorDepth.SystemCursors));
             cursorColourComboBox.Items.Add(
                 new ComboBoxItem<GameArgumentsHelper.CursorColorDepth>(
-                    LocalizationStrings.BlackAndWhite, GameArgumentsHelper.CursorColorDepth.BlackAndWhite));
+                    LocalizationStrings.BlackAndWhite,
+                    GameArgumentsHelper.CursorColorDepth.BlackAndWhite));
             cursorColourComboBox.Items.Add(
                 new ComboBoxItem<GameArgumentsHelper.CursorColorDepth>(
-                    LocalizationStrings.Colors16, GameArgumentsHelper.CursorColorDepth.Colors16));
+                    LocalizationStrings.Colors16,
+                    GameArgumentsHelper.CursorColorDepth.Colors16));
             cursorColourComboBox.Items.Add(
                 new ComboBoxItem<GameArgumentsHelper.CursorColorDepth>(
-                    LocalizationStrings.Colors256, GameArgumentsHelper.CursorColorDepth.Colors256));
+                    LocalizationStrings.Colors256,
+                    GameArgumentsHelper.CursorColorDepth.Colors256));
             cursorColourComboBox.Items.Add(
                 new ComboBoxItem<GameArgumentsHelper.CursorColorDepth>(
-                    LocalizationStrings.FullColors, GameArgumentsHelper.CursorColorDepth.FullColors));
+                    LocalizationStrings.FullColors,
+                    GameArgumentsHelper.CursorColorDepth.FullColors));
 
             GameArgumentsHelper.CursorColorDepth selectedCursor;
             Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CursorColourDepth), true, out selectedCursor);
@@ -335,127 +509,6 @@
             cursorColourComboBox.EndUpdate();
         }
 
-        private void UpdateCpuPriorityComboBox()
-        {
-            cpuPriorityComboBox.BeginUpdate();
-            cpuPriorityComboBox.Items.Clear();
-            cpuPriorityComboBox.Items.Add(LocalizationStrings.Ignore);
-            cpuPriorityComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.CpuPriority>(LocalizationStrings.Low, GameArgumentsHelper.CpuPriority.Low));
-            cpuPriorityComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.CpuPriority>(
-                    LocalizationStrings.Medium, GameArgumentsHelper.CpuPriority.Medium));
-            cpuPriorityComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.CpuPriority>(
-                    LocalizationStrings.High, GameArgumentsHelper.CpuPriority.High));
-
-            GameArgumentsHelper.CpuPriority selectedPriority;
-            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.CpuPriority), true, out selectedPriority);
-            switch (selectedPriority)
-            {
-                case GameArgumentsHelper.CpuPriority.Low:
-                    cpuPriorityComboBox.SelectedIndex = 1;
-                    break;
-                case GameArgumentsHelper.CpuPriority.Medium:
-                    cpuPriorityComboBox.SelectedIndex = 2;
-                    break;
-                case GameArgumentsHelper.CpuPriority.High:
-                    cpuPriorityComboBox.SelectedIndex = 3;
-                    break;
-                default:
-                    cpuPriorityComboBox.SelectedIndex = 0;
-                    break;
-            }
-
-            cpuPriorityComboBox.EndUpdate();
-        }
-
-        private void UpdateCpuCountComboBox()
-        {
-            cpuCountComboBox.BeginUpdate();
-            cpuCountComboBox.Items.Clear();
-            cpuCountComboBox.Items.Add(LocalizationStrings.Ignore);
-            for (var i = 1; i <= Environment.ProcessorCount; i++)
-            {
-                cpuCountComboBox.Items.Add(i);
-            }
-
-            cpuCountComboBox.SelectedIndex = LauncherSettings.GetInt(LauncherSettings.Keys.CpuCount);
-            cpuCountComboBox.EndUpdate();
-        }
-
-        private void UpdateColourDepthComboBox()
-        {
-            colourDepthComboBox.BeginUpdate();
-            colourDepthComboBox.Items.Clear();
-            colourDepthComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.ColorDepth>(
-                    LocalizationStrings.Bits16, GameArgumentsHelper.ColorDepth.Bits16));
-            colourDepthComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.ColorDepth>(
-                    LocalizationStrings.Bits32, GameArgumentsHelper.ColorDepth.Bits32));
-
-            colourDepthComboBox.SelectedIndex = LauncherSettings.Get<bool>(LauncherSettings.Keys.ColourDepth32Bit) ? 1 : 0;
-            colourDepthComboBox.EndUpdate();
-        }
-
-        private void UpdateRenderModeComboBox()
-        {
-            renderModeComboBox.BeginUpdate();
-            renderModeComboBox.Items.Clear();
-            renderModeComboBox.Items.Add(LocalizationStrings.Ignore);
-            renderModeComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.RenderMode>(
-                    LocalizationStrings.DirectX, GameArgumentsHelper.RenderMode.DirectX));
-            renderModeComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.RenderMode>(
-                    LocalizationStrings.OpenGL, GameArgumentsHelper.RenderMode.OpenGl));
-            renderModeComboBox.Items.Add(
-                new ComboBoxItem<GameArgumentsHelper.RenderMode>(
-                    LocalizationStrings.Software, GameArgumentsHelper.RenderMode.Software));
-
-            GameArgumentsHelper.RenderMode selectedRenderMode;
-            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.RenderMode), true, out selectedRenderMode);
-            switch (selectedRenderMode)
-            {
-                case GameArgumentsHelper.RenderMode.DirectX:
-                    renderModeComboBox.SelectedIndex = 1;
-                    break;
-                case GameArgumentsHelper.RenderMode.OpenGl:
-                    renderModeComboBox.SelectedIndex = 2;
-                    break;
-                case GameArgumentsHelper.RenderMode.Software:
-                    renderModeComboBox.SelectedIndex = 3;
-                    break;
-                default:
-                    renderModeComboBox.SelectedIndex = 0;
-                    break;
-            }
-
-            renderModeComboBox.EndUpdate();
-        }
-
-        private void UpdateBackgroundsListView()
-        {
-            var wallpapers = settingsController.GetWallpapers();
-
-            backgroundImageListView.BeginUpdate();
-            var imageList = new ImageList { ImageSize = new Size(65, 65) };
-            backgroundImageListView.LargeImageList = imageList;
-
-            for (var index = 0; index < wallpapers.Count; index++)
-            {
-                var wallpaper = wallpapers[index];
-                var item = new ListViewItem((index + 1).ToString(CultureInfo.InvariantCulture));
-                imageList.Images.Add(wallpaper);
-                item.ImageIndex = index;
-
-                backgroundImageListView.Items.Add(item);
-            }
-
-            backgroundImageListView.EndUpdate();
-        }
-
         private void UpdateLanguageComboBox()
         {
             if (!settingsController.ValidateGameLocationPath(Settings.Get(Settings.Keys.GameLocation)))
@@ -470,61 +523,60 @@
             languageComboBox.Items.Add(LocalizationStrings.Ignore);
             languageComboBox.Items.AddRange(languages.Cast<object>().ToArray());
 
-            languageComboBox.SelectedItem = string.IsNullOrWhiteSpace(LauncherSettings.Get(LauncherSettings.Keys.Language))
-                                                ? LocalizationStrings.Ignore
-                                                : LauncherSettings.Get(LauncherSettings.Keys.Language);
+            languageComboBox.SelectedItem =
+                string.IsNullOrWhiteSpace(LauncherSettings.Get(LauncherSettings.Keys.Language))
+                    ? LocalizationStrings.Ignore
+                    : LauncherSettings.Get(LauncherSettings.Keys.Language);
 
             languageComboBox.EndUpdate();
         }
 
-        private void DisableAudioCheckBoxCheckedChanged(object sender, EventArgs e)
+        private void UpdateRenderModeComboBox()
         {
-            disableMusicCheckBox.Enabled = !disableAudioCheckBox.Checked;
-            disableSoundsCheckBox.Enabled = !disableAudioCheckBox.Checked;
-        }
+            renderModeComboBox.BeginUpdate();
+            renderModeComboBox.Items.Clear();
+            renderModeComboBox.Items.Add(LocalizationStrings.Ignore);
+            renderModeComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.RenderMode>(
+                    LocalizationStrings.DirectX,
+                    GameArgumentsHelper.RenderMode.DirectX));
+            renderModeComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.RenderMode>(
+                    LocalizationStrings.OpenGL,
+                    GameArgumentsHelper.RenderMode.OpenGl));
+            renderModeComboBox.Items.Add(
+                new ComboBoxItem<GameArgumentsHelper.RenderMode>(
+                    LocalizationStrings.Software,
+                    GameArgumentsHelper.RenderMode.Software));
 
-        private void EnableAutoSaveButtonCheckedChanged(object sender, EventArgs e)
-        {
-            autoSaveIntervalTrackBar.Enabled = enableAutoSaveCheckBox.Checked;
+            Enum.TryParse(LauncherSettings.Get(LauncherSettings.Keys.RenderMode), true, out GameArgumentsHelper.RenderMode selectedRenderMode);
 
-            AutoSaveIntervalTrackBarScroll(sender, e);
-        }
-
-        private void AutoSaveIntervalTrackBarScroll(object sender, EventArgs e)
-        {
-            var interval = autoSaveIntervalTrackBar.Value;
-
-            UpdateAutoSaveLabel(interval);
-        }
-
-        private void UpdateAutoSaveLabel(int interval)
-        {
-            autoSaveIntervalLabel.Text = string.Format(LocalizationStrings.NumMinutes, interval);
-            shortAutosaveIntervalsLabel.Visible = interval < 10;
-        }
-
-        private void SettingsFormFormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (settingsController.ValidateGameLocationPath(Settings.Get(Settings.Keys.GameLocation)))
+            switch (selectedRenderMode)
             {
-                return;
+                case GameArgumentsHelper.RenderMode.DirectX:
+                    renderModeComboBox.SelectedIndex = 1;
+
+                    break;
+                case GameArgumentsHelper.RenderMode.OpenGl:
+                    renderModeComboBox.SelectedIndex = 2;
+
+                    break;
+                case GameArgumentsHelper.RenderMode.Software:
+                    renderModeComboBox.SelectedIndex = 3;
+
+                    break;
+                default:
+                    renderModeComboBox.SelectedIndex = 0;
+
+                    break;
             }
 
-            var result = MessageBox.Show(
-                this,
-                LocalizationStrings.YouMustSettheGameLocationBeforeYouCanUseThisApplication,
-                LocalizationStrings.GameFolderNotSet,
-                MessageBoxButtons.RetryCancel,
-                MessageBoxIcon.Exclamation,
-                MessageBoxDefaultButton.Button1);
+            renderModeComboBox.EndUpdate();
+        }
 
-            if (result != DialogResult.Retry)
-            {
-                return;
-            }
-
-            Log.Info("Abort form close");
-            e.Cancel = true;
+        private void UpdateResolutionComboBox()
+        {
+            resolutionComboBox.Text = LauncherSettings.Get(LauncherSettings.Keys.Resolution);
         }
 
         private bool ValidateResolution()
@@ -532,17 +584,9 @@
             var regEx = new Regex(@"\d+x\d+");
             var text = resolutionComboBox.Text.Trim();
 
-            return regEx.IsMatch(text) || string.IsNullOrWhiteSpace(text)
-                    || text.Equals(LocalizationStrings.Ignore, StringComparison.OrdinalIgnoreCase);
-        }
-
-        private void BrowseQuarantinedButtonClick(object sender, EventArgs e)
-        {
-            var result = storeLocationDialog.ShowDialog(this);
-            if (result == DialogResult.OK)
-            {
-                quarantinedFilesLocationTextBox.Text = storeLocationDialog.SelectedPath;
-            }
+            return regEx.IsMatch(text)
+                   || string.IsNullOrWhiteSpace(text)
+                   || text.Equals(LocalizationStrings.Ignore, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

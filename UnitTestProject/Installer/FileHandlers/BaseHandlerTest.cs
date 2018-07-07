@@ -3,9 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using FluentAssertions;
     using Nihei.SC4Buddy.Model;
     using Nihei.SC4Buddy.Plugins.Installer.FileHandlers;
-    using Should;
     using Xunit;
 
     public class BaseHandlerTest
@@ -19,7 +19,7 @@
         {
             var instance = new BaseHandlerImpl();
             var exception = Assert.Throws<ArgumentNullException>(() => instance.FileInfo = null);
-            exception.Message.ShouldContain("value");
+            exception.Message.Should().Contain("value");
         }
 
         [Fact(DisplayName = "set_FileInfo, FileInfo for non-existent file, Throws FileNotFoundException")]
@@ -28,7 +28,7 @@
             var instance = new BaseHandlerImpl();
             var value = new FileInfo(Path.Combine(PathToTestMaterial, "nonexistentfile.test"));
             var exception = Assert.Throws<FileNotFoundException>(() => instance.FileInfo = value);
-            exception.Message.ShouldEqual("FileInfo does not point to an existing file.");
+            exception.Message.Should().Be("FileInfo does not point to an existing file.");
         }
 
         #endregion

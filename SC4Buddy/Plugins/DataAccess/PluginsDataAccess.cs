@@ -37,7 +37,7 @@
 
         public ICollection<Plugin> LoadPlugins()
         {
-            Log.Info(string.Format("Loading plugins for user folder {0}.", UserFolder.FolderPath));
+            Log.Info($"Loading plugins for user folder {UserFolder.FolderPath}.");
 
             var path = Path.Combine(UserFolder.PluginFolderPath, Filename);
             var fileInfo = new FileInfo(path);
@@ -59,9 +59,8 @@
                     foreach (var pluginJson in pluginsJson)
                     {
                         var groupName = pluginJson.Group.ToString();
-                        var plugin = new Plugin
+                        var plugin = new Plugin((Guid)pluginJson.Id)
                         {
-                            Id = pluginJson.Id,
                             Author = pluginJson.Author,
                             Description = pluginJson.Description,
                             Name = pluginJson.Name,
@@ -79,11 +78,10 @@
 
                         foreach (var fileJson in pluginJson.PluginFiles)
                         {
-                            var file = new PluginFile
+                            var file = new PluginFile((Guid)fileJson.Id)
                             {
                                 Checksum = fileJson.Checksum,
                                 Path = fileJson.Path,
-                                Id = fileJson.Id,
                                 QuarantinedFile = fileJson.QuarantinedFile
                             };
                             plugin.PluginFiles.Add(file);
@@ -95,7 +93,7 @@
             }
             catch (JsonReaderException exception)
             {
-                Log.Error(string.Format("Error reading json from {0}", fileInfo.FullName), exception);
+                Log.Error($"Error reading json from {fileInfo.FullName}", exception);
             }
 
             return plugins;
@@ -103,7 +101,7 @@
 
         public void SavePlugins(IEnumerable<Plugin> plugins, UserFolder userFolder)
         {
-            Log.Info(string.Format("Save plugins for user folder {0}.", UserFolder.FolderPath));
+            Log.Info($"Save plugins for user folder {UserFolder.FolderPath}.");
 
             var fileInfo = new FileInfo(Path.Combine(userFolder.PluginFolderPath, Filename));
 
