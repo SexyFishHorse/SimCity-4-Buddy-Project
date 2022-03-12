@@ -173,11 +173,12 @@
                 LauncherSettings.Keys.ColourDepth32Bit,
                 colorDepth == ColorDepth.Bits32);
 
-            var cursorColour = ((ComboBoxItem<CursorColorDepth>)cursorColourComboBox.SelectedItem)
-                               .Value.ToString();
+            var cursorColour = cursorColourComboBox.SelectedIndex > 0 ?
+                ((ComboBoxItem<CursorColorDepth>)cursorColourComboBox.SelectedItem).Value.ToString()
+                : string.Empty;
             LauncherSettings.SetAndSave(
                 LauncherSettings.Keys.CursorColourDepth,
-                cursorColourComboBox.SelectedIndex > 0 ? cursorColour : string.Empty);
+                cursorColour);
 
             var numCpus = Convert.ToInt32(cpuCountComboBox.Text.Trim());
             LauncherSettings.SetAndSave(LauncherSettings.Keys.CpuCount, numCpus);
